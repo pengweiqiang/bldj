@@ -60,10 +60,11 @@ public interface ReqUrls {
 	
 
 	
-	public static final String CONFIG_HOST_IP="www.elefone.net"; //dns ip
+	public static final String CONFIG_HOST_IP="172.21.0.41:18082"; //dns ip
+//	public static final String CONFIG_HOST_IP="http://bldj.com" 
 	
-	//public static final String DEFAULT_REQ_HOST_IP = "10.202.10.195"; //默认值异常的请求地址
-    public static final String DEFAULT_REQ_HOST_IP = "www.elefone.net";
+//	public static final String DEFAULT_REQ_HOST_IP = "http://bldj.com";
+    public static final String DEFAULT_REQ_HOST_IP = "172.16.102.145:8080/wechatshop/login.html"; //默认值异常的请求地址
 	
 	public static final String LIMIT_DEFAULT_NUM="10";
 	
@@ -101,6 +102,82 @@ public interface ReqUrls {
 	 * 用户登录
 	 */
 	public static final String REQUEST_USER_LOGIN = "/user/login";
+	/**
+	 * 修改密码
+	 */
+	public static final String UPDATE_PWD = "/user/mpass/";
+	
+	/**
+	 * 修改用户昵称
+	 */
+	public static final String UPDATE_NICKNAME = "/user/updateNickName";
+	/**
+	 * 修改用户头像
+	 */
+	public static final String UPDATE_HEADER_URL="/user/updateHeadPic";
+	/**
+	 * 信息收集接口(意见、招聘、打分)
+	 */
+	public static final String UNIFOR = "/user/uinfor";
+	/**
+	 * 忘记密码
+	 */
+	public static final String FORGET_PWD = "/user/rpass";
+	/**
+	 * 用户注册
+	 */
+	public static final String REGISTER_USER = "/user/reg";
+	/**
+	 * 用户地址(0:添加 1删除 2修改 3查询)
+	 */
+	public static final String ADDRESS_MANAGER = "/user/addressManage";
+	/**
+	 * 短信验证
+	 */
+	public static final String CHECK_CODE = "/user/checkCode";
+	/**
+	 * 获取精品及热门推荐接口
+	 */
+	public static final String REQUEST_HOT_PRODUCT = "/pro/getProducts";
+	
+	/**
+	 * 预约时间和选择美容师接口
+	 */
+	public static final String REQUEST_SCHEDULED = "/seller/getScheduled";
+	/**
+	 * 添加、查询和校验优惠券
+	 */
+	public static final String COUPONS_MANAGE = "/user/couponsManage";
+	
+	/**
+	 * 生成订单
+	 */
+	public static final String CREATE_ORDER = "/user/orderGenerate";
+	
+	/**
+	 * 获取用户订单
+	 */
+	public static final String REQUEST_ORDERS = "/user/getOrders";
+	
+	/**
+	 * 获取美容师列表
+	 */
+	public static final String REQUEST_SELLERS = "/seller/getSellers";
+	
+	/**
+	 * 获取美容师好中差评个数
+	 */
+	public static final String REQUEST_SELLER_EVALS = "/seller/getEvals";
+	
+	/**
+	 * 版本升级
+	 */
+	public static final String CHECK_VERSION = "user/checkVersion";
+	
+	/**获取首页 广告**/
+	public static final String REQUEST_GET_MAINPAGE_AD = "/ad/getAds";
+	
+	
 	
 	/**用户个人中心**/
     public static final String REQUEST_USER_INFO = "/user/getUserInfo";
@@ -117,8 +194,7 @@ public interface ReqUrls {
 	
 
 	
-	/**获取首页 广告**/
-	public static final String REQUEST_GET_MAINPAGE_AD = "/ad/getHpAds";
+	
 	
 	/**获取应用商店页 广告**/
 	public static final String REQUEST_GET_APPSTORE_AD = "/ad/getAdList";
