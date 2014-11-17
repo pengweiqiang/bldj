@@ -113,7 +113,7 @@ public class ApiUtils {
 			RequestCallback requestCallBack, MethodType methodType, Context context) {
 		if (!GlobalConfig.GLOBAL_NET_STATE) { // 无网络
 			ParseModel pm = new ParseModel();
-			pm.setResult(String.valueOf(NetUtil.NET_ERR));
+			pm.setStatus(String.valueOf(NetUtil.NET_ERR));
 			pm.setMsg(NetUtil.NET_ERR_MSG);
 			requestCallBack.execute(pm);
 			return;
