@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/app_bg_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/app_bg_color"
+                android:paddingBottom="@dimen/main_navigation_bar_inner_height" />
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_tab"
+                android:visibility="gone" >
+            </TabWidget>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/main_navigation_bar_inner_height"
+                android:layout_alignParentBottom="true"
+                android:background="@color/main_navigation_bar_bg_color"
+                android:gravity="bottom"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/tab_bottom_select_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/main_navigation_bar_inner_height"
+                android:layout_alignParentBottom="true" >
+
+                <ImageView
+                    android:id="@+id/tab_bottom_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/main_navigation_bar_inner_height"
+                    android:src="@drawable/btn_home_page_item_bg_selector"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/rgTabBar"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/main_navigation_bar_height"
+                android:layout_alignParentBottom="true"
+                android:gravity="bottom"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/rdTopList"
+                    android:layout_marginTop="@dimen/main_navigation_bar_top_border"
+                    android:background="@color/transparent"
+                    android:gravity="center"
+                    android:paddingBottom="3dip"
+                    android:paddingTop="@dimen/main_navigation_bar_item_padding_top"
+                    android:tag="radio_button0"
+                    android:textSize="@dimen/main_navigation_bar_item_text_size" />
+
+                <RadioButton
+                    android:layout_width="1dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/main_navigation_bar_top_border"
+                    android:background="#BABBBB"
+                    android:checked="false"
+                    android:clickable="false" />
+
+                <RadioButton
+                    android:id="@+id/rdFriend"
+                    android:layout_marginTop="@dimen/main_navigation_bar_top_border"
+                    android:background="@color/transparent"
+                    android:gravity="center"
+                    android:paddingBottom="3dip"
+                    android:paddingTop="@dimen/main_navigation_bar_item_padding_top"
+                    android:tag="radio_button1"
+                    android:textSize="@dimen/main_navigation_bar_item_text_size" />
+
+                <RadioButton
+                    android:id="@+id/rdHomePage"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="11"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:paddingBottom="3dip"
+                    android:paddingTop="10dip"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/main_navigation_bar_item_text_size" />
+
+                <RadioButton
+                    android:id="@+id/rdMe"
+                    android:layout_marginTop="@dimen/main_navigation_bar_top_border"
+                    android:background="@color/transparent"
+                    android:gravity="center"
+                    android:paddingBottom="3dip"
+                    android:paddingTop="@dimen/main_navigation_bar_item_padding_top"
+                    android:tag="radio_button3"
+                    android:textSize="@dimen/main_navigation_bar_item_text_size" />
+
+                <RadioButton
+                    android:layout_width="1dip"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/main_navigation_bar_top_border"
+                    android:background="#BABBBB"
+                    android:checked="false"
+                    android:clickable="false" />
+
+                <RadioButton
+                    android:id="@+id/rdUpload"
+                    style="@style/main_tab_bottom"
+                    android:layout_marginTop="@dimen/main_navigation_bar_top_border"
+                    android:background="@color/transparent"
+                    android:gravity="center"
+                    android:paddingBottom="3dip"
+                    android:paddingTop="@dimen/main_navigation_bar_item_padding_top"
+                    android:tag="radio_button4"
+                    android:textSize="@dimen/main_navigation_bar_item_text_size" />
+            </RadioGroup>
+
+            <ImageView
+                android:id="@+id/main_navigation_bar_play_game_shadow_left"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/main_navigation_bar_height"
+                android:layout_alignParentBottom="true"
+                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/main_navigation_bar_play_game_shadow_right"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/main_navigation_bar_height"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"  />
+        </RelativeLayout>
+    </TabHost>
+
+    <RelativeLayout
+        android:id="@+id/guide_page_playgame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/guide_page_playgame_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/guide_page_playgame_btn"
+            android:layout_below="@+id/guide_page_playgame_search" />
+
+        <ImageView
+            android:id="@+id/guide_page_playgame_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

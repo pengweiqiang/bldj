@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rgb_838383">#838383</color>
+    <color name="color_black">#000000</color>
+    <color name="alpha_color_black">#99000000</color>
+    <color name="color_white">#ffffff</color>
+    <color name="common_button_blue_normal">#30b0f2</color>
+    <color name="color_gray">#C0C0C0</color>
+    <color name="color_font_blue">#079ce9</color>
+    <color name="color_album_description">#666666</color>
+    <color name="color_btn_text_unbind">#0075b2</color>
+    <color name="color_rl_pressed">#e1e1e1</color>
+    <color name="color_line">#c7c7c7</color>
+    <color name="_color_btn_text">#ffffff</color> 
+
+    <!-- Random Color -->
+    <color name="color_random_one">#4169E1</color>
+    <color name="color_random_two">#7B68EE</color>
+    <color name="color_random_three">#CD5555</color>
+    <color name="color_random_four">#9400D3</color>
+    <color name="color_random_five">#3CB371</color>
+    <color name="color_random_six">#CDCD00</color>
+    <color name="color_random_seven">#228B22</color>
+    <color name="color_random_eight">#00CED1</color>
+    <color name="color_random_nine">#CD5C5C</color>
+    <color name="color_random_ten">#2E8B57</color>
+    <color name="color_random_eleven">#8470FF</color>
+    <color name="color_random_twelve">#483D8B</color>
+    <color name="color_random_thirteen">#5F9EA0</color>
+    <color name="color_album_gray">#bfbfbf</color>
+
+    <!-- Text Color -->
+    <color name="color_text_register">#999999</color>
+    <color name="color_text_select_info">#333333</color>
+    <color name="_color_text_inter_reg">#003E5E</color>
+    <color name="color_text_666">#666666</color>
+    <color name="color_text_999">#999999</color>
+    <color name="color_text_ccc">#cccccc</color>
+    <color name="color_text_007">#0075b2</color>
+    <color name="color_text_email_reg">#00237c</color>
+
+    <!-- 公共title中间文字颜色 -->
+    <color name="_text_title_default">#005797</color>
+    <color name="text_title_cool">#b3adc2</color>
+    
+    <!-- 需要替换按钮颜色 -->
+    <color name="_color_text_common_middle">#FFFFFF</color>
+    <color name="_color_text_btn_download">#FFFFFF</color>
+    <color name="_color_addbtn_text">#ffffff</color>
+
+    <!-- 大背景图 颜色 -->
+    <color name="headpic_stroke">#b2b2b2</color>
+    <!-- 二维码扫描 -->
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    
+    <!-- 排行 -->
+    <color name="color_text_one">#ff6600</color>
+    <color name="color_text_two">#ff9c00</color>
+    <color name="color_text_three">#ffc000</color>
+    <color name="color_text_other">#7f7f7f</color>
+    <color name="color_text_uncheck">#aeaeae</color>
+    
+    <!-- 下载管理 -->
+	<color name="white">#ffffffff</color>   
+    <color name="orange">#ffffdfd2</color> 
+    <color name="update_all_dis_color">#ffbebebe</color>    
+    <color name="common_text_color">#ff666666</color>
+    <color name="top_app_listview_down">#ffffe9ce</color>
+    <color name="tips_orange">#ffff9c00</color>
+    
+    <!-- 登录验证对话框 -->
+    <color name="dialog_title_color">#2967A8</color>
+    <color name="dialog_tip_color">#AFAFAF</color>
+    <color name="dialog_verify_code_btn_disable">#DEDEDE</color>
+    <color name="dialog_verify_code_btn_enable">#4EA1F9</color>
+    
+    <!-- 新版 -->
+    <color name="app_bg_color">#EEEDED</color>
+    <color name="default_listview_item_pressed_color">#CEEEFD</color>
+    <color name="btn_find_game_text_color_normal">#FF626262</color>
+    <color name="btn_find_game_text_color_pressed">#175AA1</color>
+    
+    <color name="color_bg_white">#FFFFFF</color>
+    <color name="color_bg_gray">#EEEDED</color>
+    <color name="color_text_black">#262626</color>
+    <color name="color_text_gray">#626262</color>
+    <color name="color_text_light_gray">#AAAAAA</color>
+    
+    <!-- 主导航条 -->
+    <color name="main_navigation_bar_bg_color">#D3D3D3</color>
+    <color name="rank_listview_divider_color">#C9C8C8</color>
+    <color name="rank_listview_game_name_color">#262626</color>
+    <color name="hot_rank_item_game_second_text_color">#AAAAAA</color>
+    
+    <!-- 热门专题 -->
+    <color name="color_hs_title">#262626</color>
+    <color name="color_hs_gamenum">#175AA1</color>
+    <color name="color_hs_gamedes">#626262</color>
+    
+    <!-- 专题详情 -->
+    <color name="specialdetail_editorspeak_bg">#2A68A9</color>
+    <color name="specialdetail_collect_share_textcolor">#AAAAAA</color>
+    
+    <!-- 个人设置 -->
+    <color name="color_text_yellow">#FF5600</color>
+    
+    
+    <!-- 安装包管理 -->
+    <color name="memory_size_bg">#AAAAAA</color>
+    <color name="apk_file_listview_bg">#EEEDED</color>
+    <color name="sd_memory_size_progress">#66D601</color>
+    <color name="mobile_size_progress">#1B88F3</color>
+    <!-- 关注按钮 -->
+     <color name="transparents">@android:color/transparent</color>
+    <!-- 分享窗口标题 -->
+     <color name="sharedialog_blue">#155AA1</color>
+     
+     <!-- LIST BORDER COLOR -->
+	<color name="rounded_container_border">#ffb7babb</color>
+	<!-- ITEM BACKGROUND COLOR - STATE - DEFAULT -->
+	<color name="base_start_color_default">#FFFFFF</color>
+    <color name="base_end_color_default">#FFFFFF</color>
+	<!-- ITEM BACKGROUND COLOR - STATE - PRESSED -->
+	<color name="base_start_color_pressed">#ff3590c4</color>
+    <color name="base_end_color_pressed">#ff2570ba</color>
+    <!-- ITEM TEXT COLORS - STATES - PRESSED AND DEFAULT -->
+    <color name="text_color_default">#000000</color>
+    <color name="text_color_pressed">#ffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="list_pressed_bg">#ffaeca5a</color>
+    <color name="list_normal_bg">#fff7f7f7</color>
+    <color name="light_green">#ff99cc00</color>
+    <color name="blue">#ffccddff</color>
+    <color name="grey">#ff808080</color>
+    <color name="list_btn_pressed_bg">#ffcce8a9</color>
+</resources>

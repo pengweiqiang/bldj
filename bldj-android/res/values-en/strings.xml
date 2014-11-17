@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">sitech game store</string>
+	<string name="NETWORK_ERROR">Network is poor, try again later!</string>
+	<string name="APP_LOADING_TIP">Loading...</string>
+	<string name="APP_LOADING_FAILED">Loading failed</string>
+	<string name="APP_PAGE_RELOAD">Touch to reload</string>
+	<string name="APP_PAGE_EMPTY">Totally empty here</string>
+	<string name="LAST_UPDATE_TIME">Last time updated at:</string>
+	<string name="UPDATE_TIME">Updated at:</string>
+	<string name="REMIND_PULL">Release to refresh</string>
+	<string name="PULL_DOWN">Slide down to refesh</string>
+	<string name="REFLESHING">Loading, please wait</string>
+	<string name="REFLESH_DONE">Loading complete</string>
+	<string name="LIST_LAST_PAGE">The last page</string>
+	<string name="loading">Loading</string>
+	
+	<string name="ds_update">Update</string>
+	<string name="ds_downloading">Downloading</string>
+	<string name="ds_waitting">Waiting</string>
+	<string name="ds_pause">Pause</string>
+	<string name="ds_finish">Complete</string>
+	<string name="ds_failure">Retry</string>
+	<string name="ds_continue">Continue</string>
+	<string name="ds_nospace">Not enough space</string>
+	<string name="ds_nosdcard">SD card pulled out</string>
+	<string name="ds_download">Download</string>
+	<string name="ds_install">Install</string>
+	<string name="ds_open">Open</string>
+	<string name="down_load">Download</string>
+	<string name="prompt">Hints</string>
+	<string name="audittip">Application in audit, please visit later</string>
+	
+	<string name="dlg_ok">Comfirm</string>
+	<string name="dlg_delete">Delete</string>
+	<string name="dlg_cancel">Cancel</string>
+	<string name="isredownload">Installation file does not exist or has been damaged, re-download?</string>
+	<string name="not_wifi">You\'re using GPRS / 3G connection, still continue?</string>
+	<string name="app_check_network_reload">Touch to reload</string>
+	<string name="go_on_download">Continue to download</string>
+	<string name="add_success">Successfully added</string>
+	<string name="gaveup_download_mes">Confirm to cancel downloading%1$s?</string>
+	<string name="game_detail_cancle_download">Cancel downloading?</string>
+	<string name="file_not_found">File does not exist!</string>
+	<string name="file_not_found_download_re">File does not exist, re-download?</string>
+	
+	<string name="tab_recommends">Recommends</string>
+	<string name="tip_recommends">Editor recommendation</string>
+	<string name="tip_must_play">Must Play</string>
+	<string name="tip_summer">Sport Selection</string>
+	<string name="tip_more">more></string>
+	<string name="tab_newest">Newest</string>
+	<string name="tab_app">Categories</string>
+	<string name="tab_hottest">Hottest</string>
+
+	<string name="tab_workbench">Mine</string>
+	
+	
+	<string name="shopping_cart">购物车</string>
+	<string name="offline_order">线下订单</string>
+	<string name="all_choose">Select All</string>
+	
+	<string name="manager">Manager</string>
+	<string name="setting">Setting</string>
+	<string name="download">Download</string>
+	<string name="login">Login</string>
+	<string name="cooperation">cooperation</string>
+	<string name="paid_list">已购买应用列表</string>
+	<string name="favorite_list">My Favorites</string>
+	<string name="money_manager">账户资金管理</string>
+	<string name="order_manager">订单管理</string>
+
+	
+	<string name="clean_history">Clean history</string>
+	<string name="search">Search</string>
+	<string name="favorite">Favorite</string>
+	<string name="apk_manager">Package Manager</string>
+	<string name="inputtext">Input text here</string>
+	<string name="follow">Foller</string>
+	<string name="buyer">购买</string>
+	<string name="add">Add</string>
+	<string name="renew">续订</string>
+	
+	<string name="package_desc" formatted="false">套餐说明：&lt;br&gt; %1s:%2s%3s授权 &lt;strike&gt;原价%4s元&lt;/strike&gt;  现价&lt;font color=red&gt;%5s&lt;/font&gt;元</string>
+	<string name="shoppingcart_desc"  formatted="false">总购授权:&lt;font color=red&gt;%1s&lt;/font&gt;天（包含套餐%2s天）</string>
+	<string name="total_money_desc"  formatted="false">金额:&lt;font color=red&gt;¥%1s&lt;/font&gt;</string>
+	
+	<string name="app_info_1"   formatted="false">Category:%1s丨Version:%2s丨Size:%3s</string>
+	<string name="app_info_2"  formatted="false">System:%1s丨Download times:%2s</string>
+	
+	
+	 <!-- 下载管理 -->
+    <string name="download_manager_traffic">游戏大厅累计为你节省流量</string>
+    <string name="update_section_title">Updatable</string>
+    <string name="new_game_section_title">New Game</string>
+    <string name="update_section_updete_all">Update All</string>
+    
+    <string name="download_manager">Download Manager</string>
+    <string name="download_manager_detail">Detail</string>
+    <string name="download_manager_redownload">Redownload</string>
+    <string name="download_manager_ingore">Ingore</string>
+    <string name="download_manager_delete">Delete</string>
+    <string name="listempty_defaulttip">Totally empty here</string>
+    <string name="goto_findgame">Find game</string>
+    
+    <string name="orin_price">原价</string>
+    <string name="download_fail">Download fail</string>
+    <string name="price">单价:</string>
+    <string name="order_status">订单状态:</string>
+    <string name="send">赠送</string>
+    <string name="introduction">Introduction:</string>
+    <string name="related_recommendation">Related recommends:</string>
+    <string name="collect_success">Saving successful</string>
+    <string name="collect_canceled">Saving canceled</string>
+    <string name="my_collect">My Favorites</string>
+    <string name="may_want">You May Like</string>
+    <string name="switch_other">View More</string>
+    
+    
+    <string name="recent_launch">Recent play</string>
+    <string name="recent_download">Recent download</string>
+    
+      <!-- APK管理 -->
+    <string name="stop_scanning">Stop scan</string>
+    <string name="clear_up">Clear up</string>
+    <string name="clear_all">Clear all</string>
+    <string name="clear_item">Confirm to delete package？</string>
+    <string name="select_all">Select all</string>
+    <string name="open_apk">Install</string>
+    <string name="un_install_apk">Uninstall</string>
+    <string name="open_file">Open</string>
+</resources>
