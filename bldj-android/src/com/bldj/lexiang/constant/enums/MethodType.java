@@ -10,7 +10,16 @@ import java.util.Map;
  */
 public enum MethodType {
 
-	GET_MAINPAGE_AD(0),   //获取广告topOne
+	LOGIN(0),//用户登录
+	UPDATE(1),//修改
+	
+	ADDRESS(2),//地址簿
+	
+	CHECKCODE(3),//短信验证
+	
+	GET_MAINPAGE_AD(50),   //获取广告topOne
+	
+	
 	
     SUBMIT_ORDER(51);  //提交订单
 	
