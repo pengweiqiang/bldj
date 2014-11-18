@@ -12,23 +12,21 @@ public interface ReqUrls {
 	
 	public static String ONLINE_CONFIG_FILE_TYPE=".json";
 	
-	public static String ACCOUNT="account"; //用户账号
+	public static String USERNAME="username"; //用户账号
 	
 	public static String PASSWORD="password";
+	
+	public static String OPASS = "opass";
+	
+	public static String STREAM = "stream";
 	
 	public static String CURPAGE = "curpage";
 	
 	public static String ID = "id";
 	
-	public static String WAY_LIFE_ID = "wayLifeId";
-	
-	public static String ACTIVE_ID = "activeId";
-	
 	public static String START = "start";
 	
 	public static String LIMIT = "limit" ;
-	
-	public static String PKG_NAME = "pkgName"; //游戏包名
 	
 	public static String USER_ID = "userId" ;
 	
@@ -38,7 +36,7 @@ public interface ReqUrls {
 	
 	public static String UIDS = "uids";
 	
-	public static String AD_INDEX ="adIndex";
+	public static String TYPE = "type";
 	
 	public static String ALL_PRICE = "allPrice";
 	
@@ -181,10 +179,6 @@ public interface ReqUrls {
 	
 	
 	
-	/**用户个人中心**/
-    public static final String REQUEST_USER_INFO = "/user/getUserInfo";
-    /**修改用户个人中心**/
-    public static final String UPDATE_USER_INFO = "/user/updateUserInfo";
 
 
     /**收藏App**/
