@@ -24,6 +24,8 @@ public interface ReqUrls {
 	
 	public static String ACTIVE_ID = "activeId";
 	
+	public static String START = "start";
+	
 	public static String LIMIT = "limit" ;
 	
 	public static String PKG_NAME = "pkgName"; //游戏包名
