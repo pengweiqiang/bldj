@@ -41,7 +41,7 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	// TODO 设置标题
 	public void setActivityView(CharSequence title, int layoutResID) {
 		setContentView(layoutResID);
-		TextView tv_title = (TextView) findViewById(R.id.title_textview);
+		TextView tv_title = (TextView) findViewById(R.id.topview_title);
 		if (null != tv_title) {
 			tv_title.setText(title);
 		}
