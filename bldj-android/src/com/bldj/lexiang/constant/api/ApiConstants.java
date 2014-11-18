@@ -8,6 +8,19 @@ package com.bldj.lexiang.constant.api;
 public interface ApiConstants {
 	
 	/**
+	 * 微信支付相关配置信息  start
+	 */
+	// APP_ID 替换为你的应用从官方网站申请到的合法appId
+    public static final String APP_ID = "wxd930ea5d5a258f4f";
+    
+    /** 商家向财付通申请的商家id */
+    public static final String PARTNER_ID = "1900000109";
+	
+    /**
+     * 微信支付相关配置信息  end
+     */
+    
+	/**
 	 * 接口正常
 	 */
 	public static final String RESULT_SUCCESS = "600";
