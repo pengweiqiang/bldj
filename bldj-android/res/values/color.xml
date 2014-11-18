@@ -12,7 +12,8 @@
     <color name="color_rl_pressed">#e1e1e1</color>
     <color name="color_line">#c7c7c7</color>
     <color name="_color_btn_text">#ffffff</color> 
-
+	<color name="light_gray_line">#cacaca</color>
+	
     <!-- Random Color -->
     <color name="color_random_one">#4169E1</color>
     <color name="color_random_two">#7B68EE</color>
