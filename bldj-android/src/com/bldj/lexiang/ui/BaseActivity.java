@@ -17,13 +17,11 @@ import com.umeng.analytics.MobclickAgent;
 public abstract class BaseActivity extends Activity implements OnClickListener {
 
 	protected static final String TAG = "BaseActivity";
-	MyApplication application ;
-	// protected static Context mContext;
+	protected MyApplication application ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		// mContext = this;
 		AppManager.getAppManager().addActivity(this);
 		
 		initView();
@@ -52,13 +50,13 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		MobclickAgent.onResume(this);
+		MobclickAgent.onResume(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-//		MobclickAgent.onPause(this);
+		MobclickAgent.onPause(this);
 	}
 
 	@Override
