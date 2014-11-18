@@ -43,8 +43,8 @@ public class ApiUserUtils {
 	public static void login(Context context, String username, String password,
 			RequestCallback requestCallBack) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("username", username);
-		params.put("password", password);
+		params.put(ReqUrls.USERNAME, username);
+		params.put(ReqUrls.PASSWORD, password);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_USER_LOGIN, false,
 				requestCallBack, MethodType.LOGIN, context);
 	}
@@ -61,9 +61,9 @@ public class ApiUserUtils {
 	public static void updatePwd(Context context, String username,
 			String opass, String password, RequestCallback requestCallback) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("username", username);
-		params.put("opass", opass);
-		params.put("password", password);
+		params.put(ReqUrls.USERNAME, username);
+		params.put(ReqUrls.OPASS, opass);
+		params.put(ReqUrls.PASSWORD, password);
 		ApiUtils.getParseModel(params, ReqUrls.UPDATE_PWD, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
@@ -79,8 +79,8 @@ public class ApiUserUtils {
 	public static void updateNickName(Context context, String username,
 			String nickname, RequestCallback requestCallback) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("username", username);
-		params.put("nickname", nickname);
+		params.put(ReqUrls.USERNAME, username);
+		params.put(ReqUrls.NICK_NAME, nickname);
 		ApiUtils.getParseModel(params, ReqUrls.UPDATE_NICKNAME, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
@@ -97,8 +97,8 @@ public class ApiUserUtils {
 	public static void updateHeader(Context context, String username,
 			String stream, RequestCallback requestCallback) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("username", username);
-		params.put("stream", stream);
+		params.put(ReqUrls.USERNAME, username);
+		params.put(ReqUrls.STREAM, stream);
 		ApiUtils.getParseModel(params, ReqUrls.UPDATE_HEADER_URL, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
@@ -124,7 +124,7 @@ public class ApiUserUtils {
 			String productName, String sellerName, int infoType, long sellerId,
 			RequestCallback requestCallback) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("userId", userId);
+		params.put(ReqUrls.USER_ID, userId);
 		params.put("content", content);
 		params.put("type", String.valueOf(type));
 		params.put("contactor", contactor);
@@ -150,8 +150,8 @@ public class ApiUserUtils {
 	public static void forgetPwd(Context context, String username,
 			String password, RequestCallback requestCallback) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("username", username);
-		params.put("password", password);
+		params.put(ReqUrls.USERNAME, username);
+		params.put(ReqUrls.PASSWORD, password);
 		ApiUtils.getParseModel(params, ReqUrls.FORGET_PWD, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
@@ -170,11 +170,10 @@ public class ApiUserUtils {
 			String password, String lon, String lat,
 			RequestCallback requestCallback) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("mobile", mobile);
-		params.put("password", password);
-		params.put("mobile", mobile);
-		params.put("lon", lon);
-		params.put("lat", lat);
+		params.put(ReqUrls.PASSWORD, password);
+		params.put(ReqUrls.MOBILE, mobile);
+		params.put(ReqUrls.USER_LON, lon);
+		params.put(ReqUrls.USER_LAT, lat);
 		ApiUtils.getParseModel(params, ReqUrls.REGISTER_USER, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
@@ -201,22 +200,22 @@ public class ApiUserUtils {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
 		params.put("type", String.valueOf(type));
 		switch (type) {
-		case 0:
-			params.put("userId", userId);
+		case 0://增加地址
+			params.put(ReqUrls.USER_ID, userId);
 			params.put("curLocation", curLocation);
 			params.put("detailAddress", detailAddress);
 			break;
-		case 1:
-			params.put("id", id);
+		case 1://删除地址
+			params.put(ReqUrls.ID, id);
 			break;
-		case 2:
-			params.put("userId", userId);
+		case 2://修改地址
+			params.put(ReqUrls.USER_ID, userId);
 			params.put("curLocation", curLocation);
 			params.put("detailAddress", detailAddress);
-			params.put("id", id);
+			params.put(ReqUrls.ID, id);
 			break;
-		case 3:
-			params.put("userId", userId);
+		case 3://查询地址
+			params.put(ReqUrls.USER_ID, userId);
 			break;
 			
 		default:
@@ -239,10 +238,10 @@ public class ApiUserUtils {
 			String code, String type, String name,
 			RequestCallback requestCallback) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("mobile", mobile);
+		params.put(ReqUrls.MOBILE, mobile);
 		params.put("code", code);
 		params.put("type", type);
-		params.put("name", name);
+		params.put(ReqUrls.NAME, name);
 		ApiUtils.getParseModel(params, ReqUrls.CHECK_CODE, false,
 				requestCallback, MethodType.UPDATE, context);
 	}

@@ -28,7 +28,7 @@ public class ApiBuyUtils {
 	public static void getScheduled(Context context, long id, long proId,
 			String dealDate, RequestCallback requestCallBack) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("id", String.valueOf(id));
+		params.put(ReqUrls.ID, String.valueOf(id));
 		params.put("proId", String.valueOf(proId));
 		params.put("dealDate", dealDate);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SCHEDULED, false,
@@ -48,7 +48,7 @@ public class ApiBuyUtils {
 	public static void couponsManage(Context context, long id, int type,
 			String vcode, int method, RequestCallback requestCallBack) {
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("id", String.valueOf(id));
+		params.put(ReqUrls.ID, String.valueOf(id));
 		params.put("type", String.valueOf(type));
 		params.put("vcode", vcode);
 		params.put("method", String.valueOf(method));
@@ -110,7 +110,7 @@ public class ApiBuyUtils {
 	 */
 	public static void getOrders(Context context,long id,RequestCallback requestCallback){
 		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("id", String.valueOf(id));
+		params.put(ReqUrls.ID, String.valueOf(id));
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ORDERS, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
