@@ -233,17 +233,21 @@ public class HttpConnectionUtil {
 		ParseModel pm = ApiUtils.parse2ParseModel(backStr);
 		if (pm == null) {
 			pm = new ParseModel();
-			pm.setResult(String.valueOf(NetUtil.NET_ERR));
+			pm.setStatus(String.valueOf(NetUtil.NET_ERR));
 			pm.setMsg(NetUtil.NET_ERR_MSG);
 			return pm;
 		}
-		if (Integer.parseInt(pm.getResult()) == NetUtil.SUCCESS_CODE) {
+		if (Integer.parseInt(pm.getStatus()) == NetUtil.SUCCESS_CODE) {
 			Object apiResult = null;
-			if (MethodType.GET_MAINPAGE_AD.getIndex() == methodType.getIndex()) { // 广告
-				//apiResult = ApiUtils.getAd(pm.getData());
-			}else if (MethodType.SUBMIT_ORDER.getIndex() == methodType.getIndex()) { // 提交订单
-                apiResult = pm.getData();
-            }
+//			if (MethodType.GET_MAINPAGE_AD.getIndex() == methodType.getIndex()) { // 广告
+////				apiResult = ApiUtils.getAd(pm.getData());
+//			}else if (MethodType.SUBMIT_ORDER.getIndex() == methodType.getIndex()) { // 提交订单
+//                apiResult = pm.getData();
+//            }
+//			if(MethodType.LOGIN.getIndex() == methodType.getIndex()){//登录
+//				apiResult = JsonUtils.fromJson(pm.getData().toString(), User.class);
+//			}
+			apiResult = pm.getData();
 			pm.setApiResult(apiResult);
 		}
 		return pm;
