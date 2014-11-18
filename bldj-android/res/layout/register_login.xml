@@ -4,20 +4,22 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="horizontal" >
-    
-    <include layout="@layout/navigationbar"
-        android:layout_alignParentTop="true"
-        android:id="@+id/header"
-        />
-    
-    <LinearLayout 
-        android:layout_below="@+id/header"
+
+    <com.bldj.lexiang.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true" >
+    </com.bldj.lexiang.view.ActionBar>
+
+    <LinearLayout
         android:id="@+id/ll_tab_title"
         android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:background="#FFFFFF"
-   	 	android:orientation="horizontal"
-        >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actionBar"
+        android:background="#FFFFFF"
+        android:orientation="horizontal" >
+
         <TextView
             android:id="@+id/login_menu"
             android:layout_width="wrap_content"
@@ -38,57 +40,51 @@
             android:text="@string/register"
             android:textSize="16sp" />
     </LinearLayout>
-	
-    <LinearLayout 
+
+    <LinearLayout
         android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:background="#FFFFFF"
-   	 	android:orientation="vertical"
-   	 	android:padding="10dip"
-   	 	android:layout_below="@+id/ll_tab_title"
-   	 	android:layout_centerHorizontal="true"
-        >
-	     <EditText
-	        android:id="@+id/user_name_input"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:hint="@string/input_phone"
-	        android:paddingLeft="4dip"
-	        android:layout_gravity="center"
-	        android:paddingRight="4dip"
-	        android:singleLine="true" />
-	     
-	     <EditText
-	        android:id="@+id/user_pwq_input"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:hint="@string/input_pwd"
-	        android:paddingLeft="4dip"
-	        android:layout_gravity="center"
-	        android:paddingRight="4dip"
-	        android:singleLine="true" />
-	     
-	     
-	     <TextView 
-	         android:id="@+id/forget_pwd"
-	         android:layout_width="wrap_content"
-	         android:layout_height="wrap_content"
-	         android:text="@string/forget_pwd"
-	         android:layout_gravity="right"
-	         
-	         />
-        
-   </LinearLayout>      
-    	
-    
-    <Button 
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_tab_title"
+        android:layout_centerHorizontal="true"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="10dip" >
+
+        <EditText
+            android:id="@+id/user_name_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/input_phone"
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/user_pwq_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="@string/input_pwd"
+            android:paddingLeft="4dip"
+            android:paddingRight="4dip"
+            android:singleLine="true" />
+
+        <TextView
+            android:id="@+id/forget_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="@string/forget_pwd" />
+    </LinearLayout>
+
+    <Button
         android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dip"
-        />
+        android:text="@string/login" />
 
 </RelativeLayout>

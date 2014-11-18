@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/actionBarLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="48dp"
+    android:background="@color/white" >
+
+    <ImageView
+        android:id="@+id/leftActionButton"
+        style="@style/ActionBarIconButton"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/ic_menu_role" />
+
+    <ImageView
+        android:id="@+id/rightIconActionButton"
+        style="@style/ActionBarIconButton"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_menu_post" />
+
+    <Button
+        android:id="@+id/rightTextActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/actionBarTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/rightIconActionButton"
+        android:layout_toRightOf="@+id/leftActionButton"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:freezesText="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/tab_home"
+        android:textColor="@color/color_font_blue"
+        android:textSize="20sp" >
+    </TextView>
+
+    <View
+        android:id="@+id/actionBarBottomLine"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/light_gray_line" />
+
+</RelativeLayout>
