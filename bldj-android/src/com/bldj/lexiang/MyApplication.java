@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.bldj.lexiang.api.vo.User;
 import com.bldj.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.bldj.universalimageloader.cache.memory.MemoryCacheAware;
 import com.bldj.universalimageloader.cache.memory.impl.LRULimitedMemoryCache;
@@ -19,8 +20,11 @@ import com.bldj.universalimageloader.core.assist.QueueProcessingType;
 public class MyApplication extends Application {
 
 	public static String TAG;
-
+	
+	
+	
 	private static MyApplication myApplication = null;
+	private User user = null;//全局用户
 	
 	public LocationClient mLocationClient;
 	public MyLocationListener mMyLocationListener;
@@ -28,7 +32,14 @@ public class MyApplication extends Application {
 	public static MyApplication getInstance() {
 		return myApplication;
 	}
-
+	
+	public void setUser(User user){
+		this.user = user;
+	}
+	public User getCurrentUser() {
+		return user;
+	}
+	
 	@Override
 	public void onCreate() {
 		// TODO Auto-generated method stub
