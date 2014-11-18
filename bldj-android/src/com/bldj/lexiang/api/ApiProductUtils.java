@@ -16,16 +16,26 @@ import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 public class ApiProductUtils {
 
 	/**
-	 * 获取app 列表
-	 * @return
+	 * 获取精品及热门推荐接口
+	 * @param context
+	 * @param tag
+	 * @param userType
+	 * @param orderbyTag
+	 * @param type
+	 * @param start
+	 * @param limit
+	 * @param requestCallBack
 	 */
-	public static void getAppList(Context context,long appId,int limit,int type,RequestCallback requestCallBack){
+	public static void getProducts(Context context,String tag,int userType,int orderbyTag,int type,int start,int limit,RequestCallback requestCallBack){
 		Map<String,String> params = HttpClientAddHeaders.getHeaders(context);
-		if(appId != 0){
-			params.put(ReqUrls.APP_ID, String.valueOf(appId));
-		}
+		params.put("tag", tag);
+		params.put("userType", String.valueOf(userType));
+		params.put("orderbyTag", String.valueOf(orderbyTag));
+		params.put("type", String.valueOf(type));
+		params.put("start", String.valueOf(start));
 		params.put(ReqUrls.LIMIT, String.valueOf(limit));
-		params.put(ReqUrls.OPER_TYPE, String.valueOf(type));
-		//ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_APP_LIST, false, requestCallBack,MethodType.GET_APPS,null);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_HOT_PRODUCT, false, requestCallBack,MethodType.GET_MAINPAGE_AD,context);
 	}
+	
+	
 }
