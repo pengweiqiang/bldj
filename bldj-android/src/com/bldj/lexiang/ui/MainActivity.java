@@ -1,18 +1,26 @@
 package com.bldj.lexiang.ui;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.commons.AppManager;
+import com.bldj.lexiang.utils.ToastUtils;
 
-public class MainActivity extends FragmentActivity{
+public class MainActivity extends FragmentActivity implements OnPageChangeListener{
 	//精品推荐
 	protected HomeFragment mHomeFragment;
 	//热门推荐
@@ -32,6 +40,7 @@ public class MainActivity extends FragmentActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		AppManager.getAppManager().addActivity(this);
 		setContentView(R.layout.activity_main);
 		mFragmentManager = getSupportFragmentManager();
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -61,6 +70,7 @@ public class MainActivity extends FragmentActivity{
 			}
 		};
 		mViewPager.setAdapter(mAdapter);
+		mViewPager.setOnPageChangeListener(this);
 
 		// 实现模块切换
 		mTabIndicators
@@ -90,6 +100,49 @@ public class MainActivity extends FragmentActivity{
 	
 	public int getCurrentTabId() {
 		return mTabIndicators.getCheckedRadioButtonId();
+	}
+	
+	private boolean isExit = false;
+    //退出操作
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {        
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(isExit==false){
+                isExit=true;
+                handler.sendEmptyMessageDelayed(0, 3000);
+                ToastUtils.showToast(this, "再按一次进行退出");
+                return true;
+            } else {
+            	AppManager.getAppManager().finishAllActivity();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isExit=false;
+        }
+    };
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onPageSelected(int i) {
+		setCurrentTabId(tabIds[i]);
 	}
 	
 }

@@ -38,15 +38,6 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 		AppManager.getAppManager().finishActivity(this);
 	}
 
-	// TODO 设置标题
-	public void setActivityView(CharSequence title, int layoutResID) {
-		setContentView(layoutResID);
-		TextView tv_title = (TextView) findViewById(R.id.topview_title);
-		if (null != tv_title) {
-			tv_title.setText(title);
-		}
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
