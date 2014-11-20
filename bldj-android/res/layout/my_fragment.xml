@@ -27,7 +27,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:orientation="horizontal" >
 
@@ -56,7 +56,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:drawableLeft="@drawable/btn_img_my_homepage"
                 android:drawablePadding="15dp"
@@ -75,7 +75,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:drawableLeft="@drawable/btn_img_my_homepage"
                 android:drawablePadding="15dp"
@@ -94,7 +94,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:drawableLeft="@drawable/btn_img_my_homepage"
                 android:drawablePadding="15dp"
@@ -113,7 +113,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:drawableLeft="@drawable/btn_img_my_homepage"
                 android:drawablePadding="15dp"
@@ -132,7 +132,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:drawableLeft="@drawable/btn_img_my_homepage"
                 android:drawablePadding="15dp"
@@ -151,7 +151,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:drawableLeft="@drawable/btn_img_my_homepage"
                 android:drawablePadding="15dp"
@@ -165,14 +165,14 @@
 
 
             <Button
-                android:id="@+id/btn_contact"
+                android:id="@+id/btn_logout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/own_btn_rounded"
                 android:drawablePadding="15dp"
                 android:gravity="center"
@@ -181,7 +181,6 @@
                 android:paddingTop="10dp"
                 android:text="@string/logout"
                 android:textColor="@color/black"
-                android:visibility="gone"
                 android:textSize="20sp" />
         </LinearLayout>
     </com.bldj.lexiang.view.SpringScrollView>
