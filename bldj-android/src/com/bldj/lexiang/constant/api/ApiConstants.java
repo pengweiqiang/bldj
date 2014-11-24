@@ -64,4 +64,6 @@ public interface ApiConstants {
     
     public static final int THREAD_DEAL_NUM = 300; //每个线程处理的数量    
     
+    public static final int LIMIT = 10;
+    
 }

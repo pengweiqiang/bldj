@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.view.ActionBar;
@@ -21,6 +22,7 @@ public class MyFragment extends BaseFragment {
 	private View infoView;
 	private ActionBar mActionBar;
 	private Button btn_logout;
+	private LinearLayout ll_myinfo;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,19 +33,27 @@ public class MyFragment extends BaseFragment {
 		onConfigureActionBar(mActionBar);
 		
 		btn_logout = (Button) infoView.findViewById(R.id.btn_logout);
-		
+		ll_myinfo = (LinearLayout)infoView.findViewById(R.id.myinfo);
 		
 		initListener();
 		return infoView;
 	}
 	
 	private void initListener(){
-		btn_logout.setOnClickListener(new View.OnClickListener() {
+		ll_myinfo.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(mActivity,RegisterAndLoginActivity.class);
 				startActivity(intent);
+			}
+		});
+		//退出登录
+		btn_logout.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				
 			}
 		});
 	}

@@ -21,7 +21,7 @@ public class ApiHomeUtils {
 	 * @param requestCallBack
 	 * @param adIndex
 	 */
-	public static void getAdList(Context context,int limit,int type,RequestCallback requestCallBack,int adIndex){
+	public static void getAdList(Context context,int limit,int type,RequestCallback requestCallBack){
 		Map<String,String> params = HttpClientAddHeaders.getHeaders(context);
         params.put(ReqUrls.LIMIT,String.valueOf(limit));
         params.put("type",String.valueOf(type));

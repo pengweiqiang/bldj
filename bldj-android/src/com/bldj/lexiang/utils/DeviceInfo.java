@@ -7,6 +7,7 @@ import java.util.Enumeration;
 
 import org.apache.http.conn.util.InetAddressUtils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
@@ -135,6 +136,12 @@ public class DeviceInfo {
 		windowManager.getDefaultDisplay().getMetrics(mMetric);
 		return mMetric.widthPixels;
 	}
+	//获取屏幕宽度
+		public static int getDisplayMetricsWidth(Activity activity) {
+			int i = activity.getWindowManager().getDefaultDisplay().getWidth();
+			int j = activity.getWindowManager().getDefaultDisplay().getHeight();
+			return Math.min(i, j);
+		}
 
     /**
      * 获取屏幕高度

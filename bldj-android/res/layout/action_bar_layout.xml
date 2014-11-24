@@ -3,13 +3,39 @@
     android:id="@+id/actionBarLayout"
     android:layout_width="fill_parent"
     android:layout_height="48dp"
-    android:background="@color/white" >
+    android:background="@color/blue" >
 
     <ImageView
         android:id="@+id/leftActionButton"
         style="@style/ActionBarIconButton"
         android:layout_alignParentLeft="true"
+        android:visibility="visible"
         android:src="@drawable/ic_menu_role" />
+
+    <LinearLayout
+        android:id="@+id/leftActionCity"
+        style="@style/ActionBarIconButton"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="3dip"
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="2dip"
+            android:text="城市"
+            android:textColor="#FFFFFFFF"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_arrow_white_down" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/rightIconActionButton"

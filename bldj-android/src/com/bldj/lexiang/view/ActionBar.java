@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.bldj.lexiang.R;
 
@@ -23,6 +26,7 @@ public class ActionBar extends FrameLayout {
 	private ImageView mLeftActionButton;
 	private ImageView mRightIconActionButton;
 	private Button mRightTextActionButton;
+	private LinearLayout mCityButton;
 
 	public ActionBar(Context context) {
 		super(context);
@@ -41,6 +45,7 @@ public class ActionBar extends FrameLayout {
 		LayoutInflater.from(getContext()).inflate(R.layout.action_bar_layout,
 				this);
 		mTitleView = (TextView) findViewById(R.id.actionBarTitle);
+		mCityButton = (LinearLayout)findViewById(R.id.leftActionCity);
 		mLeftActionButton = (ImageView) findViewById(R.id.leftActionButton);
 		mRightIconActionButton = (ImageView) findViewById(R.id.rightIconActionButton);
 		mRightTextActionButton = (Button) findViewById(R.id.rightTextActionButton);
@@ -55,12 +60,23 @@ public class ActionBar extends FrameLayout {
 	}
 
 	public void setLeftActionButton(int icon, OnClickListener listener) {
+		mCityButton.setVisibility(View.GONE);
 		mLeftActionButton.setImageResource(icon);
 		mLeftActionButton.setOnClickListener(listener);
 		mLeftActionButton.setVisibility(View.VISIBLE);
 	}
+	/**
+	 * 设置首页城市的下拉框
+	 * @param listener
+	 */
+	public void setLeftHomeCityActionButton(OnClickListener listener){
+		mLeftActionButton.setVisibility(View.INVISIBLE);
+		mCityButton.setOnClickListener(listener);
+		mCityButton.setVisibility(View.VISIBLE);
+	}
 
 	public void hideLeftActionButton() {
+		mCityButton.setVisibility(View.INVISIBLE);
 		mLeftActionButton.setVisibility(View.INVISIBLE);
 	}
 

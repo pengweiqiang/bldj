@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.view.ActionBar;
 
 /**
  * 登录
@@ -14,7 +15,7 @@ import com.bldj.lexiang.R;
  * @author will
  * 
  */
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends BaseFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,14 @@ public class RegisterFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.register, container, false);
+		ActionBar actionBar = (ActionBar)mActivity.findViewById(R.id.actionBar);
+		actionBar.setLeftActionButton(R.drawable.ic_menu_back, new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				mActivity.finish();
+			}
+		});
 		return v;
 	}
 

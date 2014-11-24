@@ -30,5 +30,16 @@
     <dimen name="main_navigation_bar_top_border">5dip</dimen>
     <dimen name="main_navigation_bar_item_padding_top">10dip</dimen>
     <dimen name="main_navigation_bar_item_text_size">12sp</dimen>
+    
+    
+     <dimen name="recomment_margin">2dp</dimen>
+    <dimen name="recomment_textsize">10sp</dimen>
+    <dimen name="recomment_width">26dp</dimen>
+    <dimen name="recomment_height">30dp</dimen>
+
+    <dimen name="price_textsize">11sp</dimen>
+    <dimen name="price_margin">18dp</dimen>
+    <dimen name="price_width">60dp</dimen>
+    <dimen name="price_height">20dp</dimen>
 
 </resources>

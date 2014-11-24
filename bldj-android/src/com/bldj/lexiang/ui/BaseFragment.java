@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+import com.bldj.lexiang.view.ActionBar;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
@@ -24,11 +25,11 @@ public abstract class BaseFragment extends Fragment {
 	protected static final int FILL_PARENT = -1;
 	protected static final int WRAP_CONTENT = -2;
 
-	protected MainActivity mActivity;
+	protected Activity mActivity;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mActivity = (MainActivity) activity;
+		mActivity = (Activity) activity;
 	}
 
 	@Override

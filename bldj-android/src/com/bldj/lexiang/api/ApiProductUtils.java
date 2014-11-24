@@ -18,12 +18,12 @@ public class ApiProductUtils {
 	/**
 	 * 获取精品及热门推荐接口
 	 * @param context
-	 * @param tag
-	 * @param userType
-	 * @param orderbyTag
-	 * @param type
-	 * @param start
-	 * @param limit
+	 * @param tag 0热门推荐 1精品推荐
+	 * @param userType (0个人1 团体 2所有)
+	 * @param orderbyTag (0时间 1价格 2销量)
+	 * @param type (0美容 1美体 2养生)
+	 * @param start (页数)
+	 * @param limit (条数)
 	 * @param requestCallBack
 	 */
 	public static void getProducts(Context context,String tag,int userType,int orderbyTag,int type,int start,int limit,RequestCallback requestCallBack){
