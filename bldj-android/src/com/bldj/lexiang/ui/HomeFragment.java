@@ -153,7 +153,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 		mListView.setPullLoadEnable(true);
 		mListView.setPullRefreshEnable(false);
-		mListView.setXListViewListener(this, 0);
+		mListView.setXListViewListener(this);
 		// mListView.setRefreshTime();
 
 		return infoView;
@@ -179,18 +179,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		});
 		// actionBar.hideLeftActionButton();
 		actionBar.hideRightActionButton();
-	}
-
-	@Override
-	public void onRefresh(int id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onLoadMore(int id) {
-		pageNumber++;
-		getHotProduct();
 	}
 
 	/*
@@ -435,6 +423,18 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						R.drawable.tab_btn2));
 			}
 		});
+	}
+
+	@Override
+	public void onRefresh() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLoadMore() {
+		pageNumber++;
+		getHotProduct();
 	}
 
 }
