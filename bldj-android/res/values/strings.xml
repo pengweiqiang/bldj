@@ -38,6 +38,11 @@
 	<string name="login">登录</string>
 	<string name="register">注册</string>
 	<string name="forget_pwd">忘记密码</string>
+	<string name="update_pwd">修改密码</string>
+	<string name="input_old_pwd">输入旧密码：</string>
+	<string name="input_new_pwd2">输入新密码：</string>
+	<string name="input_new_pwd_again">确认密码：</string>
+	<string name="confirm_update">确认修改</string>
 	<string name="get_code">获取验证码</string>
 	<string name="reset_pwd">重置密码</string>
 	<string name="input_phone">请输入您的手机号码</string>
@@ -53,6 +58,8 @@
 	<string name="my_record">我的档案</string>
 	<string name="check_version">新版本检测</string>
 	<string name="logout">退出</string>
+	<string name="jlys">经络养生</string>
+	<string name="kmrs">看美容师</string>
 	
 	
 	<string name="pay_by_wx">通过微信支付</string>
