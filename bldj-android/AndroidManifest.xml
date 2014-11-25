@@ -48,7 +48,12 @@
         <activity android:name=".ui.UpdatePwdActivity"
             android:screenOrientation="portrait"
             ></activity>
+        <!-- 重置密码 -->
+        <activity android:name=".ui.ForgetPwdActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity 
+            
             android:name=".ui.BannerWebActivity"
             android:screenOrientation="portrait"
             >
