@@ -10,28 +10,29 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
-    
-    <include android:id="@+id/banner" layout="@layout/home_banner"/>
-    
-     <LinearLayout
+
+    <include
+        android:id="@+id/banner"
+        layout="@layout/home_banner" />
+
+    <LinearLayout
         android:id="@+id/ll_tab_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:orientation="horizontal" >
 
-	        <TextView
-	            android:id="@+id/tab_find"
-	            android:layout_weight="1"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:gravity="center"
-	            android:padding="8dip"
-	            android:background="@drawable/tab_btn_selected1"
-	            android:text="@string/tab_find"
-	            android:textSize="16sp" />
-	      
-	        
+        <TextView
+            android:id="@+id/tab_find"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/tab_btn_selected1"
+            android:gravity="center"
+            android:padding="8dip"
+            android:text="@string/tab_find"
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/tab_company"
             android:layout_width="wrap_content"
@@ -42,39 +43,35 @@
             android:padding="8dip"
             android:text="@string/tab_company"
             android:textSize="16sp" />
+
         <TextView
             android:id="@+id/tab_reserve "
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/tab_btn3"
             android:layout_weight="1"
+            android:background="@drawable/tab_btn3"
             android:gravity="center"
             android:padding="8dip"
             android:text="@string/tab_reserve"
             android:textSize="16sp" />
     </LinearLayout>
-	
-      <com.bldj.lexiang.view.MyListView
+
+    <com.bldj.lexiang.view.MyListView
         android:id="@+id/home_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/good_list_bg"
         android:divider="#00000000"
-        android:visibility="gone"
-         />
-      
-       <ProgressBar
-            android:id="@+id/progress_listView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:max="100"
-            android:visibility="visible" />
-    
-    	    
-    
-    
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:max="100"
+        android:visibility="visible" />
 
 </LinearLayout>
