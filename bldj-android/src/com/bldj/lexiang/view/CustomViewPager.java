@@ -7,24 +7,36 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 public class CustomViewPager extends ViewPager {
-	
+
 	private static GestureDetector mDetector = null;
-	//private Context mContext = null;
+	private boolean isCanScroll = true; 
+	// private Context mContext = null;
 
 	public CustomViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		//this.mContext = context;
+		// this.mContext = context;
 	}
 
 	public CustomViewPager(Context context) {
 		super(context);
-		//this.mContext = context;
+		// this.mContext = context;
+	}
+
+    public void setScanScroll(boolean isCanScroll){  
+        this.isCanScroll = isCanScroll;  
+    } 
+
+	@Override
+	public void scrollTo(int x, int y) {
+		if (isCanScroll) {
+			super.scrollTo(x, y);
+		}
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
-		if(mDetector!=null){
-			mDetector.onTouchEvent( ev );
+		if (mDetector != null) {
+			mDetector.onTouchEvent(ev);
 		}
 		return super.onTouchEvent(ev);
 	}
