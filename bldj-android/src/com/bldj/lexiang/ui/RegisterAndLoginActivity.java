@@ -3,6 +3,7 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.CustomViewPager;
 
 /**
  * 登录注册界面
@@ -28,15 +30,16 @@ import com.bldj.lexiang.view.ActionBar;
  * @author will
  * 
  */
+@SuppressLint("NewApi")
 public class RegisterAndLoginActivity extends FragmentActivity {
 
+	CustomViewPager mViewPager;
 	private ActionBar mActionBar;
-	ViewPager mViewPager;
 
 	private int tabLineLength;// 1/2屏幕宽
 	private int currentPage = 0;// 初始化当前页为0（第一页）
 	private TextView tabline;
-	
+
 	private TextView register_menu;
 	private TextView login_menu;
 
@@ -46,47 +49,25 @@ public class RegisterAndLoginActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register_login);
-		mActionBar = (ActionBar) findViewById(R.id.actionBar);
-		mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
-		register_menu = (TextView)findViewById(R.id.register_menu);
-		login_menu = (TextView)findViewById(R.id.login_menu);
-		
-		onConfigureActionBar(mActionBar);
-		initTabLine();
-		
+		// initTabLine();
+
 		initView();
+
+		initListener();
 	}
 
-	// 设置activity的导航条
-	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("登录");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
-				new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						finish();
-					}
-				});
-		actionBar.hideRightActionButton();
-	}
-
-	private void initTabLine() {
-		// 获取显示屏信息
-		Display display = getWindow().getWindowManager().getDefaultDisplay();
-		// 得到显示屏宽度
-		DisplayMetrics metrics = new DisplayMetrics();
-		display.getMetrics(metrics);
-		// 1/2屏幕宽度
-		tabLineLength = (metrics.widthPixels -30) / 2;
-//		tabLineLength = register_menu.getWidth();
-		// 获取控件实例
-		tabline = (TextView) findViewById(R.id.tabline);
-		// 控件参数
-		LayoutParams lp = tabline.getLayoutParams();
-		lp.width = tabLineLength;
-		tabline.setLayoutParams(lp);
-	}
+	/*
+	 * private void initTabLine() { // 获取显示屏信息 Display display =
+	 * getWindow().getWindowManager().getDefaultDisplay(); // 得到显示屏宽度
+	 * DisplayMetrics metrics = new DisplayMetrics();
+	 * display.getMetrics(metrics); // 1/2屏幕宽度 tabLineLength =
+	 * (metrics.widthPixels - 30) / 2; // tabLineLength =
+	 * register_menu.getWidth(); // 获取控件实例 tabline = (TextView)
+	 * findViewById(R.id.tabline); // 控件参数 LayoutParams lp =
+	 * tabline.getLayoutParams(); lp.width = tabLineLength;
+	 * tabline.setLayoutParams(lp); }
+	 */
 
 	// // 登录
 	// btn_login.setOnClickListener(new View.OnClickListener() {
@@ -116,8 +97,29 @@ public class RegisterAndLoginActivity extends FragmentActivity {
 	// });
 	// }
 	// });
+	// 设置activity的导航条
+	protected void onConfigureActionBar(ActionBar actionBar) {
+		actionBar.setTitle("登录");
+		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						finish();
+					}
+				});
+		actionBar.hideRightActionButton();
+	}
 
 	private void initView() {
+
+		mViewPager = (CustomViewPager) findViewById(R.id.viewPager);
+		// mViewPager.setScanScroll(false);
+		mActionBar = (ActionBar) findViewById(R.id.actionBar);
+		onConfigureActionBar(mActionBar);
+
+		register_menu = (TextView) findViewById(R.id.register_menu);
+		login_menu = (TextView) findViewById(R.id.login_menu);
+
 		// 实例化对象
 		list = new ArrayList<Fragment>();
 
@@ -145,7 +147,6 @@ public class RegisterAndLoginActivity extends FragmentActivity {
 
 		// 绑定适配器
 		mViewPager.setAdapter(adapter);
-
 		// 设置滑动监听
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 
@@ -157,17 +158,7 @@ public class RegisterAndLoginActivity extends FragmentActivity {
 				// tv3.setTextColor(Color.BLACK);
 				//
 				// // 再改变当前选择页（position）对应的textview颜色
-				 switch (position) {
-				 case 0:
-					 mActionBar.setTitle("登录");
-//					 tv1.setTextColor(Color.rgb(51, 153, 0));
-				 break;
-				 case 1:
-					 mActionBar.setTitle("注册");
-//					 tv2.setTextColor(Color.rgb(51, 153, 0));
-				 break;
-				 }
-
+				setCurrentTitle(position);
 				currentPage = position;
 
 			}
@@ -176,24 +167,31 @@ public class RegisterAndLoginActivity extends FragmentActivity {
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				Log.i("tuzi", arg0 + "," + arg1 + "," + arg2);
 
-				// 取得该控件的实例
-				LinearLayout.LayoutParams ll = (android.widget.LinearLayout.LayoutParams) tabline
-						.getLayoutParams();
-
-				if (currentPage == 0 && arg0 == 0) { // 0->1移动(第一页到第二页)
-					ll.leftMargin = (int) (currentPage * tabLineLength + arg1
-							* tabLineLength);
-				} else if (currentPage == 1 && arg0 == 1) { // 1->2移动（第二页到第三页）
-					ll.leftMargin = (int) (currentPage * tabLineLength + arg1
-							* tabLineLength);
-				} else if (currentPage == 1 && arg0 == 0) { // 1->0移动（第二页到第一页）
-					ll.leftMargin = (int) (currentPage * tabLineLength - ((1 - arg1) * tabLineLength));
-				} else if (currentPage == 2 && arg0 == 1) { // 2->1移动（第三页到第二页）
-					ll.leftMargin = (int) (currentPage * tabLineLength - (1 - arg1)
-							* tabLineLength);
-				}
-
-				tabline.setLayoutParams(ll);
+				// // 取得该控件的实例
+				// LinearLayout.LayoutParams ll =
+				// (android.widget.LinearLayout.LayoutParams) tabline
+				// .getLayoutParams();
+				//
+				// if (currentPage == 0 && arg0 == 0) { // 0->1移动(第一页到第二页)
+				// ll.leftMargin = (int) (currentPage * tabLineLength + arg1
+				// * tabLineLength);
+				// } else if (currentPage == 1 && arg0 == 1) { //
+				// 1->2移动（第二页到第三页）
+				// ll.leftMargin = (int) (currentPage * tabLineLength + arg1
+				// * tabLineLength);
+				// } else if (currentPage == 1 && arg0 == 0) { //
+				// 1->0移动（第二页到第一页）
+				// ll.leftMargin = (int) (currentPage * tabLineLength - ((1 -
+				// arg1) *
+				// tabLineLength));
+				// } else if (currentPage == 2 && arg0 == 1) { //
+				// 2->1移动（第三页到第二页）
+				// ll.leftMargin = (int) (currentPage * tabLineLength - (1 -
+				// arg1)
+				// * tabLineLength);
+				// }
+				//
+				// tabline.setLayoutParams(ll);
 
 			}
 
@@ -203,6 +201,49 @@ public class RegisterAndLoginActivity extends FragmentActivity {
 
 			}
 		});
+
+	}
+
+	private void initListener() {
+		login_menu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				setCurrentTitle(0);
+
+			}
+		});
+
+		register_menu.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				setCurrentTitle(1);
+			}
+		});
+
+	}
+
+	public void setCurrentTitle(int position) {
+
+		int height = login_menu.getHeight();
+		register_menu.setHeight(height);
+		login_menu.setHeight(height);
+		if (position == 0) {
+			mActionBar.setTitle("登录");
+			login_menu.setBackground(getResources().getDrawable(
+					R.drawable.select_left));
+			register_menu.setBackground(getResources().getDrawable(
+					R.drawable.unselect_right));
+			mViewPager.setCurrentItem(0, false);
+		} else if (position == 1) {
+			mActionBar.setTitle("注册");
+			login_menu.setBackground(getResources().getDrawable(
+					R.drawable.unselect_left));
+			register_menu.setBackground(getResources().getDrawable(
+					R.drawable.select_right));
+		}
+		mViewPager.setCurrentItem(position, false);
 
 	}
 
