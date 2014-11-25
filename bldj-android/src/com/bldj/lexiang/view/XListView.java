@@ -147,8 +147,8 @@ public class XListView extends ListView implements OnScrollListener {
 			mFooterView.setOnClickListener(null);
 		} else {
 			mPullLoading = false;
-//			mFooterView.show();
-			mFooterView.hide();
+			mFooterView.show();
+//			mFooterView.hide();
 			mFooterView.setState(XListViewFooter.STATE_NORMAL);
 			// both "pull up" and "click" will invoke load more.
 			mFooterView.setOnClickListener(new OnClickListener() {
@@ -176,7 +176,7 @@ public class XListView extends ListView implements OnScrollListener {
 	public void stopLoadMore() {
 		if (mPullLoading == true) {
 			mPullLoading = false;
-			mFooterView.hide();
+			mFooterView.show();
 			mFooterView.setState(XListViewFooter.STATE_NORMAL);
 		}
 	}
