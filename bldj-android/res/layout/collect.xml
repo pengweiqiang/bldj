@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <com.bldj.lexiang.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" >
+    </com.bldj.lexiang.view.ActionBar>
+
+
+    <LinearLayout
+        android:id="@+id/ll_tab_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actionBar"
+        android:layout_margin="5dip"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tab_jlys"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/select_left"
+            android:gravity="center"
+            android:padding="8dip"
+            android:text="@string/jlys"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tab_kmrs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/unselect_right"
+            android:gravity="center"
+            android:padding="8dip"
+            android:text="@string/kmrs"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <com.bldj.lexiang.view.CustomViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_tab_title" >
+    </com.bldj.lexiang.view.CustomViewPager>
+
+</RelativeLayout>

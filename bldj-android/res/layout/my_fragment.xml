@@ -25,7 +25,6 @@
                 android:id="@+id/myinfo"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
@@ -36,18 +35,51 @@
                     android:id="@+id/img_person"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:src="@drawable/icon_ppw_user" />
-
-                <TextView
-                    android:id="@+id/tv_person_name"
+                    android:src="@drawable/ic_launcher" />
+				
+                <LinearLayout 
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:layout_marginLeft="4dp"
-                    android:gravity="center"
-                    android:text="name"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dip"
+                    >
+	                <TextView
+	                    android:id="@+id/tv_person_name"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="fill_parent"
+	                    android:text="用户昵称"
+	                    android:textColor="@color/black"
+	                    android:paddingTop="5dip"
+	                    android:textSize="18sp" />
+	                <TextView
+	                    android:id="@+id/tv_info"
+	                    android:layout_marginTop="8dip"
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="fill_parent"
+	                    android:layout_gravity="bottom"
+	                    android:text="健康送到家，方便你我他"
+	                    android:textColor="@color/grey"
+	                    android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout 
+                    android:id="@+id/update_pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginRight="10dip"
+                    >
+                <TextView
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:text="@string/update_pwd"
+	                    android:paddingTop="5dip"
+	                    android:textColor="@color/black"
+	                    android:textSize="18sp" />
+                </LinearLayout>
+                
             </LinearLayout>
 
             <Button
