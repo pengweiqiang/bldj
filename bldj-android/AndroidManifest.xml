@@ -38,6 +38,16 @@
             android:screenOrientation="portrait"
             >
         </activity>
+        <!-- 收藏界面 -->
+        <activity android:name=".ui.MyCollectActivity"
+            android:screenOrientation="portrait"
+            >
+            
+        </activity>
+        <!-- 修改密码 -->
+        <activity android:name=".ui.UpdatePwdActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity 
             android:name=".ui.BannerWebActivity"
             android:screenOrientation="portrait"
