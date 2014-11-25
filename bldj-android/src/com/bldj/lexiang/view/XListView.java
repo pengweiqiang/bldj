@@ -1,11 +1,14 @@
+/**
+ * @file XListView.java
+ * @package me.maxwin.view
+ * @create Mar 18, 2012 6:28:41 PM
+ * @author Maxwin
+ * @description An ListView support (a) Pull down to refresh, (b) Pull up to load more.
+ * 		Implement IXListViewListener, and see stopRefresh() / stopLoadMore().
+ */
 package com.bldj.lexiang.view;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +23,6 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
-
 
 public class XListView extends ListView implements OnScrollListener {
 
@@ -62,7 +64,6 @@ public class XListView extends ListView implements OnScrollListener {
 	private final static float OFFSET_RADIO = 1.8f; // support iOS like pull
 													// feature.
 
-	private int id;
 	/**
 	 * @param context
 	 */
@@ -97,7 +98,7 @@ public class XListView extends ListView implements OnScrollListener {
 
 		// init footer view
 		mFooterView = new XListViewFooter(context);
-
+		
 		// init header height
 		mHeaderView.getViewTreeObserver().addOnGlobalLayoutListener(
 				new OnGlobalLayoutListener() {
@@ -146,7 +147,8 @@ public class XListView extends ListView implements OnScrollListener {
 			mFooterView.setOnClickListener(null);
 		} else {
 			mPullLoading = false;
-			mFooterView.show();
+//			mFooterView.show();
+			mFooterView.hide();
 			mFooterView.setState(XListViewFooter.STATE_NORMAL);
 			// both "pull up" and "click" will invoke load more.
 			mFooterView.setOnClickListener(new OnClickListener() {
@@ -174,10 +176,9 @@ public class XListView extends ListView implements OnScrollListener {
 	public void stopLoadMore() {
 		if (mPullLoading == true) {
 			mPullLoading = false;
+			mFooterView.hide();
 			mFooterView.setState(XListViewFooter.STATE_NORMAL);
 		}
-		
-		mFooterView.setEnabled(true);
 	}
 
 	/**
@@ -185,18 +186,8 @@ public class XListView extends ListView implements OnScrollListener {
 	 * 
 	 * @param time
 	 */
-	public void setRefreshTime() {
-		//mHeaderTimeView.setText(new Date().toLocaleString());
-		mHeaderTimeView.setText(date());
-	}
-	
-	// 获取系统时间
-	public String date() {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = new Date();
-		String t = sdf.format(date);
-		return t;
+	public void setRefreshTime(String time) {
+		mHeaderTimeView.setText(time);
 	}
 
 	private void invokeOnScrolling() {
@@ -267,21 +258,13 @@ public class XListView extends ListView implements OnScrollListener {
 		}
 	}
 
-	public void startLoadMore() {
+	private void startLoadMore() {
 		mPullLoading = true;
+		mFooterView.show();
 		mFooterView.setState(XListViewFooter.STATE_LOADING);
 		if (mListViewListener != null) {
-			mListViewListener.onLoadMore(id);
+			mListViewListener.onLoadMore();
 		}
-		mFooterView.setEnabled(false);
-        Handler mHandler = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                XListView.this.stopLoadMore();
-            }
-        };
-        mHandler.sendEmptyMessageDelayed(0, 4000);
 	}
 
 	@Override
@@ -317,25 +300,16 @@ public class XListView extends ListView implements OnScrollListener {
 					mPullRefreshing = true;
 					mHeaderView.setState(XListViewHeader.STATE_REFRESHING);
 					if (mListViewListener != null) {
-						mListViewListener.onRefresh(id);
-                        Handler mHandler = new Handler(){
-                            @Override
-                            public void handleMessage(Message msg) {
-                                super.handleMessage(msg);
-                                XListView.this.stopRefresh();
-                            }
-                        };
-                        mHandler.sendEmptyMessageDelayed(0, 4000);
+						mListViewListener.onRefresh();
 					}
 				}
 				resetHeaderHeight();
 			} else if (getLastVisiblePosition() == mTotalItemCount - 1) {
 				// invoke load more.
 				if (mEnablePullLoad
-						&& mFooterView.getBottomMargin() > PULL_LOAD_MORE_DELTA) {
-					if(mFooterView.isEnabled()) {
-						startLoadMore();
-					}
+				    && mFooterView.getBottomMargin() > PULL_LOAD_MORE_DELTA
+				    && !mPullLoading) {
+					startLoadMore();
 				}
 				resetFooterHeight();
 			}
@@ -381,9 +355,8 @@ public class XListView extends ListView implements OnScrollListener {
 		}
 	}
 
-	public void setXListViewListener(IXListViewListener l,int id) {
+	public void setXListViewListener(IXListViewListener l) {
 		mListViewListener = l;
-		this.id = id;
 	}
 
 	/**
@@ -398,8 +371,8 @@ public class XListView extends ListView implements OnScrollListener {
 	 * implements this interface to get refresh/load more event.
 	 */
 	public interface IXListViewListener {
-		public void onRefresh(int id);
+		public void onRefresh();
 
-		public void onLoadMore(int id);
+		public void onLoadMore();
 	}
 }

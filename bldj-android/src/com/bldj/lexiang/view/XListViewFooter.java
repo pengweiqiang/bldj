@@ -1,5 +1,6 @@
 package com.bldj.lexiang.view;
 
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
-
 
 public class XListViewFooter extends LinearLayout {
 	public final static int STATE_NORMAL = 0;
