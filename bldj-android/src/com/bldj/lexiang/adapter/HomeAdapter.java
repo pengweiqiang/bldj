@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.universalimageloader.core.ImageLoader;
@@ -87,13 +88,13 @@ public class HomeAdapter extends BaseListAdapter {
 			holder.name.setText(productItem.get(0).getName());
 			holder.title.setText(productItem.get(0).getOneword());
 			holder.price.setText("价格："+String.valueOf(productItem.get(0).getCurPrice())+"元/20分钟");
-			ImageLoader.getInstance().displayImage(productItem.get(0).getPicurl(), holder.img);
+			ImageLoader.getInstance().displayImage(productItem.get(0).getPicurl(), holder.img,MyApplication.getInstance().getOptions(R.drawable.default_image));
 			
 			holder.name2.setText(productItem.get(1).getName());
 			holder.title2.setText(productItem.get(1).getOneword());
 			holder.price2.setText(String.valueOf(productItem.get(1).getCurPrice()));
-			ImageLoader.getInstance().displayImage(productItem.get(1).getPicurl(), holder.img2);
-			
+			ImageLoader.getInstance().displayImage(productItem.get(1).getPicurl(), holder.img2,MyApplication.getInstance().getOptions(R.drawable.default_image));
+		
 			
 			return convertView;
 		}

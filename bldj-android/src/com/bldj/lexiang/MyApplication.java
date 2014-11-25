@@ -87,7 +87,7 @@ public class MyApplication extends Application {
 		.cacheInMemory(true)
 		.cacheOnDisc(true)
 		.imageScaleType(ImageScaleType.EXACTLY)
-		.bitmapConfig(Bitmap.Config.ARGB_8888)
+		.bitmapConfig(Bitmap.Config.RGB_565)
 		.build();
 	}
 	
