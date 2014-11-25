@@ -10,7 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
-    
+
+    <!--
     <LinearLayout 
         android:layout_below="@+id/actionBar"
         android:layout_width="fill_parent"
@@ -31,24 +32,26 @@
 	            />
         
     </LinearLayout>
-    
+    -->
+
     <LinearLayout
         android:id="@+id/ll_tab_title"
-        android:layout_below="@+id/actionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:layout_marginLeft="15dip"
-		android:layout_marginTop="2dip"
-		android:layout_marginRight="15dip"        
+        android:layout_below="@+id/actionBar"
+        android:layout_margin="5dip"
         android:orientation="horizontal" >
 
-        <!-- <FrameLayout 
+        <!--
+             <FrameLayout 
             	android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            
 	            android:gravity="center"
-	            > -->
-	             <!--  <TextView 
+	            >
+        -->
+        <!--
+                <TextView 
 	            android:id="@+id/tabline"
 	            android:gravity="center"
 	            android:layout_weight="1"
@@ -56,41 +59,40 @@
 	            android:layout_width="fill_parent"
 	            android:layout_height="wrap_content"
 	            android:background="@color/color_font_blue"
-	            /> -->
-	        <TextView
-	            android:id="@+id/login_menu"
-	            android:layout_weight="1"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:gravity="center"
-	            android:padding="8dip"
-	            android:background="@drawable/select_left"
-	            
-	            android:text="@string/login"
-	            android:textSize="16sp" />
-	      
-	        
-      <!--   </FrameLayout> -->
+	            />
+        -->
+
+        <TextView
+            android:id="@+id/login_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/select_left"
+            android:gravity="center"
+            android:padding="8dip"
+            android:text="@string/login"
+            android:textSize="16sp" />
+
+        <!-- </FrameLayout> -->
 
         <TextView
             android:id="@+id/register_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/unselect_right"
             android:gravity="center"
             android:padding="8dip"
-            android:background="@drawable/unselect_right"
             android:text="@string/register"
             android:textSize="16sp" />
     </LinearLayout>
-    
 
-
-    <android.support.v4.view.ViewPager
+    <com.bldj.lexiang.view.CustomViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_tab_title" >
+    </com.bldj.lexiang.view.CustomViewPager>
 
     <!--
     <LinearLayout
@@ -166,7 +168,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="100dip"
-        android:text="@string/login" />
-    -->
+        android:text="@string/login" />    -->
 
 </RelativeLayout>

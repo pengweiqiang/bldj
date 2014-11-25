@@ -2,7 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
     
-
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+	    <EditText 
+	        android:layout_weight="1"
+	        android:id="@+id/phone"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="10dip"
+	        android:inputType="phone"
+	        android:hint="@string/input_phone"
+	        android:gravity="center"
+	        />
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        >
+     <EditText 
+        android:id="@+id/password"
+        android:layout_weight="1"
+        android:layout_margin="10dip"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:hint="@string/input_pwd"
+        android:inputType="textPassword"
+        android:gravity="center"
+        />
+     </LinearLayout>
+    
+    <TextView 
+        android:id="@+id/forget_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forget_pwd"
+        android:layout_gravity="right"
+        android:layout_marginRight="25dip"
+        />
+ 	<LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:gravity="center"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="15dip"
+        >
+	    <Button 
+	        android:layout_weight="1"
+	        android:id="@+id/login"
+	        android:text="@string/login"
+	        android:layout_width="0dip"
+	        android:layout_height="wrap_content"
+	        android:layout_margin="5dip"
+	        android:gravity="center"
+	        />
+    </LinearLayout>
+    
+    
+    
 </LinearLayout>
