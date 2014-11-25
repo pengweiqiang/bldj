@@ -22,21 +22,32 @@ public class MyFragment extends BaseFragment {
 	private View infoView;
 	private ActionBar mActionBar;
 	private Button btn_logout;
+	private Button btn_collect;
 	private LinearLayout ll_myinfo;
+	private LinearLayout ll_updatePwd;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		infoView = inflater.inflate(R.layout.my_fragment, container, false);
+		
+		
+		initView();
+		
+		initListener();
+		return infoView;
+	}
+	
+	private void initView(){
+		
 		mActionBar = (ActionBar) infoView.findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		
 		btn_logout = (Button) infoView.findViewById(R.id.btn_logout);
 		ll_myinfo = (LinearLayout)infoView.findViewById(R.id.myinfo);
-		
-		initListener();
-		return infoView;
+		ll_updatePwd = (LinearLayout)infoView.findViewById(R.id.update_pwd);
+		btn_collect = (Button)infoView.findViewById(R.id.btn_collect);
 	}
 	
 	private void initListener(){
@@ -54,6 +65,24 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				
+			}
+		});
+		//我的收藏
+		btn_collect.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(mActivity,MyCollectActivity.class);
+				startActivity(intent);
+			}
+		});
+		//修改密码
+		ll_updatePwd.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(mActivity,UpdatePwdActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
