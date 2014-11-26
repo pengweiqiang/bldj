@@ -292,7 +292,7 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
 //                    new int[] { selected ,selected, selected,selected,normal});
             //int textColor = Color.parseColor("#2B2B2B");
             setTextColor(Color.BLACK);
-            setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
             setFadingEdgeLength(dp12);
 //            setCompoundDrawablePadding(-dp8);
 //            
