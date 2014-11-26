@@ -32,7 +32,7 @@ import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
 /**
- * 经络养生
+ * 已失效优惠卷
  * 
  * @author will
  * 
@@ -55,7 +55,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		infoView = inflater.inflate(R.layout.jlys, container, false);
+		infoView = inflater.inflate(R.layout.failure_coupons, container, false);
 		
 		initView();
 		
