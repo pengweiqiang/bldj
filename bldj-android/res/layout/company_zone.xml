@@ -221,7 +221,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:weightSum="1"
-            android:layout_marginTop="@dimen/company_margin_top" >
+            android:layout_marginTop="@dimen/company_margin_button_top" >
         
         <Button 
             android:id="@+id/btn_confirm"
