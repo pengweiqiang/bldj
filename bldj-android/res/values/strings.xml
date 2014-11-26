@@ -76,6 +76,8 @@
 	<string name="company_service_item_head">头部按摩</string>
 	<string name="company_service_item_body">全身放松</string>
 	<string name="submit">提交</string>
+	<string name="appointment_my">给自己预约</string>
+	<string name="appointment_other">给他人预约</string>
 	
 	
 	
