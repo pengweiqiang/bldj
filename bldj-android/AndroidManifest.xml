@@ -37,6 +37,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 我要预约 -->
+        <activity
+            android:name=".ui.AppointmentFragmentActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 登录注册界面 -->
         <activity
             android:name=".ui.RegisterAndLoginActivity"
