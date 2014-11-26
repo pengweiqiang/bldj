@@ -78,7 +78,8 @@
 	<string name="submit">提交</string>
 	<string name="appointment_my">给自己预约</string>
 	<string name="appointment_other">给他人预约</string>
-	
+	<string name="unused">未使用</string>
+	<string name="failure">已失效</string>
 	
 	
 	<string name="pay_by_wx">通过微信支付</string>
