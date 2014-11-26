@@ -16,11 +16,16 @@
  */
 package com.bldj.lexiang.view;
 
+import static android.graphics.Paint.ANTI_ALIAS_FLAG;
+import static android.widget.LinearLayout.HORIZONTAL;
+import static android.widget.LinearLayout.VERTICAL;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.view.MotionEventCompat;
@@ -31,11 +36,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.bldj.lexiang.utils.CommonHelper;
-
-import static android.graphics.Paint.ANTI_ALIAS_FLAG;
-import static android.widget.LinearLayout.HORIZONTAL;
-import static android.widget.LinearLayout.VERTICAL;
+import com.bldj.lexiang.R;
 
 /**
  * Draws circles (one for each view). The current view position is filled and
@@ -69,7 +70,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
     }
 
     public CirclePageIndicator(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        this(context, attrs, R.attr.vpiCirclePageIndicatorStyle);
     }
 
     public CirclePageIndicator(Context context, AttributeSet attrs, int defStyle) {
@@ -77,37 +78,37 @@ public class CirclePageIndicator extends View implements PageIndicator {
         if (isInEditMode()) return;
 
         //Load defaults from resources
-       // final Resources res = getResources();
-        final int defaultPageColor = Color.parseColor("#FFd2d2d2");
-        final int defaultFillColor = Color.parseColor("#FF818181"); 
-        final int defaultOrientation = 0;
-        final int defaultStrokeColor = Color.parseColor("#FFDDDDDD");
-        final float defaultStrokeWidth = 0.0f;
-        final float defaultRadius = CommonHelper.getDp2px(context,5);
-        final boolean defaultCentered = true;
-        final boolean defaultSnap = false;
+        final Resources res = getResources();
+        final int defaultPageColor = res.getColor(R.color.default_circle_indicator_page_color);
+        final int defaultFillColor = res.getColor(R.color.default_circle_indicator_fill_color);
+        final int defaultOrientation = res.getInteger(R.integer.default_circle_indicator_orientation);
+        final int defaultStrokeColor = res.getColor(R.color.default_circle_indicator_stroke_color);
+        final float defaultStrokeWidth = res.getDimension(R.dimen.default_circle_indicator_stroke_width);
+        final float defaultRadius = res.getDimension(R.dimen.default_circle_indicator_radius);
+        final boolean defaultCentered = res.getBoolean(R.bool.default_circle_indicator_centered);
+        final boolean defaultSnap = res.getBoolean(R.bool.default_circle_indicator_snap);
 
         //Retrieve styles attributes
-        //TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CirclePageIndicator, defStyle, 0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CirclePageIndicator, defStyle, 0);
 
-        mCentered = defaultCentered;
-        mOrientation = defaultOrientation;
+        mCentered = a.getBoolean(R.styleable.CirclePageIndicator_centered, defaultCentered);
+        mOrientation = a.getInt(R.styleable.CirclePageIndicator_android_orientation, defaultOrientation);
         mPaintPageFill.setStyle(Style.FILL);
-        mPaintPageFill.setColor(defaultPageColor);
+        mPaintPageFill.setColor(a.getColor(R.styleable.CirclePageIndicator_pageColor, defaultPageColor));
         mPaintStroke.setStyle(Style.STROKE);
-        mPaintStroke.setColor(defaultStrokeColor);
-        mPaintStroke.setStrokeWidth(defaultStrokeWidth);
+        mPaintStroke.setColor(a.getColor(R.styleable.CirclePageIndicator_strokeColor, defaultStrokeColor));
+        mPaintStroke.setStrokeWidth(a.getDimension(R.styleable.CirclePageIndicator_strokeWidth, defaultStrokeWidth));
         mPaintFill.setStyle(Style.FILL);
-        mPaintFill.setColor(defaultFillColor);
-        mRadius = defaultRadius;
-        mSnap = defaultSnap;
+        mPaintFill.setColor(a.getColor(R.styleable.CirclePageIndicator_fillColor, defaultFillColor));
+        mRadius = a.getDimension(R.styleable.CirclePageIndicator_radius, defaultRadius);
+        mSnap = a.getBoolean(R.styleable.CirclePageIndicator_snap, defaultSnap);
 
-//        Drawable background = a.getDrawable(R.styleable.CirclePageIndicator_android_background);
-//        if (background != null) {
-//          setBackgroundDrawable(background);
-//        }
+        Drawable background = a.getDrawable(R.styleable.CirclePageIndicator_android_background);
+        if (background != null) {
+          setBackgroundDrawable(background);
+        }
 
-       // a.recycle();
+        a.recycle();
 
         final ViewConfiguration configuration = ViewConfiguration.get(context);
         mTouchSlop = ViewConfigurationCompat.getScaledPagingTouchSlop(configuration);
@@ -539,6 +540,7 @@ public class CirclePageIndicator extends View implements PageIndicator {
             dest.writeInt(currentPage);
         }
 
+        @SuppressWarnings("UnusedDeclaration")
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
             @Override
             public SavedState createFromParcel(Parcel in) {
