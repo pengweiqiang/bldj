@@ -391,12 +391,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View v) {
-				tab_find.setBackground(getResources().getDrawable(
+				/*tab_find.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn_selected1));
 				tab_company.setBackground(mActivity.getResources().getDrawable(
 						R.drawable.tab_btn2));
 				tab_reserve.setBackground(mActivity.getResources().getDrawable(
-						R.drawable.tab_btn3));
+						R.drawable.tab_btn3));*/
 			}
 		});
 		//企业专区
@@ -404,12 +404,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View v) {
-				tab_company.setBackground(getResources().getDrawable(
+				/*tab_company.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn_selected2));
 				tab_find.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn1));
 				tab_reserve.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn3));
+						R.drawable.tab_btn3));*/
 				
 				Intent intent = new Intent(mActivity,CompanyZoneActivity.class);
 				startActivity(intent);
@@ -419,12 +419,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View v) {
-				tab_reserve.setBackground(getResources().getDrawable(
+				/*tab_reserve.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn_selected3));
 				tab_find.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn1));
 				tab_company.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn2));
+						R.drawable.tab_btn2));*/
 			}
 		});
 	}
