@@ -53,6 +53,16 @@
             android:name=".ui.MyCollectActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 地址列表界面 -->
+        <activity
+            android:name=".ui.AddressesActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 详细地址界面 -->
+        <activity
+            android:name=".ui.AddressInfoActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 我的优惠卷界面 -->
         <activity
             android:name=".ui.CouponsFragmentActivity"
