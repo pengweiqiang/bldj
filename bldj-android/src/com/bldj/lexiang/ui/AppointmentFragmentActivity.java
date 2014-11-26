@@ -31,7 +31,6 @@ public class AppointmentFragmentActivity extends FragmentActivity {
 	private ActionBar mActionBar;
 
 
-	List<Fragment> list;
 	TabPageIndicator tabPageIndicator;
 
 	@Override
