@@ -82,6 +82,9 @@
 	<string name="failure">已失效</string>
 	
 	
+	<string name="contact_name">联系人姓名：</string>
+	<string name="contact_phone">手机号码：</string>
+	
 	<string name="pay_by_wx">通过微信支付</string>
 	<string name="check_pay">检查微信版本是否支持支付</string>
 	<string name="input_reqkey">输入reqkey</string>
