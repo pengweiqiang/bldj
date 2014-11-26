@@ -53,6 +53,11 @@
             android:name=".ui.MyCollectActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 我的优惠卷界面 -->
+        <activity
+            android:name=".ui.CouponsFragmentActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 修改密码 -->
         <activity
             android:name=".ui.UpdatePwdActivity"
