@@ -9,5 +9,26 @@
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
     
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:orientation="vertical"
+        >
+    <EditText 
+        android:id="@+id/suggestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="9"
+        />
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/input_suggestion"
+        />
+    
+    
+    </LinearLayout>
+    
 
 </LinearLayout>
