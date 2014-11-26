@@ -21,10 +21,11 @@ public class MyFragment extends BaseFragment {
 
 	private View infoView;
 	private ActionBar mActionBar;
-	private Button btn_logout;
-	private Button btn_collect;
-	private LinearLayout ll_myinfo;
-	private LinearLayout ll_updatePwd;
+	private Button btn_logout;//退出
+	private Button btn_collect;//收藏
+	private Button btn_coupons;//优惠卷
+	private LinearLayout ll_myinfo;//我的个人信息
+	private LinearLayout ll_updatePwd;//修改密码
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,6 +49,7 @@ public class MyFragment extends BaseFragment {
 		ll_myinfo = (LinearLayout)infoView.findViewById(R.id.myinfo);
 		ll_updatePwd = (LinearLayout)infoView.findViewById(R.id.update_pwd);
 		btn_collect = (Button)infoView.findViewById(R.id.btn_collect);
+		btn_coupons = (Button)infoView.findViewById(R.id.btn_coupons);
 	}
 	
 	private void initListener(){
@@ -73,6 +75,15 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(mActivity,MyCollectActivity.class);
+				startActivity(intent);
+			}
+		});
+		//优惠卷
+		btn_coupons.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mActivity,CouponsFragmentActivity.class);
 				startActivity(intent);
 			}
 		});
