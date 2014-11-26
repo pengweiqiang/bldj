@@ -41,5 +41,8 @@
     <dimen name="price_margin">18dp</dimen>
     <dimen name="price_width">60dp</dimen>
     <dimen name="price_height">20dp</dimen>
+    
+    <dimen name="company_margin_top">8dip</dimen>
+    <dimen name="compnay_radio_textSize">11sp</dimen>
 
 </resources>
