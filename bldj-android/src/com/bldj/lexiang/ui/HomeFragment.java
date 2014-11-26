@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.BannerPagerAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
@@ -348,7 +349,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			ImageView viewOne = (ImageView) LayoutInflater.from(mActivity)
 					.inflate(R.layout.b0_index_banner_cell, null);
 
-			ImageLoader.getInstance().displayImage(ad.getPicurl(), viewOne);
+			ImageLoader.getInstance().displayImage(ad.getPicurl(), viewOne,MyApplication.getInstance().getOptions(R.drawable.default_image));
 			bannerListView.add(viewOne);
 
 			viewOne.setOnClickListener(new OnClickListener() {
@@ -387,6 +388,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	 * 初始化点击事件
 	 */
 	private void initListener() {
+		
 		tab_find.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -397,6 +399,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						R.drawable.tab_btn2));
 				tab_reserve.setBackground(mActivity.getResources().getDrawable(
 						R.drawable.tab_btn3));*/
+				
+				
 			}
 		});
 		//企业专区
@@ -415,6 +419,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 				startActivity(intent);
 			}
 		});
+		//现在预约
 		tab_reserve.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -425,6 +430,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						R.drawable.tab_btn1));
 				tab_company.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn2));*/
+				Intent intent = new Intent(mActivity,AppointmentFragmentActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
