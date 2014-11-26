@@ -102,7 +102,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/btn_class"
+                android:id="@+id/btn_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -140,7 +140,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/btn_message"
+                android:id="@+id/btn_coupons"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
