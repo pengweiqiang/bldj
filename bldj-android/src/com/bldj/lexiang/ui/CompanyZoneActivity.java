@@ -8,26 +8,26 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 /**
- * 反馈意见
+ * 企业专区
  * 
  * @author will
  * 
  */
-public class FeedBackActivity extends BaseActivity {
+public class CompanyZoneActivity extends BaseActivity {
 
 	ActionBar mActionBar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.feed_back);
+		setContentView(R.layout.company_zone);
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 	}
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("反馈意见");
+		actionBar.setTitle("企业专区");
 		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
 				new OnClickListener() {
 			@Override
@@ -35,13 +35,7 @@ public class FeedBackActivity extends BaseActivity {
 				finish();
 			}
 		});
-		actionBar.setRightTextActionButton("发送", new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				
-			}
-		});
+		actionBar.hideRightActionButton();
 	}
 
 	@Override

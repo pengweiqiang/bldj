@@ -399,6 +399,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						R.drawable.tab_btn3));
 			}
 		});
+		//企业专区
 		tab_company.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -409,6 +410,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						R.drawable.tab_btn1));
 				tab_reserve.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn3));
+				
+				Intent intent = new Intent(mActivity,CompanyZoneActivity.class);
+				startActivity(intent);
 			}
 		});
 		tab_reserve.setOnClickListener(new View.OnClickListener() {

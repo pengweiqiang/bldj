@@ -1,5 +1,6 @@
 package com.bldj.lexiang.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -99,7 +100,8 @@ public class LoginFragment extends BaseFragment {
 			
 			@Override
 			public void onClick(View arg0) {
-				
+				Intent intent = new Intent(mActivity,ForgetPwdActivity.class);
+				startActivity(intent);
 			}
 		});
 		
