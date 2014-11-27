@@ -179,7 +179,14 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			}
 		});
 		// actionBar.hideLeftActionButton();
-		actionBar.hideRightActionButton();
+		actionBar.setRightTextActionButton("更多", new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(mActivity,MoreActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	/*
@@ -400,6 +407,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 				tab_reserve.setBackground(mActivity.getResources().getDrawable(
 						R.drawable.tab_btn3));*/
 				
+				Intent intent = new Intent(mActivity,JLYSFragmentActivity.class);
+				startActivity(intent);
 				
 			}
 		});

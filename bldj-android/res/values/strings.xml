@@ -57,9 +57,15 @@
 	<string name="my_coupon">优惠卷</string>
 	<string name="my_record">我的档案</string>
 	<string name="check_version">新版本检测</string>
+	<string name="about_us">关于我们</string>
+	<string name="feed_back">反馈意见</string>
+	<string name="share_friend">好友分享</string>
+	<string name="authent">我要认证</string>
 	<string name="logout">退出</string>
 	<string name="jlys">经络养生</string>
 	<string name="kmrs">看美容师</string>
+	<string name="health_service">养生服务</string>
+	<string name="see_health_division">看养生师</string>
 	<string name="input_suggestion">请输入您的宝贵意见</string>
 	<string name="company_title">企业购买有月卡、年卡、季卡以及各种优惠套装等，详情请填写意向订单，客服人员会联系你</string>
 	<string name="company_name">企业名称：</string>
