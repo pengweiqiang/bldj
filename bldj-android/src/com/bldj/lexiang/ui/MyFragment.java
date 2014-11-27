@@ -84,7 +84,7 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(mActivity, MyCollectActivity.class);
+				Intent intent = new Intent(mActivity, MyCollectFragmentActivity.class);
 				startActivity(intent);
 			}
 		});
