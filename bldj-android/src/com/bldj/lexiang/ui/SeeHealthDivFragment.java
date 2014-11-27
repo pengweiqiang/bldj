@@ -51,7 +51,7 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		infoView = inflater.inflate(R.layout.see_health_div, container, false);
-		ActionBar mActionBar = (com.bldj.lexiang.view.ActionBar)getActivity().findViewById(R.id.actionBar);
+		ActionBar mActionBar = (ActionBar)getActivity().findViewById(R.id.actionBar);
 		mActionBar.hideRightActionButton();
 		initView();
 		
@@ -91,7 +91,7 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 	}
 	
 	/**
-	 * 获取收藏数据
+	 * 获取收藏美容师数据
 	 */
 	private void getSellers() {
 		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
@@ -109,9 +109,24 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 							// return;
 							List<Seller> sellersList = new ArrayList<Seller>();
 
-//							Product p1 = new Product();
-//							p1.setName("商品" + (products.size() + 1));
-//							p1.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i3/T11iAAFoNbXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
+							Seller p1 = new Seller();
+							p1.setUsername("美容师" + (sellersList.size() + 1));
+							p1.setAddress("四川");
+							p1.setRecommend("共接单12次");
+							
+							Seller p2 = new Seller();
+							p2.setUsername("美容师" + (sellersList.size() + 2));
+							p2.setAddress("北京");
+							p2.setRecommend("共接单6次");
+							
+							Seller p3 = new Seller();
+							p3.setUsername("美容师" + (sellersList.size() + 3));
+							p3.setAddress("上海");
+							p3.setRecommend("共接单123次");
+							
+							sellersList.add(p1);
+							sellersList.add(p2);
+							sellersList.add(p3);
 //
 //							Product p2 = new Product();
 //							p2.setName("商品" + (products.size() + 2));

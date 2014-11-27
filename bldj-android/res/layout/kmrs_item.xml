@@ -43,6 +43,7 @@
 
             <TextView
                 android:id="@+id/address"
+                android:layout_marginLeft="10dip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/username"
@@ -80,12 +81,12 @@
                 android:text="赞数" />
 
             <TextView
-                android:id="@+id/comment"
+                android:id="@+id/order_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
-                android:text="共有21次好评" />
+                android:text="共接单:21次" />
         </LinearLayout>
     </LinearLayout>
 

@@ -60,7 +60,7 @@ public class KmrsAdapter extends BaseListAdapter {
 			holder.tv_address = (TextView) convertView
 					.findViewById(R.id.address);
 			holder.tv_price = (TextView) convertView.findViewById(R.id.price);
-			holder.tv_comment = (TextView) convertView.findViewById(R.id.comment);
+			holder.tv_comment = (TextView) convertView.findViewById(R.id.order_count);
 			holder.tv_distance = (TextView) convertView.findViewById(R.id.distance);
 			convertView.setTag(holder);
 
@@ -72,11 +72,11 @@ public class KmrsAdapter extends BaseListAdapter {
 		holder.tv_address.setText(seller.getAddress());
 		holder.tv_price.setText("价格："
 				+ String.valueOf(seller.getAvgPrice()) + "元/20分钟");
-		ImageLoader.getInstance().displayImage(
+		/*ImageLoader.getInstance().displayImage(
 				seller.getHeadurl(),
 				holder.headImg,
 				MyApplication.getInstance()
-						.getOptions(R.drawable.default_image));
+						.getOptions(R.drawable.default_image));*/
 
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
 		holder.tv_comment.setText(seller.getRecommend());

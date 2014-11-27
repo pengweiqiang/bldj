@@ -27,7 +27,7 @@ import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
 /**
- * 看美容师
+ * 收藏--》看美容师
  * 
  * @author will
  * 
@@ -115,6 +115,24 @@ public class CollectKmrsFragment extends BaseFragment implements IXListViewListe
 							// return;
 							List<Seller> sellersList = new ArrayList<Seller>();
 
+							Seller p1 = new Seller();
+							p1.setUsername("美容师" + (sellersList.size() + 1));
+							p1.setAddress("四川");
+							p1.setRecommend("共接单12次");
+							
+							Seller p2 = new Seller();
+							p2.setUsername("美容师" + (sellersList.size() + 2));
+							p2.setAddress("北京");
+							p2.setRecommend("共接单6次");
+							
+							Seller p3 = new Seller();
+							p3.setUsername("美容师" + (sellersList.size() + 3));
+							p3.setAddress("上海");
+							p3.setRecommend("共接单123次");
+							
+							sellersList.add(p1);
+							sellersList.add(p2);
+							sellersList.add(p3);
 //							Product p1 = new Product();
 //							p1.setName("商品" + (products.size() + 1));
 //							p1.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i3/T11iAAFoNbXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
