@@ -55,7 +55,7 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		infoView = inflater.inflate(R.layout.jlys, container, false);
+		infoView = inflater.inflate(R.layout.collect_jlys, container, false);
 		
 		initView();
 		
