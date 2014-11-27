@@ -1,6 +1,12 @@
 package com.bldj.lexiang.ui;
 
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.ApiUserUtils;
+import com.bldj.lexiang.api.vo.Address;
+import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -20,18 +26,31 @@ public class AddressInfoActivity extends BaseActivity {
 
 	ActionBar mActionBar;
 	private EditText et_contact_name,et_contact_address,et_contact_phone;
+	private int type;//0--增加地址  2--修改地址 
+	private Address addressVo;
+	private String title = "增加地址";
+	private User user ;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.update_address);//setContentView要放在super.onCreate前面，不然会报nullPointer
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.update_address);
+		type = getIntent().getIntExtra("type", 0);//地址类型
+		if(type==2){
+			addressVo = (Address)getIntent().getSerializableExtra("address");
+			initAddressData();
+			title = "修改地址";
+		}
+		user = MyApplication.getInstance().getCurrentUser();
+		
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		
 	}
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("添加地址");
+		actionBar.setTitle(title);
 		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
 				new OnClickListener() {
 			@Override
@@ -59,6 +78,18 @@ public class AddressInfoActivity extends BaseActivity {
 					return;
 				}
 				//TODO 调用接口
+				String addressId = "";
+				String curLocation = "";
+				if(address!=null && type==2){//修改地址
+					addressId = String.valueOf(addressVo.getId());
+				}
+				ApiUserUtils.addressManager(AddressInfoActivity.this, type, user.getUserId(),curLocation , address, addressId, new HttpConnectionUtil.RequestCallback() {
+					
+					@Override
+					public void execute(ParseModel parseModel) {
+						
+					}
+				});
 			}
 		});
 	}
@@ -74,6 +105,11 @@ public class AddressInfoActivity extends BaseActivity {
 	public void initListener() {
 		// TODO Auto-generated method stub
 
+	}
+	public void initAddressData(){
+		et_contact_name.setText(user.getUsername());
+		et_contact_address.setText(addressVo.getDetailAddress());
+		et_contact_phone.setText(user.getMobile());
 	}
 
 }
