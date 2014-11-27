@@ -50,7 +50,7 @@
         </activity>
         <!-- 收藏界面 -->
         <activity
-            android:name=".ui.MyCollectActivity"
+            android:name=".ui.MyCollectFragmentActivity"
             android:screenOrientation="portrait" >
         </activity>
         <!-- 地址列表界面 -->
