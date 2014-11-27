@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.HomeAdapter;
+import com.bldj.lexiang.adapter.JlysHealthAdapter;
 import com.bldj.lexiang.adapter.KmrsAdapter;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.ApiSellerUtils;
@@ -37,7 +38,7 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 	private ProgressBar progressBar;
 	private View infoView;
 	private XListView mListView;
-	private KmrsAdapter listAdapter;
+	private JlysHealthAdapter listAdapter;
 	private List<Seller> sellers;
 	
 	private int pageNumber = 1;
@@ -64,7 +65,7 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		sellers = new ArrayList<Seller>();
-		listAdapter = new KmrsAdapter(mActivity, sellers);
+		listAdapter = new JlysHealthAdapter(mActivity, sellers);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
