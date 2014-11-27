@@ -73,6 +73,36 @@
             android:name=".ui.UpdatePwdActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 关于我们界面 -->
+        <activity 
+            android:name=".ui.AboutActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 反馈意见界面 -->
+        <activity 
+            android:name=".ui.FeedBackActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 分享好友 -->
+        <activity 
+            android:name=".ui.SharedFriendActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+         <!-- 我要认证 -->
+        <activity 
+            android:name=".ui.AuthentActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <!-- 申请认证 -->
+        <activity 
+            android:name=".ui.ApplyAuthentActivity"
+            android:screenOrientation="portrait"
+            >
+        </activity>
         <!-- 企业专区 -->
         <activity
             android:name=".ui.CompanyZoneActivity"
