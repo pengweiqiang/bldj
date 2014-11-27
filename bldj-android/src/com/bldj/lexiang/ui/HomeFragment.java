@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -87,7 +88,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		tab_reserve = (TextView) infoView.findViewById(R.id.tab_reserve);
 		progressbar = (ProgressBar) infoView
 				.findViewById(R.id.progress_listView);
-		initListener();
 
 		mListView = (MyListView) infoView.findViewById(R.id.home_listview);
 		// bannerView =
@@ -163,7 +163,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
+		
+		initListener();
+		
 		getAdLists();
 		getHotProduct();
 	}
@@ -442,6 +444,17 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 				Intent intent = new Intent(mActivity,AppointmentFragmentActivity.class);
 				startActivity(intent);
 			}
+		});
+		
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				Intent intent = new Intent(mActivity,HealthProductDetailActivity.class);
+				startActivity(intent);
+			}
+			
 		});
 	}
 

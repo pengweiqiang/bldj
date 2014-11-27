@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+
+    
+    <com.bldj.lexiang.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" >
+    </com.bldj.lexiang.view.ActionBar>
+	
+    <LinearLayout 
+        android:id="@+id/center_info"
+        android:layout_below="@+id/actionBar"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        >
+	    <ImageView 
+	        android:id="@+id/product_img"
+	        android:layout_marginTop="3dp"
+	        android:layout_gravity="center"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/ic_launcher"
+	        />
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/info1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:text="时长：30分钟" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="一休价：￥64.5/次"
+                android:layout_weight="1"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/share"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="0.5"
+                android:text="分享"
+                android:textSize="13sp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/info2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/buy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:layout_weight="1"
+                android:text="50人已经购买" />
+
+            <TextView
+                android:id="@+id/price_shop"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="门店价:￥22.4/次"
+                android:layout_weight="1"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/invite"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:text="邀请"
+                android:layout_weight="0.5"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dip"
+        android:paddingLeft="10dip"
+        android:background="@color/blue"
+        >
+        
+        <TextView 
+            android:id="@+id/goodEval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="好评   77条"
+            android:layout_weight="1"
+            />
+        
+         <TextView 
+            android:id="@+id/midEval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="中评  7条"
+            android:layout_weight="1"
+            />
+         
+         <TextView 
+            android:id="@+id/badEval"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="差评  7条"
+            android:layout_weight="1"
+            />
+        
+    </LinearLayout>
+    
+    <TextView 
+        android:id="@+id/prodcut_feature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:layout_margin="5dp"
+        android:textSize="11sp"
+        android:text="特色：产品订购优惠、人数团购等特色特色：产品订购优惠、人数团购等特色特色：产品订购优惠、人数团购等特色"
+        />
+   
+    
+    <TextView 
+        android:id="@+id/prodcut_effect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:layout_margin="5dp"
+        android:textSize="11sp"
+        android:text="手法功效：运用中医传统推拿手法，刺激人体的特定部位，疏通肩部的肌肉劳损"
+        />
+    
+    <TextView 
+        android:id="@+id/product_to_person"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dip"
+        android:layout_margin="5dip"
+        android:textSize="11sp"
+        android:text="适用人群：运用中医传统推拿手法，刺激人体的特定部位，疏通肩部的肌肉劳损
+预防和养护：运用中医传统推拿手法，刺激人体的特定部位，疏通肩部的肌肉劳损"
+        />
+    
+	
+       
+     </LinearLayout>  
+    
+       <RelativeLayout 
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_alignParentBottom="true"
+           android:layout_marginLeft="5dip"
+           android:layout_marginRight="5dip"
+           android:layout_marginBottom="2dip"
+           android:background="@drawable/own_btn_rounded"
+           >
+           <TextView 
+               android:id="@+id/custom_service"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:text="联系客服"
+               android:layout_centerVertical="true"
+               />
+           <Button 
+               android:id="@+id/appointment_product"
+               android:layout_width="wrap_content"
+               android:layout_height="35dp"
+               android:text="预约该产品"
+               android:textSize="14sp"
+               android:layout_centerInParent="true"
+               />
+          <TextView 
+               android:id="@+id/collect"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="收藏"
+               android:layout_centerVertical="true"
+               android:layout_alignParentRight="true"
+               /> 
+           
+           
+       </RelativeLayout>
+	
+</RelativeLayout>
