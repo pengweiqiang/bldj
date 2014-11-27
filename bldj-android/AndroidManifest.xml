@@ -48,6 +48,11 @@
             android:name=".ui.RegisterAndLoginActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 经络养生 -->
+        <activity
+            android:name=".ui.JLYSFragmentActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 收藏界面 -->
         <activity
             android:name=".ui.MyCollectFragmentActivity"
@@ -73,35 +78,35 @@
             android:name=".ui.UpdatePwdActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 更多 -->
+        <activity
+            android:name=".ui.MoreActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 关于我们界面 -->
-        <activity 
+        <activity
             android:name=".ui.AboutActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 反馈意见界面 -->
-        <activity 
+        <activity
             android:name=".ui.FeedBackActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 分享好友 -->
-        <activity 
+        <activity
             android:name=".ui.SharedFriendActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
-         <!-- 我要认证 -->
-        <activity 
+        <!-- 我要认证 -->
+        <activity
             android:name=".ui.AuthentActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 申请认证 -->
-        <activity 
+        <activity
             android:name=".ui.ApplyAuthentActivity"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <!-- 企业专区 -->
         <activity
