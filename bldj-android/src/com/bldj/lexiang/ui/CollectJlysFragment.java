@@ -37,7 +37,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * @author will
  * 
  */
-public class JlysFragment extends BaseFragment implements IXListViewListener{
+public class CollectJlysFragment extends BaseFragment implements IXListViewListener{
 
 	private ProgressBar progressBar;
 	private View infoView;
