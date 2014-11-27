@@ -104,7 +104,10 @@
 	<string name="single_project">单人项目</string>
 	<string name="team">团体</string>
 	<string name="high">高端</string>
+	<string name="order_sale">销量排序</string>
+	<string name="order_price">价格排序</string>
 	
+		
 	<string name="pay_by_wx">通过微信支付</string>
 	<string name="check_pay">检查微信版本是否支持支付</string>
 	<string name="input_reqkey">输入reqkey</string>

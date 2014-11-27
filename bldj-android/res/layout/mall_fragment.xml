@@ -11,8 +11,69 @@
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
 	
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dip"
+        >
+        <TextView 
+            android:id="@+id/order_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_sale"
+            android:layout_weight="1"
+            />
+        <TextView 
+            android:id="@+id/order_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_price"
+            android:layout_weight="1"
+            />
+        <Spinner 
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+		<TextView 
+		    android:id="@+id/search"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="搜索"
+		    />        
+        
+    </LinearLayout>
+    	  
+    <ImageView 
+        android:id="@+id/company_zone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher"
+        android:layout_gravity="center"
+        android:layout_margin="10dip"
+        />
+    <com.bldj.lexiang.view.XListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/good_list_bg"
+        android:divider="#00000000"
+        android:visibility="gone" />
+      
+       <ProgressBar
+        android:id="@+id/progress_listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:max="100"
+        android:visibility="visible" />
     
-    	    
+    
     
     
 
