@@ -32,6 +32,7 @@ import com.bldj.lexiang.api.vo.Ad;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
@@ -336,10 +337,14 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
 							productsList.add(p8);
 
+							if (pageNumber == 1) {
+								products.clear();
+							}
 							products.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
-
+							onLoad();
+							
 						} else {
 							List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
@@ -468,6 +473,13 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	public void onLoadMore() {
 		pageNumber++;
 		getHotProduct();
+	}
+	
+	private void onLoad() {
+		mListView.stopRefresh();
+		mListView.stopLoadMore();
+		mListView.setRefreshTime(DateUtils.convert2String(
+				System.currentTimeMillis(), ""));
 	}
 
 }
