@@ -74,8 +74,8 @@ public class MyCollectActivity extends FragmentActivity {
 		list = new ArrayList<Fragment>();
 
 		// 设置数据源
-		JlysFragment jlysFragment = new JlysFragment();
-		KmrsFragment kmrsFragment = new KmrsFragment();
+		CollectJlysFragment jlysFragment = new CollectJlysFragment();
+		CollectKmrsFragment kmrsFragment = new CollectKmrsFragment();
 
 		list.add(jlysFragment);
 		list.add(kmrsFragment);

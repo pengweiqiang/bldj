@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.bldj.lexiang.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" >
+    </com.bldj.lexiang.view.ActionBar>
+
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dip"
+        >
+        <ImageView 
+            android:id="@+id/head_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher"
+            android:layout_marginLeft="10dip"
+            />
+		    <TextView
+		        android:id="@+id/tv_card_tip"
+		        android:layout_toRightOf="@+id/head_card"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:paddingBottom="5dip"
+		        android:paddingTop="5dip"
+		        android:paddingLeft="5dip"
+		        android:text="上传个人身份证照片"
+		        />
+		    <TextView 
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:paddingLeft="5dip"
+		        android:layout_toRightOf="@+id/head_card"
+		        android:textSize="12sp"
+		        android:layout_below="@+id/tv_card_tip"
+		        android:text="证件页面区域清晰可见，支持jpg、jpeg、bmp、png格式图片，大小不能超过5M"
+		        />
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        >
+		    <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:textColor="@color/color_text_three"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/real_name"
+            />
+        
+        <EditText 
+            android:id="@+id/real_name"
+            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:hint="@string/input_real_name"
+            />
+        
+    </LinearLayout>
+    
+     <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/common_email"
+            />
+        
+        <EditText 
+            android:id="@+id/common_email"
+            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:hint="@string/input_common_email"
+            />
+        
+    </LinearLayout>
+    
+      <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:orientation="horizontal"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        >
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/company_contact_type"
+            />
+        
+        <EditText 
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:hint="@string/input_phone2"
+            />
+        
+    </LinearLayout>
+    
+   <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginLeft="15dip"
+        android:layout_marginRight="15dip"
+        >
+            <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/auth_type"
+            />
+            <RadioGroup
+                android:id="@+id/radioGroup_service"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="3" >
+                
+                <RadioButton
+                        android:id="@+id/radio_service_head"
+                        android:layout_width="0dip"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/compnay_radio_textSize"
+                        android:text="@string/auth_item_seller" >
+                    </RadioButton>
+            
+        </RadioGroup>
+        
+        
+    </LinearLayout>  
+      
+    
+      <Button 
+          android:id="@+id/confirm"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/submit_auth"
+          android:layout_margin="10dip"
+          android:layout_gravity="center"
+          />
+
+	
+</LinearLayout>
