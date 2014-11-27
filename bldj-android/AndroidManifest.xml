@@ -38,10 +38,15 @@
             </intent-filter>
         </activity>
         <!-- 美容师个人界面 -->
-		<activity 
-		    android:name=".ui.SellerPersonalActivity"
-		    android:screenOrientation="portrait"
-		    ></activity>
+        <activity
+            android:name=".ui.SellerPersonalActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 养生产品详情页 -->
+        <activity
+            android:name=".ui.HealthProductDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 我要预约 -->
         <activity
             android:name=".ui.AppointmentFragmentActivity"
