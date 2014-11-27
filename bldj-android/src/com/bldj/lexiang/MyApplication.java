@@ -38,6 +38,11 @@ public class MyApplication extends Application {
 		this.user = user;
 	}
 	public User getCurrentUser() {
+		if(user==null){
+			user = new User();
+			user.setUsername("小新");
+			user.setMobile("156262631236");
+		}
 		return user;
 	}
 	
