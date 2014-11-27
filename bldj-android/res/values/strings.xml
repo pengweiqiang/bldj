@@ -100,7 +100,10 @@
 	<string name="submit_auth">立即认证</string>
 	<string name="auth_type">认证类型：</string>
 	<string name="auth_item_seller">美容师</string>
-	
+	<string name="all">全部</string>
+	<string name="single_project">单人项目</string>
+	<string name="team">团体</string>
+	<string name="high">高端</string>
 	
 	<string name="pay_by_wx">通过微信支付</string>
 	<string name="check_pay">检查微信版本是否支持支付</string>

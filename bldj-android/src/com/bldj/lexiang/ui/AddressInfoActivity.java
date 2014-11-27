@@ -35,13 +35,14 @@ public class AddressInfoActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.update_address);//setContentView要放在super.onCreate前面，不然会报nullPointer
 		super.onCreate(savedInstanceState);
+		user = MyApplication.getInstance().getCurrentUser();
 		type = getIntent().getIntExtra("type", 0);//地址类型
 		if(type==2){
 			addressVo = (Address)getIntent().getSerializableExtra("address");
 			initAddressData();
 			title = "修改地址";
 		}
-		user = MyApplication.getInstance().getCurrentUser();
+		
 		
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);

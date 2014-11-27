@@ -66,9 +66,12 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(mActivity,
+				if (checkIsLogin()) {
+
+				}
+				/*Intent intent = new Intent(mActivity,
 						RegisterAndLoginActivity.class);
-				startActivity(intent);
+				startActivity(intent);*/
 			}
 		});
 		// 退出登录
@@ -84,6 +87,9 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
+//				if (checkIsLogin()) {
+//
+//				}
 				Intent intent = new Intent(mActivity, MyCollectFragmentActivity.class);
 				startActivity(intent);
 			}
@@ -93,6 +99,9 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
+//				if (checkIsLogin()) {
+//
+//				}
 				Intent intent = new Intent(mActivity,
 						CouponsFragmentActivity.class);
 				startActivity(intent);
@@ -112,6 +121,9 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
+//				if (checkIsLogin()) {
+//
+//				}
 				Intent intent = new Intent(mActivity, AddressesActivity.class);
 				startActivity(intent);
 			}

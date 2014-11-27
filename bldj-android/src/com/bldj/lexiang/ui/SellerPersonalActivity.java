@@ -3,109 +3,113 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ProgressBar;
-
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ProgressBar;
+
 /**
- * 经络养生-->养生服务
+ * 美容师个人页面
  * 
  * @author will
  * 
  */
-public class HealthServiceFragment extends BaseFragment implements
-		IXListViewListener {
+public class SellerPersonalActivity extends BaseActivity implements IXListViewListener{
 
+	ActionBar mActionBar;
+	Seller sellerVo;
+	
 	private ProgressBar progressBar;
-	private View infoView;
 	private XListView mListView;
 	private HomeAdapter listAdapter;
 	private List<Product> products;
-
+	
+	
+	
 	private int pageNumber = 1;
-
+	
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
+		setContentView(R.layout.seller_personal);
 		super.onCreate(savedInstanceState);
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		infoView = inflater.inflate(R.layout.health_service, container, false);
-
-		initView();
-
-		initListener();
-
-		return infoView;
-	}
-
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+		
+		sellerVo = (Seller)this.getIntent().getSerializableExtra("seller");
+		mActionBar = (ActionBar)findViewById(R.id.actionBar);
+		onConfigureActionBar(mActionBar);
+		
+		
 		products = new ArrayList<Product>();
-		listAdapter = new HomeAdapter(mActivity, products);
+		listAdapter = new HomeAdapter(this, products);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
-
-		getCollectProduct();
+		
+		getProduct();
 	}
 
-	/**
-	 * 初始化控件
-	 */
-	private void initView() {
-
-		progressBar = (ProgressBar) infoView
-				.findViewById(R.id.progress_listView);
-		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
-
-	}
-
-	/**
-	 * 事件初始化
-	 */
-	private void initListener() {
-		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+	// 设置activity的导航条
+	protected void onConfigureActionBar(ActionBar actionBar) {
+//		actionBar.setTitle(sellerVo.getNickname());
+		actionBar.setTitle("美容师1号");
+		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+				new OnClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				// 启动美容师个人界面
-				Intent intent = new Intent(mActivity,
-						SellerPersonalActivity.class);
-//				intent.putExtra("seller", products.get(position));
-				startActivity(intent);
+			public void onClick(View v) {
+				finish();
 			}
-
 		});
-
+		actionBar.hideRightActionButton();
 	}
 
+	@Override
+	public void initView() {
+		progressBar = (ProgressBar)findViewById(R.id.progress_listView);
+		mListView = (XListView)findViewById(R.id.listview);
+	}
+
+	@Override
+	public void initListener() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void onRefresh() {
+		pageNumber=1;
+		getProduct();
+	}
+
+	@Override
+	public void onLoadMore() {
+		pageNumber++;
+		getProduct();
+	}
+	private void onLoad() {
+		mListView.stopRefresh();
+		mListView.stopLoadMore();
+		mListView.setRefreshTime(DateUtils.convert2String(System.currentTimeMillis(),""));
+	}
+	
 	/**
 	 * 获取收藏数据
 	 */
-	private void getCollectProduct() {
-		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
+	private void getProduct() {
+		ApiProductUtils.getProducts(SellerPersonalActivity.this, "1", 2,
 				0, 0, pageNumber, ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
 
@@ -159,8 +163,8 @@ public class HealthServiceFragment extends BaseFragment implements
 							p8.setName("商品" + (products.size() + 8));
 							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
 							productsList.add(p8);
-
-							if (pageNumber == 1) {
+							
+							if(pageNumber==1){
 								products.clear();
 							}
 							products.addAll(productsList);
@@ -177,25 +181,6 @@ public class HealthServiceFragment extends BaseFragment implements
 
 					}
 				});
-	}
-
-	@Override
-	public void onRefresh() {
-		pageNumber = 1;
-		getCollectProduct();
-	}
-
-	@Override
-	public void onLoadMore() {
-		pageNumber++;
-		getCollectProduct();
-	}
-
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(
-				System.currentTimeMillis(), ""));
 	}
 
 }

@@ -39,9 +39,9 @@ public class MyApplication extends Application {
 	}
 	public User getCurrentUser() {
 		if(user==null){
-			user = new User();
+			/*user = new User();
 			user.setUsername("小新");
-			user.setMobile("156262631236");
+			user.setMobile("156262631236");*/
 		}
 		return user;
 	}

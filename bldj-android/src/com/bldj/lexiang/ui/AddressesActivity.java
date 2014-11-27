@@ -18,7 +18,6 @@ import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Address;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.view.ActionBar;
