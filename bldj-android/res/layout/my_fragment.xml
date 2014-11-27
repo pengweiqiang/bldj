@@ -159,7 +159,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/btn_homepage"
+                android:id="@+id/btn_myFiles"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -178,7 +178,7 @@
                 android:textSize="20sp" />
 
             <Button
-                android:id="@+id/btn_rename"
+                android:id="@+id/btn_check_version"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
