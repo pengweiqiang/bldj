@@ -397,7 +397,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 							Product p8 = new Product();
 							p8.setName("商品" + (products.size() + 8));
 							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
-//							productsList.add(p8);
+							productsList.add(p8);
 
 							if (pageNumber == 1) {
 								products.clear();
