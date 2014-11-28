@@ -12,6 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dip"
+            android:layout_centerVertical="true"
             android:src="@drawable/ic_launcher" />
 
         <RelativeLayout
@@ -36,7 +37,7 @@
                 android:layout_toRightOf="@+id/username"
                 android:text="四川" />
             <TextView
-                android:id="@+id/age"
+                android:id="@+id/avg_price"
                 android:layout_marginLeft="10dip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

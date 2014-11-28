@@ -15,6 +15,7 @@
             android:layout_height="wrap_content"
             android:text="接单次数"
             android:layout_weight="1"
+             android:gravity="center"
             android:layout_marginLeft="8dip"
             />
         <TextView 
@@ -23,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="价格区间"
             android:layout_weight="1"
+             android:gravity="center"
             />
         <TextView 
             android:id="@+id/order_count"
@@ -30,6 +32,7 @@
             android:layout_height="wrap_content"
             android:text="工作经验"
             android:layout_weight="1"
+             android:gravity="center"
             android:layout_marginRight="8dip"
             />
     </LinearLayout>

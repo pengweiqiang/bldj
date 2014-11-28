@@ -17,6 +17,7 @@
             android:text="时间排序"
             android:layout_weight="1"
             android:layout_marginLeft="8dip"
+             android:gravity="center"
             />
         <TextView 
             android:id="@+id/order_count"
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:text="价格区间"
             android:layout_weight="1"
+             android:gravity="center"
             />
         <TextView 
             android:id="@+id/order_count"
@@ -32,6 +34,7 @@
             android:text="团队"
             android:layout_weight="1"
             android:layout_marginRight="8dip"
+             android:gravity="center"
             />
     </LinearLayout>
     
