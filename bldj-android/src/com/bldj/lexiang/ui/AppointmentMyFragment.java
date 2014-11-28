@@ -1,26 +1,13 @@
 package com.bldj.lexiang.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.api.ApiUserUtils;
-import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.User;
-import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.utils.StringUtils;
-import com.bldj.lexiang.utils.ToastUtils;
-import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
-import com.bldj.lexiang.view.ActionBar;
 
 /**
  * 为自己预约
@@ -31,6 +18,7 @@ import com.bldj.lexiang.view.ActionBar;
 public class AppointmentMyFragment extends BaseFragment {
 	
 	View infoView;
+	private Button btn_next;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,14 +41,21 @@ public class AppointmentMyFragment extends BaseFragment {
 	 * 初始化控件
 	 */
 	private void initView(){
-		
+		btn_next = (Button)infoView.findViewById(R.id.btn_next);
 		
 	}
 	/**
 	 * 事件初始化
 	 */
 	private void initListener(){
-		
+		btn_next.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(mActivity,AppointmentDoor1Activity.class);
+				startActivity(intent);
+			}
+		});
 	}
 	
 }
