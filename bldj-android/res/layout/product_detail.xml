@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+    android:layout_height="match_parent" >
 
-    
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
-	
-    
+
     <LinearLayout
         android:id="@+id/mall_center"
-        android:layout_below="@+id/actionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/actionBar"
         android:layout_margin="5dip"
         android:background="@drawable/own_btn_rounded"
         android:orientation="horizontal" >
@@ -38,10 +35,10 @@
             <Button
                 android:id="@+id/buy"
                 android:layout_width="wrap_content"
-                android:layout_height="30dip"
+                android:layout_height="35dp"
                 android:layout_below="@+id/logo"
                 android:text="点击购买"
-                android:textSize="13sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <TextView
@@ -60,73 +57,166 @@
             android:layout_weight="1"
             android:text="美容床美容床美容床" />
     </LinearLayout>
-    
+
     <LinearLayout
+        android:id="@+id/ll_product_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mall_center"
         android:orientation="horizontal"
         android:padding="3dip" >
-         <TextView
+
+        <TextView
             android:id="@+id/product_info"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="【美容床】美容床的一句话简介"
             android:textSize="13sp" />
-        </LinearLayout>
-        
-    
-    <!-- <LinearLayout 
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/ll_product_info"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:background="@color/grey" />
+
+    <LinearLayout
         android:id="@+id/price_count_share"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-         
-        
-        
-    </LinearLayout> -->
-    
-    
-	    
-    
-    
-       <RelativeLayout 
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:layout_alignParentBottom="true"
-           android:layout_marginLeft="5dip"
-           android:layout_marginRight="5dip"
-           android:layout_marginBottom="2dip"
-           android:background="@drawable/own_btn_rounded"
-           >
-           <TextView 
-               android:id="@+id/custom_service"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_alignParentLeft="true"
-               android:text="联系客服"
-               android:layout_centerVertical="true"
-               />
-           <Button 
-               android:id="@+id/buy_now"
-               android:layout_width="wrap_content"
-               android:layout_height="35dp"
-               android:text="立即购买"
-               android:textSize="14sp"
-               android:layout_centerInParent="true"
-               />
-          <TextView 
-               android:id="@+id/add_cart"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="加入购物车"
-               android:layout_centerVertical="true"
-               android:layout_alignParentRight="true"
-               /> 
-           
-           
-       </RelativeLayout>
-	
+        android:layout_below="@+id/line"
+        android:orientation="horizontal"
+        android:padding="3dip" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/price_platform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="平台价：￥100.0"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:id="@+id/price_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dip"
+                android:layout_toRightOf="@+id/price_platform"
+                android:text="普通价：￥120.0"
+                android:textColor="@color/grey"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/price_platform" >
+
+                <TextView
+                    android:id="@+id/buy_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dip"
+                    android:text="购买数量："
+                    android:textColor="@color/grey"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/reduce_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <EditText
+                    android:id="@+id/count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1" />
+
+                <TextView
+                    android:id="@+id/add_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:text="分享" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom"
+        android:layout_below="@+id/price_count_share" >
+
+        <!-- 图片列表 -->
+
+        <com.bldj.lexiang.view.XListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/good_list_bg"
+            android:divider="#00000000"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progress_listView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:max="100"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="2dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="2dip"
+        android:background="@drawable/own_btn_rounded"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/custom_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:text="联系客服" />
+
+        <Button
+            android:id="@+id/buy_now"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:text="立即购买"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/add_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="加入购物车" />
+    </RelativeLayout>
+
 </RelativeLayout>

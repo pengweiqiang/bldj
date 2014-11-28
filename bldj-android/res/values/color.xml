@@ -135,4 +135,6 @@
     <color name="blue">#ffccddff</color>
     <color name="grey">#ff808080</color>
     <color name="list_btn_pressed_bg">#ffcce8a9</color>
+    <color name="red">#FF4500</color>
+    
 </resources>

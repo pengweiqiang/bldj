@@ -99,7 +99,9 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				
+				//启动产品商品详细页
+				Intent intent = new Intent(mActivity,ProductDetailActivity.class);
+				startActivity(intent);
 			}
 			
 		});
