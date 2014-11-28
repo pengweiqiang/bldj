@@ -30,30 +30,19 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * @author will
  * 
  */
-public class AppointmentDoor3Activity extends BaseActivity implements IXListViewListener{
+public class AppointmentDoor3Activity extends BaseActivity {
 
 	ActionBar mActionBar;
-	
-	private ProgressBar progressBar;
-	private XListView mListView;
-	private JlysHealthAdapter listAdapter;
-	private List<Seller> sellers;
-	
-	private int pageNumber = 1;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.appointment_door3);
 		super.onCreate(savedInstanceState);
-		mActionBar = (ActionBar)findViewById(R.id.actionBar);
-		onConfigureActionBar(mActionBar);
+	
 		initView();
-		
+
 		initListener();
-		
-		
-		
-		getSellers();
+
 	}
 
 	// 设置activity的导航条
@@ -61,126 +50,22 @@ public class AppointmentDoor3Activity extends BaseActivity implements IXListView
 		actionBar.setTitle("上门预约");
 		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
 				new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+					@Override
+					public void onClick(View v) {
+						finish();
+					}
+				});
 		actionBar.hideRightActionButton();
 	}
 
 	@Override
 	public void initView() {
-		progressBar = (ProgressBar)findViewById(R.id.progress_listView);
-		mListView = (XListView)findViewById(R.id.listview);
-		
-		sellers = new ArrayList<Seller>();
-		listAdapter = new JlysHealthAdapter(AppointmentDoor3Activity.this, sellers);
-		mListView.setAdapter(listAdapter);
-		mListView.setPullLoadEnable(true);
-		mListView.setXListViewListener(this);
+		mActionBar = (ActionBar) findViewById(R.id.actionBar);
+		onConfigureActionBar(mActionBar);
 	}
 
 	@Override
 	public void initListener() {
-		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				// 启动美容师个人界面
-				Intent intent = new Intent(AppointmentDoor3Activity.this,
-						SellerPersonalActivity.class);
-//				intent.putExtra("seller", products.get(position));
-				startActivity(intent);
-			}
-			
-		});
 	}
-	
-	/**
-	 * 获取收藏美容师数据
-	 */
-	private void getSellers() {
-		ApiProductUtils.getProducts(AppointmentDoor3Activity.this, "1", 2,
-				0, 0, pageNumber, ApiConstants.LIMIT,
-				new HttpConnectionUtil.RequestCallback() {
-
-					@Override
-					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
-						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
-								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Seller> sellersList = new ArrayList<Seller>();
-
-							Seller p1 = new Seller();
-							p1.setUsername("美容师" + (sellersList.size() + 1));
-							p1.setAddress("四川");
-							p1.setRecommend("共接单12次");
-							p1.setAvgPrice("33");
-							
-							Seller p2 = new Seller();
-							p2.setUsername("美容师" + (sellersList.size() + 2));
-							p2.setAddress("北京");
-							p2.setRecommend("共接单6次");
-							p2.setAvgPrice("32");
-							
-							Seller p3 = new Seller();
-							p3.setUsername("美容师" + (sellersList.size() + 3));
-							p3.setAddress("上海");
-							p3.setRecommend("共接单123次");
-							p2.setAvgPrice("54");
-							
-							sellersList.add(p1);
-							sellersList.add(p2);
-							sellersList.add(p3);
-							
-							if(pageNumber==1){
-								sellers.clear();
-							}
-							sellers.addAll(sellersList);
-
-							listAdapter.notifyDataSetChanged();
-							onLoad();
-
-						} else {
-							List<Seller> sellersList = JsonUtils.fromJson(
-									parseModel.getData().toString(),
-									new TypeToken<List<Seller>>() {
-									});
-							if(pageNumber==1){
-								sellers.clear();
-							}
-							sellers.addAll(sellersList);
-
-							listAdapter.notifyDataSetChanged();
-							onLoad();
-						}
-
-					}
-				});
-	}
-
-	@Override
-	public void onRefresh() {
-		pageNumber=1;
-		getSellers();
-	}
-
-	@Override
-	public void onLoadMore() {
-		pageNumber++;
-		getSellers();
-	}
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(System.currentTimeMillis(),""));
-	}
-
 
 }
