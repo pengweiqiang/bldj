@@ -47,6 +47,11 @@
             android:name=".ui.HealthProductDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 商品产品详情页 -->
+        <activity
+            android:name=".ui.ProductDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 我要预约 -->
         <activity
             android:name=".ui.AppointmentFragmentActivity"
