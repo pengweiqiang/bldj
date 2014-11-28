@@ -57,6 +57,21 @@
             android:name=".ui.AppointmentFragmentActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 上门预约1 -->
+        <activity
+            android:name=".ui.AppointmentDoor1Activity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 上门预约2 -->
+        <activity
+            android:name=".ui.AppointmentDoor2Activity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- 上门预约3 -->
+        <activity
+            android:name=".ui.AppointmentDoor3Activity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 登录注册界面 -->
         <activity
             android:name=".ui.RegisterAndLoginActivity"
