@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="5dip"
         >
         <TextView 
             android:id="@+id/order_sales"
@@ -23,6 +22,7 @@
             android:layout_height="wrap_content"
             android:text="@string/order_sale"
             android:layout_weight="1"
+            android:gravity="center"
             />
         <TextView 
             android:id="@+id/order_price"
@@ -30,12 +30,15 @@
             android:layout_height="wrap_content"
             android:text="@string/order_price"
             android:layout_weight="1"
+            android:gravity="center"
             />
-        <Spinner 
+        <TextView 
             android:id="@+id/type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="美容"
+            android:gravity="center"
             />
 		<TextView 
 		    android:id="@+id/search"
@@ -43,6 +46,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:text="搜索"
+		    android:gravity="center"
 		    />        
         
     </LinearLayout>
