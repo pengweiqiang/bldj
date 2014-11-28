@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.bldj.lexiang.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" >
+    </com.bldj.lexiang.view.ActionBar>
+
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="5dip"
+        >
+   	<TextView 
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:text="1.选择时间"
+   	    />
+   	<TextView 
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:text="2.选择理疗师"
+   	    android:textColor="@color/light_green"
+   	    />
+   	<TextView 
+   	    android:layout_width="wrap_content"
+   	    android:layout_height="wrap_content"
+   	    android:text="3.确认订单"
+   	    />
+   	</LinearLayout>
+    
+    
+    
+	  <com.bldj.lexiang.view.XListView
+        android:id="@+id/jlys_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/good_list_bg"
+        android:divider="#00000000"
+        android:visibility="gone" />
+      
+       <ProgressBar
+        android:id="@+id/progress_listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:max="100"
+        android:visibility="visible" />
+       
+       <LinearLayout 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:orientation="vertical"
+           android:layout_marginLeft="10dip"
+           android:layout_marginRight="10dip"
+           android:layout_marginTop="8dip"
+           >
+           <TextView 
+               android:id="@+id/tips"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/appointment_door_tips"
+               android:textColor="@color/red"
+               android:gravity="center"
+               android:textSize="14sp"
+               android:layout_marginBottom="5dip"
+               />
+           <LinearLayout 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:layout_gravity="center"
+               >
+               <Button 
+                   android:id="@+id/btn_previous"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/previous"
+                   />
+               <Button 
+                   android:id="@+id/btn_next"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/next"
+                   />
+               
+           </LinearLayout>
+           
+       </LinearLayout>
+       
+    
+</LinearLayout>

@@ -112,9 +112,21 @@
 	<string name="select_address">请输入详细地址</string>
 	<string name="appoint_type">预约类型：</string>
 	<string name="next">下一步</string>
+	<string name="input_contact_name">请输入联系人姓名</string>
+	<string name="input_contact_phone">点击输入联系人手机号码</string>
+	<string name="appointment_door_tips">所有理疗师都在忙，麻烦联系下客服010-1234567</string>
+	<string name="previous">上一步</string>
+	<string name="seller_name">预约技师名称：</string>
+	<string name="product_name">预约产品名称：</string>
+	<string name="start_time">预约的开始时间：</string>
+	<string name="use_coupons">使用优惠卷：</string>
+	<string name="use_elect_code">使用电子码：</string>
+	<string name="select_pay_type">选择支付方式</string>
+	<string name="input_elect_code">请输入电子码</string>	
+	<string name="aliay_pay_tip">支付宝客户端支付推荐已经安装支付宝客户端用户</string>
+	<string name="weixin_pay_tip">银行卡支付支持储蓄卡，无需开通网银</string>
+	<string name="union_pay_tip">信用卡支付支持储蓄卡，无需开通网银</string>
 	
-	
-		
 	<string name="pay_by_wx">通过微信支付</string>
 	<string name="check_pay">检查微信版本是否支持支付</string>
 	<string name="input_reqkey">输入reqkey</string>
