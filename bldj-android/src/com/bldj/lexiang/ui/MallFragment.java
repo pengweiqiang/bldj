@@ -3,11 +3,13 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -37,6 +39,8 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 	private XListView mListView;
 	private MallAdapter listAdapter;
 	private List<Product> products;
+	
+	private ImageView company_zone;
 	
 	private int pageNumber = 1;
 
@@ -82,6 +86,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		mListView = (XListView)infoView.findViewById(R.id.listview);
 		tv_order_sales = (TextView)infoView.findViewById(R.id.order_sales);
 		tv_order_price = (TextView)infoView.findViewById(R.id.order_price);
+		company_zone = (ImageView)infoView.findViewById(R.id.company_zone);
 	
 	}
 	/**
@@ -97,6 +102,14 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 				
 			}
 			
+		});
+		company_zone.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(mActivity,CompanyZoneActivity.class);
+				startActivity(intent);
+			}
 		});
 	}
 	
