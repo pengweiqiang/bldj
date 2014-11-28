@@ -32,6 +32,7 @@
                 android:layout_height="35dip"
                 android:layout_below="@+id/logo"
                 android:text="购买"
+                android:focusable="false"
                 android:textSize="13sp" />
         </LinearLayout>
 
