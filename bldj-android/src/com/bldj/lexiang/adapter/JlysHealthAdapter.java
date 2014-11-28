@@ -70,8 +70,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 
 		holder.tv_username.setText(seller.getUsername());
 		holder.tv_address.setText(seller.getAddress());
-		holder.tv_avgprice.setText("价格："
-				+ String.valueOf(seller.getAvgPrice()) + "元/20分钟");
+		holder.tv_avgprice.setText(String.valueOf(seller.getAvgPrice()) + "岁");
 		/*ImageLoader.getInstance().displayImage(
 				seller.getHeadurl(),
 				holder.headImg,

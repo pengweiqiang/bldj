@@ -3,21 +3,19 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.adapter.JlysHealthAdapter;
-import com.bldj.lexiang.adapter.KmrsAdapter;
 import com.bldj.lexiang.api.ApiProductUtils;
-import com.bldj.lexiang.api.ApiSellerUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DateUtils;
@@ -87,7 +85,19 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 	 * 事件初始化
 	 */
 	private void initListener(){
-		
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				// 启动美容师个人界面
+				Intent intent = new Intent(mActivity,
+						SellerPersonalActivity.class);
+//				intent.putExtra("seller", products.get(position));
+				startActivity(intent);
+			}
+			
+		});
 		
 	}
 	
