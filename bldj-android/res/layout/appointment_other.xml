@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.bldj.lexiang.view.SpringScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_appoint_time"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/own_btn_rounded"
+            android:drawableLeft="@drawable/btn_img_my_homepage"
+            android:drawablePadding="15dp"
+            android:drawableRight="@drawable/btn_img_open"
+            android:gravity="left|center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/select_appoint_time"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_city"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/own_btn_rounded"
+            android:drawableLeft="@drawable/btn_img_my_homepage"
+            android:drawablePadding="15dp"
+            android:drawableRight="@drawable/btn_img_open"
+            android:gravity="left|center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/select_city"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_location"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/own_btn_rounded"
+            android:drawableLeft="@drawable/btn_img_my_homepage"
+            android:drawablePadding="15dp"
+            android:drawableRight="@drawable/btn_img_open"
+            android:gravity="left|center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/select_location"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
+
+        <ListView
+            android:id="@+id/locations_list"
+            android:layout_width="match_parent"
+            android:layout_height="100dip"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp" >
+        </ListView>
+
+        <Button
+            android:id="@+id/btn_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/own_btn_rounded"
+            android:drawableLeft="@drawable/btn_img_my_homepage"
+            android:drawablePadding="15dp"
+            android:drawableRight="@drawable/btn_img_open"
+            android:gravity="left|center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/select_address"
+            android:textColor="@color/grey"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appoint_type" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/radio_service_head"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="养生"
+                    android:textSize="@dimen/compnay_radio_textSize" >
+                </RadioButton>
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:layout_width="150dip"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@string/next" />
+    </LinearLayout>
+
+</com.bldj.lexiang.view.SpringScrollView>
