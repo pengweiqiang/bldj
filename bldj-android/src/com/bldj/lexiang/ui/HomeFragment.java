@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.GestureDetector;
@@ -15,9 +17,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +31,7 @@ import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.BannerPagerAdapter;
+import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.api.ApiHomeUtils;
 import com.bldj.lexiang.api.ApiProductUtils;
@@ -32,6 +39,7 @@ import com.bldj.lexiang.api.vo.Ad;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -76,6 +84,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	private int pageNumber = 1;
 
 	private TextView tab_find, tab_company, tab_reserve;
+	
+	private PopupWindow popupWindow;
+	private View view;
+	private ListView lv_group;
+	private List<TitleBarEnum> groups; 
+	private Context mContext;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +104,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		progressbar = (ProgressBar) infoView
 				.findViewById(R.id.progress_listView);
 
+		mContext = this.getActivity();
 		mListView = (MyListView) infoView.findViewById(R.id.home_listview);
 		// bannerView =
 		// (FrameLayout)LayoutInflater.from(mActivity).inflate(R.layout.home_banner,
@@ -185,13 +200,60 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		actionBar.setRightTextActionButton("更多", new View.OnClickListener() {
 			
 			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(mActivity,MoreActivity.class);
-				startActivity(intent);
+			public void onClick(View view) {
+				/*Intent intent = new Intent(mActivity,MoreActivity.class);
+				startActivity(intent);*/
+				buildTitleBar(view);
 			}
 		});
 	}
-
+	private void buildTitleBar(View parent){
+		if (popupWindow == null) {  
+            view = LayoutInflater.from(mContext).inflate(R.layout.group_list, null);  
+            lv_group = (ListView) view.findViewById(R.id.lvGroup);  
+            groups = new ArrayList<TitleBarEnum>();  
+            groups.add(TitleBarEnum.ABOUT);  
+            groups.add(TitleBarEnum.FEEDBACK);  
+            groups.add(TitleBarEnum.SHARE);  
+            groups.add(TitleBarEnum.ZHAOPIN);  
+            GroupAdapter groupAdapter = new GroupAdapter(mContext, groups);  
+            lv_group.setAdapter(groupAdapter);  
+            popupWindow = new PopupWindow(view, 200, 250);  
+        }
+        popupWindow.setFocusable(true);  
+        popupWindow.setOutsideTouchable(true);  
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());  
+        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE);  
+        int xPos = windowManager.getDefaultDisplay().getWidth() / 2  
+                - popupWindow.getWidth() / 2;  
+        popupWindow.showAsDropDown(parent, xPos, 0);  
+        lv_group.setOnItemClickListener(new OnItemClickListener() {  
+            @Override  
+            public void onItemClick(AdapterView<?> adapterView, View view,  
+                    int position, long id) {  
+                if(position == TitleBarEnum.ABOUT.getIndex()){
+                	Intent intent = new Intent(mContext,
+    						AboutActivity.class);
+    				startActivity(intent);
+                }else if(position == TitleBarEnum.FEEDBACK.getIndex()){
+                	Intent intent = new Intent(mContext,
+    						FeedBackActivity.class);
+    				startActivity(intent);
+                }else if(position == TitleBarEnum.SHARE.getIndex()){
+                	Intent intent = new Intent(mContext,
+    						SharedFriendActivity.class);
+    				startActivity(intent);
+                }else if(position == TitleBarEnum.ZHAOPIN.getIndex()){
+                	Intent intent = new Intent(mContext,
+    						AuthentActivity.class);
+    				startActivity(intent);
+                }
+                if (popupWindow != null) {  
+                    popupWindow.dismiss();  
+                }  
+            } 
+        });
+	}
 	/*
 	 * @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
 	 * 
