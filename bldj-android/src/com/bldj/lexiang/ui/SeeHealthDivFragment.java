@@ -114,16 +114,19 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 							p1.setUsername("美容师" + (sellersList.size() + 1));
 							p1.setAddress("四川");
 							p1.setRecommend("共接单12次");
+							p1.setAvgPrice("33");
 							
 							Seller p2 = new Seller();
 							p2.setUsername("美容师" + (sellersList.size() + 2));
 							p2.setAddress("北京");
 							p2.setRecommend("共接单6次");
+							p2.setAvgPrice("32");
 							
 							Seller p3 = new Seller();
 							p3.setUsername("美容师" + (sellersList.size() + 3));
 							p3.setAddress("上海");
 							p3.setRecommend("共接单123次");
+							p2.setAvgPrice("54");
 							
 							sellersList.add(p1);
 							sellersList.add(p2);

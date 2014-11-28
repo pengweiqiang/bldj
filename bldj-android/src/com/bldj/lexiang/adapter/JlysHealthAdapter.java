@@ -59,7 +59,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 					.findViewById(R.id.username);
 			holder.tv_address = (TextView) convertView
 					.findViewById(R.id.address);
-			holder.tv_price = (TextView) convertView.findViewById(R.id.price);
+			holder.tv_avgprice = (TextView) convertView.findViewById(R.id.avg_price);
 			holder.tv_comment = (TextView) convertView.findViewById(R.id.order_count);
 			holder.tv_distance = (TextView) convertView.findViewById(R.id.distance);
 			convertView.setTag(holder);
@@ -70,7 +70,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 
 		holder.tv_username.setText(seller.getUsername());
 		holder.tv_address.setText(seller.getAddress());
-		holder.tv_price.setText("价格："
+		holder.tv_avgprice.setText("价格："
 				+ String.valueOf(seller.getAvgPrice()) + "元/20分钟");
 		/*ImageLoader.getInstance().displayImage(
 				seller.getHeadurl(),
@@ -86,7 +86,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 
 	public final class ViewHolder {
 		public ImageView headImg;
-		public TextView tv_username, tv_distance, tv_address, tv_price,
+		public TextView tv_username, tv_distance, tv_address, tv_avgprice,
 				tv_comment;
 	}
 
