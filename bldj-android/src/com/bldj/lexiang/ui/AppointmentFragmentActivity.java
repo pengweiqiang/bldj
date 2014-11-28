@@ -1,10 +1,8 @@
 package com.bldj.lexiang.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -58,8 +56,8 @@ public class AppointmentFragmentActivity extends FragmentActivity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				
+				Intent intent = new Intent(AppointmentFragmentActivity.this,AddressesActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
