@@ -74,8 +74,8 @@ public class JLYSFragmentActivity extends FragmentActivity {
 		list = new ArrayList<Fragment>();
 
 		// 设置数据源
-		HealthServiceFragment jlysFragment = new HealthServiceFragment();
-		SeeHealthDivFragment kmrsFragment = new SeeHealthDivFragment();
+		HealthServiceFragment jlysFragment = new HealthServiceFragment();//养生服务
+		SeeHealthDivFragment kmrsFragment = new SeeHealthDivFragment();//看养生师
 
 		list.add(jlysFragment);
 		list.add(kmrsFragment);
