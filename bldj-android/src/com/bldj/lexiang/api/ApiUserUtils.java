@@ -25,7 +25,7 @@ public class ApiUserUtils {
 	 * @param exception
 	 */
 	public static void repoException(ExceptionInfo exception) {
-		Map<String,Object> params = new HashMap<String,Object>();
+		Map<String, Object> params = new HashMap<String, Object>();
 		params.put(ReqUrls.PRODUCT_MODEL, exception.getProductModel());
 		params.put(ReqUrls.CUR_VERSION, exception.getCurAppVerMsg());
 		params.put(ReqUrls.EXCEPTION_MSG, exception.getExceptionMsg());
@@ -42,7 +42,7 @@ public class ApiUserUtils {
 	 */
 	public static void login(Context context, String username, String password,
 			RequestCallback requestCallBack) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.USERNAME, username);
 		params.put(ReqUrls.PASSWORD, password);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_USER_LOGIN, false,
@@ -60,7 +60,7 @@ public class ApiUserUtils {
 	 */
 	public static void updatePwd(Context context, String username,
 			String opass, String password, RequestCallback requestCallback) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.USERNAME, username);
 		params.put(ReqUrls.OPASS, opass);
 		params.put(ReqUrls.PASSWORD, password);
@@ -78,7 +78,7 @@ public class ApiUserUtils {
 	 */
 	public static void updateNickName(Context context, String username,
 			String nickname, RequestCallback requestCallback) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.USERNAME, username);
 		params.put(ReqUrls.NICK_NAME, nickname);
 		ApiUtils.getParseModel(params, ReqUrls.UPDATE_NICKNAME, false,
@@ -96,7 +96,7 @@ public class ApiUserUtils {
 	 */
 	public static void updateHeader(Context context, String username,
 			String stream, RequestCallback requestCallback) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.USERNAME, username);
 		params.put(ReqUrls.STREAM, stream);
 		ApiUtils.getParseModel(params, ReqUrls.UPDATE_HEADER_URL, false,
@@ -119,21 +119,27 @@ public class ApiUserUtils {
 	 * @param sellerId
 	 * @param requestCallback
 	 */
-	public static void unifor(Context context, String userId, String content,
+	public static void unifor(Context context, long userId, String content,
 			int type, String contactor, String contact, String ordernum,
 			String productName, String sellerName, int infoType, long sellerId,
 			RequestCallback requestCallback) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
-		params.put(ReqUrls.USER_ID, userId);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		if (userId != 0) {
+			params.put(ReqUrls.USER_ID, userId);
+		}
 		params.put("content", content);
-		params.put("type", String.valueOf(type));
+		params.put("type", type);
 		params.put("contactor", contactor);
 		params.put("contact", contact);
 		params.put("ordernum", ordernum);
 		params.put("productName", productName);
 		params.put("sellerName", sellerName);
-		params.put("infoType", String.valueOf(infoType));
-		params.put("sellerId", String.valueOf(sellerId));
+		if (infoType != 0) {
+			params.put("infoType", infoType);
+		}
+		if (sellerId != 0) {
+			params.put("sellerId", sellerId);
+		}
 
 		ApiUtils.getParseModel(params, ReqUrls.UNIFOR, false, requestCallback,
 				MethodType.UPDATE, context);
@@ -149,7 +155,7 @@ public class ApiUserUtils {
 	 */
 	public static void forgetPwd(Context context, String username,
 			String password, RequestCallback requestCallback) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.USERNAME, username);
 		params.put(ReqUrls.PASSWORD, password);
 		ApiUtils.getParseModel(params, ReqUrls.FORGET_PWD, false,
@@ -197,36 +203,38 @@ public class ApiUserUtils {
 	public static void addressManager(Context context, int type, String userId,
 			String curLocation, String detailAddress, String id,
 			RequestCallback requestCallback) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put("type", String.valueOf(type));
 		switch (type) {
-		case 0://增加地址
+		case 0:// 增加地址
 			params.put(ReqUrls.USER_ID, userId);
 			params.put("curLocation", curLocation);
 			params.put("detailAddress", detailAddress);
 			break;
-		case 1://删除地址
+		case 1:// 删除地址
 			params.put(ReqUrls.ID, id);
 			break;
-		case 2://修改地址
+		case 2:// 修改地址
 			params.put(ReqUrls.USER_ID, userId);
 			params.put("curLocation", curLocation);
 			params.put("detailAddress", detailAddress);
 			params.put(ReqUrls.ID, id);
 			break;
-		case 3://查询地址
+		case 3:// 查询地址
 			params.put(ReqUrls.USER_ID, userId);
 			break;
-			
+
 		default:
 			break;
 		}
-		
+
 		ApiUtils.getParseModel(params, ReqUrls.ADDRESS_MANAGER, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
+
 	/**
 	 * 短信验证
+	 * 
 	 * @param context
 	 * @param mobile
 	 * @param code
@@ -234,10 +242,9 @@ public class ApiUserUtils {
 	 * @param name
 	 * @param requestCallback
 	 */
-	public static void checkCode(Context context, String mobile,
-			String code, String type, String name,
-			RequestCallback requestCallback) {
-		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+	public static void checkCode(Context context, String mobile, String code,
+			String type, String name, RequestCallback requestCallback) {
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.MOBILE, mobile);
 		params.put("code", code);
 		params.put("type", type);
@@ -245,53 +252,53 @@ public class ApiUserUtils {
 		ApiUtils.getParseModel(params, ReqUrls.CHECK_CODE, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
-	
 
-//	/**
-//	 * 获取用户个人中心界面
-//	 * 
-//	 * @param userId
-//	 * @return
-//	 */
-//	public static void getUserInfo(Context context,
-//			RequestCallback requestCallBack) {
-//		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
-//		// ApiUtils.getParseModel(params, ReqUrls.REQUEST_USER_INFO, false,
-//		// requestCallBack,MethodType.USER_PAGE_INFO,null);
-//	}
-//
-//	/**
-//	 * 修改用户信息
-//	 * 
-//	 * @param enterId
-//	 * @return
-//	 */
-//	public static void modifyUserInfo(Context context, String name,
-//			String address, String mobile, RequestCallback requestCallBack) {
-//		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
-//		params.put(ReqUrls.NAME, name);
-//		params.put(ReqUrls.MOBILE, mobile);
-//		params.put(ReqUrls.ADDRESS, address);
-//		ApiUtils.getParseModel(params, ReqUrls.UPDATE_USER_INFO, false,
-//				requestCallBack, MethodType.GET_MAINPAGE_AD, null);
-//	}
-//
-//	/**
-//	 * 修改用户信息
-//	 * 
-//	 * @param
-//	 * @return
-//	 */
-//	public static void downloadRepoInfo(Context context, long appId) {
-//		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
-//		params.put(ReqUrls.APP_ID, String.valueOf(appId));
-//		ApiUtils.repo(params, ReqUrls.DOWNLOAD_REPO_INFO, HttpMethod.GET);
-//		// ApiUtils.getParseModel(params, ReqUrls.DOWNLOAD_REPO_INFO, false,
-//		// null,MethodType.DOWNLOAD_REPO_INFO,null);
-//	}
-//
-//	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	public static String parseLong2Str(long userId) {
-//		return String.valueOf(userId);
-//	}
+	// /**
+	// * 获取用户个人中心界面
+	// *
+	// * @param userId
+	// * @return
+	// */
+	// public static void getUserInfo(Context context,
+	// RequestCallback requestCallBack) {
+	// Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+	// // ApiUtils.getParseModel(params, ReqUrls.REQUEST_USER_INFO, false,
+	// // requestCallBack,MethodType.USER_PAGE_INFO,null);
+	// }
+	//
+	// /**
+	// * 修改用户信息
+	// *
+	// * @param enterId
+	// * @return
+	// */
+	// public static void modifyUserInfo(Context context, String name,
+	// String address, String mobile, RequestCallback requestCallBack) {
+	// Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+	// params.put(ReqUrls.NAME, name);
+	// params.put(ReqUrls.MOBILE, mobile);
+	// params.put(ReqUrls.ADDRESS, address);
+	// ApiUtils.getParseModel(params, ReqUrls.UPDATE_USER_INFO, false,
+	// requestCallBack, MethodType.GET_MAINPAGE_AD, null);
+	// }
+	//
+	// /**
+	// * 修改用户信息
+	// *
+	// * @param
+	// * @return
+	// */
+	// public static void downloadRepoInfo(Context context, long appId) {
+	// Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+	// params.put(ReqUrls.APP_ID, String.valueOf(appId));
+	// ApiUtils.repo(params, ReqUrls.DOWNLOAD_REPO_INFO, HttpMethod.GET);
+	// // ApiUtils.getParseModel(params, ReqUrls.DOWNLOAD_REPO_INFO, false,
+	// // null,MethodType.DOWNLOAD_REPO_INFO,null);
+	// }
+	//
+	// //
+	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// public static String parseLong2Str(long userId) {
+	// return String.valueOf(userId);
+	// }
 }

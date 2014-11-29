@@ -174,7 +174,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
 							productsList.add(p8);
 							
-							if(pageNumber==1){
+							if(pageNumber==0){
 								products.clear();
 							}
 							products.addAll(productsList);
@@ -195,7 +195,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 
 	@Override
 	public void onRefresh() {
-		pageNumber=1;
+		pageNumber=0;
 		getMallData();
 	}
 

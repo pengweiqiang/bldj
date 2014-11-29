@@ -177,6 +177,10 @@ public interface ReqUrls {
 	
 	/**获取首页 广告**/
 	public static final String REQUEST_GET_MAINPAGE_AD = "/ad/getAds";
+	/**
+	 * 企业专区
+	 */
+	public static final String REQUEST_COMPANY_ZONE = "/user/enterOrderGenerate";
 	
 	
 	

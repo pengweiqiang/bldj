@@ -332,7 +332,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	}
 
 	/**
-	 * 获取精品推荐和体检接口
+	 * 获取精品推荐数据
 	 */
 	private void getHotProduct() {
 		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
@@ -442,7 +442,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						R.drawable.tab_btn1));
 				tab_reserve.setBackground(getResources().getDrawable(
 						R.drawable.tab_btn3));*/
-				
+				if (MyApplication.getInstance().getCurrentUser() == null) {
+					Intent intent = new Intent(mActivity,
+							RegisterAndLoginActivity.class);
+					startActivity(intent);
+					return;
+				}
 				Intent intent = new Intent(mActivity,CompanyZoneActivity.class);
 				startActivity(intent);
 			}

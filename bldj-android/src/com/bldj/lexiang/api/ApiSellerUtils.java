@@ -28,11 +28,10 @@ public class ApiSellerUtils {
 	 * @param endWorkyear
 	 * @param orderbyTag
 	 * @param requestCallBack
-	 * @param adIndex
 	 */
 	public static void getSellers(Context context, int start, int limit,
 			int startPrice, int endPrice, int startWorkyear, int endWorkyear,
-			int orderbyTag, RequestCallback requestCallBack, int adIndex) {
+			int orderbyTag, RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.START, String.valueOf(start));
 		params.put(ReqUrls.LIMIT, String.valueOf(limit));

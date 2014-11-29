@@ -173,7 +173,7 @@ public class CollectKmrsFragment extends BaseFragment implements IXListViewListe
 //							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
 //							productsList.add(p8);
 							
-							if(pageNumber==1){
+							if(pageNumber==0){
 								sellers.clear();
 							}
 							sellers.addAll(sellersList);
@@ -186,7 +186,7 @@ public class CollectKmrsFragment extends BaseFragment implements IXListViewListe
 									parseModel.getData().toString(),
 									new TypeToken<List<Seller>>() {
 									});
-							if(pageNumber==1){
+							if(pageNumber==0){
 								sellers.clear();
 							}
 							sellers.addAll(sellersList);
@@ -201,7 +201,7 @@ public class CollectKmrsFragment extends BaseFragment implements IXListViewListe
 
 	@Override
 	public void onRefresh() {
-		pageNumber=1;
+		pageNumber=0;
 		getSellers();
 	}
 

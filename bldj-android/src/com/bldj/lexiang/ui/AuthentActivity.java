@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.view.ActionBar;
@@ -17,7 +18,6 @@ import com.bldj.lexiang.view.ActionBar;
 public class AuthentActivity extends BaseActivity {
 
 	ActionBar mActionBar;
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.authent);
@@ -48,8 +48,7 @@ public class AuthentActivity extends BaseActivity {
 
 	@Override
 	public void initView() {
-		// TODO Auto-generated method stub
-
+	
 	}
 
 	@Override

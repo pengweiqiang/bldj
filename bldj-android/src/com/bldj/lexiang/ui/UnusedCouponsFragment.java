@@ -153,7 +153,7 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
 							productsList.add(p8);
 							
-							if(pageNumber==1){
+							if(pageNumber==0){
 								products.clear();
 							}
 							products.addAll(productsList);
@@ -174,7 +174,7 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 
 	@Override
 	public void onRefresh() {
-		pageNumber=1;
+		pageNumber=0;
 		getCollectProduct();
 	}
 
