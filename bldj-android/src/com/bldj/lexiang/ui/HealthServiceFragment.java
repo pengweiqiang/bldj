@@ -21,6 +21,7 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
@@ -67,7 +68,7 @@ public class HealthServiceFragment extends BaseFragment implements
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 
-		getCollectProduct();
+		getData();
 	}
 
 	/**
@@ -89,11 +90,11 @@ public class HealthServiceFragment extends BaseFragment implements
 	}
 
 	/**
-	 * 获取收藏数据
+	 * 获取养生服务数据
 	 */
-	private void getCollectProduct() {
-		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
-				0, 0, pageNumber, ApiConstants.LIMIT,
+	private void getData() {
+		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "0", 2,
+				0, 2, pageNumber, ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -102,50 +103,15 @@ public class HealthServiceFragment extends BaseFragment implements
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Product> productsList = new ArrayList<Product>();
-
-							Product p1 = new Product();
-							p1.setName("商品" + (products.size() + 1));
-							p1.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i3/T11iAAFoNbXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-
-							Product p2 = new Product();
-							p2.setName("商品" + (products.size() + 2));
-							p2.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-
-							productsList.add(p1);
-							productsList.add(p2);
-							Product p3 = new Product();
-							p3.setName("商品" + (products.size() + 3));
-							p3.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB10ChmGFXXXXadaXXXSutbFXXX.jpg");
-							productsList.add(p3);
-
-							Product p4 = new Product();
-							p4.setName("商品" + (products.size() + 4));
-							p4.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-							productsList.add(p4);
-
-							Product p5 = new Product();
-							p5.setName("商品" + (products.size() + 5));
-							p5.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1rpHzGpXXXXXJaXXXSutbFXXX.jpg");
-							productsList.add(p5);
-
-							Product p6 = new Product();
-							p6.setName("商品" + (products.size() + 6));
-							p6.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1T2YnGpXXXXaFaXXXSutbFXXX.jpg");
-							productsList.add(p6);
-
-							Product p7 = new Product();
-							p7.setName("商品" + (products.size() + 7));
-							p7.setPicurl("http://img01.taobaocdn.com/imgextra/i1/1713844438/TB2TXsCaXXXXXbuXXXXXXXXXXXX-1713844438.jpg");
-							productsList.add(p7);
-
-							Product p8 = new Product();
-							p8.setName("商品" + (products.size() + 8));
-							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
-							productsList.add(p8);
+							 ToastUtils.showToast(mActivity,
+							 parseModel.getMsg());
+							 return;
+							
+						} else {
+							List<Product> productsList = JsonUtils.fromJson(
+									parseModel.getData().toString(),
+									new TypeToken<List<Product>>() {
+									});
 
 							if (pageNumber == 0) {
 								products.clear();
@@ -154,12 +120,6 @@ public class HealthServiceFragment extends BaseFragment implements
 
 							listAdapter.notifyDataSetChanged();
 							onLoad();
-
-						} else {
-							List<Product> productsList = JsonUtils.fromJson(
-									parseModel.getData().toString(),
-									new TypeToken<List<Product>>() {
-									});
 						}
 
 					}
@@ -169,13 +129,13 @@ public class HealthServiceFragment extends BaseFragment implements
 	@Override
 	public void onRefresh() {
 		pageNumber = 1;
-		getCollectProduct();
+		getData();
 	}
 
 	@Override
 	public void onLoadMore() {
 		pageNumber++;
-		getCollectProduct();
+		getData();
 	}
 
 	private void onLoad() {

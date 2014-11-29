@@ -90,7 +90,7 @@ public class SellerPersonalActivity extends BaseActivity implements IXListViewLi
 	
 	@Override
 	public void onRefresh() {
-		pageNumber=1;
+		pageNumber=0;
 		getProduct();
 	}
 
@@ -164,7 +164,7 @@ public class SellerPersonalActivity extends BaseActivity implements IXListViewLi
 							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
 							productsList.add(p8);
 							
-							if(pageNumber==1){
+							if(pageNumber==0){
 								products.clear();
 							}
 							products.addAll(productsList);

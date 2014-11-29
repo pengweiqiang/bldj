@@ -8,6 +8,9 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.SharePreferenceManager;
+import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.bldj.universalimageloader.cache.memory.MemoryCacheAware;
 import com.bldj.universalimageloader.cache.memory.impl.LRULimitedMemoryCache;
@@ -54,6 +57,10 @@ public class MyApplication extends Application {
 		// 由于Application类本身已经单例，所以直接按以下处理即可。
 		myApplication = this;
 		initImageLoader(this);
+		String userJson = (String)SharePreferenceManager.getSharePreferenceValue(this, "currentuser", "user", "");
+		if(!StringUtils.isEmpty(userJson)){
+			user = JsonUtils.fromJson(userJson, User.class);
+		}
 //		initBaiduLocClient();
 
 	}
