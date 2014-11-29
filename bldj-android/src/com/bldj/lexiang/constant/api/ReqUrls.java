@@ -74,7 +74,7 @@ public interface ReqUrls {
 	public static final String ORDER_ID = "orderId";
 	public static final String ORDER_TYPE = "orderType";
 	
-	public static final String NICK_NAME = "nickName";
+	public static final String NICK_NAME = "nickname";
 	public static final String NAME = "name";
 	public static final String MOBILE = "mobile";
 	public static final String ADDRESS = "address";

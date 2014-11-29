@@ -111,6 +111,12 @@ public class ApiUtils {
 	 */
 	public static void getParseModel(Map<String, Object> params, String requestUrl, boolean isAsync,
 			RequestCallback requestCallBack, MethodType methodType, Context context) {
+		getParseModel(params, requestUrl, isAsync, requestCallBack, methodType, context,HttpMethod.POST);
+	
+	}
+	public static void getParseModel(Map<String, Object> params, String requestUrl, boolean isAsync,
+			RequestCallback requestCallBack, MethodType methodType, Context context,HttpMethod httpMethod) {
+
 		if (!GlobalConfig.GLOBAL_NET_STATE) { // 无网络
 			ParseModel pm = new ParseModel();
 			pm.setStatus(String.valueOf(NetUtil.NET_ERR));
@@ -120,7 +126,7 @@ public class ApiUtils {
 		}
 
 		HttpConnectionUtil.asyncConnect(NetUtil.getConectionUrlWithoutPort(requestUrl, isAsync), params,
-				HttpConnectionUtil.HttpMethod.POST, requestCallBack, methodType, context);
+				httpMethod, requestCallBack, methodType, context);
 	
 	}
 		

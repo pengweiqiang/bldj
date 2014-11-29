@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Address;
 import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.ui.AddressInfoActivity;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -26,6 +28,7 @@ public class AddressAdapter extends BaseListAdapter {
 	private List<Address> dataList;
 	private LayoutInflater mInflater;
 	private Handler handler;
+	User user = MyApplication.getInstance().getCurrentUser();
 
 	public AddressAdapter(Context c, List<Address> dataList,Handler handler) {
 		this.context = c;
@@ -71,9 +74,9 @@ public class AddressAdapter extends BaseListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.tv_username.setText("小新");
+		holder.tv_username.setText(user.getNickname());
 		holder.tv_address.setText(address.getDetailAddress());
-		holder.tv_phone.setText("15245625896");
+		holder.tv_phone.setText(user.getMobile());
 
 		// 修改
 		holder.tv_update.setOnClickListener(new View.OnClickListener() {

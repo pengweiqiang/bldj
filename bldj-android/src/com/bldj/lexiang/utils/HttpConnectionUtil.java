@@ -119,7 +119,7 @@ public class HttpConnectionUtil {
 	 */
 	private static void syncConnect(final String url, final Map<String, Object> params, final HttpMethod method,
 			final RequestCallback callback, final MethodType methodType, final Context context) {
-		System.out.println(url+"接口传入参数："+JsonUtils.toJson(params));
+//		System.out.println(url+"接口传入参数："+JsonUtils.toJson(params));
 		final Handler handler = new Handler() {
 			@Override
 			public void handleMessage(Message message) {
