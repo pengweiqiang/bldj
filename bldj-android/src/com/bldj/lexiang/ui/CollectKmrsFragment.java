@@ -40,7 +40,7 @@ public class CollectKmrsFragment extends BaseFragment implements IXListViewListe
 	private KmrsAdapter listAdapter;
 	private List<Seller> sellers;
 	
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

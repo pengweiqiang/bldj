@@ -1,13 +1,19 @@
 package com.bldj.lexiang.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiUserUtils;
+import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -83,7 +89,21 @@ public class UpdatePwdActivity extends BaseActivity {
 					ToastUtils.showToast(UpdatePwdActivity.this, "两次密码不一致");
 					return;
 				}
-//				ApiUserUtils.updatePwd(UpdatePwdActivity.this, username, opass, password, requestCallback);
+				User user = MyApplication.getInstance().getCurrentUser();
+				ApiUserUtils.updatePwd(UpdatePwdActivity.this, user.getUsername(), old_pwd, new_pwd2, new HttpConnectionUtil.RequestCallback(){
+					@Override
+					public void execute(ParseModel parseModel) {
+						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//修改成功
+							ToastUtils.showToast(UpdatePwdActivity.this, "密码修改成功");
+							/*Intent intent = new Intent(UpdatePwdActivity.this,RegisterAndLoginActivity.class);
+							startActivity(intent);
+							finish();*/
+						}else{
+							ToastUtils.showToast(UpdatePwdActivity.this, parseModel.getMsg());
+						}
+					}
+					
+				});
 			}
 		});
 	}

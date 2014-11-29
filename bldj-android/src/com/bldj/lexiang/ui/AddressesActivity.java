@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -12,6 +14,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.bldj.gson.reflect.TypeToken;
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.AddressAdapter;
 import com.bldj.lexiang.api.ApiUserUtils;
@@ -20,6 +23,7 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 
 /**
@@ -37,7 +41,7 @@ public class AddressesActivity extends BaseActivity{
 	private AddressAdapter listAdapter;
 	private List<Address> addresses;
 	
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +53,9 @@ public class AddressesActivity extends BaseActivity{
 		
 		
 		addresses = new ArrayList<Address>();
-		listAdapter = new AddressAdapter(AddressesActivity.this, addresses);
+		listAdapter = new AddressAdapter(AddressesActivity.this, addresses,handler);
 		mListView.setAdapter(listAdapter);
 		
-		getAddresses();
 	}
 
 	// 设置activity的导航条
@@ -104,8 +107,7 @@ public class AddressesActivity extends BaseActivity{
 	 * 获取地址列表数据
 	 */
 	private void getAddresses() {
-//		String userId = MyApplication.getInstance().getCurrentUser().getUserId();
-		String userId = "";
+		String userId = MyApplication.getInstance().getCurrentUser().getUserId();
 		ApiUserUtils.addressManager(this.getApplicationContext(), 3, userId, "", "", "", 
 				new HttpConnectionUtil.RequestCallback() {
 
@@ -115,39 +117,15 @@ public class AddressesActivity extends BaseActivity{
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Address> addressList = new ArrayList<Address>();
-
-							Address p1 = new Address();
-							p1.setCurLocation("北京朝阳区");
-							p1.setDetailAddress("来广营");
-							p1.setId(1);
-							
-							Address p2 = new Address();
-							p2.setCurLocation("湖南");
-							p2.setDetailAddress("长沙雨花区");
-							p2.setId(2);
-							
-							addressList.add(p1);
-							addressList.add(p2);
-							
-							if(pageNumber==1){
-								addresses.clear();
-							}
-							addresses.addAll(addressList);
-
-							listAdapter.notifyDataSetChanged();
+							 ToastUtils.showToast(AddressesActivity.this,parseModel.getMsg());
+							 return;
 
 						} else {
 							List<Address> sellersList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Address>>() {
 									});
-							if(pageNumber==1){
-								addresses.clear();
-							}
+							addresses.clear();
 							addresses.addAll(sellersList);
 
 							listAdapter.notifyDataSetChanged();
@@ -157,4 +135,22 @@ public class AddressesActivity extends BaseActivity{
 				});
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		getAddresses();
+	}
+
+	private Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			if(msg.what == 1){
+				addresses.remove(msg.arg1);
+				listAdapter.notifyDataSetChanged();
+			}
+		}
+		
+	};
+	
 }

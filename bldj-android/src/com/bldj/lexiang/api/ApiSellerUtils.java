@@ -33,7 +33,7 @@ public class ApiSellerUtils {
 	public static void getSellers(Context context, int start, int limit,
 			int startPrice, int endPrice, int startWorkyear, int endWorkyear,
 			int orderbyTag, RequestCallback requestCallBack, int adIndex) {
-		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.START, String.valueOf(start));
 		params.put(ReqUrls.LIMIT, String.valueOf(limit));
 		params.put("startPrice", String.valueOf(startPrice));
@@ -54,7 +54,7 @@ public class ApiSellerUtils {
 	 */
 	public static void getSellerEvals(Context context,int id,RequestCallback requestCallBack){
 		
-		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, String.valueOf(id));
 		
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_EVALS, false,

@@ -25,7 +25,7 @@ import com.bldj.lexiang.view.CustomViewPager;
  * 
  */
 @SuppressLint("NewApi")
-public class MyCollectFragmentActivity extends FragmentActivity {
+public class MyCollectFragmentActivity extends BaseFragmentActivity {
 
 	CustomViewPager mViewPager;
 	private ActionBar mActionBar;

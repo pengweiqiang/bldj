@@ -4,7 +4,8 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
-import android.sax.StartElementListener;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,23 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Address;
 import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.ui.AddressInfoActivity;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.ToastUtils;
 
 public class AddressAdapter extends BaseListAdapter {
 
 	private Context context;
 	private List<Address> dataList;
 	private LayoutInflater mInflater;
+	private Handler handler;
 
-	public AddressAdapter(Context c, List<Address> dataList) {
+	public AddressAdapter(Context c, List<Address> dataList,Handler handler) {
 		this.context = c;
 		this.dataList = dataList;
 		this.mInflater = LayoutInflater.from(context);
+		this.handler = handler;
 	}
 
 	@Override
@@ -46,7 +51,7 @@ public class AddressAdapter extends BaseListAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		final Address address = (Address) getItem(position);
 		if (null == convertView) {
@@ -92,7 +97,16 @@ public class AddressAdapter extends BaseListAdapter {
 
 							@Override
 							public void execute(ParseModel parseModel) {
-								
+								if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+										.getStatus())) {
+									ToastUtils.showToast(context, parseModel.getMsg());
+								}else{
+									ToastUtils.showToast(context, "删除成功");
+									Message msg = new Message();
+									msg.what = 1;
+									msg.arg1 = position;
+									handler.sendMessage(msg);
+								}
 							}
 						});
 

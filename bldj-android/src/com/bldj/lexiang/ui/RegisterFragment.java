@@ -98,17 +98,17 @@ public class RegisterFragment extends BaseFragment {
 					@Override
 					public void execute(ParseModel parseModel) {
 						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//注册成功
-//							User user = JsonUtils.fromJson(parseModel.getData().toString(), User.class);
-//							MyApplication.getInstance().setUser(user);
+							User user = JsonUtils.fromJson(parseModel.getData().toString(), User.class);
+							MyApplication.getInstance().setUser(user);
 							
 							
 							et_phone.setText("");
 							et_password.setText("");
 							et_code.setText("");
+							((RegisterAndLoginActivity)mActivity).setCurrentTitle(0);
 							
 						}else{
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
-							((RegisterAndLoginActivity)mActivity).setCurrentTitle(0);
 						}
 					}
 				});				

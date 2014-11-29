@@ -22,7 +22,7 @@ public class ApiHomeUtils {
 	 * @param adIndex
 	 */
 	public static void getAdList(Context context,int limit,int type,RequestCallback requestCallBack){
-		Map<String,String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
         params.put(ReqUrls.LIMIT,String.valueOf(limit));
         params.put("type",String.valueOf(type));
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_MAINPAGE_AD, false, requestCallBack,MethodType.GET_MAINPAGE_AD,null);

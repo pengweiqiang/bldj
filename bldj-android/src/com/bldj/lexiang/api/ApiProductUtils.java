@@ -27,8 +27,8 @@ public class ApiProductUtils {
 	 * @param requestCallBack
 	 */
 	public static void getProducts(Context context,String tag,int userType,int orderbyTag,int type,int start,int limit,RequestCallback requestCallBack){
-		Map<String,String> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("tag", tag);
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put("tag", String.valueOf(tag));
 		params.put("userType", String.valueOf(userType));
 		params.put("orderbyTag", String.valueOf(orderbyTag));
 		params.put("type", String.valueOf(type));

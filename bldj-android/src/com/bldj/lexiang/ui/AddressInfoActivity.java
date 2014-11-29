@@ -6,6 +6,7 @@ import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Address;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -80,7 +81,7 @@ public class AddressInfoActivity extends BaseActivity {
 				}
 				//TODO 调用接口
 				String addressId = "";
-				String curLocation = "";
+				String curLocation = address;
 				if(address!=null && type==2){//修改地址
 					addressId = String.valueOf(addressVo.getId());
 				}
@@ -88,7 +89,13 @@ public class AddressInfoActivity extends BaseActivity {
 					
 					@Override
 					public void execute(ParseModel parseModel) {
-						
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
+						}else{
+							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
+							finish();
+						}
 					}
 				});
 			}

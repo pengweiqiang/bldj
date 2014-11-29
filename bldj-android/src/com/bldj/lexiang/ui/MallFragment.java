@@ -42,7 +42,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 	
 	private ImageView company_zone;
 	
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 
 	private TextView tv_order_sales;
 	private TextView tv_order_price;

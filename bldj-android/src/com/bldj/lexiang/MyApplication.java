@@ -21,8 +21,8 @@ public class MyApplication extends Application {
 
 	public static String TAG;
 	
-	public static String lat = "";
-	public static String lon = "";
+	public static String lat = "116.320044";
+	public static String lon = "39.966051";
 	
 	private static MyApplication myApplication = null;
 	private User user = null;//全局用户

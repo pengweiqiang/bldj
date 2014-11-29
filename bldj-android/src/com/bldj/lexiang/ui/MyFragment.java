@@ -1,16 +1,32 @@
 package com.bldj.lexiang.ui;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.ApiUserUtils;
+import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.ImageTools;
+import com.bldj.lexiang.utils.StringUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.universalimageloader.core.ImageLoader;
 
 /**
  * 我的
@@ -31,15 +47,19 @@ public class MyFragment extends BaseFragment {
 	private Button btn_checkVersion;// 检测新版本
 	private LinearLayout ll_myinfo;// 我的个人信息
 	private LinearLayout ll_updatePwd;// 修改密码
+	private TextView tv_username;// 用户名
+	private ImageView image_head;// 头像
+
+	private EditText et_nickname;
+
+	User user;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		infoView = inflater.inflate(R.layout.my_fragment, container, false);
-
 		initView();
-
 		initListener();
 		return infoView;
 	}
@@ -59,9 +79,134 @@ public class MyFragment extends BaseFragment {
 		btn_myFiles = (Button) infoView.findViewById(R.id.btn_myFiles);
 		btn_checkVersion = (Button) infoView
 				.findViewById(R.id.btn_check_version);
+
+		tv_username = (TextView) infoView.findViewById(R.id.tv_person_name);
+		image_head = (ImageView) infoView.findViewById(R.id.img_person);
+
+	}
+
+	private void initData() {
+		user = MyApplication.getInstance().getCurrentUser();
+		if (user != null) {
+			tv_username
+					.setText(StringUtils.isEmpty(user.getNickname()) ? "未设置昵称"
+							: user.getNickname());
+			ImageLoader.getInstance().displayImage(
+					user.getHeadurl(),
+					image_head,
+					MyApplication.getInstance().getOptions(
+							R.drawable.default_image));
+		} else {// 未登录
+			tv_username.setText("未登录");
+		}
 	}
 
 	private void initListener() {
+		// 修改图片头像
+		image_head.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (checkIsLogin()) {
+					// String stream = ImageTools.imgToBase64(imgPath, null,
+					// "");
+					String stream = "";
+					ApiUserUtils.updateHeader(mActivity, user.getUsername(),
+							stream, new HttpConnectionUtil.RequestCallback() {
+
+								@Override
+								public void execute(ParseModel parseModel) {
+									if (!ApiConstants.RESULT_SUCCESS
+											.equals(parseModel.getStatus())) {
+										ToastUtils.showToast(mActivity,
+												parseModel.getMsg());
+									} else {
+										user.setHeadurl(/* headurl */"");
+										MyApplication.getInstance().setUser(
+												user);
+										ImageLoader
+												.getInstance()
+												.displayImage(
+														user.getHeadurl(),
+														image_head,
+														MyApplication
+																.getInstance()
+																.getOptions(
+																		R.drawable.default_image));
+									}
+								}
+							});
+				}
+			}
+		});
+		// 用户昵称
+		tv_username.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				if (checkIsLogin()) {
+					Builder dialog = new AlertDialog.Builder(mActivity);
+					LayoutInflater inflater = (LayoutInflater) mActivity
+							.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+					LinearLayout layout = (LinearLayout) inflater.inflate(
+							R.layout.dialogview, null);
+					dialog.setView(layout);
+					et_nickname = (EditText) layout.findViewById(R.id.searchC);
+					et_nickname.setText(StringUtils.isEmpty(user.getNickname()) ? ""
+							: user.getNickname());
+					dialog.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									final String nickname = et_nickname
+											.getText().toString();
+									if (StringUtils.isEmpty(nickname)) {
+										ToastUtils.showToast(mActivity,
+												"用户昵称不能为空");
+										return;
+									}
+
+									ApiUserUtils.updateNickName(
+											mActivity,
+											user.getUsername(),
+											nickname,
+											new HttpConnectionUtil.RequestCallback() {
+
+												@Override
+												public void execute(
+														ParseModel parseModel) {
+													if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+															.getStatus())) {
+														ToastUtils
+																.showToast(
+																		mActivity,
+																		parseModel
+																				.getMsg());
+													} else {
+														user.setNickname(nickname);
+														MyApplication
+																.getInstance()
+																.setUser(user);
+														tv_username
+																.setText(nickname);
+													}
+												}
+											});
+								}
+							});
+
+					dialog.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+
+								}
+
+							});
+					dialog.show();
+				}
+			}
+		});
 		ll_myinfo.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -69,9 +214,10 @@ public class MyFragment extends BaseFragment {
 				if (checkIsLogin()) {
 
 				}
-				/*Intent intent = new Intent(mActivity,
-						RegisterAndLoginActivity.class);
-				startActivity(intent);*/
+				/*
+				 * Intent intent = new Intent(mActivity,
+				 * RegisterAndLoginActivity.class); startActivity(intent);
+				 */
 			}
 		});
 		// 退出登录
@@ -79,7 +225,8 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-
+				MyApplication.getInstance().setUser(null);
+				initData();
 			}
 		});
 		// 我的收藏
@@ -87,10 +234,11 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-//				if (checkIsLogin()) {
-//
-//				}
-				Intent intent = new Intent(mActivity, MyCollectFragmentActivity.class);
+				// if (checkIsLogin()) {
+				//
+				// }
+				Intent intent = new Intent(mActivity,
+						MyCollectFragmentActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -99,9 +247,9 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-//				if (checkIsLogin()) {
-//
-//				}
+				// if (checkIsLogin()) {
+				//
+				// }
 				Intent intent = new Intent(mActivity,
 						CouponsFragmentActivity.class);
 				startActivity(intent);
@@ -112,8 +260,11 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(mActivity, UpdatePwdActivity.class);
-				startActivity(intent);
+				if (checkIsLogin()) {
+					Intent intent = new Intent(mActivity,
+							UpdatePwdActivity.class);
+					startActivity(intent);
+				}
 			}
 		});
 		// 我的地址
@@ -121,11 +272,12 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-//				if (checkIsLogin()) {
-//
-//				}
-				Intent intent = new Intent(mActivity, AddressesActivity.class);
-				startActivity(intent);
+				if (checkIsLogin()) {
+					Intent intent = new Intent(mActivity,
+							AddressesActivity.class);
+					startActivity(intent);
+				}
+
 			}
 		});
 		// 我的订单
@@ -182,6 +334,12 @@ public class MyFragment extends BaseFragment {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		initData();
 	}
 
 }

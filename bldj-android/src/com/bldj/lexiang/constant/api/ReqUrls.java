@@ -64,7 +64,8 @@ public interface ReqUrls {
 //	public static final String CONFIG_HOST_IP="http://bldj.com" 
 	
 //	public static final String DEFAULT_REQ_HOST_IP = "http://bldj.com";
-    public static final String DEFAULT_REQ_HOST_IP = "172.16.102.145:8080/wechatshop/login.html"; //默认值异常的请求地址
+//    public static final String DEFAULT_REQ_HOST_IP = "172.16.102.145:8080/wechatshop/login.html"; //默认值异常的请求地址
+	 public static final String DEFAULT_REQ_HOST_IP = "192.168.0.113"; //默认值异常的请求地址
 	
 	public static final String LIMIT_DEFAULT_NUM="10";
 	

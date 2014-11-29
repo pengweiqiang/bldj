@@ -88,6 +88,7 @@ public class LoginFragment extends BaseFragment {
 						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//登录成功
 							User user = JsonUtils.fromJson(parseModel.getData().toString(), User.class);
 							MyApplication.getInstance().setUser(user);
+							mActivity.finish();
 						}else{
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
 						}
