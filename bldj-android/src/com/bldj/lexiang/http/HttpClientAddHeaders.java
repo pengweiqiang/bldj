@@ -13,14 +13,15 @@ import com.bldj.lexiang.GlobalConfig;
  * 添加请求头
  */
 public class HttpClientAddHeaders {
-	private static ConcurrentHashMap<String, Object> headers = new ConcurrentHashMap<String,Object>();
+//	private static ConcurrentHashMap<String, Object> headers = new ConcurrentHashMap<String,Object>();
 	/**
 	 * 获取请求头集合
 	 * isAuthentication 是否需要认证，注册，密码重置 不需要
 	 * @return
 	 */
 	public static ConcurrentHashMap<String, Object> getHeaders(Context context){
-		headers.clear();
+//		headers.clear();
+		ConcurrentHashMap<String, Object> headers = new ConcurrentHashMap<String,Object>();
 		headers.put("source","Android");//客户端系统
 
 		if("".equals(GlobalConfig.VERSION_NAME_V)){

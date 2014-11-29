@@ -182,6 +182,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		initListener();
 		
 		getAdLists();
+		
 		getHotProduct();
 	}
 
@@ -327,6 +328,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						addBannerView();
 					}
 				});
+		
 	}
 
 	/**

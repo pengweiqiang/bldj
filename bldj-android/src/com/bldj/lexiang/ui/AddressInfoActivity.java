@@ -34,9 +34,9 @@ public class AddressInfoActivity extends BaseActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		user = MyApplication.getInstance().getCurrentUser();
 		setContentView(R.layout.update_address);//setContentView要放在super.onCreate前面，不然会报nullPointer
 		super.onCreate(savedInstanceState);
-		user = MyApplication.getInstance().getCurrentUser();
 		type = getIntent().getIntExtra("type", 0);//地址类型
 		if(type==2){
 			addressVo = (Address)getIntent().getSerializableExtra("address");
@@ -107,6 +107,9 @@ public class AddressInfoActivity extends BaseActivity {
 		et_contact_name = (EditText)findViewById(R.id.contact_name);
 		et_contact_address = (EditText)findViewById(R.id.contact_address);
 		et_contact_phone = (EditText)findViewById(R.id.contact_phone);
+		
+		et_contact_name.setText(user.getNickname());
+		et_contact_phone.setText(user.getMobile());
 	}
 
 	@Override
@@ -115,9 +118,8 @@ public class AddressInfoActivity extends BaseActivity {
 
 	}
 	public void initAddressData(){
-		et_contact_name.setText(user.getUsername());
 		et_contact_address.setText(addressVo.getDetailAddress());
-		et_contact_phone.setText(user.getMobile());
+		
 	}
 
 }

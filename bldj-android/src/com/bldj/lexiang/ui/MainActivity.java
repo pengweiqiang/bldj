@@ -72,7 +72,7 @@ public class MainActivity extends FragmentActivity implements OnPageChangeListen
 		mViewPager.setAdapter(mAdapter);
 		mViewPager.setOnPageChangeListener(this);
 
-		mViewPager.setOffscreenPageLimit(10);
+		mViewPager.setOffscreenPageLimit(4);
 		// 实现模块切换
 		mTabIndicators
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
