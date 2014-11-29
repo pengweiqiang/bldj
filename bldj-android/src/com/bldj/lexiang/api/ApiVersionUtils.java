@@ -23,7 +23,7 @@ public class ApiVersionUtils {
 	 * @param adIndex
 	 */
 	public static void checkVersion(Context context,RequestCallback requestCallBack,int adIndex){
-		Map<String,String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
         params.put("terType",params.get("source"));
         params.put("vcode", GlobalConfig.VERSION_CODE_V);
 		ApiUtils.getParseModel(params, ReqUrls.CHECK_VERSION, false, requestCallBack,MethodType.GET_MAINPAGE_AD,null);

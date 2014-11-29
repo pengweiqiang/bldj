@@ -76,7 +76,7 @@ public class HttpConnectionUtil {
 	/**
 	 * 请求不等待响应
 	 */
-	public static void reqNoWaitResponse(final String url, Map<String, String> params, final HttpMethod method) {
+	public static void reqNoWaitResponse(final String url, Map<String, Object> params, final HttpMethod method) {
 		HttpClient client = new DefaultHttpClient();
 		HttpUriRequest request = getRequest(url, params, method);
 		try {
@@ -97,7 +97,7 @@ public class HttpConnectionUtil {
 	 * @param method 方法,POST或GET
 	 * @param callback 回调方法
 	 */
-	public static void asyncConnect(final String url, final Map<String, String> params, final HttpMethod method,
+	public static void asyncConnect(final String url, final Map<String, Object> params, final HttpMethod method,
 			final RequestCallback callback, final MethodType methodType, final Context context) {
 //		Handler handler = new Handler();
 //		Runnable runnable = new Runnable() {
@@ -117,14 +117,16 @@ public class HttpConnectionUtil {
 	 * @param method 方法,POST或GET
 	 * @param callback 回调方法
 	 */
-	private static void syncConnect(final String url, final Map<String, String> params, final HttpMethod method,
+	private static void syncConnect(final String url, final Map<String, Object> params, final HttpMethod method,
 			final RequestCallback callback, final MethodType methodType, final Context context) {
+		System.out.println(url+"接口传入参数："+JsonUtils.toJson(params));
 		final Handler handler = new Handler() {
 			@Override
 			public void handleMessage(Message message) {
 				switch (message.what) {
 				case ApiConstants.RESULT_CODE: {
 					String backStr = message.getData().getString(ApiConstants.RESULT_BACK_STR);
+					System.out.println(url+"接口返回结果："+backStr);
 					if (callback != null && null != backStr)
 						callback.execute(getParseModel(backStr, methodType, context));
 					break;
@@ -145,7 +147,8 @@ public class HttpConnectionUtil {
 					HttpResponse response = client.execute(request);
 					int statusCode = response.getStatusLine().getStatusCode();
 					backStr = String.valueOf(statusCode);
-					if (statusCode == HttpStatus.SC_OK || statusCode == NetUtil.NET_QUERY_SUCC) {
+					System.out.println("statuCode:"+statusCode);
+					if (statusCode == HttpStatus.SC_OK || statusCode == NetUtil.NET_QUERY_SUCC || statusCode== NetUtil.FAIL_CODE) {
 						backStr = EntityUtils.toString(response.getEntity());
 						sendMessage(backStr, handler, ApiConstants.RESULT_CODE);
 					}
@@ -175,14 +178,14 @@ public class HttpConnectionUtil {
 	 * @param method 方法
 	 * @return
 	 */
-	private static HttpUriRequest getRequest(String url, Map<String, String> params, HttpMethod method) {
+	private static HttpUriRequest getRequest(String url, Map<String, Object> params, HttpMethod method) {
 		Log.d(TAG, "-------发出的url请求-----------" + url);
 		if (method.equals(HttpMethod.POST)) {
 			List<NameValuePair> listParams = new ArrayList<NameValuePair>();
 			if (params != null) {
 				for (String name : params.keySet()) {
 					Log.d(TAG, "========" + name + "=" + params.get(name));
-					listParams.add(new BasicNameValuePair(name, params.get(name)));
+					listParams.add(new BasicNameValuePair(name, params.get(name).toString()));
 				}
 			}
 			try {
@@ -201,7 +204,7 @@ public class HttpConnectionUtil {
 			if (params != null) {
 				for (String name : params.keySet()) {
 					try {
-						url += "&" + name + "=" + URLEncoder.encode(params.get(name), HTTP.UTF_8);
+						url += "&" + name + "=" + URLEncoder.encode(params.get(name).toString(), HTTP.UTF_8);
 						
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
@@ -233,6 +236,12 @@ public class HttpConnectionUtil {
 		ParseModel pm = ApiUtils.parse2ParseModel(backStr);
 		if (pm == null) {
 			pm = new ParseModel();
+			if(String.valueOf(NetUtil.FAIL_CODE).equals(backStr)){//服务器异常
+				pm.setStatus(String.valueOf(NetUtil.FAIL_CODE));
+				pm.setMsg(NetUtil.SERVICE_ERR_MSG);
+				return pm;
+			}
+			
 			pm.setStatus(String.valueOf(NetUtil.NET_ERR));
 			pm.setMsg(NetUtil.NET_ERR_MSG);
 			return pm;

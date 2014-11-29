@@ -41,7 +41,7 @@ public class SellerPersonalActivity extends BaseActivity implements IXListViewLi
 	
 	
 	
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

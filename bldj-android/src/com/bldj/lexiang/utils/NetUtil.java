@@ -65,10 +65,12 @@ public class NetUtil {
 	
 	/** 服务端返回状态 **/
 	public static final int SUCCESS_CODE = 600;
+	public static final int FAIL_CODE = 500;
 	
 	public static final int NET_QUERY_SUCC = 201;
 	public static final int NET_ERR = 777;
 	public static final String NET_ERR_MSG = "网络不给力呀，稍后试试吧！";
+	public static final String SERVICE_ERR_MSG = "服务器异常，稍后试试吧！";
 	public static final int NET_EXC_ERR = 888;
 	public static final int NET_REP_HOME = 889;
 	public static final int NET_REQUEST_TIME_OUT = 10000; // 连接超时

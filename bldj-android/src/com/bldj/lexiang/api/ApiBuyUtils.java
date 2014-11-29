@@ -27,7 +27,7 @@ public class ApiBuyUtils {
 	 */
 	public static void getScheduled(Context context, long id, long proId,
 			String dealDate, RequestCallback requestCallBack) {
-		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, String.valueOf(id));
 		params.put("proId", String.valueOf(proId));
 		params.put("dealDate", dealDate);
@@ -47,7 +47,7 @@ public class ApiBuyUtils {
 	 */
 	public static void couponsManage(Context context, long id, int type,
 			String vcode, int method, RequestCallback requestCallBack) {
-		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, String.valueOf(id));
 		params.put("type", String.valueOf(type));
 		params.put("vcode", vcode);
@@ -82,7 +82,7 @@ public class ApiBuyUtils {
 			String proName, double orderPay, String curuser, int type,
 			String contactor, String mobile, String detailAddress,
 			String notes, int payType, RequestCallback requestCallback) {
-		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put("userId", String.valueOf(userId));
 		params.put("username", username);
 		params.put("sellerId", String.valueOf(sellerId));
@@ -109,7 +109,7 @@ public class ApiBuyUtils {
 	 * @param requestCallback
 	 */
 	public static void getOrders(Context context,long id,RequestCallback requestCallback){
-		Map<String, String> params = HttpClientAddHeaders.getHeaders(context);
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, String.valueOf(id));
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ORDERS, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);

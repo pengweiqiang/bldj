@@ -33,6 +33,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.BannerPagerAdapter;
 import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
+import com.bldj.lexiang.adapter.MallAdapter;
 import com.bldj.lexiang.api.ApiHomeUtils;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.Ad;
@@ -81,7 +82,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	private BannerPagerAdapter bannerPageAdapter;
 
 	// 广告条 end
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 
 	private TextView tab_find, tab_company, tab_reserve;
 	
@@ -169,10 +170,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		mListView.setAdapter(listAdapter);
 
 		mListView.setPullLoadEnable(true);
-		mListView.setPullRefreshEnable(false);
+		mListView.setPullRefreshEnable(true);
 		mListView.setXListViewListener(this);
-		// mListView.setRefreshTime();
-
 		return infoView;
 	}
 
@@ -317,19 +316,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 								.getStatus())) {
 							bannerView.setVisibility(View.VISIBLE);
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
-							// return;
-							ads = new ArrayList<Ad>();
-							Ad ad = new Ad();
-							ad.setName("百度");
-							ad.setPicurl("http://static.oschina.net/uploads/space/2012/0619/094900_woCq_254190.jpg");
-							ad.setActionUrl("http://www.baidu.com");
-							ads.add(ad);
-							Ad ad2 = new Ad();
-							ad2.setName("便利到家");
-							ad2.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB10ChmGFXXXXadaXXXSutbFXXX.jpg");
-							ad2.setActionUrl("http://www.bldj.com");
-							ads.add(ad2);
+							 return;
 						} else {
+							bannerView.setVisibility(View.VISIBLE);
 							ads = JsonUtils.fromJson(parseModel.getData()
 									.toString(), new TypeToken<List<Ad>>() {
 							});
@@ -345,7 +334,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	 */
 	private void getHotProduct() {
 		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
-				0, 0, pageNumber, ApiConstants.LIMIT,
+				0, 2, pageNumber, ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -354,64 +343,23 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Product> productsList = new ArrayList<Product>();
-
-							Product p1 = new Product();
-							p1.setName("商品" + (products.size() + 1));
-							p1.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i3/T11iAAFoNbXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-
-							Product p2 = new Product();
-							p2.setName("商品" + (products.size() + 2));
-							p2.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-
-							productsList.add(p1);
-							productsList.add(p2);
-							Product p3 = new Product();
-							p3.setName("商品" + (products.size() + 3));
-							p3.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB10ChmGFXXXXadaXXXSutbFXXX.jpg");
-							productsList.add(p3);
-
-							Product p4 = new Product();
-							p4.setName("商品" + (products.size() + 4));
-							p4.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-							productsList.add(p4);
-
-							Product p5 = new Product();
-							p5.setName("商品" + (products.size() + 5));
-							p5.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1rpHzGpXXXXXJaXXXSutbFXXX.jpg");
-							productsList.add(p5);
-
-							Product p6 = new Product();
-							p6.setName("商品" + (products.size() + 6));
-							p6.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1T2YnGpXXXXaFaXXXSutbFXXX.jpg");
-							productsList.add(p6);
-
-							Product p7 = new Product();
-							p7.setName("商品" + (products.size() + 7));
-							p7.setPicurl("http://img01.taobaocdn.com/imgextra/i1/1713844438/TB2TXsCaXXXXXbuXXXXXXXXXXXX-1713844438.jpg");
-							productsList.add(p7);
-
-							Product p8 = new Product();
-							p8.setName("商品" + (products.size() + 8));
-							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
-							productsList.add(p8);
-
-							if (pageNumber == 1) {
-								products.clear();
-							}
-							products.addAll(productsList);
-
-							listAdapter.notifyDataSetChanged();
-							onLoad();
+							 ToastUtils.showToast(mActivity,
+							 parseModel.getMsg());
+							 return;
 							
 						} else {
 							List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Product>>() {
 									});
+
+							if (pageNumber == 0) {
+								products.clear();
+							}
+							products.addAll(productsList);
+
+							listAdapter.notifyDataSetChanged();
+							onLoad();
 						}
 
 					}
@@ -527,13 +475,17 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 	@Override
 	public void onRefresh() {
-		// TODO Auto-generated method stub
-		
+		pageNumber = 0 ;
+		getHotProduct();
 	}
 
 	@Override
 	public void onLoadMore() {
-		pageNumber++;
+		if(products==null || products.isEmpty()){
+			pageNumber = 0;
+		}else{
+			pageNumber++;
+		}
 		getHotProduct();
 	}
 	

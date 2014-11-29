@@ -23,7 +23,7 @@ import com.bldj.lexiang.view.TabPageIndicator;
  * 
  */
 @SuppressLint("NewApi")
-public class AppointmentFragmentActivity extends FragmentActivity {
+public class AppointmentFragmentActivity extends BaseFragmentActivity {
 
 	CustomViewPager mViewPager;
 	private ActionBar mActionBar;

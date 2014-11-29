@@ -40,7 +40,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private XListView mListView;
 	private JlysHealthAdapter listAdapter;
 	private List<Seller> sellers;
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 
 	private Button btn_previous, btn_next;
 
@@ -162,7 +162,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 							sellersList.add(p2);
 							sellersList.add(p3);
 
-							if (pageNumber == 1) {
+							if (pageNumber == 0) {
 								sellers.clear();
 							}
 							sellers.addAll(sellersList);
@@ -175,7 +175,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 									parseModel.getData().toString(),
 									new TypeToken<List<Seller>>() {
 									});
-							if (pageNumber == 1) {
+							if (pageNumber == 0) {
 								sellers.clear();
 							}
 							sellers.addAll(sellersList);

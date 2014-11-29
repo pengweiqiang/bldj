@@ -45,7 +45,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	private HomeAdapter listAdapter;
 	private List<Product> products;
 	
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

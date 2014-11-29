@@ -39,7 +39,7 @@ public class SeeHealthDivFragment extends BaseFragment implements IXListViewList
 	private JlysHealthAdapter listAdapter;
 	private List<Seller> sellers;
 	
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

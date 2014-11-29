@@ -25,6 +25,7 @@ import android.graphics.Shader.TileMode;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
+import android.util.Base64;
 
 /**
  * Tools for handler picture
@@ -471,4 +472,54 @@ public final class ImageTools {
 		bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height);
 		return bitmap;
 	}
+	
+	
+	/**
+	 * 
+	 * @param imgPath
+	 * @param bitmap
+	 * @param imgFormat 图片格式
+	 * @return
+	 */
+	public static String imgToBase64(String imgPath, Bitmap bitmap,String imgFormat) {
+		if (imgPath !=null && imgPath.length() > 0) {
+			bitmap = readBitmap(imgPath);
+		}
+		if(bitmap == null){
+			//bitmap not found!!
+		}
+		ByteArrayOutputStream out = null;
+		try {
+			out = new ByteArrayOutputStream();
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+
+			out.flush();
+			out.close();
+
+			byte[] imgBytes = out.toByteArray();
+			return Base64.encodeToString(imgBytes, Base64.DEFAULT);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		} finally {
+			try {
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private static Bitmap readBitmap(String imgPath) {
+		try {
+			return BitmapFactory.decodeFile(imgPath);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+
+	}
+	
 }

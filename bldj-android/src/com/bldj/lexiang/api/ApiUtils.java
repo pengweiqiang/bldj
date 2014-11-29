@@ -97,7 +97,7 @@ public class ApiUtils {
 	 * @param requestUrl
 	 * @param method
 	 */
-	public static void repo(Map<String, String> params, String requestUrl, HttpMethod method) {
+	public static void repo(Map<String, Object> params, String requestUrl, HttpMethod method) {
 		HttpConnectionUtil.reqNoWaitResponse(NetUtil.getConectionUrlWithoutPort(requestUrl, false), params, method);
 	}
 	
@@ -109,7 +109,7 @@ public class ApiUtils {
 	 * @param requestUrl
 	 * @return
 	 */
-	public static void getParseModel(Map<String, String> params, String requestUrl, boolean isAsync,
+	public static void getParseModel(Map<String, Object> params, String requestUrl, boolean isAsync,
 			RequestCallback requestCallBack, MethodType methodType, Context context) {
 		if (!GlobalConfig.GLOBAL_NET_STATE) { // 无网络
 			ParseModel pm = new ParseModel();

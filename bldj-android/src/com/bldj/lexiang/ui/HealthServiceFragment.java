@@ -39,7 +39,7 @@ public class HealthServiceFragment extends BaseFragment implements
 	private HomeAdapter listAdapter;
 	private List<Product> products;
 
-	private int pageNumber = 1;
+	private int pageNumber = 0;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -147,7 +147,7 @@ public class HealthServiceFragment extends BaseFragment implements
 							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
 							productsList.add(p8);
 
-							if (pageNumber == 1) {
+							if (pageNumber == 0) {
 								products.clear();
 							}
 							products.addAll(productsList);
