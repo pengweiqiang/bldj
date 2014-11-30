@@ -13,6 +13,25 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <!-- 用于读取手机当前的状态 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <!-- 允许应用读取低级别的系统日志文件 -->
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <supports-screens android:anyDensity="true" />
 
@@ -75,7 +94,7 @@
         <!-- 登录注册界面 -->
         <activity
             android:name=".ui.RegisterAndLoginActivity"
-             android:launchMode="singleTask"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <!-- 经络养生 -->
@@ -173,6 +192,19 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="BLDJ" />
+
+        <!-- baidu map start -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="mIRyHB3Vf3cXCuv6FhSVAYNS" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+        </service>
+        <!-- baidu map end -->
+
     </application>
 
 </manifest>
