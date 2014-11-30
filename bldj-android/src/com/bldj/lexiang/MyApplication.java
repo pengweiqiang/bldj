@@ -24,8 +24,8 @@ public class MyApplication extends Application {
 
 	public static String TAG;
 	
-	public static String lat = "116.320044";
-	public static String lon = "39.966051";
+	public static double lat;
+	public static double lon;
 	
 	private static MyApplication myApplication = null;
 	private User user = null;//全局用户
@@ -56,7 +56,7 @@ public class MyApplication extends Application {
 		if(!StringUtils.isEmpty(userJson)){
 			user = JsonUtils.fromJson(userJson, User.class);
 		}
-//		initBaiduLocClient();
+		initBaiduLocClient();
 
 	}
 	
@@ -119,9 +119,17 @@ public class MyApplication extends Application {
 		@Override
 		public void onReceiveLocation(BDLocation location) {
 			// Receive Location
-			double latitude = location.getLatitude();
-			double longtitude = location.getLongitude();
-			}
+//			double latitude = location.getLatitude();
+//			double longtitude = location.getLongitude();
+				if (lat == location.getLatitude()
+						&& lon == location.getLongitude()) {
+					// 若两次请求获取到的地理位置坐标是相同的，则不再定位
+					mLocationClient.stop();
+					return;
+				}
+			lat = location.getLatitude();
+			lon = location.getLongitude();
+		}
 	}
 	
 }
