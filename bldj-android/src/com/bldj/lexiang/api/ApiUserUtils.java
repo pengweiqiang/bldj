@@ -173,7 +173,7 @@ public class ApiUserUtils {
 	 * @param requestCallback
 	 */
 	public static void register(Context context, String mobile,
-			String password, String lon, String lat,
+			String password, double lon, double lat,
 			RequestCallback requestCallback) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.PASSWORD, password);
