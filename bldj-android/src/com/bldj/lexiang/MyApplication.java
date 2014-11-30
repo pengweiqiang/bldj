@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.baidu.mapapi.SDKInitializer;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
@@ -107,6 +108,9 @@ public class MyApplication extends Application {
 	 * @throws
 	 */
 	private void initBaiduLocClient() {
+		// 初始化地图Sdk
+		SDKInitializer.initialize(this);
+		
 		mLocationClient = new LocationClient(this.getApplicationContext());//声明LocationClient类
 		mMyLocationListener = new MyLocationListener();
 		mLocationClient.registerLocationListener(mMyLocationListener);//注册监听函数
@@ -121,6 +125,11 @@ public class MyApplication extends Application {
 			// Receive Location
 //			double latitude = location.getLatitude();
 //			double longtitude = location.getLongitude();
+			String province = location.getProvince();
+			String city = location.getCity();
+			String district = location.getDistrict();
+			String addressStr = location.getAddrStr();
+			System.out.println("province:"+province+"  city:"+city+"  district:"+district+"  addressStr:"+addressStr);
 				if (lat == location.getLatitude()
 						&& lon == location.getLongitude()) {
 					// 若两次请求获取到的地理位置坐标是相同的，则不再定位
