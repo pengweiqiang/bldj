@@ -162,7 +162,10 @@ public interface ReqUrls {
 	 * 生成订单
 	 */
 	public static final String CREATE_ORDER = "/user/orderGenerate";
-	
+	/**
+	 * 用户订单支付成功
+	 */
+	public static final String REQUEST_ORDER_SUCCESS = "/user/orderPaid";
 	/**
 	 * 获取用户订单
 	 */

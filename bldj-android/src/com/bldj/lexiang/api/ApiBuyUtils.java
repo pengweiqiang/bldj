@@ -103,6 +103,21 @@ public class ApiBuyUtils {
 
 	}
 	/**
+	 * 用户支付成功
+	 * @param context
+	 * @param id 用户id
+	 * @param orderNum 订单号
+	 * @param requestCallback
+	 */
+	public static void orderSuccess(Context context,long id ,String orderNum,RequestCallback requestCallback){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put("orderNum", orderNum);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ORDER_SUCCESS, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+	}
+	
+	/**
 	 * 获取用户订单
 	 * @param context
 	 * @param id
@@ -110,7 +125,7 @@ public class ApiBuyUtils {
 	 */
 	public static void getOrders(Context context,long id,RequestCallback requestCallback){
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
-		params.put(ReqUrls.ID, String.valueOf(id));
+		params.put(ReqUrls.ID, id);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ORDERS, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
