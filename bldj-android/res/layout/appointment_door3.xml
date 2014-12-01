@@ -54,7 +54,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tips"
+            android:id="@+id/seller_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -79,7 +79,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tips"
+            android:id="@+id/product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -104,7 +104,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/tips"
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"

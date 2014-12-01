@@ -15,12 +15,14 @@ import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.JlysHealthAdapter;
 import com.bldj.lexiang.api.ApiProductUtils;
+import com.bldj.lexiang.api.ApiSellerUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
@@ -41,13 +43,15 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private JlysHealthAdapter listAdapter;
 	private List<Seller> sellers;
 	private int pageNumber = 0;
-
+	private String time;// 预约时间
+	private Seller mSeletedSeller;// 预约美容师
 	private Button btn_previous, btn_next;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.appointment_door2);
 		super.onCreate(savedInstanceState);
+		time = this.getIntent().getStringExtra("time");
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		initView();
@@ -101,8 +105,15 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 
 			@Override
 			public void onClick(View v) {
+				if (mSeletedSeller == null) {
+					ToastUtils.showToast(AppointmentDoor2Activity.this,
+							"请选择理疗师");
+					return;
+				}
 				Intent intent = new Intent(AppointmentDoor2Activity.this,
 						AppointmentDoor3Activity.class);
+				intent.putExtra("time", time);// 预约时间
+				intent.putExtra("seller", mSeletedSeller);// 美容师
 				startActivity(intent);
 			}
 		});
@@ -111,10 +122,11 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
+				mSeletedSeller = sellers.get(position);
 				// 启动美容师个人界面
 				Intent intent = new Intent(AppointmentDoor2Activity.this,
 						SellerPersonalActivity.class);
-				// intent.putExtra("seller", products.get(position));
+				intent.putExtra("seller", mSeletedSeller);// 美容师
 				startActivity(intent);
 			}
 
@@ -122,12 +134,11 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	}
 
 	/**
-	 * 获取收藏美容师数据
+	 * 获取美容师数据
 	 */
 	private void getSellers() {
-		ApiProductUtils.getProducts(AppointmentDoor2Activity.this, "1", 2, 0,
-				0, pageNumber, ApiConstants.LIMIT,
-				new HttpConnectionUtil.RequestCallback() {
+		/*ApiSellerUtils.getSellers(AppointmentDoor2Activity.this, pageNumber, ApiConstants.LIMIT, "", "", 
+				startWorkyear, endWorkyear, orderbyTag, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
@@ -183,10 +194,9 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 							listAdapter.notifyDataSetChanged();
 							onLoad();
 						}
-
 					}
-				});
-	}
+					});
+*/	}
 
 	@Override
 	public void onRefresh() {

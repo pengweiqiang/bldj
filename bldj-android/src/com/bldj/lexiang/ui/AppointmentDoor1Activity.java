@@ -35,6 +35,7 @@ public class AppointmentDoor1Activity extends BaseActivity{
 
 	ActionBar mActionBar;
 	Button btn_next;
+	String time = "2014-12-2 10:30:00";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class AppointmentDoor1Activity extends BaseActivity{
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(AppointmentDoor1Activity.this,AppointmentDoor2Activity.class);
+				intent.putExtra("time", time);
 				startActivity(intent);
 			}
 		});
