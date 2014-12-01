@@ -66,6 +66,11 @@
             android:name=".ui.HealthProductDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 分类的产品列表页 -->
+        <activity 
+            android:name=".ui.CategoryProductActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <!-- 商品产品详情页 -->
         <activity
             android:name=".ui.ProductDetailActivity"
