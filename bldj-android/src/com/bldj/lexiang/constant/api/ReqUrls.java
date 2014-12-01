@@ -140,6 +140,14 @@ public interface ReqUrls {
 	 * 获取精品及热门推荐接口
 	 */
 	public static final String REQUEST_HOT_PRODUCT = "/pro/getProducts";
+	/**
+	 * 获取分类列表
+	 */
+	public static final String REQUEST_GET_CATEGORY = "/cat/getCategory";
+	/**
+	 * 获取分类产品
+	 */
+	public static final String REQUEST_GET_CATEGORY_PRODUCT = "/cat/getProductsByCategoryId";
 	
 	/**
 	 * 预约时间和选择美容师接口
