@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
@@ -10,10 +9,8 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
-	
-    
-    	    
-      <com.bldj.lexiang.view.XListView
+
+    <com.bldj.lexiang.view.XListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,8 +18,8 @@
         android:background="@drawable/good_list_bg"
         android:divider="#00000000"
         android:visibility="gone" />
-      
-       <ProgressBar
+
+    <ProgressBar
         android:id="@+id/progress_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +27,5 @@
         android:layout_weight="1"
         android:max="100"
         android:visibility="visible" />
-    
 
 </LinearLayout>
