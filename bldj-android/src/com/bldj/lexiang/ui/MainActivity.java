@@ -23,7 +23,7 @@ import com.bldj.lexiang.utils.ToastUtils;
 public class MainActivity extends FragmentActivity implements OnPageChangeListener{
 	//精品推荐
 	protected HomeFragment mHomeFragment;
-	//热门推荐
+	//分类
 	protected HotProductFragment mProductFragment;
 	//我的
 	protected MyFragment mMyFragment;

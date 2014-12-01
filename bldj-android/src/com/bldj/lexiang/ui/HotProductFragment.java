@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 /**
- * 热门推荐
+ * 热门推荐（分类）
  * @author will
  *
  */
@@ -30,7 +30,7 @@ public class HotProductFragment extends BaseFragment{
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("热门推荐");
+		actionBar.setTitle("分类");
 		actionBar.hideLeftActionButton();
 		actionBar.hideRightActionButton();
 	}
