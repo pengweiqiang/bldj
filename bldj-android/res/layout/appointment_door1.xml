@@ -21,12 +21,13 @@
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
    	    android:text="1.选择时间"
+   	    android:textColor="@color/light_green"
    	    />
    	<TextView 
    	    android:layout_width="wrap_content"
    	    android:layout_height="wrap_content"
    	    android:text="2.选择理疗师"
-   	    android:textColor="@color/light_green"
+   	    
    	    />
    	<TextView 
    	    android:layout_width="wrap_content"
@@ -34,8 +35,46 @@
    	    android:text="3.确认订单"
    	    />
    	</LinearLayout>
+   	
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="200dip"
+        
+        />
     
     
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dip"
+        >
+   		<TextView 
+   		    android:layout_width="wrap_content"
+   		    android:layout_height="wrap_content"
+   		    android:layout_gravity="center_vertical"
+   		    android:text="地址："
+   		    android:gravity="center_vertical"
+   		    />
+   		
+   		            <Button
+                android:id="@+id/btn_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:drawablePadding="15dp"
+                android:drawableRight="@drawable/btn_img_open"
+                android:gravity="left|center"
+                android:text="世纪科贸大厦22层"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        
+        
+    </LinearLayout>
     
        
        <LinearLayout 
