@@ -36,6 +36,35 @@ public class ApiProductUtils {
 		params.put(ReqUrls.LIMIT, String.valueOf(limit));
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_HOT_PRODUCT, false, requestCallBack,MethodType.GET_MAINPAGE_AD,context);
 	}
+	/**
+	 * 获取分类列表
+	 * @param context
+	 * @param start
+	 * @param limit
+	 * @param requestCallback
+	 */
+	public static void getCategory(Context context,int start,int limit,RequestCallback requestCallback){
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_CATEGORY, false, requestCallback,MethodType.GET_MAINPAGE_AD,context);
+	
+	}
+	/**
+	 * 获取分类的产品列表
+	 * @param context
+	 * @param start 页数
+	 * @param limit 条数
+	 * @param id 分类id
+	 * @param requestCallback
+	 */
+	public static void getProductByCategoryByid(Context context,int start,int limit,long id,RequestCallback requestCallback){
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_CATEGORY_PRODUCT, false, requestCallback,MethodType.GET_MAINPAGE_AD,context);
+	}
 	
 	
 }
