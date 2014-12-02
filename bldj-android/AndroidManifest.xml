@@ -84,16 +84,19 @@
         <!-- 上门预约1 -->
         <activity
             android:name=".ui.AppointmentDoor1Activity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <!-- 上门预约2 -->
         <activity
             android:name=".ui.AppointmentDoor2Activity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <!-- 上门预约3 -->
         <activity
             android:name=".ui.AppointmentDoor3Activity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
         </activity>
         <!-- 登录注册界面 -->
