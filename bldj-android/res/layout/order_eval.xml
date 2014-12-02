@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.bldj.lexiang.view.SpringScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.bldj.lexiang.view.ActionBar
+            android:id="@+id/actionBar"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp" >
+        </com.bldj.lexiang.view.ActionBar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单号：" />
+
+            <TextView
+                android:id="@+id/order_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="12312314" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="产品名称" />
+
+            <TextView
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="A美容产品名称" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务人：" />
+
+            <TextView
+                android:id="@+id/service_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="晓林晓丽" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="评价类型：" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/eval_type"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/radio_good"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/eval_good"
+                    android:textSize="@dimen/compnay_radio_textSize" >
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/radio_nor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/eval_nor"
+                    android:textSize="@dimen/compnay_radio_textSize" >
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/radio_bad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/eval_bad"
+                    android:textSize="@dimen/compnay_radio_textSize" >
+                </RadioButton>
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:orientation="vertical" >
+
+            <EditText
+                android:id="@+id/suggestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/input_suggestion" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="晒晒图片：" />
+
+            <ImageView
+                android:id="@+id/service_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/submit" />
+    </LinearLayout>
+
+</com.bldj.lexiang.view.SpringScrollView>
