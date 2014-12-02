@@ -415,6 +415,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	 */
 	private void initListener() {
 		
+		//找理疗师
 		tab_find.setOnClickListener(new View.OnClickListener() {
 
 			@Override

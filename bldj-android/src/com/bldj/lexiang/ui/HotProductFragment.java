@@ -91,7 +91,7 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 	}
 	
 	/**
-	 * 获取收藏数据
+	 * 获取数据
 	 */
 	private void getCategory() {
 		ApiProductUtils.getCategory(mActivity, pageNumber, ApiConstants.LIMIT, new HttpConnectionUtil.RequestCallback() {

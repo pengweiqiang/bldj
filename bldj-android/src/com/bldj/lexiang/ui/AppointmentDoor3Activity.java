@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -13,7 +16,10 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.StringUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 
 /**
@@ -28,12 +34,16 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private String time;
 	private Seller seller;
 	private Product product;
+	private Button btn_use_code;
+	private EditText et_code;
 
 	private User user;
 	private TextView tv_sellerName;
 	private TextView tv_productName;
 	private TextView tv_time;
 	private Button btn_confirm;
+
+	private RadioButton rb_aliay, rb_weixin, rb_union;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +59,10 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		initView();
 
 		initListener();
+
+		tv_time.setText(time);
+		tv_sellerName.setText(seller.getUsername());
+		// tv_productName.setText(product.getName());
 
 	}
 
@@ -69,32 +83,105 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	public void initView() {
 
 		btn_confirm = (Button) findViewById(R.id.btn_confirm);
+		btn_use_code = (Button) findViewById(R.id.btn_use_code);
+		tv_time = (TextView) findViewById(R.id.time);
+		tv_productName = (TextView) findViewById(R.id.product_name);
+		tv_sellerName = (TextView) findViewById(R.id.seller_name);
+		rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
+		rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
+		rb_union = (RadioButton) findViewById(R.id.union_pay);
+
+		et_code = (EditText) findViewById(R.id.code);
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
-
-		tv_time.setText(time);
-		tv_sellerName.setText(seller.getUsername());
-		tv_productName.setText(product.getName());
 
 	}
 
 	@Override
 	public void initListener() {
+		rb_aliay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				if (isChecked) {
+					rb_weixin.setChecked(false);
+					rb_union.setChecked(false);
+				}
+			}
+		});
+		rb_weixin
+				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						if (isChecked) {
+							rb_aliay.setChecked(false);
+							rb_union.setChecked(false);
+						}
+					}
+				});
+		rb_union.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				if (isChecked) {
+					rb_weixin.setChecked(false);
+					rb_aliay.setChecked(false);
+				}
+			}
+		});
+		// 确定订单
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				/*ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
-						user.getUserId(), user.getUsername(), "",
-						seller.getUsername(), "", product.getName(), orderPay,
-						curuser, type, contactor, mobile, detailAddress, notes,
-						payType, new HttpConnectionUtil.RequestCallback() {
+				/*
+				 * ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
+				 * user.getUserId(), user.getUsername(), "",
+				 * seller.getUsername(), "", product.getName(), orderPay,
+				 * curuser, type, contactor, mobile, detailAddress, notes,
+				 * payType, new HttpConnectionUtil.RequestCallback() {
+				 * 
+				 * @Override public void execute(ParseModel parseModel) {
+				 * 
+				 * } });
+				 */
+			}
+		});
+
+		// 使用电子卷
+		btn_use_code.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String vcode = et_code.getText().toString().trim();
+				if (StringUtils.isEmpty(vcode)) {
+					ToastUtils.showToast(AppointmentDoor3Activity.this,
+							"请输入电子卷码");
+					return;
+				}
+				ApiBuyUtils.couponsManage(AppointmentDoor3Activity.this,
+						Long.parseLong(user.getUserId()), 0, vcode, 4,
+						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
 							public void execute(ParseModel parseModel) {
+								if (!ApiConstants.RESULT_SUCCESS
+										.equals(parseModel.getStatus())) {
+									ToastUtils.showToast(
+											AppointmentDoor3Activity.this,
+											parseModel.getMsg());
+									return;
 
+								} else {
+									System.out.println(parseModel.getData()
+											.toString());
+								}
 							}
-						});*/
+						});
 			}
 		});
 	}

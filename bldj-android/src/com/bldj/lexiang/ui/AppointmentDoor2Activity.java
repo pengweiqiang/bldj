@@ -122,12 +122,12 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
-				mSeletedSeller = sellers.get(position);
+				mSeletedSeller = sellers.get(position-1);
 				// 启动美容师个人界面
-				Intent intent = new Intent(AppointmentDoor2Activity.this,
-						SellerPersonalActivity.class);
-				intent.putExtra("seller", mSeletedSeller);// 美容师
-				startActivity(intent);
+//				Intent intent = new Intent(AppointmentDoor2Activity.this,
+//						SellerPersonalActivity.class);
+//				intent.putExtra("seller", mSeletedSeller);// 美容师
+//				startActivity(intent);
 			}
 
 		});
@@ -137,8 +137,8 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	 * 获取美容师数据
 	 */
 	private void getSellers() {
-		/*ApiSellerUtils.getSellers(AppointmentDoor2Activity.this, pageNumber, ApiConstants.LIMIT, "", "", 
-				startWorkyear, endWorkyear, orderbyTag, new HttpConnectionUtil.RequestCallback() {
+		ApiSellerUtils.getSellers(AppointmentDoor2Activity.this, pageNumber, ApiConstants.LIMIT, 0, 0, 
+				1, 5, 2, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
@@ -196,7 +196,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 						}
 					}
 					});
-*/	}
+	}
 
 	@Override
 	public void onRefresh() {
