@@ -107,16 +107,16 @@ public class ApiUserUtils {
 	 * 信息收集接口(意见、招聘、打分)
 	 * 
 	 * @param context
-	 * @param userId
-	 * @param content
-	 * @param type
-	 * @param contactor
-	 * @param contact
-	 * @param ordernum
-	 * @param productName
-	 * @param sellerName
-	 * @param infoType
-	 * @param sellerId
+	 * @param userId 用户ID(手机号)(可以为空)
+	 * @param content 提出的建议内容
+	 * @param type 0 意见反馈 1招聘 2 评论
+	 * @param contactor 联系人姓名
+	 * @param contact  联系方式(手机 or 邮箱拼接)
+	 * @param ordernum 订单号(点评)
+	 * @param productName 产品名称
+	 * @param sellerName 美容师名称
+	 * @param infoType  0好评 1中评 2差评
+	 * @param sellerId 卖家id
 	 * @param requestCallback
 	 */
 	public static void unifor(Context context, long userId, String content,

@@ -88,6 +88,9 @@
 	<string name="failure">已失效</string>
 	<string name="share_sina">分享到新浪微博</string>
 	<string name="share_weixin">分享到朋友圈</string>
+	<string name="eval_good">好评</string>
+	<string name="eval_nor">中评</string>
+	<string name="eval_bad">差评</string>
 	    
 	
 	<string name="contact_name">联系人姓名：</string>
