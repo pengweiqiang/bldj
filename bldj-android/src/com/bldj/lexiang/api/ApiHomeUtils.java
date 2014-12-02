@@ -36,7 +36,7 @@ public class ApiHomeUtils {
 	/**
 	 * 企业专区
 	 * @param context
-	 * @param packageId
+	 * @param packageId 所选择的套餐id(从0开始)
 	 * @param applicationName
 	 * @param enterName
 	 * @param contact
