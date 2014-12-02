@@ -172,6 +172,16 @@
             android:name=".ui.ForgetPwdActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 我的订单 -->
+        <activity 
+            android:name=".ui.MyOrdersActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+        <!-- 用户评价 -->
+        <activity 
+            android:name=".ui.OrderEvalActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         <activity
             android:name=".ui.BannerWebActivity"
             android:screenOrientation="portrait" >
