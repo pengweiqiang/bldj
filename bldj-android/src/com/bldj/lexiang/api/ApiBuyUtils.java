@@ -39,19 +39,19 @@ public class ApiBuyUtils {
 	 * 添加、查询和校验优惠卷
 	 * 
 	 * @param context
-	 * @param id
-	 * @param type
-	 * @param vcode
-	 * @param method
+	 * @param id 用户id
+	 * @param type 0电子券 1注册 2分享
+	 * @param vcode 电子券码
+	 * @param method 0添加 3查询 4校验
 	 * @param requestCallBack
 	 */
 	public static void couponsManage(Context context, long id, int type,
 			String vcode, int method, RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
-		params.put(ReqUrls.ID, String.valueOf(id));
-		params.put("type", String.valueOf(type));
+		params.put(ReqUrls.ID, id);
+		params.put("type", type);
 		params.put("vcode", vcode);
-		params.put("method", String.valueOf(method));
+		params.put("method", method);
 		ApiUtils.getParseModel(params, ReqUrls.COUPONS_MANAGE, false,
 				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 
