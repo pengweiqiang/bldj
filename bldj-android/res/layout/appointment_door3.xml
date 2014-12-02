@@ -29,12 +29,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="2.选择理疗师"
-            android:textColor="@color/light_green" />
+             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/light_green"
             android:text="3.确认订单" />
     </LinearLayout>
 
@@ -163,6 +164,7 @@
             android:textSize="14sp" />
 
         <Button
+            android:id="@+id/btn_use_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -268,7 +270,7 @@
     
     <Button 
         android:layout_marginTop="5dip"
-        android:id="@+id/confirm"
+        android:id="@+id/btn_confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/confirm"
