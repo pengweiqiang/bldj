@@ -74,8 +74,9 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 		list = new ArrayList<Fragment>();
 
 		// 设置数据源
-		UnusedCouponsFragment unusedFragment = new UnusedCouponsFragment();
-		FailureCouponsFragment failureFragment = new FailureCouponsFragment();
+		UnusedCouponsFragment unusedFragment = new UnusedCouponsFragment();//未使用
+		
+		FailureCouponsFragment failureFragment = new FailureCouponsFragment();//已失效
 
 		list.add(unusedFragment);
 		list.add(failureFragment);
