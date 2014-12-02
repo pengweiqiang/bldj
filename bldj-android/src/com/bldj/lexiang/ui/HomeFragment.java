@@ -208,6 +208,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		});
 	}
 	private void buildTitleBar(View parent){
+		DeviceInfo.setContext(mActivity);
 		if (popupWindow == null) {  
             view = LayoutInflater.from(mContext).inflate(R.layout.group_list, null);  
             lv_group = (ListView) view.findViewById(R.id.lvGroup);  
@@ -218,15 +219,18 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
             groups.add(TitleBarEnum.ZHAOPIN);  
             GroupAdapter groupAdapter = new GroupAdapter(mContext, groups);  
             lv_group.setAdapter(groupAdapter);  
-            popupWindow = new PopupWindow(view, 200, 250);  
+            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2-20,
+                    LayoutParams.WRAP_CONTENT);  
         }
         popupWindow.setFocusable(true);  
         popupWindow.setOutsideTouchable(true);  
         popupWindow.setBackgroundDrawable(new BitmapDrawable());  
-        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE);  
-        int xPos = windowManager.getDefaultDisplay().getWidth() / 2  
-                - popupWindow.getWidth() / 2;  
-        popupWindow.showAsDropDown(parent, xPos, 0);  
+        
+//        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE);  
+        int xPos = DeviceInfo.getScreenWidth() / 2  
+                - popupWindow.getWidth()/2;  
+        
+        popupWindow.showAsDropDown(parent, DeviceInfo.px2dip(mActivity, xPos), 0);  
         lv_group.setOnItemClickListener(new OnItemClickListener() {  
             @Override  
             public void onItemClick(AdapterView<?> adapterView, View view,  

@@ -42,6 +42,13 @@ public class MyApplication extends Application {
 		this.user = user;
 	}
 	public User getCurrentUser() {
+		if(user==null){
+			user = new User();
+			user.setUserId("123");
+			user.setUsername("15201459685");
+			user.setNickname("小新");
+			user.setHeadurl("http://g.hiphotos.baidu.com/image/pic/item/8435e5dde71190ef380e9ed8cd1b9d16fdfa603b.jpg");
+		}
 		return user;
 	}
 	
