@@ -15,9 +15,11 @@ import android.widget.TextView;
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.adapter.CouponsAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.ApiUserUtils;
+import com.bldj.lexiang.api.vo.Coupon;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.User;
@@ -42,8 +44,8 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 	private ProgressBar progressBar;
 	private View infoView;
 	private XListView mListView;
-	private HomeAdapter listAdapter;
-	private List<Product> products;
+	private CouponsAdapter listAdapter;
+	private List<Coupon> coupons;
 	
 	private int pageNumber = 0;
 	
@@ -67,8 +69,8 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		products = new ArrayList<Product>();
-		listAdapter = new HomeAdapter(mActivity, products);
+		coupons = new ArrayList<Coupon>();
+		listAdapter = new CouponsAdapter(mActivity, coupons);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
@@ -111,61 +113,38 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 							// ToastUtils.showToast(mActivity,
 							// parseModel.getMsg());
 							// return;
-							List<Product> productsList = new ArrayList<Product>();
+							List<Coupon> productsList = new ArrayList<Coupon>();
 
-							Product p1 = new Product();
-							p1.setName("商品" + (products.size() + 1));
-							p1.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i3/T11iAAFoNbXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
+							Coupon p1 = new Coupon();
+							p1.setName("优惠卷1");
+							p1.setStarttime("214-12-1");
+							p1.setEndtime("2015-5-5");
 
-							Product p2 = new Product();
-							p2.setName("商品" + (products.size() + 2));
-							p2.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-
-							productsList.add(p1);
-							productsList.add(p2);
-							Product p3 = new Product();
-							p3.setName("商品" + (products.size() + 3));
-							p3.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB10ChmGFXXXXadaXXXSutbFXXX.jpg");
-							productsList.add(p3);
-
-							Product p4 = new Product();
-							p4.setName("商品" + (products.size() + 4));
-							p4.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-							productsList.add(p4);
-
-							Product p5 = new Product();
-							p5.setName("商品" + (products.size() + 5));
-							p5.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1rpHzGpXXXXXJaXXXSutbFXXX.jpg");
-							productsList.add(p5);
-
-							Product p6 = new Product();
-							p6.setName("商品" + (products.size() + 6));
-							p6.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1T2YnGpXXXXaFaXXXSutbFXXX.jpg");
-							productsList.add(p6);
-
-							Product p7 = new Product();
-							p7.setName("商品" + (products.size() + 7));
-							p7.setPicurl("http://img01.taobaocdn.com/imgextra/i1/1713844438/TB2TXsCaXXXXXbuXXXXXXXXXXXX-1713844438.jpg");
-							productsList.add(p7);
-
-							Product p8 = new Product();
-							p8.setName("商品" + (products.size() + 8));
-							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
-							productsList.add(p8);
+							Coupon p2 = new Coupon();
+							p2.setName("优惠卷1");
+							p2.setStarttime("214-12-1");
+							p2.setEndtime("2015-5-5");
 							
 							if(pageNumber==0){
-								products.clear();
+								coupons.clear();
 							}
-							products.addAll(productsList);
+							coupons.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
 							onLoad();
 
 						} else {
-							List<Product> productsList = JsonUtils.fromJson(
+							List<Coupon> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
-									new TypeToken<List<Product>>() {
+									new TypeToken<List<Coupon>>() {
 									});
+							if(pageNumber==0){
+								coupons.clear();
+							}
+							coupons.addAll(productsList);
+
+							listAdapter.notifyDataSetChanged();
+							onLoad();
 						}
 
 					}
