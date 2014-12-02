@@ -165,6 +165,7 @@ public class CategoryAdapter extends BaseListAdapter {
 				}
 			});
 		}
+		//查看更多
 		holder.tv_more.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
