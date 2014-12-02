@@ -3,13 +3,12 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
@@ -39,6 +38,11 @@ public class HealthServiceFragment extends BaseFragment implements
 	private XListView mListView;
 	private HomeAdapter listAdapter;
 	private List<Product> products;
+	private TextView tv_orderTime;
+	private TextView tv_orderPrice;
+	private TextView tv_orderTeam;
+
+	private int orderByTag = 0;// 0时间 1价格 2销量
 
 	private int pageNumber = 0;
 
@@ -80,13 +84,40 @@ public class HealthServiceFragment extends BaseFragment implements
 				.findViewById(R.id.progress_listView);
 		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
 
+		tv_orderTime = (TextView) infoView.findViewById(R.id.order_time);
+		tv_orderPrice = (TextView) infoView.findViewById(R.id.order_price);
+		tv_orderTeam = (TextView) infoView.findViewById(R.id.order_team);
+
 	}
 
 	/**
 	 * 事件初始化
 	 */
 	private void initListener() {
+		// 时间排序
+		tv_orderTime.setOnClickListener(new View.OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				orderByTag = 0;
+			}
+		});
+		// 价格区间
+		tv_orderPrice.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				orderByTag = 1;
+			}
+		});
+		// 团队
+		tv_orderTeam.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				orderByTag = 2;
+			}
+		});
 	}
 
 	/**
@@ -94,7 +125,7 @@ public class HealthServiceFragment extends BaseFragment implements
 	 */
 	private void getData() {
 		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "0", 2,
-				0, 2, pageNumber, ApiConstants.LIMIT,
+				orderByTag, 2, pageNumber, ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -103,10 +134,9 @@ public class HealthServiceFragment extends BaseFragment implements
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(mActivity,
-							 parseModel.getMsg());
-							 return;
-							
+							ToastUtils.showToast(mActivity, parseModel.getMsg());
+							return;
+
 						} else {
 							List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),

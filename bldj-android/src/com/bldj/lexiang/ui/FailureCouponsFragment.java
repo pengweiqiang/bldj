@@ -17,6 +17,7 @@ import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.CouponsAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
+import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Coupon;
@@ -75,7 +76,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 		
-		getCollectProduct();
+		getCoupons();
 	}
 
 	/**
@@ -97,11 +98,11 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	}
 	
 	/**
-	 * 获取收藏数据
+	 * 获取优惠卷数据
 	 */
-	private void getCollectProduct() {
-		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
-				0, 0, pageNumber, ApiConstants.LIMIT,
+	private void getCoupons() {
+		User user = MyApplication.getInstance().getCurrentUser();
+		ApiBuyUtils.couponsManage(mActivity, Long.parseLong(user.getUserId()), 0, "", 3,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -128,6 +129,8 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 							if(pageNumber==0){
 								coupons.clear();
 							}
+							productsList.add(p1);
+							productsList.add(p2);
 							coupons.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
@@ -154,13 +157,13 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	@Override
 	public void onRefresh() {
 		pageNumber=0;
-		getCollectProduct();
+		getCoupons();
 	}
 
 	@Override
 	public void onLoadMore() {
 		pageNumber++;
-		getCollectProduct();
+		getCoupons();
 	}
 	private void onLoad() {
 		mListView.stopRefresh();
