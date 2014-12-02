@@ -448,7 +448,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 					startActivity(intent);
 					return;
 				}
-				Intent intent = new Intent(mActivity,CompanyZoneActivity.class);
+				Intent intent = new Intent(mActivity,CompanyZoneSelectPackageActivity.class);
 				startActivity(intent);
 			}
 		});

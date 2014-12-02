@@ -21,6 +21,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/company_title" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/company_margin_top" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/service_type" />
+
+            <TextView
+                android:id="@+id/service_type_name"
+                android:layout_width="wrap_content"
+                android:textColor="@color/red"
+                android:text="2万元包月套餐服务"
+                android:layout_height="wrap_content"
+                 />
+        </LinearLayout>
         <!-- 企业名称 -->
 
         <LinearLayout
@@ -227,7 +246,7 @@
         
         <Button 
             android:id="@+id/btn_confirm"
-            android:layout_width="0dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="@string/submit"

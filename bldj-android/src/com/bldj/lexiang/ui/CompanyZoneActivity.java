@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
@@ -31,13 +32,20 @@ public class CompanyZoneActivity extends BaseActivity {
 	private EditText et_contactor;
 	private EditText et_address;
 	private Button btn_confirm;
+	private TextView et_service_type_name;//选择的套餐服务
+	private String service_type_name;
+	private int serviceTypeIndex;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.company_zone);
 		super.onCreate(savedInstanceState);
+		serviceTypeIndex = this.getIntent().getIntExtra("serviceTypeIndex", 0);
+		service_type_name = this.getIntent().getStringExtra("serviceTypeName");
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		
+		et_service_type_name.setText(service_type_name);
 	}
 
 	// 设置activity的导航条
@@ -55,11 +63,13 @@ public class CompanyZoneActivity extends BaseActivity {
 
 	@Override
 	public void initView() {
+		et_service_type_name = (TextView)findViewById(R.id.service_type_name);
 		et_company_name = (EditText) findViewById(R.id.company_name);
 		et_contact_type = (EditText) findViewById(R.id.company_contact_type);
 		et_contactor = (EditText) findViewById(R.id.company_contact);
 		et_address = (EditText) findViewById(R.id.company_address);
 		btn_confirm = (Button) findViewById(R.id.btn_confirm);
+		
 	}
 
 	@Override
@@ -91,7 +101,7 @@ public class CompanyZoneActivity extends BaseActivity {
 					return;
 				}
 				User user = MyApplication.getInstance().getCurrentUser();
-				ApiHomeUtils.createCompanyZone(CompanyZoneActivity.this,0, user.getUsername(),
+				ApiHomeUtils.createCompanyZone(CompanyZoneActivity.this,serviceTypeIndex, user.getUsername(),
 						 companyName, concactType,
 						contactor, address,
 						new HttpConnectionUtil.RequestCallback() {

@@ -68,6 +68,8 @@
 	<string name="see_health_division">看养生师</string>
 	<string name="input_suggestion">请输入您的宝贵意见</string>
 	<string name="company_title">企业购买有月卡、年卡、季卡以及各种优惠套装等，详情请填写意向订单，客服人员会联系你</string>
+	<string name="service_type">您选择的套餐服务是：</string>
+	<string name="select_company_package">请选择企业套餐</string>
 	<string name="company_name">企业名称：</string>
 	<string name="company_contact">联系人：</string>
 	<string name="company_contact_type">联系方式：</string>
@@ -91,8 +93,16 @@
 	<string name="eval_good">好评</string>
 	<string name="eval_nor">中评</string>
 	<string name="eval_bad">差评</string>
+	<string name="cancel_order">取消订单</string>
 	    
-	
+	<string name="package_1">1万元包月套餐服务</string>
+	<string name="package_1_info">1、每月可使用最多50次，外加免费赠送5次\n2、可享受头部、肩部等全套服务项目\n3、可享受免费深度中医理疗按摩5次</string>
+	<string name="package_2">2万元包月套餐服务</string>
+	<string name="package_2_info">1、每月可使用最多50次，外加免费赠送5次\n2、可享受头部、肩部等全套服务项目\n3、可享受免费深度中医理疗按摩5次</string>
+	<string name="package_3">5万元包月套餐服务</string>
+	<string name="package_3_info">1、每月可使用最多50次，外加免费赠送5次\n2、可享受头部、肩部等全套服务项目\n3、可享受免费深度中医理疗按摩5次</string>
+	<string name="package_4">10万元包月套餐服务</string>
+	<string name="package_4_info">1、每月可使用最多50次，外加免费赠送5次\n2、可享受头部、肩部等全套服务项目\n3、可享受免费深度中医理疗按摩5次</string>
 	<string name="contact_name">联系人姓名：</string>
 	<string name="contact_phone">手机号码：</string>
 	<string name="real_name">真实姓名：</string>
@@ -129,6 +139,11 @@
 	<string name="aliay_pay_tip">支付宝客户端支付推荐已经安装支付宝客户端用户</string>
 	<string name="weixin_pay_tip">银行卡支付支持储蓄卡，无需开通网银</string>
 	<string name="union_pay_tip">信用卡支付支持储蓄卡，无需开通网银</string>
+	<string name="order_num">订单号：</string>
+	<string name="order_time">下单时间：</string>
+	<string name="order_pay">应付金额：</string>
+	<string name="order_real_pay">实付金额：</string>
+	
 	
 	<string name="pay_by_wx">通过微信支付</string>
 	<string name="check_pay">检查微信版本是否支持支付</string>

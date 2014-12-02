@@ -26,7 +26,7 @@ import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
 /**
- * 上门预约2
+ * 上门预约1
  * 
  * @author will
  * 
