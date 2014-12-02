@@ -22,7 +22,6 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
-import com.bldj.lexiang.utils.ImageTools;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -212,7 +211,7 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				if (checkIsLogin()) {
-
+					
 				}
 				/*
 				 * Intent intent = new Intent(mActivity,
@@ -286,7 +285,8 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				if (checkIsLogin()) {
-
+					Intent intent = new Intent(mActivity,MyOrdersActivity.class);
+					startActivity(intent);
 				}
 			}
 		});
@@ -307,8 +307,7 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
+				ToastUtils.showToast(mActivity, "正在检查...");
 			}
 		});
 
