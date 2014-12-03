@@ -217,7 +217,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
             groups.add(TitleBarEnum.ZHAOPIN);  
             GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);  
             lv_group.setAdapter(groupAdapter);  
-            popupWindow = new PopupWindow(view, parent.getWidth(),
+            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth()/2 - 20,
                     LayoutParams.WRAP_CONTENT);  
         }
         popupWindow.setFocusable(true);  
