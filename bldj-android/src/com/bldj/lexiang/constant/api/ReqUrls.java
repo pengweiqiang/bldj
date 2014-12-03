@@ -65,7 +65,7 @@ public interface ReqUrls {
 	
 //	public static final String DEFAULT_REQ_HOST_IP = "http://bldj.com";
 //    public static final String DEFAULT_REQ_HOST_IP = "172.16.102.145:8080/wechatshop/login.html"; //默认值异常的请求地址
-	 public static final String DEFAULT_REQ_HOST_IP = "192.168.0.113"; //默认值异常的请求地址
+	 public static final String DEFAULT_REQ_HOST_IP = "220.113.10.11:8090"; //默认值异常的请求地址
 	
 	public static final String LIMIT_DEFAULT_NUM="10";
 	
@@ -143,7 +143,7 @@ public interface ReqUrls {
 	/**
 	 * 获取分类列表
 	 */
-	public static final String REQUEST_GET_CATEGORY = "/cat/getCategory";
+	public static final String REQUEST_GET_CATEGORY = "/cat/getCategoty";
 	/**
 	 * 获取分类产品
 	 */
