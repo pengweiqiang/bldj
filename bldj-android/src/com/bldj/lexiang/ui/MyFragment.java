@@ -1,5 +1,10 @@
 package com.bldj.lexiang.ui;
 
+import java.io.IOException;
+
+import org.apache.http.HttpConnection;
+import org.apache.http.HttpConnectionMetrics;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -18,6 +23,7 @@ import android.widget.TextView;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiUserUtils;
+import com.bldj.lexiang.api.ApiVersionUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
@@ -308,6 +314,20 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				ToastUtils.showToast(mActivity, "正在检查...");
+				ApiVersionUtils.checkVersion(mActivity, new HttpConnectionUtil.RequestCallback() {
+					
+					@Override
+					public void execute(ParseModel parseModel) {
+						if (!ApiConstants.RESULT_SUCCESS
+								.equals(parseModel.getStatus())) {
+							ToastUtils.showToast(mActivity,
+									parseModel.getMsg());
+						}else{
+							ToastUtils.showToast(mActivity,
+									parseModel.getMsg());
+						}
+					}
+				});
 			}
 		});
 

@@ -202,7 +202,7 @@ public class HealthServiceFragment extends BaseFragment implements
             groups.add(TitleBarEnum.ORDER_PRICE);  
             GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups,1);  
             lv_group.setAdapter(groupAdapter);  
-            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth()/3,
+            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 3,
                     LayoutParams.WRAP_CONTENT,true);  
         }
         popupWindow.setFocusable(true);  
@@ -211,9 +211,10 @@ public class HealthServiceFragment extends BaseFragment implements
         
 //        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE); 
         // 计算x轴方向的偏移量，使得PopupWindow在Title的正下方显示，此处的单位是pixels  
-        int xPos = DeviceInfo.getScreenWidth() / 3;
+//        int xPos = DeviceInfo.getScreenWidth() / 3;
         
-        popupWindow.showAsDropDown(parent, xPos, 0);  
+//        popupWindow.showAsDropDown(parent, xPos, 0); 
+        popupWindow.showAsDropDown(parent);
         popupWindow.update();
   
         lv_group.setOnItemClickListener(new OnItemClickListener() {  

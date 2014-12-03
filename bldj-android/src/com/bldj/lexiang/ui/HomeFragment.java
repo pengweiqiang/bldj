@@ -217,7 +217,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
             groups.add(TitleBarEnum.ZHAOPIN);  
             GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);  
             lv_group.setAdapter(groupAdapter);  
-            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth()/2 - 20,
+            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth()/2 - parent.getWidth(),
                     LayoutParams.WRAP_CONTENT);  
         }
         popupWindow.setFocusable(true);  
@@ -226,7 +226,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
         
 //        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE);  
         
-        popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);  
+//        popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);  
+        popupWindow.showAsDropDown(parent);
         lv_group.setOnItemClickListener(new OnItemClickListener() {  
             @Override  
             public void onItemClick(AdapterView<?> adapterView, View view,  

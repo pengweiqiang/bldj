@@ -24,12 +24,12 @@ import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 
 /**
- * 订单详情
+ * 订单详情2
  * 
  * @author will
  * 
  */
-public class OrderDetailActivity extends BaseActivity {
+public class OrderDetail2Activity extends BaseActivity {
 
 	ActionBar mActionBar;
 	private Order order;
@@ -47,7 +47,7 @@ public class OrderDetailActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		setContentView(R.layout.order_detail);
+		setContentView(R.layout.order_detail2);
 		super.onCreate(savedInstanceState);
 
 		order = (Order) this.getIntent().getSerializableExtra("order");
@@ -147,11 +147,11 @@ public class OrderDetailActivity extends BaseActivity {
 			public void onClick(View arg0) {
 				String vcode = et_code.getText().toString().trim();
 				if (StringUtils.isEmpty(vcode)) {
-					ToastUtils.showToast(OrderDetailActivity.this,
+					ToastUtils.showToast(OrderDetail2Activity.this,
 							"请输入电子卷码");
 					return;
 				}
-				ApiBuyUtils.couponsManage(OrderDetailActivity.this,
+				ApiBuyUtils.couponsManage(OrderDetail2Activity.this,
 						Long.parseLong(user.getUserId()), 0, vcode, 4,
 						new HttpConnectionUtil.RequestCallback() {
 
@@ -160,7 +160,7 @@ public class OrderDetailActivity extends BaseActivity {
 								if (!ApiConstants.RESULT_SUCCESS
 										.equals(parseModel.getStatus())) {
 									ToastUtils.showToast(
-											OrderDetailActivity.this,
+											OrderDetail2Activity.this,
 											parseModel.getMsg());
 									return;
 

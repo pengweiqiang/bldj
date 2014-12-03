@@ -141,7 +141,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	 */
 	private void getSellers() {
 		ApiSellerUtils.getSellers(AppointmentDoor2Activity.this, pageNumber, ApiConstants.LIMIT, 0, 0, 
-				1, 5, 2, new HttpConnectionUtil.RequestCallback() {
+				1, 5, 2,0,0, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
@@ -149,40 +149,8 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Seller> sellersList = new ArrayList<Seller>();
-
-							Seller p1 = new Seller();
-							p1.setUsername("美容师" + (sellersList.size() + 1));
-							p1.setAddress("四川");
-							p1.setRecommend("共接单12次");
-							p1.setAvgPrice("33");
-
-							Seller p2 = new Seller();
-							p2.setUsername("美容师" + (sellersList.size() + 2));
-							p2.setAddress("北京");
-							p2.setRecommend("共接单6次");
-							p2.setAvgPrice("32");
-
-							Seller p3 = new Seller();
-							p3.setUsername("美容师" + (sellersList.size() + 3));
-							p3.setAddress("上海");
-							p3.setRecommend("共接单123次");
-							p2.setAvgPrice("54");
-
-							sellersList.add(p1);
-							sellersList.add(p2);
-							sellersList.add(p3);
-
-							if (pageNumber == 0) {
-								sellers.clear();
-							}
-							sellers.addAll(sellersList);
-
-							listAdapter.notifyDataSetChanged();
-							onLoad();
+							 ToastUtils.showToast(AppointmentDoor2Activity.this,parseModel.getMsg());
+							 return;
 
 						} else {
 							List<Seller> sellersList = JsonUtils.fromJson(
