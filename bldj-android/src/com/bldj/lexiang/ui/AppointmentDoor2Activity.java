@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,8 +45,10 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private List<Seller> sellers;
 	private int pageNumber = 0;
 	private String time;// 预约时间
+	private String address;
 	private Product product;
 	private Seller mSeletedSeller;// 预约美容师
+	private View mSelectedView;
 	private Button btn_previous, btn_next;
 
 	@Override
@@ -54,6 +57,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		time = this.getIntent().getStringExtra("time");
 		product = (Product)this.getIntent().getSerializableExtra("product");
+		address = this.getIntent().getStringExtra("address");
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		initView();
@@ -117,6 +121,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 				intent.putExtra("time", time);// 预约时间
 				intent.putExtra("seller", mSeletedSeller);// 预约美容师
 				intent.putExtra("product", product);//预约产品
+				intent.putExtra("address", address);//详细地址
 				startActivity(intent);
 			}
 		});
@@ -125,6 +130,15 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
+				
+				if (mSelectedView == null) {
+                    arg1.setBackgroundColor(Color.RED);
+                    mSelectedView = arg1;
+                } else {
+                	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
+                    arg1.setBackgroundColor(Color.RED);
+                    mSelectedView = arg1;
+                }
 				mSeletedSeller = sellers.get(position-1);
 				// 启动美容师个人界面
 //				Intent intent = new Intent(AppointmentDoor2Activity.this,

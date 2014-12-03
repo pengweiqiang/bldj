@@ -13,6 +13,7 @@ public class Product implements Serializable{
 	 */
 	private static final long serialVersionUID = -7120840589691200591L;
 	
+	private long id;
 	private String name;
 	private String picurl;
 	private double curPrice;
@@ -25,6 +26,12 @@ public class Product implements Serializable{
 	
 	
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

@@ -61,42 +61,44 @@ public class ApiBuyUtils {
 	 * 生成订单
 	 * 
 	 * @param context
-	 * @param userId
-	 * @param username
-	 * @param sellerId
-	 * @param sellerName
-	 * @param productId
-	 * @param proName
-	 * @param orderPay
-	 * @param curuser
-	 * @param type
-	 * @param contactor
-	 * @param mobile
-	 * @param detailAddress
-	 * @param notes
-	 * @param payType
-	 * @param requestCallback
+	 * @param userId 用户id
+	 * @param username 用户名
+	 * @param sellerId 卖家id
+	 * @param sellerName 卖家姓名
+	 * @param productId 产品id
+	 * @param proName 产品名称
+	 * @param orderPay 总价
+	 * @param curuser 当前操作人
+	 * @param type 0预约 1立即
+	 * @param contactor 联系人
+	 * @param mobile 手机号
+	 * @param detailAddress 详细地址
+	 * @param notes 备案
+	 * @param payType 0支付宝 1微信 2网银
+	 * @param couponsId 优惠券id
+	 * @param requestCallback 
 	 */
 	public static void createOrder(Context context, long userId,
 			String username, long sellerId, String sellerName, long productId,
 			String proName, double orderPay, String curuser, int type,
 			String contactor, String mobile, String detailAddress,
-			String notes, int payType, RequestCallback requestCallback) {
+			String notes, int payType,long couponsId, RequestCallback requestCallback) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("userId", String.valueOf(userId));
+		params.put("userId", userId);
 		params.put("username", username);
-		params.put("sellerId", String.valueOf(sellerId));
+		params.put("sellerId", sellerId);
 		params.put("sellerName", sellerName);
-		params.put("productId", String.valueOf(productId));
+		params.put("productId", productId);
 		params.put("proName", proName);
-		params.put("orderPay", String.valueOf(orderPay));
+		params.put("orderPay", orderPay);
 		params.put("curuser", curuser);
-		params.put("type", String.valueOf(type));
+		params.put("type", type);
 		params.put("contactor", contactor);
 		params.put("mobile", mobile);
 		params.put("detailAddress", detailAddress);
 		params.put("notes", notes);
-		params.put("payType", String.valueOf(payType));
+		params.put("payType", payType);
+		params.put("couponsId", couponsId);
 
 		ApiUtils.getParseModel(params, ReqUrls.CREATE_ORDER, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
