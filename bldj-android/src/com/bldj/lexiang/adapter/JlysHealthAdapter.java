@@ -71,11 +71,11 @@ public class JlysHealthAdapter extends BaseListAdapter {
 		holder.tv_username.setText(seller.getUsername());
 		holder.tv_address.setText(seller.getAddress());
 		holder.tv_avgprice.setText(String.valueOf(seller.getAvgPrice()) + "岁");
-		/*ImageLoader.getInstance().displayImage(
+		ImageLoader.getInstance().displayImage(
 				seller.getHeadurl(),
 				holder.headImg,
 				MyApplication.getInstance()
-						.getOptions(R.drawable.default_image));*/
+						.getOptions(R.drawable.ic_launcher));
 
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
 		holder.tv_comment.setText(seller.getRecommend());
