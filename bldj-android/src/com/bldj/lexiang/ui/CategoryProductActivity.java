@@ -1,5 +1,6 @@
 package com.bldj.lexiang.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -48,9 +49,17 @@ IXListViewListener {
 		setContentView(R.layout.category_product);
 		super.onCreate(savedInstanceState);
 		categoryId = this.getIntent().getIntExtra("categoryId", 0);
-		categoryName = this.getIntent().getStringExtra("categoryName");
+		categoryName = this.getIntent().getStringExtra("name");
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		
+		
+		products = new ArrayList<Product>();
+		listAdapter = new HomeAdapter(this, products);
+		mListView.setAdapter(listAdapter);
+		mListView.setPullLoadEnable(true);
+		mListView.setXListViewListener(this);
+		getData();
 	}
 
 	// 设置activity的导航条
