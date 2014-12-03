@@ -68,7 +68,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.tv_username.setText(seller.getUsername());
+		holder.tv_username.setText(seller.getNickname());
 		holder.tv_address.setText(seller.getAddress());
 		holder.tv_avgprice.setText(String.valueOf(seller.getAvgPrice()) + "岁");
 		ImageLoader.getInstance().displayImage(

@@ -90,9 +90,9 @@ public class HealthProductDetailActivity extends BaseActivity {
 				product_img,
 				MyApplication.getInstance().getOptions(
 						R.drawable.ic_launcher));
-		tv_time.setText(String.valueOf(product.getTimeConsume()));
-		tv_price.setText(String.valueOf(product.getCurPrice()));
-		tv_shop_price.setText(String.valueOf(product.getMarketPrice()));
+		tv_time.setText("时长："+product.getTimeConsume()+"分钟");
+		tv_price.setText("一休价：￥"+String.valueOf(product.getCurPrice()));
+		tv_shop_price.setText("门店价：￥"+String.valueOf(product.getMarketPrice()));
 		tv_buy_count.setText(product.getSuitsCrowd());//???具体哪个字段
 		
 		

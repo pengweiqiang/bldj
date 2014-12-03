@@ -12,12 +12,14 @@ import android.widget.TextView;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -32,6 +34,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	ActionBar mActionBar;
 	private String time;
+	private String detailAddress;
 	private Seller seller;
 	private Product product;
 	private Button btn_use_code;
@@ -44,6 +47,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private Button btn_confirm;
 
 	private RadioButton rb_aliay, rb_weixin, rb_union;
+	
+	private double orderPay;//总金额
+	private int payType = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +59,18 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		time = this.getIntent().getStringExtra("time");
 		seller = (Seller) this.getIntent().getSerializableExtra("seller");
 		product = (Product) this.getIntent().getSerializableExtra("product");
+		detailAddress = this.getIntent().getStringExtra("address");
 
 		user = MyApplication.getInstance().getCurrentUser();
-
 		initView();
 
 		initListener();
 
 		tv_time.setText(time);
 		tv_sellerName.setText(seller.getUsername());
-		// tv_productName.setText(product.getName());
+		
+		orderPay = product.getCurPrice()+Double.parseDouble(seller.getAvgPrice());
+		 tv_productName.setText(product.getName());
 
 	}
 
@@ -105,6 +113,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if (isChecked) {
+					payType = 0;
 					rb_weixin.setChecked(false);
 					rb_union.setChecked(false);
 				}
@@ -117,6 +126,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					public void onCheckedChanged(CompoundButton buttonView,
 							boolean isChecked) {
 						if (isChecked) {
+							payType = 1;
 							rb_aliay.setChecked(false);
 							rb_union.setChecked(false);
 						}
@@ -128,6 +138,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			public void onCheckedChanged(CompoundButton buttonView,
 					boolean isChecked) {
 				if (isChecked) {
+					payType = 2;
 					rb_weixin.setChecked(false);
 					rb_aliay.setChecked(false);
 				}
@@ -138,17 +149,27 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				/*
-				 * ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
-				 * user.getUserId(), user.getUsername(), "",
-				 * seller.getUsername(), "", product.getName(), orderPay,
-				 * curuser, type, contactor, mobile, detailAddress, notes,
-				 * payType, new HttpConnectionUtil.RequestCallback() {
-				 * 
-				 * @Override public void execute(ParseModel parseModel) {
-				 * 
-				 * } });
-				 */
+
+				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
+						Long.parseLong(user.getUserId()), user.getUsername(), seller.getId(),
+						seller.getUsername(), product.getId(), product.getName(), orderPay,
+						user.getUsername(), 1, user.getUsername(), user.getMobile(), detailAddress, "",
+						payType,0, new HttpConnectionUtil.RequestCallback() {
+							@Override
+							public void execute(ParseModel parseModel) {
+								if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+										.getStatus())) {
+									ToastUtils.showToast(AppointmentDoor3Activity.this, parseModel.getMsg());
+									return;
+
+								} else {
+									Order order = (Order)JsonUtils.fromJson(parseModel.getData().toString(), Order.class);
+									ToastUtils.showToast(AppointmentDoor3Activity.this, parseModel.getMsg()+",订单号是:"+order.getOrderNum());
+									return;
+								}
+							}
+						});
+
 			}
 		});
 

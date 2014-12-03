@@ -67,6 +67,7 @@ public class AppointmentDoor1Activity extends BaseActivity{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(AppointmentDoor1Activity.this,AddressesActivity.class);
+				intent.putExtra("type", 1);
 				startActivityForResult(intent, 123);
 			}
 		});
@@ -78,6 +79,7 @@ public class AppointmentDoor1Activity extends BaseActivity{
 				Intent intent = new Intent(AppointmentDoor1Activity.this,AppointmentDoor2Activity.class);
 				intent.putExtra("time", time);
 				intent.putExtra("product", product);
+				intent.putExtra("address", address);
 				startActivity(intent);
 			}
 		});
