@@ -7,12 +7,23 @@ package com.bldj.lexiang.constant.enums;
 public enum TitleBarEnum {
 
 	ABOUT(0,"关于我们"),	
-	
 	FEEDBACK(1,"意见反馈"),	
-	
 	SHARE(2,"分享好友"),	
+	ZHAOPIN(3,"理疗师招聘"), 
 	
-	ZHAOPIN(3,"理疗师招聘");     
+	ORDER_SALE(4,"销量排序"),
+	ORDER_TIME(5,"时间排序"),
+	ORDER_PRICE(6,"价格排序"),
+	
+	PRICE_NONE(7,"价格区间"),
+	PRICE_ORDER1(8,"100-300"),
+	PRICE_ORDER2(9,"300-500"),
+	
+	
+	TYPE_ORDER_ALL(10,"全部"),
+	TYPE_ORDER_DOUBLE(11,"双人"),
+	TYPE_ORDER_MANY(12,"多人"),
+	TYPE_ORDER_SINGLE(13,"个人");
 	
 	private int index;
 	
