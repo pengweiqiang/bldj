@@ -15,7 +15,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Category;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.ui.CategoryProductActivity;
-import com.bldj.lexiang.ui.ProductDetailActivity;
+import com.bldj.lexiang.ui.HealthProductDetailActivity;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class CategoryAdapter extends BaseListAdapter {
@@ -98,7 +98,7 @@ public class CategoryAdapter extends BaseListAdapter {
 				@Override
 				public void onClick(View arg0) {
 					Intent intent = new Intent(context,
-							ProductDetailActivity.class);
+							HealthProductDetailActivity.class);
 					intent.putExtra("product", product1);
 					context.startActivity(intent);
 				}
@@ -119,7 +119,7 @@ public class CategoryAdapter extends BaseListAdapter {
 				@Override
 				public void onClick(View arg0) {
 					Intent intent = new Intent(context,
-							ProductDetailActivity.class);
+							HealthProductDetailActivity.class);
 					intent.putExtra("product", product2);
 					context.startActivity(intent);
 				}
@@ -139,7 +139,7 @@ public class CategoryAdapter extends BaseListAdapter {
 				@Override
 				public void onClick(View arg0) {
 					Intent intent = new Intent(context,
-							ProductDetailActivity.class);
+							HealthProductDetailActivity.class);
 					intent.putExtra("product", product3);
 					context.startActivity(intent);
 				}
@@ -159,7 +159,7 @@ public class CategoryAdapter extends BaseListAdapter {
 				@Override
 				public void onClick(View arg0) {
 					Intent intent = new Intent(context,
-							ProductDetailActivity.class);
+							HealthProductDetailActivity.class);
 					intent.putExtra("product", product4);
 					context.startActivity(intent);
 				}

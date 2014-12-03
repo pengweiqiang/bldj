@@ -54,7 +54,7 @@ public class HomeAdapter extends BaseListAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		List<Product> productItem = (List<Product>) getItem(position);
+		final List<Product> productItem = (List<Product>) getItem(position);
 		if (null == convertView) {
 			holder = new ViewHolder();
 
@@ -95,6 +95,7 @@ public class HomeAdapter extends BaseListAdapter {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(mContext,
 						HealthProductDetailActivity.class);
+				intent.putExtra("product", productItem.get(0));
 				mContext.startActivity(intent);
 			}
 		});
@@ -117,6 +118,7 @@ public class HomeAdapter extends BaseListAdapter {
 				public void onClick(View arg0) {
 					Intent intent = new Intent(mContext,
 							HealthProductDetailActivity.class);
+					intent.putExtra("product", productItem.get(0));
 					mContext.startActivity(intent);
 				}
 			});
