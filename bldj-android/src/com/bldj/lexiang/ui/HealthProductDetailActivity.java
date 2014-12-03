@@ -57,7 +57,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("养生产品详情页");
+		actionBar.setTitle(product.getName());
 		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
 				new OnClickListener() {
 			@Override

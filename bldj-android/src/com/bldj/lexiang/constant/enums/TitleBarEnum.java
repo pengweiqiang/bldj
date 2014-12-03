@@ -11,29 +11,52 @@ public enum TitleBarEnum {
 	SHARE(2,"分享好友"),	
 	ZHAOPIN(3,"理疗师招聘"), 
 	
-	ORDER_SALE(4,"销量排序"),
-	ORDER_TIME(5,"时间排序"),
-	ORDER_PRICE(6,"价格排序"),
+	ORDER_SALE(4,"销量排序",2),
+	ORDER_TIME(5,"时间排序",0),
+	ORDER_PRICE(6,"价格排序",1),
 	
 	PRICE_NONE(7,"价格区间"),
 	PRICE_ORDER1(8,"100-300"),
 	PRICE_ORDER2(9,"300-500"),
 	
 	
-	TYPE_ORDER_ALL(10,"全部"),
-	TYPE_ORDER_DOUBLE(11,"双人"),
-	TYPE_ORDER_MANY(12,"多人"),
-	TYPE_ORDER_SINGLE(13,"个人");
+	TYPE_ORDER_ALL(10,"全部",2),
+	TYPE_ORDER_DOUBLE(11,"双人",1),
+	TYPE_ORDER_MANY(12,"多人",1),
+	TYPE_ORDER_SINGLE(13,"个人",0),
+	
+	ORDER_DEFAULT(14,"默认排序"),
+	ORDER_DISTANCE(15,"距离排序"),
+	ORDER_COUNT(16,"接单次数"),
+	
+	WORK_3_BIG(17,"三年工作以上"),
+	WORK_3_5(18,"工作3-5年"),
+	WORK_5_10(19,"工作5-10年"),
+	
+	SHARE_SINA(20,"新浪微博"),
+	SHARE_WEIXIN(21,"微信"),
+	SHARE_TENCENT(22,"腾讯微博");
 	
 	private int index;
 	
 	private String msg;
+	
+	private int value;
 
     private TitleBarEnum(int index,String msg) {
         this.index = index;
         this.msg = msg;
     }
+    private TitleBarEnum(int index,String msg,int value) {
+        this.index = index;
+        this.msg = msg;
+        this.value = value;
+    }
 
+    public int getValue(){
+    	return value;
+    }
+    
     public int getIndex() {
         return index;
     }

@@ -69,7 +69,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_time.setText(time);
 		tv_sellerName.setText(seller.getUsername());
 		
-		orderPay = product.getCurPrice()+Double.parseDouble(seller.getAvgPrice());
+		orderPay = product.getCurPrice()+seller.getAvgPrice();
 		 tv_productName.setText(product.getName());
 
 	}

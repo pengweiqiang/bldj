@@ -185,7 +185,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 
 	@Override
 	public void onRefresh() {
-		pageNumber = 1;
+		pageNumber = 0;
 		getSellers();
 	}
 

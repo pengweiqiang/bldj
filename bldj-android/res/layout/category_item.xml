@@ -4,129 +4,124 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dip"
     android:orientation="horizontal" >
- <TextView
-            android:id="@+id/category_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/red"
-            android:layout_margin="5dip"
-            android:text="美容床" />
-  <View
+
+    <TextView
+        android:id="@+id/category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dip"
+        android:text="美容床"
+        android:textColor="@color/red" />
+
+    <View
         android:id="@+id/line"
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:layout_marginBottom="5dip"
         android:layout_below="@+id/category_name"
+        android:layout_marginBottom="5dip"
         android:background="@color/light_gray_line" />
- 
- 	<LinearLayout
- 	    android:id="@+id/ll_image" 
- 	    android:layout_width="match_parent"
- 	    android:layout_height="wrap_content"
- 	    android:layout_below="@+id/line"
- 	    android:orientation="horizontal"
- 	    >
- 	    <FrameLayout 
- 	        android:id="@+id/frame1"
- 	        android:layout_width="wrap_content"
- 	        android:layout_height="wrap_content"
- 	        android:layout_weight="1"
- 	        android:focusable="false"
- 	        >
-	 	    <ImageView 
-				android:id="@+id/imageview1"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"	 	        
-	 	        android:src="@drawable/ic_launcher"
-	 	        />
-	 	    <TextView 
-	 	        android:id="@+id/product_name1"
-	 	        android:layout_gravity="center"
-	 	        android:layout_width="wrap_content"
-	 	        android:layout_height="wrap_content"
-	 	        android:text="产品1"
-	 	        />
-	 	    
- 	    </FrameLayout>
- 	    <FrameLayout 
- 	        android:id="@+id/frame2"
- 	        android:layout_width="wrap_content"
- 	        android:layout_height="wrap_content"
- 	        android:layout_weight="1"
- 	        android:focusable="false"
- 	        >
-	 	    <ImageView 
-				android:id="@+id/imageview2"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"	 	        
-	 	        android:src="@drawable/ic_launcher"
-	 	        />
-	 	    <TextView 
-	 	        android:id="@+id/product_name2"
-	 	        android:layout_gravity="center"
-	 	        android:layout_width="wrap_content"
-	 	        android:layout_height="wrap_content"
-	 	        android:text="产品2"
-	 	        />
-	 	    
- 	    </FrameLayout>
- 	    <FrameLayout 
- 	        android:id="@+id/frame3"
- 	        android:layout_width="wrap_content"
- 	        android:layout_height="wrap_content"
- 	        android:layout_weight="1"
- 	        android:focusable="false"
- 	        >
-	 	    <ImageView 
-				android:id="@+id/imageview3"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"	 	        
-	 	        android:src="@drawable/ic_launcher"
-	 	        />
-	 	    <TextView 
-	 	        android:id="@+id/product_name3"
-	 	        android:layout_gravity="center"
-	 	        android:layout_width="wrap_content"
-	 	        android:layout_height="wrap_content"
-	 	        android:text="产品3"
-	 	        />
-	 	    
- 	    </FrameLayout>
- 	    <FrameLayout 
- 	        android:id="@+id/frame4"
- 	        android:layout_width="wrap_content"
- 	        android:layout_height="wrap_content"
- 	        android:layout_weight="1"
- 	        android:focusable="false"
- 	        >
-	 	    <ImageView 
-				android:id="@+id/imageview4"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"	 	        
-	 	        android:src="@drawable/ic_launcher"
-	 	        />
-	 	    <TextView 
-	 	        android:id="@+id/product_name4"
-	 	        android:layout_gravity="center"
-	 	        android:layout_width="wrap_content"
-	 	        android:layout_height="wrap_content"
-	 	        android:text="产品4"
-	 	        />
-	 	    
- 	    </FrameLayout>
-	 	    
- 	    
- 	</LinearLayout>
- 	
- 	<TextView 
- 	    android:id="@+id/more"
- 	    android:layout_margin="4dip"
- 	    android:layout_below="@+id/ll_image"
- 	    android:layout_width="wrap_content"
- 	    android:layout_height="wrap_content"
- 	    android:layout_centerHorizontal="true"
- 	    android:textColor="@color/grey"
- 	    android:text="点击查看更多"
- 	    />
+
+    <LinearLayout
+        android:id="@+id/ll_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <FrameLayout
+            android:id="@+id/frame1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/imageview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/product_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="产品1" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/imageview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/product_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="产品2" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/imageview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/product_name3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="产品3" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frame4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false" >
+
+            <ImageView
+                android:id="@+id/imageview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/product_name4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="产品4" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_image"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="4dip"
+        android:text="点击查看更多"
+        android:textColor="@color/grey" />
 
 </RelativeLayout>

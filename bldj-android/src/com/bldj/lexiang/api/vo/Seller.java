@@ -20,8 +20,8 @@ public class Seller implements Serializable{
 	private String recommend;
 	private String mobile;
 	private String address;
-	private String avgPrice;
-	private String userGrade;
+	private double avgPrice;
+	private int userGrade;
 	private String headurl;
 	private int workyear;
 	private int dealnumSum;
@@ -71,16 +71,16 @@ public class Seller implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getAvgPrice() {
+	public double getAvgPrice() {
 		return avgPrice;
 	}
-	public void setAvgPrice(String avgPrice) {
+	public void setAvgPrice(double avgPrice) {
 		this.avgPrice = avgPrice;
 	}
-	public String getUserGrade() {
+	public int getUserGrade() {
 		return userGrade;
 	}
-	public void setUserGrade(String userGrade) {
+	public void setUserGrade(int userGrade) {
 		this.userGrade = userGrade;
 	}
 	public String getHeadurl() {
