@@ -190,6 +190,11 @@
             android:name=".ui.OrderDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 订单详情 2-->
+        <activity
+            android:name=".ui.OrderDetail2Activity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 用户评价 -->
         <activity
             android:name=".ui.OrderEvalActivity"
