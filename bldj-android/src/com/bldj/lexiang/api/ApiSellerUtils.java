@@ -7,6 +7,7 @@ import java.util.Map;
 import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.constant.enums.MethodType;
 import com.bldj.lexiang.http.HttpClientAddHeaders;
+import com.bldj.lexiang.utils.HttpConnectionUtil.HttpMethod;
 import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 
 /**
@@ -31,7 +32,7 @@ public class ApiSellerUtils {
 	 */
 	public static void getSellers(Context context, int start, int limit,
 			int startPrice, int endPrice, int startWorkyear, int endWorkyear,
-			int orderbyTag, RequestCallback requestCallBack) {
+			int orderbyTag,double lat,double lon, RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.START, start);
 		params.put(ReqUrls.LIMIT, limit);
@@ -40,9 +41,11 @@ public class ApiSellerUtils {
 		params.put("startWorkyear", startWorkyear);
 		params.put("endWorkyear", endWorkyear);
 		params.put("orderbyTag", orderbyTag);
+		params.put("lat", lat);
+		params.put("lon", lon);
 
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLERS, false,
-				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
+				requestCallBack, MethodType.GET_MAINPAGE_AD, context,HttpMethod.GET);
 	}
 	
 	/**

@@ -20,9 +20,8 @@ public class ApiVersionUtils {
 	 * 获取最新版本信息
 	 * @param context
 	 * @param requestCallBack
-	 * @param adIndex
 	 */
-	public static void checkVersion(Context context,RequestCallback requestCallBack,int adIndex){
+	public static void checkVersion(Context context,RequestCallback requestCallBack){
 		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
         params.put("terType",params.get("source"));
         params.put("vcode", GlobalConfig.VERSION_CODE_V);
