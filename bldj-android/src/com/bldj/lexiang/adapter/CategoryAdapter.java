@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,6 +56,10 @@ public class CategoryAdapter extends BaseListAdapter {
 			holder = new ViewHolder();
 
 			convertView = mInflater.inflate(R.layout.category_item, null);
+			holder.frame1 = (FrameLayout)convertView.findViewById(R.id.frame1);
+			holder.frame2 = (FrameLayout)convertView.findViewById(R.id.frame2);
+			holder.frame3 = (FrameLayout)convertView.findViewById(R.id.frame3);
+			holder.frame4 = (FrameLayout)convertView.findViewById(R.id.frame4);
 			holder.imageView1 = (ImageView) convertView
 					.findViewById(R.id.imageview1);
 			holder.imageView2 = (ImageView) convertView
@@ -124,6 +129,11 @@ public class CategoryAdapter extends BaseListAdapter {
 					context.startActivity(intent);
 				}
 			});
+		}else{
+			holder.frame2.setVisibility(View.GONE);
+			holder.frame3.setVisibility(View.GONE);
+			holder.frame4.setVisibility(View.GONE);
+			
 		}
 		if (products != null && products.size() > 3) {
 			final Product product3 = products.get(2);
@@ -144,6 +154,10 @@ public class CategoryAdapter extends BaseListAdapter {
 					context.startActivity(intent);
 				}
 			});
+		}else{
+			holder.frame3.setVisibility(View.GONE);
+			holder.frame4.setVisibility(View.GONE);
+			
 		}
 		if (products != null && products.size() > 4) {
 			final Product product4 = products.get(3);
@@ -164,6 +178,9 @@ public class CategoryAdapter extends BaseListAdapter {
 					context.startActivity(intent);
 				}
 			});
+		}else{
+			holder.frame4.setVisibility(View.GONE);
+			
 		}
 		//查看更多
 		holder.tv_more.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +199,7 @@ public class CategoryAdapter extends BaseListAdapter {
 
 	public final class ViewHolder {
 		public TextView tv_category_name;
+		public FrameLayout frame1,frame2,frame3,frame4;
 		public ImageView imageView1, imageView2, imageView3, imageView4;
 		public TextView tv_product_name1, tv_product_name2, tv_product_name3,
 				tv_product_name4;
