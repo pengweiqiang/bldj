@@ -28,12 +28,12 @@ public class ApiProductUtils {
 	 */
 	public static void getProducts(Context context,String tag,int userType,int orderbyTag,int type,int start,int limit,RequestCallback requestCallBack){
 		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
-		params.put("tag", String.valueOf(tag));
-		params.put("userType", String.valueOf(userType));
-		params.put("orderbyTag", String.valueOf(orderbyTag));
-		params.put("type", String.valueOf(type));
-		params.put(ReqUrls.START, String.valueOf(start));
-		params.put(ReqUrls.LIMIT, String.valueOf(limit));
+		params.put("tag", tag);
+		params.put("userType", userType);
+		params.put("orderbyTag", orderbyTag);
+		params.put("type", type);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_HOT_PRODUCT, false, requestCallBack,MethodType.GET_MAINPAGE_AD,context);
 	}
 	/**
