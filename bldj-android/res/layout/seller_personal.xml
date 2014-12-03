@@ -47,11 +47,11 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/address"
+                android:id="@+id/work"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dip"
-                android:text="籍贯：四川"
+                android:text="年龄：33"
                 android:textSize="13sp" />
         </LinearLayout>
 

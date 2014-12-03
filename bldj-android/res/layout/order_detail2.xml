@@ -55,6 +55,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         android:layout_marginTop="8dip"
+        android:visibility="gone"
         android:orientation="horizontal" >
 
         <TextView
@@ -111,25 +112,16 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="@string/use_elect_code"
             android:textSize="14sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/code"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:hint="@string/input_elect_code"
+            android:text="无"
             android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/use_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="使用电子卷"
-            android:textSize="14sp" />
     </LinearLayout>
     
      <LinearLayout
@@ -162,97 +154,70 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
         android:layout_marginTop="8dip"
-        android:text="@string/select_pay_type" />
-
-    <LinearLayout
+        android:text="@string/order_item" />
+    
+     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="8dip"
-        android:gravity="center"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:layout_width="0dip"
-            android:layout_height="30dip"
-            android:layout_marginRight="8dip"
-            android:layout_weight="1"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:layout_weight="2"
-            android:layout_width="0dip"
+        android:layout_margin="5dip"
+        >
+        <TextView 
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/aliay_pay_tip" />
-
-        <RadioButton
-            android:id="@+id/aliay_pay"
+            android:text="预约时间"
             android:layout_weight="1"
-            android:layout_width="0dip"
-            android:checked="true"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-         android:gravity="center"
-        android:layout_marginTop="8dip"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:layout_width="0dip"
-            android:layout_height="30dip"
-            android:layout_weight="1"
-            android:layout_marginRight="8dip"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:layout_width="0dip"
-            android:layout_weight="2"
+            android:layout_marginLeft="8dip"
+             android:gravity="center"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/weixin_pay_tip" />
-
-        <RadioButton
-            android:id="@+id/weixin_pay"
+            android:text="疗程名称"
             android:layout_weight="1"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-         android:gravity="center"
-        android:layout_marginTop="8dip"
-        android:orientation="horizontal" >
-
-        <ImageView
-            android:layout_width="0dip"
-            android:layout_height="30dip"
-            android:layout_weight="1"
-            android:layout_marginRight="8dip"
-            android:src="@drawable/ic_launcher" />
-
-        <TextView
-            android:layout_weight="2"
-            android:layout_width="0dip"
+             android:gravity="center"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/union_pay_tip" />
-
-        <RadioButton
-            android:id="@+id/union_pay"
+            android:text="预约类型"
             android:layout_weight="1"
-            android:layout_width="0dip"
-            android:gravity="center_horizontal|center"
-            android:layout_height="wrap_content" />
+             android:gravity="center"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务人"
+            android:layout_weight="1"
+             android:gravity="center"
+            />
+        <TextView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单总额"
+            android:layout_weight="1"
+             android:gravity="center"
+            />
     </LinearLayout>
     
+     <com.bldj.lexiang.view.XListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/good_list_bg"
+        android:divider="#00000000"
+        android:visibility="gone" />
+      
+       <ProgressBar
+        android:id="@+id/progress_listView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:max="100"
+        android:visibility="visible" />
+    
+
     <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -264,7 +229,7 @@
         android:id="@+id/confirm"
         android:layout_width="100dip"
         android:layout_height="wrap_content"
-        android:text="@string/confirm"
+        android:text="去支付"
         />
      <Button 
         android:layout_marginTop="5dip"
