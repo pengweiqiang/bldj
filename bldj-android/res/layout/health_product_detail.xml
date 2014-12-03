@@ -54,6 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="一休价：￥64.5/次"
+                    android:textColor="@color/red"
                     android:textSize="13sp" />
 
                 <Button
