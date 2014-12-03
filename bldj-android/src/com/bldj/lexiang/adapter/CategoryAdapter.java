@@ -98,7 +98,7 @@ public class CategoryAdapter extends BaseListAdapter {
 							R.drawable.default_image));
 			holder.tv_product_name1.setText(product1.getName());
 
-			holder.imageView1.setOnClickListener(new View.OnClickListener() {
+			holder.frame1.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
@@ -119,7 +119,7 @@ public class CategoryAdapter extends BaseListAdapter {
 
 			holder.tv_product_name2.setText(product2.getName());
 
-			holder.imageView2.setOnClickListener(new View.OnClickListener() {
+			holder.frame2.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
@@ -130,9 +130,9 @@ public class CategoryAdapter extends BaseListAdapter {
 				}
 			});
 		}else{
-			holder.frame2.setVisibility(View.GONE);
-			holder.frame3.setVisibility(View.GONE);
-			holder.frame4.setVisibility(View.GONE);
+			holder.frame2.setVisibility(View.INVISIBLE);
+			holder.frame3.setVisibility(View.INVISIBLE);
+			holder.frame4.setVisibility(View.INVISIBLE);
 			
 		}
 		if (products != null && products.size() > 3) {
@@ -144,7 +144,7 @@ public class CategoryAdapter extends BaseListAdapter {
 							R.drawable.default_image));
 			holder.tv_product_name3.setText(product3.getName());
 
-			holder.imageView3.setOnClickListener(new View.OnClickListener() {
+			holder.frame3.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
@@ -155,8 +155,8 @@ public class CategoryAdapter extends BaseListAdapter {
 				}
 			});
 		}else{
-			holder.frame3.setVisibility(View.GONE);
-			holder.frame4.setVisibility(View.GONE);
+			holder.frame3.setVisibility(View.INVISIBLE);
+			holder.frame4.setVisibility(View.INVISIBLE);
 			
 		}
 		if (products != null && products.size() > 4) {
@@ -168,7 +168,7 @@ public class CategoryAdapter extends BaseListAdapter {
 							R.drawable.default_image));
 			holder.tv_product_name4.setText(product4.getName());
 
-			holder.imageView4.setOnClickListener(new View.OnClickListener() {
+			holder.frame4.setOnClickListener(new View.OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
@@ -179,7 +179,7 @@ public class CategoryAdapter extends BaseListAdapter {
 				}
 			});
 		}else{
-			holder.frame4.setVisibility(View.GONE);
+			holder.frame4.setVisibility(View.INVISIBLE);
 			
 		}
 		//查看更多

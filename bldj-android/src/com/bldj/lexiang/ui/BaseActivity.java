@@ -1,16 +1,15 @@
 package com.bldj.lexiang.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bldj.lexiang.MyApplication;
-import com.bldj.lexiang.R;
 import com.bldj.lexiang.commons.AppManager;
 import com.umeng.analytics.MobclickAgent;
 
@@ -18,6 +17,7 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 
 	protected static final String TAG = "BaseActivity";
 	protected MyApplication application ;
+	protected Context mContext;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -25,7 +25,7 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 		AppManager.getAppManager().addActivity(this);
 		
 		initView();
-
+		mContext = this;
 		initListener();
 		application = MyApplication.getInstance();
 

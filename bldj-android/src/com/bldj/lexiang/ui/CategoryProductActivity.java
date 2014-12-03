@@ -126,7 +126,7 @@ IXListViewListener {
 
 	@Override
 	public void onRefresh() {
-		pageNumber = 1;
+		pageNumber = 0;
 		getData();
 	}
 

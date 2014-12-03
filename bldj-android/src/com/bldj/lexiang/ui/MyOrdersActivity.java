@@ -1,21 +1,22 @@
 package com.bldj.lexiang.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ProgressBar;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.adapter.OrderAdapter;
 import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DateUtils;
@@ -51,6 +52,13 @@ IXListViewListener{
 		super.onCreate(savedInstanceState);
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		
+		orders = new ArrayList<Order>();
+		listAdapter = new OrderAdapter(this, orders);
+		mListView.setAdapter(listAdapter);
+		mListView.setPullLoadEnable(true);
+		mListView.setXListViewListener(this);
+		getData();
 	}
 
 	// 设置activity的导航条
@@ -75,7 +83,17 @@ IXListViewListener{
 
 	@Override
 	public void initListener() {
-		
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				Intent intent = new Intent(MyOrdersActivity.this,OrderDetail2Activity.class);
+				intent.putExtra("order", orders.get(position-1));
+				startActivity(intent);
+			}
+			
+		});
 	}
 	
 	/**
@@ -102,9 +120,9 @@ IXListViewListener{
 									new TypeToken<List<Order>>() {
 									});
 
-							if (pageNumber == 0) {
+//							if (pageNumber == 0) {
 								orders.clear();
-							}
+//							}
 							orders.addAll(ordersList);
 
 							listAdapter.notifyDataSetChanged();
@@ -117,7 +135,7 @@ IXListViewListener{
 
 	@Override
 	public void onRefresh() {
-		pageNumber = 1;
+		pageNumber = 0;
 		getData();
 	}
 

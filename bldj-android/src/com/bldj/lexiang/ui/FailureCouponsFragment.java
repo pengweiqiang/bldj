@@ -7,29 +7,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.CouponsAdapter;
-import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.api.ApiBuyUtils;
-import com.bldj.lexiang.api.ApiProductUtils;
-import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Coupon;
 import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DateUtils;
-import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
@@ -111,31 +102,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Coupon> productsList = new ArrayList<Coupon>();
-
-							Coupon p1 = new Coupon();
-							p1.setName("优惠卷1");
-							p1.setStarttime("214-12-1");
-							p1.setEndtime("2015-5-5");
-
-							Coupon p2 = new Coupon();
-							p2.setName("优惠卷1");
-							p2.setStarttime("214-12-1");
-							p2.setEndtime("2015-5-5");
-							
-							if(pageNumber==0){
-								coupons.clear();
-							}
-							productsList.add(p1);
-							productsList.add(p2);
-							coupons.addAll(productsList);
-
-							listAdapter.notifyDataSetChanged();
-							onLoad();
-
+							 ToastUtils.showToast(mActivity,parseModel.getMsg());
 						} else {
 							List<Coupon> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),

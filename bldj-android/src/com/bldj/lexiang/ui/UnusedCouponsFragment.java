@@ -102,7 +102,7 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 	 */
 	private void getCoupons() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.couponsManage(mActivity, Long.parseLong(user.getUserId()), 0, "", 3,
+		ApiBuyUtils.couponsManage(mActivity, Long.parseLong(user.getUserId()), 2, "", 3,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -111,31 +111,9 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Coupon> productsList = new ArrayList<Coupon>();
-
-							Coupon p1 = new Coupon();
-							p1.setName("优惠卷1");
-							p1.setStarttime("214-12-1");
-							p1.setEndtime("2015-5-5");
-
-							Coupon p2 = new Coupon();
-							p2.setName("优惠卷1");
-							p2.setStarttime("214-12-1");
-							p2.setEndtime("2015-5-5");
-							
-							productsList.add(p1);
-							productsList.add(p2);
-							
-							if(pageNumber==0){
-								coupons.clear();
-							}
-							coupons.addAll(productsList);
-
-							listAdapter.notifyDataSetChanged();
-							onLoad();
+							 ToastUtils.showToast(mActivity,
+							 parseModel.getMsg());
+							 return;
 
 						} else {
 							List<Coupon> productsList = JsonUtils.fromJson(

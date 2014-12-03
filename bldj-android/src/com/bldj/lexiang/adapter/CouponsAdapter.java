@@ -60,6 +60,8 @@ public class CouponsAdapter extends BaseListAdapter {
 					.findViewById(R.id.starttime);
 			holder.tv_endTime = (TextView) convertView
 					.findViewById(R.id.endtime);
+			holder.tv_name = (TextView)convertView.findViewById(R.id.name);
+			holder.tv_description = (TextView)convertView.findViewById(R.id.description);
 			convertView.setTag(holder);
 
 		} else {
@@ -68,6 +70,8 @@ public class CouponsAdapter extends BaseListAdapter {
 		holder.tv_price.setText(String.valueOf(coupon.getPrice()));
 		holder.tv_startTime.setText(coupon.getStarttime());
 		holder.tv_endTime.setText(coupon.getEndtime());
+		holder.tv_name.setText(coupon.getName());
+		holder.tv_description.setText(coupon.getDescription());
 
 		return convertView;
 	}
@@ -76,6 +80,8 @@ public class CouponsAdapter extends BaseListAdapter {
 		public TextView tv_price;
 		public TextView tv_startTime;
 		public TextView tv_endTime;
+		public TextView tv_name;
+		public TextView tv_description;
 	}
 
 }
