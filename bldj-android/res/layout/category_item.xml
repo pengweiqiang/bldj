@@ -27,9 +27,11 @@
  	    android:orientation="horizontal"
  	    >
  	    <FrameLayout 
+ 	        android:id="@+id/frame1"
  	        android:layout_width="wrap_content"
  	        android:layout_height="wrap_content"
  	        android:layout_weight="1"
+ 	        android:focusable="false"
  	        >
 	 	    <ImageView 
 				android:id="@+id/imageview1"
@@ -47,9 +49,11 @@
 	 	    
  	    </FrameLayout>
  	    <FrameLayout 
+ 	        android:id="@+id/frame2"
  	        android:layout_width="wrap_content"
  	        android:layout_height="wrap_content"
  	        android:layout_weight="1"
+ 	        android:focusable="false"
  	        >
 	 	    <ImageView 
 				android:id="@+id/imageview2"
@@ -67,9 +71,11 @@
 	 	    
  	    </FrameLayout>
  	    <FrameLayout 
+ 	        android:id="@+id/frame3"
  	        android:layout_width="wrap_content"
  	        android:layout_height="wrap_content"
  	        android:layout_weight="1"
+ 	        android:focusable="false"
  	        >
 	 	    <ImageView 
 				android:id="@+id/imageview3"
@@ -87,9 +93,11 @@
 	 	    
  	    </FrameLayout>
  	    <FrameLayout 
+ 	        android:id="@+id/frame4"
  	        android:layout_width="wrap_content"
  	        android:layout_height="wrap_content"
  	        android:layout_weight="1"
+ 	        android:focusable="false"
  	        >
 	 	    <ImageView 
 				android:id="@+id/imageview4"
