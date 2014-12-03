@@ -1,27 +1,22 @@
 package com.bldj.lexiang.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.bldj.gson.reflect.TypeToken;
-import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.HomeAdapter;
-import com.bldj.lexiang.api.ApiProductUtils;
-import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
-import com.bldj.lexiang.api.vo.Seller;
-import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DateUtils;
-import com.bldj.lexiang.utils.HttpConnectionUtil;
-import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.view.ActionBar;
-import com.bldj.lexiang.view.XListView;
-import com.bldj.lexiang.view.XListView.IXListViewListener;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ProgressBar;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bldj.lexiang.MyApplication;
+import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.view.ActionBar;
+import com.bldj.universalimageloader.core.ImageLoader;
 
 /**
  * 养生产品详细页
@@ -32,8 +27,19 @@ import android.widget.ProgressBar;
 public class HealthProductDetailActivity extends BaseActivity {
 
 	ActionBar mActionBar;
+	private Product product;
 	
-	
+	private ImageView product_img;
+	private TextView tv_time;//时长
+	private TextView tv_price;//当前价
+	private TextView tv_buy_count;//购买次数
+	private TextView tv_shop_price;//市场价
+	private Button btn_shared;//分享
+	private Button btn_invite;//邀请
+	private TextView tv_fav;//收藏
+	private TextView tv_custom_service;//联系客服
+	private WebView webView;
+	private Button btn_appointment_product;
 	
 	
 	
@@ -41,12 +47,12 @@ public class HealthProductDetailActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.health_product_detail);
 		super.onCreate(savedInstanceState);
-		
+		product = (Product)this.getIntent().getSerializableExtra("product");
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		
 		
-		
+		initData();
 	}
 
 	// 设置activity的导航条
@@ -64,13 +70,123 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	@Override
 	public void initView() {
+		product_img = (ImageView)findViewById(R.id.product_img);
+		tv_time = (TextView)findViewById(R.id.time);
+		tv_price = (TextView)findViewById(R.id.price);
+		btn_shared = (Button)findViewById(R.id.share);
+		tv_buy_count = (TextView)findViewById(R.id.buy_count);
+		tv_shop_price = (TextView)findViewById(R.id.price_shop);
+		btn_invite = (Button)findViewById(R.id.invite);
+		webView = (WebView)findViewById(R.id.webView_product_info);
+		btn_appointment_product = (Button)findViewById(R.id.appointment_product);
+		tv_custom_service = (TextView)findViewById(R.id.custom_service);
+		tv_fav = (TextView)findViewById(R.id.collect);
 		
+		
+	}
+	private void initData(){
+		ImageLoader.getInstance().displayImage(
+				product.getPicurl(),
+				product_img,
+				MyApplication.getInstance().getOptions(
+						R.drawable.ic_launcher));
+		tv_time.setText(String.valueOf(product.getTimeConsume()));
+		tv_price.setText(String.valueOf(product.getCurPrice()));
+		tv_shop_price.setText(String.valueOf(product.getMarketPrice()));
+		tv_buy_count.setText(product.getSuitsCrowd());//???具体哪个字段
+		
+		
+		webView.setWebViewClient(new WebViewClient() { // 通过webView打开链接，不调用系统浏览器
+
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				view.loadUrl(url);
+				return true;
+			}
+			
+		});
+
+		webView.setInitialScale(25);
+		WebSettings webSettings = webView.getSettings();
+		webSettings.setJavaScriptEnabled(true);
+		webSettings.setBuiltInZoomControls(true);
+		webSettings.setSupportZoom(true);
+
+		webView.getSettings().setUseWideViewPort(true);
+		webView.getSettings().setLoadWithOverviewMode(true);
+
+		webView.loadUrl(product.getProDetailUrl());
+
+		WebChromeClient webChromeClient = new WebChromeClient() {
+
+			@Override
+			public void onReceivedTitle(WebView view, String str) {
+				super.onReceivedTitle(view, str);
+			}
+
+			@Override
+			public void onProgressChanged(WebView view, int newProgress) {
+				// TODO Auto-generated method stub
+				super.onProgressChanged(view, newProgress);
+				/*if (newProgress == 100) {
+	                progressBar.setVisibility(View.GONE);
+	            } else {
+	                if (progressBar.getVisibility() == View.GONE)
+	                	progressBar.setVisibility(View.VISIBLE);
+	                progressBar.setProgress(newProgress);
+	            }*/
+			}
+			
+			
+		};
+		webView.setWebChromeClient(webChromeClient);
 	}
 
 	@Override
 	public void initListener() {
-		// TODO Auto-generated method stub
-
+		//预约产品
+		btn_appointment_product.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(HealthProductDetailActivity.this,AppointmentDoor1Activity.class);
+				intent.putExtra("product", product);
+				startActivity(intent);
+			}
+		});
+		//分享
+		btn_shared.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		//邀请
+		btn_invite.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		//联系客服
+		tv_custom_service.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		//收藏
+		tv_fav.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	

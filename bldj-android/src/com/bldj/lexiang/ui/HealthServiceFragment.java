@@ -3,21 +3,31 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.utils.DateUtils;
+import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -45,6 +55,12 @@ public class HealthServiceFragment extends BaseFragment implements
 	private int orderByTag = 0;// 0时间 1价格 2销量
 
 	private int pageNumber = 0;
+	
+	
+	private PopupWindow popupWindow;
+	private View view;
+	private ListView lv_group;
+	private List<TitleBarEnum> groups; 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,7 +115,7 @@ public class HealthServiceFragment extends BaseFragment implements
 
 			@Override
 			public void onClick(View v) {
-				orderByTag = 0;
+				buildTitleBar(v);
 			}
 		});
 		// 价格区间
@@ -107,7 +123,7 @@ public class HealthServiceFragment extends BaseFragment implements
 
 			@Override
 			public void onClick(View v) {
-				orderByTag = 1;
+				buildTitleBar(v);
 			}
 		});
 		// 团队
@@ -115,7 +131,7 @@ public class HealthServiceFragment extends BaseFragment implements
 
 			@Override
 			public void onClick(View v) {
-				orderByTag = 2;
+				buildTitleBar(v);
 			}
 		});
 	}
@@ -158,7 +174,7 @@ public class HealthServiceFragment extends BaseFragment implements
 
 	@Override
 	public void onRefresh() {
-		pageNumber = 1;
+		pageNumber = 0;
 		getData();
 	}
 
@@ -173,6 +189,44 @@ public class HealthServiceFragment extends BaseFragment implements
 		mListView.stopLoadMore();
 		mListView.setRefreshTime(DateUtils.convert2String(
 				System.currentTimeMillis(), ""));
+	}
+	
+	private void buildTitleBar(final View parent){
+		DeviceInfo.setContext(mActivity);
+		if (popupWindow == null) {  
+            view = LayoutInflater.from(mActivity).inflate(R.layout.group_list, null);  
+            lv_group = (ListView) view.findViewById(R.id.lvGroup);  
+            groups = new ArrayList<TitleBarEnum>();  
+            groups.add(TitleBarEnum.ORDER_SALE);  
+            groups.add(TitleBarEnum.ORDER_TIME);  
+            groups.add(TitleBarEnum.ORDER_PRICE);  
+            GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups,1);  
+            lv_group.setAdapter(groupAdapter);  
+            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth()/3,
+                    LayoutParams.WRAP_CONTENT,true);  
+        }
+        popupWindow.setFocusable(true);  
+        popupWindow.setOutsideTouchable(true);  
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());  
+        
+//        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE); 
+        // 计算x轴方向的偏移量，使得PopupWindow在Title的正下方显示，此处的单位是pixels  
+        int xPos = DeviceInfo.getScreenWidth() / 3;
+        
+        popupWindow.showAsDropDown(parent, xPos, 0);  
+        popupWindow.update();
+  
+        lv_group.setOnItemClickListener(new OnItemClickListener() {  
+            @Override  
+            public void onItemClick(AdapterView<?> adapterView, View view,  
+                    int position, long id) {  
+            	((TextView)parent).setText(groups.get(position).getMsg());
+            	orderByTag = position;
+                if (popupWindow != null) {  
+                    popupWindow.dismiss();  
+                }  
+            } 
+        });
 	}
 
 }

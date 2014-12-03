@@ -43,11 +43,12 @@ public class AddressesActivity extends BaseActivity{
 	
 	private int pageNumber = 0;
 
+	private int type;//1-从上门预约界面跳入
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.address);
 		super.onCreate(savedInstanceState);
-		
+		type = this.getIntent().getIntExtra("type", 0);
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		
@@ -94,6 +95,15 @@ public class AddressesActivity extends BaseActivity{
 					long arg3) {
 //				Intent intent = new Intent(AddressesActivity.this,AddressInfoActivity.class);
 //				intent.putExtra("type", 1);
+				Address address = addresses.get(position);
+				if(type ==1 ){
+		            Intent data=new Intent();  
+		            data.putExtra("address", address.getDetailAddress());  
+		            //回到上门预约界面
+		            setResult(20, data);  
+		            finish();  
+				}
+				
 			}
 			
 		});

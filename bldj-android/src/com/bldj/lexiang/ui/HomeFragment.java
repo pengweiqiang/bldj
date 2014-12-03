@@ -90,7 +90,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	private View view;
 	private ListView lv_group;
 	private List<TitleBarEnum> groups; 
-	private Context mContext;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,7 +104,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		progressbar = (ProgressBar) infoView
 				.findViewById(R.id.progress_listView);
 
-		mContext = this.getActivity();
 		mListView = (MyListView) infoView.findViewById(R.id.home_listview);
 		// bannerView =
 		// (FrameLayout)LayoutInflater.from(mActivity).inflate(R.layout.home_banner,
@@ -210,16 +208,16 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	private void buildTitleBar(View parent){
 		DeviceInfo.setContext(mActivity);
 		if (popupWindow == null) {  
-            view = LayoutInflater.from(mContext).inflate(R.layout.group_list, null);  
+            view = LayoutInflater.from(mActivity).inflate(R.layout.group_list, null);  
             lv_group = (ListView) view.findViewById(R.id.lvGroup);  
             groups = new ArrayList<TitleBarEnum>();  
             groups.add(TitleBarEnum.ABOUT);  
             groups.add(TitleBarEnum.FEEDBACK);  
             groups.add(TitleBarEnum.SHARE);  
             groups.add(TitleBarEnum.ZHAOPIN);  
-            GroupAdapter groupAdapter = new GroupAdapter(mContext, groups);  
+            GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);  
             lv_group.setAdapter(groupAdapter);  
-            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2-20,
+            popupWindow = new PopupWindow(view, parent.getWidth(),
                     LayoutParams.WRAP_CONTENT);  
         }
         popupWindow.setFocusable(true);  
@@ -227,28 +225,26 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
         popupWindow.setBackgroundDrawable(new BitmapDrawable());  
         
 //        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE);  
-        int xPos = DeviceInfo.getScreenWidth() / 2  
-                - popupWindow.getWidth()/2;  
         
-        popupWindow.showAsDropDown(parent, DeviceInfo.px2dip(mActivity, xPos), 0);  
+        popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);  
         lv_group.setOnItemClickListener(new OnItemClickListener() {  
             @Override  
             public void onItemClick(AdapterView<?> adapterView, View view,  
                     int position, long id) {  
                 if(position == TitleBarEnum.ABOUT.getIndex()){
-                	Intent intent = new Intent(mContext,
+                	Intent intent = new Intent(mActivity,
     						AboutActivity.class);
     				startActivity(intent);
                 }else if(position == TitleBarEnum.FEEDBACK.getIndex()){
-                	Intent intent = new Intent(mContext,
+                	Intent intent = new Intent(mActivity,
     						FeedBackActivity.class);
     				startActivity(intent);
                 }else if(position == TitleBarEnum.SHARE.getIndex()){
-                	Intent intent = new Intent(mContext,
+                	Intent intent = new Intent(mActivity,
     						SharedFriendActivity.class);
     				startActivity(intent);
                 }else if(position == TitleBarEnum.ZHAOPIN.getIndex()){
-                	Intent intent = new Intent(mContext,
+                	Intent intent = new Intent(mActivity,
     						AuthentActivity.class);
     				startActivity(intent);
                 }

@@ -14,9 +14,9 @@ import android.widget.ProgressBar;
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.JlysHealthAdapter;
-import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.ApiSellerUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DateUtils;
@@ -44,6 +44,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private List<Seller> sellers;
 	private int pageNumber = 0;
 	private String time;// 预约时间
+	private Product product;
 	private Seller mSeletedSeller;// 预约美容师
 	private Button btn_previous, btn_next;
 
@@ -52,6 +53,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		setContentView(R.layout.appointment_door2);
 		super.onCreate(savedInstanceState);
 		time = this.getIntent().getStringExtra("time");
+		product = (Product)this.getIntent().getSerializableExtra("product");
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		initView();
@@ -113,7 +115,8 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 				Intent intent = new Intent(AppointmentDoor2Activity.this,
 						AppointmentDoor3Activity.class);
 				intent.putExtra("time", time);// 预约时间
-				intent.putExtra("seller", mSeletedSeller);// 美容师
+				intent.putExtra("seller", mSeletedSeller);// 预约美容师
+				intent.putExtra("product", product);//预约产品
 				startActivity(intent);
 			}
 		});
