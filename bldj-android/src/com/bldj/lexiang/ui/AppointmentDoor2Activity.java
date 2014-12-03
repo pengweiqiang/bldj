@@ -141,7 +141,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	 */
 	private void getSellers() {
 		ApiSellerUtils.getSellers(AppointmentDoor2Activity.this, pageNumber, ApiConstants.LIMIT, 0, 0, 
-				1, 5, 2,0,0, new HttpConnectionUtil.RequestCallback() {
+				1, 5, 0,0,0, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
