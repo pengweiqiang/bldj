@@ -67,7 +67,7 @@
         android:padding="3dip" >
 
         <TextView
-            android:id="@+id/product_info"
+            android:id="@+id/product_info_word"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -165,21 +165,26 @@
 
         <!-- 图片列表 -->
 
-        <com.bldj.lexiang.view.XListView
+       <!--  <com.bldj.lexiang.view.XListView
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/good_list_bg"
             android:divider="#00000000"
-            android:visibility="gone" />
+            android:visibility="gone" /> -->
+            <WebView 
+                android:id="@+id/webView_product"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
 
-        <ProgressBar
+       <!--  <ProgressBar
             android:id="@+id/progress_listView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:max="100"
-            android:visibility="visible" />
+            android:visibility="visible" /> -->
     </RelativeLayout>
 
     <RelativeLayout
