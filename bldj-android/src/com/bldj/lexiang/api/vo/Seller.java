@@ -13,6 +13,7 @@ public class Seller implements Serializable{
 	 */
 	private static final long serialVersionUID = -7120840589691200591L;
 	
+	private long id;
 	private String username;
 	private String nickname;
 	private String area;
@@ -28,6 +29,12 @@ public class Seller implements Serializable{
 	
 	
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getUsername() {
 		return username;
 	}
