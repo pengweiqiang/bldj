@@ -39,9 +39,11 @@ public class XListView extends ListView implements OnScrollListener {
 	// when disable pull refresh.
 	private RelativeLayout mHeaderViewContent;
 	private TextView mHeaderTimeView;
+	private TextView mFootHintView;
 	private int mHeaderViewHeight; // header view's height
 	private boolean mEnablePullRefresh = true;
 	private boolean mPullRefreshing = false; // is refreashing.
+	
 
 	// -- footer view
 	private XListViewFooter mFooterView;
@@ -98,6 +100,7 @@ public class XListView extends ListView implements OnScrollListener {
 
 		// init footer view
 		mFooterView = new XListViewFooter(context);
+		mFootHintView = (TextView)mFooterView.findViewById(R.id.xlistview_footer_hint_textview);
 		
 		// init header height
 		mHeaderView.getViewTreeObserver().addOnGlobalLayoutListener(
@@ -188,6 +191,13 @@ public class XListView extends ListView implements OnScrollListener {
 	 */
 	public void setRefreshTime(String time) {
 		mHeaderTimeView.setText(time);
+	}
+	/**
+	 * 
+	 * @param str
+	 */
+	public void setFootHintText(String str){
+		mFootHintView.setText(str);
 	}
 
 	private void invokeOnScrolling() {

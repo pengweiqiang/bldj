@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.db.DatabaseUtil;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.universalimageloader.core.ImageLoader;
 
@@ -40,7 +42,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	private TextView tv_custom_service;//联系客服
 	private WebView webView;
 	private Button btn_appointment_product;
-	
+	boolean isFav;//是否收藏
 	
 	
 	@Override
@@ -85,6 +87,13 @@ public class HealthProductDetailActivity extends BaseActivity {
 		
 	}
 	private void initData(){
+		
+		//获取此美容师是否收藏过
+		isFav = DatabaseUtil.getInstance(mContext).checkFavProduct(product.getId());
+		if(isFav){
+			tv_fav.setText("已收藏");
+		}
+		
 		ImageLoader.getInstance().displayImage(
 				product.getPicurl(),
 				product_img,
@@ -183,8 +192,25 @@ public class HealthProductDetailActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				
+				if(!isFav){
+					long row = DatabaseUtil.getInstance(mContext).insertProduct(product);
+					if(row>0){
+						isFav = true; 
+						ToastUtils.showToast(mContext, "收藏成功");
+						tv_fav.setText("已收藏");
+					}else{
+						ToastUtils.showToast(mContext, "该产品已经收藏");
+					}
+				}else{
+					int row = DatabaseUtil.getInstance(mContext).deleteFavProduct(product.getId());
+					if(row>0){
+						isFav = false; 
+						ToastUtils.showToast(mContext, "取消收藏");
+						tv_fav.setText("收藏");
+					}else{
+						ToastUtils.showToast(mContext, "取消收藏失败，稍后请重试");
+					}
+				}
 			}
 		});
 	}

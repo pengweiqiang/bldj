@@ -239,12 +239,12 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				// if (checkIsLogin()) {
-				//
-				// }
-				Intent intent = new Intent(mActivity,
-						MyCollectFragmentActivity.class);
-				startActivity(intent);
+				 if (checkIsLogin()) {
+					 Intent intent = new Intent(mActivity,
+								MyCollectFragmentActivity.class);
+						startActivity(intent);
+				 }
+				
 			}
 		});
 		// 优惠卷
@@ -252,12 +252,12 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				// if (checkIsLogin()) {
-				//
-				// }
-				Intent intent = new Intent(mActivity,
-						CouponsFragmentActivity.class);
-				startActivity(intent);
+				 if (checkIsLogin()) {
+					 Intent intent = new Intent(mActivity,
+								CouponsFragmentActivity.class);
+						startActivity(intent);
+				 }
+				
 			}
 		});
 		// 修改密码

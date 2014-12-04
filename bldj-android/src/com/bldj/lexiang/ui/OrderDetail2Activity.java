@@ -112,8 +112,8 @@ public class OrderDetail2Activity extends BaseActivity {
 
 	private void initData() {
 		tv_order_time.setText(order.getCreatetime());
-		tv_order_pay.setText(order.getOrderPay());
-		tv_order_num.setText(String.valueOf(order.getOrderNum()));
+		tv_order_pay.setText(String.valueOf(order.getOrderPay()));
+		tv_order_num.setText(order.getOrderNum());
 	}
 
 	@Override
@@ -263,7 +263,7 @@ public class OrderDetail2Activity extends BaseActivity {
 	 */
 	private void shared_addCode() {
 		ApiBuyUtils.couponsManage(this, Long.parseLong(user.getUserId()), 2,
-				"", 0, new HttpConnectionUtil.RequestCallback() {
+				"", 0,0,0, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {

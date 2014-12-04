@@ -185,7 +185,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					return;
 				}
 				ApiBuyUtils.couponsManage(AppointmentDoor3Activity.this,
-						Long.parseLong(user.getUserId()), 0, vcode, 4,
+						Long.parseLong(user.getUserId()), 0, vcode, 4,0,0,
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override

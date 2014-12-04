@@ -36,6 +36,7 @@ public class DBHelper extends SQLiteOpenHelper{
 
 	interface ProductTable{
 		String _ID = "_id";
+		String PRODUCTID="productId";
 		String NAME = "name";
 		String PICURL = "picurl";
 		String CURPRICE = "curPrice";
@@ -49,6 +50,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	}
 	interface SellerTable{
 		String _ID = "_id";
+		String SELLERID = "sellerId";
 		String USERNAME = "username";
 		String NICKNAME = "nickname";
 		String AREA = "area";
@@ -72,6 +74,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	      favStr.append("CREATE TABLE IF NOT EXISTS ")
 	      		.append(DBHelper.TABLE_NAME_PRODUCT)
 	      		.append(" ( ").append(ProductTable._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT,")
+	      		.append(ProductTable.PRODUCTID).append(" Integer,")
 	      		.append(ProductTable.NAME).append(" varchar(100),")
 	      		.append(ProductTable.PICURL).append(" varchar(200),")
 	      		.append(ProductTable.CURPRICE).append(" double,")
@@ -80,7 +83,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	      		.append(ProductTable.TIMECONSUME).append(" Integer,")
 	      		.append(ProductTable.SELLERNUM).append(" Integer,")
 	      		.append(ProductTable.PRODETAILURL).append(" varchar(200),")
-	      		.append(ProductTable.SUITSCROWD).append(" varchar(100);");
+	      		.append(ProductTable.SUITSCROWD).append(" varchar(100) );");
 	      db.execSQL(favStr.toString());
 	}
 	
@@ -93,18 +96,19 @@ public class DBHelper extends SQLiteOpenHelper{
 	      favStr.append("CREATE TABLE IF NOT EXISTS ")
 	      		.append(DBHelper.TABLE_NAME_SELLER)
 	      		.append(" ( ").append(SellerTable._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT,")
+	      		.append(SellerTable.SELLERID).append(" Integer,")
 	      		.append(SellerTable.USERNAME).append(" varchar(100),")
 	      		.append(SellerTable.NICKNAME).append(" varchar(100),")
 	      		.append(SellerTable.AREA).append(" text,")
 	      		.append(SellerTable.RECOMMEND).append(" text,")
 	      		.append(SellerTable.MOBILE).append(" varchat(50),")
 	      		.append(SellerTable.ADDRESS).append(" text,")
-	      		.append(SellerTable.AVGPRICE).append(" varchar(50),")
-	      		.append(SellerTable.USERGRADE).append(" text,")
-	      		.append(SellerTable.HEADURL).append(" varchar(200),")
+	      		.append(SellerTable.AVGPRICE).append(" double,")
+	      		.append(SellerTable.USERGRADE).append(" Integer,")
+	      		.append(SellerTable.HEADURL).append(" text,")
 	      		.append(SellerTable.WORKYEAR).append(" integer,")
 	      		.append(SellerTable.DEALNUMSUM).append(" integer,")
-	      		.append(SellerTable.DISTANCE).append(" double);");
+	      		.append(SellerTable.DISTANCE).append(" double );");
 	      db.execSQL(favStr.toString());
 	}
 	
