@@ -32,6 +32,7 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    
 
     <supports-screens android:anyDensity="true" />
 
@@ -46,6 +47,25 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
+        
+           <!-- baidu map start -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="mIRyHB3Vf3cXCuv6FhSVAYNS" />
+
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+            
+        </service>
+        <!-- baidu map end -->
+        
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -190,7 +210,7 @@
             android:name=".ui.OrderDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <!-- 订单详情 2-->
+        <!-- 订单详情 2 -->
         <activity
             android:name=".ui.OrderDetail2Activity"
             android:screenOrientation="portrait" >
@@ -200,6 +220,7 @@
             android:name=".ui.OrderEvalActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 进入web页面 -->
         <activity
             android:name=".ui.BannerWebActivity"
             android:screenOrientation="portrait" >
@@ -225,18 +246,6 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="BLDJ" />
-
-        <!-- baidu map start -->
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="mIRyHB3Vf3cXCuv6FhSVAYNS" />
-
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" >
-        </service>
-        <!-- baidu map end -->
 
     </application>
 
