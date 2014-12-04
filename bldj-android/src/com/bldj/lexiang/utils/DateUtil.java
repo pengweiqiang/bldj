@@ -2,6 +2,7 @@ package com.bldj.lexiang.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -16,6 +17,8 @@ public class DateUtil {
 	public static final String SIMPLY_HH_PATTERN = "HH";
 	public static final String CRITICISM_PATTERN = "yyyy-MM-dd HH:mm";
 	public static final String CHINESE_PATTERN = "MM月dd日  HH:mm";
+	public static final String CUSTOM_PATTERN_SCHEDULED = "yyyyMMdd";
+	public static final String SIMPLY_DD_PATTERN2 = "MM-dd";
 	/**
 	 * 获得日期对象
 	 * 
@@ -108,6 +111,13 @@ public class DateUtil {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	public static String getDateString(Date date, String pattern,int index){
+		//通过日历获取下一天日期  
+        Calendar cal = Calendar.getInstance();  
+        cal.setTime(date);
+        cal.add(Calendar.DAY_OF_YEAR, +index);
+        return getDateString(cal.getTime(), pattern);
 	}
 
 }
