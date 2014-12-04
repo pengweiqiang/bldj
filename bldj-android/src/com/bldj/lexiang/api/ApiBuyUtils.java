@@ -46,12 +46,14 @@ public class ApiBuyUtils {
 	 * @param requestCallBack
 	 */
 	public static void couponsManage(Context context, long id, int type,
-			String vcode, int method, RequestCallback requestCallBack) {
+			String vcode, int method,int start,int limit, RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, id);
 		params.put("type", type);
 		params.put("vcode", vcode);
 		params.put("method", method);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
 		ApiUtils.getParseModel(params, ReqUrls.COUPONS_MANAGE, false,
 				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 

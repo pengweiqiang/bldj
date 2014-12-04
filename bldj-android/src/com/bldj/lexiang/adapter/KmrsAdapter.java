@@ -60,7 +60,7 @@ public class KmrsAdapter extends BaseListAdapter {
 			holder.tv_address = (TextView) convertView
 					.findViewById(R.id.address);
 			holder.tv_price = (TextView) convertView.findViewById(R.id.price);
-			holder.tv_comment = (TextView) convertView.findViewById(R.id.order_count);
+			holder.tv_order_count = (TextView) convertView.findViewById(R.id.order_count);
 			holder.tv_distance = (TextView) convertView.findViewById(R.id.distance);
 			convertView.setTag(holder);
 
@@ -70,16 +70,16 @@ public class KmrsAdapter extends BaseListAdapter {
 
 		holder.tv_username.setText(seller.getUsername());
 		holder.tv_address.setText(seller.getAddress());
-		holder.tv_price.setText("价格："
-				+ String.valueOf(seller.getAvgPrice()) + "元/20分钟");
-		/*ImageLoader.getInstance().displayImage(
+		holder.tv_price.setText("价格：￥"
+				+ String.valueOf(seller.getAvgPrice()) );
+		ImageLoader.getInstance().displayImage(
 				seller.getHeadurl(),
 				holder.headImg,
 				MyApplication.getInstance()
-						.getOptions(R.drawable.default_image));*/
+						.getOptions(R.drawable.ic_launcher));
 
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
-		holder.tv_comment.setText(seller.getRecommend());
+		holder.tv_order_count.setText("共接单"+seller.getDealnumSum()+"次");
 
 		return convertView;
 	}
@@ -87,7 +87,7 @@ public class KmrsAdapter extends BaseListAdapter {
 	public final class ViewHolder {
 		public ImageView headImg;
 		public TextView tv_username, tv_distance, tv_address, tv_price,
-				tv_comment;
+		tv_order_count;
 	}
 
 }

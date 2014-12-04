@@ -99,8 +99,8 @@ public class OrderDetailActivity extends BaseActivity {
 	
 	private void initData(){
 		tv_order_time.setText(order.getCreatetime());
-		tv_order_pay.setText(order.getOrderPay());
-		tv_order_num.setText(String.valueOf(order.getOrderNum()));
+		tv_order_pay.setText(String.valueOf(order.getOrderPay()));
+		tv_order_num.setText(order.getOrderNum());
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class OrderDetailActivity extends BaseActivity {
 					return;
 				}
 				ApiBuyUtils.couponsManage(OrderDetailActivity.this,
-						Long.parseLong(user.getUserId()), 0, vcode, 4,
+						Long.parseLong(user.getUserId()), 0, vcode, 4,0,0,
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override

@@ -1,284 +1,371 @@
 package com.bldj.lexiang.db;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.bldj.lexiang.MyApplication;
-import com.bldj.lexiang.api.vo.User;
-import com.bldj.lexiang.utils.StringUtils;
-
-
-
+import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.Seller;
+import com.bldj.lexiang.db.DBHelper.ProductTable;
+import com.bldj.lexiang.db.DBHelper.SellerTable;
 
 public class DatabaseUtil {
-	 private static final String TAG="DatabaseUtil";
+	private static final String TAG = "DatabaseUtil";
 
-	    private static DatabaseUtil instance;
+	private static DatabaseUtil instance;
 
-	    /** 数据库帮助类 **/
-	    private DBHelper dbHelper;
+	/** 数据库帮助类 **/
+	private DBHelper dbHelper;
 
-	    public synchronized static DatabaseUtil getInstance(Context context) {
-	        if(instance == null) {
-	            instance=new DatabaseUtil(context);
-	        }
-	        return instance;
-	    }
+	public synchronized static DatabaseUtil getInstance(Context context) {
+		if (instance == null) {
+			instance = new DatabaseUtil(context);
+		}
+		return instance;
+	}
 
-	    /**
-	     * 初始化
-	     * @param context
-	     */
-	    private DatabaseUtil(Context context) {
-	        dbHelper=new DBHelper(context);
-	    }
+	/**
+	 * 初始化
+	 * 
+	 * @param context
+	 */
+	private DatabaseUtil(Context context) {
+		dbHelper = new DBHelper(context);
+	}
 
-	    /**
-	     * 销毁
-	     */
-	    public static void destory() {
-	        if(instance != null) {
-	            instance.onDestory();
-	        }
-	    }
+	/**
+	 * 销毁
+	 */
+	public static void destory() {
+		if (instance != null) {
+			instance.onDestory();
+		}
+	}
 
-	    /**
-	     * 销毁
-	     */
-	    public void onDestory() {
-	        instance=null;
-	        if(dbHelper != null) {
-	            dbHelper.close();
-	            dbHelper=null;
-	        }
-	    }
-	    
-	    /**
-	     * 删除收藏
-	     * @param qy
-	     */
-//	    public void delete( qy){
-//	    	Cursor cursor=null;
-//	    	String where = FavTable.USER_ID+" = '"+MyApplication.getInstance().getCurrentUser().getObjectId()
-//	    			+"' AND "+FavTable.OBJECT_ID+" = '"+qy.getObjectId()+"'";
-//	    	cursor=dbHelper.query(DBHelper.TABLE_NAME, null, where, null, null, null, null);
-//	    	if(cursor != null && cursor.getCount() > 0) {
-//            	cursor.moveToFirst();
-//            	int isLove = cursor.getInt(cursor.getColumnIndex(FavTable.IS_LOVE));
-//            	if(isLove==0){
-//            		dbHelper.delete(DBHelper.TABLE_NAME, where, null);
-//            	}else{
-//            		ContentValues cv = new ContentValues();
-//            		cv.put(FavTable.IS_FAV, 0);
-//            		dbHelper.update(DBHelper.TABLE_NAME, cv, where, null);
-//            	}
-//	    	}
-//	    	if(cursor != null) {
-//	            cursor.close();
-//	            dbHelper.close();
-//	        }
-//	    }
-//	    
-//	    
-//	    
-//	    /**
-//	     * 添加收藏
-//	     * @param qy
-//	     * @return
-//	     */
-//	    public long insertFav(QiangYu qy){
-//	    	long uri = 0;
-//	    	Cursor cursor=null;
-//	    	String where = FavTable.USER_ID+" = '"+MyApplication.getInstance().getCurrentUser().getObjectId()
-//	    			+"' AND "+FavTable.OBJECT_ID+" = '"+qy.getObjectId()+"'";
-//            cursor=dbHelper.query(DBHelper.TABLE_NAME, null, where, null, null, null, null);
-//            if(cursor != null && cursor.getCount() > 0) {
-//            	cursor.moveToFirst();
-//            	ContentValues conv = new ContentValues();
-//            	conv.put(FavTable.IS_FAV, 1);
-//            	conv.put(FavTable.IS_LOVE, 1);
-//            	dbHelper.update(DBHelper.TABLE_NAME, conv, where, null);
-//            }else{
-//		    	ContentValues cv = new ContentValues();
-//		    	cv.put(FavTable.USER_ID, MyApplication.getInstance().getCurrentUser().getObjectId());
-//		    	cv.put(FavTable.OBJECT_ID, qy.getObjectId());
-//		    	cv.put(FavTable.IS_LOVE, qy.getMyLove()==true?1:0);
-//		    	cv.put(FavTable.IS_FAV,qy.getMyFav()==true?1:0);
-//		    	uri = dbHelper.insert(DBHelper.TABLE_NAME, null, cv);
-//            }
-//	    	 if(cursor != null) {
-//		            cursor.close();
-//		            dbHelper.close();
-//		        }
-//	    	return uri;
-//	    }
-//	    public long insertQiangyu(QiangYu qy){
-//	    	long uri = 0;
-//	    	Cursor cursor=null;
-//	    	String where = QiangTable.OBJECT_ID+" = '"+qy.getObjectId()+"'";
-//            cursor=dbHelper.query(DBHelper.TABLE_NAME_QIANGYU, null, where, null, null, null, null);
-//            if(cursor != null && cursor.getCount() > 0) {
-//            	cursor.moveToFirst();
-//            	ContentValues conv = new ContentValues();
-//            	conv.put(QiangTable.HATE, qy.getHate());
-//            	conv.put(QiangTable.LOVE, qy.getLove());
-//            	conv.put(QiangTable.COMMENT, qy.getComment());
-//            	conv.put(QiangTable.MYFAV,qy.getMyFav()==true?1:0);
-//            	
-//            	dbHelper.update(DBHelper.TABLE_NAME_QIANGYU, conv, where, null);
-//            }else{
-//		    	ContentValues cv = new ContentValues();
-//		    	cv.put(QiangTable.OBJECT_ID, qy.getObjectId());
-//		    	cv.put(QiangTable.CONTENT, qy.getContent());
-//		    	cv.put(QiangTable.HATE, qy.getHate());
-//		    	cv.put(QiangTable.LOVE, qy.getLove());
-//		    	
-//		    	cv.put(QiangTable.COMMENT, qy.getComment());
-//		    	cv.put(QiangTable.AUTHOROBJECTID, qy.getAuthorObjectId());
-//		    	if(qy.getContentfigureurl()!=null){
-//		    		cv.put(QiangTable.CONTENTURL, qy.getContentfigureurl().getFileUrl());
-//		    	}
-//		    	cv.put(QiangTable.USERNAME, qy.getAuthor().getUsername());
-//		    	
-//		    	cv.put(QiangTable.MYFAV,qy.getMyFav()==true?1:0);
-//		    	String url = "";
-//		    	if(qy.getAuthor().getAvatar()!=null){
-//		    		url = qy.getAuthor().getAvatar().getFileUrl();
-//		    	}else if(!StringUtils.isEmpty(qy.getAuthor().getFromType())){
-//		    		url = qy.getAuthor().getFromType();
-//		    	}
-//		    	cv.put(QiangTable.USERURL,url);
-//		    	
-//		    	uri = dbHelper.insert(DBHelper.TABLE_NAME_QIANGYU, null, cv);
-//            }
-//	    	 if(cursor != null) {
-//		            cursor.close();
-//		            dbHelper.close();
-//		        }
-//	    	return uri;
-//	    }
-//	    
-////	    public int deleteFav(QiangYu qy){
-////	    	int row = 0;
-////	    	String where = FavTable.USER_ID+" = "+qy.getAuthor().getObjectId()
-////	    			+" AND "+FavTable.OBJECT_ID+" = "+qy.getObjectId();
-////	    	row = dbHelper.delete(DBHelper.TABLE_NAME, where, null);
-////	    	return row;
-////	    }
-//	    
-//	    public void deteleCache(long id ){
-//	    	String where = QiangTable._ID+" < "+id;
-////	    			+" AND "+FavTable.OBJECT_ID+" = "+qy.getObjectId();
-//	    	int row = dbHelper.delete(DBHelper.TABLE_NAME_QIANGYU, where, null);
-//	    	System.out.println("row:::::::::::"+row);
-//	    }
-//	    
-//	    
-//	    /**
-//	     * 设置内容的收藏状态
-//	     * @param context
-//	     * @param lists
-//	     */
-//	    public List<QiangYu> setFav(List<QiangYu> lists) {
-//	        Cursor cursor=null;
-//	        if(lists != null && lists.size() > 0) {
-//	            for(Iterator iterator=lists.iterator(); iterator.hasNext();) {
-//	            	QiangYu content=(QiangYu)iterator.next();
-//	            	String where = FavTable.USER_ID+" = '"+MyApplication.getInstance().getCurrentUser().getObjectId()//content.getAuthor().getObjectId()
-//	    	    			+"' AND "+FavTable.OBJECT_ID+" = '"+content.getObjectId()+"'";
-//	                cursor=dbHelper.query(DBHelper.TABLE_NAME, null, where, null, null, null, null);
-//	                if(cursor != null && cursor.getCount() > 0) {
-//	                	cursor.moveToFirst();
-//	                	if(cursor.getInt(cursor.getColumnIndex(FavTable.IS_FAV))==1){
-//	                		content.setMyFav(true);
-//	                	}else{
-//	                		content.setMyFav(false);
-//	                	}
-//	                    if(cursor.getInt(cursor.getColumnIndex(FavTable.IS_LOVE))==1){
-//	                    	content.setMyLove(true);
-//	                    }else{
-//	                    	content.setMyLove(false);
-//	                    }
-//	                }
-//	                LogUtils.i(TAG,content.getMyFav()+".."+content.getMyLove());
-//	            }
-//	        }
-//	        if(cursor != null) {
-//	            cursor.close();
-//	            dbHelper.close();
-//	        }
-//	        return lists;
-//	    }
-//	    
-//	    
-//	    public ArrayList<QiangYu> queryFav() {
-//	        ArrayList<QiangYu> contents=null;
-//	        // ContentResolver resolver = context.getContentResolver();
-//	        Cursor cursor=dbHelper.query(DBHelper.TABLE_NAME, null, null, null, null, null, null);
-//	        LogUtils.i(TAG, cursor.getCount() + "");
-//	        if(cursor == null) {
-//	            return null;
-//	        }
-//	        contents=new ArrayList<QiangYu>();
-//	        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-//	        	QiangYu content=new QiangYu();
-//	        	content.setMyFav(cursor.getInt(3)==1?true:false);
-//	        	content.setMyLove(cursor.getInt(4)==1?true:false);
-//	            LogUtils.i(TAG,cursor.getColumnIndex("isfav")+".."+cursor.getColumnIndex("islove")+".."+content.getMyFav()+"..."+content.getMyLove());
-//	            contents.add(content);
-//	        }
-//	        if(cursor != null) {
-//	            cursor.close();
-//	        }
-//	        // if (contents.size() > 0) {
-//	        // return contents;
-//	        // }
-//	        return contents;
-//	    }
-//	    
-//	    public ArrayList<QiangYu> queryQiangyuCache() {
-//	        ArrayList<QiangYu> contents=null;
-//	        String where = "1=1 order by _id Limit "+String.valueOf(40)+ " Offset " +String.valueOf(0); 
-//	        // ContentResolver resolver = context.getContentResolver();
-//	        Cursor cursor=dbHelper.query(DBHelper.TABLE_NAME_QIANGYU, null, where, null, null, null, null);
-//	        LogUtils.i(TAG, cursor.getCount() +" size");
-//	        if(cursor == null) {
-//	            return null;
-//	        }
-//	        contents=new ArrayList<QiangYu>();
-//	        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-//	        	QiangYu content=new QiangYu();
-//	        	content.setObjectId(cursor.getString(1));
-//	        	content.setContent(cursor.getString(2));
-//	        	content.setHate(cursor.getInt(3));
-//	        	content.setLove(cursor.getInt(4));
-//	        	content.setShare(cursor.getInt(5));
-//	        	content.setComment(cursor.getInt(6));
-//	        	content.setAuthorObjectId(cursor.getString(7));
-//	        	content.setCacheUrl(cursor.getString(8));
-//	        	
-//	        	User author = new User();
-//	        	author.setUsername(cursor.getString(9));
-//	        	author.setFromType(cursor.getString(10));
-//	        	
-//	        	content.setAuthor(author);
-//	        	content.setMyFav(cursor.getInt(11)==1?true:false);
-//	        	
-//	            LogUtils.i(TAG,cursor.getColumnIndex("isfav")+".."+cursor.getColumnIndex("islove")+".."+content.getMyFav()+"..."+content.getMyLove());
-//	            contents.add(content);
-//	        }
-//	        if(cursor != null) {
-//	            cursor.close();
-//	        }
-//	        // if (contents.size() > 0) {
-//	        // return contents;
-//	        // }
-//	        return contents;
-//	    }
+	/**
+	 * 销毁
+	 */
+	public void onDestory() {
+		instance = null;
+		if (dbHelper != null) {
+			dbHelper.close();
+			dbHelper = null;
+		}
+	}
+
+	/**
+	 * 删除收藏
+	 * 
+	 * @param qy
+	 */
+	// public void delete( qy){
+	// Cursor cursor=null;
+	// String where =
+	// FavTable.USER_ID+" = '"+MyApplication.getInstance().getCurrentUser().getObjectId()
+	// +"' AND "+FavTable.OBJECT_ID+" = '"+qy.getObjectId()+"'";
+	// cursor=dbHelper.query(DBHelper.TABLE_NAME, null, where, null, null, null,
+	// null);
+	// if(cursor != null && cursor.getCount() > 0) {
+	// cursor.moveToFirst();
+	// int isLove = cursor.getInt(cursor.getColumnIndex(FavTable.IS_LOVE));
+	// if(isLove==0){
+	// dbHelper.delete(DBHelper.TABLE_NAME, where, null);
+	// }else{
+	// ContentValues cv = new ContentValues();
+	// cv.put(FavTable.IS_FAV, 0);
+	// dbHelper.update(DBHelper.TABLE_NAME, cv, where, null);
+	// }
+	// }
+	// if(cursor != null) {
+	// cursor.close();
+	// dbHelper.close();
+	// }
+	// }
+	//
+	//
+	//
+	/**
+	 * 添加收藏产品
+	 * 
+	 * @param product
+	 * @return
+	 */
+	public long insertProduct(Product product) {
+		long uri = 0;
+		Cursor cursor = null;
+		String where = ProductTable.PRODUCTID + " = " + product.getId();
+		cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null, where, null,
+				null, null, null);
+		if (cursor != null && cursor.getCount() > 0) {
+			return uri;
+		} else {
+			ContentValues cv = new ContentValues();
+			cv.put(ProductTable.PRODUCTID, product.getId());
+			cv.put(ProductTable.NAME, product.getName());
+			cv.put(ProductTable.PICURL, product.getPicurl());
+			cv.put(ProductTable.CURPRICE, product.getCurPrice());
+			cv.put(ProductTable.MARKETPRICE, product.getMarketPrice());
+			cv.put(ProductTable.ONEWORD, product.getOneword());
+			cv.put(ProductTable.TIMECONSUME, product.getTimeConsume());
+			cv.put(ProductTable.SELLERNUM, product.getSellerNum());
+			cv.put(ProductTable.PRODETAILURL, product.getProDetailUrl());
+			cv.put(ProductTable.SUITSCROWD, product.getSuitsCrowd());
+			uri = dbHelper.insert(DBHelper.TABLE_NAME_PRODUCT, null, cv);
+		}
+		if (cursor != null) {
+			cursor.close();
+			dbHelper.close();
+		}
+		return uri;
+	}
+
+	/**
+	 * 收藏添加美容师
+	 * 
+	 * @param qy
+	 * @return
+	 */
+	public long insertSeller(Seller seller) {
+		long uri = 0;
+		Cursor cursor = null;
+		String where = SellerTable.SELLERID + " = " + seller.getId();
+		cursor = dbHelper.query(DBHelper.TABLE_NAME_SELLER, null, where, null,
+				null, null, null);
+		if (cursor != null && cursor.getCount() > 0) {
+			/*
+			 * cursor.moveToFirst(); ContentValues conv = new ContentValues();
+			 * conv.put(QiangTable.HATE, qy.getHate());
+			 * conv.put(QiangTable.LOVE, qy.getLove());
+			 * conv.put(QiangTable.COMMENT, qy.getComment());
+			 * conv.put(QiangTable.MYFAV,qy.getMyFav()==true?1:0);
+			 * 
+			 * dbHelper.update(DBHelper.TABLE_NAME_QIANGYU, conv, where, null);
+			 */
+			return uri;
+		} else {
+			ContentValues cv = new ContentValues();
+			cv.put(SellerTable.SELLERID, seller.getId());
+			cv.put(SellerTable.USERNAME, seller.getUsername());
+			cv.put(SellerTable.NICKNAME, seller.getNickname());
+			cv.put(SellerTable.AREA, seller.getArea());
+			cv.put(SellerTable.RECOMMEND, seller.getRecommend());
+			cv.put(SellerTable.MOBILE, seller.getMobile());
+			cv.put(SellerTable.ADDRESS, seller.getAddress());
+			cv.put(SellerTable.AVGPRICE, seller.getAvgPrice());
+			cv.put(SellerTable.USERGRADE, seller.getUserGrade());
+			cv.put(SellerTable.HEADURL, seller.getHeadurl());
+			cv.put(SellerTable.WORKYEAR, seller.getWorkyear());
+			cv.put(SellerTable.DEALNUMSUM, seller.getDealnumSum());
+			cv.put(SellerTable.DISTANCE, seller.getDistance());
+
+			uri = dbHelper.insert(DBHelper.TABLE_NAME_SELLER, null, cv);
+		}
+		if (cursor != null) {
+			cursor.close();
+			dbHelper.close();
+		}
+		return uri;
+	}
+
+	//
+	/**
+	 * 取消收藏产品
+	 * 
+	 * @param product
+	 * @return
+	 */
+	public int deleteFavProduct(long productId) {
+		int row = 0;
+		String where = ProductTable.PRODUCTID + " = " + productId;
+		row = dbHelper.delete(DBHelper.TABLE_NAME_PRODUCT, where, null);
+		return row;
+	}
+
+	/**
+	 * 取消收藏美容师
+	 * 
+	 * @param sellerId
+	 * @return
+	 */
+	public int deleteFavSeller(long sellerId) {
+		int row = 0;
+		String where = SellerTable.SELLERID + " = " + sellerId;
+		row = dbHelper.delete(DBHelper.TABLE_NAME_SELLER, where, null);
+		return row;
+	}
+
+	//
+	// public void deteleCache(long id ){
+	// String where = QiangTable._ID+" < "+id;
+	// // +" AND "+FavTable.OBJECT_ID+" = "+qy.getObjectId();
+	// int row = dbHelper.delete(DBHelper.TABLE_NAME_QIANGYU, where, null);
+	// System.out.println("row:::::::::::"+row);
+	// }
+	//
+	//
+	// /**
+	// * 设置内容的收藏状态
+	// * @param context
+	// * @param lists
+	// */
+	// public List<QiangYu> setFav(List<QiangYu> lists) {
+	// Cursor cursor=null;
+	// if(lists != null && lists.size() > 0) {
+	// for(Iterator iterator=lists.iterator(); iterator.hasNext();) {
+	// QiangYu content=(QiangYu)iterator.next();
+	// String where =
+	// FavTable.USER_ID+" = '"+MyApplication.getInstance().getCurrentUser().getObjectId()//content.getAuthor().getObjectId()
+	// +"' AND "+FavTable.OBJECT_ID+" = '"+content.getObjectId()+"'";
+	// cursor=dbHelper.query(DBHelper.TABLE_NAME, null, where, null, null, null,
+	// null);
+	// if(cursor != null && cursor.getCount() > 0) {
+	// cursor.moveToFirst();
+	// if(cursor.getInt(cursor.getColumnIndex(FavTable.IS_FAV))==1){
+	// content.setMyFav(true);
+	// }else{
+	// content.setMyFav(false);
+	// }
+	// if(cursor.getInt(cursor.getColumnIndex(FavTable.IS_LOVE))==1){
+	// content.setMyLove(true);
+	// }else{
+	// content.setMyLove(false);
+	// }
+	// }
+	// LogUtils.i(TAG,content.getMyFav()+".."+content.getMyLove());
+	// }
+	// }
+	// if(cursor != null) {
+	// cursor.close();
+	// dbHelper.close();
+	// }
+	// return lists;
+	// }
+	//
+	//
+	/**
+	 * 检查是否收藏过该产品
+	 * @param productId
+	 * @return
+	 */
+	public boolean checkFavProduct(long productId) {
+		String where = ProductTable.PRODUCTID + " = " + productId;
+		Cursor cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
+				where, null, null, null, null);
+		if (cursor != null && cursor.getCount() > 0) {
+			return true;
+		}
+		return false;
+	}
+	/**
+	 * 检查是否收藏过该美容师
+	 * @param sellerId
+	 * @return
+	 */
+	public boolean checkFavSeller(long sellerId) {
+		String where = SellerTable.SELLERID + " = " + sellerId;
+		Cursor cursor = dbHelper.query(DBHelper.TABLE_NAME_SELLER, null, where,
+				null, null, null, null);
+		if (cursor != null && cursor.getCount() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 获取收藏的产品
+	 * 
+	 * @return
+	 */
+	public ArrayList<Product> queryFavProduct(int pageNubmer, int limit) {
+		ArrayList<Product> products = null;
+		// ContentResolver resolver = context.getContentResolver();
+		// String where = "1=1 order by _id Limit "+String.valueOf(40)+
+		// " Offset " +String.valueOf(0);
+		int firstResult = pageNubmer * limit;
+		int maxResult = (pageNubmer + 1) * limit;
+		String where = "1=1 order by _id limit " + firstResult + ","
+				+ maxResult;
+		Cursor cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
+				where, null, null, null, null);
+		if (cursor == null) {
+			return null;
+		}
+		products = new ArrayList<Product>();
+		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+			Product product = new Product();
+
+			product.setId(cursor.getInt(1));
+			product.setName(cursor.getString(2));
+			product.setPicurl(cursor.getString(3));
+			product.setCurPrice(cursor.getDouble(4));
+			product.setMarketPrice(cursor.getDouble(5));
+			product.setOneword(cursor.getString(6));
+			product.setTimeConsume(cursor.getLong(7));
+			product.setSellerNum(cursor.getInt(8));
+			product.setProDetailUrl(cursor.getString(9));
+			product.setSuitsCrowd(cursor.getString(10));
+
+			products.add(product);
+		}
+		if (cursor != null) {
+			cursor.close();
+		}
+		// if (contents.size() > 0) {
+		// return contents;
+		// }
+		return products;
+	}
+
+	/**
+	 * 获取收藏的美容师列表
+	 * 
+	 * @param pageNum
+	 * @param limit
+	 * @return
+	 */
+	public ArrayList<Seller> querySellers(int pageNubmer, int limit) {
+		ArrayList<Seller> contents = null;
+
+		// ContentResolver resolver = context.getContentResolver();
+		int firstResult = pageNubmer * limit;
+		int maxResult = (pageNubmer + 1) * limit;
+		// String where = "1=1 order by _id Limit "+String.valueOf(40)+
+		// " Offset " +String.valueOf(0);
+		String where = "1=1 order by _id limit " + firstResult + ","
+				+ maxResult;
+		Cursor cursor = dbHelper.query(DBHelper.TABLE_NAME_SELLER, null, where,
+				null, null, null, null);
+		if (cursor == null) {
+			return null;
+		}
+		contents = new ArrayList<Seller>();
+		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+			Seller content = new Seller();
+			content.setId(cursor.getInt(1));
+			content.setUsername(cursor.getString(2));
+			content.setNickname(cursor.getString(3));
+			content.setArea(cursor.getString(4));
+			content.setRecommend(cursor.getString(5));
+			content.setMobile(cursor.getString(6));
+			content.setAddress(cursor.getString(7));
+			content.setAvgPrice(cursor.getDouble(8));
+			content.setUserGrade(cursor.getInt(9));
+			content.setHeadurl(cursor.getString(10));
+			content.setWorkyear(cursor.getInt(11));
+			content.setDealnumSum(cursor.getInt(12));
+			content.setDistance(cursor.getDouble(13));
+
+			contents.add(content);
+		}
+		if (cursor != null) {
+			cursor.close();
+		}
+		// if (contents.size() > 0) {
+		// return contents;
+		// }
+		return contents;
+	}
 
 }

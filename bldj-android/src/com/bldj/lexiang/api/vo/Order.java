@@ -8,8 +8,8 @@ public class Order  implements Serializable{
 	 */
 	private static final long serialVersionUID = -7889547444319575287L;
 	
-	private double orderNum;//订单号
-	private String orderPay;//订单总额
+	private String orderNum;//订单号
+	private double orderPay;//订单总额
 	private String createtime;//xiadan shijian 
 	private int status;//下单状态
 	private String statusStr;//状态
@@ -18,16 +18,16 @@ public class Order  implements Serializable{
 	
 	
 	
-	public double getOrderNum() {
+	public String getOrderNum() {
 		return orderNum;
 	}
-	public void setOrderNum(double orderNum) {
+	public void setOrderNum(String orderNum) {
 		this.orderNum = orderNum;
 	}
-	public String getOrderPay() {
+	public double getOrderPay() {
 		return orderPay;
 	}
-	public void setOrderPay(String orderPay) {
+	public void setOrderPay(double orderPay) {
 		this.orderPay = orderPay;
 	}
 	public String getCreatetime() {
