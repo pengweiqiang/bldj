@@ -6,8 +6,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.Scheduled;
+import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 
 /**
@@ -21,15 +30,20 @@ public class AppointmentDoor1Activity extends BaseActivity{
 	ActionBar mActionBar;
 	Button btn_next;
 	String time = "2014-12-2 10:30:00";
+	String dealDate = "20141202";
 	Button btn_address;
 	private String address;
 	Product product;
+	User user;
+	
+	Scheduled scheduled;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.appointment_door1);
 		super.onCreate(savedInstanceState);
 		product = (Product)this.getIntent().getSerializableExtra("product");
+		user = MyApplication.getInstance().getCurrentUser();
 		initView();
 		
 		initListener();
@@ -94,6 +108,21 @@ public class AppointmentDoor1Activity extends BaseActivity{
 		}
 	}
 	
+	private void getData(){
+		ApiBuyUtils.getScheduled(mContext, user.getUserId(), product.getId(),
+				dealDate, new HttpConnectionUtil.RequestCallback() {
+			
+			@Override
+			public void execute(ParseModel parseModel) {
+				if(!ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){
+					ToastUtils.showToast(mContext, parseModel.getMsg());
+				}else{
+					scheduled = (Scheduled)JsonUtils.fromJson(parseModel.getData().toString(), Scheduled.class);
+				}
+				
+			}
+		});
+	}
 	
 
 }

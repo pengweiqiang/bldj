@@ -151,7 +151,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			public void onClick(View v) {
 
 				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
-						Long.parseLong(user.getUserId()), user.getUsername(), seller.getId(),
+						user.getUserId(), user.getUsername(), seller.getId(),
 						seller.getUsername(), product.getId(), product.getName(), orderPay,
 						user.getUsername(), 1, user.getUsername(), user.getMobile(), detailAddress, "",
 						payType,0, new HttpConnectionUtil.RequestCallback() {
@@ -185,7 +185,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					return;
 				}
 				ApiBuyUtils.couponsManage(AppointmentDoor3Activity.this,
-						Long.parseLong(user.getUserId()), 0, vcode, 4,0,0,
+						user.getUserId(), 0, vcode, 4,0,0,
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
