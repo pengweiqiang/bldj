@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -17,7 +19,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
@@ -33,18 +34,19 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.BannerPagerAdapter;
 import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
-import com.bldj.lexiang.adapter.MallAdapter;
 import com.bldj.lexiang.api.ApiHomeUtils;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.Ad;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.MyListView;
@@ -85,11 +87,11 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	private int pageNumber = 0;
 
 	private TextView tab_find, tab_company, tab_reserve;
-	
+
 	private PopupWindow popupWindow;
 	private View view;
 	private ListView lv_group;
-	private List<TitleBarEnum> groups; 
+	private List<TitleBarEnum> groups;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,7 +121,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 		bannerViewPager.setLayoutParams(params1);
 		bannerListView = new ArrayList<View>();
-		
 
 		bannerPageAdapter = new BannerPagerAdapter(bannerListView);
 
@@ -172,16 +173,20 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		mListView.setXListViewListener(this);
 		return infoView;
 	}
-
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
+
 		initListener();
-		
+
 		getAdLists();
-		
+
 		getHotProduct();
+		
+		IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.LOCATION);
+        mActivity.registerReceiver(new LocationBroadcastReciver(), intentFilter);
 	}
 
 	// 设置activity的导航条
@@ -195,66 +200,73 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			}
 		});
 		// actionBar.hideLeftActionButton();
+		String city = (String) SharePreferenceManager.getSharePreferenceValue(
+				mActivity, Constant.FILE_NAME, "city", "");
+		actionBar.setCityName(city);
 		actionBar.setRightTextActionButton("更多", new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View view) {
-				/*Intent intent = new Intent(mActivity,MoreActivity.class);
-				startActivity(intent);*/
+				/*
+				 * Intent intent = new Intent(mActivity,MoreActivity.class);
+				 * startActivity(intent);
+				 */
 				buildTitleBar(view);
 			}
 		});
 	}
-	private void buildTitleBar(View parent){
+
+	private void buildTitleBar(View parent) {
 		DeviceInfo.setContext(mActivity);
-		if (popupWindow == null) {  
-            view = LayoutInflater.from(mActivity).inflate(R.layout.group_list, null);  
-            lv_group = (ListView) view.findViewById(R.id.lvGroup);  
-            groups = new ArrayList<TitleBarEnum>();  
-            groups.add(TitleBarEnum.ABOUT);  
-            groups.add(TitleBarEnum.FEEDBACK);  
-            groups.add(TitleBarEnum.SHARE);  
-            groups.add(TitleBarEnum.ZHAOPIN);  
-            GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);  
-            lv_group.setAdapter(groupAdapter);  
-            popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth()/2 - parent.getWidth(),
-                    LayoutParams.WRAP_CONTENT);  
-        }
-        popupWindow.setFocusable(true);  
-        popupWindow.setOutsideTouchable(true);  
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());  
-        
-//        WindowManager windowManager = (WindowManager) this.getActivity().getSystemService(Context.WINDOW_SERVICE);  
-        
-//        popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);  
-        popupWindow.showAsDropDown(parent);
-        lv_group.setOnItemClickListener(new OnItemClickListener() {  
-            @Override  
-            public void onItemClick(AdapterView<?> adapterView, View view,  
-                    int position, long id) {  
-                if(position == TitleBarEnum.ABOUT.getIndex()){
-                	Intent intent = new Intent(mActivity,
-    						AboutActivity.class);
-    				startActivity(intent);
-                }else if(position == TitleBarEnum.FEEDBACK.getIndex()){
-                	Intent intent = new Intent(mActivity,
-    						FeedBackActivity.class);
-    				startActivity(intent);
-                }else if(position == TitleBarEnum.SHARE.getIndex()){
-                	Intent intent = new Intent(mActivity,
-    						SharedFriendActivity.class);
-    				startActivity(intent);
-                }else if(position == TitleBarEnum.ZHAOPIN.getIndex()){
-                	Intent intent = new Intent(mActivity,
-    						AuthentActivity.class);
-    				startActivity(intent);
-                }
-                if (popupWindow != null) {  
-                    popupWindow.dismiss();  
-                }  
-            } 
-        });
+		if (popupWindow == null) {
+			view = LayoutInflater.from(mActivity).inflate(R.layout.group_list,
+					null);
+			lv_group = (ListView) view.findViewById(R.id.lvGroup);
+			groups = new ArrayList<TitleBarEnum>();
+			groups.add(TitleBarEnum.ABOUT);
+			groups.add(TitleBarEnum.FEEDBACK);
+			groups.add(TitleBarEnum.SHARE);
+			groups.add(TitleBarEnum.ZHAOPIN);
+			GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);
+			lv_group.setAdapter(groupAdapter);
+			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
+					- parent.getWidth(), LayoutParams.WRAP_CONTENT);
+		}
+		popupWindow.setFocusable(true);
+		popupWindow.setOutsideTouchable(true);
+		popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+		// WindowManager windowManager = (WindowManager)
+		// this.getActivity().getSystemService(Context.WINDOW_SERVICE);
+
+		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
+		popupWindow.showAsDropDown(parent);
+		lv_group.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				if (position == TitleBarEnum.ABOUT.getIndex()) {
+					Intent intent = new Intent(mActivity, AboutActivity.class);
+					startActivity(intent);
+				} else if (position == TitleBarEnum.FEEDBACK.getIndex()) {
+					Intent intent = new Intent(mActivity,
+							FeedBackActivity.class);
+					startActivity(intent);
+				} else if (position == TitleBarEnum.SHARE.getIndex()) {
+					Intent intent = new Intent(mActivity,
+							SharedFriendActivity.class);
+					startActivity(intent);
+				} else if (position == TitleBarEnum.ZHAOPIN.getIndex()) {
+					Intent intent = new Intent(mActivity, AuthentActivity.class);
+					startActivity(intent);
+				}
+				if (popupWindow != null) {
+					popupWindow.dismiss();
+				}
+			}
+		});
 	}
+
 	/*
 	 * @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
 	 * 
@@ -312,13 +324,15 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						infoView.findViewById(R.id.progress_banner).setVisibility(View.GONE);
-						infoView.findViewById(R.id.fl_banner).setVisibility(View.VISIBLE);
+						infoView.findViewById(R.id.progress_banner)
+								.setVisibility(View.GONE);
+						infoView.findViewById(R.id.fl_banner).setVisibility(
+								View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							bannerView.setVisibility(View.VISIBLE);
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
-							 return;
+							return;
 						} else {
 							bannerView.setVisibility(View.VISIBLE);
 							ads = JsonUtils.fromJson(parseModel.getData()
@@ -329,7 +343,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						addBannerView();
 					}
 				});
-		
+
 	}
 
 	/**
@@ -346,10 +360,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(mActivity,
-							 parseModel.getMsg());
-							 return;
-							
+							ToastUtils.showToast(mActivity, parseModel.getMsg());
+							return;
+
 						} else {
 							List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
@@ -376,7 +389,11 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			ImageView viewOne = (ImageView) LayoutInflater.from(mActivity)
 					.inflate(R.layout.b0_index_banner_cell, null);
 
-			ImageLoader.getInstance().displayImage(ad.getPicurl(), viewOne,MyApplication.getInstance().getOptions(R.drawable.default_image));
+			ImageLoader.getInstance().displayImage(
+					ad.getPicurl(),
+					viewOne,
+					MyApplication.getInstance().getOptions(
+							R.drawable.default_image));
 			bannerListView.add(viewOne);
 
 			viewOne.setOnClickListener(new OnClickListener() {
@@ -393,116 +410,144 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			});
 
 		}
-		
+
 		bannerPageAdapter = new BannerPagerAdapter(bannerListView);
 
 		bannerViewPager.setAdapter(bannerPageAdapter);
 		bannerViewPager.setCurrentItem(0);
 		bannerPageAdapter.notifyDataSetChanged();
-		
+
 		mIndicator.setViewPager(bannerViewPager);
-//		bannerPageAdapter = new BannerPagerAdapter(bannerListView);
-//		bannerViewPager.setAdapter(bannerPageAdapter);
-//		bannerViewPager.setCurrentItem(0);
-//		mIndicator.setViewPager(bannerViewPager);
-//		bannerPageAdapter.mListViews = bannerListView;
-//		bannerViewPager.setAdapter(bannerPageAdapter);
-//		bannerPageAdapter.notifyDataSetChanged();
-//		mIndicator.setCurrentItem(0);
+		// bannerPageAdapter = new BannerPagerAdapter(bannerListView);
+		// bannerViewPager.setAdapter(bannerPageAdapter);
+		// bannerViewPager.setCurrentItem(0);
+		// mIndicator.setViewPager(bannerViewPager);
+		// bannerPageAdapter.mListViews = bannerListView;
+		// bannerViewPager.setAdapter(bannerPageAdapter);
+		// bannerPageAdapter.notifyDataSetChanged();
+		// mIndicator.setCurrentItem(0);
 	}
 
 	/**
 	 * 初始化点击事件
 	 */
 	private void initListener() {
-		
-		//找理疗师
+
+		// 找理疗师
 		tab_find.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				/*tab_find.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn_selected1));
-				tab_company.setBackground(mActivity.getResources().getDrawable(
-						R.drawable.tab_btn2));
-				tab_reserve.setBackground(mActivity.getResources().getDrawable(
-						R.drawable.tab_btn3));*/
-				
-				Intent intent = new Intent(mActivity,JLYSFragmentActivity.class);
+				/*
+				 * tab_find.setBackground(getResources().getDrawable(
+				 * R.drawable.tab_btn_selected1));
+				 * tab_company.setBackground(mActivity
+				 * .getResources().getDrawable( R.drawable.tab_btn2));
+				 * tab_reserve
+				 * .setBackground(mActivity.getResources().getDrawable(
+				 * R.drawable.tab_btn3));
+				 */
+
+				Intent intent = new Intent(mActivity,
+						JLYSFragmentActivity.class);
 				startActivity(intent);
-				
+
 			}
 		});
-		//企业专区
+		// 企业专区
 		tab_company.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				/*tab_company.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn_selected2));
-				tab_find.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn1));
-				tab_reserve.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn3));*/
+				/*
+				 * tab_company.setBackground(getResources().getDrawable(
+				 * R.drawable.tab_btn_selected2));
+				 * tab_find.setBackground(getResources().getDrawable(
+				 * R.drawable.tab_btn1));
+				 * tab_reserve.setBackground(getResources().getDrawable(
+				 * R.drawable.tab_btn3));
+				 */
 				if (MyApplication.getInstance().getCurrentUser() == null) {
 					Intent intent = new Intent(mActivity,
 							RegisterAndLoginActivity.class);
 					startActivity(intent);
 					return;
 				}
-				Intent intent = new Intent(mActivity,CompanyZoneSelectPackageActivity.class);
+				Intent intent = new Intent(mActivity,
+						CompanyZoneSelectPackageActivity.class);
 				startActivity(intent);
 			}
 		});
-		//现在预约
+		// 现在预约
 		tab_reserve.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				/*tab_reserve.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn_selected3));
-				tab_find.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn1));
-				tab_company.setBackground(getResources().getDrawable(
-						R.drawable.tab_btn2));*/
-				Intent intent = new Intent(mActivity,AppointmentFragmentActivity.class);
+				/*
+				 * tab_reserve.setBackground(getResources().getDrawable(
+				 * R.drawable.tab_btn_selected3));
+				 * tab_find.setBackground(getResources().getDrawable(
+				 * R.drawable.tab_btn1));
+				 * tab_company.setBackground(getResources().getDrawable(
+				 * R.drawable.tab_btn2));
+				 */
+				Intent intent = new Intent(mActivity,
+						AppointmentFragmentActivity.class);
 				startActivity(intent);
 			}
 		});
-		
-		/*mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
-				Intent intent = new Intent(mActivity,HealthProductDetailActivity.class);
-				startActivity(intent);
-			}
-			
-		});*/
+		/*
+		 * mListView.setOnItemClickListener(new
+		 * AdapterView.OnItemClickListener() {
+		 * 
+		 * @Override public void onItemClick(AdapterView<?> arg0, View arg1, int
+		 * position, long arg3) { Intent intent = new
+		 * Intent(mActivity,HealthProductDetailActivity.class);
+		 * startActivity(intent); }
+		 * 
+		 * });
+		 */
 	}
 
 	@Override
 	public void onRefresh() {
-		pageNumber = 0 ;
+		pageNumber = 0;
 		getHotProduct();
 	}
 
 	@Override
 	public void onLoadMore() {
-		if(products==null || products.isEmpty()){
+		if (products == null || products.isEmpty()) {
 			pageNumber = 0;
-		}else{
+		} else {
 			pageNumber++;
 		}
 		getHotProduct();
 	}
-	
+
 	private void onLoad() {
 		mListView.stopRefresh();
 		mListView.stopLoadMore();
 		mListView.setRefreshTime(DateUtils.convert2String(
 				System.currentTimeMillis(), ""));
+	}
+
+	/**
+	 * 定位通知改变城市广播
+	 * @author will
+	 *
+	 */
+	private class LocationBroadcastReciver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals(Constant.LOCATION)) {
+				String city = intent.getStringExtra("city");
+				
+				mActionBar.setCityName(city);
+			}
+		}
 	}
 
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.utils.StringUtils;
 
 /**
  * 标题栏, 可设置标题和左右图标
@@ -27,6 +28,7 @@ public class ActionBar extends FrameLayout {
 	private ImageView mRightIconActionButton;
 	private Button mRightTextActionButton;
 	private LinearLayout mCityButton;
+	private TextView mCityView;
 
 	public ActionBar(Context context) {
 		super(context);
@@ -45,6 +47,7 @@ public class ActionBar extends FrameLayout {
 		LayoutInflater.from(getContext()).inflate(R.layout.action_bar_layout,
 				this);
 		mTitleView = (TextView) findViewById(R.id.actionBarTitle);
+		mCityView = (TextView)findViewById(R.id.tv_city);
 		mCityButton = (LinearLayout)findViewById(R.id.leftActionCity);
 		mLeftActionButton = (ImageView) findViewById(R.id.leftActionButton);
 		mRightIconActionButton = (ImageView) findViewById(R.id.rightIconActionButton);
@@ -73,6 +76,12 @@ public class ActionBar extends FrameLayout {
 		mLeftActionButton.setVisibility(View.INVISIBLE);
 		mCityButton.setOnClickListener(listener);
 		mCityButton.setVisibility(View.VISIBLE);
+	}
+	public void setCityName(String city){
+		if(StringUtils.isEmpty(city)){
+			city = "城市";
+		}
+		mCityView.setText(city);
 	}
 
 	public void hideLeftActionButton() {

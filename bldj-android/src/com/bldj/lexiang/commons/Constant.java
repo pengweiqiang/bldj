@@ -10,6 +10,10 @@ public class Constant {
     private static final int GD_LOG_LEVEL_INFO = 3;
 
     private static final int GD_LOG_LEVEL_NONE = 0;
+    
+    public static final String FILE_NAME = "bldj";
+    
+    public static final String LOCATION = "com.bldj.lexiang.location";
 
     /**
      * Set this flag to GD_LOG_LEVEL_NONE when releasing your application in
