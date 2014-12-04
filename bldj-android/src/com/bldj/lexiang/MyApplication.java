@@ -58,7 +58,7 @@ public class MyApplication extends Application {
 		myApplication = this;
 		initImageLoader(this);
 		String userJson = (String) SharePreferenceManager
-				.getSharePreferenceValue(this, "currentuser", "user", "");
+				.getSharePreferenceValue(this, Constant.FILE_NAME, "user", "");
 		if (!StringUtils.isEmpty(userJson)) {
 			user = JsonUtils.fromJson(userJson, User.class);
 		}
