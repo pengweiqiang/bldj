@@ -16,6 +16,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
@@ -92,7 +93,7 @@ public class LoginFragment extends BaseFragment {
 						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//登录成功
 							User user = JsonUtils.fromJson(parseModel.getData().toString(), User.class);
 							MyApplication.getInstance().setUser(user);
-							SharePreferenceManager.saveBatchSharedPreference(mActivity, "currentuser", "user", JsonUtils.toJson(user));
+							SharePreferenceManager.saveBatchSharedPreference(mActivity, Constant.FILE_NAME, "user", JsonUtils.toJson(user));
 							mActivity.finish();
 						}else{
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
