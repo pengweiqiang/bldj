@@ -262,7 +262,7 @@ public class OrderDetail2Activity extends BaseActivity {
 	 * 分享成功之后获取电子卷
 	 */
 	private void shared_addCode() {
-		ApiBuyUtils.couponsManage(this, Long.parseLong(user.getUserId()), 2,
+		ApiBuyUtils.couponsManage(this, user.getUserId(), 2,
 				"", 0,0,0, new HttpConnectionUtil.RequestCallback() {
 
 					@Override

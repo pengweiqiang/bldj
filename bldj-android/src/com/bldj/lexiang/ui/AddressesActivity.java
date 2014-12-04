@@ -117,7 +117,7 @@ public class AddressesActivity extends BaseActivity{
 	 * 获取地址列表数据
 	 */
 	private void getAddresses() {
-		String userId = MyApplication.getInstance().getCurrentUser().getUserId();
+		long userId = MyApplication.getInstance().getCurrentUser().getUserId();
 		ApiUserUtils.addressManager(this.getApplicationContext(), 3, userId, "", "", "", 
 				new HttpConnectionUtil.RequestCallback() {
 
