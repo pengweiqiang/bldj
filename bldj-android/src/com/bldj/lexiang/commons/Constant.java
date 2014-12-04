@@ -2,6 +2,12 @@ package com.bldj.lexiang.commons;
 
 public class Constant {
 
+	/**
+	 * 微信appid,appsecret
+	 */
+	public static String appID = "wx91da119751fdde4a";
+	public static String appSecret = "4ae149de66a81bca8ef0e2986bf03792";
+	
     /**
      * 超时时间
      */
