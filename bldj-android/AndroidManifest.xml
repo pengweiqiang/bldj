@@ -32,7 +32,6 @@
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.BROADCAST_STICKY" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    
 
     <supports-screens android:anyDensity="true" />
 
@@ -47,8 +46,8 @@
         android:label="@string/app_name"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme" >
-        
-           <!-- baidu map start -->
+
+        <!-- baidu map start -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="mIRyHB3Vf3cXCuv6FhSVAYNS" />
@@ -57,15 +56,13 @@
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" >
-            
             <intent-filter>
                 <action android:name="com.baidu.location.service_v2.2" >
                 </action>
             </intent-filter>
-            
         </service>
         <!-- baidu map end -->
-        
+
         <activity
             android:name=".ui.MainActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -246,7 +243,6 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="BLDJ" />
-
     </application>
 
 </manifest>
