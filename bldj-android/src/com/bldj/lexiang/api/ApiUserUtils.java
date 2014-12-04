@@ -200,7 +200,7 @@ public class ApiUserUtils {
 	 *            地址id
 	 * @param requestCallback
 	 */
-	public static void addressManager(Context context, int type, String userId,
+	public static void addressManager(Context context, int type, long userId,
 			String curLocation, String detailAddress, String id,
 			RequestCallback requestCallback) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);

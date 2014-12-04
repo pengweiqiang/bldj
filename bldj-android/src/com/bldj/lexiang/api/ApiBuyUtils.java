@@ -20,16 +20,16 @@ public class ApiBuyUtils {
 	 * 预约时间和选择美容师接口
 	 * 
 	 * @param context
-	 * @param id
-	 * @param proId
-	 * @param dealDate
+	 * @param id 用户id
+	 * @param proId 产品id
+	 * @param dealDate YYYYMMDD格式
 	 * @param requestCallBack
 	 */
 	public static void getScheduled(Context context, long id, long proId,
 			String dealDate, RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
-		params.put(ReqUrls.ID, String.valueOf(id));
-		params.put("proId", String.valueOf(proId));
+		params.put(ReqUrls.ID, id);
+		params.put("proId", proId);
 		params.put("dealDate", dealDate);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SCHEDULED, false,
 				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
