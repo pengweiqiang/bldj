@@ -9,19 +9,19 @@ public class User implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String userId;//用户userId,全局唯一
+	private long userId;//用户userId,全局唯一
 	private String username;//用户登录名，全局唯一
 	private String mobile;//用户手机号
 	private String nickname;//用户昵称
 	private String headurl;//头像
-	private String lon;//经度
-	private String lat;//纬度
+	private double lon;//经度
+	private double lat;//纬度
 	
 	
-	public String getUserId() {
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 	public String getUsername() {
@@ -48,16 +48,16 @@ public class User implements Serializable{
 	public void setHeadurl(String headurl) {
 		this.headurl = headurl;
 	}
-	public String getLon() {
+	public double getLon() {
 		return lon;
 	}
-	public void setLon(String lon) {
+	public void setLon(double lon) {
 		this.lon = lon;
 	}
-	public String getLat() {
+	public double getLat() {
 		return lat;
 	}
-	public void setLat(String lat) {
+	public void setLat(double lat) {
 		this.lat = lat;
 	}
 	
