@@ -195,11 +195,10 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		actionBar.setLeftHomeCityActionButton(new OnClickListener() {
 
 			@Override
-			public void onClick(View v) {
-				ToastUtils.showToast(mActivity, "切换城市");
+			public void onClick(View view) {
+				buildTitleBar(view,0);
 			}
 		});
-		// actionBar.hideLeftActionButton();
 		String city = (String) SharePreferenceManager.getSharePreferenceValue(
 				mActivity, Constant.FILE_NAME, "city", "");
 		actionBar.setCityName(city);
@@ -207,37 +206,37 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View view) {
-				/*
-				 * Intent intent = new Intent(mActivity,MoreActivity.class);
-				 * startActivity(intent);
-				 */
-				buildTitleBar(view);
+				buildTitleBar(view,1);
 			}
 		});
 	}
 
-	private void buildTitleBar(View parent) {
+	private void buildTitleBar(View parent,final int index) {
 		DeviceInfo.setContext(mActivity);
-		if (popupWindow == null) {
-			view = LayoutInflater.from(mActivity).inflate(R.layout.group_list,
-					null);
-			lv_group = (ListView) view.findViewById(R.id.lvGroup);
-			groups = new ArrayList<TitleBarEnum>();
+		groups = new ArrayList<TitleBarEnum>();
+		if(index == 0 ){//城市
+			groups.add(TitleBarEnum.CITY_BEIJING);
+			groups.add(TitleBarEnum.CITY_GUANGZHOU);
+			groups.add(TitleBarEnum.CITY_SHENZHEN);
+		}else{
 			groups.add(TitleBarEnum.ABOUT);
 			groups.add(TitleBarEnum.FEEDBACK);
 			groups.add(TitleBarEnum.SHARE);
 			groups.add(TitleBarEnum.ZHAOPIN);
-			GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);
-			lv_group.setAdapter(groupAdapter);
+		}
+		if (popupWindow == null) {
+			view = LayoutInflater.from(mActivity).inflate(R.layout.group_list,
+					null);
+			lv_group = (ListView) view.findViewById(R.id.lvGroup);
+			
 			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
 					- parent.getWidth(), LayoutParams.WRAP_CONTENT);
 		}
+		GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);
+		lv_group.setAdapter(groupAdapter);
 		popupWindow.setFocusable(true);
 		popupWindow.setOutsideTouchable(true);
 		popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-		// WindowManager windowManager = (WindowManager)
-		// this.getActivity().getSystemService(Context.WINDOW_SERVICE);
 
 		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
 		popupWindow.showAsDropDown(parent);
@@ -245,20 +244,26 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				if (position == TitleBarEnum.ABOUT.getIndex()) {
-					Intent intent = new Intent(mActivity, AboutActivity.class);
-					startActivity(intent);
-				} else if (position == TitleBarEnum.FEEDBACK.getIndex()) {
-					Intent intent = new Intent(mActivity,
-							FeedBackActivity.class);
-					startActivity(intent);
-				} else if (position == TitleBarEnum.SHARE.getIndex()) {
-					Intent intent = new Intent(mActivity,
-							SharedFriendActivity.class);
-					startActivity(intent);
-				} else if (position == TitleBarEnum.ZHAOPIN.getIndex()) {
-					Intent intent = new Intent(mActivity, AuthentActivity.class);
-					startActivity(intent);
+				if(index == 0){
+					mActionBar.setCityName(groups.get(position).getMsg());
+					SharePreferenceManager.saveBatchSharedPreference(mActivity, Constant.LOCATION, "city", groups.get(position).getMsg());
+				}else if (index == 1){
+					if (position == TitleBarEnum.ABOUT.getIndex()) {
+						Intent intent = new Intent(mActivity, AboutActivity.class);
+						startActivity(intent);
+					} else if (position == TitleBarEnum.FEEDBACK.getIndex()) {
+						Intent intent = new Intent(mActivity,
+								FeedBackActivity.class);
+						startActivity(intent);
+					} else if (position == TitleBarEnum.SHARE.getIndex()) {
+						Intent intent = new Intent(mActivity,
+								SharedFriendActivity.class);
+						startActivity(intent);
+					} else if (position == TitleBarEnum.ZHAOPIN.getIndex()) {
+						Intent intent = new Intent(mActivity, AuthentActivity.class);
+						startActivity(intent);
+					}
+				
 				}
 				if (popupWindow != null) {
 					popupWindow.dismiss();
