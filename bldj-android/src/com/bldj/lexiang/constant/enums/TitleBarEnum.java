@@ -35,7 +35,11 @@ public enum TitleBarEnum {
 	
 	SHARE_SINA(20,"新浪微博"),
 	SHARE_WEIXIN(21,"微信"),
-	SHARE_TENCENT(22,"腾讯微博");
+	SHARE_TENCENT(22,"腾讯微博"),
+	
+	CITY_BEIJING(22,"北京"),
+	CITY_GUANGZHOU(23,"广州"),
+	CITY_SHENZHEN(24,"深圳");
 	
 	private int index;
 	
