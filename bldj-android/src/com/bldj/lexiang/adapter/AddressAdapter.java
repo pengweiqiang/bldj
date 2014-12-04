@@ -94,7 +94,8 @@ public class AddressAdapter extends BaseListAdapter {
 
 			@Override
 			public void onClick(View arg0) {
-				ApiUserUtils.addressManager(context, 1, "", "", "",
+				User user = MyApplication.getInstance().getCurrentUser();
+				ApiUserUtils.addressManager(context, 1, user.getUserId(), "", "",
 						String.valueOf(address.getId()),
 						new HttpConnectionUtil.RequestCallback() {
 
