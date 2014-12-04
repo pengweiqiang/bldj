@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
@@ -45,6 +46,7 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 	@Override
 	public void onResp(BaseResp resp) {
 		Log.d(TAG, "onPayFinish, errCode = " + resp.errCode);
+		ToastUtils.showToast(this, "分享"+resp.errCode);
 
 		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -52,5 +54,22 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler{
 			builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
 			builder.show();
 		}
+		
+		 switch (resp.errCode) {  
+	        case BaseResp.ErrCode.ERR_OK:  
+	        	ToastUtils.showToast(this, "分享成功");
+	            //分享成功  
+	            break;  
+	        case BaseResp.ErrCode.ERR_USER_CANCEL:  
+	        	ToastUtils.showToast(this, "分享取消");
+	            //分享取消  
+	            break;  
+	        case BaseResp.ErrCode.ERR_AUTH_DENIED:  
+	            //分享拒绝  
+	        	ToastUtils.showToast(this, "分享拒绝");
+	            break;  
+	        }  
 	}
+	
+	
 }
