@@ -26,8 +26,10 @@ import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.ApiVersionUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -231,6 +233,7 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				MyApplication.getInstance().setUser(null);
+				SharePreferenceManager.saveBatchSharedPreference(mActivity, Constant.FILE_NAME, "user", "");
 				initData();
 			}
 		});
