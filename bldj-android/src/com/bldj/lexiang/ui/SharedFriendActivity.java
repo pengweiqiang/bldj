@@ -1,7 +1,10 @@
 package com.bldj.lexiang.ui;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.utils.ShareUtil;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 import android.os.Bundle;
 import android.view.View;
@@ -20,12 +23,18 @@ public class SharedFriendActivity extends BaseActivity {
 	private Button btn_sina;
 	private Button btn_weixin;
 
+	
+	ShareUtil shareUtil ;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.share_friend);
 		super.onCreate(savedInstanceState);
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		
+		shareUtil = new ShareUtil(mContext);
+		shareUtil.initWX();
 	}
 
 	// 设置activity的导航条
@@ -61,8 +70,9 @@ public class SharedFriendActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
+				ToastUtils.showToast(mContext, "分享微信...");
+				shareUtil.sendMsgToWX("健康送到家，方便你我他",
+						SendMessageToWX.Req.WXSceneTimeline);
 			}
 		});
 	}

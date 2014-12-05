@@ -180,7 +180,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 							products.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
-							onLoad();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 
 						} else {
 							List<Product> productsList = JsonUtils.fromJson(
@@ -203,11 +203,6 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 	public void onLoadMore() {
 		pageNumber++;
 		getMallData();
-	}
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(System.currentTimeMillis(),""));
 	}
 	
 	

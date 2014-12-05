@@ -126,7 +126,7 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 							coupons.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
-							onLoad();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 						}
 
 					}
@@ -144,10 +144,4 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 		pageNumber++;
 		getCoupons();
 	}
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(System.currentTimeMillis(),""));
-	}
-
 }

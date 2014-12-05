@@ -117,7 +117,7 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 					categorys.addAll(categoryList);
 
 					listAdapter.notifyDataSetChanged();
-					onLoad();
+					mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 				}
 
 			}
@@ -134,11 +134,6 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 	public void onLoadMore() {
 		pageNumber++;
 		getCategory();
-	}
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(System.currentTimeMillis(),""));
 	}
 
 	

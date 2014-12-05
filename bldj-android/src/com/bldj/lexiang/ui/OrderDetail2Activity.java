@@ -29,9 +29,11 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 /**
  * 订单详情2
@@ -59,6 +61,9 @@ public class OrderDetail2Activity extends BaseActivity {
 	private View view;
 	private ListView lv_group;
 	private List<TitleBarEnum> groups;
+	
+	
+	ShareUtil shareUtil;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +116,10 @@ public class OrderDetail2Activity extends BaseActivity {
 	}
 
 	private void initData() {
+		
+		shareUtil = new ShareUtil(mContext);
+		shareUtil.initWX();
+		
 		tv_order_time.setText(order.getCreatetime());
 		tv_order_pay.setText(String.valueOf(order.getOrderPay()));
 		tv_order_num.setText(order.getOrderNum());
@@ -245,8 +254,9 @@ public class OrderDetail2Activity extends BaseActivity {
 					ToastUtils.showToast(OrderDetail2Activity.this,TitleBarEnum.SHARE_SINA.getMsg()+"分享成功");
 					shared_addCode();
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN.getIndex()) {
-					ToastUtils.showToast(OrderDetail2Activity.this,TitleBarEnum.SHARE_WEIXIN.getMsg()+"分享成功");
-					shared_addCode();
+					ToastUtils.showToast(mContext, "分享微信...");
+					shareUtil.sendMsgToWX("健康送到家，方便你我他",
+							SendMessageToWX.Req.WXSceneTimeline);
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT.getIndex()) {
 					ToastUtils.showToast(OrderDetail2Activity.this,TitleBarEnum.SHARE_TENCENT.getMsg()+"分享成功");
 					shared_addCode();
