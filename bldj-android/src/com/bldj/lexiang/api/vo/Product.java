@@ -23,6 +23,7 @@ public class Product implements Serializable{
 	private int sellerNum;
 	private String proDetailUrl;
 	private String suitsCrowd;
+	private long sellerId;
 	
 	
 	
@@ -85,6 +86,12 @@ public class Product implements Serializable{
 	}
 	public void setSuitsCrowd(String suitsCrowd) {
 		this.suitsCrowd = suitsCrowd;
+	}
+	public long getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(long sellerId) {
+		this.sellerId = sellerId;
 	}
 	
 	

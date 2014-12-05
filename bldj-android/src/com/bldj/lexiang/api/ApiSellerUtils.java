@@ -62,5 +62,38 @@ public class ApiSellerUtils {
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_EVALS, false,
 				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 	}
+	/**
+	 * 获取美容师产品列表
+	 * @param context
+	 * @param id 卖家id
+	 * @param start 起始页
+	 * @param limit 每页条数
+	 * @param requestCallBack
+	 */
+	public static void getSellerProduct(Context context,long id ,int start,int limit,RequestCallback requestCallBack){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_PRODUCTS, false,
+				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
+	}
+	
+	/**
+	 * 获取美容师评论列表
+	 * @param context
+	 * @param id 卖家id
+	 * @param start 起始页
+	 * @param limit 每页条数
+	 * @param requestCallBack
+	 */
+	public static void getSellerScores(Context context,long id ,int start,int limit,RequestCallback requestCallBack){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_SCORES, false,
+				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
+	}
 	
 }
