@@ -23,6 +23,9 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.DateUtils;
+import com.bldj.lexiang.utils.StringUtils;
 
 public class XListView extends ListView implements OnScrollListener {
 
@@ -183,7 +186,18 @@ public class XListView extends ListView implements OnScrollListener {
 			mFooterView.setState(XListViewFooter.STATE_NORMAL);
 		}
 	}
-
+	/**
+	 * 
+	 * @param footTxt listView底部文字提示
+	 */
+	public void onLoadFinish(int pageNumber,int count,String footTxt) {
+		stopRefresh();
+		stopLoadMore();
+		setRefreshTime(DateUtils.convert2String(
+				System.currentTimeMillis(), ""));
+		setFootHintText(pageNumber,count,footTxt);
+	}
+	
 	/**
 	 * set last refresh time
 	 * 
@@ -196,8 +210,13 @@ public class XListView extends ListView implements OnScrollListener {
 	 * 
 	 * @param str
 	 */
-	public void setFootHintText(String str){
-		mFootHintView.setText(str);
+	public void setFootHintText(int pageNumber,int count,String str){
+		if(count == 0){//上次加载为0,本次加载数据也为0
+			mFootHintView.setText(str);
+		}else if(count < (pageNumber+1)*ApiConstants.LIMIT){//本次加载数据为0
+			mFooterView.setOnClickListener(null);
+			mFootHintView.setText("加载完毕");
+		}
 	}
 
 	private void invokeOnScrolling() {
