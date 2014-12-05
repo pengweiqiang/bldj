@@ -108,124 +108,58 @@
         </RelativeLayout>
     </RelativeLayout>
     
-    <LinearLayout 
+    <RadioGroup
+        android:id="@+id/rg_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dip"
-        android:paddingLeft="10dip"
-        android:background="@color/blue"
-        >
-        
-        <TextView 
-            android:id="@+id/goodEval"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="好评   77条"
-            android:layout_weight="1"
-            />
-        
-         <TextView 
-            android:id="@+id/midEval"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="中评  7条"
-            android:layout_weight="1"
-            />
-         
-         <TextView 
-            android:id="@+id/badEval"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="差评  7条"
-            android:layout_weight="1"
-            />
-        
-    </LinearLayout>
-    
-    <TextView 
-        android:id="@+id/person_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="2dip"
-        android:layout_margin="5dip"
-        android:textSize="11sp"
-        android:text="毕业于北京中医药大学，10年理疗经验。擅长颈、肩、腰、背等，从师5年临床实验毕业于北京中医药大学，10年理疗经验。擅长颈、肩、腰、背等，从师5年临床实验"
-        />
-    
-     <LinearLayout
-        android:id="@+id/ll_tab_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/actionBar"
-        android:layout_margin="5dip"
         android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/tab_jlys"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/radio_msg"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
             android:layout_weight="1"
-            android:background="@drawable/select_left"
+            android:background="@drawable/bg_main_tab_button"
+            android:button="@android:color/transparent"
+            android:checked="true"
             android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/all"
-            android:textSize="13sp" />
+            android:text="信息概览" />
 
+        <RadioButton
+            android:id="@+id/radio_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:background="@drawable/bg_main_tab_button"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="服务项目" /> 
 
-        <TextView
-            android:id="@+id/tab_single_project"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/radio_work"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/unselect_right"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:background="@drawable/bg_main_tab_button"
+            android:button="@android:color/transparent"
             android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/single_project"
-            android:textSize="13sp" />
-         <TextView
-            android:id="@+id/tab_team"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/unselect_right"
-            android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/team"
-            android:textSize="13sp" />
-          <TextView
-            android:id="@+id/tab_high"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/unselect_right"
-            android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/high"
-            android:textSize="13sp" />
-        
-    </LinearLayout>
-	
-           <com.bldj.lexiang.view.XListView
-        android:id="@+id/listview"
+            android:text="证书履历" />
+
+    </RadioGroup>
+    
+    
+      <com.bldj.lexiang.view.CustomViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@drawable/good_list_bg"
-        android:divider="#00000000"
-        android:visibility="visible" />
-      
-       <ProgressBar
-        android:id="@+id/progress_listView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:max="100"
-        android:visibility="gone" />
+        android:layout_below="@+id/ll_tab_title" >
+    </com.bldj.lexiang.view.CustomViewPager>
      
 
 </LinearLayout>
