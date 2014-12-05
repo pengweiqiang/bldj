@@ -108,7 +108,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 		tv_price.setText("一休价：￥" + String.valueOf(product.getCurPrice()));
 		tv_shop_price.setText("门店价：￥"
 				+ String.valueOf(product.getMarketPrice()));
-		tv_buy_count.setText(product.getSuitsCrowd());// ???具体哪个字段
+		tv_buy_count.setText(product.getSellerNum()+"人已经购买");// ???具体哪个字段
 
 		webView.setWebViewClient(new WebViewClient() { // 通过webView打开链接，不调用系统浏览器
 
