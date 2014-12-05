@@ -203,7 +203,15 @@ public class SellerPersonalActivity extends FragmentActivity {
 		tv_order_count.setText("共接单" + sellerVo.getDealnumSum() + "次");
 		tv_price.setText("均价：￥" + String.valueOf(sellerVo.getAvgPrice()));
 		tv_username.setText(sellerVo.getUsername());
-		tv_level.setText(String.valueOf(sellerVo.getUserGrade()));
+		String levelStr = "";
+		if(sellerVo.getDealnumSum()<20){
+			levelStr = "★";
+		}else if(sellerVo.getDealnumSum()>200){
+			levelStr = "★★";
+		}else{
+			levelStr = "★★★★";
+		}
+		tv_level.setText(levelStr);
 		tv_work.setText("年龄：" + sellerVo.getWorkyear());
 
 	}
