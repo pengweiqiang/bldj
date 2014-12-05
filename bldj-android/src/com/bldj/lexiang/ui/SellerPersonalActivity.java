@@ -4,11 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
@@ -29,6 +36,7 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.CustomViewPager;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 import com.bldj.universalimageloader.core.ImageLoader;
@@ -40,8 +48,7 @@ import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
  * @author will
  * 
  */
-public class SellerPersonalActivity extends BaseActivity implements
-		IXListViewListener {
+public class SellerPersonalActivity extends FragmentActivity {
 
 	private ImageView imageHead;
 	private TextView tv_username;
@@ -51,20 +58,18 @@ public class SellerPersonalActivity extends BaseActivity implements
 	private TextView tv_level;
 	private Button btn_collect;
 	private Button btn_share;
-	private TextView tv_goodeval, tv_mideval, tv_badeval;
+	private RadioGroup rg_title; 
+	 private RadioButton rb_msg, rb_service, rb_work;
 
 	ActionBar mActionBar;
+	CustomViewPager mViewPager;
+	List<Fragment> list;
+
 	Seller sellerVo;
 
-	private ProgressBar progressBar;
-	private XListView mListView;
-	private HomeAdapter listAdapter;
-	private List<Product> products;
 	Evals evals;// 评价
 	boolean isFav;// 是否收藏
 
-	private int pageNumber = 0;
-	
 	ShareUtil shareUtil;
 
 	@Override
@@ -73,19 +78,11 @@ public class SellerPersonalActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 
 		sellerVo = (Seller) this.getIntent().getSerializableExtra("seller");
-		mActionBar = (ActionBar) findViewById(R.id.actionBar);
-		onConfigureActionBar(mActionBar);
 
+		initView();
 		initData();
+		initListener();
 
-		products = new ArrayList<Product>();
-		listAdapter = new HomeAdapter(this, products);
-		mListView.setAdapter(listAdapter);
-		mListView.setPullLoadEnable(true);
-		mListView.setXListViewListener(this);
-
-		getProduct();
-		getSellerEval();
 	}
 
 	// 设置activity的导航条
@@ -101,10 +98,10 @@ public class SellerPersonalActivity extends BaseActivity implements
 		actionBar.hideRightActionButton();
 	}
 
-	@Override
 	public void initView() {
-		progressBar = (ProgressBar) findViewById(R.id.progress_listView);
-		mListView = (XListView) findViewById(R.id.listview);
+		mActionBar = (ActionBar) findViewById(R.id.actionBar);
+		onConfigureActionBar(mActionBar);
+		mViewPager = (CustomViewPager) findViewById(R.id.viewPager);
 
 		imageHead = (ImageView) findViewById(R.id.head_img);
 		tv_order_count = (TextView) findViewById(R.id.order_count);
@@ -114,19 +111,88 @@ public class SellerPersonalActivity extends BaseActivity implements
 		tv_work = (TextView) findViewById(R.id.work);
 		btn_collect = (Button) findViewById(R.id.collect);
 		btn_share = (Button) findViewById(R.id.share);
-		tv_badeval = (TextView) findViewById(R.id.badEval);
-		tv_mideval = (TextView) findViewById(R.id.midEval);
-		tv_goodeval = (TextView) findViewById(R.id.goodEval);
+		rg_title = (RadioGroup) findViewById(R.id.rg_title);
+		rb_msg = (RadioButton)findViewById(R.id.radio_msg);
+		rb_service = (RadioButton)findViewById(R.id.radio_service);
+		rb_work = (RadioButton)findViewById(R.id.radio_work);
+		
+
+		// 实例化对象
+		list = new ArrayList<Fragment>();
+
+		// 设置数据源
+		// 信息概览
+		SellerInfoFragment sellerInfoFragment = new SellerInfoFragment();
+		// 服务项目
+		SellerServiceFragment serviceFragment = new SellerServiceFragment();
+		SellerWorkFragment workFragment = new SellerWorkFragment();
+
+		list.add(sellerInfoFragment);
+		list.add(serviceFragment);
+		list.add(workFragment);
+
+		// 设置适配器
+		FragmentPagerAdapter adapter = new FragmentPagerAdapter(
+				getSupportFragmentManager()) {
+
+			@Override
+			public int getCount() {
+				return list.size();
+			}
+
+			@Override
+			public Fragment getItem(int arg0) {
+				return list.get(arg0);
+			}
+		};
+
+		// 绑定适配器
+		mViewPager.setAdapter(adapter);
+		// 设置滑动监听
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int position) {
+				mViewPager.setCurrentItem(position, false);
+				switch (position) {
+				case 0:
+					rb_msg.setChecked(true);
+					break;
+				case 1:
+					rb_service.setChecked(true);
+					break;
+				case 2:
+					rb_work.setChecked(true);
+					break;
+
+				default:
+					break;
+				}
+
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				Log.i("tuzi", arg0 + "," + arg1 + "," + arg2);
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 	}
 
 	private void initData() {
-		
-		shareUtil = new ShareUtil(mContext);
+
+		shareUtil = new ShareUtil(this);
 		shareUtil.initWX();
-		
+
 		// 获取此美容师是否收藏过
-		isFav = DatabaseUtil.getInstance(mContext).checkFavSeller(
-				sellerVo.getId());
+		isFav = DatabaseUtil.getInstance(this).checkFavSeller(sellerVo.getId());
 		if (isFav) {
 			btn_collect.setText("已收藏");
 		}
@@ -142,7 +208,6 @@ public class SellerPersonalActivity extends BaseActivity implements
 
 	}
 
-	@Override
 	public void initListener() {
 		// 收藏
 		btn_collect.setOnClickListener(new View.OnClickListener() {
@@ -150,24 +215,29 @@ public class SellerPersonalActivity extends BaseActivity implements
 			@Override
 			public void onClick(View arg0) {
 				if (!isFav) {
-					long row = DatabaseUtil.getInstance(mContext).insertSeller(
-							sellerVo);
+					long row = DatabaseUtil.getInstance(
+							SellerPersonalActivity.this).insertSeller(sellerVo);
 					if (row > 0) {
 						isFav = true;
-						ToastUtils.showToast(mContext, "收藏成功");
+						ToastUtils.showToast(SellerPersonalActivity.this,
+								"收藏成功");
 						btn_collect.setText("已收藏");
 					} else {
-						ToastUtils.showToast(mContext, "该美容师已经收藏");
+						ToastUtils.showToast(SellerPersonalActivity.this,
+								"该美容师已经收藏");
 					}
 				} else {
-					int row = DatabaseUtil.getInstance(mContext)
-							.deleteFavSeller(sellerVo.getId());
+					int row = DatabaseUtil.getInstance(
+							SellerPersonalActivity.this).deleteFavSeller(
+							sellerVo.getId());
 					if (row > 0) {
 						isFav = false;
-						ToastUtils.showToast(mContext, "取消收藏");
+						ToastUtils.showToast(SellerPersonalActivity.this,
+								"取消收藏");
 						btn_collect.setText("收藏");
 					} else {
-						ToastUtils.showToast(mContext, "取消收藏失败，稍后请重试！");
+						ToastUtils.showToast(SellerPersonalActivity.this,
+								"取消收藏失败，稍后请重试！");
 					}
 				}
 
@@ -178,85 +248,58 @@ public class SellerPersonalActivity extends BaseActivity implements
 
 			@Override
 			public void onClick(View arg0) {
-				ToastUtils.showToast(mContext, "分享微信...");
+				ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
 				shareUtil.sendMsgToWX("健康送到家，方便你我他",
 						SendMessageToWX.Req.WXSceneTimeline);
 			}
 		});
 
+		rg_title.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                case R.id.radio_msg:
+                	mViewPager.setCurrentItem(0, false);
+                    break;
+                case R.id.radio_service:
+                	mViewPager.setCurrentItem(1, false);
+                    break;
+                case R.id.radio_work:
+                	mViewPager.setCurrentItem(2, false);
+                    break;
+                }
+            }
+        });
 	}
 
-	@Override
-	public void onRefresh() {
-		pageNumber = 0;
-		getProduct();
-	}
-
-	@Override
-	public void onLoadMore() {
-		pageNumber++;
-		getProduct();
-	}
-
-
-	/**
-	 * 获取数据
-	 */
-	private void getProduct() {
-		ApiProductUtils.getProducts(SellerPersonalActivity.this, "1", 2, 0, 0,
-				pageNumber, ApiConstants.LIMIT,
-				new HttpConnectionUtil.RequestCallback() {
-
-					@Override
-					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
-						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
-								.getStatus())) {
-							ToastUtils.showToast(mContext, parseModel.getMsg());
-
-						} else {
-							List<Product> productsList = JsonUtils.fromJson(
-									parseModel.getData().toString(),
-									new TypeToken<List<Product>>() {
-									});
-							if (pageNumber == 0) {
-								products.clear();
-							}
-							products.addAll(productsList);
-
-							listAdapter.notifyDataSetChanged();
-							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
-						}
-
-					}
-				});
+	public Seller getSellerVo() {
+		return sellerVo;
 	}
 
 	/**
 	 * 获取美容师的评价
 	 */
-	private void getSellerEval() {
-		ApiSellerUtils.getSellerEvals(this, sellerVo.getId(),
-				new HttpConnectionUtil.RequestCallback() {
-
-					@Override
-					public void execute(ParseModel parseModel) {
-						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
-								.getStatus())) {
-							// ToastUtils.showToast(SellerPersonalActivity.this,parseModel.getMsg());
-							return;
-						} else {
-							evals = (Evals) JsonUtils.fromJson(parseModel
-									.getData().toString(), Evals.class);
-							tv_goodeval.setText("好评   " + evals.getGoodEval()
-									+ "条");
-							tv_mideval.setText("中评   " + evals.getMidEval()
-									+ "条");
-							tv_badeval.setText("差评   " + evals.getBadEval()
-									+ "条");
-						}
-					}
-				});
-	}
+	// private void getSellerEval() {
+	// ApiSellerUtils.getSellerEvals(this, sellerVo.getId(),
+	// new HttpConnectionUtil.RequestCallback() {
+	//
+	// @Override
+	// public void execute(ParseModel parseModel) {
+	// if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+	// .getStatus())) {
+	// // ToastUtils.showToast(SellerPersonalActivity.this,parseModel.getMsg());
+	// return;
+	// } else {
+	// evals = (Evals) JsonUtils.fromJson(parseModel
+	// .getData().toString(), Evals.class);
+	// tv_goodeval.setText("好评   " + evals.getGoodEval()
+	// + "条");
+	// tv_mideval.setText("中评   " + evals.getMidEval()
+	// + "条");
+	// tv_badeval.setText("差评   " + evals.getBadEval()
+	// + "条");
+	// }
+	// }
+	// });
+	// }
 }

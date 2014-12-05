@@ -81,8 +81,12 @@ public class JlysHealthAdapter extends BaseListAdapter {
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
 		holder.tv_order_count.setText("共接单:"+seller.getDealnumSum()+"次");
 		StringBuffer levelStr = new StringBuffer();
-		for(int i =0;i<seller.getUserGrade();i++){
+		if(seller.getDealnumSum()<20){
 			levelStr.append("★");
+		}else if(seller.getDealnumSum()>200){
+			levelStr.append("★★");
+		}else{
+			levelStr.append("★★★★");
 		}
 		holder.tv_level.setText(levelStr);
 

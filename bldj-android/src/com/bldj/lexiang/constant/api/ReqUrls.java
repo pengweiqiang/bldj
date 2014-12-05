@@ -182,6 +182,15 @@ public interface ReqUrls {
 	public static final String REQUEST_SELLER_EVALS = "/seller/getEvals";
 	
 	/**
+	 * 获取美容师产品列表
+	 */
+	public static final String REQUEST_SELLER_PRODUCTS = "/seller/getSellerProducts";
+	/**
+	 * 获取美容师评论列表
+	 */
+	public static final String REQUEST_SELLER_SCORES = "/seller/getSellerScores";
+	
+	/**
 	 * 版本升级
 	 */
 	public static final String CHECK_VERSION = "user/checkVersion";

@@ -154,7 +154,7 @@ public class JLYSFragmentActivity extends FragmentActivity {
 					R.drawable.select_left));
 			tab_see_health_div.setBackground(getResources().getDrawable(
 					R.drawable.unselect_right));
-			mViewPager.setCurrentItem(0, false);
+//			mViewPager.setCurrentItem(0, false);
 		} else if (position == 1) {
 			tab_health_service.setBackground(getResources().getDrawable(
 					R.drawable.unselect_left));
