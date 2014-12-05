@@ -40,18 +40,22 @@ public class ApiBuyUtils {
 	 * 
 	 * @param context
 	 * @param id 用户id
-	 * @param type 0电子券 1注册 2分享
+	 * @param type 0电子券 1注册 2分享 -1获取所有
 	 * @param vcode 电子券码
 	 * @param method 0添加 3查询 4校验
+	 * @param start 起始页
+	 * @param limit 每页数量
+	 * @param status 0 有效 1过期失效
 	 * @param requestCallBack
 	 */
 	public static void couponsManage(Context context, long id, int type,
-			String vcode, int method,int start,int limit, RequestCallback requestCallBack) {
+			String vcode, int method,int start,int limit,int status, RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, id);
 		params.put("type", type);
 		params.put("vcode", vcode);
 		params.put("method", method);
+		params.put("status", status);
 		params.put(ReqUrls.START, start);
 		params.put(ReqUrls.LIMIT, limit);
 		ApiUtils.getParseModel(params, ReqUrls.COUPONS_MANAGE, false,

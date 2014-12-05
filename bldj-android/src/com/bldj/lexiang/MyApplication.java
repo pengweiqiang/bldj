@@ -95,7 +95,7 @@ public class MyApplication extends Application {
 				.showImageForEmptyUri(drawableId).showImageOnFail(drawableId)
 				.resetViewBeforeLoading(true).cacheInMemory(true)
 				.cacheOnDisc(true).imageScaleType(ImageScaleType.EXACTLY)
-				.bitmapConfig(Bitmap.Config.RGB_565).build();
+				.bitmapConfig(Bitmap.Config.RGB_565).build(); 
 	}
 
 	/**

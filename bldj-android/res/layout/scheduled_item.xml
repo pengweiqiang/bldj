@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/time1"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="10点" />
+
+            <TextView
+                android:id="@+id/tv_status1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time2"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="11点" />
+
+            <TextView
+                android:id="@+id/tv_status2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time3"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="12点" />
+
+            <TextView
+                android:id="@+id/tv_status3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time4"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="12:30" />
+
+            <TextView
+                android:id="@+id/tv_status4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/time5"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="14:30" />
+
+            <TextView
+                android:id="@+id/tv_status5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time6"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="15点" />
+
+            <TextView
+                android:id="@+id/tv_status6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time7"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="16点" />
+
+            <TextView
+                android:id="@+id/tv_status7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time8"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="17:30" />
+
+            <TextView
+                android:id="@+id/tv_status8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/time9"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1"
+            android:onClick="clickTime" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="18点" />
+
+            <TextView
+                android:id="@+id/tv_status9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time10"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="19点" />
+
+            <TextView
+                android:id="@+id/tv_status10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time11"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="20点" />
+
+            <TextView
+                android:id="@+id/tv_status11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time12"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="21点" />
+
+            <TextView
+                android:id="@+id/tv_status12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/time13"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="21:30" />
+
+            <TextView
+                android:id="@+id/tv_status13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time14"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="22点" />
+
+            <TextView
+                android:id="@+id/tv_status14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time15"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="22:30" />
+
+            <TextView
+                android:id="@+id/tv_status15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/time16"
+            android:layout_width="0dip"
+            android:layout_height="70dip"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:text="23点" />
+
+            <TextView
+                android:id="@+id/tv_status16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_time"
+                android:layout_centerInParent="true"
+                android:text="可预约" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
