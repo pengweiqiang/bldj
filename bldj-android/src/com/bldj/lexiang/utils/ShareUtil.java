@@ -33,7 +33,8 @@ public class ShareUtil {
 	 */
 	public void initWX() {
 		// 通过WXAPIFactory工厂，获取IWXAPI的实例
-		api = WXAPIFactory.createWXAPI(context, Constant.appID, true);
+		api = WXAPIFactory.createWXAPI(context, Constant.appID, false);
+		api.registerApp(Constant.appID);
 
 		// 将应用的appId注册到微信
 
