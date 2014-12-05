@@ -139,7 +139,7 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 				userId = user.getUserId();
 			}
 			ApiBuyUtils.couponsManage(this, userId, 2,
-					"", 0,0,0, new HttpConnectionUtil.RequestCallback() {
+					"", 0,0,0,0, new HttpConnectionUtil.RequestCallback() {
 
 						@Override
 						public void execute(ParseModel parseModel) {
