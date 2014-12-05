@@ -89,11 +89,11 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	}
 	
 	/**
-	 * 获取优惠卷数据
+	 * 获取失效优惠卷数据
 	 */
 	private void getCoupons() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), 0, "", 3,pageNumber,ApiConstants.LIMIT,
+		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), -1, "", 3,pageNumber,ApiConstants.LIMIT,1,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -104,14 +104,14 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 								.getStatus())) {
 							 ToastUtils.showToast(mActivity,parseModel.getMsg());
 						} else {
-							List<Coupon> productsList = JsonUtils.fromJson(
+							List<Coupon> couponsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Coupon>>() {
 									});
 							if(pageNumber==0){
 								coupons.clear();
 							}
-							coupons.addAll(productsList);
+							coupons.addAll(couponsList);
 
 							listAdapter.notifyDataSetChanged();
 							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");

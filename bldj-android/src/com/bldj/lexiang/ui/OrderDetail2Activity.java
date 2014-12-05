@@ -273,7 +273,7 @@ public class OrderDetail2Activity extends BaseActivity {
 	 */
 	private void shared_addCode() {
 		ApiBuyUtils.couponsManage(this, user.getUserId(), 2,
-				"", 0,0,0, new HttpConnectionUtil.RequestCallback() {
+				"", 0,0,0,0, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {

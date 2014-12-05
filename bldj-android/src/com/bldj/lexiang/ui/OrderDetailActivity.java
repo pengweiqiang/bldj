@@ -152,7 +152,7 @@ public class OrderDetailActivity extends BaseActivity {
 					return;
 				}
 				ApiBuyUtils.couponsManage(OrderDetailActivity.this,
-						user.getUserId(), 0, vcode, 4,0,0,
+						user.getUserId(), 0, vcode, 4,0,0,0,
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
