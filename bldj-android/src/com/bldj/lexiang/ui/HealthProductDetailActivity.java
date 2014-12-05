@@ -163,6 +163,12 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
+				if(MyApplication.getInstance().getCurrentUser()==null){
+					Intent intent = new Intent(HealthProductDetailActivity.this,
+							RegisterAndLoginActivity.class);
+					startActivity(intent);
+					return;
+				}
 				Intent intent = new Intent(HealthProductDetailActivity.this,
 						AppointmentDoor1Activity.class);
 				intent.putExtra("product", product);
