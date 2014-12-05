@@ -103,6 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignRight="@+id/level"
                      android:textSize="12sp"
+                     android:layout_marginLeft="6dip"
                     android:text="共接单21次" />
             </LinearLayout>
         </RelativeLayout>
