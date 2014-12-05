@@ -34,7 +34,8 @@ public class AppointmentDoor1Activity extends BaseActivity {
 
 	ActionBar mActionBar;
 	Button btn_next;
-	String time = "";
+	String date = "";//日期
+	String time = "";//时间点
 	Button btn_address;
 	String address;
 	Product product;
@@ -97,6 +98,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+//				ToastUtils.showToast(mContext, date+" "+time);
 				if(StringUtils.isEmpty(address)){
 					ToastUtils.showToast(mContext, "请选择地址");
 					return;
@@ -107,7 +109,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 				}
 				Intent intent = new Intent(AppointmentDoor1Activity.this,
 						AppointmentDoor2Activity.class);
-				intent.putExtra("time", time);
+				intent.putExtra("time", date+" "+time);
 				intent.putExtra("product", product);
 				intent.putExtra("address", address);
 				startActivity(intent);
@@ -158,6 +160,8 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		tv_four_date = (TextView) findViewById(R.id.four_date);
 		tv_five_date = (TextView) findViewById(R.id.five_date);
 		
+		
+		
 		tv_first_date.setOnClickListener(dateClickListener);
 		tv_seconde_date.setOnClickListener(dateClickListener);
 		tv_third_date.setOnClickListener(dateClickListener);
@@ -181,14 +185,14 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		time15 = findViewById(R.id.time15);
 		time16 = findViewById(R.id.time16);
 		
-		time1.setTag("10:00");time2.setTag("10:30");
-		time3.setTag("11:00");time4.setTag("12:00");
-		time5.setTag("13:00");time6.setTag("14:00");
-		time7.setTag("15:00");time8.setTag("15:30");
-		time9.setTag("16:00");time10.setTag("17:00");
-		time11.setTag("18:00");time12.setTag("19:00");
-		time13.setTag("20:00");time14.setTag("21:00");
-		time15.setTag("22:00");time16.setTag("22:30");
+		time1.setTag("10:00");time2.setTag("11:00");
+		time3.setTag("12:00");time4.setTag("12:30");
+		time5.setTag("14:30");time6.setTag("15:00");
+		time7.setTag("16:00");time8.setTag("17:30");
+		time9.setTag("18:00");time10.setTag("19:00");
+		time11.setTag("20:00");time12.setTag("21:00");
+		time13.setTag("21:30");time14.setTag("22:00");
+		time15.setTag("22:30");time16.setTag("23:00");
 		
 		time1.setOnClickListener(timeClickListener);
 		time2.setOnClickListener(timeClickListener);
@@ -229,31 +233,34 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		tv_first_date.setText("今天");
 		tv_first_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED));
+		tv_first_date.setBackgroundColor(getResources().getColor(R.color.light_green));
 
 		tv_seconde_date.setText("明天");
 		tv_seconde_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 1));
 
-		tv_third_date.setText(DateUtil.getDateString(nowdate,
+		tv_third_date.setText(DateUtil.getScheduledTitle(nowdate,
 				DateUtil.SIMPLY_DD_PATTERN2, 2));
 		tv_third_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 2));
 
-		tv_four_date.setText(DateUtil.getDateString(nowdate,
+		tv_four_date.setText(DateUtil.getScheduledTitle(nowdate,
 				DateUtil.SIMPLY_DD_PATTERN2, 3));
 		tv_four_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 3));
 
-		tv_five_date.setText(DateUtil.getDateString(nowdate,
+		tv_five_date.setText(DateUtil.getScheduledTitle(nowdate,
 				DateUtil.SIMPLY_DD_PATTERN2, 4));
 		tv_five_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 4));
 		
-
+		
+		currentDateView = tv_first_date;//默认选中今天
+		date = tv_first_date.getTag().toString();
 	}
 
-	TextView currentDateView;
-	View currentTimeView;
+	TextView currentDateView;//当前选中的日期
+	View currentTimeView;//当前选中的时间
 	//具体时间点
 	OnClickListener timeClickListener = new OnClickListener() {
 		
@@ -263,8 +270,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 				currentTimeView.setBackground(null);
 				
 			}
-			time = time+v.getTag().toString();
-//			time = StringUtils.isEmpty(time)?time:time.substring(0, time.indexOf(" "))+" "+v.getTag().toString();
+			time = v.getTag().toString();
 //			ToastUtils.showToast(mContext, time);
 			v.setBackgroundColor(getResources().getColor(R.color.red));
 			currentTimeView = v;
@@ -276,13 +282,11 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 			if(currentDateView !=null){
-//				currentDateView.setBackgroundColor(null);
-//				currentDateView.setBacegroundDrawable(null);
 				currentDateView.setBackground(null);
 			}
-			time = v.getTag().toString();
+			date = v.getTag().toString();
 			v.setBackgroundColor(getResources().getColor(R.color.light_green));
-//			ToastUtils.showToast(mContext, v.getTag().toString());
+//			ToastUtils.showToast(mContext, date);
 			getData((String) v.getTag());
 			currentDateView = (TextView)v;
 		}
@@ -313,6 +317,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		if(status==0){
 //			bgView.setBackgroundColor(getResources().getColor(
 //				R.color.light_green));
+			bgView.setBackground(null);
 			time.setText(canAppointment);
 		}else if(status == 1){
 			bgView.setBackgroundColor(getResources().getColor(

@@ -98,11 +98,11 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 	}
 	
 	/**
-	 * 获取优惠卷
+	 * 获取未使用优惠卷
 	 */
 	private void getCoupons() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), -1, "", 3,pageNumber,ApiConstants.LIMIT,
+		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), -1, "", 3,pageNumber,ApiConstants.LIMIT,0,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
