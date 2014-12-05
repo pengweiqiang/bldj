@@ -168,7 +168,7 @@ public class HealthServiceFragment extends BaseFragment implements
 							products.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
-							onLoad();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 						}
 
 					}
@@ -185,13 +185,6 @@ public class HealthServiceFragment extends BaseFragment implements
 	public void onLoadMore() {
 		pageNumber++;
 		getData();
-	}
-
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(
-				System.currentTimeMillis(), ""));
 	}
 
 	private void buildTitleBar(final View parent, final int index) {

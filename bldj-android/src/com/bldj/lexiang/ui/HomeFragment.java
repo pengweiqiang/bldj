@@ -377,10 +377,11 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 							if (pageNumber == 0) {
 								products.clear();
 							}
+							
 							products.addAll(productsList);
-
 							listAdapter.notifyDataSetChanged();
-							onLoad();
+							mListView.onLoadFinish(pageNumber,products.size(),"加载完毕");
+							
 						}
 
 					}
@@ -496,6 +497,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 				 * tab_company.setBackground(getResources().getDrawable(
 				 * R.drawable.tab_btn2));
 				 */
+				if (MyApplication.getInstance().getCurrentUser() == null) {
+					Intent intent = new Intent(mActivity,
+							RegisterAndLoginActivity.class);
+					startActivity(intent);
+					return;
+				}
 				Intent intent = new Intent(mActivity,
 						AppointmentFragmentActivity.class);
 				startActivity(intent);
@@ -529,13 +536,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			pageNumber++;
 		}
 		getHotProduct();
-	}
-
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(
-				System.currentTimeMillis(), ""));
 	}
 
 	/**

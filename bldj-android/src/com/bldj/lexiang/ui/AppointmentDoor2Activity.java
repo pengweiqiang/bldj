@@ -177,7 +177,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 							sellers.addAll(sellersList);
 
 							listAdapter.notifyDataSetChanged();
-							onLoad();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 						}
 					}
 					});
@@ -193,13 +193,6 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	public void onLoadMore() {
 		pageNumber++;
 		getSellers();
-	}
-
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(
-				System.currentTimeMillis(), ""));
 	}
 
 }

@@ -178,7 +178,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 							sellers.addAll(sellersList);
 
 							listAdapter.notifyDataSetChanged();
-							onLoad();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 						}
 
 					}
@@ -197,13 +197,6 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		getSellers();
 	}
 
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(
-				System.currentTimeMillis(), ""));
-	}
-	
 	private void buildTitleBar(final View parent,int index){
 		DeviceInfo.setContext(mActivity);
 		

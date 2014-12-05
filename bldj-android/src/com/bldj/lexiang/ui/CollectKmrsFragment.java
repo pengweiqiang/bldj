@@ -127,7 +127,7 @@ public class CollectKmrsFragment extends BaseFragment implements
 		sellers.addAll(sellersList);
 
 		listAdapter.notifyDataSetChanged();
-		onLoad();
+		mListView.onLoadFinish(pageNumber, sellers.size(), "亲，你没有收藏美容师");
 
 	}
 
@@ -143,14 +143,5 @@ public class CollectKmrsFragment extends BaseFragment implements
 		getSellers();
 	}
 
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(
-				System.currentTimeMillis(), ""));
-		if(sellers==null || sellers.isEmpty()){
-			mListView.setFootHintText("亲，你没有收藏美容师");
-		}
-	}
 
 }

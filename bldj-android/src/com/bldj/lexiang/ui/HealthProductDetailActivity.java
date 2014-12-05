@@ -1,6 +1,7 @@
 package com.bldj.lexiang.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,7 +46,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	private WebView webView;
 	private Button btn_appointment_product;
 	boolean isFav;// 是否收藏
-	
+
 	ShareUtil shareUtil;
 
 	@Override
@@ -57,7 +58,9 @@ public class HealthProductDetailActivity extends BaseActivity {
 		onConfigureActionBar(mActionBar);
 
 		initData();
-		
+		shareUtil = new ShareUtil(this);
+		shareUtil.initWX();
+
 	}
 
 	// 设置activity的导航条
@@ -91,9 +94,6 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	private void initData() {
 
-		shareUtil = new ShareUtil(this);
-		shareUtil.initWX();
-		
 		// 获取此美容师是否收藏过
 		isFav = DatabaseUtil.getInstance(mContext).checkFavProduct(
 				product.getId());
@@ -174,9 +174,10 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-//				shareUtil.sendImgToWX("健康送到家，方便你我他",SendMessageToWX.Req.WXSceneSession);
-				shareUtil.sendWebPageToWX("健康送到家，方便你我他",
-						SendMessageToWX.Req.WXSceneSession);
+				ToastUtils.showToast(mContext, "分享微信...");
+				shareUtil.sendMsgToWX("健康送到家，方便你我他",
+						SendMessageToWX.Req.WXSceneTimeline);
+
 			}
 		});
 		// 邀请
@@ -184,6 +185,11 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
+
+				Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+				sendIntent.setData(Uri.parse("smsto:"));
+				sendIntent.putExtra("sms_body", "健康送到家，方便你我他");
+				mContext.startActivity(sendIntent);
 
 			}
 		});
@@ -224,6 +230,5 @@ public class HealthProductDetailActivity extends BaseActivity {
 			}
 		});
 	}
-
 
 }

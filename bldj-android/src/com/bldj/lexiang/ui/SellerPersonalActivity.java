@@ -26,11 +26,13 @@ import com.bldj.lexiang.db.DatabaseUtil;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 import com.bldj.universalimageloader.core.ImageLoader;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 /**
  * 美容师个人页面
@@ -62,6 +64,8 @@ public class SellerPersonalActivity extends BaseActivity implements
 	boolean isFav;// 是否收藏
 
 	private int pageNumber = 0;
+	
+	ShareUtil shareUtil;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +120,10 @@ public class SellerPersonalActivity extends BaseActivity implements
 	}
 
 	private void initData() {
-
+		
+		shareUtil = new ShareUtil(mContext);
+		shareUtil.initWX();
+		
 		// 获取此美容师是否收藏过
 		isFav = DatabaseUtil.getInstance(mContext).checkFavSeller(
 				sellerVo.getId());
@@ -171,8 +178,9 @@ public class SellerPersonalActivity extends BaseActivity implements
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
+				ToastUtils.showToast(mContext, "分享微信...");
+				shareUtil.sendMsgToWX("健康送到家，方便你我他",
+						SendMessageToWX.Req.WXSceneTimeline);
 			}
 		});
 
@@ -190,12 +198,6 @@ public class SellerPersonalActivity extends BaseActivity implements
 		getProduct();
 	}
 
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(
-				System.currentTimeMillis(), ""));
-	}
 
 	/**
 	 * 获取数据
@@ -224,7 +226,7 @@ public class SellerPersonalActivity extends BaseActivity implements
 							products.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
-							onLoad();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 						}
 
 					}

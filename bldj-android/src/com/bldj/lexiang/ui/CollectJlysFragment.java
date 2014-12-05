@@ -94,7 +94,7 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 		products.addAll(productsList);
 
 		listAdapter.notifyDataSetChanged();
-		onLoad();
+		mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 	}
 
 	@Override
@@ -107,11 +107,6 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 	public void onLoadMore() {
 		pageNumber++;
 		getCollectProduct();
-	}
-	private void onLoad() {
-		mListView.stopRefresh();
-		mListView.stopLoadMore();
-		mListView.setRefreshTime(DateUtils.convert2String(System.currentTimeMillis(),""));
 	}
 
 }
