@@ -33,6 +33,7 @@ import android.util.Log;
 import com.bldj.lexiang.api.ApiUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.constant.enums.MethodType;
 
 /**
@@ -149,7 +150,7 @@ public class HttpConnectionUtil {
 					int statusCode = response.getStatusLine().getStatusCode();
 					backStr = String.valueOf(statusCode);
 					System.out.println("statuCode:"+statusCode);
-					if (statusCode == HttpStatus.SC_OK || statusCode == NetUtil.NET_QUERY_SUCC || statusCode== NetUtil.FAIL_CODE) {
+					if (statusCode == HttpStatus.SC_OK || statusCode == NetUtil.NET_QUERY_SUCC || statusCode== NetUtil.FAIL_CODE || statusCode == NetUtil.FAIL_CODE_400) {
 						backStr = EntityUtils.toString(response.getEntity());
 						sendMessage(backStr, handler, ApiConstants.RESULT_CODE);
 					}
@@ -186,6 +187,9 @@ public class HttpConnectionUtil {
 			if (params != null) {
 				for (String name : params.keySet()) {
 					Log.d(TAG, "========" + name + "=" + params.get(name));
+//					if(ReqUrls.IMG_FILE.equals(name)){
+//						listParams.add(new BasicNameValuePair(name, ));
+//					}
 					listParams.add(new BasicNameValuePair(name, params.get(name).toString()));
 				}
 			}
