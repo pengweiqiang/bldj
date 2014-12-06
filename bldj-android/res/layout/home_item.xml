@@ -20,17 +20,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="top"
             android:orientation="vertical" >
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/image_height"
+                android:layout_gravity="top"
+                 android:scaleType="fitCenter"
                 android:layout_margin="1.5dp"
                 android:src="@drawable/default_image" />
 
             <LinearLayout 
-                android:layout_gravity="bottom"
                  android:layout_width="match_parent"
 	             android:layout_height="wrap_content"
 	             android:orientation="horizontal"
@@ -38,12 +41,14 @@
 	            <TextView
 	                android:id="@+id/product_price"
 	                android:layout_width="wrap_content"
+	                android:layout_weight="1"
 	                android:layout_height="wrap_content"
 	                android:text="价格：100元/20分钟"
 	                android:textSize="@dimen/price_textsize" />
 	            
 	             <TextView
 	                android:id="@+id/yixiu_price"
+	                android:layout_weight="1"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:text="一休价：80元/20分钟"
@@ -62,6 +67,7 @@
             android:layout_marginTop="@dimen/price_margin"
             android:gravity="center"
             android:paddingRight="5dp"
+            android:visibility="gone"
             android:textColor="#ffffff"
             android:textSize="@dimen/price_textsize" />
 
@@ -98,8 +104,9 @@
             <ImageView
                 android:id="@+id/image2"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/image_height"
                 android:layout_margin="1.5dp"
+                 android:scaleType="fitCenter"
                 android:src="@drawable/default_image" />
 
            <LinearLayout 
@@ -113,6 +120,7 @@
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:text="价格：100元/20分钟"
+	                 android:layout_weight="1"
 	                android:textSize="@dimen/price_textsize" />
 	            
 	             <TextView
@@ -120,6 +128,7 @@
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:text="一休价：80元/20分钟"
+	                 android:layout_weight="1"
 	                android:textSize="@dimen/price_textsize" />
             
             </LinearLayout>
@@ -135,6 +144,7 @@
             android:gravity="center"
             android:paddingRight="5dp"
             android:textColor="#ffffff"
+            android:visibility="gone"
             android:textSize="@dimen/price_textsize" />
 
         <TextView
