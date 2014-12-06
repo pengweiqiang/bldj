@@ -103,7 +103,7 @@ public class OrderDetail2Activity extends BaseActivity {
 		btn_cancel_order = (Button) findViewById(R.id.cancel);
 		btn_use_code = (Button) findViewById(R.id.use_code);
 		tv_order_num = (TextView) findViewById(R.id.order_num);
-		tv_order_pay = (TextView) findViewById(R.id.order_pay);
+		tv_order_pay = (TextView) findViewById(R.id.order_real_pay);
 		tv_order_time = (TextView) findViewById(R.id.order_time);
 		et_code = (TextView) findViewById(R.id.code);
 //		rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);

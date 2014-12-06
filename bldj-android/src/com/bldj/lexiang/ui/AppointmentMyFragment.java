@@ -1,5 +1,7 @@
 package com.bldj.lexiang.ui;
 
+import org.apache.http.client.HttpClient;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -42,7 +44,6 @@ public class AppointmentMyFragment extends BaseFragment {
 	 */
 	private void initView(){
 		btn_next = (Button)infoView.findViewById(R.id.btn_next);
-		
 	}
 	/**
 	 * 事件初始化
@@ -52,7 +53,7 @@ public class AppointmentMyFragment extends BaseFragment {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(mActivity,AppointmentDoor1Activity.class);
+				Intent intent = new Intent(mActivity,JLYSFragmentActivity.class);
 				startActivity(intent);
 			}
 		});
