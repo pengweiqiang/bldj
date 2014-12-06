@@ -46,5 +46,8 @@
     <dimen name="company_margin_top">8dip</dimen>
     <dimen name="compnay_radio_textSize">11sp</dimen>
     <dimen name="company_margin_button_top">20dip</dimen>
+    
+    <dimen name="image_height">100dip</dimen>
+    <dimen name="home_image_height">160dip</dimen>
 
 </resources>
