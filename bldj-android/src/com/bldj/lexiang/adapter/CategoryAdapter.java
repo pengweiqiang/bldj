@@ -89,13 +89,13 @@ public class CategoryAdapter extends BaseListAdapter {
 		}
 		holder.tv_category_name.setText(category.getName());
 
-		if (products != null && products.size() > 1) {
+		if (products != null && products.size() > 0) {
 			final Product product1 = products.get(0);
 			ImageLoader.getInstance().displayImage(
 					product1.getPicurl(),
 					holder.imageView1,
 					MyApplication.getInstance().getOptions(
-							R.drawable.default_image));
+							R.drawable.ic_launcher));
 			holder.tv_product_name1.setText(product1.getName());
 
 			holder.frame1.setOnClickListener(new View.OnClickListener() {
@@ -109,13 +109,13 @@ public class CategoryAdapter extends BaseListAdapter {
 				}
 			});
 		}
-		if (products != null && products.size() > 2) {
+		if (products != null && products.size() > 1) {
 			final Product product2 = products.get(1);
 			ImageLoader.getInstance().displayImage(
 					product2.getPicurl(),
 					holder.imageView2,
 					MyApplication.getInstance().getOptions(
-							R.drawable.default_image));
+							R.drawable.ic_launcher));
 
 			holder.tv_product_name2.setText(product2.getName());
 
@@ -135,13 +135,13 @@ public class CategoryAdapter extends BaseListAdapter {
 			holder.frame4.setVisibility(View.INVISIBLE);
 			
 		}
-		if (products != null && products.size() > 3) {
+		if (products != null && products.size() > 2) {
 			final Product product3 = products.get(2);
 			ImageLoader.getInstance().displayImage(
 					product3.getPicurl(),
 					holder.imageView3,
 					MyApplication.getInstance().getOptions(
-							R.drawable.default_image));
+							R.drawable.ic_launcher));
 			holder.tv_product_name3.setText(product3.getName());
 
 			holder.frame3.setOnClickListener(new View.OnClickListener() {
@@ -159,13 +159,13 @@ public class CategoryAdapter extends BaseListAdapter {
 			holder.frame4.setVisibility(View.INVISIBLE);
 			
 		}
-		if (products != null && products.size() > 4) {
+		if (products != null && products.size() > 3) {
 			final Product product4 = products.get(3);
 			ImageLoader.getInstance().displayImage(
 					product4.getPicurl(),
 					holder.imageView4,
 					MyApplication.getInstance().getOptions(
-							R.drawable.default_image));
+							R.drawable.ic_launcher));
 			holder.tv_product_name4.setText(product4.getName());
 
 			holder.frame4.setOnClickListener(new View.OnClickListener() {
