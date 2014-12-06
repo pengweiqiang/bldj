@@ -45,6 +45,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private List<Seller> sellers;
 	private int pageNumber = 0;
 	private String time;// 预约时间
+	private int timeIndex;
 	private String address;
 	private Product product;
 	private Seller mSeletedSeller;// 预约美容师
@@ -56,6 +57,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		setContentView(R.layout.appointment_door2);
 		super.onCreate(savedInstanceState);
 		time = this.getIntent().getStringExtra("time");
+		timeIndex = this.getIntent().getIntExtra("timeIndex", 0);
 		product = (Product)this.getIntent().getSerializableExtra("product");
 		address = this.getIntent().getStringExtra("address");
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
@@ -119,6 +121,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 				Intent intent = new Intent(AppointmentDoor2Activity.this,
 						AppointmentDoor3Activity.class);
 				intent.putExtra("time", time);// 预约时间
+				intent.putExtra("timeIndex", timeIndex);// 预约时间位置
 				intent.putExtra("seller", mSeletedSeller);// 预约美容师
 				intent.putExtra("product", product);//预约产品
 				intent.putExtra("address", address);//详细地址
