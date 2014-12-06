@@ -218,7 +218,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			groups.add(TitleBarEnum.CITY_BEIJING);
 			groups.add(TitleBarEnum.CITY_GUANGZHOU);
 			groups.add(TitleBarEnum.CITY_SHENZHEN);
-		}else{
+		}else{//更多
 			groups.add(TitleBarEnum.ABOUT);
 			groups.add(TitleBarEnum.FEEDBACK);
 			groups.add(TitleBarEnum.SHARE);
@@ -239,7 +239,11 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		popupWindow.setBackgroundDrawable(new BitmapDrawable());
 
 		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
-		popupWindow.showAsDropDown(parent);
+		if(index == 0){
+			popupWindow.showAsDropDown(parent, 0, 0);
+		}else{
+			popupWindow.showAsDropDown(parent);
+		}
 		lv_group.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
