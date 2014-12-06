@@ -137,5 +137,21 @@ public class ApiBuyUtils {
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ORDERS, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
+	/**
+	 * 订单管理（作废。。。）
+	 * @param context  
+	 * @param id 用户id
+	 * @param orderNum  订单号
+	 * @param status 状态  3-取消
+	 * @param requestCallback
+	 */
+	public static void orderManager(Context context,long id,String orderNum,int status,RequestCallback requestCallback) {
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put("orderNum", orderNum);
+		params.put("status", status);
+		ApiUtils.getParseModel(params, ReqUrls.ORDER_MANAGER, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+	}
 
 }
