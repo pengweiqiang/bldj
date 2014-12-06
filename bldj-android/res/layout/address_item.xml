@@ -2,72 +2,79 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dip"
-    android:background="@drawable/own_btn_rounded"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dip"
-        android:paddingRight="10dip"
-        android:orientation="horizontal" >
+        android:layout_margin="10dip"
+        android:background="@drawable/own_btn_rounded"
+        android:orientation="vertical" >
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip" >
+
+            <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                
                 android:text="Nobody" />
-        
-        <TextView
+
+            <TextView
                 android:id="@+id/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="right"
                 android:layout_weight="1"
+                android:gravity="right"
                 android:text="15201454625" />
-	</LinearLayout>
-	
-     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:paddingLeft="10dip"
-        android:orientation="horizontal" >
+        </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:orientation="horizontal"
+            android:paddingLeft="10dip" >
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/company_address" />
-        
-        <TextView
+
+            <TextView
                 android:id="@+id/address_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="北京朝阳区来广营" />
-	</LinearLayout>
-	
-     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
-        android:paddingLeft="10dip"
-        android:orientation="horizontal" >
+        </LinearLayout>
 
-        <TextView
-            	android:id="@+id/update"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:orientation="horizontal"
+            android:paddingLeft="10dip" >
+
+            <TextView
+                android:id="@+id/update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dip"
+                android:layout_marginRight="20dip"
+                android:paddingRight="2dip"
                 android:text="修改" />
-        
-        <TextView
-            	android:id="@+id/delete"
+
+            <TextView
+                android:id="@+id/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="2dip"
                 android:text="删除" />
-	</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
