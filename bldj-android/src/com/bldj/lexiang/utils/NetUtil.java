@@ -66,6 +66,7 @@ public class NetUtil {
 	/** 服务端返回状态 **/
 	public static final int SUCCESS_CODE = 600;
 	public static final int FAIL_CODE = 500;
+	public static final int FAIL_CODE_400 = 400;
 	
 	public static final int NET_QUERY_SUCC = 201;
 	public static final int NET_ERR = 777;
