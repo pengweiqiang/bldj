@@ -16,7 +16,7 @@
         android:id="@+id/leftActionCity"
         style="@style/ActionBarIconButton"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="3dip"
+        android:paddingLeft="3dip"
         android:orientation="horizontal"
         android:visibility="gone" >
 
