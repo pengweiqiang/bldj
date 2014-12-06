@@ -167,6 +167,10 @@ public interface ReqUrls {
 	 */
 	public static final String REQUEST_ORDER_SUCCESS = "/user/orderPaid";
 	/**
+	 * 订单作废
+	 */
+	public static final String ORDER_MANAGER = "/user/orderManage";
+	/**
 	 * 获取用户订单
 	 */
 	public static final String REQUEST_ORDERS = "/user/getOrders";
