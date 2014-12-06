@@ -82,7 +82,7 @@ public interface ReqUrls {
 	
 	public static final String OPEN_TYPE = "operType";
 	
-	public static final String IMG_FILE = "imgFile";
+	public static final String IMG_FILE = "formFile";
 	
 	public static final String CUR_VERSION = "curVersion";
 	
@@ -115,7 +115,7 @@ public interface ReqUrls {
 	/**
 	 * 修改用户头像
 	 */
-	public static final String UPDATE_HEADER_URL="/user/updateHeadPic";
+	public static final String UPDATE_HEADER_URL=Connection_Type_Common+DEFAULT_REQ_HOST_IP+ "/user/updateHeadPic";
 	/**
 	 * 信息收集接口(意见、招聘、打分)
 	 */
@@ -193,7 +193,7 @@ public interface ReqUrls {
 	/**
 	 * 版本升级
 	 */
-	public static final String CHECK_VERSION = "user/checkVersion";
+	public static final String CHECK_VERSION = "/user/checkVersion";
 	
 	/**获取首页 广告**/
 	public static final String REQUEST_GET_MAINPAGE_AD = "/ad/getAds";
