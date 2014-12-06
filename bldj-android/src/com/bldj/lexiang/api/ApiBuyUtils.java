@@ -82,13 +82,14 @@ public class ApiBuyUtils {
 	 * @param notes 备案
 	 * @param payType 0支付宝 1微信 2网银
 	 * @param couponsId 优惠券id
+	 * @param servicetime 预约的时间如20141218@0~15等数字(0 表示10点；1表示11点类推)
 	 * @param requestCallback 
 	 */
 	public static void createOrder(Context context, long userId,
 			String username, long sellerId, String sellerName, long productId,
 			String proName, double orderPay, String curuser, int type,
 			String contactor, String mobile, String detailAddress,
-			String notes, int payType,long couponsId, RequestCallback requestCallback) {
+			String notes, int payType,long couponsId,String servicetime, RequestCallback requestCallback) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put("userId", userId);
 		params.put("username", username);
@@ -105,6 +106,7 @@ public class ApiBuyUtils {
 		params.put("notes", notes);
 		params.put("payType", payType);
 		params.put("couponsId", couponsId);
+		params.put("servicetime", servicetime);
 
 		ApiUtils.getParseModel(params, ReqUrls.CREATE_ORDER, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
