@@ -1,23 +1,37 @@
 package com.bldj.lexiang.ui;
 
-import java.io.IOException;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import org.apache.http.HttpConnection;
-import org.apache.http.HttpConnectionMetrics;
-
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -28,7 +42,9 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.PhotoUtil;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -60,6 +76,8 @@ public class MyFragment extends BaseFragment {
 	private EditText et_nickname;
 
 	User user;
+
+	String path;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,6 +123,7 @@ public class MyFragment extends BaseFragment {
 							R.drawable.default_image));
 		} else {// 未登录
 			tv_username.setText("未登录");
+			image_head.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
 		}
 	}
 
@@ -113,36 +132,9 @@ public class MyFragment extends BaseFragment {
 		image_head.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View view) {
 				if (checkIsLogin()) {
-					// String stream = ImageTools.imgToBase64(imgPath, null,
-					// "");
-					String stream = "";
-					ApiUserUtils.updateHeader(mActivity, user.getUsername(),
-							stream, new HttpConnectionUtil.RequestCallback() {
-
-								@Override
-								public void execute(ParseModel parseModel) {
-									if (!ApiConstants.RESULT_SUCCESS
-											.equals(parseModel.getStatus())) {
-										ToastUtils.showToast(mActivity,
-												parseModel.getMsg());
-									} else {
-										user.setHeadurl(/* headurl */"");
-										MyApplication.getInstance().setUser(
-												user);
-										ImageLoader
-												.getInstance()
-												.displayImage(
-														user.getHeadurl(),
-														image_head,
-														MyApplication
-																.getInstance()
-																.getOptions(
-																		R.drawable.default_image));
-									}
-								}
-							});
+					showAvatarPop(view);
 				}
 			}
 		});
@@ -217,9 +209,9 @@ public class MyFragment extends BaseFragment {
 		ll_myinfo.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View view) {
 				if (checkIsLogin()) {
-					
+
 				}
 				/*
 				 * Intent intent = new Intent(mActivity,
@@ -233,7 +225,8 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				MyApplication.getInstance().setUser(null);
-				SharePreferenceManager.saveBatchSharedPreference(mActivity, Constant.FILE_NAME, "user", "");
+				SharePreferenceManager.saveBatchSharedPreference(mActivity,
+						Constant.FILE_NAME, "user", "");
 				initData();
 			}
 		});
@@ -242,12 +235,12 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				 if (checkIsLogin()) {
-					 Intent intent = new Intent(mActivity,
-								MyCollectFragmentActivity.class);
-						startActivity(intent);
-				 }
-				
+				if (checkIsLogin()) {
+					Intent intent = new Intent(mActivity,
+							MyCollectFragmentActivity.class);
+					startActivity(intent);
+				}
+
 			}
 		});
 		// 优惠卷
@@ -255,12 +248,12 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
-				 if (checkIsLogin()) {
-					 Intent intent = new Intent(mActivity,
-								CouponsFragmentActivity.class);
-						startActivity(intent);
-				 }
-				
+				if (checkIsLogin()) {
+					Intent intent = new Intent(mActivity,
+							CouponsFragmentActivity.class);
+					startActivity(intent);
+				}
+
 			}
 		});
 		// 修改密码
@@ -294,7 +287,8 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				if (checkIsLogin()) {
-					Intent intent = new Intent(mActivity,MyOrdersActivity.class);
+					Intent intent = new Intent(mActivity,
+							MyOrdersActivity.class);
 					startActivity(intent);
 				}
 			}
@@ -317,20 +311,21 @@ public class MyFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				ToastUtils.showToast(mActivity, "正在检查...");
-				ApiVersionUtils.checkVersion(mActivity, new HttpConnectionUtil.RequestCallback() {
-					
-					@Override
-					public void execute(ParseModel parseModel) {
-						if (!ApiConstants.RESULT_SUCCESS
-								.equals(parseModel.getStatus())) {
-							ToastUtils.showToast(mActivity,
-									parseModel.getMsg());
-						}else{
-							ToastUtils.showToast(mActivity,
-									parseModel.getMsg());
-						}
-					}
-				});
+				ApiVersionUtils.checkVersion(mActivity,
+						new HttpConnectionUtil.RequestCallback() {
+
+							@Override
+							public void execute(ParseModel parseModel) {
+								if (!ApiConstants.RESULT_SUCCESS
+										.equals(parseModel.getStatus())) {
+									ToastUtils.showToast(mActivity,
+											parseModel.getMsg());
+								} else {
+									ToastUtils.showToast(mActivity,
+											parseModel.getMsg());
+								}
+							}
+						});
 			}
 		});
 
@@ -363,5 +358,257 @@ public class MyFragment extends BaseFragment {
 		super.onResume();
 		initData();
 	}
+
+	RelativeLayout layout_choose;
+	RelativeLayout layout_photo;
+	PopupWindow avatorPop;
+
+	public String filePath = "";
+
+	private void showAvatarPop(View parent) {
+		View view = LayoutInflater.from(mActivity).inflate(
+				R.layout.pop_showavator, null);
+		layout_choose = (RelativeLayout) view.findViewById(R.id.layout_choose);
+		layout_photo = (RelativeLayout) view.findViewById(R.id.layout_photo);
+		layout_photo.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				layout_choose.setBackgroundColor(getResources().getColor(
+						R.color.white));
+				layout_photo.setBackgroundDrawable(getResources().getDrawable(
+						R.drawable.pop_bg_press));
+				File dir = new File(Constant.MyAvatarDir);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				// 原图
+				File file = new File(dir, new SimpleDateFormat("yyMMddHHmmss")
+						.format(new Date()));
+				filePath = file.getAbsolutePath();// 获取相片的保存路径
+				Uri imageUri = Uri.fromFile(file);
+
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+				startActivityForResult(intent, 0);
+			}
+		});
+		layout_choose.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				layout_photo.setBackgroundColor(getResources().getColor(
+						R.color.white));
+				// layout_choose.setBackgroundDrawable(getResources().getDrawable(
+				// R.drawable.));
+				Intent intent = new Intent(Intent.ACTION_PICK, null);
+				intent.setDataAndType(
+						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+				startActivityForResult(intent, 1);
+			}
+		});
+
+		avatorPop = new PopupWindow(view, LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT);
+		avatorPop.setTouchInterceptor(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+					avatorPop.dismiss();
+					return true;
+				}
+				return false;
+			}
+		});
+
+		avatorPop.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+		avatorPop.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+		avatorPop.setTouchable(true);
+		avatorPop.setFocusable(true);
+		avatorPop.setOutsideTouchable(true);
+		avatorPop.setBackgroundDrawable(new BitmapDrawable());
+		// 动画效果 从底部弹起
+		// avatorPop.setAnimationStyle(R.style.Animations_GrowFromBottom);
+		avatorPop.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
+	}
+
+	/**
+	 * @Title: startImageAction
+	 * @return void
+	 * @throws
+	 */
+	private void startImageAction(Uri uri, int outputX, int outputY,
+			int requestCode, boolean isCrop) {
+		Intent intent = null;
+		if (isCrop) {
+			intent = new Intent("com.android.camera.action.CROP");
+		} else {
+			intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+		}
+		intent.setDataAndType(uri, "image/*");
+		intent.putExtra("crop", "true");
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		intent.putExtra("outputX", outputX);
+		intent.putExtra("outputY", outputY);
+		intent.putExtra("scale", true);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+		intent.putExtra("return-data", true);
+		intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+		intent.putExtra("noFaceDetection", true); // no face detection
+		startActivityForResult(intent, requestCode);
+	}
+
+	boolean isFromCamera = false;// 区分拍照旋转
+	int degree = 0;
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case 0:// 拍照修改头像
+			if (resultCode == Activity.RESULT_OK) {
+				if (!Environment.getExternalStorageState().equals(
+						Environment.MEDIA_MOUNTED)) {
+					return;
+				}
+				isFromCamera = true;
+				File file = new File(filePath);
+				degree = PhotoUtil.readPictureDegree(file.getAbsolutePath());
+				Log.i("life", "拍照后的角度：" + degree);
+				startImageAction(Uri.fromFile(file), 200, 200, 2, true);
+			}
+			break;
+		case 1:// 本地修改头像
+			if (avatorPop != null) {
+				avatorPop.dismiss();
+			}
+			Uri uri = null;
+			if (data == null) {
+				return;
+			}
+			if (resultCode == Activity.RESULT_OK) {
+				if (!Environment.getExternalStorageState().equals(
+						Environment.MEDIA_MOUNTED)) {
+					return;
+				}
+				isFromCamera = false;
+				uri = data.getData();
+				startImageAction(uri, 200, 200, 2, true);
+			} else {
+				// ShowToast("照片获取失败");
+			}
+
+			break;
+		case 2:// 裁剪头像返回
+				// TODO sent to crop
+			if (avatorPop != null) {
+				avatorPop.dismiss();
+			}
+			if (data == null) {
+				// Toast.makeText(this, "取消选择", Toast.LENGTH_SHORT).show();
+				return;
+			} else {
+				saveCropAvator(data);
+			}
+			// 初始化文件路径
+			filePath = "";
+			// 上传头像
+			updateHeadImage();
+			break;
+		default:
+			break;
+
+		}
+	}
+
+	/**
+	 * 保存裁剪的头像
+	 * 
+	 * @param data
+	 */
+	private void saveCropAvator(Intent data) {
+		Bundle extras = data.getExtras();
+		if (extras != null) {
+			Bitmap bitmap = extras.getParcelable("data");
+			Log.i("life", "avatar - bitmap = " + bitmap);
+			if (bitmap != null) {
+				bitmap = PhotoUtil.toRoundCorner(bitmap, 10);
+				if (isFromCamera && degree != 0) {
+					bitmap = PhotoUtil.rotaingImageView(degree, bitmap);
+				}
+				image_head.setImageBitmap(bitmap);
+				// 保存图片
+				String filename = new SimpleDateFormat("yyMMddHHmmss")
+						.format(new Date()) + ".jpg";
+				path = Constant.MyAvatarDir + filename;
+				PhotoUtil.saveBitmap(Constant.MyAvatarDir, filename, bitmap,
+						false);
+				// 上传头像
+				if (bitmap != null && bitmap.isRecycled()) {
+					bitmap.recycle();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 上传头像图片
+	 */
+	private void updateHeadImage() {
+
+		// String stream = ImageTools.imgToBase64(path, null,"");
+		// File file = new File(path);
+		ApiUserUtils.updateHeader2(mActivity, user.getUsername(), path,
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							ToastUtils.showToast(mActivity, parseModel.getMsg());
+						} else {
+							ToastUtils.showToast(mActivity, parseModel.getMsg());
+							user.setHeadurl(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+parseModel.getData().getAsString());
+							MyApplication.getInstance().setUser(user);
+							ImageLoader.getInstance().displayImage(
+									user.getHeadurl(),
+									image_head,
+									MyApplication.getInstance().getOptions(
+											R.drawable.ic_launcher));
+						}
+					}
+				});
+	}
+
+	// ApiUserUtils.updateHeader(mActivity,user.getUsername(),
+	// stream,new File(path), new HttpConnectionUtil.RequestCallback() {
+	//
+	// @Override
+	// public void execute(ParseModel parseModel) {
+	// if (!ApiConstants.RESULT_SUCCESS
+	// .equals(parseModel.getStatus())) {
+	// ToastUtils.showToast(mActivity,
+	// parseModel.getMsg());
+	// } else {
+	// // user.setHeadurl(headurl);
+	// MyApplication.getInstance().setUser(
+	// user);
+	// ImageLoader
+	// .getInstance()
+	// .displayImage(
+	// user.getHeadurl(),
+	// image_head,
+	// MyApplication
+	// .getInstance()
+	// .getOptions(
+	// R.drawable.default_image));
+	// }
+	// }
+	// });
+	// }
 
 }
