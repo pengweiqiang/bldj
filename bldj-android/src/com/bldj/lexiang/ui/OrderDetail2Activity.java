@@ -55,14 +55,13 @@ public class OrderDetail2Activity extends BaseActivity {
 	private Button btn_use_code;
 	private TextView et_code;
 
-//	private RadioButton rb_aliay, rb_weixin, rb_union;
+	// private RadioButton rb_aliay, rb_weixin, rb_union;
 
 	private PopupWindow popupWindow;
 	private View view;
 	private ListView lv_group;
 	private List<TitleBarEnum> groups;
-	
-	
+
 	ShareUtil shareUtil;
 
 	@Override
@@ -106,9 +105,9 @@ public class OrderDetail2Activity extends BaseActivity {
 		tv_order_pay = (TextView) findViewById(R.id.order_real_pay);
 		tv_order_time = (TextView) findViewById(R.id.order_time);
 		et_code = (TextView) findViewById(R.id.code);
-//		rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
-//		rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
-//		rb_union = (RadioButton) findViewById(R.id.union_pay);
+		// rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
+		// rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
+		// rb_union = (RadioButton) findViewById(R.id.union_pay);
 
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
@@ -116,10 +115,10 @@ public class OrderDetail2Activity extends BaseActivity {
 	}
 
 	private void initData() {
-		
+
 		shareUtil = new ShareUtil(mContext);
 		shareUtil.initWX();
-		
+
 		tv_order_time.setText(order.getCreatetime());
 		tv_order_pay.setText(String.valueOf(order.getOrderPay()));
 		tv_order_num.setText(order.getOrderNum());
@@ -128,71 +127,45 @@ public class OrderDetail2Activity extends BaseActivity {
 	@Override
 	public void initListener() {
 
-		/*rb_aliay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		/*
+		 * rb_aliay.setOnCheckedChangeListener(new
+		 * CompoundButton.OnCheckedChangeListener() {
+		 * 
+		 * @Override public void onCheckedChanged(CompoundButton buttonView,
+		 * boolean isChecked) { if (isChecked) { rb_weixin.setChecked(false);
+		 * rb_union.setChecked(false); } } }); rb_weixin
+		 * .setOnCheckedChangeListener(new
+		 * CompoundButton.OnCheckedChangeListener() {
+		 * 
+		 * @Override public void onCheckedChanged(CompoundButton buttonView,
+		 * boolean isChecked) { if (isChecked) { rb_aliay.setChecked(false);
+		 * rb_union.setChecked(false); } } });
+		 * rb_union.setOnCheckedChangeListener(new
+		 * CompoundButton.OnCheckedChangeListener() {
+		 * 
+		 * @Override public void onCheckedChanged(CompoundButton buttonView,
+		 * boolean isChecked) { if (isChecked) { rb_weixin.setChecked(false);
+		 * rb_aliay.setChecked(false); } } });
+		 */
 
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked) {
-					rb_weixin.setChecked(false);
-					rb_union.setChecked(false);
-				}
-			}
-		});
-		rb_weixin
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						if (isChecked) {
-							rb_aliay.setChecked(false);
-							rb_union.setChecked(false);
-						}
-					}
-				});
-		rb_union.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked) {
-					rb_weixin.setChecked(false);
-					rb_aliay.setChecked(false);
-				}
-			}
-		});*/
-
-		/*btn_use_code.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				String vcode = et_code.getText().toString().trim();
-				if (StringUtils.isEmpty(vcode)) {
-					ToastUtils.showToast(OrderDetail2Activity.this, "请输入电子卷码");
-					return;
-				}
-				ApiBuyUtils.couponsManage(OrderDetail2Activity.this,
-						Long.parseLong(user.getUserId()), 0, vcode, 4,
-						new HttpConnectionUtil.RequestCallback() {
-
-							@Override
-							public void execute(ParseModel parseModel) {
-								if (!ApiConstants.RESULT_SUCCESS
-										.equals(parseModel.getStatus())) {
-									ToastUtils.showToast(
-											OrderDetail2Activity.this,
-											parseModel.getMsg());
-									return;
-
-								} else {
-									System.out.println(parseModel.getData()
-											.toString());
-								}
-							}
-						});
-			}
-		});*/
+		/*
+		 * btn_use_code.setOnClickListener(new View.OnClickListener() {
+		 * 
+		 * @Override public void onClick(View arg0) { String vcode =
+		 * et_code.getText().toString().trim(); if (StringUtils.isEmpty(vcode))
+		 * { ToastUtils.showToast(OrderDetail2Activity.this, "请输入电子卷码"); return;
+		 * } ApiBuyUtils.couponsManage(OrderDetail2Activity.this,
+		 * Long.parseLong(user.getUserId()), 0, vcode, 4, new
+		 * HttpConnectionUtil.RequestCallback() {
+		 * 
+		 * @Override public void execute(ParseModel parseModel) { if
+		 * (!ApiConstants.RESULT_SUCCESS .equals(parseModel.getStatus())) {
+		 * ToastUtils.showToast( OrderDetail2Activity.this,
+		 * parseModel.getMsg()); return;
+		 * 
+		 * } else { System.out.println(parseModel.getData() .toString()); } }
+		 * }); } });
+		 */
 		// 确定支付
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
 
@@ -216,7 +189,24 @@ public class OrderDetail2Activity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
+				ApiBuyUtils.orderManager(mContext, user.getUserId(),
+						order.getOrderNum(), 3,
+						new HttpConnectionUtil.RequestCallback() {
 
+							@Override
+							public void execute(ParseModel parseModel) {
+								if (!ApiConstants.RESULT_SUCCESS
+										.equals(parseModel.getStatus())) {
+									ToastUtils.showToast(
+											OrderDetail2Activity.this,
+											parseModel.getMsg());
+								} else {
+									ToastUtils.showToast(
+											OrderDetail2Activity.this,
+											parseModel.getMsg());
+								}
+							}
+						});
 			}
 		});
 
@@ -249,16 +239,21 @@ public class OrderDetail2Activity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				
-				if (groups.get(position).getIndex() == TitleBarEnum.SHARE_SINA.getIndex()) {
-					ToastUtils.showToast(OrderDetail2Activity.this,TitleBarEnum.SHARE_SINA.getMsg()+"分享成功");
+
+				if (groups.get(position).getIndex() == TitleBarEnum.SHARE_SINA
+						.getIndex()) {
+					ToastUtils.showToast(OrderDetail2Activity.this,
+							TitleBarEnum.SHARE_SINA.getMsg() + "分享成功");
 					shared_addCode();
-				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN.getIndex()) {
+				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN
+						.getIndex()) {
 					ToastUtils.showToast(mContext, "分享微信...");
 					shareUtil.sendMsgToWX("健康送到家，方便你我他",
 							SendMessageToWX.Req.WXSceneTimeline);
-				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT.getIndex()) {
-					ToastUtils.showToast(OrderDetail2Activity.this,TitleBarEnum.SHARE_TENCENT.getMsg()+"分享成功");
+				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT
+						.getIndex()) {
+					ToastUtils.showToast(OrderDetail2Activity.this,
+							TitleBarEnum.SHARE_TENCENT.getMsg() + "分享成功");
 					shared_addCode();
 				}
 				if (popupWindow != null) {
@@ -272,16 +267,18 @@ public class OrderDetail2Activity extends BaseActivity {
 	 * 分享成功之后获取电子卷
 	 */
 	private void shared_addCode() {
-		ApiBuyUtils.couponsManage(this, user.getUserId(), 2,
-				"", 0,0,0,0, new HttpConnectionUtil.RequestCallback() {
+		ApiBuyUtils.couponsManage(this, user.getUserId(), 2, "", 0, 0, 0, 0,
+				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(OrderDetail2Activity.this,parseModel.getMsg());
+							ToastUtils.showToast(OrderDetail2Activity.this,
+									parseModel.getMsg());
 						} else {
-							ToastUtils.showToast(OrderDetail2Activity.this,parseModel.getMsg());
+							ToastUtils.showToast(OrderDetail2Activity.this,
+									parseModel.getMsg());
 						}
 					}
 				});
