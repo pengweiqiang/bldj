@@ -34,4 +34,10 @@ public class Constant {
     public static final boolean GD_INFO_LOGS_ENABLED = (GD_LOG_LEVEL == GD_LOG_LEVEL_INFO);
     
     public static final String  IMAGELOADER_LOCAL_TITLE = "file://";
+    
+	/**
+	 * 我的头像保存目录
+	 */
+	public static String MyAvatarDir = "/sdcard/com.bldj.lexiang/head/";
+    
 }
