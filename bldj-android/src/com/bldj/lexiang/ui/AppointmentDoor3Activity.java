@@ -33,7 +33,8 @@ import com.bldj.lexiang.view.ActionBar;
 public class AppointmentDoor3Activity extends BaseActivity {
 
 	ActionBar mActionBar;
-	private String time;
+	private String time;//预约时间
+	private int timeIndex;
 	private String detailAddress;
 	private Seller seller;
 	private Product product;
@@ -57,6 +58,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 
 		time = this.getIntent().getStringExtra("time");
+		timeIndex = this.getIntent().getIntExtra("timeIndex", 0);
 		seller = (Seller) this.getIntent().getSerializableExtra("seller");
 		product = (Product) this.getIntent().getSerializableExtra("product");
 		detailAddress = this.getIntent().getStringExtra("address");
@@ -149,12 +151,12 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-
+				String serviceTime = time.substring(0,time.indexOf(" "))+"@"+timeIndex;
 				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
 						user.getUserId(), user.getUsername(), seller.getId(),
 						seller.getUsername(), product.getId(), product.getName(), orderPay,
 						user.getUsername(), 1, user.getUsername(), user.getMobile(), detailAddress, "",
-						payType,0, new HttpConnectionUtil.RequestCallback() {
+						payType,0,serviceTime, new HttpConnectionUtil.RequestCallback() {
 							@Override
 							public void execute(ParseModel parseModel) {
 								if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
