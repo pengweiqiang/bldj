@@ -65,6 +65,7 @@ public class HomeAdapter extends BaseListAdapter {
 			holder.img = (ImageView) convertView.findViewById(R.id.image);
 			holder.price = (TextView) convertView
 					.findViewById(R.id.product_price);
+			holder.yixiujia_price = (TextView) convertView.findViewById(R.id.yixiu_price);
 			holder.title = (TextView) convertView.findViewById(R.id.title);
 
 			holder.frameTwo = (FrameLayout) convertView
@@ -73,6 +74,7 @@ public class HomeAdapter extends BaseListAdapter {
 			holder.img2 = (ImageView) convertView.findViewById(R.id.image2);
 			holder.price2 = (TextView) convertView
 					.findViewById(R.id.product_price2);
+			holder.yixiujia_price2 = (TextView) convertView.findViewById(R.id.yixiu_price2);
 			holder.title2 = (TextView) convertView.findViewById(R.id.title2);
 			convertView.setTag(holder);
 
@@ -83,7 +85,9 @@ public class HomeAdapter extends BaseListAdapter {
 		holder.name.setText(productItem.get(0).getName());
 		holder.title.setText(productItem.get(0).getOneword());
 		holder.price.setText("价格："
-				+ String.valueOf(productItem.get(0).getCurPrice()) + "元/20分钟");
+				+ String.valueOf(productItem.get(0).getMarketPrice()) + "元/20分钟");
+		holder.yixiujia_price.setText("一休价："
+				+ String.valueOf(productItem.get(0).getMarketPrice()) + "元/20分钟");
 		ImageLoader.getInstance().displayImage(
 				productItem.get(0).getPicurl(),
 				holder.img,
@@ -106,6 +110,8 @@ public class HomeAdapter extends BaseListAdapter {
 			holder.title2.setText(productItem.get(1).getOneword());
 			holder.price2.setText(String.valueOf(productItem.get(1)
 					.getCurPrice()));
+			holder.yixiujia_price2.setText("一休价："
+					+ String.valueOf(productItem.get(1).getMarketPrice()) + "元/20分钟");
 			ImageLoader.getInstance().displayImage(
 					productItem.get(1).getPicurl(),
 					holder.img2,
@@ -134,6 +140,7 @@ public class HomeAdapter extends BaseListAdapter {
 		public ImageView img, img2;
 		public TextView title, title2;
 		public TextView price, price2;
+		public TextView yixiujia_price,yixiujia_price2;
 		public TextView name, name2;
 		public FrameLayout frameOne, frameTwo;
 	}
