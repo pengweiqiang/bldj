@@ -103,7 +103,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 		ImageLoader.getInstance().displayImage(product.getPicurl(),
 				product_img,
-				MyApplication.getInstance().getOptions(R.drawable.ic_launcher));
+				MyApplication.getInstance().getOptions(R.drawable.default_image));
 		tv_time.setText("时长：" + product.getTimeConsume() + "分钟");
 		tv_price.setText("一休价：￥" + String.valueOf(product.getCurPrice()));
 		tv_shop_price.setText("门店价：￥"
