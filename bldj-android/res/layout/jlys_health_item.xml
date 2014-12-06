@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@drawable/own_btn_rounded"
-     >
+    android:layout_height="wrap_content" >
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/own_btn_rounded" >
 
         <ImageView
             android:id="@+id/headImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dip"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="4dip"
             android:src="@drawable/ic_launcher" />
 
         <RelativeLayout
             android:id="@+id/rl"
-            android:layout_toRightOf="@+id/headImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dip"
+            android:layout_toRightOf="@+id/headImage"
             android:paddingTop="4dip" >
 
             <TextView
@@ -31,67 +33,63 @@
 
             <TextView
                 android:id="@+id/address"
-                android:layout_marginLeft="10dip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
                 android:layout_toRightOf="@+id/username"
                 android:text="四川" />
+
             <TextView
                 android:id="@+id/avg_price"
-                android:layout_marginLeft="10dip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
                 android:layout_toRightOf="@+id/address"
                 android:text="33岁" />
-			<TextView
+
+            <TextView
                 android:id="@+id/order_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/username"
                 android:layout_marginBottom="4dip"
                 android:layout_marginTop="4dip"
-                android:layout_below="@+id/username"
                 android:text="共接单:21次" />
-			
-			 <LinearLayout
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/avg_price"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:paddingRight="4dip" >
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dip"
+                    android:text="距您3公里" />
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dip"
+                    android:text="★★★★★" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/seller_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/avg_price"
-            android:orientation="vertical"
-            android:gravity="right"
-            android:paddingRight="4dip" >
+            android:layout_below="@+id/rl"
+            android:layout_marginLeft="4dip"
+            android:layout_toRightOf="@+id/headImage"
+            android:text="毕业于北京中医药大学，10年理疗经验。擅长颈、肩、腰、背等，从师5年临床实验"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dip"
-                android:text="距您3公里" />
-
-            <TextView
-                android:id="@+id/level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dip"
-                android:text="★★★★★" />
-
-        </LinearLayout>
-        
-		
-			
-			 	
-            
-        </RelativeLayout>
-	
-	 <TextView
-                android:id="@+id/seller_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl"
-                android:layout_toRightOf="@+id/headImage"
-                android:textSize="12sp"
-                android:layout_marginLeft="4dip"
-                android:text="毕业于北京中医药大学，10年理疗经验。擅长颈、肩、腰、背等，从师5年临床实验" />
-       
-        
 </RelativeLayout>
