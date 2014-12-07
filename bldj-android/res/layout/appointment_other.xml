@@ -64,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/input_contact_phone"
+                android:inputType="phone"
                 android:layout_weight="1"
                 />
             
