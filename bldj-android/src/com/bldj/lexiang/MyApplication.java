@@ -9,6 +9,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.MyLocationData;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.utils.JsonUtils;
@@ -36,6 +37,7 @@ public class MyApplication extends Application {
 
 	public LocationClient mLocationClient;
 	public MyLocationListener mMyLocationListener;
+	public String addressStr = "";
 
 	public static MyApplication getInstance() {
 		return myApplication;
@@ -126,10 +128,17 @@ public class MyApplication extends Application {
 			// Receive Location
 			// double latitude = location.getLatitude();
 			// double longtitude = location.getLongitude();
+			
+//			MyLocationData locData = new MyLocationData.Builder()
+//			.accuracy(location.getRadius())
+//			// 此处设置开发者获取到的方向信息，顺时针0-360
+//			.direction(100).latitude(location.getLatitude())
+//			.longitude(location.getLongitude()).build();
+			
 			String province = location.getProvince();
 			city = location.getCity();
 			String district = location.getDistrict();
-			String addressStr = location.getAddrStr();
+			addressStr = location.getAddrStr();
 			System.out.println("province:" + province + "  city:" + city
 					+ "  district:" + district + "  addressStr:" + addressStr);
 			if (lat == location.getLatitude() && lon == location.getLongitude()) {
