@@ -3,10 +3,12 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -40,16 +42,17 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * @author will
  * 
  */
-public class UnusedCouponsFragment extends BaseFragment implements IXListViewListener{
+public class UnusedCouponsFragment extends BaseFragment implements
+		IXListViewListener {
 
 	private ProgressBar progressBar;
 	private View infoView;
 	private XListView mListView;
 	private CouponsAdapter listAdapter;
 	private List<Coupon> coupons;
-	
+
 	private int pageNumber = 0;
-	
+	private int type;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -61,12 +64,12 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 		infoView = inflater.inflate(R.layout.unused_coupons, container, false);
 		
 		initView();
-		
+
 		initListener();
-		
+
 		return infoView;
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -75,34 +78,51 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
-		
+
 		getCoupons();
 	}
 
 	/**
 	 * 初始化控件
 	 */
-	private void initView(){
-		
-		progressBar = (ProgressBar)infoView.findViewById(R.id.progress_listView);
-		mListView = (XListView)infoView.findViewById(R.id.jlys_listview);
-		
-		
+	private void initView() {
+
+		progressBar = (ProgressBar) infoView
+				.findViewById(R.id.progress_listView);
+		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
+		type = ((CouponsFragmentActivity)mActivity).type;
+
 	}
+
 	/**
 	 * 事件初始化
 	 */
-	private void initListener(){
-		
-		
+	private void initListener() {
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				if (type == 1) {
+					Intent data=new Intent();  
+			        data.putExtra("coupon", coupons.get(position-1));  
+			        //回到生成订单界面
+			        mActivity.setResult(20, data);  
+			        mActivity.finish();  
+				}
+			}
+
+		});
+
 	}
-	
+
 	/**
 	 * 获取未使用优惠卷
 	 */
 	private void getCoupons() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), -1, "", 3,pageNumber,ApiConstants.LIMIT,0,
+		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), -1, "", 3,
+				pageNumber, ApiConstants.LIMIT, 0,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -111,22 +131,22 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 						mListView.setVisibility(View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(mActivity,
-							 parseModel.getMsg());
-							 return;
+							ToastUtils.showToast(mActivity, parseModel.getMsg());
+							return;
 
 						} else {
 							List<Coupon> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Coupon>>() {
 									});
-							if(pageNumber==0){
+							if (pageNumber == 0) {
 								coupons.clear();
 							}
 							coupons.addAll(productsList);
 
 							listAdapter.notifyDataSetChanged();
-							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+							mListView.onLoadFinish(pageNumber,
+									listAdapter.getCount(), "加载完毕");
 						}
 
 					}
@@ -135,7 +155,7 @@ public class UnusedCouponsFragment extends BaseFragment implements IXListViewLis
 
 	@Override
 	public void onRefresh() {
-		pageNumber=0;
+		pageNumber = 0;
 		getCoupons();
 	}
 
