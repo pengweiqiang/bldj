@@ -1,17 +1,20 @@
 package com.bldj.lexiang.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.vo.Coupon;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
@@ -46,11 +49,15 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private TextView tv_productName;
 	private TextView tv_time;
 	private Button btn_confirm;
+	private LinearLayout select_coupons;
+	private TextView tv_coupons;
 
 	private RadioButton rb_aliay, rb_weixin, rb_union;
 	
 	private double orderPay;//总金额
 	private int payType = 0;
+	
+	private Coupon coupon;//使用优惠卷
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +107,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
 		rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
 		rb_union = (RadioButton) findViewById(R.id.union_pay);
-
+		select_coupons = (LinearLayout)findViewById(R.id.select_coupons);
+		tv_coupons = (TextView)findViewById(R.id.tips);
+		
 		et_code = (EditText) findViewById(R.id.code);
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
@@ -207,5 +216,26 @@ public class AppointmentDoor3Activity extends BaseActivity {
 						});
 			}
 		});
+		//选择优惠卷
+		select_coupons.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(mContext,CouponsFragmentActivity.class);
+				intent.putExtra("type", 1);
+				startActivityForResult(intent, 0);
+			}
+		});
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == 20){
+			coupon = (Coupon)data.getSerializableExtra("coupon");
+			tv_coupons.setText(coupon.getName());
+			
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
 }
