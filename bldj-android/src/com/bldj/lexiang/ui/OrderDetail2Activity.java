@@ -53,7 +53,8 @@ public class OrderDetail2Activity extends BaseActivity {
 	private Button btn_confirm;
 	private Button btn_cancel_order;
 	private Button btn_use_code;
-	private TextView et_code;
+	private TextView tv_code;
+	private TextView tv_coupon;
 
 	// private RadioButton rb_aliay, rb_weixin, rb_union;
 
@@ -104,7 +105,8 @@ public class OrderDetail2Activity extends BaseActivity {
 		tv_order_num = (TextView) findViewById(R.id.order_num);
 		tv_order_pay = (TextView) findViewById(R.id.order_real_pay);
 		tv_order_time = (TextView) findViewById(R.id.order_time);
-		et_code = (TextView) findViewById(R.id.code);
+		tv_code = (TextView) findViewById(R.id.code);
+		tv_coupon = (TextView)findViewById(R.id.order_coupons);
 		// rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
 		// rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
 		// rb_union = (RadioButton) findViewById(R.id.union_pay);
@@ -122,6 +124,7 @@ public class OrderDetail2Activity extends BaseActivity {
 		tv_order_time.setText(order.getCreatetime());
 		tv_order_pay.setText(String.valueOf(order.getOrderPay()));
 		tv_order_num.setText(order.getOrderNum());
+		tv_coupon.setText("无");
 	}
 
 	@Override
