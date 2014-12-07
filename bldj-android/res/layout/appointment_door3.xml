@@ -115,6 +115,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/select_coupons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dip"
@@ -135,9 +136,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="优惠券A 注册新用户 50
- 优惠券B 分享好友50元"
+            android:text="请选择优惠卷"
             android:textSize="14sp" />
+        <ImageView 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_img_open"
+            />
     </LinearLayout>
 
     <LinearLayout
