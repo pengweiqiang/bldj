@@ -1,5 +1,7 @@
 package com.bldj.lexiang.ui;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -10,11 +12,15 @@ import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.constant.enums.TitleBarEnum;
+import com.bldj.lexiang.utils.StringUtils;
+import com.bldj.lexiang.view.CustomerSpinner;
 
 /**
  * 为他人预约
@@ -33,7 +39,12 @@ public class AppointmentOtherFragment extends BaseFragment {
 	private TextView tv_address_detail;
 	private TextView btn_city;
 	private Button btn_location;
-
+	String address = "";
+	
+	CustomerSpinner spinner;
+	ArrayList<String> citys = new ArrayList<String>();
+	private ArrayAdapter<String> adapter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -65,6 +76,15 @@ public class AppointmentOtherFragment extends BaseFragment {
 		btn_time = (TextView) infoView.findViewById(R.id.btn_appoint_time);
 		btn_city = (Button) infoView.findViewById(R.id.btn_city);
 		btn_location = (Button) infoView.findViewById(R.id.btn_location);
+		
+		
+		spinner = (CustomerSpinner)infoView.findViewById(R.id.spinner_city);
+		citys.add(TitleBarEnum.CITY_BEIJING.getMsg());
+		citys.add(TitleBarEnum.CITY_GUANGZHOU.getMsg());
+		citys.add(TitleBarEnum.CITY_SHENZHEN.getMsg());
+	    spinner.setList(citys);
+	    adapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_spinner_item, citys);
+	    spinner.setAdapter(adapter);
 
 	}
 
@@ -82,19 +102,32 @@ public class AppointmentOtherFragment extends BaseFragment {
 			}
 		});
 		btn_next.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(mActivity,JLYSFragmentActivity.class);
+				Intent intent = new Intent(mActivity,
+						JLYSFragmentActivity.class);
 				startActivity(intent);
+			}
+		});
+		btn_location.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(mActivity,MapLocationActivity.class);
+				startActivityForResult(intent, 123);
 			}
 		});
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		if (resultCode == Activity.RESULT_OK) {
+		if(resultCode == 20){
+			address = data.getStringExtra("address");
+			if(!StringUtils.isEmpty(address)){
+				btn_location.setText(address);
+			}
+		}else if (resultCode == Activity.RESULT_OK) {
 			final Uri uriRet = data.getData();
 			if (uriRet != null) {
 				try {
