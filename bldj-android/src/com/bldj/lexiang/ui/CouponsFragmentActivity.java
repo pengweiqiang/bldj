@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -15,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.vo.Coupon;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.CustomViewPager;
 
@@ -35,12 +37,12 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 	private TextView tab_failure;
 
 	List<Fragment> list;
-
+	int type;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coupons);
-
+		type = this.getIntent().getIntExtra("type", 0);
 		
 		initView();
 
