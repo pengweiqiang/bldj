@@ -68,6 +68,11 @@ public class MapLocationActivity extends BaseActivity {
 		mBaiduMap = mMapView.getMap();
 		// 开启定位图层
 		mBaiduMap.setMyLocationEnabled(true);
+		
+		
+		MapStatusUpdate msu = MapStatusUpdateFactory.zoomTo(18.0f);
+		mBaiduMap.setMapStatus(msu);
+		
 		// 定位初始化
 		mLocClient = new LocationClient(this);
 		mLocClient.registerLocationListener(myListener);

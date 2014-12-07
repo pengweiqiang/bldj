@@ -105,12 +105,12 @@ public class AppointmentDoor1Activity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// ToastUtils.showToast(mContext, date+" "+time);
-				if (StringUtils.isEmpty(address)) {
-					ToastUtils.showToast(mContext, "请选择地址");
-					return;
-				}
 				if (StringUtils.isEmpty(time)) {
 					ToastUtils.showToast(mContext, "请选择时间");
+					return;
+				}
+				if (StringUtils.isEmpty(address)) {
+					ToastUtils.showToast(mContext, "请选择地址");
 					return;
 				}
 				Intent intent = new Intent(AppointmentDoor1Activity.this,

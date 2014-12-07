@@ -117,7 +117,7 @@ public class MyFragment extends BaseFragment {
 					.setText(StringUtils.isEmpty(user.getNickname()) ? "未设置昵称"
 							: user.getNickname());
 			ImageLoader.getInstance().displayImage(
-					user.getHeadurl(),
+					ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+user.getHeadurl(),
 					image_head,
 					MyApplication.getInstance().getOptions(
 							R.drawable.default_image));
