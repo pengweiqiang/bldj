@@ -161,11 +161,16 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				String serviceTime = time.substring(0,time.indexOf(" "))+"@"+timeIndex;
+				long couponId = 0 ;
+				if(coupon!=null){
+					couponId = coupon.getId();
+				}
+				
 				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
 						user.getUserId(), user.getUsername(), seller.getId(),
 						seller.getUsername(), product.getId(), product.getName(), orderPay,
 						user.getUsername(), 1, user.getUsername(), user.getMobile(), detailAddress, "",
-						payType,0,serviceTime, new HttpConnectionUtil.RequestCallback() {
+						payType,couponId,serviceTime, new HttpConnectionUtil.RequestCallback() {
 							@Override
 							public void execute(ParseModel parseModel) {
 								if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
@@ -232,7 +237,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == 20){
 			coupon = (Coupon)data.getSerializableExtra("coupon");
-			tv_coupons.setText(coupon.getName());
+			tv_coupons.setText(coupon.getName()+" ￥:"+coupon.getPrice());
 			
 		}
 		super.onActivityResult(requestCode, resultCode, data);
