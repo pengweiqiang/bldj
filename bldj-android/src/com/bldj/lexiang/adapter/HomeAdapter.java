@@ -87,7 +87,7 @@ public class HomeAdapter extends BaseListAdapter {
 		holder.price.setText("价格："
 				+ String.valueOf(productItem.get(0).getMarketPrice()) );
 		holder.yixiujia_price.setText("一休价："
-				+ String.valueOf(productItem.get(0).getMarketPrice()));
+				+ String.valueOf(productItem.get(0).getCurPrice()));
 		ImageLoader.getInstance().displayImage(
 				productItem.get(0).getPicurl(),
 				holder.img,
@@ -109,9 +109,9 @@ public class HomeAdapter extends BaseListAdapter {
 			holder.name2.setText(productItem.get(1).getName());
 			holder.title2.setText(productItem.get(1).getOneword());
 			holder.price2.setText("价格："+String.valueOf(productItem.get(1)
-					.getCurPrice()));
+					.getMarketPrice()));
 			holder.yixiujia_price2.setText("一休价："
-					+ String.valueOf(productItem.get(1).getMarketPrice()) );
+					+ String.valueOf(productItem.get(1).getCurPrice()) );
 			ImageLoader.getInstance().displayImage(
 					productItem.get(1).getPicurl(),
 					holder.img2,
@@ -124,7 +124,7 @@ public class HomeAdapter extends BaseListAdapter {
 				public void onClick(View arg0) {
 					Intent intent = new Intent(mContext,
 							HealthProductDetailActivity.class);
-					intent.putExtra("product", productItem.get(0));
+					intent.putExtra("product", productItem.get(1));
 					mContext.startActivity(intent);
 				}
 			});
