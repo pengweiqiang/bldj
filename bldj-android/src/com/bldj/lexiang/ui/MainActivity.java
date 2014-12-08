@@ -1,6 +1,7 @@
 package com.bldj.lexiang.ui;
 
 import android.annotation.TargetApi;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -23,6 +25,7 @@ import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.utils.ToastUtils;
+import com.bldj.lexiang.view.BadgeView;
 
 public class MainActivity extends FragmentActivity implements
 		OnPageChangeListener {
@@ -44,6 +47,9 @@ public class MainActivity extends FragmentActivity implements
 
 	// 定位获取当前用户的地理位置
 	private LocationClient mLocationClient;
+	
+	private Button btn_my;//显示我的按钮右上角具体的数字
+	private BadgeView myBadgeView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,8 @@ public class MainActivity extends FragmentActivity implements
 		mFragmentManager = getSupportFragmentManager();
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);
 		mTabIndicators = (RadioGroup) findViewById(R.id.tabIndicators);
+		btn_my = (Button)findViewById(R.id.btn_my);
+		myBadgeView = remind(0);
 
 		mAdapter = new FragmentPagerAdapter(mFragmentManager) {
 
@@ -174,6 +182,27 @@ public class MainActivity extends FragmentActivity implements
 		option.setIsNeedAddress(true);// 不需要包含地址信息
 		mLocationClient.setLocOption(option);
 		mLocationClient.start();
+	}
+	
+	private BadgeView remind(int count) { //BadgeView的具体使用
+		BadgeView badge1 = new BadgeView(this, btn_my);// 创建一个BadgeView对象，view为你需要显示提醒的控件
+		if(count>99){//当消息数量大于99，显示99+
+			badge1.setText("99+");
+		}else{
+			badge1.setText(String.valueOf(count)); // 需要显示的提醒类容
+		}
+		badge1.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);// 显示的位置.右上角,BadgeView.POSITION_BOTTOM_LEFT,下左，还有其他几个属性
+		badge1.setTextColor(Color.WHITE); // 文本颜色
+		badge1.setBadgeBackgroundColor(Color.RED); // 提醒信息的背景颜色，自己设置
+		badge1.setTextSize(12); // 文本大小
+		//badge1.setBadgeMargin(3, 3); // 水平和竖直方向的间距
+		badge1.setBadgeMargin(1); //各边间隔
+		// badge1.toggle(); //显示效果，如果已经显示，则影藏，如果影藏，则显示
+		if(count>0){
+			badge1.show();// 只有显示
+			// badge1.hide();//影藏显示
+		}
+		return badge1;
 	}
 
 }
