@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="时间排序"
             android:layout_weight="1"
+            android:layout_margin="5dip"
              android:gravity="center"
             />
         <TextView 
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:text="价格区间"
             android:layout_weight="1"
+            android:layout_margin="5dip"
              android:gravity="center"
             />
         <TextView 
@@ -32,6 +34,7 @@
             android:layout_height="wrap_content"
             android:text="团队"
             android:layout_weight="1"
+            android:layout_margin="5dip"
              android:gravity="center"
             />
     </LinearLayout>
