@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.bldj.lexiang.view.SpringScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- <com.bldj.lexiang.view.SpringScrollView 
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:scrollbars="none" >
+    android:scrollbars="none" > -->
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -166,4 +166,4 @@
             android:text="@string/next" />
     </LinearLayout>
 
-</com.bldj.lexiang.view.SpringScrollView>
+<!-- </com.bldj.lexiang.view.SpringScrollView> -->
