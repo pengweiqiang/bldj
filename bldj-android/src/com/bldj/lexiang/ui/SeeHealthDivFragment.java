@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.bldj.gson.reflect.TypeToken;
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.adapter.JlysHealthAdapter;
@@ -60,6 +61,8 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	private List<TitleBarEnum> groups;
 	
 	private int orderByTag = 0;
+	private int startWorker;
+	private int endWorker;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -156,7 +159,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	 */
 	private void getSellers() {
 		ApiSellerUtils.getSellers(mActivity, pageNumber, ApiConstants.LIMIT, 0,
-				1000, 0, 4, 0,0,0, new HttpConnectionUtil.RequestCallback() {
+				1000, 0, 4, orderByTag,MyApplication.getInstance().lat,MyApplication.getInstance().lon, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
@@ -251,7 +254,9 @@ public class SeeHealthDivFragment extends BaseFragment implements
             	orderByTag = position;
                 if (popupWindow != null) {  
                     popupWindow.dismiss();  
-                }  
+                }
+                pageNumber = 0;
+                getSellers();
             } 
         });
 	}

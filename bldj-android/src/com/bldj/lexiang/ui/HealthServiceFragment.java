@@ -241,6 +241,7 @@ public class HealthServiceFragment extends BaseFragment implements
 					int position, long id) {
 				((TextView) parent).setText(groups.get(position).getMsg());
 				switch (index) {
+				
 				case 0://orderBytag
 					orderByTag = groups.get(position).getValue();
 					break;
@@ -254,6 +255,8 @@ public class HealthServiceFragment extends BaseFragment implements
 				default:
 					break;
 				}
+				pageNumber = 0;
+				getData();
 				
 				if (popupWindow != null) {
 					popupWindow.dismiss();
