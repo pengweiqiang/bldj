@@ -1,7 +1,6 @@
 package com.bldj.lexiang.ui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.adapter.ListviewAdapter;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.view.CustomerSpinner;
@@ -31,6 +33,9 @@ public class AppointmentMyFragment extends BaseFragment {
 	Button btn_address;
 	Button btn_location;
 	String address;
+	ListView locatioListView;
+	ArrayList<String> locationList;
+	ListviewAdapter listadapter;
 	
 	CustomerSpinner spinner;
 	ArrayList<String> citys = new ArrayList<String>();
@@ -59,11 +64,12 @@ public class AppointmentMyFragment extends BaseFragment {
 		btn_next = (Button)infoView.findViewById(R.id.btn_next);
 		btn_address = (Button)infoView.findViewById(R.id.btn_address);
 		btn_location = (Button)infoView.findViewById(R.id.btn_location);
+		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
 		
 		btn_location.setText(MyApplication.getInstance().addressStr);
 		btn_address.setText(MyApplication.getInstance().addressStr);
 		
-		
+		//城市
 		spinner = (CustomerSpinner)infoView.findViewById(R.id.spinner_city);
 		citys.add(TitleBarEnum.CITY_BEIJING.getMsg());
 		citys.add(TitleBarEnum.CITY_GUANGZHOU.getMsg());
@@ -71,6 +77,16 @@ public class AppointmentMyFragment extends BaseFragment {
 	    spinner.setList(citys);
 	    adapter = new ArrayAdapter<String>(mActivity, android.R.layout.simple_spinner_item, citys);
 	    spinner.setAdapter(adapter);
+	    
+	    //常用地址
+	    locationList = new ArrayList<String>();
+	    locationList.add("上地城铁");
+	    locationList.add("长城大厦");
+	    locationList.add("来广营");
+	    locationList.add("西直门");
+	    listadapter = new ListviewAdapter(mActivity,locationList);
+	    locatioListView.setAdapter(listadapter);
+	    
 	}
 	/**
 	 * 事件初始化
