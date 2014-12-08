@@ -24,14 +24,14 @@ public enum TitleBarEnum {
 	TYPE_ORDER_DOUBLE(11,"双人",1),
 	TYPE_ORDER_MANY(12,"多人",1),
 	TYPE_ORDER_SINGLE(13,"个人",0),
-	
+	//0时间 3均价 4累计成交量 5距离
 	ORDER_DEFAULT(14,"默认排序"),
-	ORDER_DISTANCE(15,"距离排序"),
-	ORDER_COUNT(16,"接单次数"),
+	ORDER_DISTANCE(15,"距离排序",5),
+	ORDER_COUNT(16,"接单次数",4),
 	
-	WORK_3_BIG(17,"三年工作以上"),
-	WORK_3_5(18,"工作3-5年"),
-	WORK_5_10(19,"工作5-10年"),
+	WORK_3_BIG(17,"三年工作以上",3),
+	WORK_3_5(18,"工作3-5年",3,5),
+	WORK_5_10(19,"工作5-10年",5,10),
 	
 	SHARE_SINA(20,"新浪微博"),
 	SHARE_WEIXIN(21,"微信"),
@@ -46,7 +46,10 @@ public enum TitleBarEnum {
 	private String msg;
 	
 	private int value;
-
+	
+	private int start;
+	private int end;
+	
     private TitleBarEnum(int index,String msg) {
         this.index = index;
         this.msg = msg;
@@ -55,6 +58,12 @@ public enum TitleBarEnum {
         this.index = index;
         this.msg = msg;
         this.value = value;
+    }
+    private TitleBarEnum(int index,String msg,int start ,int end){
+    	this.index = index;
+    	this.msg = msg;
+    	this.start = start;
+    	this.end = end;
     }
 
     public int getValue(){
@@ -68,7 +77,13 @@ public enum TitleBarEnum {
     public String getMsg() {
 		return msg;
 	}
-
+    
+	public int getStart() {
+		return start;
+	}
+	public int getEnd() {
+		return end;
+	}
 	public static TitleBarEnum getTitleBarResult(int index) {
         for (TitleBarEnum v : TitleBarEnum.values()) {
             if (index == v.getIndex()) {

@@ -232,7 +232,7 @@ public class HealthServiceFragment extends BaseFragment implements
 		// int xPos = DeviceInfo.getScreenWidth() / 3;
 
 		// popupWindow.showAsDropDown(parent, xPos, 0);
-		popupWindow.showAsDropDown(parent);
+		popupWindow.showAsDropDown(parent,0,10);
 		popupWindow.update();
 
 		lv_group.setOnItemClickListener(new OnItemClickListener() {
