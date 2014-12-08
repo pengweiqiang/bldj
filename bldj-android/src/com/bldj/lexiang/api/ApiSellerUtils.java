@@ -28,6 +28,8 @@ public class ApiSellerUtils {
 	 * @param startWorkyear 起始工作年限
 	 * @param endWorkyear 终止工作年限
 	 * @param orderbyTag 排序字段 0时间 3均价 4累计成交量 5距离
+	 * @param lat
+	 * @param lon
 	 * @param requestCallBack
 	 */
 	public static void getSellers(Context context, int start, int limit,
