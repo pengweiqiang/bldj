@@ -30,7 +30,8 @@ public class MyApplication extends Application {
 
 	public static double lat;
 	public static double lon;
-	public static String city = "";
+	public static String city = "";//当前定位城市
+	public static float radius; 
 
 	private static MyApplication myApplication = null;
 	private User user = null;// 全局用户
@@ -139,6 +140,7 @@ public class MyApplication extends Application {
 			city = location.getCity();
 			String district = location.getDistrict();
 			addressStr = location.getAddrStr();
+			radius = location.getRadius();
 			System.out.println("province:" + province + "  city:" + city
 					+ "  district:" + district + "  addressStr:" + addressStr);
 			if (lat == location.getLatitude() && lon == location.getLongitude()) {
