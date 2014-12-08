@@ -79,7 +79,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	ViewPager bannerViewPager;
 	private View mTouchTarget;
 	PageIndicator mIndicator;
-
+	LocationBroadcastReciver locationBroadReceiver;
+	
 	ArrayList<View> bannerListView;
 	private BannerPagerAdapter bannerPageAdapter;
 
@@ -186,7 +187,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		
 		IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Constant.LOCATION);
-        mActivity.registerReceiver(new LocationBroadcastReciver(), intentFilter);
+        locationBroadReceiver = new LocationBroadcastReciver();
+        mActivity.registerReceiver(locationBroadReceiver, intentFilter);
 	}
 
 	// 设置activity的导航条
@@ -558,5 +560,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			}
 		}
 	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		mActivity.unregisterReceiver(locationBroadReceiver);
+	}
+	
 
 }
