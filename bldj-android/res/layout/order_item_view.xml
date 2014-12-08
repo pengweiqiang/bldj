@@ -10,5 +10,6 @@
             android:text="时间排序"
             android:gravity="center"
             android:layout_height="wrap_content"
+            android:layout_margin="5dip"
              />  
 </LinearLayout>  
