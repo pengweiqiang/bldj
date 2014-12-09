@@ -29,6 +29,7 @@ public class ActionBar extends FrameLayout {
 	private Button mRightTextActionButton;
 	private LinearLayout mCityButton;
 	private TextView mCityView;
+	private LinearLayout mRightHomeActionLinearLayout; 
 
 	public ActionBar(Context context) {
 		super(context);
@@ -52,6 +53,7 @@ public class ActionBar extends FrameLayout {
 		mLeftActionButton = (ImageView) findViewById(R.id.leftActionButton);
 		mRightIconActionButton = (ImageView) findViewById(R.id.rightIconActionButton);
 		mRightTextActionButton = (Button) findViewById(R.id.rightTextActionButton);
+		mRightHomeActionLinearLayout = (LinearLayout)findViewById(R.id.home_right);
 	}
 
 	public void setTitle(int resId) {
@@ -92,6 +94,7 @@ public class ActionBar extends FrameLayout {
 	public void hideRightActionButton() {
 		mRightIconActionButton.setVisibility(View.INVISIBLE);
 		mRightTextActionButton.setVisibility(View.INVISIBLE);
+		mRightHomeActionLinearLayout.setVisibility(View.INVISIBLE);
 	}
 
 	public void setRightIconActionButton(int resId, OnClickListener listener) {
@@ -99,6 +102,7 @@ public class ActionBar extends FrameLayout {
 		mRightIconActionButton.setOnClickListener(listener);
 		mRightIconActionButton.setVisibility(View.VISIBLE);
 		mRightTextActionButton.setVisibility(View.INVISIBLE);
+		mRightHomeActionLinearLayout.setVisibility(View.INVISIBLE);
 	}
 
 	public void setRightTextActionButton(String text, OnClickListener listener) {
@@ -106,5 +110,13 @@ public class ActionBar extends FrameLayout {
 		mRightTextActionButton.setOnClickListener(listener);
 		mRightTextActionButton.setVisibility(View.VISIBLE);
 		mRightIconActionButton.setVisibility(View.INVISIBLE);
+		mRightHomeActionLinearLayout.setVisibility(View.INVISIBLE);
+	}
+	public void setHomeRightAction(OnClickListener callListener,OnClickListener morelistener){
+		mRightTextActionButton.setVisibility(View.INVISIBLE);
+		mRightIconActionButton.setVisibility(View.INVISIBLE);
+		findViewById(R.id.rightIconActionMore).setOnClickListener(morelistener);
+		findViewById(R.id.rightIconActionCall).setOnClickListener(callListener);
+		
 	}
 }
