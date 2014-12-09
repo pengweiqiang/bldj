@@ -204,8 +204,22 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		String city = (String) SharePreferenceManager.getSharePreferenceValue(
 				mActivity, Constant.FILE_NAME, "city", "");
 		actionBar.setCityName(city);
-		actionBar.setRightTextActionButton("更多", new View.OnClickListener() {
-
+//		actionBar.setRightTextActionButton("更多", new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View view) {
+//				buildTitleBar(view,1);
+//			}
+//		});
+		actionBar.setHomeRightAction(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				
+			}
+		},
+		new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View view) {
 				buildTitleBar(view,1);
