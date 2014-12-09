@@ -5,11 +5,13 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -59,23 +61,23 @@ public class HomeAdapter extends BaseListAdapter {
 			holder = new ViewHolder();
 
 			convertView = mInflater.inflate(R.layout.home_item, null);
-			holder.frameOne = (FrameLayout) convertView
+			holder.frameOne = (LinearLayout) convertView
 					.findViewById(R.id.good_cell_one);
 			holder.name = (TextView) convertView.findViewById(R.id.name);
 			holder.img = (ImageView) convertView.findViewById(R.id.image);
 			holder.price = (TextView) convertView
 					.findViewById(R.id.product_price);
 			holder.yixiujia_price = (TextView) convertView.findViewById(R.id.yixiu_price);
-			holder.title = (TextView) convertView.findViewById(R.id.title);
+//			holder.title = (TextView) convertView.findViewById(R.id.title);
 
-			holder.frameTwo = (FrameLayout) convertView
+			holder.frameTwo = (LinearLayout) convertView
 					.findViewById(R.id.good_cell_two);
 			holder.name2 = (TextView) convertView.findViewById(R.id.name2);
 			holder.img2 = (ImageView) convertView.findViewById(R.id.image2);
 			holder.price2 = (TextView) convertView
 					.findViewById(R.id.product_price2);
 			holder.yixiujia_price2 = (TextView) convertView.findViewById(R.id.yixiu_price2);
-			holder.title2 = (TextView) convertView.findViewById(R.id.title2);
+//			holder.title2 = (TextView) convertView.findViewById(R.id.title2);
 			convertView.setTag(holder);
 
 		} else {
@@ -83,10 +85,11 @@ public class HomeAdapter extends BaseListAdapter {
 		}
 
 		holder.name.setText(productItem.get(0).getName());
-		holder.title.setText(productItem.get(0).getOneword());
-		holder.price.setText("价格："
+//		holder.title.setText(productItem.get(0).getOneword());
+		holder.price.setText("价格：￥"
 				+ String.valueOf(productItem.get(0).getMarketPrice()) );
-		holder.yixiujia_price.setText("一休价："
+		holder.price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG ); 
+		holder.yixiujia_price.setText("一休价：￥"
 				+ String.valueOf(productItem.get(0).getCurPrice()));
 		ImageLoader.getInstance().displayImage(
 				productItem.get(0).getPicurl(),
@@ -107,10 +110,11 @@ public class HomeAdapter extends BaseListAdapter {
 		if ((position * 2 + 1) < dataList.size()) {
 			holder.frameTwo.setVisibility(View.VISIBLE);
 			holder.name2.setText(productItem.get(1).getName());
-			holder.title2.setText(productItem.get(1).getOneword());
-			holder.price2.setText("价格："+String.valueOf(productItem.get(1)
+//			holder.title2.setText(productItem.get(1).getOneword());
+			holder.price2.setText("价格：￥"+String.valueOf(productItem.get(1)
 					.getMarketPrice()));
-			holder.yixiujia_price2.setText("一休价："
+			holder.price2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG );
+			holder.yixiujia_price2.setText("一休价：￥"
 					+ String.valueOf(productItem.get(1).getCurPrice()) );
 			ImageLoader.getInstance().displayImage(
 					productItem.get(1).getPicurl(),
@@ -138,11 +142,11 @@ public class HomeAdapter extends BaseListAdapter {
 
 	public final class ViewHolder {
 		public ImageView img, img2;
-		public TextView title, title2;
+//		public TextView title, title2;
 		public TextView price, price2;
 		public TextView yixiujia_price,yixiujia_price2;
 		public TextView name, name2;
-		public FrameLayout frameOne, frameTwo;
+		public LinearLayout frameOne, frameTwo;
 	}
 
 }

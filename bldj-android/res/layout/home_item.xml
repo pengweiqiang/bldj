@@ -2,10 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="5dp"
-    android:background="@drawable/body"
-    android:orientation="horizontal" >
-    <FrameLayout
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip"
+    android:orientation="horizontal"
+    android:paddingBottom="8dip" >
+
+    <LinearLayout
         android:id="@+id/good_cell_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,70 +16,68 @@
         android:layout_marginRight="2.5dp"
         android:layout_marginTop="4dp"
         android:layout_weight="1"
-        android:background="#00000000" >
+        android:background="@drawable/border"
+        android:orientation="vertical" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="@dimen/image_height"
+            android:layout_margin="3dip"
+             >
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/image_height"
+                android:scaleType="fitXY"
                 android:src="@drawable/default_image" />
 
-            <LinearLayout 
-                 android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:orientation="horizontal"
-                >
-	            <TextView
-	                android:id="@+id/product_price"
-	                android:layout_width="wrap_content"
-	                android:layout_weight="1"
-	                android:layout_height="wrap_content"
-	                android:text="价格：100元/20分钟"
-	                android:textSize="@dimen/price_textsize" />
-	            
-	             <TextView
-	                android:id="@+id/yixiu_price"
-	                android:layout_weight="1"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:text="一休价：80元/20分钟"
-	                android:textSize="@dimen/price_textsize" />
-            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/transcat_bg" >
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:minWidth="@dimen/recomment_width"
+                    android:paddingLeft="3dip"
+                    android:text="头皮放松按摩"
+                    android:textColor="@color/white" />
             </LinearLayout>
-            
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="@dimen/price_width"
-            android:layout_height="@dimen/price_height"
-            android:layout_gravity="top|left"
-            android:layout_marginLeft="1.5dp"
-            android:layout_marginTop="@dimen/price_margin"
-            android:gravity="center"
-            android:paddingRight="5dp"
-            android:visibility="gone"
-            android:textColor="#ffffff"
-            android:textSize="@dimen/price_textsize" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:minWidth="@dimen/recomment_width"
-            android:text="头皮放松按摩"
-             />
-    </FrameLayout>
+            android:layout_margin="2dip"
+            android:orientation="horizontal" >
 
-    <FrameLayout
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="价格：100元/20分钟"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/price_textsize" />
+
+            <TextView
+                android:id="@+id/yixiu_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="一休价：80元/20分钟"
+                android:textColor="@color/app_bg_color"
+                android:textSize="@dimen/price_textsize" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/good_cell_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,71 +85,65 @@
         android:layout_marginLeft="2.5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="4dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/recomment_margin"
-            android:gravity="center"
-            android:orientation="vertical" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/image_height" 
+            android:layout_margin="3dip"
+            >
 
             <ImageView
                 android:id="@+id/image2"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/image_height"
-                 android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 android:src="@drawable/default_image" />
 
-           <LinearLayout 
-                android:layout_gravity="bottom"
-                 android:layout_width="match_parent"
-	             android:layout_height="wrap_content"
-	             android:orientation="horizontal"
-                >
-	            <TextView
-	                android:id="@+id/product_price2"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:text="价格：100元/20分钟"
-	                 android:layout_weight="1"
-	                android:textSize="@dimen/price_textsize" />
-	            
-	             <TextView
-	                android:id="@+id/yixiu_price2"
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:text="一休价：80元/20分钟"
-	                 android:layout_weight="1"
-	                android:textSize="@dimen/price_textsize" />
-            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/transcat_bg" >
+
+                <TextView
+                    android:id="@+id/name2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="@dimen/recomment_width"
+                    android:paddingLeft="3dip"
+                    android:text="腰部推拿"
+                    android:textColor="@color/white" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/title2"
-            android:layout_width="@dimen/price_width"
-            android:layout_height="@dimen/price_height"
-            android:layout_gravity="left|top"
-            android:layout_marginLeft="1.5dp"
-            android:layout_marginTop="@dimen/price_margin"
-            android:gravity="center"
-            android:paddingRight="5dp"
-            android:textColor="#ffffff"
-            android:visibility="gone"
-            android:textSize="@dimen/price_textsize" />
-
-        <TextView
-            android:id="@+id/name2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:minWidth="@dimen/recomment_width"
-            android:text="头皮放松按摩"
-             />
-    </FrameLayout>
+            android:layout_gravity="bottom"
+            android:layout_margin="2dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/product_price2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="价格：100元/20分钟"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/price_textsize" />
+
+            <TextView
+                android:id="@+id/yixiu_price2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="一休价：80元/20分钟"
+                android:textColor="@color/app_bg_color"
+                android:textSize="@dimen/price_textsize" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

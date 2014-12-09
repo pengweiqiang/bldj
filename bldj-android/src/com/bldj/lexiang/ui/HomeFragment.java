@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -87,7 +88,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	// 广告条 end
 	private int pageNumber = 0;
 
-	private TextView tab_find, tab_company, tab_reserve;
+	private LinearLayout tab_find, tab_company, tab_reserve;
 
 	private PopupWindow popupWindow;
 	private View view;
@@ -101,9 +102,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		infoView = inflater.inflate(R.layout.home_fragment, container, false);
 		mActionBar = (ActionBar) infoView.findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
-		tab_find = (TextView) infoView.findViewById(R.id.tab_find);
-		tab_company = (TextView) infoView.findViewById(R.id.tab_company);
-		tab_reserve = (TextView) infoView.findViewById(R.id.tab_reserve);
+		tab_find = (LinearLayout) infoView.findViewById(R.id.tab_find);
+		tab_company = (LinearLayout) infoView.findViewById(R.id.tab_company);
+		tab_reserve = (LinearLayout) infoView.findViewById(R.id.tab_reserve);
 		progressbar = (ProgressBar) infoView
 				.findViewById(R.id.progress_listView);
 

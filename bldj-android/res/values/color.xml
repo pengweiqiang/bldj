@@ -63,7 +63,8 @@
     <color name="color_text_uncheck">#aeaeae</color>
     
     <!-- 下载管理 -->
-	<color name="white">#ffffffff</color>   
+	<color name="white">#ffffffff</color>  
+	<color name="home_bg">#f0f0f0</color> 
     <color name="orange">#ffffdfd2</color> 
     <color name="update_all_dis_color">#ffbebebe</color>    
     <color name="common_text_color">#ff666666</color>
