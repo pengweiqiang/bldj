@@ -110,7 +110,7 @@ public class OrderDetail2Activity extends BaseActivity {
 		// rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
 		// rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
 		// rb_union = (RadioButton) findViewById(R.id.union_pay);
-
+		
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 
@@ -121,6 +121,9 @@ public class OrderDetail2Activity extends BaseActivity {
 		shareUtil = new ShareUtil(mContext);
 		shareUtil.initWX();
 
+		if(order.getStatus()==0){//未支付的情况下才能取消订单
+			btn_cancel_order.setVisibility(View.VISIBLE);
+		}
 		tv_order_time.setText(order.getCreatetime());
 		tv_order_pay.setText(String.valueOf(order.getOrderPay()));
 		tv_order_num.setText(order.getOrderNum());
