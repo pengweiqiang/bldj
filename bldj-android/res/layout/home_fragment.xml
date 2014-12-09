@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
@@ -19,41 +19,98 @@
         android:id="@+id/ll_tab_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dip"
+        android:background="@drawable/border"
+        android:layout_marginTop="8dip"
+        android:layout_marginBottom="8dip"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         android:orientation="horizontal" >
 
-        <TextView
+        <LinearLayout
             android:id="@+id/tab_find"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/tab_find"
             android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/tab_find"
-            android:textSize="16sp" />
+            android:orientation="vertical" >
 
-        <TextView
+            <ImageView
+                android:layout_marginTop="8dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_find_seller"
+                android:layout_marginBottom="3dip" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_find"
+                android:padding="5dip"
+                android:textSize="14sp" />
+        </LinearLayout>
+        <View 
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            android:background="@color/home_bg"
+            />
+
+        <LinearLayout
             android:id="@+id/tab_company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/tab_company"
             android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/tab_company"
-            android:textSize="16sp" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tab_reserve "
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:layout_marginBottom="3dip"
+                android:background="@drawable/tab_company"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/tab_company"
+                android:textSize="14sp" />
+        </LinearLayout>
+		
+        <View 
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            android:background="@color/home_bg"
+            />
+        
+        <LinearLayout
+            android:id="@+id/tab_reserve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/tab_reverse"
             android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/tab_reserve"
-            android:textSize="16sp" />
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dip"
+                android:layout_marginBottom="3dip"
+                android:background="@drawable/tab_appoinment"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="@string/tab_reserve"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <com.bldj.lexiang.view.MyListView
@@ -61,7 +118,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@drawable/good_list_bg"
         android:divider="#00000000"
         android:visibility="gone" />
 
