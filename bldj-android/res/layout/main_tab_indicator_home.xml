@@ -3,6 +3,7 @@
     android:id="@+id/tabInfoButton"
     style="@style/MainTabButton"
     android:drawableTop="@drawable/ic_tab_home"
+    android:checked="true"
     android:text="@string/tab_home" >
 
 </RadioButton>

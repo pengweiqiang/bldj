@@ -3,14 +3,14 @@
     android:id="@+id/actionBarLayout"
     android:layout_width="fill_parent"
     android:layout_height="48dp"
-    android:background="@color/blue" >
+    android:background="@color/app_bg_color" >
 
     <ImageView
         android:id="@+id/leftActionButton"
         style="@style/ActionBarIconButton"
         android:layout_alignParentLeft="true"
-        android:visibility="visible"
-        android:src="@drawable/ic_menu_role" />
+        android:visibility="gone"
+        android:src="@drawable/ic_menu_back" />
 
     <LinearLayout
         android:id="@+id/leftActionCity"
@@ -18,14 +18,15 @@
         android:layout_alignParentLeft="true"
         android:paddingLeft="3dip"
         android:orientation="horizontal"
-        android:visibility="gone" >
+        android:visibility="visible" >
 
         <TextView
             android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="2dip"
+            android:paddingLeft="6dip"
+            android:paddingRight="6dip"
             android:text="城市"
             android:textColor="#FFFFFFFF"
             android:textSize="18sp" />
@@ -36,13 +37,37 @@
             android:layout_gravity="center_vertical"
             android:src="@drawable/ic_arrow_white_down" />
     </LinearLayout>
-
+	
+    <LinearLayout 
+        android:id="@+id/home_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        >
+        <ImageView
+        android:id="@+id/rightIconActionCall"
+        style="@style/ActionBarIconButton"
+        android:paddingRight="5dip"
+        android:paddingLeft="5dip"
+        android:src="@drawable/title_call" />
+        
+        <ImageView
+        android:id="@+id/rightIconActionMore"
+        style="@style/ActionBarIconButton"
+        android:paddingRight="5dip"
+        android:paddingLeft="5dip"
+        android:src="@drawable/title_more" />
+        
+    </LinearLayout>
     <ImageView
         android:id="@+id/rightIconActionButton"
         style="@style/ActionBarIconButton"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_menu_post" />
-
+        android:visibility="gone"
+        android:src="@drawable/title_more" />
+	
     <Button
         android:id="@+id/rightTextActionButton"
         android:layout_width="wrap_content"
@@ -58,7 +83,7 @@
         android:id="@+id/actionBarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_centerInParent="true"
         android:layout_toLeftOf="@+id/rightIconActionButton"
         android:layout_toRightOf="@+id/leftActionButton"
         android:ellipsize="marquee"
@@ -69,8 +94,8 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:text="@string/tab_home"
-        android:textColor="@color/color_font_blue"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
         android:textSize="20sp" >
     </TextView>
 
