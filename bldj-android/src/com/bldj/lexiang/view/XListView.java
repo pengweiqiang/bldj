@@ -197,6 +197,12 @@ public class XListView extends ListView implements OnScrollListener {
 				System.currentTimeMillis(), ""));
 		setFootHintText(pageNumber,count,footTxt);
 	}
+	public void onLoadFinish(){
+		stopRefresh();
+		stopLoadMore();
+		setRefreshTime(DateUtils.convert2String(
+				System.currentTimeMillis(), ""));
+	}
 	
 	/**
 	 * set last refresh time
