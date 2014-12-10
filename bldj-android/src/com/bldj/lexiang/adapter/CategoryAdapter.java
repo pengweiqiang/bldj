@@ -1,6 +1,7 @@
 package com.bldj.lexiang.adapter;
 
 import java.util.List;
+import java.util.Random;
 
 import android.content.Context;
 import android.content.Intent;
@@ -89,7 +90,10 @@ public class CategoryAdapter extends BaseListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.tv_category_name.setText(category.getName());
-//		holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_four));
+		int res = context.getResources().getColor(R.color.color_random_one);
+		Random rand = new Random();
+		int i = rand.nextInt(10);
+		holder.title_circle.setBackgroundColor(res+i);
 
 		if (products != null && products.size() > 0) {
 			final Product product1 = products.get(0);

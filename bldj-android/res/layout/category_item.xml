@@ -156,10 +156,11 @@
     </LinearLayout>
     <View 
 	    android:layout_below="@+id/more"
-	    android:background="@drawable/dashd_line"
+	    android:background="@drawable/border_category"
 	    android:layout_width="match_parent"
 	    android:layout_height="2dp"
 	    android:layout_margin="7dip"
+	    android:layerType="software"
 	    />
 
     <TextView
