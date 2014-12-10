@@ -54,6 +54,7 @@ public class SellerInfoFragment extends BaseFragment implements IXListViewListen
 	private XListView mListView;
 	private ScoreAdapter listAdapter;
 	private List<SellerScores> scores;
+	private TextView tv_recommend;
 	
 	private int pageNumber = 0;
 	
@@ -68,7 +69,7 @@ public class SellerInfoFragment extends BaseFragment implements IXListViewListen
 		infoView = inflater.inflate(R.layout.seller_info, container, false);
 		
 		initView();
-		
+		initData();
 		initListener();
 		
 		return infoView;
@@ -93,8 +94,14 @@ public class SellerInfoFragment extends BaseFragment implements IXListViewListen
 		
 		progressBar = (ProgressBar)infoView.findViewById(R.id.progress_listView);
 		mListView = (XListView)infoView.findViewById(R.id.listview);
+		tv_recommend = (TextView)infoView.findViewById(R.id.person_recommend);
 		
 		
+	}
+	private void initData(){
+		if(((SellerPersonalActivity)mActivity).getSellerVo() != null){
+			tv_recommend.setText(((SellerPersonalActivity)mActivity).getSellerVo().getRecommend());
+		}
 	}
 	/**
 	 * 事件初始化

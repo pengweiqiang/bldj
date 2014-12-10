@@ -88,6 +88,8 @@ public class SellerPersonalActivity extends FragmentActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle(sellerVo.getNickname());
+		findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.white));
+		actionBar.setTitleTextColor(R.color.app_title_color);
 		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
 				new OnClickListener() {
 					@Override
@@ -202,7 +204,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 				MyApplication.getInstance().getOptions(R.drawable.ic_launcher));
 		tv_order_count.setText("共接单" + sellerVo.getDealnumSum() + "次");
 		tv_price.setText("均价：￥" + String.valueOf(sellerVo.getAvgPrice()));
-		tv_username.setText(sellerVo.getUsername());
+		tv_username.setText(sellerVo.getNickname());
 		String levelStr = "";
 		if(sellerVo.getDealnumSum()<20){
 			levelStr = "★";
@@ -212,7 +214,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 			levelStr = "★★★★";
 		}
 		tv_level.setText(levelStr);
-		tv_work.setText("年龄：" + sellerVo.getWorkyear());
+		tv_work.setText("年龄：" + sellerVo.getUserGrade());
 
 	}
 

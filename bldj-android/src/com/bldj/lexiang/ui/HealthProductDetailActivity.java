@@ -1,8 +1,12 @@
 package com.bldj.lexiang.ui;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebChromeClient;
@@ -13,10 +17,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.ApiProductUtils;
+import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -57,7 +67,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 
-		initData();
+		getProduct();
 		shareUtil = new ShareUtil(this);
 		shareUtil.initWX();
 
@@ -94,9 +104,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	private void initData() {
 
-		// 获取此美容师是否收藏过
-		isFav = DatabaseUtil.getInstance(mContext).checkFavProduct(
-				product.getId());
+		// 获取此产品是否收藏过
 		if (isFav) {
 			tv_fav.setText("已收藏");
 		}
@@ -156,6 +164,58 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	}
 
+	/**
+	 * 获取产品明细
+	 */
+	private void getProduct(){
+		new Thread(){
+
+			@Override
+			public void run() {
+				super.run();
+				
+				isFav = DatabaseUtil.getInstance(mContext).checkFavProduct(
+						product.getId());
+				if(product.getCurPrice()==0 && product.getMarketPrice()==0){
+					Product productCache = DatabaseUtil.getInstance(mContext).getProductById(product.getId());
+					Message msg = new Message();
+					msg.what = 1;
+					msg.obj = productCache;
+					handler.sendMessage(msg);
+				}else{
+					handler.sendEmptyMessage(0);
+				}
+				
+			}
+			
+		}.start();
+		
+
+	}
+	/**
+	 * 从接口获取产品明细
+	 */
+	private void getProductByIdHttp(){
+		ApiProductUtils.getProductById(mContext, product.getId(), new HttpConnectionUtil.RequestCallback() {
+			
+			@Override
+			public void execute(ParseModel parseModel) {
+				if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+						.getStatus())) {
+					ToastUtils.showToast(mContext, parseModel.getMsg());
+					return;
+
+				} else {
+					product = JsonUtils.fromJson(
+							parseModel.getData().toString(),
+							Product.class);
+					initData();
+					
+				}
+			}
+		});
+	}
+	
 	@Override
 	public void initListener() {
 		// 预约产品
@@ -214,7 +274,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 			public void onClick(View arg0) {
 				if (!isFav) {
 					long row = DatabaseUtil.getInstance(mContext)
-							.insertProduct(product);
+							.insertProduct(product,0);
 					if (row > 0) {
 						isFav = true;
 						ToastUtils.showToast(mContext, "收藏成功");
@@ -224,7 +284,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 					}
 				} else {
 					int row = DatabaseUtil.getInstance(mContext)
-							.deleteFavProduct(product.getId());
+							.deleteFavProduct(product.getId(),0);
 					if (row > 0) {
 						isFav = false;
 						ToastUtils.showToast(mContext, "取消收藏");
@@ -236,5 +296,24 @@ public class HealthProductDetailActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	Handler handler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			if(msg.what == 1){
+				Product product = (Product) msg.obj;
+				if(product == null){//缓存里面没有明细，从接口获取
+					getProductByIdHttp();
+				}else{
+					initData();
+				}
+			}else{
+				initData();
+			}
+			super.handleMessage(msg);
+		}
+		
+	};
 
 }

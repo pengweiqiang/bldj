@@ -43,6 +43,7 @@ import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
+import com.bldj.lexiang.db.DatabaseUtil;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -87,6 +88,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 	// 广告条 end
 	private int pageNumber = 0;
+	private boolean isFirst = true;// 首次进入app先从缓存加载产品数据
 
 	private LinearLayout tab_find, tab_company, tab_reserve;
 
@@ -376,6 +378,21 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	 * 获取精品推荐数据
 	 */
 	private void getHotProduct() {
+		if(isFirst){
+			isFirst = false;
+			//获取缓存数据
+			List<Product> productsCache = DatabaseUtil.getInstance(mActivity).queryFavProduct(0, 0, 1);
+			
+			if(productsCache!=null && !productsCache.isEmpty()){
+				progressbar.setVisibility(View.GONE);
+				mListView.setVisibility(View.VISIBLE);
+				products.addAll(productsCache);
+				listAdapter.notifyDataSetChanged();
+				mListView.onLoadFinish();
+				return;
+			}
+		}
+		
 		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
 				0, 2, pageNumber, ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
@@ -390,13 +407,24 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 							return;
 
 						} else {
-							List<Product> productsList = JsonUtils.fromJson(
+							final List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Product>>() {
 									});
 
 							if (pageNumber == 0) {
 								products.clear();
+								if(productsList!=null && !productsList.isEmpty()){
+									new Thread(){
+
+										@Override
+										public void run() {
+											super.run();
+											DatabaseUtil.getInstance(mActivity).insertProductsList(productsList,1);
+										}
+										
+									}.start();
+								}
 							}
 							
 							products.addAll(productsList);
