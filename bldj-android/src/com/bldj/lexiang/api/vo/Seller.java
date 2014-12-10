@@ -20,8 +20,8 @@ public class Seller implements Serializable{
 	private String recommend;
 	private String mobile;
 	private String address;
-	private double avgPrice;
-	private int userGrade;
+	private double avgPrice;//均价
+	private int userGrade;//年龄
 	private String headurl;
 	private int workyear;
 	private int dealnumSum;

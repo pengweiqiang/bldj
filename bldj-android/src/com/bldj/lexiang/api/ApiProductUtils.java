@@ -50,6 +50,8 @@ public class ApiProductUtils {
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_CATEGORY, false, requestCallback,MethodType.GET_MAINPAGE_AD,context);
 	
 	}
+	
+	
 	/**
 	 * 获取分类的产品列表
 	 * @param context
@@ -65,6 +67,17 @@ public class ApiProductUtils {
 		params.put(ReqUrls.LIMIT, limit);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_CATEGORY_PRODUCT, false, requestCallback,MethodType.GET_MAINPAGE_AD,context);
 	}
-	
+	/**
+	 * 获取产品明细
+	 * @param context
+	 * @param productId
+	 * @param requestCallback
+	 */
+	public static void getProductById(Context context,long productId,RequestCallback requestCallback){
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, productId);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_PRODUCT_BYID, false, requestCallback,MethodType.GET_MAINPAGE_AD,context);
+		
+	}
 	
 }
