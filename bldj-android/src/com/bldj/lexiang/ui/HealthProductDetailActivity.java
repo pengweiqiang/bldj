@@ -67,11 +67,18 @@ public class HealthProductDetailActivity extends BaseActivity {
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 
-		getProduct();
 		shareUtil = new ShareUtil(this);
 		shareUtil.initWX();
 
 	}
+	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		getProduct();
+	}
+
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
