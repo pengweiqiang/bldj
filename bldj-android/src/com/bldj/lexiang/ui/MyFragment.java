@@ -28,7 +28,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -49,6 +48,7 @@ import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.RoundImageView;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 /**
@@ -71,7 +71,7 @@ public class MyFragment extends BaseFragment {
 	private LinearLayout ll_myinfo;// 我的个人信息
 	private LinearLayout ll_updatePwd;// 修改密码
 	private TextView tv_username;// 用户名
-	private ImageView image_head;// 头像
+	private RoundImageView image_head;// 头像
 
 	private EditText et_nickname;
 
@@ -107,7 +107,7 @@ public class MyFragment extends BaseFragment {
 				.findViewById(R.id.btn_check_version);
 
 		tv_username = (TextView) infoView.findViewById(R.id.tv_person_name);
-		image_head = (ImageView) infoView.findViewById(R.id.img_person);
+		image_head = (RoundImageView) infoView.findViewById(R.id.img_person);
 
 	}
 
