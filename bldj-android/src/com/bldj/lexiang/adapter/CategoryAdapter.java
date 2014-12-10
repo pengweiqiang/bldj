@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -56,10 +56,10 @@ public class CategoryAdapter extends BaseListAdapter {
 			holder = new ViewHolder();
 
 			convertView = mInflater.inflate(R.layout.category_item, null);
-			holder.frame1 = (FrameLayout)convertView.findViewById(R.id.frame1);
-			holder.frame2 = (FrameLayout)convertView.findViewById(R.id.frame2);
-			holder.frame3 = (FrameLayout)convertView.findViewById(R.id.frame3);
-			holder.frame4 = (FrameLayout)convertView.findViewById(R.id.frame4);
+			holder.frame1 = (RelativeLayout)convertView.findViewById(R.id.frame1);
+			holder.frame2 = (RelativeLayout)convertView.findViewById(R.id.frame2);
+			holder.frame3 = (RelativeLayout)convertView.findViewById(R.id.frame3);
+			holder.frame4 = (RelativeLayout)convertView.findViewById(R.id.frame4);
 			holder.imageView1 = (ImageView) convertView
 					.findViewById(R.id.imageview1);
 			holder.imageView2 = (ImageView) convertView
@@ -80,6 +80,7 @@ public class CategoryAdapter extends BaseListAdapter {
 
 			holder.tv_category_name = (TextView) convertView
 					.findViewById(R.id.category_name);
+			holder.title_circle = (View)convertView.findViewById(R.id.title_circle);
 			holder.tv_more = (TextView)convertView.findViewById(R.id.more);
 
 			convertView.setTag(holder);
@@ -88,6 +89,7 @@ public class CategoryAdapter extends BaseListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.tv_category_name.setText(category.getName());
+//		holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_four));
 
 		if (products != null && products.size() > 0) {
 			final Product product1 = products.get(0);
@@ -95,7 +97,7 @@ public class CategoryAdapter extends BaseListAdapter {
 					product1.getPicurl(),
 					holder.imageView1,
 					MyApplication.getInstance().getOptions(
-							R.drawable.ic_launcher));
+							R.drawable.eg));
 			holder.tv_product_name1.setText(product1.getName());
 
 			holder.frame1.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +201,8 @@ public class CategoryAdapter extends BaseListAdapter {
 
 	public final class ViewHolder {
 		public TextView tv_category_name;
-		public FrameLayout frame1,frame2,frame3,frame4;
+		public View title_circle;
+		public RelativeLayout frame1,frame2,frame3,frame4;
 		public ImageView imageView1, imageView2, imageView3, imageView4;
 		public TextView tv_product_name1, tv_product_name2, tv_product_name3,
 				tv_product_name4;
