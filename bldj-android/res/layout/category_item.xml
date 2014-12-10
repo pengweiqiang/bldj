@@ -2,119 +2,165 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dip"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:background="@color/white"
     >
 
+    <LinearLayout 
+        android:id="@+id/title_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="5dip"
+        >
+    <View
+        android:id="@+id/title_circle"
+        android:layout_margin="2dp"
+        android:layout_width="10dip"
+        android:layout_height="10dip"
+        android:background="@drawable/category_circle"
+        />
     <TextView
         android:id="@+id/category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:text="美容床"
-        android:textColor="@color/red" />
+        />
+    </LinearLayout>
 
-    <View
+    <!-- <View
         android:id="@+id/line"
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:layout_below="@+id/category_name"
+        android:layout_below="@+id/title_ll"
         android:layout_marginBottom="5dip"
-        android:background="@color/light_gray_line" />
+        android:visibility="gone"
+        android:background="@color/light_gray_line" /> -->
 
     <LinearLayout
         android:id="@+id/ll_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line"
+        android:layout_below="@+id/title_ll"
         android:orientation="horizontal"
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:weightSum="4" >
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/frame1"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
+            android:layout_margin="1dip"
             android:focusable="false" >
 
             <ImageView
                 android:id="@+id/imageview1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/category_image_height"
+                android:scaleType="fitXY"
+                android:padding="1dip"
+                android:src="@drawable/eg" />
 
             <TextView
                 android:id="@+id/product_name1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:text="产品1" />
-        </FrameLayout>
+        </RelativeLayout>
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/frame2"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
+            android:layout_margin="1dip"
             android:focusable="false" >
 
             <ImageView
                 android:id="@+id/imageview2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/category_image_height"
+                android:scaleType="fitXY"
+                android:padding="2dip"
+                android:src="@drawable/eg" />
 
             <TextView
                 android:id="@+id/product_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:text="产品2" />
-        </FrameLayout>
+        </RelativeLayout>
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/frame3"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
+            android:layout_margin="1dip"
             android:focusable="false" >
 
             <ImageView
                 android:id="@+id/imageview3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/category_image_height"
+                android:scaleType="fitXY"
+                android:padding="2dip"
+                android:src="@drawable/eg" />
 
             <TextView
                 android:id="@+id/product_name3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:text="产品3" />
-        </FrameLayout>
+        </RelativeLayout>
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/frame4"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@drawable/border"
+            android:layout_margin="1dip"
             android:focusable="false" >
 
             <ImageView
                 android:id="@+id/imageview4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/category_image_height"
+                android:scaleType="fitXY"
+                android:padding="2dip"
+                android:src="@drawable/eg" />
 
             <TextView
                 android:id="@+id/product_name4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:text="产品4" />
-        </FrameLayout>
+        </RelativeLayout>
     </LinearLayout>
+    <View 
+	    android:layout_below="@+id/more"
+	    android:background="@drawable/dashd_line"
+	    android:layout_width="match_parent"
+	    android:layout_height="2dp"
+	    android:layout_margin="7dip"
+	    />
 
     <TextView
         android:id="@+id/more"
@@ -122,9 +168,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_image"
         android:layout_centerHorizontal="true"
-        android:layout_margin="4dip"
         android:paddingTop="5dip"
         android:text="点击查看更多"
+        android:drawablePadding="5dip"
+        android:textSize="13sp"
+        android:drawableRight="@drawable/category_more"
         android:textColor="@color/grey" />
-
+	
 </RelativeLayout>
