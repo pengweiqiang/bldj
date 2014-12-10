@@ -92,6 +92,7 @@ public class MyFragment extends BaseFragment {
 	private void initView() {
 
 		mActionBar = (ActionBar) infoView.findViewById(R.id.actionBar);
+		infoView.findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.white));
 		onConfigureActionBar(mActionBar);
 
 		ll_myinfo = (LinearLayout) infoView.findViewById(R.id.myinfo);
@@ -113,6 +114,7 @@ public class MyFragment extends BaseFragment {
 	private void initData() {
 		user = MyApplication.getInstance().getCurrentUser();
 		if (user != null) {
+			btn_logout.setText(getResources().getString(R.string.logout));
 			tv_username
 					.setText(StringUtils.isEmpty(user.getNickname()) ? "未设置昵称"
 							: user.getNickname());
@@ -123,6 +125,7 @@ public class MyFragment extends BaseFragment {
 							R.drawable.default_image));
 		} else {// 未登录
 			tv_username.setText("未登录");
+			btn_logout.setText(getResources().getString(R.string.login));
 			image_head.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
 		}
 	}
@@ -224,10 +227,13 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				MyApplication.getInstance().setUser(null);
-				SharePreferenceManager.saveBatchSharedPreference(mActivity,
-						Constant.FILE_NAME, "user", "");
-				initData();
+				if (checkIsLogin()) {
+					MyApplication.getInstance().setUser(null);
+					SharePreferenceManager.saveBatchSharedPreference(mActivity,
+							Constant.FILE_NAME, "user", "");
+					initData();
+				}
+				
 			}
 		});
 		// 我的收藏
@@ -333,7 +339,8 @@ public class MyFragment extends BaseFragment {
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("我");
+		actionBar.setTitle("我的");
+		actionBar.setTitleTextColor(R.color.app_title_color);
 		actionBar.hideLeftActionButton();
 		actionBar.hideRightActionButton();
 	}
