@@ -46,6 +46,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		String SELLERNUM = "sellerNum";
 		String PRODETAILURL = "proDetailUrl";
 		String SUITSCROWD = "suitsCrowd";
+		String TYPE = "type";//0是首页缓存  1是收藏
 				
 	}
 	interface SellerTable{
@@ -83,7 +84,9 @@ public class DBHelper extends SQLiteOpenHelper{
 	      		.append(ProductTable.TIMECONSUME).append(" Integer,")
 	      		.append(ProductTable.SELLERNUM).append(" Integer,")
 	      		.append(ProductTable.PRODETAILURL).append(" varchar(200),")
-	      		.append(ProductTable.SUITSCROWD).append(" varchar(100) );");
+	      		.append(ProductTable.SUITSCROWD).append(" varchar(100) ,")
+	      		.append(ProductTable.TYPE).append(" Integer );")
+	      		;
 	      db.execSQL(favStr.toString());
 	}
 	

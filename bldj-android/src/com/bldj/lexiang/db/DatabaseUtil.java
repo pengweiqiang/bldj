@@ -1,6 +1,7 @@
 package com.bldj.lexiang.db;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -92,10 +93,10 @@ public class DatabaseUtil {
 	 * @param product
 	 * @return
 	 */
-	public long insertProduct(Product product) {
+	public long insertProduct(Product product,int type) {
 		long uri = 0;
 		Cursor cursor = null;
-		String where = ProductTable.PRODUCTID + " = " + product.getId();
+		String where = ProductTable.PRODUCTID + " = " + product.getId() +" and "+ProductTable.TYPE +" = "+type;
 		cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null, where, null,
 				null, null, null);
 		if (cursor != null && cursor.getCount() > 0) {
@@ -112,6 +113,7 @@ public class DatabaseUtil {
 			cv.put(ProductTable.SELLERNUM, product.getSellerNum());
 			cv.put(ProductTable.PRODETAILURL, product.getProDetailUrl());
 			cv.put(ProductTable.SUITSCROWD, product.getSuitsCrowd());
+			cv.put(ProductTable.TYPE, type);
 			uri = dbHelper.insert(DBHelper.TABLE_NAME_PRODUCT, null, cv);
 		}
 		if (cursor != null) {
@@ -176,9 +178,9 @@ public class DatabaseUtil {
 	 * @param product
 	 * @return
 	 */
-	public int deleteFavProduct(long productId) {
+	public int deleteFavProduct(long productId,int type) {
 		int row = 0;
-		String where = ProductTable.PRODUCTID + " = " + productId;
+		String where = ProductTable.PRODUCTID + " = " + productId+" and "+ProductTable.TYPE +" = "+type;
 		row = dbHelper.delete(DBHelper.TABLE_NAME_PRODUCT, where, null);
 		return row;
 	}
@@ -246,11 +248,12 @@ public class DatabaseUtil {
 	//
 	/**
 	 * 检查是否收藏过该产品
+	 * 
 	 * @param productId
 	 * @return
 	 */
 	public boolean checkFavProduct(long productId) {
-		String where = ProductTable.PRODUCTID + " = " + productId;
+		String where = ProductTable.PRODUCTID + " = " + productId +" and "+ ProductTable.TYPE +" = 0";
 		Cursor cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
 				where, null, null, null, null);
 		if (cursor != null && cursor.getCount() > 0) {
@@ -258,8 +261,10 @@ public class DatabaseUtil {
 		}
 		return false;
 	}
+
 	/**
 	 * 检查是否收藏过该美容师
+	 * 
 	 * @param sellerId
 	 * @return
 	 */
@@ -278,17 +283,24 @@ public class DatabaseUtil {
 	 * 
 	 * @return
 	 */
-	public ArrayList<Product> queryFavProduct(int pageNubmer, int limit) {
+	public ArrayList<Product> queryFavProduct(int pageNubmer, int limit,int type) {
 		ArrayList<Product> products = null;
 		// ContentResolver resolver = context.getContentResolver();
 		// String where = "1=1 order by _id Limit "+String.valueOf(40)+
 		// " Offset " +String.valueOf(0);
-		int firstResult = pageNubmer * limit;
-		int maxResult = (pageNubmer + 1) * limit;
-		String where = "1=1 order by _id limit " + firstResult + ","
-				+ maxResult;
-		Cursor cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
-				where, null, null, null, null);
+		Cursor cursor = null;
+		if(type == 0){//收藏数据
+			int firstResult = pageNubmer * limit;
+			int maxResult = (pageNubmer + 1) * limit;
+			String where = ProductTable.TYPE +" = "+type+" order by _id limit " + firstResult + ","
+					+ maxResult;
+			cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
+					where, null, null, null, null);
+		}else if (type == 1){//缓存数据
+			String where = ProductTable.TYPE +" = "+ type;
+			cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
+					where, null, null, null, null);
+		}
 		if (cursor == null) {
 			return null;
 		}
@@ -366,6 +378,88 @@ public class DatabaseUtil {
 		// return contents;
 		// }
 		return contents;
+	}
+
+	/**
+	 * 缓存首页产品数据
+	 * 
+	 * @param products
+	 */
+	public void insertProductsList(List<Product> products,int type) {
+		Cursor cursor = null;
+		if (products != null && !products.isEmpty()) {
+			dbHelper.delete(DBHelper.TABLE_NAME_PRODUCT, null, null);
+			for (Product product : products) {
+
+//				String where = ProductTable.PRODUCTID + " = " + product.getId();
+//				cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
+//						where, null, null, null, null);
+//				if (cursor != null && cursor.getCount() > 0) {
+//					cursor.moveToFirst();
+//					// ContentValues conv = new ContentValues();
+//					//
+//					// dbHelper.update(DBHelper.TABLE_NAME_QIANGYU, conv, where,
+//					// null);
+//				} else {
+					ContentValues cv = new ContentValues();
+					cv.put(ProductTable.PRODUCTID, product.getId());
+					cv.put(ProductTable.NAME, product.getName());
+					cv.put(ProductTable.PICURL, product.getPicurl());
+					cv.put(ProductTable.CURPRICE, product.getCurPrice());
+					cv.put(ProductTable.MARKETPRICE, product.getMarketPrice());
+					cv.put(ProductTable.ONEWORD, product.getOneword());
+					cv.put(ProductTable.TIMECONSUME, product.getTimeConsume());
+					cv.put(ProductTable.SELLERNUM, product.getSellerNum());
+					cv.put(ProductTable.PRODETAILURL, product.getProDetailUrl());
+					cv.put(ProductTable.SUITSCROWD, product.getSuitsCrowd());
+					cv.put(ProductTable.TYPE, type);
+					long uri = dbHelper.insert(DBHelper.TABLE_NAME_PRODUCT,
+							null, cv);
+					System.out.println("缓存数据："+uri);
+
+//				}
+
+			}
+		}
+		if (cursor != null) {
+			cursor.close();
+			dbHelper.close();
+		}
+
+	}
+
+	/**
+	 * 获取产品明细
+	 * 
+	 * @param productId
+	 * @return
+	 */
+	public Product getProductById(long productId) {
+		Cursor cursor = null;
+		String where = ProductTable.PRODUCTID + " = " + productId;
+		cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null, where, null,
+				null, null, null);
+		if (cursor == null) {
+			return null;
+		}
+		cursor.moveToFirst();
+		Product product = new Product();
+
+		product.setId(cursor.getInt(1));
+		product.setName(cursor.getString(2));
+		product.setPicurl(cursor.getString(3));
+		product.setCurPrice(cursor.getDouble(4));
+		product.setMarketPrice(cursor.getDouble(5));
+		product.setOneword(cursor.getString(6));
+		product.setTimeConsume(cursor.getLong(7));
+		product.setSellerNum(cursor.getInt(8));
+		product.setProDetailUrl(cursor.getString(9));
+		product.setSuitsCrowd(cursor.getString(10));
+		if (cursor != null) {
+			cursor.close();
+		}
+		return product;
+
 	}
 
 }

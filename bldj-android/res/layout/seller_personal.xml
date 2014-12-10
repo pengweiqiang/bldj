@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="48dp" >
+        android:layout_height="48dp"
+        android:layout_marginTop="10dip"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:background="@drawable/border" >
     </com.bldj.lexiang.view.ActionBar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="3dip"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:id="@+id/head_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_launcher" />
+            
+        <com.bldj.lexiang.view.RoundImageView
+                    android:id="@+id/head_img"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_launcher"
+                    imagecontrol:border_outside_color="@color/app_title_color"
+                    imagecontrol:border_thickness="2dp" />
 
         <LinearLayout
             android:id="@+id/info"
@@ -44,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="2dip"
                 android:text="均价:￥124.5"
+                android:textColor="@color/grey"
                 android:textSize="13sp" />
 
             <TextView
@@ -51,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="2dip"
+                android:textColor="@color/grey"
                 android:text="年龄：33"
                 android:textSize="13sp" />
         </LinearLayout>
@@ -104,6 +117,7 @@
                     android:layout_alignRight="@+id/level"
                      android:textSize="12sp"
                      android:layout_marginLeft="6dip"
+                     android:textColor="@color/grey"
                     android:text="共接单21次" />
             </LinearLayout>
         </RelativeLayout>
@@ -113,6 +127,10 @@
         android:id="@+id/rg_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border"
+        android:paddingTop="5dip"
+        android:paddingBottom="5dip"
+        android:layout_marginBottom="10dip"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -121,12 +139,21 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dip"
             android:paddingBottom="10dip"
+            android:checked="true"
             android:layout_weight="1"
             android:background="@drawable/bg_main_tab_button"
             android:button="@android:color/transparent"
-            android:checked="true"
+            android:textColor="@color/title_tab_button_text"
             android:gravity="center"
+            android:textSize="15sp"
             android:text="信息概览" />
+        <View 
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            android:background="@color/home_bg"
+            />
 
         <RadioButton
             android:id="@+id/radio_service"
@@ -137,8 +164,17 @@
             android:paddingBottom="10dip"
             android:background="@drawable/bg_main_tab_button"
             android:button="@android:color/transparent"
+            android:textColor="@color/title_tab_button_text"
             android:gravity="center"
+            android:textSize="15sp"
             android:text="服务项目" /> 
+            <View 
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            android:background="@color/home_bg"
+            />
 
         <RadioButton
             android:id="@+id/radio_work"
@@ -147,9 +183,11 @@
             android:layout_weight="1"
             android:paddingTop="10dip"
             android:paddingBottom="10dip"
+            android:textColor="@color/title_tab_button_text"
             android:background="@drawable/bg_main_tab_button"
             android:button="@android:color/transparent"
             android:gravity="center"
+            android:textSize="15sp"
             android:text="证书履历" />
 
     </RadioGroup>

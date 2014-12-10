@@ -35,7 +35,7 @@
     <FrameLayout 
         android:id="@+id/progress_banner"
         android:layout_width="fill_parent"
-        android:layout_height="@dimen/home_image_height"
+        android:layout_height="@dimen/banner_image_height"
         android:gravity="center"
         >
     <ProgressBar
