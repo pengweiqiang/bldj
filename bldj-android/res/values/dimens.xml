@@ -48,6 +48,7 @@
     <dimen name="company_margin_button_top">20dip</dimen>
     
     <dimen name="image_height">100dip</dimen>
+    <dimen name="category_image_height">60dip</dimen>
     <dimen name="home_image_height">160dip</dimen>
     <dimen name="banner_image_height">100dip</dimen>
 
