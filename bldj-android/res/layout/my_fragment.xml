@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/home_bg"
@@ -32,22 +33,28 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dip"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:paddingBottom="5dip"
+                android:paddingTop="5dip" >
 
-                <ImageView
+                <com.bldj.lexiang.view.RoundImageView
                     android:id="@+id/img_person"
-                    android:layout_width="60dip"
-                    android:layout_height="60dip"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_launcher" />
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_launcher"
+                    imagecontrol:border_outside_color="@color/app_title_color"
+                    imagecontrol:border_thickness="2dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dip"
+                    android:layout_marginLeft="5dip"
                     android:layout_weight="1"
                     android:orientation="vertical" >
 
@@ -100,10 +107,10 @@
                 android:drawablePadding="10dp"
                 android:drawableRight="@drawable/btn_img_open"
                 android:gravity="left|center"
-                android:paddingBottom="10dp"
+                android:paddingBottom="15dp"
                 android:paddingLeft="10dip"
                 android:paddingRight="10dip"
-                android:paddingTop="10dp"
+                android:paddingTop="15dp"
                 android:text="@string/my_order"
                 android:textSize="16sp" />
 
@@ -118,10 +125,10 @@
                 android:drawablePadding="10dp"
                 android:drawableRight="@drawable/btn_img_open"
                 android:gravity="left|center"
-                android:paddingBottom="10dp"
+                android:paddingBottom="15dp"
                 android:paddingLeft="10dip"
                 android:paddingRight="10dip"
-                android:paddingTop="10dp"
+                android:paddingTop="15dp"
                 android:text="@string/my_address"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -145,6 +152,8 @@
                     android:gravity="left|center"
                     android:paddingLeft="10dip"
                     android:paddingRight="10dip"
+                    android:paddingTop="10dip"
+                    android:paddingBottom="10dip"
                     android:text="@string/my_fav"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -168,6 +177,8 @@
                     android:gravity="left|center"
                     android:paddingLeft="10dip"
                     android:paddingRight="10dip"
+                    android:paddingTop="10dip"
+                    android:paddingBottom="10dip"
                     android:text="@string/my_coupon"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -191,6 +202,7 @@
                     android:gravity="left|center"
                     android:paddingLeft="10dip"
                     android:paddingRight="10dip"
+                    android:paddingTop="10dip"
                     android:text="@string/my_record"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -219,8 +231,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="#fc6900"
