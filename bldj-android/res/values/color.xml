@@ -79,6 +79,7 @@
     
     <!-- 新版 -->
     <color name="app_bg_color">#f5ad1e</color>
+    <color name="app_title_color">#fc8403</color>
     <color name="default_listview_item_pressed_color">#CEEEFD</color>
     <color name="btn_find_game_text_color_normal">#FF626262</color>
     <color name="btn_find_game_text_color_pressed">#175AA1</color>
