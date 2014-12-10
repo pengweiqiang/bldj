@@ -63,6 +63,10 @@ public class ActionBar extends FrameLayout {
 	public void setTitle(String text) {
 		mTitleView.setText(text);
 	}
+	
+	public void setTitleTextColor(int resId){
+		mTitleView.setTextColor(getResources().getColor(resId));
+	}
 
 	public void setLeftActionButton(int icon, OnClickListener listener) {
 		mCityButton.setVisibility(View.GONE);
