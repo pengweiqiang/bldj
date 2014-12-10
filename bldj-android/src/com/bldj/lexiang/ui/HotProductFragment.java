@@ -55,7 +55,9 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
+		infoView.findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.white));
 		actionBar.setTitle("分类");
+		actionBar.setTitleTextColor(R.color.app_title_color);
 		actionBar.hideLeftActionButton();
 		actionBar.hideRightActionButton();
 	}

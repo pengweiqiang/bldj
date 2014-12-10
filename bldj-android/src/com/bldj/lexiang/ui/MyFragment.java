@@ -92,7 +92,6 @@ public class MyFragment extends BaseFragment {
 	private void initView() {
 
 		mActionBar = (ActionBar) infoView.findViewById(R.id.actionBar);
-		infoView.findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.white));
 		onConfigureActionBar(mActionBar);
 
 		ll_myinfo = (LinearLayout) infoView.findViewById(R.id.myinfo);
@@ -339,6 +338,7 @@ public class MyFragment extends BaseFragment {
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
+		infoView.findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.white));
 		actionBar.setTitle("我的");
 		actionBar.setTitleTextColor(R.color.app_title_color);
 		actionBar.hideLeftActionButton();
