@@ -85,7 +85,7 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 	 * 获取收藏数据
 	 */
 	private void getCollectProduct() {
-		List<Product> productsList = DatabaseUtil.getInstance(mActivity).queryFavProduct(pageNumber, ApiConstants.LIMIT);
+		List<Product> productsList = DatabaseUtil.getInstance(mActivity).queryFavProduct(pageNumber, ApiConstants.LIMIT,0);
 		progressBar.setVisibility(View.GONE);
 		mListView.setVisibility(View.VISIBLE);
 		if(pageNumber==0){
