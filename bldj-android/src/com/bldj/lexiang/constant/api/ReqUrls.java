@@ -178,6 +178,10 @@ public interface ReqUrls {
 	 */
 	public static final String REQUEST_ORDERS = "/user/getOrders";
 	///user/getOrders?id=123&start=0&limit=10
+	/**
+	 * 获取支付方式
+	 */
+	public static final String REQUEST_PAY_TYPE = "/pay/getPays";
 	
 	/**
 	 * 获取美容师列表
