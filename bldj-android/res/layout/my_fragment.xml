@@ -16,7 +16,7 @@
         android:background="@drawable/border" >
     </com.bldj.lexiang.view.ActionBar>
 
-    <com.bldj.lexiang.view.SpringScrollView
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="none" >
@@ -237,12 +237,10 @@
                 android:layout_weight="1"
                 android:background="#fc6900"
                 android:gravity="center"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
                 android:text="@string/login"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
         </LinearLayout>
-    </com.bldj.lexiang.view.SpringScrollView>
+    </ScrollView>
 
 </LinearLayout>

@@ -25,6 +25,7 @@
         android:layout_marginRight="2dp"
         android:layout_marginBottom="5dip"
         android:background="@drawable/border"
+        android:listSelector="@android:color/transparent"
         android:divider="#00000000"
         android:visibility="gone" />
 
