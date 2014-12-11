@@ -49,12 +49,12 @@ public class HealthProductDetailActivity extends BaseActivity {
 	private TextView tv_price;// 当前价
 	private TextView tv_buy_count;// 购买次数
 	private TextView tv_shop_price;// 市场价
-	private Button btn_shared;// 分享
-	private Button btn_invite;// 邀请
-	private TextView tv_fav;// 收藏
-	private TextView tv_custom_service;// 联系客服
+	private ImageView btn_shared;// 分享
+	private ImageView btn_invite;// 邀请
+	private ImageView tv_fav;// 收藏
+	private ImageView tv_custom_service;// 联系客服
 	private WebView webView;
-	private Button btn_appointment_product;
+	private ImageView btn_appointment_product;
 	boolean isFav;// 是否收藏
 
 	ShareUtil shareUtil;
@@ -98,14 +98,14 @@ public class HealthProductDetailActivity extends BaseActivity {
 		product_img = (ImageView) findViewById(R.id.product_img);
 		tv_time = (TextView) findViewById(R.id.time);
 		tv_price = (TextView) findViewById(R.id.price);
-		btn_shared = (Button) findViewById(R.id.share);
+		btn_shared = (ImageView) findViewById(R.id.share);
 		tv_buy_count = (TextView) findViewById(R.id.buy_count);
 		tv_shop_price = (TextView) findViewById(R.id.price_shop);
-		btn_invite = (Button) findViewById(R.id.invite);
+		btn_invite = (ImageView) findViewById(R.id.invite);
 		webView = (WebView) findViewById(R.id.webView_product_info);
-		btn_appointment_product = (Button) findViewById(R.id.appointment_product);
-		tv_custom_service = (TextView) findViewById(R.id.custom_service);
-		tv_fav = (TextView) findViewById(R.id.collect);
+		btn_appointment_product = (ImageView) findViewById(R.id.appointment_product);
+		tv_custom_service = (ImageView) findViewById(R.id.custom_service);
+		tv_fav = (ImageView) findViewById(R.id.collect);
 
 	}
 
@@ -113,7 +113,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 		// 获取此产品是否收藏过
 		if (isFav) {
-			tv_fav.setText("已收藏");
+//			tv_fav.setText("已收藏");
 		}
 
 		ImageLoader.getInstance().displayImage(product.getPicurl(),
@@ -285,7 +285,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 					if (row > 0) {
 						isFav = true;
 						ToastUtils.showToast(mContext, "收藏成功");
-						tv_fav.setText("已收藏");
+//						tv_fav.setText("已收藏");
 					} else {
 						ToastUtils.showToast(mContext, "该产品已经收藏");
 					}
@@ -295,7 +295,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 					if (row > 0) {
 						isFav = false;
 						ToastUtils.showToast(mContext, "取消收藏");
-						tv_fav.setText("收藏");
+//						tv_fav.setText("收藏");
 					} else {
 						ToastUtils.showToast(mContext, "取消收藏失败，稍后请重试");
 					}

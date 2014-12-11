@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
@@ -51,6 +52,7 @@ public class ScoreAdapter extends BaseListAdapter {
 			holder.tv_time = (TextView) convertView
 					.findViewById(R.id.time);
 			holder.tv_content = (TextView) convertView.findViewById(R.id.content);
+			holder.head_img = (ImageView) convertView.findViewById(R.id.head_img);
 			convertView.setTag(holder);
 
 		} else {
@@ -67,6 +69,7 @@ public class ScoreAdapter extends BaseListAdapter {
 
 	public final class ViewHolder {
 		public TextView tv_username, tv_time, tv_content;
+		public ImageView head_img;
 	}
 
 }

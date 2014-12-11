@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -8,34 +9,60 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dip"
-        android:background="@drawable/own_btn_rounded"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+             >
+            
+             <com.bldj.lexiang.view.RoundImageView
+                    android:id="@+id/head_img"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginRight="5dip"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_launcher"
+                    imagecontrol:border_outside_color="@color/app_title_color"
+                    imagecontrol:border_thickness="2dp" />
 
             <TextView
                 android:id="@+id/username"
+                android:layout_toRightOf="@+id/head_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="张三" />
 
             <TextView
                 android:id="@+id/time"
+                android:layout_toRightOf="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dip"
                 android:text="2014-11-26" />
-        </LinearLayout>
-
-        <TextView
+            
+              <TextView
             android:id="@+id/content"
+            android:layout_below="@+id/username"
+            android:layout_toRightOf="@+id/head_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dip"
+            android:textSize="12sp"
             android:text="服务真好服务真好服务真好服务真好服务真好服务真好服务真好服务真好服务真好服务真好" />
+        </RelativeLayout>
+        
+        <View 
+	    android:layout_below="@+id/more"
+	    android:background="@drawable/border_category"
+	    android:layout_width="match_parent"
+	    android:layout_height="2dp"
+	    android:layout_margin="7dip"
+	    android:layerType="software"
+	    />
+
+      
     </LinearLayout>
 
 </LinearLayout>

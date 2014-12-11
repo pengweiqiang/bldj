@@ -168,7 +168,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 				
 				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
 						user.getUserId(), user.getUsername(), seller.getId(),
-						seller.getUsername(), product.getId(), product.getName(), orderPay,
+						seller.getNickname(), product.getId(), product.getName(), orderPay,
 						user.getUsername(), 1, user.getUsername(), user.getMobile(), detailAddress, "",
 						payType,couponId,serviceTime, new HttpConnectionUtil.RequestCallback() {
 							@Override

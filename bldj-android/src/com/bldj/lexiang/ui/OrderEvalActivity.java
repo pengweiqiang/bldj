@@ -6,6 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
@@ -32,6 +33,9 @@ public class OrderEvalActivity extends BaseActivity {
 	private EditText et_suggestion;
 	private Order order;
 	RadioGroup rg;//评价类型
+	private TextView tv_orderNum;
+	private TextView tv_productName;
+	private TextView tv_sellerName;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,8 @@ public class OrderEvalActivity extends BaseActivity {
 		order = (Order)this.getIntent().getSerializableExtra("order");
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		
+		initData();
 	}
 
 	// 设置activity的导航条
@@ -60,6 +66,15 @@ public class OrderEvalActivity extends BaseActivity {
 		btn_confirm = (Button)findViewById(R.id.btn_confirm);
 		et_suggestion = (EditText)findViewById(R.id.suggestion);
 		rg = (RadioGroup)findViewById(R.id.eval_type);
+		tv_orderNum = (TextView)findViewById(R.id.order_num);
+		tv_productName = (TextView)findViewById(R.id.product_name);
+		tv_sellerName = (TextView) findViewById(R.id.service_name);
+	}
+	private void initData(){
+		
+		tv_orderNum.setText(order.getOrderNum());
+		tv_productName.setText(order.getProName());
+		tv_sellerName.setText(order.getSellerName());
 	}
 
 	@Override
@@ -91,7 +106,7 @@ public class OrderEvalActivity extends BaseActivity {
 				}
 					
 				ApiUserUtils.unifor(OrderEvalActivity.this, userId, suggestion, 2, nickname, username, 
-						String.valueOf(order.getOrderNum()), order.getProName(), order.getSellerName(),checkId , 0, new HttpConnectionUtil.RequestCallback(){
+						String.valueOf(order.getOrderNum()), order.getProName(), order.getSellerName(),checkId , order.getSellerId(), new HttpConnectionUtil.RequestCallback(){
 
 							@Override
 							public void execute(ParseModel parseModel) {
