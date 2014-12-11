@@ -197,6 +197,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("便利到家");
+		infoView.findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+		actionBar.setTitleTextColor(R.color.white);
 		actionBar.setLeftHomeCityActionButton(new OnClickListener() {
 
 			@Override
