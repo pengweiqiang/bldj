@@ -133,9 +133,11 @@ public class ApiBuyUtils {
 	 * @param id
 	 * @param requestCallback
 	 */
-	public static void getOrders(Context context,long id,RequestCallback requestCallback){
+	public static void getOrders(Context context,long id,int start,int limit,RequestCallback requestCallback){
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ORDERS, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}

@@ -29,6 +29,7 @@
                     android:id="@+id/head_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:layout_marginLeft="10dip"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_launcher"
                     imagecontrol:border_outside_color="@color/app_title_color"
@@ -107,8 +108,16 @@
                     android:id="@+id/level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                     android:textSize="12sp"
-                    android:text="★★★★★" />
+                    android:drawableLeft="@drawable/level_star"
+                    android:visibility="visible"
+                     />
+                <RatingBar  android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="@style/MyRatingBar"
+                android:visibility="gone"
+                />
 
                 <TextView
                     android:id="@+id/order_count"

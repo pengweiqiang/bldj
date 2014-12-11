@@ -169,6 +169,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_margin="5dip"
+        android:listSelector="@color/transparents"
         android:divider="#00000000"
         android:visibility="visible" />
       

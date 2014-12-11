@@ -7,7 +7,7 @@ public class Order  implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7889547444319575287L;
-	
+	//
 	private String orderNum;//订单号
 	private double orderPay;//订单总额
 	private String createtime;//xiadan shijian 
@@ -15,9 +15,16 @@ public class Order  implements Serializable{
 	private String statusStr;//状态
 	private String proName;//产品名称
 	private String sellerName;//卖家名称
+	private long sellerId;//卖家id
 	
 	
 	
+	public long getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(long sellerId) {
+		this.sellerId = sellerId;
+	}
 	public String getOrderNum() {
 		return orderNum;
 	}

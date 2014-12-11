@@ -101,7 +101,7 @@ IXListViewListener{
 	 */
 	private void getData() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.getOrders(MyOrdersActivity.this, user.getUserId(),
+		ApiBuyUtils.getOrders(MyOrdersActivity.this, user.getUserId(),pageNumber,ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override

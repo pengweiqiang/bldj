@@ -13,32 +13,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.HomeAdapter;
-import com.bldj.lexiang.api.ApiProductUtils;
-import com.bldj.lexiang.api.ApiSellerUtils;
 import com.bldj.lexiang.api.vo.Evals;
-import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
-import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
-import com.bldj.lexiang.utils.DateUtils;
-import com.bldj.lexiang.utils.HttpConnectionUtil;
-import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.CustomViewPager;
-import com.bldj.lexiang.view.XListView;
-import com.bldj.lexiang.view.XListView.IXListViewListener;
 import com.bldj.universalimageloader.core.ImageLoader;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
@@ -64,6 +52,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 	ActionBar mActionBar;
 	CustomViewPager mViewPager;
 	List<Fragment> list;
+	RatingBar star_ratingbar;
 
 	Seller sellerVo;
 
@@ -117,6 +106,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 		rb_msg = (RadioButton)findViewById(R.id.radio_msg);
 		rb_service = (RadioButton)findViewById(R.id.radio_service);
 		rb_work = (RadioButton)findViewById(R.id.radio_work);
+		star_ratingbar = (RatingBar)findViewById(R.id.ratingBar);
 		
 
 		// 实例化对象
@@ -207,13 +197,16 @@ public class SellerPersonalActivity extends FragmentActivity {
 		tv_username.setText(sellerVo.getNickname());
 		String levelStr = "";
 		if(sellerVo.getDealnumSum()<20){
-			levelStr = "★";
+//			levelStr = "★";
+//			star_ratingbar.setRating(3);
 		}else if(sellerVo.getDealnumSum()>200){
-			levelStr = "★★";
+//			levelStr = "★★";
+			star_ratingbar.setRating(2);
 		}else{
-			levelStr = "★★★★";
+//			levelStr = "★★★★";
+			star_ratingbar.setRating(3);
 		}
-		tv_level.setText(levelStr);
+//		tv_level.setText(levelStr);
 		tv_work.setText("年龄：" + sellerVo.getUserGrade());
 
 	}

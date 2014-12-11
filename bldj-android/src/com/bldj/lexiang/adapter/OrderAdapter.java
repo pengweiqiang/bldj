@@ -44,7 +44,7 @@ public class OrderAdapter extends BaseListAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		Order order = (Order) getItem(position);
+		final Order order = (Order) getItem(position);
 		if (null == convertView) {
 			holder = new ViewHolder();
 
@@ -69,13 +69,15 @@ public class OrderAdapter extends BaseListAdapter {
 		holder.tv_order_pay.setText("￥："+String.valueOf(order.getOrderPay()));
 		holder.tv_order_num.setText(order.getOrderNum());
 		holder.tv_order_status.setText(order.getStatusStr());
-		if(order.getStatus() == 3){
+		if(order.getStatus() == 0){
+			holder.tv_eval.setVisibility(View.VISIBLE);
 			holder.tv_eval.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View arg0) {
 					//启动用户评价界面
 					Intent intent = new Intent(context,OrderEvalActivity.class);
+					intent.putExtra("order", order);
 					context.startActivity(intent);
 				}
 			});

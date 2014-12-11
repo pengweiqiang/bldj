@@ -177,6 +177,7 @@ public interface ReqUrls {
 	 * 获取用户订单
 	 */
 	public static final String REQUEST_ORDERS = "/user/getOrders";
+	///user/getOrders?id=123&start=0&limit=10
 	
 	/**
 	 * 获取美容师列表
