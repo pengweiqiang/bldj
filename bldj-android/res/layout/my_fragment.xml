@@ -227,16 +227,13 @@
 
             <Button
                 android:id="@+id/btn_logout"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
+                android:paddingLeft="60dip"
+                android:paddingRight="60dip"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="#fc6900"
-                android:gravity="center"
+                android:background="@drawable/coners"
                 android:text="@string/login"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
