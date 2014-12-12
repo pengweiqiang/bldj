@@ -15,15 +15,15 @@
 
         <ImageView
             android:id="@+id/pay_image"
-            android:layout_width="0dip"
-            android:layout_height="30dip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="8dip"
             android:src="@drawable/ic_launcher" />
 
         <TextView
             android:id="@+id/pay_name"
-            android:layout_width="0dip"
+            android:layout_width="wrap_content"
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="@string/weixin_pay_tip" />
@@ -31,8 +31,16 @@
         <CheckBox
             android:id="@+id/pay_radio"
             android:layout_weight="1"
-            android:layout_width="0dip"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <View 
+	    android:layout_below="@+id/more"
+	    android:background="@drawable/border_category"
+	    android:layout_width="match_parent"
+	    android:layout_height="2dp"
+	    android:layout_margin="7dip"
+	    android:layerType="software"
+	    />
 
 </LinearLayout>
