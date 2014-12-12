@@ -169,7 +169,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/btn_img_open" />
+                android:layout_gravity="center"
+                android:src="@drawable/btn_down_open" />
         </LinearLayout>
         
          <View
@@ -200,6 +201,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:drawableLeft="@drawable/use_coupon"
                 android:hint="@string/input_elect_code"
                 android:textSize="14sp" />
 		
@@ -222,6 +225,7 @@
                 android:id="@+id/real_pay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#940707"
                 android:text="实际支付：￥216.0"
                 />
             </LinearLayout>
@@ -245,7 +249,7 @@
         <ListView
             android:id="@+id/paytype_listView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dip"
             android:divider="#00000000"
             android:listSelector="@android:color/transparent" >
         </ListView>
@@ -255,7 +259,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="5dip"
+            android:paddingLeft="40dip"
+            android:paddingRight="40dip"
+            android:layout_marginTop="10dip"
+            android:textColor="@color/white"
+            android:background="@drawable/coners"
             android:text="@string/confirm" />
     </LinearLayout>
 
