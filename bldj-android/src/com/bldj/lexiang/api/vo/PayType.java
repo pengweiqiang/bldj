@@ -15,6 +15,9 @@ public class PayType  implements Serializable{
 	private String iconPic;
 	private String payId;
 	private String payKey;
+	private int payNum;
+	private String rsaPublicKey;
+	private String rsaPrivateKey;
 	
 	
 	public long getId() {
@@ -59,6 +62,25 @@ public class PayType  implements Serializable{
 	public void setPayKey(String payKey) {
 		this.payKey = payKey;
 	}
+	public int getPayNum() {
+		return payNum;
+	}
+	public void setPayNum(int payNum) {
+		this.payNum = payNum;
+	}
+	public String getRsaPublicKey() {
+		return rsaPublicKey;
+	}
+	public void setRsaPublicKey(String rsaPublicKey) {
+		this.rsaPublicKey = rsaPublicKey;
+	}
+	public String getRsaPrivateKey() {
+		return rsaPrivateKey;
+	}
+	public void setRsaPrivateKey(String rsaPrivateKey) {
+		this.rsaPrivateKey = rsaPrivateKey;
+	}
+	
 	
 	
 }
