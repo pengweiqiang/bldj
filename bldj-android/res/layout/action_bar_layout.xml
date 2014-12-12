@@ -9,6 +9,8 @@
         android:id="@+id/leftActionButton"
         style="@style/ActionBarIconButton"
         android:layout_alignParentLeft="true"
+        android:paddingLeft="10dip"
+        android:paddingRight="8dip"
         android:visibility="visible"
         android:src="@drawable/ic_menu_back" />
 
