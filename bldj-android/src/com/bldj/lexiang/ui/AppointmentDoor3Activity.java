@@ -73,7 +73,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 //	private RadioButton rb_aliay, rb_weixin, rb_union;
 
 	private double orderPay;// 总金额
-	private int payType = 1;
+	private PayType payType;
 
 	private Coupon coupon;// 使用优惠卷
 
@@ -188,6 +188,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					ToastUtils.showToast(mContext, "请选择支付方式");
 					return;
 				}
+				payType = payTypeList.get(listAdapter.getCheckPosition());
 				String serviceTime = time.substring(0, time.indexOf(" ")) + "@"
 						+ timeIndex;
 				long couponId = 0;
@@ -200,7 +201,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 						seller.getNickname(), product.getId(),
 						product.getName(), orderPay, user.getUsername(), 1,
 						user.getUsername(), user.getMobile(), detailAddress,
-						"", payType, couponId, serviceTime,
+						"", payType.getCode(), couponId, serviceTime,
 						new HttpConnectionUtil.RequestCallback() {
 							@Override
 							public void execute(ParseModel parseModel) {
@@ -318,7 +319,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		try {
 			Log.i("ExternalPartner", "onItemClick");
 			String info = getNewOrderInfo(order);
-			String sign = Rsa.sign(info, Keys.PRIVATE);
+			String sign = Rsa.sign(info, payType.getRsaPrivateKey());
 			sign = URLEncoder.encode(sign);
 			info += "&sign=\"" + sign + "\"&" + getSignType();
 			Log.i("ExternalPartner", "start pay");
@@ -353,7 +354,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private String getNewOrderInfo(Order order) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("partner=\"");
-		sb.append(Keys.DEFAULT_PARTNER);
+		sb.append(payType.getPayId());
 		sb.append("\"&out_trade_no=\"");
 		sb.append(order.getOrderNum());
 		sb.append("\"&subject=\"");
@@ -365,7 +366,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		sb.append("\"&notify_url=\"");
 
 		// 网址需要做URL编码
-		sb.append(URLEncoder.encode("http://notify.java.jpxx.org/index.jsp"));
+		sb.append(URLEncoder.encode("http://weixin.shopin.net/wechatshop/index.html"));
 		sb.append("\"&service=\"mobile.securitypay.pay");
 		sb.append("\"&_input_charset=\"UTF-8");
 		sb.append("\"&return_url=\"");
@@ -376,7 +377,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 		// 如果show_url值为空，可不传
 		// sb.append("\"&show_url=\"");
-		sb.append("\"&it_b_pay=\"30m");
+		sb.append("\"&it_b_pay=\"15m");
 		sb.append("\"");
 
 		return new String(sb);
