@@ -214,7 +214,10 @@ public interface ReqUrls {
 	 */
 	public static final String REQUEST_COMPANY_ZONE = "/user/enterOrderGenerate";
 	
-	
+	/**
+	 * 支付宝回调地址
+	 */
+	public static final String ALIPAY_NOTIFY_URL = Connection_Type_Common+DEFAULT_REQ_HOST_IP + "/pay/notify";
 	
 
 
