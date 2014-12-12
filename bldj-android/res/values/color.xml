@@ -64,6 +64,7 @@
     
     <!-- 下载管理 -->
 	<color name="white">#ffffffff</color>  
+	<color name="line">#aaaba9</color>
 	<color name="home_bg">#f0f0f0</color> 
     <color name="orange">#ffffdfd2</color> 
     <color name="update_all_dis_color">#ffbebebe</color>    
@@ -80,6 +81,7 @@
     <!-- 新版 -->
     <color name="app_bg_color">#f5ad1e</color>
     <color name="app_title_color">#fc8403</color>
+    <color name="btn_bg_color">#ff5e00</color>
     <color name="default_listview_item_pressed_color">#CEEEFD</color>
     <color name="btn_find_game_text_color_normal">#FF626262</color>
     <color name="btn_find_game_text_color_pressed">#175AA1</color>
