@@ -189,7 +189,11 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									Order order = (Order) JsonUtils.fromJson(
 											parseModel.getData().toString(),
 											Order.class);
-									aliPay(order);
+									if(payType.getCode() == 1){//支付宝支付
+										aliPay(order);
+									}else if(payType.getCode() == 2){//银联支付
+										
+									}
 									return;
 								}
 							}
