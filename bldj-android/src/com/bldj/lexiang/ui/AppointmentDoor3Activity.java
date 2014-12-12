@@ -356,7 +356,11 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		sb.append("\"&subject=\"");
 		sb.append(order.getProName());
 		sb.append("\"&body=\"");
-		sb.append(product.getOneword());
+		if(product.getOneword()!=null && product.getOneword().length()>512){
+			sb.append(product.getOneword().subSequence(0, 512));
+		}else{
+			sb.append(product.getOneword());
+		}
 		sb.append("\"&total_fee=\"");
 		sb.append(String.valueOf(order.getOrderPay()));
 		sb.append("\"&notify_url=\"");
