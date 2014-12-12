@@ -27,7 +27,6 @@ import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.PayTypeAdapter;
-import com.bldj.lexiang.alipay.Keys;
 import com.bldj.lexiang.alipay.Result;
 import com.bldj.lexiang.alipay.Rsa;
 import com.bldj.lexiang.api.ApiBuyUtils;
@@ -70,7 +69,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private LinearLayout select_coupons;
 	private TextView tv_coupons;
 
-//	private RadioButton rb_aliay, rb_weixin, rb_union;
+	// private RadioButton rb_aliay, rb_weixin, rb_union;
 
 	private double orderPay;// 总金额
 	private PayType payType;
@@ -109,7 +108,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("上门预约");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -127,9 +126,11 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_time = (TextView) findViewById(R.id.time);
 		tv_productName = (TextView) findViewById(R.id.product_name);
 		tv_sellerName = (TextView) findViewById(R.id.seller_name);
-		/*rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
-		rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
-		rb_union = (RadioButton) findViewById(R.id.union_pay);*/
+		/*
+		 * rb_aliay = (RadioButton) findViewById(R.id.aliay_pay); rb_weixin =
+		 * (RadioButton) findViewById(R.id.weixin_pay); rb_union = (RadioButton)
+		 * findViewById(R.id.union_pay);
+		 */
 		select_coupons = (LinearLayout) findViewById(R.id.select_coupons);
 		tv_coupons = (TextView) findViewById(R.id.tips);
 		mListView = (ListView) findViewById(R.id.paytype_listView);
@@ -142,49 +143,32 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	@Override
 	public void initListener() {
-		/*rb_aliay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked) {
-					payType = 0;
-					rb_weixin.setChecked(false);
-					rb_union.setChecked(false);
-				}
-			}
-		});
-		rb_weixin
-				.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						if (isChecked) {
-							payType = 1;
-							rb_aliay.setChecked(false);
-							rb_union.setChecked(false);
-						}
-					}
-				});
-		rb_union.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView,
-					boolean isChecked) {
-				if (isChecked) {
-					payType = 2;
-					rb_weixin.setChecked(false);
-					rb_aliay.setChecked(false);
-				}
-			}
-		});*/
+		/*
+		 * rb_aliay.setOnCheckedChangeListener(new
+		 * CompoundButton.OnCheckedChangeListener() {
+		 * 
+		 * @Override public void onCheckedChanged(CompoundButton buttonView,
+		 * boolean isChecked) { if (isChecked) { payType = 0;
+		 * rb_weixin.setChecked(false); rb_union.setChecked(false); } } });
+		 * rb_weixin .setOnCheckedChangeListener(new
+		 * CompoundButton.OnCheckedChangeListener() {
+		 * 
+		 * @Override public void onCheckedChanged(CompoundButton buttonView,
+		 * boolean isChecked) { if (isChecked) { payType = 1;
+		 * rb_aliay.setChecked(false); rb_union.setChecked(false); } } });
+		 * rb_union.setOnCheckedChangeListener(new
+		 * CompoundButton.OnCheckedChangeListener() {
+		 * 
+		 * @Override public void onCheckedChanged(CompoundButton buttonView,
+		 * boolean isChecked) { if (isChecked) { payType = 2;
+		 * rb_weixin.setChecked(false); rb_aliay.setChecked(false); } } });
+		 */
 		// 确定订单
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if(listAdapter.getCheckPosition()==-1){
+				if (listAdapter.getCheckPosition() == -1) {
 					ToastUtils.showToast(mContext, "请选择支付方式");
 					return;
 				}
@@ -217,10 +201,6 @@ public class AppointmentDoor3Activity extends BaseActivity {
 											parseModel.getData().toString(),
 											Order.class);
 									aliPay(order);
-									ToastUtils.showToast(
-											AppointmentDoor3Activity.this,
-											parseModel.getMsg() + ",订单号是:"
-													+ order.getOrderNum());
 									return;
 								}
 							}
@@ -302,12 +282,14 @@ public class AppointmentDoor3Activity extends BaseActivity {
 								.getStatus())) {
 							ToastUtils.showToast(mContext, parseModel.getMsg());
 						} else {
-							List<PayType> payTypes = JsonUtils.fromJson(parseModel
-									.getData().toString(),
+							List<PayType> payTypes = JsonUtils.fromJson(
+									parseModel.getData().toString(),
 									new TypeToken<List<PayType>>() {
 									});
-							payTypeList.addAll(payTypes);
-							listAdapter.notifyDataSetChanged();
+							if (payTypes != null && !payTypes.isEmpty()) {
+								payTypeList.addAll(payTypes);
+								listAdapter.notifyDataSetChanged();
+							}
 
 						}
 					}
@@ -315,16 +297,15 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	}
 
-	private void aliPay(Order order) {
+	private void aliPay(final Order order) {
 		try {
 			Log.i("ExternalPartner", "onItemClick");
 			String info = getNewOrderInfo(order);
 			String sign = Rsa.sign(info, payType.getRsaPrivateKey());
 			sign = URLEncoder.encode(sign);
 			info += "&sign=\"" + sign + "\"&" + getSignType();
-			Log.i("ExternalPartner", "start pay");
 			// start the pay.
-			Log.i(TAG, "info = " + info);
+//			Log.i(TAG, "info = " + info);
 
 			final String orderInfo = info;
 			new Thread() {
@@ -337,17 +318,20 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 					String result = alipay.pay(orderInfo);
 
-					Log.i(TAG, "result = " + result);
+					// Log.i(TAG, "result = " + result);
 					Message msg = new Message();
 					msg.what = 1;
-					msg.obj = result;
+					Bundle data = new Bundle();
+					data.putString("result", result);
+					data.putString("orderNum", order.getOrderNum());
+					msg.setData(data);
 					mHandler.sendMessage(msg);
 				}
 			}.start();
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			Toast.makeText(mContext, "支付失败！", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext, "支付失败,稍后请重试!", Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -360,20 +344,21 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		sb.append("\"&subject=\"");
 		sb.append(order.getProName());
 		sb.append("\"&body=\"");
-		sb.append(order.getProName());
+		sb.append(product.getOneword());
 		sb.append("\"&total_fee=\"");
 		sb.append(String.valueOf(order.getOrderPay()));
 		sb.append("\"&notify_url=\"");
 
 		// 网址需要做URL编码
-		sb.append(URLEncoder.encode("http://weixin.shopin.net/wechatshop/index.html"));
+		sb.append(URLEncoder
+				.encode("http://weixin.shopin.net/wechatshop/index.html"));
 		sb.append("\"&service=\"mobile.securitypay.pay");
 		sb.append("\"&_input_charset=\"UTF-8");
 		sb.append("\"&return_url=\"");
 		sb.append(URLEncoder.encode("http://m.alipay.com"));
 		sb.append("\"&payment_type=\"1");
 		sb.append("\"&seller_id=\"");
-		sb.append(Keys.DEFAULT_SELLER);
+		sb.append(payType.getPayNum());
 
 		// 如果show_url值为空，可不传
 		// sb.append("\"&show_url=\"");
@@ -383,39 +368,52 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		return new String(sb);
 	}
 
-	private String getOutTradeNo() {
-		SimpleDateFormat format = new SimpleDateFormat("MMddHHmmss");
-		Date date = new Date();
-		String key = format.format(date);
-
-		java.util.Random r = new java.util.Random();
-		key += r.nextInt();
-		key = key.substring(0, 15);
-		Log.d(TAG, "outTradeNo: " + key);
-		return key;
-	}
-
 	private String getSignType() {
 		return "sign_type=\"RSA\"";
 	}
 
 	Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			Result result = new Result((String) msg.obj);
-			Toast.makeText(mContext, result.getResult(), Toast.LENGTH_SHORT)
-			.show();
-//			switch (msg.what) {
-//			case 1:
-//			case 2: {
-//				Toast.makeText(mContext, result.getResult(), Toast.LENGTH_SHORT)
-//						.show();
-//
-//			}
-//				break;
-//			default:
-//				break;
-//			}
+			if (msg.what == 1) {//支付返回结果
+//				Result result = new Result((String) msg.obj);
+				Bundle data = msg.getData();
+				String result = (String)data.getString("result");
+				String orderNum = (String)data.getString("orderNum");
+				
+				String tradeStatus = "resultStatus={";
+				int imemoStart = result.indexOf("resultStatus=");
+				imemoStart += tradeStatus.length();
+				int imemoEnd = result.indexOf("};memo=");
+				
+				tradeStatus = result.substring(imemoStart, imemoEnd);
+				
+				if("9000".equals(tradeStatus)){//支付成功
+//					paySuccess(orderNum);
+					ToastUtils.showToast(mContext, "支付成功！");
+				}else if("6002".equals(tradeStatus)){//网络连接异常
+					ToastUtils.showToast(mContext, getResources().getString(R.string.NETWORK_ERROR));
+				}else if("4000".equals(tradeStatus)){//支付失败
+					ToastUtils.showToast(mContext, "支付失败，稍后请重试！");
+				}
+				
+				
+			}
 		};
 	};
+	
+	/**
+	 * 支付成功之后
+	 * @param orderNum
+	 */
+	private void paySuccess(String orderNum){
+		ApiBuyUtils.orderSuccess(mContext, user.getUserId(), orderNum, new HttpConnectionUtil.RequestCallback() {
+			
+			@Override
+			public void execute(ParseModel parseModel) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
 
 }

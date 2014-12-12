@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class Result {
 	
-	private static final Map<String, String> sResultStatus;
+	public static final Map<String, String> sResultStatus;
 
 	private String mResult;
 	
@@ -73,7 +73,7 @@ public class Result {
 			sign = sign.replace("\"", "");
 
 			if (signType.equalsIgnoreCase("RSA")) {
-				retVal = Rsa.doCheck(signContent, sign, Keys.PUBLIC);
+//				retVal = Rsa.doCheck(signContent, sign, Keys.PUBLIC);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.PayType;
+import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class PayTypeAdapter extends BaseListAdapter {
@@ -82,7 +83,7 @@ public class PayTypeAdapter extends BaseListAdapter {
 			}
 		});
 		tv_username.setText(payType.getDescription());
-		ImageLoader.getInstance().displayImage(payType.getIconPic(), iv_image,
+		ImageLoader.getInstance().displayImage(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+payType.getIconPic(), iv_image,
 				MyApplication.getInstance().getOptions(R.drawable.ic_launcher));
 
 		return convertView;
