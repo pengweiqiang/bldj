@@ -38,6 +38,7 @@ import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.StringUtils;
@@ -362,7 +363,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 		// 网址需要做URL编码
 		sb.append(URLEncoder
-				.encode("http://weixin.shopin.net/wechatshop/index.html"));
+				.encode(ReqUrls.ALIPAY_NOTIFY_URL));
 		sb.append("\"&service=\"mobile.securitypay.pay");
 		sb.append("\"&_input_charset=\"UTF-8");
 		sb.append("\"&return_url=\"");
