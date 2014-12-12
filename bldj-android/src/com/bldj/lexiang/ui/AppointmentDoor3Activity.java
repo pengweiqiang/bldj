@@ -73,6 +73,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	// private RadioButton rb_aliay, rb_weixin, rb_union;
 
 	private double orderPay;// 总金额
+	private TextView tv_orderPay;
 	private PayType payType;
 
 	private Coupon coupon;// 使用优惠卷
@@ -92,19 +93,22 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		seller = (Seller) this.getIntent().getSerializableExtra("seller");
 		product = (Product) this.getIntent().getSerializableExtra("product");
 		detailAddress = this.getIntent().getStringExtra("address");
-
 		user = MyApplication.getInstance().getCurrentUser();
+		
 		initView();
 
 		initListener();
-
+		initData();
+		//获取支付方式
+		getPayType();
+	}
+	private void initData(){
 		tv_time.setText(time);
 		tv_sellerName.setText(seller.getUsername());
 
 		orderPay = product.getCurPrice();
+		showOrderPay();
 		tv_productName.setText(product.getName());
-
-		getPayType();
 	}
 
 	// 设置activity的导航条
@@ -128,6 +132,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_time = (TextView) findViewById(R.id.time);
 		tv_productName = (TextView) findViewById(R.id.product_name);
 		tv_sellerName = (TextView) findViewById(R.id.seller_name);
+		tv_orderPay = (TextView)findViewById(R.id.real_pay);
 		/*
 		 * rb_aliay = (RadioButton) findViewById(R.id.aliay_pay); rb_weixin =
 		 * (RadioButton) findViewById(R.id.weixin_pay); rb_union = (RadioButton)
@@ -239,10 +244,11 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == 20) {
+		if (resultCode == 20) {//选择优惠卷
 			coupon = (Coupon) data.getSerializableExtra("coupon");
 			tv_coupons.setText(coupon.getName() + " ￥:" + coupon.getPrice());
 			couponPrice = coupon.getPrice();
+			showOrderPay();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -262,6 +268,12 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			payCount = 0.01;
 		}
 		return payCount;
+	}
+	
+	private void showOrderPay(){
+		
+		tv_orderPay.setText("实际支付：￥"+String.valueOf(caluOrderPay()));
+		
 	}
 	/**
 	 * 获取支付方式
