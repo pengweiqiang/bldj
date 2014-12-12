@@ -24,6 +24,7 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
+import com.bldj.lexiang.view.LoadingView;
 
 /**
  * 登录
@@ -38,7 +39,7 @@ public class LoginFragment extends BaseFragment {
 	private TextView tv_forgetPwd;
 	private Button btn_login;
 	private View infoView;
-	
+	LoadingView loading ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
