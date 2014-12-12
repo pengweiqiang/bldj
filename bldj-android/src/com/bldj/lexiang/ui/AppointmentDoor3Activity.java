@@ -60,6 +60,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private Product product;
 	private Button btn_use_code;
 	private EditText et_code;
+	private double codePrice = 0;//电子卷价格
 
 	private User user;
 	private TextView tv_sellerName;
@@ -75,6 +76,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private PayType payType;
 
 	private Coupon coupon;// 使用优惠卷
+	private double couponPrice = 0;
 
 	private List<PayType> payTypeList;// 支付方式
 	private ListView mListView;
@@ -99,7 +101,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_time.setText(time);
 		tv_sellerName.setText(seller.getUsername());
 
-		orderPay = product.getCurPrice() + seller.getAvgPrice();
+		orderPay = product.getCurPrice();
 		tv_productName.setText(product.getName());
 
 		getPayType();
@@ -143,26 +145,6 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	@Override
 	public void initListener() {
-		/*
-		 * rb_aliay.setOnCheckedChangeListener(new
-		 * CompoundButton.OnCheckedChangeListener() {
-		 * 
-		 * @Override public void onCheckedChanged(CompoundButton buttonView,
-		 * boolean isChecked) { if (isChecked) { payType = 0;
-		 * rb_weixin.setChecked(false); rb_union.setChecked(false); } } });
-		 * rb_weixin .setOnCheckedChangeListener(new
-		 * CompoundButton.OnCheckedChangeListener() {
-		 * 
-		 * @Override public void onCheckedChanged(CompoundButton buttonView,
-		 * boolean isChecked) { if (isChecked) { payType = 1;
-		 * rb_aliay.setChecked(false); rb_union.setChecked(false); } } });
-		 * rb_union.setOnCheckedChangeListener(new
-		 * CompoundButton.OnCheckedChangeListener() {
-		 * 
-		 * @Override public void onCheckedChanged(CompoundButton buttonView,
-		 * boolean isChecked) { if (isChecked) { payType = 2;
-		 * rb_weixin.setChecked(false); rb_aliay.setChecked(false); } } });
-		 */
 		// 确定订单
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
 
@@ -179,11 +161,12 @@ public class AppointmentDoor3Activity extends BaseActivity {
 				if (coupon != null) {
 					couponId = coupon.getId();
 				}
+				double orderCount = caluOrderPay();
 
 				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
 						user.getUserId(), user.getUsername(), seller.getId(),
 						seller.getNickname(), product.getId(),
-						product.getName(), orderPay, user.getUsername(), 1,
+						product.getName(), orderCount, user.getUsername(), 1,
 						user.getUsername(), user.getMobile(), detailAddress,
 						"", payType.getCode(), couponId, serviceTime,
 						new HttpConnectionUtil.RequestCallback() {
@@ -259,11 +242,27 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		if (resultCode == 20) {
 			coupon = (Coupon) data.getSerializableExtra("coupon");
 			tv_coupons.setText(coupon.getName() + " ￥:" + coupon.getPrice());
-
+			couponPrice = coupon.getPrice();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
+	/**
+	 * 获取订单最后的金额
+	 * @return
+	 */
+	private double caluOrderPay(){
+		double payCount = orderPay;
+		if(couponPrice != 0d){//优惠卷
+			payCount = payCount - couponPrice;
+		}else if(codePrice != 0){//电子卷
+			payCount = payCount - codePrice;
+		}
+		if(payCount<=0){//总价格小于1，最低消费0.01
+			payCount = 0.01;
+		}
+		return payCount;
+	}
 	/**
 	 * 获取支付方式
 	 */
