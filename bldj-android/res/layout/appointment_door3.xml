@@ -15,29 +15,67 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="5dip"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip"
+        android:gravity="center"
         android:orientation="horizontal" >
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1.选择时间" />
+            android:layout_marginLeft="7dip"
+            android:src="@drawable/btn_appoinment_point" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="2.选择理疗师" />
+        <View
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected" />
 
-        <TextView
+        <ImageView
+            android:id="@+id/step1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3.确认订单"
-            android:textColor="@color/light_green" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/step1_unselected" />
+
+        <View
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/step2_unselected" />
+
+        <View
+            android:layout_width="10dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected" />
+
+        <View
+            android:layout_width="20dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_selected" />
+
+        <ImageView
+            android:id="@+id/step3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/step3__selected" />
+
+        <View
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_selected" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dip"
+            android:src="@drawable/btn_appoinment_point" />
     </LinearLayout>
 
     <View
@@ -131,14 +169,14 @@
                 android:textColor="@color/grey"
                 android:textSize="14sp" />
         </LinearLayout>
-        
-         <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="8dip"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:background="@color/line" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="8dip"
+            android:background="@color/line" />
 
         <LinearLayout
             android:id="@+id/select_coupons"
@@ -172,14 +210,14 @@
                 android:layout_gravity="center"
                 android:src="@drawable/btn_down_open" />
         </LinearLayout>
-        
-         <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="8dip"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:background="@color/line" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="8dip"
+            android:background="@color/line" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -201,43 +239,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:drawableLeft="@drawable/use_coupon"
+                android:gravity="center"
                 android:hint="@string/input_elect_code"
                 android:textSize="14sp" />
-		
-            <LinearLayout 
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_weight="1"
                 android:gravity="center"
-                >
-            <Button
-                android:id="@+id/btn_use_code"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:background="@drawable/coners"
-                android:textColor="@color/white"
-                android:text="使用电子卷"
-                android:textSize="12sp" />
-            <TextView 
-                android:id="@+id/real_pay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#940707"
-                android:text="实际支付：￥216.0"
-                />
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/btn_use_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:background="@drawable/coners"
+                    android:text="使用电子卷"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/real_pay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="实际支付：￥216.0"
+                    android:textColor="#940707" />
             </LinearLayout>
         </LinearLayout>
-        
-         <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginTop="8dip"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:background="@color/line" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="8dip"
+            android:background="@color/line" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -259,12 +297,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/coners"
             android:paddingLeft="40dip"
             android:paddingRight="40dip"
-            android:layout_marginTop="10dip"
-            android:textColor="@color/white"
-            android:background="@drawable/coners"
-            android:text="@string/confirm" />
+            android:text="@string/confirm"
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </LinearLayout>

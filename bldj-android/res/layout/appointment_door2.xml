@@ -12,30 +12,77 @@
         android:layout_marginTop="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
-    <LinearLayout 
+     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip"
         android:gravity="center"
-        android:layout_marginTop="5dip"
-        >
-   	<TextView 
-   	    android:layout_width="wrap_content"
-   	    android:layout_height="wrap_content"
-   	    android:text="1.选择时间"
-   	    />
-   	<TextView 
-   	    android:layout_width="wrap_content"
-   	    android:layout_height="wrap_content"
-   	    android:text="2.选择理疗师"
-   	    android:textColor="@color/light_green"
-   	    />
-   	<TextView 
-   	    android:layout_width="wrap_content"
-   	    android:layout_height="wrap_content"
-   	    android:text="3.确认订单"
-   	    />
-   	</LinearLayout>
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dip"
+            android:src="@drawable/btn_appoinment_point" />
+
+        <View
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected" />
+
+	        <ImageView
+	            android:id="@+id/step1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:src="@drawable/step1_unselected" />
+	        
+        
+	      <View 
+            android:layout_width="10dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected"
+            />   
+        <View 
+            android:layout_width="20dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_selected"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/step2_selected" />
+	        
+         <View 
+            android:layout_width="20dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_selected"
+            />
+        <View 
+            android:layout_width="10dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected"
+            />
+        <ImageView
+            android:id="@+id/step3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+            android:src="@drawable/step3_unselected" />
+        
+        <View 
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected"
+            />
+		 <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dip"
+            android:src="@drawable/btn_appoinment_point" />
+    </LinearLayout>
     
     
     
