@@ -18,6 +18,7 @@ import com.bldj.lexiang.api.vo.Category;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.ui.CategoryProductActivity;
 import com.bldj.lexiang.ui.HealthProductDetailActivity;
+import com.bldj.lexiang.view.CircleView;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class CategoryAdapter extends BaseListAdapter {
@@ -89,6 +90,8 @@ public class CategoryAdapter extends BaseListAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+		CircleView c = (CircleView)convertView.findViewById(R.id.title_circle2);
+		c.invalidate();
 		holder.tv_category_name.setText(category.getName());
 		int res = context.getResources().getColor(R.color.color_random_one);
 		Random rand = new Random();
