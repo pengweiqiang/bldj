@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content" 
+    >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="@drawable/own_btn_rounded" >
+        android:layout_margin="5dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:background="@drawable/border" >
 
         <ImageView
             android:id="@+id/headImage"
@@ -15,18 +18,22 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="4dip"
+            android:layout_marginRight="4dip"
             android:src="@drawable/ic_launcher" />
 
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dip"
             android:layout_toRightOf="@+id/headImage"
-            android:paddingTop="4dip" >
+            android:layout_marginLeft="4dip"
+            android:layout_marginRight="3dip"
+            android:layout_marginBottom="3dip"
+            android:paddingTop="6dip" >
 
             <TextView
                 android:id="@+id/username"
+                 android:textColor="@color/grey"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nobody" />
@@ -36,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
+                 android:textColor="@color/grey"
                 android:layout_toRightOf="@+id/username"
                 android:text="四川" />
 
@@ -45,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
                 android:layout_toRightOf="@+id/address"
+                 android:textColor="@color/grey"
                 android:text="33岁" />
 
             <TextView
@@ -53,15 +62,19 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/username"
                 android:layout_marginBottom="4dip"
+                 android:textColor="@color/grey"
                 android:layout_marginTop="4dip"
-                android:text="共接单:21次" />
+                android:drawablePadding="3dip"
+                android:textSize="13sp"
+                android:drawableRight="@drawable/btn_search"
+                android:text="共搜集21次" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@+id/avg_price"
-                android:gravity="right"
+                android:gravity="right|top"
                 android:orientation="vertical"
                 android:paddingRight="4dip" >
 
@@ -69,24 +82,42 @@
                     android:id="@+id/distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dip"
+                    android:drawablePadding="3dip"
+                     android:textColor="@color/grey"
+                     android:textSize="13sp"
+                     android:layout_marginBottom="4dip"
+                     android:drawableLeft="@drawable/btn_distance"
                     android:text="距您3公里" />
 
                 <TextView
                     android:id="@+id/level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dip"
                     android:text="★★★★★" />
             </LinearLayout>
         </RelativeLayout>
-
+		<View
+		    android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:layout_below="@+id/rl"
+        android:layout_toRightOf="@+id/headImage"
+        android:layout_marginRight="3dip"
+        android:layout_marginTop="2dip"
+        android:layout_marginBottom="2dip"
+        android:layout_marginLeft="4dip"
+        android:background="@drawable/border_category"
+        android:layerType="software" />
         <TextView
             android:id="@+id/seller_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl"
+            android:layout_below="@+id/line"
+            android:textColor="@color/grey"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
             android:layout_marginLeft="4dip"
+             android:layout_marginRight="3dip"
             android:layout_toRightOf="@+id/headImage"
             android:text="毕业于北京中医药大学，10年理疗经验。擅长颈、肩、腰、背等，从师5年临床实验"
             android:textSize="12sp" />
