@@ -2,101 +2,177 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="48dp" >
+        android:layout_height="48dp"
+        android:layout_marginTop="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dip"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip"
         android:gravity="center"
         android:orientation="horizontal" >
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1.选择时间"
-            android:textColor="@color/light_green" />
+            android:layout_marginLeft="7dip"
+            android:src="@drawable/btn_appoinment_point" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2.选择理疗师" />
+        <View
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_selected" />
 
-        <TextView
+	        <ImageView
+	            android:id="@+id/step1"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_centerInParent="true"
+	            android:src="@drawable/step1_selected" />
+	        
+        
+        <View 
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected"
+            />
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3.确认订单" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/step2_unselected" />
+	        
+        <View 
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected"
+            />
+        <ImageView
+            android:id="@+id/step3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+            android:src="@drawable/step3_unselected" />
+        
+        <View 
+            android:layout_width="30dip"
+            android:layout_height="3dip"
+            android:background="@color/appoinment_step_unselected"
+            />
+		 <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dip"
+            android:src="@drawable/btn_appoinment_point" />
     </LinearLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="40dip"
-        android:background="@color/grey" >
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
 
-        <TextView
-            android:id="@+id/first_date"
-            android:layout_width="0dip"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="今天"
-            android:textColor="#ffffffff"
-            android:textSize="13.0dip" />
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dip" >
 
-        <TextView
-            android:id="@+id/second_date"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="明天"
-            android:textColor="#ffffffff"
-            android:textSize="13.0dip" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="0.6dip"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/third_date"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="周一(12-1)"
-            android:textColor="#ffffffff"
-            android:textSize="13.0dip" />
+                <TextView
+                    android:id="@+id/first_date"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="1dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/time_unselecte"
+                    android:gravity="center"
+                    android:paddingBottom="12dip"
+                    android:paddingTop="12dip"
+                    android:text="今天"
+                    android:textColor="#ffffffff"
+                    android:textSize="13.0dip" />
 
-        <TextView
-            android:id="@+id/four_date"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="周二(12-2)"
-            android:textColor="#ffffffff"
-            android:textSize="13.0dip" />
+                <TextView
+                    android:id="@+id/second_date"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="1dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/time_unselecte"
+                    android:gravity="center"
+                    android:paddingBottom="12dip"
+                    android:paddingTop="12dip"
+                    android:text="明天"
+                    android:textColor="#ffffffff"
+                    android:textSize="13.0dip" />
 
-        <TextView
-            android:id="@+id/five_date"
-            android:layout_width="0dip"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="周三(12-3)"
-            android:textColor="#ffffffff"
-            android:textSize="13.0dip" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/third_date"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="1dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/time_unselecte"
+                    android:gravity="center"
+                    android:paddingBottom="12dip"
+                    android:paddingTop="12dip"
+                    android:text="周一"
+                    android:textColor="#ffffffff"
+                    android:textSize="13.0dip" />
 
-  	<include layout="@layout/scheduled_item"/>
-  <!-- 	<GridView
+                <TextView
+                    android:id="@+id/four_date"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="1dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/time_unselecte"
+                    android:gravity="center"
+                    android:paddingBottom="12dip"
+                    android:paddingTop="12dip"
+                    android:text="周二"
+                    android:textColor="#ffffffff"
+                    android:textSize="13.0dip" />
+
+                <TextView
+                    android:id="@+id/five_date"
+                    android:layout_width="0dip"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.0"
+                    android:background="@color/time_unselecte"
+                    android:gravity="center"
+                    android:paddingBottom="12dip"
+                    android:paddingTop="12dip"
+                    android:text="周三"
+                    android:textColor="#ffffffff"
+                    android:textSize="13.0dip" />
+            </LinearLayout>
+
+            <include
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                layout="@layout/scheduled_item" />
+            <!--
+       	<GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -109,39 +185,42 @@
         android:numColumns="4"
         android:paddingBottom="1.0dip"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="1.0dip" /> -->
-  	    
-            
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip"
-        android:orientation="horizontal" >
+        android:verticalSpacing="1.0dip" />
+            -->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-            android:text="地址：" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="5dip"
+                android:paddingTop="5dip" >
 
-        <Button
-            android:id="@+id/btn_address"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:drawablePadding="15dp"
-            android:drawableRight="@drawable/btn_img_open"
-            android:gravity="left|center"
-            android:text="请选择地址"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="地址："
+                    android:textColor="@color/grey" />
 
-    <LinearLayout
+                <TextView
+                    android:id="@+id/btn_address"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:drawablePadding="15dp"
+                    android:drawableRight="@drawable/btn_img_open"
+                    android:gravity="left|center"
+                    android:text="请选择地址"
+                    android:textColor="@color/grey" />
+            </LinearLayout>
+
+            <!--
+         <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -158,20 +237,26 @@
             android:gravity="center"
             android:text="@string/appointment_door_tips"
             android:textColor="@color/red"
-            android:textSize="14sp" />
+            android:textSize="14sp" />
+            -->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/btn_next"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/next" />
+                android:layout_marginTop="10dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/btn_next"
+                    android:layout_width="120dip"
+                    android:layout_height="40dip"
+                    android:background="@drawable/coners"
+                    android:gravity="center"
+                    android:text="@string/next"
+                    android:textColor="@color/white" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

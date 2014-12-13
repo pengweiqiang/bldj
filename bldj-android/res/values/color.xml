@@ -64,13 +64,19 @@
     
     <!-- 下载管理 -->
 	<color name="white">#ffffffff</color>  
-	<color name="line">#aaaba9</color>
-	<color name="home_bg">#f0f0f0</color> 
+	<color name="line">#ffaaaba9</color>
+	<color name="home_bg">#fff0f0f0</color> 
     <color name="orange">#ffffdfd2</color> 
     <color name="update_all_dis_color">#ffbebebe</color>    
     <color name="common_text_color">#ff666666</color>
     <color name="top_app_listview_down">#ffffe9ce</color>
     <color name="tips_orange">#ffff9c00</color>
+    <color name="scheduled_green">#ff44c11a</color>
+    <color name="scheduled_grey">#ff8b8b8b</color>
+    <color name="selected_color">#fffe8500</color>
+    <color name="time_unselecte">#ff4f4e4e</color>
+    <color name="appoinment_step_selected">#fc6900</color>
+    <color name="appoinment_step_unselected">#c2c2c2</color>
     
     <!-- 登录验证对话框 -->
     <color name="dialog_title_color">#2967A8</color>
