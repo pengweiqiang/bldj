@@ -173,7 +173,7 @@ public class DateUtil {
 			break;
 		}
 		
-		title = title + "(" +getDateString(cal.getTime(), pattern)+")";
+//		title = title + "(" +getDateString(cal.getTime(), pattern)+")";
 		return title;
 	}
 }
