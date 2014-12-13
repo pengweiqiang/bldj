@@ -72,7 +72,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("上门预约");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -135,11 +135,11 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 					int position, long arg3) {
 				
 				if (mSelectedView == null) {
-                    arg1.setBackgroundColor(Color.RED);
+                    arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
                     mSelectedView = arg1;
                 } else {
                 	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
-                    arg1.setBackgroundColor(Color.RED);
+                	arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
                     mSelectedView = arg1;
                 }
 				mSeletedSeller = sellers.get(position-1);
