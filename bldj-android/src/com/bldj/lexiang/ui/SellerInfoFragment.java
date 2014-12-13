@@ -99,8 +99,10 @@ public class SellerInfoFragment extends BaseFragment implements IXListViewListen
 		
 	}
 	private void initData(){
-		if(((SellerPersonalActivity)mActivity).getSellerVo() != null){
+		if(((SellerPersonalActivity)mActivity).getSellerVo() != null && !StringUtils.isEmpty(((SellerPersonalActivity)mActivity).getSellerVo().getRecommend())){
 			tv_recommend.setText(((SellerPersonalActivity)mActivity).getSellerVo().getRecommend());
+		}else{
+			tv_recommend.setText("无");
 		}
 	}
 	/**
