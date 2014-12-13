@@ -80,14 +80,17 @@ public class RegisterFragment extends BaseFragment {
 				String password = et_password.getText().toString();
 				String code = et_code.getText().toString();
 				if(StringUtils.isEmpty(phone)){
+					et_phone.requestFocus();
 					ToastUtils.showToast(mActivity, "用户名不能为空");
 					return;
 				}
 				if(StringUtils.isEmpty(code)){
+					et_code.requestFocus();
 					ToastUtils.showToast(mActivity, "验证码不能为空");
 					return;
 				}
 				if(StringUtils.isEmpty(password)){
+					et_password.requestFocus();
 					ToastUtils.showToast(mActivity, "密码不能为空");
 					return;
 				}
@@ -105,7 +108,7 @@ public class RegisterFragment extends BaseFragment {
 							et_phone.setText("");
 							et_password.setText("");
 							et_code.setText("");
-							((RegisterAndLoginActivity)mActivity).setCurrentTitle(0);
+							((RegisterAndLoginActivity)mActivity).mViewPager.setCurrentItem(0, false);
 							
 						}else{
 							ToastUtils.showToast(mActivity, parseModel.getMsg());

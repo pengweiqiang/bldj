@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
@@ -7,8 +8,8 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dip"
-        android:background="@drawable/own_btn_rounded"
+        android:layout_margin="5dip"
+        android:background="@drawable/border"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -16,12 +17,16 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <ImageView
-                android:id="@+id/headImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dip"
-                android:src="@drawable/ic_launcher" />
+            <com.bldj.lexiang.view.RoundImageView
+                    android:id="@+id/headImage"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                   android:layout_marginLeft="7dip"
+                   android:layout_marginRight="5dip"
+                   android:layout_gravity="center"
+                    android:src="@drawable/ic_launcher"
+                    imagecontrol:border_outside_color="@color/app_title_color"
+                    imagecontrol:border_thickness="2dp" />
 
             <!--
              <LinearLayout 
@@ -38,12 +43,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="4dip"
+                android:paddingLeft="4dip"
                 android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
                 android:paddingTop="4dip" >
 
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
+                    android:textColor="@color/grey"
+                    android:layout_marginBottom="3dip"
                     android:layout_height="wrap_content"
                     android:text="Nobody" />
 
@@ -52,15 +62,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dip"
+                    android:layout_marginBottom="3dip"
+                    android:textColor="@color/grey"
                     android:layout_toRightOf="@+id/username"
                     android:text="四川" />
 
                 <TextView
                     android:id="@+id/distance"
+                    android:layout_below="@+id/username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="8dip"
+                    android:layout_marginTop="10dip"
+                    android:drawableLeft="@drawable/btn_distance"
+                    android:drawablePadding="3dip"
+                    android:textColor="@color/grey"
                     android:text="据您3公里" />
             </RelativeLayout>
             <!-- </LinearLayout> -->
@@ -70,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right"
                 android:orientation="vertical"
+                android:layout_marginRight="4dip"
                 android:paddingRight="4dip" >
 
                 <TextView
@@ -92,6 +108,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dip"
                     android:layout_marginTop="4dip"
+                    android:textColor="@color/grey"
+                    android:drawablePadding="3dip"
+                    android:drawableRight="@drawable/btn_search"
                     android:text="共接单:21次" />
             </LinearLayout>
         </LinearLayout>

@@ -79,10 +79,12 @@ public class LoginFragment extends BaseFragment {
 				String phone = et_phone.getText().toString();
 				String password = et_password.getText().toString();
 				if(StringUtils.isEmpty(phone)){
+					et_phone.requestFocus();
 					ToastUtils.showToast(mActivity, "用户名不能为空");
 					return;
 				}
 				if(StringUtils.isEmpty(password)){
+					et_password.requestFocus();
 					ToastUtils.showToast(mActivity, "密码不能为空");
 					return;
 				}

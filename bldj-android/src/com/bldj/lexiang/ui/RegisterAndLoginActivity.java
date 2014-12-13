@@ -18,6 +18,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
@@ -40,8 +42,9 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 	private int currentPage = 0;// 初始化当前页为0（第一页）
 	private TextView tabline;
 
-	private TextView register_menu;
-	private TextView login_menu;
+	private RadioGroup tab_radioGroup;
+	private RadioButton register_menu;
+	private RadioButton login_menu;
 
 	List<Fragment> list;
 
@@ -100,7 +103,7 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("登录");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -117,8 +120,9 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 
-		register_menu = (TextView) findViewById(R.id.register_menu);
-		login_menu = (TextView) findViewById(R.id.login_menu);
+		tab_radioGroup = (RadioGroup)findViewById(R.id.rg_title);
+		register_menu = (RadioButton) findViewById(R.id.register_menu);
+		login_menu = (RadioButton) findViewById(R.id.login_menu);
 
 		// 实例化对象
 		list = new ArrayList<Fragment>();
@@ -158,8 +162,13 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 				// tv3.setTextColor(Color.BLACK);
 				//
 				// // 再改变当前选择页（position）对应的textview颜色
-				setCurrentTitle(position);
-				currentPage = position;
+//				currentPage = position;
+//				mViewPager.setCurrentItem(position,false);
+				if(position == 0){
+					login_menu.setChecked(true);
+				}else if(position ==1){
+					register_menu.setChecked(true);
+				}
 
 			}
 
@@ -205,46 +214,22 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 	}
 
 	private void initListener() {
-		login_menu.setOnClickListener(new OnClickListener() {
-
+		
+		tab_radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			
 			@Override
-			public void onClick(View arg0) {
-				setCurrentTitle(0);
-
-			}
-		});
-
-		register_menu.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				setCurrentTitle(1);
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if(checkedId == R.id.login_menu){
+					mActionBar.setTitle("登录");
+					mViewPager.setCurrentItem(0, false);
+				}else if(checkedId == R.id.register_menu){
+					mActionBar.setTitle("注册");
+					mViewPager.setCurrentItem(1, false);
+				}
 			}
 		});
 
 	}
 
-	public void setCurrentTitle(int position) {
-
-		int height = login_menu.getHeight();
-		register_menu.setHeight(height);
-		login_menu.setHeight(height);
-		if (position == 0) {
-			mActionBar.setTitle("登录");
-			login_menu.setBackground(getResources().getDrawable(
-					R.drawable.select_left));
-			register_menu.setBackground(getResources().getDrawable(
-					R.drawable.unselect_right));
-			mViewPager.setCurrentItem(0, false);
-		} else if (position == 1) {
-			mActionBar.setTitle("注册");
-			login_menu.setBackground(getResources().getDrawable(
-					R.drawable.unselect_left));
-			register_menu.setBackground(getResources().getDrawable(
-					R.drawable.select_right));
-		}
-		mViewPager.setCurrentItem(position, false);
-
-	}
 
 }

@@ -18,6 +18,7 @@
 	        android:layout_width="0dip"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="10dip"
+	        android:drawableLeft="@drawable/et_username"
 	        android:inputType="phone"
 	        android:hint="@string/input_phone"
 	        android:gravity="center"
@@ -35,6 +36,7 @@
         android:layout_weight="1"
         android:layout_margin="10dip"
         android:layout_width="0dip"
+        android:drawableLeft="@drawable/et_pwd"
         android:layout_height="wrap_content"
         android:hint="@string/input_pwd"
         android:inputType="textPassword"
@@ -49,6 +51,7 @@
         android:text="@string/forget_pwd"
         android:layout_gravity="right"
         android:layout_marginRight="25dip"
+        android:textColor="@color/grey"
         />
  	<LinearLayout 
         android:layout_width="fill_parent"
@@ -65,6 +68,8 @@
 	        android:id="@+id/login"
 	        android:text="@string/login"
 	        android:layout_width="0dip"
+	        android:background="@drawable/btn_coners"
+	        android:textColor="@color/white"
 	        android:layout_height="wrap_content"
 	        android:layout_margin="5dip"
 	        android:gravity="center"

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,7 +73,7 @@ public class KmrsAdapter extends BaseListAdapter {
 
 		holder.tv_username.setText(seller.getUsername());
 		holder.tv_address.setText(seller.getAddress());
-		holder.tv_price.setText("价格：￥"
+		holder.tv_price.setText("均价：￥"
 				+ String.valueOf(seller.getAvgPrice()) );
 		ImageLoader.getInstance().displayImage(
 				seller.getHeadurl(),
@@ -79,7 +82,11 @@ public class KmrsAdapter extends BaseListAdapter {
 						.getOptions(R.drawable.ic_launcher));
 
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
-		holder.tv_order_count.setText("共接单"+seller.getDealnumSum()+"次");
+		
+		String orderCount = "共接单"+seller.getDealnumSum()+"次";
+		SpannableStringBuilder style=new SpannableStringBuilder(orderCount);
+		style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.app_title_color)),3,orderCount.indexOf("次"),Spannable.SPAN_EXCLUSIVE_INCLUSIVE); 
+		holder.tv_order_count.setText(style);
 
 		return convertView;
 	}

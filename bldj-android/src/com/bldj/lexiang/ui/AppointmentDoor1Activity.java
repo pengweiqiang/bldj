@@ -272,21 +272,30 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		tv_seconde_date.setText("明天");
 		tv_seconde_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 1));
+		tv_seconde_date.setBackgroundColor(getResources().getColor(
+				R.color.time_unselecte));
 
 		tv_third_date.setText(DateUtil.getScheduledTitle(nowdate,
 				DateUtil.SIMPLY_DD_PATTERN2, 2));
 		tv_third_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 2));
+		tv_third_date.setBackgroundColor(getResources().getColor(
+				R.color.time_unselecte));
+//		tv_third_date.setBackground(null);
 
 		tv_four_date.setText(DateUtil.getScheduledTitle(nowdate,
 				DateUtil.SIMPLY_DD_PATTERN2, 3));
 		tv_four_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 3));
+		tv_four_date.setBackgroundColor(getResources().getColor(
+				R.color.time_unselecte));
 
 		tv_five_date.setText(DateUtil.getScheduledTitle(nowdate,
 				DateUtil.SIMPLY_DD_PATTERN2, 4));
 		tv_five_date.setTag(DateUtil.getDateString(nowdate,
 				DateUtil.CUSTOM_PATTERN_SCHEDULED, 4));
+		tv_five_date.setBackgroundColor(getResources().getColor(
+				R.color.time_unselecte));
 
 		currentDateView = tv_first_date;// 默认选中今天
 		date = tv_first_date.getTag().toString();
