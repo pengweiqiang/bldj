@@ -6,8 +6,10 @@ import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Address;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -81,7 +83,7 @@ public class AddressInfoActivity extends BaseActivity {
 				}
 				//TODO 调用接口
 				String addressId = "";
-				String curLocation = address;
+				final String curLocation = address;
 				if(address!=null && type==2){//修改地址
 					addressId = String.valueOf(addressVo.getId());
 				}
@@ -94,6 +96,7 @@ public class AddressInfoActivity extends BaseActivity {
 							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
 						}else{
 							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
+							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",curLocation);
 							finish();
 						}
 					}
