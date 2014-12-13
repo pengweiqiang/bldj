@@ -41,7 +41,7 @@ public class ForgetPwdActivity extends BaseActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("密码重置");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -12,6 +12,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
@@ -30,9 +32,9 @@ public class MyCollectFragmentActivity extends BaseFragmentActivity {
 	CustomViewPager mViewPager;
 	private ActionBar mActionBar;
 
-
-	private TextView tab_jlys;
-	private TextView tab_kmrs;
+	private RadioGroup tab_radioGroup;
+	private RadioButton tab_jlys;
+	private RadioButton tab_kmrs;
 
 	List<Fragment> list;
 
@@ -50,7 +52,7 @@ public class MyCollectFragmentActivity extends BaseFragmentActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("我的收藏");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -58,6 +60,7 @@ public class MyCollectFragmentActivity extends BaseFragmentActivity {
 					}
 				});
 		actionBar.hideRightActionButton();
+		
 	}
 
 	private void initView() {
@@ -67,8 +70,9 @@ public class MyCollectFragmentActivity extends BaseFragmentActivity {
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		
-		tab_jlys = (TextView) findViewById(R.id.tab_jlys);
-		tab_kmrs = (TextView) findViewById(R.id.tab_kmrs);
+		tab_radioGroup = (RadioGroup)findViewById(R.id.rg_title);
+		tab_jlys = (RadioButton) findViewById(R.id.tab_jlys);
+		tab_kmrs = (RadioButton) findViewById(R.id.tab_kmrs);
 
 		// 实例化对象
 		list = new ArrayList<Fragment>();
@@ -102,8 +106,11 @@ public class MyCollectFragmentActivity extends BaseFragmentActivity {
 
 			@Override
 			public void onPageSelected(int position) {
-				setCurrentTitle(position);
-
+				if(position == 0){
+					tab_jlys.setChecked(true);
+				}else if(position ==1){
+					tab_kmrs.setChecked(true);
+				}
 			}
 
 			@Override
@@ -123,44 +130,18 @@ public class MyCollectFragmentActivity extends BaseFragmentActivity {
 	}
 
 	private void initListener() {
-		tab_jlys.setOnClickListener(new OnClickListener() {
-
+		tab_radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			
 			@Override
-			public void onClick(View arg0) {
-				setCurrentTitle(0);
-
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if(checkedId == R.id.tab_jlys){
+					mViewPager.setCurrentItem(0, false);
+				}else if(checkedId == R.id.tab_kmrs){
+					mViewPager.setCurrentItem(1, false);
+				}
 			}
 		});
-
-		tab_kmrs.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				setCurrentTitle(1);
-			}
-		});
-
 	}
 
-	public void setCurrentTitle(int position) {
-
-		int height = tab_jlys.getHeight();
-		tab_jlys.setHeight(height);
-		tab_kmrs.setHeight(height);
-		if (position == 0) {
-			tab_jlys.setBackground(getResources().getDrawable(
-					R.drawable.select_left));
-			tab_kmrs.setBackground(getResources().getDrawable(
-					R.drawable.unselect_right));
-			mViewPager.setCurrentItem(0, false);
-		} else if (position == 1) {
-			tab_jlys.setBackground(getResources().getDrawable(
-					R.drawable.unselect_left));
-			tab_kmrs.setBackground(getResources().getDrawable(
-					R.drawable.select_right));
-		}
-		mViewPager.setCurrentItem(position, false);
-
-	}
 
 }

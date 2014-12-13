@@ -55,7 +55,7 @@ public class CollectKmrsFragment extends BaseFragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		infoView = inflater.inflate(R.layout.collect_kmrs, container, false);
-		ActionBar mActionBar = (com.bldj.lexiang.view.ActionBar) getActivity()
+		/*ActionBar mActionBar = (com.bldj.lexiang.view.ActionBar) getActivity()
 				.findViewById(R.id.actionBar);
 		mActionBar.setRightTextActionButton("搜索", new View.OnClickListener() {
 
@@ -63,7 +63,7 @@ public class CollectKmrsFragment extends BaseFragment implements
 			public void onClick(View v) {
 
 			}
-		});
+		});*/
 		initView();
 
 		initListener();

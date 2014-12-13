@@ -13,6 +13,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bldj.lexiang.R;
@@ -32,18 +34,19 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 	CustomViewPager mViewPager;
 	private ActionBar mActionBar;
 
-
-	private TextView tab_unused;
-	private TextView tab_failure;
+	private RadioGroup tab_radioGroup;
+	private RadioButton tab_unused;
+	private RadioButton tab_failure;
 
 	List<Fragment> list;
 	int type;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.coupons);
 		type = this.getIntent().getIntExtra("type", 0);
-		
+
 		initView();
 
 		initListener();
@@ -52,7 +55,7 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("我的优惠卷");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -68,17 +71,18 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 		// mViewPager.setScanScroll(false);
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
-		
-		tab_unused = (TextView) findViewById(R.id.tab_unused);
-		tab_failure = (TextView) findViewById(R.id.tab_failure);
+
+		tab_radioGroup = (RadioGroup) findViewById(R.id.rg_title);
+		tab_unused = (RadioButton) findViewById(R.id.tab_unused);
+		tab_failure = (RadioButton) findViewById(R.id.tab_failure);
 
 		// 实例化对象
 		list = new ArrayList<Fragment>();
 
 		// 设置数据源
-		UnusedCouponsFragment unusedFragment = new UnusedCouponsFragment();//未使用
-		
-		FailureCouponsFragment failureFragment = new FailureCouponsFragment();//已失效
+		UnusedCouponsFragment unusedFragment = new UnusedCouponsFragment();// 未使用
+
+		FailureCouponsFragment failureFragment = new FailureCouponsFragment();// 已失效
 
 		list.add(unusedFragment);
 		list.add(failureFragment);
@@ -105,14 +109,17 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 
 			@Override
 			public void onPageSelected(int position) {
-				setCurrentTitle(position);
+				if (position == 0) {
+					tab_unused.setChecked(true);
+				} else if (position == 1) {
+					tab_failure.setChecked(true);
+				}
 
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				Log.i("tuzi", arg0 + "," + arg1 + "," + arg2);
-
 
 			}
 
@@ -126,43 +133,18 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 	}
 
 	private void initListener() {
-		tab_unused.setOnClickListener(new OnClickListener() {
+		tab_radioGroup
+				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-			@Override
-			public void onClick(View arg0) {
-				setCurrentTitle(0);
-
-			}
-		});
-
-		tab_failure.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				setCurrentTitle(1);
-			}
-		});
-
-	}
-
-	public void setCurrentTitle(int position) {
-
-		int height = tab_unused.getHeight();
-		tab_unused.setHeight(height);
-		tab_failure.setHeight(height);
-		if (position == 0) {
-			tab_unused.setBackground(getResources().getDrawable(
-					R.drawable.select_left));
-			tab_failure.setBackground(getResources().getDrawable(
-					R.drawable.unselect_right));
-			mViewPager.setCurrentItem(0, false);
-		} else if (position == 1) {
-			tab_unused.setBackground(getResources().getDrawable(
-					R.drawable.unselect_left));
-			tab_failure.setBackground(getResources().getDrawable(
-					R.drawable.select_right));
-		}
-		mViewPager.setCurrentItem(position, false);
+					@Override
+					public void onCheckedChanged(RadioGroup group, int checkedId) {
+						if (checkedId == R.id.tab_unused) {
+							mViewPager.setCurrentItem(0, false);
+						} else if (checkedId == R.id.tab_failure) {
+							mViewPager.setCurrentItem(1, false);
+						}
+					}
+				});
 
 	}
 
