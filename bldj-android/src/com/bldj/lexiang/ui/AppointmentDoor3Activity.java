@@ -73,7 +73,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	// private RadioButton rb_aliay, rb_weixin, rb_union;
 
-	private double orderPay;// 总金额
+	private double orderPay;// 最后总金额
 	private TextView tv_orderPay;
 	private PayType payType;
 
@@ -108,7 +108,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_sellerName.setText(seller.getUsername());
 
 		orderPay = product.getCurPrice();
-		showOrderPay();
+		showOrderPay(0);
 		tv_productName.setText(product.getName());
 	}
 
@@ -167,12 +167,11 @@ public class AppointmentDoor3Activity extends BaseActivity {
 				if (coupon != null) {
 					couponId = coupon.getId();
 				}
-				double orderCount = caluOrderPay();
 
 				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
 						user.getUserId(), user.getUsername(), seller.getId(),
 						seller.getNickname(), product.getId(),
-						product.getName(), orderCount, user.getUsername(), 1,
+						product.getName(), orderPay, user.getUsername(), 1,
 						user.getUsername(), user.getMobile(), detailAddress,
 						"", payType.getCode(), couponId, serviceTime,
 						new HttpConnectionUtil.RequestCallback() {
@@ -209,6 +208,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			public void onClick(View v) {
 				String vcode = et_code.getText().toString().trim();
 				if (StringUtils.isEmpty(vcode)) {
+					et_code.requestFocus();
 					ToastUtils.showToast(AppointmentDoor3Activity.this,
 							"请输入电子卷码");
 					return;
@@ -224,11 +224,15 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									ToastUtils.showToast(
 											AppointmentDoor3Activity.this,
 											parseModel.getMsg());
+									codePrice = 12;
+									showOrderPay(2);
 									return;
 
 								} else {
 									System.out.println(parseModel.getData()
 											.toString());
+									codePrice = 12;
+									showOrderPay(2);
 								}
 							}
 						});
@@ -253,7 +257,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			coupon = (Coupon) data.getSerializableExtra("coupon");
 			tv_coupons.setText(coupon.getName() + " ￥:" + coupon.getPrice());
 			couponPrice = coupon.getPrice();
-			showOrderPay();
+			showOrderPay(1);
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -262,22 +266,29 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	 * 获取订单最后的金额
 	 * @return
 	 */
-	private double caluOrderPay(){
-		double payCount = orderPay;
-		if(couponPrice != 0d){//优惠卷
-			payCount = payCount - couponPrice;
-		}else if(codePrice != 0){//电子卷
-			payCount = payCount - codePrice;
+	private double caluOrderPay(int type){
+		orderPay = product.getCurPrice();
+		if(type == 1){//优惠卷
+			orderPay = orderPay - couponPrice;
+			codePrice = 0;
+		}else if(type == 2){//电子卷
+			orderPay = orderPay - codePrice;
+			if(coupon!=null){
+				tv_coupons.setText("无");
+				couponPrice = 0;
+				coupon = null;
+			}
+
 		}
-		if(payCount<=0){//总价格小于1，最低消费0.01
-			payCount = 0.01;
+		if(orderPay<=0){//总价格小于1，最低消费0.01
+			orderPay = 0.01;
 		}
-		return payCount;
+		return orderPay;
 	}
 	
-	private void showOrderPay(){
+	private void showOrderPay(int type){
 		
-		tv_orderPay.setText("实际支付：￥"+String.valueOf(caluOrderPay()));
+		tv_orderPay.setText("实际支付：￥"+String.valueOf(caluOrderPay(type)));
 		
 	}
 	/**
