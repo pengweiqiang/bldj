@@ -36,6 +36,7 @@ public class OrderEvalActivity extends BaseActivity {
 	private TextView tv_orderNum;
 	private TextView tv_productName;
 	private TextView tv_sellerName;
+	private TextView tv_order_time;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +70,14 @@ public class OrderEvalActivity extends BaseActivity {
 		tv_orderNum = (TextView)findViewById(R.id.order_num);
 		tv_productName = (TextView)findViewById(R.id.product_name);
 		tv_sellerName = (TextView) findViewById(R.id.service_name);
+		tv_order_time = (TextView)findViewById(R.id.order_time);
 	}
 	private void initData(){
 		
 		tv_orderNum.setText(order.getOrderNum());
 		tv_productName.setText(order.getProName());
 		tv_sellerName.setText(order.getSellerName());
+		tv_order_time.setText(order.getCreatetime());
 	}
 
 	@Override
