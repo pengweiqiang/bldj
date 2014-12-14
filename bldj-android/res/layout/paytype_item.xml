@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dip"
         android:layout_marginRight="10dip"
-        android:layout_marginTop="8dip"
+        android:layout_marginTop="5dip"
         android:orientation="horizontal" >
 
         <ImageView
@@ -55,7 +55,7 @@
 	    android:background="@drawable/border_category"
 	    android:layout_width="match_parent"
 	    android:layout_height="2dp"
-	    android:layout_margin="7dip"
+	    android:layout_marginTop="5dip"
 	    android:layout_marginLeft="20dip"
 	    android:layout_marginRight="15dip"
 	    android:layerType="software"
