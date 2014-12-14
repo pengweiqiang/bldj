@@ -224,8 +224,6 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									ToastUtils.showToast(
 											AppointmentDoor3Activity.this,
 											parseModel.getMsg());
-									codePrice = 12;
-									showOrderPay(2);
 									return;
 
 								} else {
