@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.GestureDetector;
@@ -220,7 +221,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			
 			@Override
 			public void onClick(View view) {
-				
+				//用intent启动拨打电话  
+                Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+getResources().getString(R.string.appointment_door_tips2)));  
+                startActivity(intent); 
 			}
 		},
 		new View.OnClickListener() {
