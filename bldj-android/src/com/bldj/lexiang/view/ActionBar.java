@@ -26,7 +26,8 @@ public class ActionBar extends FrameLayout {
 	private TextView mTitleView;
 	private ImageView mLeftActionButton;
 	private ImageView mRightIconActionButton;
-	private Button mRightTextActionButton;
+	private View mRightTextTitleView;
+	private TextView mRightTextActionTextView;
 	private LinearLayout mCityButton;
 	private TextView mCityView;
 	private LinearLayout mRightHomeActionLinearLayout; 
@@ -52,7 +53,8 @@ public class ActionBar extends FrameLayout {
 		mCityButton = (LinearLayout)findViewById(R.id.leftActionCity);
 		mLeftActionButton = (ImageView) findViewById(R.id.leftActionButton);
 		mRightIconActionButton = (ImageView) findViewById(R.id.rightIconActionButton);
-		mRightTextActionButton = (Button) findViewById(R.id.rightTextActionButton);
+		mRightTextTitleView = findViewById(R.id.ll_right_title);
+		mRightTextActionTextView = (TextView) findViewById(R.id.rightTextActionTextView);
 		mRightHomeActionLinearLayout = (LinearLayout)findViewById(R.id.home_right);
 	}
 
@@ -97,7 +99,8 @@ public class ActionBar extends FrameLayout {
 
 	public void hideRightActionButton() {
 		mRightIconActionButton.setVisibility(View.INVISIBLE);
-		mRightTextActionButton.setVisibility(View.INVISIBLE);
+//		mRightTextActionTextView.setVisibility(View.INVISIBLE);
+		mRightTextTitleView.setVisibility(View.INVISIBLE);
 		mRightHomeActionLinearLayout.setVisibility(View.INVISIBLE);
 	}
 
@@ -105,19 +108,22 @@ public class ActionBar extends FrameLayout {
 		mRightIconActionButton.setImageResource(resId);
 		mRightIconActionButton.setOnClickListener(listener);
 		mRightIconActionButton.setVisibility(View.VISIBLE);
-		mRightTextActionButton.setVisibility(View.INVISIBLE);
+//		mRightTextActionTextView.setVisibility(View.INVISIBLE);
+		mRightTextTitleView.setVisibility(View.INVISIBLE);
 		mRightHomeActionLinearLayout.setVisibility(View.INVISIBLE);
 	}
 
 	public void setRightTextActionButton(String text, OnClickListener listener) {
-		mRightTextActionButton.setText(text);
-		mRightTextActionButton.setOnClickListener(listener);
-		mRightTextActionButton.setVisibility(View.VISIBLE);
+		mRightTextActionTextView.setText(text);
+		mRightTextActionTextView.setOnClickListener(listener);
+		mRightTextTitleView.setVisibility(View.VISIBLE);
+//		mRightTextActionTextView.setVisibility(View.VISIBLE);
 		mRightIconActionButton.setVisibility(View.INVISIBLE);
 		mRightHomeActionLinearLayout.setVisibility(View.INVISIBLE);
 	}
 	public void setHomeRightAction(OnClickListener callListener,OnClickListener morelistener){
-		mRightTextActionButton.setVisibility(View.INVISIBLE);
+//		mRightTextActionTextView.setVisibility(View.INVISIBLE);
+		mRightTextTitleView.setVisibility(View.INVISIBLE);
 		mRightIconActionButton.setVisibility(View.INVISIBLE);
 		findViewById(R.id.rightIconActionMore).setOnClickListener(morelistener);
 		findViewById(R.id.rightIconActionCall).setOnClickListener(callListener);
