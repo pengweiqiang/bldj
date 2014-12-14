@@ -96,7 +96,14 @@ public class CategoryAdapter extends BaseListAdapter {
 		int res = context.getResources().getColor(R.color.color_random_one);
 		Random rand = new Random();
 		int i = rand.nextInt(10);
-		holder.title_circle.setBackgroundColor(res+i);
+		if(i==0){
+			holder.title_circle.setBackgroundColor(res);
+		}else if(i==1){
+			holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_two));
+		}else if(i==2){
+			holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_three));
+		}
+		
 
 		if (products != null && products.size() > 0) {
 			final Product product1 = products.get(0);
