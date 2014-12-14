@@ -5,12 +5,14 @@ import java.util.List;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
@@ -20,7 +22,6 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -51,6 +52,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private Seller mSeletedSeller;// 预约美容师
 	private View mSelectedView;
 	private Button btn_previous, btn_next;
+	private TextView tv_callCustom;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,10 +98,20 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 
 		btn_previous = (Button) findViewById(R.id.btn_previous);
 		btn_next = (Button) findViewById(R.id.btn_next);
+		tv_callCustom = (TextView) findViewById(R.id.call_custom);
 	}
 
 	@Override
 	public void initListener() {
+		tv_callCustom.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				//用intent启动拨打电话  
+                Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tv_callCustom.getText().toString()));  
+                startActivity(intent);  
+			}
+		});
 		btn_previous.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -139,7 +151,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
                     mSelectedView = arg1;
                 } else {
                 	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
-                	arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
+//                	arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
                     mSelectedView = arg1;
                 }
 				mSeletedSeller = sellers.get(position-1);

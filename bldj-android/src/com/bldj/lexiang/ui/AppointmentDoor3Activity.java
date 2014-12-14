@@ -105,7 +105,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	}
 	private void initData(){
 		tv_time.setText(time);
-		tv_sellerName.setText(seller.getUsername());
+		tv_sellerName.setText(seller.getNickname());
 
 		orderPay = product.getCurPrice();
 		showOrderPay(0);

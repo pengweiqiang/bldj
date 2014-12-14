@@ -15,8 +15,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip"
-        android:layout_marginTop="10dip"
+        android:layout_marginBottom="6dip"
         android:gravity="center"
         android:orientation="horizontal" >
 
@@ -29,46 +28,145 @@
         <View
             android:layout_width="30dip"
             android:layout_height="3dip"
+            android:layout_weight="1"
             android:background="@color/appoinment_step_unselected" />
 
-        <ImageView
-            android:id="@+id/step1"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/step1_unselected" />
+            android:layout_height="wrap_content" >
+
+            <View
+                android:id="@+id/line_left"
+                android:layout_width="20dip"
+                android:layout_height="3dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@color/appoinment_step_unselected" />
+
+            <View
+                android:layout_width="20dip"
+                android:layout_height="3dip"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/step1"
+                android:background="@color/appoinment_step_unselected" />
+
+            <ImageView
+                android:id="@+id/step1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dip"
+                android:layout_toRightOf="@+id/line_left"
+                android:src="@drawable/step1_unselected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/step1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dip"
+                android:text="选择时间"
+                android:textColor="@color/grey" />
+        </RelativeLayout>
 
         <View
             android:layout_width="30dip"
             android:layout_height="3dip"
+            android:layout_weight="1"
             android:background="@color/appoinment_step_unselected" />
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/step2_unselected" />
+            android:layout_height="wrap_content" >
+
+            <View
+                android:id="@+id/line_left"
+                android:layout_width="20dip"
+                android:layout_height="3dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@color/appoinment_step_unselected" />
+
+            <View
+                android:layout_width="20dip"
+                android:layout_height="3dip"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/step2"
+                android:background="@color/appoinment_step_unselected" />
+
+            <ImageView
+                android:id="@+id/step2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dip"
+                android:layout_toRightOf="@+id/line_left"
+                android:src="@drawable/step2_unselected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/step2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dip"
+                android:text="选理疗师"
+                android:textColor="@color/grey" />
+        </RelativeLayout>
 
         <View
             android:layout_width="10dip"
             android:layout_height="3dip"
+            android:layout_weight="1"
             android:background="@color/appoinment_step_unselected" />
 
         <View
             android:layout_width="20dip"
             android:layout_height="3dip"
+            android:layout_weight="1"
             android:background="@color/appoinment_step_selected" />
 
-        <ImageView
-            android:id="@+id/step3"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/step3__selected" />
+            android:layout_height="wrap_content" >
+
+            <View
+                android:id="@+id/line_left"
+                android:layout_width="20dip"
+                android:layout_height="3dip"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@color/appoinment_step_selected" />
+
+            <View
+                android:layout_width="20dip"
+                android:layout_height="3dip"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/step3"
+                android:background="@color/appoinment_step_selected" />
+
+            <ImageView
+                android:id="@+id/step3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dip"
+                android:layout_toRightOf="@+id/line_left"
+                android:src="@drawable/step3__selected" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/step3"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dip"
+                android:text="确认订单"
+                android:textColor="@color/grey" />
+        </RelativeLayout>
 
         <View
             android:layout_width="30dip"
             android:layout_height="3dip"
+            android:layout_weight="1"
             android:background="@color/appoinment_step_selected" />
 
         <ImageView
@@ -80,229 +178,236 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="1px"
         android:background="@color/line" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.bldj.lexiang.view.SpringScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:background="@color/white"
-        android:orientation="vertical" >
+        android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:orientation="horizontal" >
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="0dip"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/seller_name"
-                android:textColor="@color/grey"
-                android:textSize="14sp" />
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/seller_name"
-                android:layout_width="0dip"
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/seller_name"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/seller_name"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="美容师1号"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="美容师1号"
-                android:textColor="@color/grey"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:orientation="horizontal" >
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/product_name"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="0dip"
+                <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="头部按摩产品"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/product_name"
-                android:textColor="@color/grey"
-                android:textSize="14sp" />
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/product_name"
-                android:layout_width="0dip"
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/start_time"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="2014.11.11 21:30"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:id="@+id/select_coupons"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="头部按摩产品"
-                android:textColor="@color/grey"
-                android:textSize="14sp" />
-        </LinearLayout>
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:orientation="horizontal" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/use_coupons"
+                    android:textColor="@color/app_title_color"
+                    android:textSize="14sp" />
 
-            <TextView
-                android:layout_width="0dip"
+                <TextView
+                    android:id="@+id/tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:text="请选择优惠卷"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/btn_down_open" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:background="@color/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/start_time"
-                android:textColor="@color/grey"
-                android:textSize="14sp" />
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:orientation="horizontal" >
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left"
-                android:text="2014.11.11 21:30"
-                android:textColor="@color/grey"
-                android:textSize="14sp" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/use_elect_code"
+                    android:textSize="14sp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:background="@color/line" />
+                <EditText
+                    android:id="@+id/code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/use_coupon"
+                    android:gravity="center"
+                    android:hint="@string/input_elect_code"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:id="@+id/select_coupons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:orientation="horizontal" >
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/btn_use_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:background="@drawable/coners"
+                        android:text="使用电子卷"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/real_pay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="实际支付：￥216.0"
+                        android:textColor="#940707" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:background="@color/line" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/use_coupons"
-                android:textColor="@color/app_title_color"
-                android:textSize="14sp" />
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="8dip"
+                android:text="@string/select_pay_type" />
 
-            <TextView
-                android:id="@+id/tips"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="请选择优惠卷"
-                android:textSize="14sp" />
+            <ListView
+                android:id="@+id/paytype_listView"
+                android:layout_width="match_parent"
+                android:layout_height="200dip"
+                android:divider="#00000000"
+                android:listSelector="@android:color/transparent" >
+            </ListView>
 
-            <ImageView
+            <Button
+                android:id="@+id/btn_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/btn_down_open" />
+                android:layout_marginTop="10dip"
+                android:background="@drawable/coners"
+                android:paddingLeft="40dip"
+                android:paddingRight="40dip"
+                android:text="@string/confirm"
+                android:textColor="@color/white" />
         </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:background="@color/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/use_elect_code"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/use_coupon"
-                android:gravity="center"
-                android:hint="@string/input_elect_code"
-                android:textSize="14sp" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/btn_use_code"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:background="@drawable/coners"
-                    android:text="使用电子卷"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/real_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="实际支付：￥216.0"
-                    android:textColor="#940707" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="8dip"
-            android:background="@color/line" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dip"
-            android:layout_marginTop="8dip"
-            android:text="@string/select_pay_type" />
-
-        <ListView
-            android:id="@+id/paytype_listView"
-            android:layout_width="match_parent"
-            android:layout_height="200dip"
-            android:divider="#00000000"
-            android:listSelector="@android:color/transparent" >
-        </ListView>
-
-        <Button
-            android:id="@+id/btn_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dip"
-            android:background="@drawable/coners"
-            android:paddingLeft="40dip"
-            android:paddingRight="40dip"
-            android:text="@string/confirm"
-            android:textColor="@color/white" />
-    </LinearLayout>
+    </com.bldj.lexiang.view.SpringScrollView>
 
 </LinearLayout>

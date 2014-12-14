@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/actionBar"
         android:layout_margin="5dip"
-        android:background="@drawable/own_btn_rounded"
+        android:background="@drawable/border"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -196,7 +196,7 @@
         android:layout_marginLeft="5dip"
         android:layout_marginRight="5dip"
         android:layout_marginTop="2dip"
-        android:background="@drawable/own_btn_rounded"
+        android:background="@drawable/border"
         android:orientation="horizontal" >
 
         <TextView

@@ -2,15 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" 
+    android:descendantFocusability="blocksDescendants"
+    
     >
-
+	
     <RelativeLayout
-        android:layout_width="wrap_content"
+       android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dip"
         android:paddingTop="8dip"
         android:paddingBottom="8dip"
-        android:background="@drawable/border" >
+        android:background="@drawable/border"
+         >
 
         <ImageView
             android:id="@+id/headImage"
@@ -89,11 +92,15 @@
                      android:drawableLeft="@drawable/btn_distance"
                     android:text="距您3公里" />
 
-                <TextView
-                    android:id="@+id/level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="★★★★★" />
+                <RatingBar  android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="13dp"
+                android:numStars="1"
+                android:focusable="false"
+                android:clickable="false"
+                style="@style/MyRatingBar"
+                android:visibility="visible"
+                />
             </LinearLayout>
         </RelativeLayout>
 		<View

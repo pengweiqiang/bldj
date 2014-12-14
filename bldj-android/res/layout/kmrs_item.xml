@@ -3,6 +3,7 @@
     xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal" >
 
     <LinearLayout
@@ -66,6 +67,16 @@
                     android:textColor="@color/grey"
                     android:layout_toRightOf="@+id/username"
                     android:text="四川" />
+                
+                <TextView
+                    android:id="@+id/age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
+                    android:layout_marginBottom="3dip"
+                    android:textColor="@color/grey"
+                    android:layout_toRightOf="@+id/address"
+                    android:text="22" />
 
                 <TextView
                     android:id="@+id/distance"
@@ -86,6 +97,8 @@
                 android:gravity="right"
                 android:orientation="vertical"
                 android:layout_marginRight="4dip"
+                android:layout_marginTop="5dip"
+                android:layout_marginBottom="5dip"
                 android:paddingRight="4dip" >
 
                 <TextView
@@ -95,12 +108,16 @@
                     android:layout_marginTop="4dip"
                     android:text="均价：￥64.5" />
 
-                <TextView
-                    android:id="@+id/feedBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dip"
-                    android:text="赞数" />
+                <RatingBar  android:id="@+id/feedBack"
+                android:layout_width="wrap_content"
+                android:layout_height="13dip"
+                android:layout_gravity="right"
+                android:numStars="2"
+                style="@style/MyRatingBar_ring"
+                 android:layout_marginTop="4dip"
+                 android:focusable="false"
+                android:visibility="visible"
+                />
 
                 <TextView
                     android:id="@+id/order_count"
