@@ -78,6 +78,7 @@
     <color name="appoinment_step_selected">#fc6900</color>
     <color name="appoinment_step_unselected">#c2c2c2</color>
     <color name="tab_title">#fc8200</color>
+    <color name="order_un_pay">#b8021a</color>
     
     <!-- 登录验证对话框 -->
     <color name="dialog_title_color">#2967A8</color>

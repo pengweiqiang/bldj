@@ -106,6 +106,11 @@
         <item name="android:minHeight">15dip</item>
         <item name="android:maxHeight">15dip</item>
     </style>
+    <style name="MyRatingBar_ring" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/myratingbar_ring</item>
+        <item name="android:minHeight">15dip</item>
+        <item name="android:maxHeight">15dip</item>
+    </style>
 
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/check</item>
