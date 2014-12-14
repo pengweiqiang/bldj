@@ -12,16 +12,11 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class CircleView extends View {
-
+	private Paint p; 
 	
 	public CircleView(Context context) {
 		super(context);
 	}
-	public CircleView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		// TODO Auto-generated constructor stub
-	}
-
 
 	public CircleView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -34,7 +29,7 @@ public class CircleView extends View {
 		super.onDraw(canvas);
 
 		// 创建画笔
-		Paint p = new Paint();
+		p = new Paint();
 		Random rand = new Random();
 		int index = rand.nextInt(20);
 		int color = Color.RED;
