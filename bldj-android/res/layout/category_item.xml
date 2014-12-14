@@ -24,7 +24,6 @@
         <com.bldj.lexiang.view.CircleView
             android:id="@+id/title_circle2"
             android:layout_width="10dip"
-            
             android:layout_height="10dip" />
 
         <TextView
