@@ -86,7 +86,7 @@ public class ActionBar extends FrameLayout {
 		mCityButton.setVisibility(View.VISIBLE);
 	}
 	public void setCityName(String city){
-		if(StringUtils.isEmpty(city)){
+		if(StringUtils.isEmpty(city)||"null".equalsIgnoreCase(city)){
 			city = "城市";
 		}
 		mCityView.setText(city);
