@@ -107,11 +107,10 @@
         android:id="@+id/progress_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:max="100"
-        android:visibility="gone" />
+        android:visibility="visible" />
     
    
 </LinearLayout>

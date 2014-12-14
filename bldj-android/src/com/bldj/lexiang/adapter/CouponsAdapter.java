@@ -67,7 +67,7 @@ public class CouponsAdapter extends BaseListAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.tv_price.setText(String.valueOf(coupon.getPrice()));
+		holder.tv_price.setText(String.valueOf("￥"+coupon.getPrice()));
 		holder.tv_startTime.setText(coupon.getStarttime());
 		holder.tv_endTime.setText(coupon.getEndtime());
 		holder.tv_name.setText(coupon.getName());

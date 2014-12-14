@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.bldj.lexiang.view.SpringScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:scrollbars="none" >
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/home_bg"
         android:orientation="vertical" >
 
-        <com.bldj.lexiang.view.ActionBar
-            android:id="@+id/actionBar"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp" >
-        </com.bldj.lexiang.view.ActionBar>
+    <com.bldj.lexiang.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip" >
+    </com.bldj.lexiang.view.ActionBar>
+    
+    <com.bldj.lexiang.view.SpringScrollView 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:scrollbars="none" >
+    	<LinearLayout 
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    
+    	    android:orientation="vertical"
+    	    >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="产品名称" />
+                android:text="产品名称：" />
 
             <TextView
                 android:id="@+id/product_name"
@@ -68,6 +78,23 @@
                 android:layout_height="wrap_content"
                 android:text="晓林晓丽" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下单时间：" />
+
+            <TextView
+                android:id="@+id/order_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="201235452131" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,8 +118,10 @@
                     android:id="@+id/radio_good"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:checked="true"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dip"
                     android:text="@string/eval_good"
                     android:textSize="@dimen/compnay_radio_textSize" >
                 </RadioButton>
@@ -101,7 +130,8 @@
                     android:id="@+id/radio_nor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/CustomCheckboxTheme"
+                    android:layout_marginRight="10dip"
                     android:text="@string/eval_nor"
                     android:textSize="@dimen/compnay_radio_textSize" >
                 </RadioButton>
@@ -110,7 +140,7 @@
                     android:id="@+id/radio_bad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/CustomCheckboxTheme"
                     android:text="@string/eval_bad"
                     android:textSize="@dimen/compnay_radio_textSize" >
                 </RadioButton>
@@ -120,14 +150,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dip"
+            android:layout_margin="5dip"
             android:orientation="vertical" >
 
             <EditText
                 android:id="@+id/suggestion"
                 android:layout_width="match_parent"
+                android:background="@drawable/border"
                 android:layout_height="wrap_content"
-                android:lines="4" />
+                android:gravity="left"
+                android:lines="6" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -153,13 +185,16 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_launcher" />
         </LinearLayout>
+        </LinearLayout>
+        </com.bldj.lexiang.view.SpringScrollView>
 
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="150dip"
+            android:background="@drawable/btn_coners"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/submit" />
     </LinearLayout>
 
-</com.bldj.lexiang.view.SpringScrollView>
