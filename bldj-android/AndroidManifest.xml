@@ -260,6 +260,13 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="BLDJ" />
+        
+        <!-- 阿里支付 -->
+        <activity
+            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        
     </application>
 
 </manifest>
