@@ -83,12 +83,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:visibility="visible"
+                android:layout_marginRight="3dip"
+                android:layout_marginBottom="10dip"
                 android:orientation="horizontal" >
 
                 <Button
                     android:id="@+id/collect"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dip"
                     android:text="收藏"
                     android:textColor="@color/white"
                     android:background="@drawable/btn_coners"
@@ -97,7 +99,7 @@
                 <Button
                     android:id="@+id/share"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dip"
                     android:text="分享"
                     android:textColor="@color/white"
                     android:background="@drawable/btn_coners"
@@ -110,7 +112,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/collect_share"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:layout_marginRight="3dip"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -118,14 +121,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/level_star"
-                    android:visibility="visible"
+                    android:visibility="gone"
                      />
                 <RatingBar  android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_height="13dp"
+                android:layout_gravity="bottom"
+                android:numStars="1"
                 style="@style/MyRatingBar"
-                android:visibility="gone"
+                android:visibility="visible"
                 />
 
                 <TextView
