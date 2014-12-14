@@ -57,8 +57,10 @@ public class OrderAdapter extends BaseListAdapter {
 					.findViewById(R.id.order_num);
 			holder.tv_order_status = (TextView) convertView
 					.findViewById(R.id.order_status);
-			holder.tv_order_pay = (TextView) convertView.findViewById(R.id.order_pay);
-			holder.tv_eval = (TextView) convertView.findViewById(R.id.order_eval);
+			holder.tv_order_pay = (TextView) convertView
+					.findViewById(R.id.order_pay);
+			holder.tv_eval = (TextView) convertView
+					.findViewById(R.id.order_eval);
 			convertView.setTag(holder);
 
 		} else {
@@ -66,29 +68,46 @@ public class OrderAdapter extends BaseListAdapter {
 		}
 
 		holder.tv_order_time.setText(order.getCreatetime());
-		holder.tv_order_pay.setText("￥"+String.valueOf(order.getOrderPay()));
+		holder.tv_order_pay.setText("￥" + String.valueOf(order.getOrderPay()));
 		holder.tv_order_num.setText(order.getOrderNum());
 		holder.tv_order_status.setText(order.getStatusStr());
-		if(order.getStatus() == 0){
+		switch (order.getStatus()) {
+		case 0:// 未付款
+			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.order_un_pay));
+			break;
+		case 1:// 
+			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.light_green));
+			break;
+		case 2:// 
+
+			break;
+		case 3://取消
+			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.grey));
+			break;
+
+		default:
+			break;
+		}
+		if (order.getStatus() == 1) {
 			holder.tv_eval.setVisibility(View.VISIBLE);
 			holder.tv_eval.setOnClickListener(new View.OnClickListener() {
-				
+
 				@Override
 				public void onClick(View arg0) {
-					//启动用户评价界面
-					Intent intent = new Intent(context,OrderEvalActivity.class);
+					// 启动用户评价界面
+					Intent intent = new Intent(context, OrderEvalActivity.class);
 					intent.putExtra("order", order);
 					context.startActivity(intent);
 				}
 			});
 		}
-		
+
 		return convertView;
 	}
 
 	public final class ViewHolder {
-		public TextView tv_order_time, tv_order_status, tv_order_num, tv_order_pay,
-				tv_eval;
+		public TextView tv_order_time, tv_order_status, tv_order_num,
+				tv_order_pay, tv_eval;
 	}
 
 }
