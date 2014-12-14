@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -63,8 +64,13 @@ public class KmrsAdapter extends BaseListAdapter {
 			holder.tv_address = (TextView) convertView
 					.findViewById(R.id.address);
 			holder.tv_price = (TextView) convertView.findViewById(R.id.price);
-			holder.tv_order_count = (TextView) convertView.findViewById(R.id.order_count);
-			holder.tv_distance = (TextView) convertView.findViewById(R.id.distance);
+			holder.tv_order_count = (TextView) convertView
+					.findViewById(R.id.order_count);
+			holder.tv_distance = (TextView) convertView
+					.findViewById(R.id.distance);
+			holder.feedBack = (RatingBar) convertView
+					.findViewById(R.id.feedBack);
+			holder.tv_age = (TextView)convertView.findViewById(R.id.age);
 			convertView.setTag(holder);
 
 		} else {
@@ -73,19 +79,34 @@ public class KmrsAdapter extends BaseListAdapter {
 
 		holder.tv_username.setText(seller.getUsername());
 		holder.tv_address.setText(seller.getAddress());
-		holder.tv_price.setText("均价：￥"
-				+ String.valueOf(seller.getAvgPrice()) );
-		ImageLoader.getInstance().displayImage(
-				seller.getHeadurl(),
+		holder.tv_price.setText("均价：￥" + String.valueOf(seller.getAvgPrice()));
+		ImageLoader.getInstance().displayImage(seller.getHeadurl(),
 				holder.headImg,
-				MyApplication.getInstance()
-						.getOptions(R.drawable.ic_launcher));
+				MyApplication.getInstance().getOptions(R.drawable.ic_launcher));
 
-		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
-		
-		String orderCount = "共接单"+seller.getDealnumSum()+"次";
-		SpannableStringBuilder style=new SpannableStringBuilder(orderCount);
-		style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.app_title_color)),3,orderCount.indexOf("次"),Spannable.SPAN_EXCLUSIVE_INCLUSIVE); 
+		holder.tv_distance.setText(String.valueOf("距您" + seller.getDistance()
+				+ "公里"));
+		holder.tv_age.setText(String.valueOf(seller.getUserGrade()));
+
+		if (seller.getDealnumSum() < 20) {
+			// levelStr = "★";
+			holder.feedBack.setNumStars(1);
+		} else if (seller.getDealnumSum() >= 20 && seller.getDealnumSum() < 200) {
+			holder.feedBack.setNumStars(2);
+		} else if (seller.getDealnumSum() >= 200) {
+			// levelStr = "★★";
+			holder.feedBack.setNumStars(3);
+		} else {
+			// levelStr = "★★★★";
+			holder.feedBack.setNumStars(5);
+		}
+
+		String orderCount = "共接单" + seller.getDealnumSum() + "次";
+		SpannableStringBuilder style = new SpannableStringBuilder(orderCount);
+		style.setSpan(
+				new ForegroundColorSpan(context.getResources().getColor(
+						R.color.app_title_color)), 3, orderCount.indexOf("次"),
+				Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
 		holder.tv_order_count.setText(style);
 
 		return convertView;
@@ -93,8 +114,10 @@ public class KmrsAdapter extends BaseListAdapter {
 
 	public final class ViewHolder {
 		public ImageView headImg;
+		public RatingBar feedBack;
 		public TextView tv_username, tv_distance, tv_address, tv_price,
-		tv_order_count;
+				tv_order_count;
+		public TextView tv_age;
 	}
 
 }

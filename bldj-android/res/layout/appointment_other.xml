@@ -16,7 +16,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/own_btn_rounded"
+            android:background="@drawable/border"
              android:paddingBottom="5dp"
             android:paddingTop="5dp"
             >
@@ -50,7 +50,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/own_btn_rounded"
+            android:background="@drawable/border"
              android:paddingBottom="5dp"
             android:paddingTop="5dp"
             >
@@ -79,7 +79,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/own_btn_rounded"
+            android:background="@drawable/border"
             android:drawableLeft="@drawable/btn_img_my_homepage"
             android:drawablePadding="15dp"
             android:drawableRight="@drawable/btn_img_open"
@@ -98,7 +98,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/own_btn_rounded"
+            android:background="@drawable/border"
             android:drawableLeft="@drawable/btn_img_my_homepage"
             android:drawablePadding="15dp"
             android:drawableRight="@drawable/btn_img_open"
@@ -120,7 +120,7 @@
             android:paddingBottom="10dp"
             android:gravity="center"
             android:paddingTop="10dp"
-            android:background="@drawable/own_btn_rounded"
+            android:background="@drawable/border"
              >
 
             <ImageView
@@ -150,7 +150,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/own_btn_rounded"
+            android:background="@drawable/border"
             android:drawableLeft="@drawable/btn_img_my_homepage"
             android:drawablePadding="15dp"
             android:drawableRight="@drawable/btn_img_open"
