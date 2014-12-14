@@ -71,16 +71,38 @@
         android:visibility="gone"
         android:src="@drawable/title_more" />
 	
-    <Button
-        android:id="@+id/rightTextActionButton"
+    <LinearLayout 
+        android:id="@+id/ll_right_title"
+           android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        android:visibility="gone" 
+        >
+    
+    <View 
+        android:layout_width="1dp"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        android:layout_height="match_parent"
+        android:layout_marginRight="5dip"
+        android:background="@color/line"
+        
+        />
+    <TextView
+        android:id="@+id/rightTextActionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:layout_marginRight="8dp"
-        android:textColor="@color/white"
+        android:textColor="@color/grey"
+        android:drawablePadding="3dip"
+        android:text="分享"
+        android:drawableLeft="@drawable/btn_share"
         android:textSize="14sp"
-        android:visibility="gone" />
+        />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/actionBarTitle"
