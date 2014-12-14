@@ -16,9 +16,11 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 /**
  * 订单评价
@@ -37,6 +39,7 @@ public class OrderEvalActivity extends BaseActivity {
 	private TextView tv_productName;
 	private TextView tv_sellerName;
 	private TextView tv_order_time;
+	ShareUtil shareUtil;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +50,27 @@ public class OrderEvalActivity extends BaseActivity {
 		onConfigureActionBar(mActionBar);
 		
 		initData();
+		shareUtil = new ShareUtil(this);
+		shareUtil.initWX();
 	}
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("用户评价");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
-		actionBar.hideRightActionButton();
+		actionBar.setRightTextActionButton("分享", new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				shareUtil.sendWebPageToWX("健康送到家，方便你我他", SendMessageToWX.Req.WXSceneTimeline);
+			}
+		});
 	}
 
 	@Override
