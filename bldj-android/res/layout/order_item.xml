@@ -60,7 +60,7 @@
                 android:id="@+id/order_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                
+                android:layout_centerHorizontal="true"
                 android:text="已付款" />
 
             <TextView
@@ -69,12 +69,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dip"
                 android:background="#fc5d00"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
-                android:padding="2dip"
+                android:padding="3dip"
                 android:layout_below="@+id/order_status"
                 android:text="去评价"
-                
-                android:visibility="visible" />
+                android:visibility="gone" />
         </RelativeLayout>
 		<View 
             android:layout_width="1px"
