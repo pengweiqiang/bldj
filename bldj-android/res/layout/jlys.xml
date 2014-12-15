@@ -2,47 +2,64 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="48dp" >
+        android:layout_height="48dp"
+        android:layout_marginTop="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
 
-    <LinearLayout
+   <LinearLayout
         android:id="@+id/ll_tab_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/actionBar"
-        android:layout_margin="5dip"
-        android:orientation="horizontal" >
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip"
+        android:background="@color/white" >
 
-        <TextView
-            android:id="@+id/tab_health_service"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/rg_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/select_left"
-            android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/health_service"
-            android:textSize="16sp" />
+            android:layout_margin="10dip"
+            android:background="@drawable/border_tab_title"
+            android:orientation="horizontal" >
 
+            <RadioButton
+                android:id="@+id/tab_health_service"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/tab_title_button"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:gravity="center"
+                android:padding="8dip"
+                android:text="@string/health_service"
+                android:textColor="@color/title_tab_button_text2"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tab_see_health_div"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/unselect_right"
-            android:gravity="center"
-            android:padding="8dip"
-            android:text="@string/see_health_division"
-            android:textSize="16sp" />
+            <RadioButton
+                android:id="@+id/tab_see_health_div"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/tab_title_button"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:padding="8dip"
+                android:text="@string/see_health_division"
+                android:textColor="@color/title_tab_button_text2"
+                android:textSize="16sp" />
+        </RadioGroup>
     </LinearLayout>
+
+
 
     <com.bldj.lexiang.view.CustomViewPager
         android:id="@+id/viewPager"
