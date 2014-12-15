@@ -317,10 +317,11 @@ public class HealthProductDetailActivity extends BaseActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			if(msg.what == 1){
-				Product product = (Product) msg.obj;
-				if(product == null){//缓存里面没有明细，从接口获取
+				Product productCache = (Product) msg.obj;
+				if(productCache == null){//缓存里面没有明细，从接口获取
 					getProductByIdHttp();
 				}else{
+					product = productCache;
 					initData();
 				}
 			}else{
