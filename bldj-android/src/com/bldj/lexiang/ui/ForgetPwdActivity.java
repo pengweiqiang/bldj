@@ -15,6 +15,7 @@ import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 
 /**
  * 重置密码
@@ -29,6 +30,7 @@ public class ForgetPwdActivity extends BaseActivity {
 	private EditText et_phone;
 	private EditText et_code;
 	private EditText et_new_pwd;
+	LoadingDialog loading;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +85,13 @@ public class ForgetPwdActivity extends BaseActivity {
 					ToastUtils.showToast(ForgetPwdActivity.this, "请输入您的新密码");
 					return;
 				}
+				loading = new LoadingDialog(mContext);
+				loading.show();
 				ApiUserUtils.forgetPwd(ForgetPwdActivity.this, phone, password, new HttpConnectionUtil.RequestCallback(){
 
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.cancel();
 						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//修改成功
 							ToastUtils.showToast(ForgetPwdActivity.this, "密码修改成功");
 							Intent intent = new Intent(ForgetPwdActivity.this,RegisterAndLoginActivity.class);

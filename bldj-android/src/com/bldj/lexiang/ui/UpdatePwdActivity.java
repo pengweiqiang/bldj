@@ -17,6 +17,7 @@ import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 
 /**
  * 修改密码
@@ -31,6 +32,7 @@ public class UpdatePwdActivity extends BaseActivity {
 	private EditText et_old_pwd;
 	private EditText et_new_pwd;
 	private EditText et_new_pwd2;
+	LoadingDialog loading;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +91,13 @@ public class UpdatePwdActivity extends BaseActivity {
 					ToastUtils.showToast(UpdatePwdActivity.this, "两次密码不一致");
 					return;
 				}
+				loading = new LoadingDialog(mContext);
+				loading.show();
 				User user = MyApplication.getInstance().getCurrentUser();
 				ApiUserUtils.updatePwd(UpdatePwdActivity.this, user.getUsername(), old_pwd, new_pwd2, new HttpConnectionUtil.RequestCallback(){
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.cancel();
 						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//修改成功
 							ToastUtils.showToast(UpdatePwdActivity.this, "密码修改成功");
 							/*Intent intent = new Intent(UpdatePwdActivity.this,RegisterAndLoginActivity.class);

@@ -21,6 +21,7 @@ import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 
 /**
  * 注册
@@ -37,7 +38,7 @@ public class RegisterFragment extends BaseFragment {
 	private EditText et_password;
 	private Button btn_code;
 	private Button btn_register;
-	
+	LoadingDialog loading;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -95,11 +96,13 @@ public class RegisterFragment extends BaseFragment {
 					return;
 				}
 				
-				
+				loading = new LoadingDialog(mActivity, "注册中...");
+				loading.show();
 				 ApiUserUtils.register(mActivity, phone, password, MyApplication.lon, MyApplication.lat,new RequestCallback() {
 					
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.dismiss();
 						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//注册成功
 							User user = JsonUtils.fromJson(parseModel.getData().toString(), User.class);
 							MyApplication.getInstance().setUser(user);
