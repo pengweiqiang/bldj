@@ -119,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    style="@style/CustomCheckboxTheme"
+                    style="@style/CustomRadioButtonTheme"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dip"
                     android:text="@string/eval_good"
@@ -130,7 +130,7 @@
                     android:id="@+id/radio_nor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/CustomCheckboxTheme"
+                    style="@style/CustomRadioButtonTheme"
                     android:layout_marginRight="10dip"
                     android:text="@string/eval_nor"
                     android:textSize="@dimen/compnay_radio_textSize" >
@@ -140,7 +140,7 @@
                     android:id="@+id/radio_bad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/CustomCheckboxTheme"
+                    style="@style/CustomRadioButtonTheme"
                     android:text="@string/eval_bad"
                     android:textSize="@dimen/compnay_radio_textSize" >
                 </RadioButton>
