@@ -77,7 +77,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:orientation="horizontal"
-        android:visibility="gone" 
         >
     
     <View 
@@ -99,7 +98,6 @@
         android:textColor="@color/grey"
         android:drawablePadding="3dip"
         android:text="分享"
-        android:drawableLeft="@drawable/btn_share"
         android:textSize="14sp"
         />
     </LinearLayout>

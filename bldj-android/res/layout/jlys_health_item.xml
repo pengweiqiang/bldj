@@ -15,15 +15,15 @@
         android:background="@drawable/border"
          >
 
-        <ImageView
+        <com.bldj.lexiang.view.RoundImageView
             android:id="@+id/headImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="4dip"
             android:layout_marginRight="4dip"
-            android:src="@drawable/ic_launcher" />
-
+            android:src="@drawable/default_head_image" />
+        
         <RelativeLayout
             android:id="@+id/rl"
             android:layout_width="wrap_content"
