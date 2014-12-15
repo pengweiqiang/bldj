@@ -89,7 +89,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 						.getOptions(R.drawable.default_head_image));
 
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
-		String orderCount ="共搜集"+seller.getDealnumSum()+"次";
+		String orderCount ="共接单"+seller.getDealnumSum()+"次";
 		SpannableStringBuilder style=new SpannableStringBuilder(orderCount);
 		style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.app_title_color)),3,orderCount.indexOf("次"),Spannable.SPAN_EXCLUSIVE_INCLUSIVE); 
 		holder.tv_order_count.setText(style);
