@@ -70,7 +70,7 @@
                 android:drawablePadding="3dip"
                 android:textSize="13sp"
                 android:drawableRight="@drawable/btn_search"
-                android:text="共搜集21次" />
+                android:text="共接单21次" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
