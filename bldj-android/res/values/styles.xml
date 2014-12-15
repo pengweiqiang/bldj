@@ -112,8 +112,12 @@
         <item name="android:maxHeight">15dip</item>
     </style>
 
-    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+    <style name="CustomRadioButtonTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/check</item>
+    </style>
+    
+    <style name="CustomFavCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/btn_fav_selector</item>
     </style>
 
 </resources>
