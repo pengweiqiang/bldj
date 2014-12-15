@@ -126,7 +126,6 @@
                     android:layout_marginTop="4dip"
                     android:textColor="@color/grey"
                     android:drawablePadding="3dip"
-                    android:drawableRight="@drawable/btn_search"
                     android:text="共接单:21次" />
             </LinearLayout>
         </LinearLayout>

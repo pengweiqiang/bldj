@@ -40,7 +40,7 @@
             >
         <CheckBox
             android:id="@+id/pay_radio"
-            style="@style/CustomCheckboxTheme"
+            style="@style/CustomRadioButtonTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
             android:checked="false"
