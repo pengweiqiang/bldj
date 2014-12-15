@@ -240,11 +240,11 @@ public class MyFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View arg0) {
-				if (checkIsLogin()) {
+//				if (checkIsLogin()) {
 					Intent intent = new Intent(mActivity,
 							MyCollectFragmentActivity.class);
 					startActivity(intent);
-				}
+//				}
 
 			}
 		});
