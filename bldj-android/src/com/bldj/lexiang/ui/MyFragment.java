@@ -48,6 +48,7 @@ import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 import com.bldj.lexiang.view.RoundImageView;
 import com.bldj.universalimageloader.core.ImageLoader;
 
@@ -72,7 +73,8 @@ public class MyFragment extends BaseFragment {
 	private LinearLayout ll_updatePwd;// 修改密码
 	private TextView tv_username;// 用户名
 	private RoundImageView image_head;// 头像
-
+	LoadingDialog loading;
+	
 	private EditText et_nickname;
 
 	User user;
@@ -166,7 +168,8 @@ public class MyFragment extends BaseFragment {
 												"用户昵称不能为空");
 										return;
 									}
-
+									loading = new LoadingDialog(mActivity);
+									loading.show();
 									ApiUserUtils.updateNickName(
 											mActivity,
 											user.getUsername(),
@@ -176,6 +179,7 @@ public class MyFragment extends BaseFragment {
 												@Override
 												public void execute(
 														ParseModel parseModel) {
+													loading.cancel();
 													if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 															.getStatus())) {
 														ToastUtils
@@ -567,11 +571,14 @@ public class MyFragment extends BaseFragment {
 
 		// String stream = ImageTools.imgToBase64(path, null,"");
 		// File file = new File(path);
+		loading = new LoadingDialog(mActivity,"上传头像...");
+		loading.show();
 		ApiUserUtils.updateHeader2(mActivity, user.getUsername(), path,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.cancel();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							ToastUtils.showToast(mActivity, parseModel.getMsg());

@@ -38,7 +38,6 @@ IXListViewListener{
 
 	ActionBar mActionBar;
 	
-	
 	private ProgressBar progressBar;
 	private XListView mListView;
 	private OrderAdapter listAdapter;
