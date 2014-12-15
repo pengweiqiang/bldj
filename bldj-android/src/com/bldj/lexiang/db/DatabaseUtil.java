@@ -100,7 +100,7 @@ public class DatabaseUtil {
 		cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null, where, null,
 				null, null, null);
 		if (cursor != null && cursor.getCount() > 0) {
-			return uri;
+			return 1;
 		} else {
 			ContentValues cv = new ContentValues();
 			cv.put(ProductTable.PRODUCTID, product.getId());
@@ -436,25 +436,29 @@ public class DatabaseUtil {
 	 */
 	public Product getProductById(long productId) {
 		Cursor cursor = null;
+		Product product = null;
 		String where = ProductTable.PRODUCTID + " = " + productId;
 		cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null, where, null,
 				null, null, null);
 		if (cursor == null) {
 			return null;
 		}
-		cursor.moveToFirst();
-		Product product = new Product();
+		if (cursor.getCount() > 0) {
+			cursor.moveToFirst();
+			product = new Product();
 
-		product.setId(cursor.getInt(1));
-		product.setName(cursor.getString(2));
-		product.setPicurl(cursor.getString(3));
-		product.setCurPrice(cursor.getDouble(4));
-		product.setMarketPrice(cursor.getDouble(5));
-		product.setOneword(cursor.getString(6));
-		product.setTimeConsume(cursor.getLong(7));
-		product.setSellerNum(cursor.getInt(8));
-		product.setProDetailUrl(cursor.getString(9));
-		product.setSuitsCrowd(cursor.getString(10));
+			product.setId(cursor.getInt(1));
+			product.setName(cursor.getString(2));
+			product.setPicurl(cursor.getString(3));
+			product.setCurPrice(cursor.getDouble(4));
+			product.setMarketPrice(cursor.getDouble(5));
+			product.setOneword(cursor.getString(6));
+			product.setTimeConsume(cursor.getLong(7));
+			product.setSellerNum(cursor.getInt(8));
+			product.setProDetailUrl(cursor.getString(9));
+			product.setSuitsCrowd(cursor.getString(10));
+		}
+		
 		if (cursor != null) {
 			cursor.close();
 		}
