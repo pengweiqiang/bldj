@@ -116,7 +116,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 		// 获取此产品是否收藏过
 		if (isFav) {
 			tv_fav.setChecked(true);
-//			tv_fav.setText("已收藏");
+			tv_fav.setText("已收藏");
 		}
 
 		ImageLoader.getInstance().displayImage(product.getPicurl(),
@@ -290,12 +290,14 @@ public class HealthProductDetailActivity extends BaseActivity {
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean isCheck) {
 				if(isCheck){
+					tv_fav.setText("已收藏");
 					long row = DatabaseUtil.getInstance(mContext)
 							.insertProduct(product,0);
 					if (row > 0) {
 						isFav = true;
 					}
 				}else{
+					tv_fav.setText("收藏");
 					int row = DatabaseUtil.getInstance(mContext)
 							.deleteFavProduct(product.getId(),0);
 					if (row > 0) {
