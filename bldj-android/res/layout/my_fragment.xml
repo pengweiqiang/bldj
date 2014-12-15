@@ -48,8 +48,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:src="@drawable/ic_launcher"
-                    imagecontrol:border_outside_color="@color/app_title_color"
-                    imagecontrol:border_thickness="2dp" />
+                     />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -222,6 +221,7 @@
                     android:paddingRight="10dip"
                     android:text="@string/check_version"
                     android:textColor="@color/black"
+                    android:visibility="gone"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -229,10 +229,10 @@
                 android:id="@+id/btn_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|bottom"
                 android:paddingLeft="60dip"
                 android:paddingRight="60dip"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/coners"
                 android:text="@string/login"
                 android:textColor="@color/white"
