@@ -145,6 +145,7 @@
 	<string name="order_time">下单时间：</string>
 	<string name="order_pay">应付金额：</string>
 	<string name="order_real_pay">实付金额：</string>
+	<string name="msg_load_ing">加载中...</string>
 	
 	
 	<string name="pay_by_wx">通过微信支付</string>
