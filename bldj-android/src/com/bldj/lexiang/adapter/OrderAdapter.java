@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Order;
+import com.bldj.lexiang.constant.enums.OrderStatusEnum;
 import com.bldj.lexiang.ui.OrderEvalActivity;
 
 public class OrderAdapter extends BaseListAdapter {
@@ -71,24 +72,34 @@ public class OrderAdapter extends BaseListAdapter {
 		holder.tv_order_pay.setText("￥" + String.valueOf(order.getOrderPay()));
 		holder.tv_order_num.setText(order.getOrderNum());
 		holder.tv_order_status.setText(order.getStatusStr());
+		
 		switch (order.getStatus()) {
-		case 0:// 未付款
+		case OrderStatusEnum.NO_PAID:
 			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.order_un_pay));
 			break;
-		case 1:// 
+		case OrderStatusEnum.PAID_ONLINE:
 			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.light_green));
 			break;
-		case 2:// 
-
+		case OrderStatusEnum.PAID_OFFLINE:
+			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.light_green));
 			break;
-		case 3://取消
+		case OrderStatusEnum.CANCLED:
 			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.grey));
+			break;
+		case OrderStatusEnum.SELLER_CONFIRM:
+			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.light_green));
+			break;
+		case OrderStatusEnum.BUYER_CONFIRM:
+			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.light_green));
+			break;
+		case OrderStatusEnum.COMPLETE:
+			holder.tv_order_status.setTextColor(context.getResources().getColor(R.color.light_green));
 			break;
 
 		default:
 			break;
 		}
-		if (order.getStatus() == 1) {
+		if (order.getStatus() == OrderStatusEnum.COMPLETE) {//已完成才有评价
 			holder.tv_eval.setVisibility(View.VISIBLE);
 			holder.tv_eval.setOnClickListener(new View.OnClickListener() {
 
