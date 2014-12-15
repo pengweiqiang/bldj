@@ -47,7 +47,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
-                    android:src="@drawable/ic_launcher"
+                    android:src="@drawable/default_head_image"
                      />
 
                 <LinearLayout

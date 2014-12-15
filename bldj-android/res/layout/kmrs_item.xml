@@ -20,14 +20,13 @@
 
             <com.bldj.lexiang.view.RoundImageView
                     android:id="@+id/headImage"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                    android:layout_marginLeft="7dip"
                    android:layout_marginRight="5dip"
                    android:layout_gravity="center"
-                    android:src="@drawable/ic_launcher"
-                    imagecontrol:border_outside_color="@color/app_title_color"
-                    imagecontrol:border_thickness="2dp" />
+                    android:src="@drawable/default_head_image"
+                    />
 
             <!--
              <LinearLayout 
