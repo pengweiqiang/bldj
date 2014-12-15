@@ -1,7 +1,5 @@
 package com.bldj.lexiang.ui;
 
-import org.apache.http.util.VersionInfo;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,13 +16,12 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
-import com.bldj.lexiang.view.LoadingView;
+import com.bldj.lexiang.view.LoadingDialog;
 
 /**
  * 登录
@@ -39,7 +36,7 @@ public class LoginFragment extends BaseFragment {
 	private TextView tv_forgetPwd;
 	private Button btn_login;
 	private View infoView;
-	LoadingView loading ;
+	LoadingDialog loading ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -88,11 +85,13 @@ public class LoginFragment extends BaseFragment {
 					ToastUtils.showToast(mActivity, "密码不能为空");
 					return;
 				}
-				
+				loading = new LoadingDialog(mActivity, "登录中...");
+				loading.show();
 				 ApiUserUtils.login(mActivity, phone, password, new RequestCallback() {
 					
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.cancel();
 						if(ApiConstants.RESULT_SUCCESS.equals(parseModel.getStatus())){//登录成功
 							User user = JsonUtils.fromJson(parseModel.getData().toString(), User.class);
 							MyApplication.getInstance().setUser(user);
