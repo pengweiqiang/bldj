@@ -581,7 +581,7 @@ public class MyFragment extends BaseFragment {
 						loading.cancel();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							ToastUtils.showToast(mActivity, parseModel.getMsg());
+//							ToastUtils.showToast(mActivity, parseModel.getMsg());
 						} else {
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
 							user.setHeadurl(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+parseModel.getData().getAsString());
