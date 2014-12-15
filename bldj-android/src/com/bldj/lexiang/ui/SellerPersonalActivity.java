@@ -191,7 +191,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 
 		ImageLoader.getInstance().displayImage(sellerVo.getHeadurl(),
 				imageHead,
-				MyApplication.getInstance().getOptions(R.drawable.ic_launcher));
+				MyApplication.getInstance().getOptions(R.drawable.default_head_image));
 		tv_order_count.setText("共接单" + sellerVo.getDealnumSum() + "次");
 		tv_price.setText("均价：￥" + String.valueOf(sellerVo.getAvgPrice()));
 		tv_username.setText(sellerVo.getNickname());
