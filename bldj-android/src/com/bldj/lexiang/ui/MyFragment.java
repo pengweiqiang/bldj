@@ -121,11 +121,11 @@ public class MyFragment extends BaseFragment {
 					ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+user.getHeadurl(),
 					image_head,
 					MyApplication.getInstance().getOptions(
-							R.drawable.default_image));
+							R.drawable.default_head_image));
 		} else {// 未登录
 			tv_username.setText("未登录");
 			btn_logout.setText(getResources().getString(R.string.login));
-			image_head.setImageDrawable(getResources().getDrawable(R.drawable.ic_launcher));
+			image_head.setImageDrawable(getResources().getDrawable(R.drawable.default_head_image));
 		}
 	}
 
@@ -583,7 +583,7 @@ public class MyFragment extends BaseFragment {
 									user.getHeadurl(),
 									image_head,
 									MyApplication.getInstance().getOptions(
-											R.drawable.ic_launcher));
+											R.drawable.default_head_image));
 						}
 					}
 				});
