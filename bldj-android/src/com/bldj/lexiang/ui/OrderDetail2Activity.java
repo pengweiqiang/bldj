@@ -1,10 +1,13 @@
 package com.bldj.lexiang.ui;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,15 +20,19 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alipay.android.app.sdk.AliPay;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.GroupAdapter;
+import com.bldj.lexiang.alipay.Rsa;
 import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -289,5 +296,86 @@ public class OrderDetail2Activity extends BaseActivity {
 					}
 				});
 	}
+	
+	
+//	private void aliPay(final Order order) {
+//		try {
+//			Log.i("ExternalPartner", "onItemClick");
+//			String info = getNewOrderInfo(order);
+//			String sign = Rsa.sign(info, payType.getRsaPrivateKey());
+//			sign = URLEncoder.encode(sign);
+//			info += "&sign=\"" + sign + "\"&" + getSignType();
+//			// start the pay.
+////			Log.i(TAG, "info = " + info);
+//
+//			final String orderInfo = info;
+//			new Thread() {
+//				public void run() {
+//					AliPay alipay = new AliPay(OrderDetail2Activity.this,
+//							mHandler);
+//
+//					// 设置为沙箱模式，不设置默认为线上环境
+//					// alipay.setSandBox(true);
+//
+//					String result = alipay.pay(orderInfo);
+//
+//					// Log.i(TAG, "result = " + result);
+//					Message msg = new Message();
+//					msg.what = 1;
+//					Bundle data = new Bundle();
+//					data.putString("result", result);
+//					data.putString("orderNum", order.getOrderNum());
+//					msg.setData(data);
+//					mHandler.sendMessage(msg);
+//				}
+//			}.start();
+//
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//			Toast.makeText(mContext, "支付失败,稍后请重试!", Toast.LENGTH_SHORT).show();
+//		}
+//	}
+//
+//	private String getNewOrderInfo(Order order) {
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("partner=\"");
+//		sb.append(payType.getPayId());
+//		sb.append("\"&out_trade_no=\"");
+//		sb.append(order.getOrderNum());
+//		sb.append("\"&subject=\"");
+//		sb.append(order.getProName());
+//		sb.append("\"&body=\"");
+//		if(product.getOneword()!=null && product.getOneword().length()>512){
+//			sb.append(product.getOneword().subSequence(0, 512));
+//		}else{
+//			sb.append(product.getOneword());
+//		}
+//		sb.append("\"&total_fee=\"");
+//		sb.append(String.valueOf(order.getOrderPay()));
+//		sb.append("\"&notify_url=\"");
+//
+//		// 网址需要做URL编码
+//		sb.append(URLEncoder
+//				.encode(ReqUrls.ALIPAY_NOTIFY_URL));
+//		sb.append("\"&service=\"mobile.securitypay.pay");
+//		sb.append("\"&_input_charset=\"UTF-8");
+//		sb.append("\"&return_url=\"");
+//		sb.append(URLEncoder.encode("http://m.alipay.com"));
+//		sb.append("\"&payment_type=\"1");
+//		sb.append("\"&seller_id=\"");
+//		sb.append(payType.getPayNum());
+//
+//		// 如果show_url值为空，可不传
+//		// sb.append("\"&show_url=\"");
+//		sb.append("\"&it_b_pay=\"15m");
+//		sb.append("\"");
+//
+//		return new String(sb);
+//	}
+//
+//	private String getSignType() {
+//		return "sign_type=\"RSA\"";
+//	}
+	
 
 }
