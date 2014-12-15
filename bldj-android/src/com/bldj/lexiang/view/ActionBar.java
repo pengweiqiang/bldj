@@ -1,16 +1,14 @@
 package com.bldj.lexiang.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.utils.StringUtils;
@@ -114,7 +112,16 @@ public class ActionBar extends FrameLayout {
 	}
 
 	public void setRightTextActionButton(String text, OnClickListener listener) {
+		setRightTextActionButton(text, 0, listener);
+	}
+	public void setRightTextActionButton(String text,int resId,OnClickListener listener){
 		mRightTextActionTextView.setText(text);
+		if(resId!=0){
+			Drawable drawable= getResources().getDrawable(resId);
+			/// 这一步必须要做,否则不会显示.
+			drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+			mRightTextActionTextView.setCompoundDrawables(drawable,null,null,null);
+		}
 		mRightTextActionTextView.setOnClickListener(listener);
 		mRightTextTitleView.setVisibility(View.VISIBLE);
 //		mRightTextActionTextView.setVisibility(View.VISIBLE);
