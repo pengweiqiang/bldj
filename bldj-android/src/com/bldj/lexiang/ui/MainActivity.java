@@ -26,6 +26,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.BadgeView;
+import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends FragmentActivity implements
 		OnPageChangeListener {
@@ -106,6 +107,8 @@ public class MainActivity extends FragmentActivity implements
 		setCurrentTabId(R.id.home);
 		//开启定位
 		initLocClient();
+		UmengUpdateAgent.setUpdateCheckConfig(false);
+		UmengUpdateAgent.update(this);
 	}
 
 	/*
