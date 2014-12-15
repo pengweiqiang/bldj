@@ -82,7 +82,7 @@ public class KmrsAdapter extends BaseListAdapter {
 		holder.tv_price.setText("均价：￥" + String.valueOf(seller.getAvgPrice()));
 		ImageLoader.getInstance().displayImage(seller.getHeadurl(),
 				holder.headImg,
-				MyApplication.getInstance().getOptions(R.drawable.ic_launcher));
+				MyApplication.getInstance().getOptions(R.drawable.default_head_image));
 
 		holder.tv_distance.setText(String.valueOf("距您" + seller.getDistance()
 				+ "公里"));
