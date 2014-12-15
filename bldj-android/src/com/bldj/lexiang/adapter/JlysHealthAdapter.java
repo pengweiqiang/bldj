@@ -86,7 +86,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 				seller.getHeadurl(),
 				holder.headImg,
 				MyApplication.getInstance()
-						.getOptions(R.drawable.ic_launcher));
+						.getOptions(R.drawable.default_head_image));
 
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
 		String orderCount ="共搜集"+seller.getDealnumSum()+"次";
