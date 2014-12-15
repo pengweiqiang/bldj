@@ -1,7 +1,6 @@
 package com.bldj.lexiang.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +15,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,7 +53,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	private TextView tv_shop_price;// 市场价
 	private TextView btn_shared;// 分享
 	private TextView btn_invite;// 邀请
-	private TextView tv_fav;// 收藏
+	private CheckBox tv_fav;// 收藏
 	private TextView tv_custom_service;// 联系客服
 	private WebView webView;
 	private Button btn_appointment_product;
@@ -106,7 +107,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 		webView = (WebView) findViewById(R.id.webView_product_info);
 		btn_appointment_product = (Button) findViewById(R.id.appointment_product);
 		tv_custom_service = (TextView) findViewById(R.id.custom_service);
-		tv_fav = (TextView) findViewById(R.id.collect);
+		tv_fav = (CheckBox) findViewById(R.id.collect);
 
 	}
 
@@ -114,7 +115,8 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 		// 获取此产品是否收藏过
 		if (isFav) {
-			tv_fav.setText("已收藏");
+			tv_fav.setChecked(true);
+//			tv_fav.setText("已收藏");
 		}
 
 		ImageLoader.getInstance().displayImage(product.getPicurl(),
@@ -283,31 +285,44 @@ public class HealthProductDetailActivity extends BaseActivity {
 			}
 		});
 		// 收藏
-		tv_fav.setOnClickListener(new OnClickListener() {
-
+		tv_fav.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
 			@Override
-			public void onClick(View arg0) {
-				if (!isFav) {
+			public void onCheckedChanged(CompoundButton arg0, boolean isCheck) {
+				if(isCheck){
 					long row = DatabaseUtil.getInstance(mContext)
 							.insertProduct(product,0);
 					if (row > 0) {
 						isFav = true;
-//						ToastUtils.showToast(mContext, "收藏成功");
-						tv_fav.setText("已收藏");
-					} else {
-//						ToastUtils.showToast(mContext, "该产品已经收藏");
 					}
-				} else {
+				}else{
 					int row = DatabaseUtil.getInstance(mContext)
 							.deleteFavProduct(product.getId(),0);
 					if (row > 0) {
 						isFav = false;
-//						ToastUtils.showToast(mContext, "取消收藏");
-						tv_fav.setText("收藏");
-					} else {
-						ToastUtils.showToast(mContext, "取消收藏失败，稍后请重试");
 					}
 				}
+//				if (!isFav) {
+//					long row = DatabaseUtil.getInstance(mContext)
+//							.insertProduct(product,0);
+//					if (row > 0) {
+//						isFav = true;
+////						ToastUtils.showToast(mContext, "收藏成功");
+////						tv_fav.setText("已收藏");
+//					} else {
+////						ToastUtils.showToast(mContext, "该产品已经收藏");
+//					}
+//				} else {
+//					int row = DatabaseUtil.getInstance(mContext)
+//							.deleteFavProduct(product.getId(),0);
+//					if (row > 0) {
+//						isFav = false;
+////						ToastUtils.showToast(mContext, "取消收藏");
+////						tv_fav.setText("收藏");
+//					} else {
+//						ToastUtils.showToast(mContext, "取消收藏失败，稍后请重试");
+//					}
+//				}
 			}
 		});
 	}
