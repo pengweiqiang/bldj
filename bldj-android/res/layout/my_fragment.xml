@@ -195,17 +195,16 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:drawableLeft="@drawable/btn_img_my_homepage"
+                    android:drawableLeft="@drawable/version"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/btn_img_open"
                     android:gravity="left|center"
                     android:paddingLeft="10dip"
                     android:paddingRight="10dip"
-                    android:paddingTop="10dip"
                     android:text="@string/my_record"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
 
                 <Button
                     android:id="@+id/btn_check_version"
