@@ -112,10 +112,15 @@ public class ActionBar extends FrameLayout {
 	}
 
 	public void setRightTextActionButton(String text, OnClickListener listener) {
-		setRightTextActionButton(text, 0, listener);
+		setRightTextActionButton(text,0,false, listener);
 	}
-	public void setRightTextActionButton(String text,int resId,OnClickListener listener){
+	public void setRightTextActionButton(String text,int resId,boolean isShowLine,OnClickListener listener){
 		mRightTextActionTextView.setText(text);
+		if(isShowLine){
+			findViewById(R.id.line).setVisibility(View.VISIBLE);
+		}else{
+			findViewById(R.id.line).setVisibility(View.INVISIBLE);
+		}
 		if(resId!=0){
 			Drawable drawable= getResources().getDrawable(resId);
 			/// 这一步必须要做,否则不会显示.
