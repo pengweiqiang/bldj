@@ -51,7 +51,7 @@ public class CompanyZoneActivity extends BaseActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("企业专区");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -85,18 +85,22 @@ public class CompanyZoneActivity extends BaseActivity {
 				String contactor = et_contactor.getText().toString().trim();
 				String address = et_address.getText().toString().trim();
 				if (StringUtils.isEmpty(companyName)) {
+					et_company_name.requestFocus();
 					ToastUtils.showToast(CompanyZoneActivity.this, "请输入企业名称");
 					return;
 				}
 				if (StringUtils.isEmpty(concactType)) {
+					et_contact_type.requestFocus();
 					ToastUtils.showToast(CompanyZoneActivity.this, "请输入联系方式");
 					return;
 				}
 				if (StringUtils.isEmpty(contactor)) {
+					et_contactor.requestFocus();
 					ToastUtils.showToast(CompanyZoneActivity.this, "请输入联系人");
 					return;
 				}
 				if (StringUtils.isEmpty(address)) {
+					et_address.requestFocus();
 					ToastUtils.showToast(CompanyZoneActivity.this, "请输入详细地址");
 					return;
 				}
