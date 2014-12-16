@@ -510,6 +510,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 				Intent intent = new Intent(mActivity,
 						JLYSFragmentActivity.class);
+				intent.putExtra("showIndex", 1);//默认显示找理疗师
 				startActivity(intent);
 
 			}

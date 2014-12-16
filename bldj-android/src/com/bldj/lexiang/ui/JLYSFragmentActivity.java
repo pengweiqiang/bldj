@@ -37,12 +37,13 @@ public class JLYSFragmentActivity extends FragmentActivity {
 	private RadioButton tab_see_health_div;
 
 	List<Fragment> list;
+	int showIndex;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jlys);
-
+		showIndex = this.getIntent().getIntExtra("showIndex", 0);
 		initView();
 
 		initListener();
@@ -126,7 +127,7 @@ public class JLYSFragmentActivity extends FragmentActivity {
 
 			}
 		});
-		mViewPager.setCurrentItem(1);//默认选中看养生师
+		mViewPager.setCurrentItem(showIndex);
 
 	}
 
