@@ -419,10 +419,13 @@ public class AppointmentDoor3Activity extends BaseActivity {
 				if("9000".equals(tradeStatus)){//支付成功
 //					paySuccess(orderNum);
 					ToastUtils.showToast(mContext, "支付成功！");
+					paySuccessOrCancelPay();
 				}else if("6002".equals(tradeStatus)){//网络连接异常
 					ToastUtils.showToast(mContext, getResources().getString(R.string.NETWORK_ERROR));
 				}else if("4000".equals(tradeStatus)){//支付失败
 					ToastUtils.showToast(mContext, "支付失败，稍后请重试！");
+				}else if("6001".equals(tradeStatus)){//用户取消支付
+					paySuccessOrCancelPay();
 				}
 				
 				
@@ -431,18 +434,12 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	};
 	
 	/**
-	 * 支付成功之后
+	 * 支付成功或者取消支付
 	 * @param orderNum
 	 */
-	private void paySuccess(String orderNum){
-		ApiBuyUtils.orderSuccess(mContext, user.getUserId(), orderNum, new HttpConnectionUtil.RequestCallback() {
-			
-			@Override
-			public void execute(ParseModel parseModel) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+	private void paySuccessOrCancelPay(){
+		Intent intent = new Intent(mContext,MyOrdersActivity.class);
+		startActivity(intent);
 	}
 
 }
