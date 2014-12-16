@@ -21,6 +21,7 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.ui.AddressInfoActivity;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.ToastUtils;
+import com.bldj.lexiang.view.LoadingDialog;
 
 public class AddressAdapter extends BaseListAdapter {
 
@@ -95,12 +96,15 @@ public class AddressAdapter extends BaseListAdapter {
 			@Override
 			public void onClick(View arg0) {
 				User user = MyApplication.getInstance().getCurrentUser();
+				final LoadingDialog loading = new LoadingDialog(context);
+				loading.show();
 				ApiUserUtils.addressManager(context, 1, user.getUserId(), "", "",
 						String.valueOf(address.getId()),
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
 							public void execute(ParseModel parseModel) {
+								loading.cancel();
 								if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 										.getStatus())) {
 									ToastUtils.showToast(context, parseModel.getMsg());
