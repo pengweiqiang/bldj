@@ -79,6 +79,14 @@
     <color name="appoinment_step_unselected">#c2c2c2</color>
     <color name="tab_title">#fc8200</color>
     <color name="order_un_pay">#b8021a</color>
+    <color name="bg_company_package2">#e6f0cc</color>
+    <color name="line_company_package2">#accc56</color>
+    <color name="bg_company_package3">#c0d5eb</color>
+    <color name="line_company_package3">#3882c7</color>
+    <color name="bg_company_package4">#edbbc4</color>
+    <color name="line_company_package4">#c41b40</color>
+    <color name="color_package1_title">#b8091e</color>
+    
     
     <!-- 登录验证对话框 -->
     <color name="dialog_title_color">#2967A8</color>
@@ -148,5 +156,6 @@
     <color name="grey">#ff808080</color>
     <color name="list_btn_pressed_bg">#ffcce8a9</color>
     <color name="red">#FF4500</color>
+    <color name="color_company_text_color">#787878</color>
     
 </resources>
