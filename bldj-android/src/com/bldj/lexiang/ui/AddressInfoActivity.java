@@ -116,7 +116,7 @@ public class AddressInfoActivity extends BaseActivity {
 		et_contact_address = (EditText)findViewById(R.id.contact_address);
 		et_contact_phone = (EditText)findViewById(R.id.contact_phone);
 		
-		et_contact_name.setText(user.getUsername());
+		et_contact_name.setText(user.getNickname());
 		et_contact_phone.setText(user.getMobile());
 	}
 
