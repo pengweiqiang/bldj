@@ -13,6 +13,7 @@ import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,7 @@ public class AddressInfoActivity extends BaseActivity {
 	private Address addressVo;
 	private String title = "增加地址";
 	private User user ;
+	LoadingDialog loading;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +89,13 @@ public class AddressInfoActivity extends BaseActivity {
 				if(address!=null && type==2){//修改地址
 					addressId = String.valueOf(addressVo.getId());
 				}
+				loading = new LoadingDialog(mContext);
+				loading.show();
 				ApiUserUtils.addressManager(AddressInfoActivity.this, type, user.getUserId(),curLocation , address, addressId, new HttpConnectionUtil.RequestCallback() {
 					
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.cancel();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
@@ -111,7 +116,7 @@ public class AddressInfoActivity extends BaseActivity {
 		et_contact_address = (EditText)findViewById(R.id.contact_address);
 		et_contact_phone = (EditText)findViewById(R.id.contact_phone);
 		
-		et_contact_name.setText(user.getNickname());
+		et_contact_name.setText(user.getUsername());
 		et_contact_phone.setText(user.getMobile());
 	}
 
