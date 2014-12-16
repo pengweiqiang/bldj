@@ -2,256 +2,296 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="48dp" >
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dip"
-        android:gravity="center"
+        android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/company_title" />
+         <View 
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line"
+                />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/company_margin_top" >
+            android:layout_margin="4dip"
+            android:paddingTop="5dip"
+            android:gravity="center"
+            android:orientation="vertical" >
+            
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/service_type" />
-
-            <TextView
-                android:id="@+id/service_type_name"
-                android:layout_width="wrap_content"
-                android:textColor="@color/red"
-                android:text="2万元包月套餐服务"
-                android:layout_height="wrap_content"
+                android:text="@string/company_title"
                  />
-        </LinearLayout>
-        <!-- 企业名称 -->
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/company_margin_top" >
-
-            <TextView
-                android:layout_width="0dip"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_name" />
+                android:layout_marginTop="@dimen/company_margin_top"
+                android:gravity="center_vertical" >
 
-            <EditText
-                android:id="@+id/company_name"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" />
-        </LinearLayout>
-        <!-- 联系方式 -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/company_margin_top" >
-
-            <TextView
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_contact_type" />
-
-            <EditText
-                android:id="@+id/company_contact_type"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" />
-        </LinearLayout>
-        <!-- 联系人 -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/company_margin_top" >
-
-            <TextView
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_contact" />
-
-            <EditText
-                android:id="@+id/company_contact"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" />
-        </LinearLayout>
-        <!-- 详细地址 -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/company_margin_top" >
-
-            <TextView
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-
-                android:text="@string/company_address" />
-
-            <EditText
-                android:id="@+id/company_address"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" />
-        </LinearLayout>
-
-        <!-- 购买套餐 -->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/company_margin_top" >
-
-            <TextView
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_buy_package" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup_package"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="3" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:text="@string/service_type"
+                    android:textColor="@color/grey" />
 
-                    <RadioButton
-                        android:id="@+id/radio_package_50"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:textSize="@dimen/compnay_radio_textSize"
-                        android:text="@string/company_package_50" >
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/radio_package_100"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/compnay_radio_textSize"
-                        android:text="@string/company_package_100" >
-                    </RadioButton>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/service_type_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:text="2万元包月套餐服务"
+                    android:textColor="#940707"
+                    android:textSize="16sp" />
+            </LinearLayout>
+            <!-- 企业名称 -->
 
-                    <RadioButton
-                        android:id="@+id/radio_package_300"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/compnay_radio_textSize"
-                        android:text="@string/company_package_300" >
-                    </RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/radio_package_500"
-                        android:layout_width="0dip"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/compnay_radio_textSize"
-                        android:text="@string/company_package_500" >
-                    </RadioButton>
-                </LinearLayout>
-            </RadioGroup>
-        </LinearLayout>
-        <!-- 服务项目 -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/company_margin_top" >
-
-            <TextView
-                android:layout_width="0dip"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/company_service_item" />
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="@dimen/company_margin_top"
+                android:gravity="center_vertical" >
 
-            <RadioGroup
-                android:id="@+id/radioGroup_service"
-                android:layout_width="0dip"
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/company_name" />
+
+                <EditText
+                    android:id="@+id/company_name"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:hint="@string/input_company_name" />
+            </LinearLayout>
+            <!-- 联系方式 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="@dimen/company_margin_top"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/company_contact_type" />
+
+                <EditText
+                    android:id="@+id/company_contact_type"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:hint="@string/input_contact" />
+            </LinearLayout>
+            <!-- 联系人 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="@dimen/company_margin_top"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/company_contact" />
+
+                <EditText
+                    android:id="@+id/company_contact"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:hint="@string/input_contactor" />
+            </LinearLayout>
+            <!-- 详细地址 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="@dimen/company_margin_top"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/company_address" />
+
+                <EditText
+                    android:id="@+id/company_address"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:hint="@string/select_address" />
+            </LinearLayout>
+
+            <!-- 购买套餐 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/company_margin_top"
+                android:gravity="center_vertical"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/company_buy_package" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_package"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/radio_package_50"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="@string/company_package_50"
+                            android:textSize="@dimen/compnay_radio_textSize" >
+                        </RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/radio_package_100"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/company_package_100"
+                            android:textSize="@dimen/compnay_radio_textSize" >
+                        </RadioButton>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <RadioButton
+                            android:id="@+id/radio_package_300"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/company_package_300"
+                            android:textSize="@dimen/compnay_radio_textSize" >
+                        </RadioButton>
+
+                        <RadioButton
+                            android:id="@+id/radio_package_500"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/company_package_500"
+                            android:textSize="@dimen/compnay_radio_textSize" >
+                        </RadioButton>
+                    </LinearLayout>
+                </RadioGroup>
+            </LinearLayout>
+            <!-- 服务项目 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/company_margin_top"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:layout_weight="3" >
-                
-                <RadioButton
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/company_service_item" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup_service"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
                         android:id="@+id/radio_service_head"
                         android:layout_width="0dip"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/compnay_radio_textSize"
-                        android:text="@string/company_service_item_head" >
+                        android:layout_weight="1"
+                        android:text="@string/company_service_item_head"
+                        android:textSize="@dimen/compnay_radio_textSize" >
                     </RadioButton>
+
                     <RadioButton
                         android:id="@+id/radio_service_body"
                         android:layout_width="0dip"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/compnay_radio_textSize"
-                        android:text="@string/company_service_item_body" >
+                        android:layout_weight="1"
+                        android:text="@string/company_service_item_body"
+                        android:textSize="@dimen/compnay_radio_textSize" >
                     </RadioButton>
-                
-            </RadioGroup>
-            </LinearLayout>    
-        
-    </LinearLayout>
-    <LinearLayout
+                </RadioGroup>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/company_margin_button_top"
             android:gravity="center"
-            android:weightSum="1"
-            android:layout_marginTop="@dimen/company_margin_button_top" >
-        
-        <Button 
-            android:id="@+id/btn_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/submit"
-            />
-        
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <Button
+                android:id="@+id/btn_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:background="@drawable/btn_coners"
+                android:text="@string/finish"
+                android:textColor="@color/white" />
         </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

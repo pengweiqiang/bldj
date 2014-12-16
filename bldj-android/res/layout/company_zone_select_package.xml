@@ -2,120 +2,289 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="48dp" >
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dip"
-        android:text="@string/select_company_package" />
-	
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_margin="10dip"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/color_random_three"
-        android:id="@+id/package1"
-        >
-        <TextView 
-            android:text="@string/package_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView 
-            android:text="@string/package_1_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:textSize="13sp"
-            />
-        
-    </LinearLayout>
-    
-       <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_margin="10dip"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/color_random_five"
-        android:id="@+id/package2"
-        >
-        <TextView 
-            android:text="@string/package_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView 
-            android:text="@string/package_2_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:textSize="13sp"
-            />
-        
-    </LinearLayout>
-    
-       
-          <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_margin="10dip"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/color_random_one"
-        android:id="@+id/package3"
-        >
-        <TextView 
-            android:text="@string/package_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView 
-            android:text="@string/package_3_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:textSize="13sp"
-            />
-        
-    </LinearLayout>
-    
-           <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_margin="10dip"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/color_random_two"
-        android:id="@+id/package4"
-        >
-        <TextView 
-            android:text="@string/package_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView 
-            android:text="@string/package_1_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:textSize="13sp"
-            />
-        
-    </LinearLayout>
-    
-    
-    <Button 
-        android:id="@+id/btn_next"
-        android:layout_width="100dip"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
-        android:layout_gravity="center"
-        />
-    
+    <com.bldj.lexiang.view.SpringScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical" >
+            <View 
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:paddingLeft="5dip"
+                android:text="@string/select_company_package"
+                android:textColor="@color/grey" />
+
+            <LinearLayout
+                android:id="@+id/package1"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:layout_margin="7dip"
+                android:background="@drawable/company_banner"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/package1_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dip"
+                    android:layout_marginTop="10dip"
+                    android:text="@string/package_1"
+                    android:textColor="@color/white"
+                    android:textSize="27sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="60dip"
+                    android:layout_marginTop="10dip"
+                    android:text="GO 》"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/package2"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:layout_margin="7dip"
+                android:background="@color/bg_company_package2"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="3dip"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_company_package2" />
+
+                <LinearLayout
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dip"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/line_company_package2"
+                        android:paddingLeft="6dip"
+                        android:paddingRight="6dip"
+                        android:paddingTop="2dip"
+                        android:paddingBottom="2dip"
+                        android:text="2万元"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dip"
+                        android:text="@string/package_service" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/package2_info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_2_info1"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/package2_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package2_info1"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_2_info2"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/package2_info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package2_info2"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_2_info3"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/package3"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:layout_margin="7dip"
+                android:background="@color/bg_company_package3"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="3dip"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_company_package3" />
+
+                <LinearLayout
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dip"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/line_company_package3"
+                         android:paddingLeft="6dip"
+                        android:paddingRight="6dip"
+                        android:paddingTop="2dip"
+                        android:paddingBottom="2dip"
+                        android:text="5万元"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dip"
+                        android:text="@string/package_service" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/package_3_info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_3_info1"
+                    android:textSize="13sp" />
+                <TextView
+                     android:id="@+id/package_3_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package_3_info1"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_3_info2"
+                    android:textSize="13sp" />
+                <TextView
+                     android:id="@+id/package_3_info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package_3_info2"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_3_info3"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/package4"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:layout_margin="7dip"
+                android:background="@color/bg_company_package4"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="3dip"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_company_package4" />
+
+                <LinearLayout
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dip"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dip" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/line_company_package4"
+                        android:text="10万元"
+                         android:paddingLeft="6dip"
+                        android:paddingRight="6dip"
+                        android:paddingTop="2dip"
+                        android:paddingBottom="2dip"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dip"
+                        android:text="@string/package_service" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/package_4_info_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_4_info1"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/package_4_info_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package_4_info_1"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_4_info2"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/package_4_info_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package_4_info_2"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_4_info3"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="100dip"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dip"
+                android:background="@drawable/btn_coners"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:text="@string/next"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </com.bldj.lexiang.view.SpringScrollView>
+
 </LinearLayout>
