@@ -64,7 +64,7 @@ public class OrderEvalActivity extends BaseActivity {
 				finish();
 			}
 		});
-		actionBar.setRightTextActionButton("分享",R.drawable.btn_share, new View.OnClickListener() {
+		actionBar.setRightTextActionButton("分享",R.drawable.btn_share,true, new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
