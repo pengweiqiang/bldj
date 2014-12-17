@@ -190,7 +190,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 
 							listAdapter.notifyDataSetChanged();
 							mListView.onLoadFinish(pageNumber,
-									listAdapter.getCount(), "加载完毕");
+									sellers.size(), "亲，没有养生师");
 						}
 
 					}
@@ -217,7 +217,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		case 0:
 			groups.add(TitleBarEnum.ORDER_DEFAULT);
 			groups.add(TitleBarEnum.ORDER_TIME);
-			groups.add(TitleBarEnum.ORDER_PRICE);
+			groups.add(TitleBarEnum.ORDER_PRICE_SELLER);
 			groups.add(TitleBarEnum.ORDER_DISTANCE);
 			groups.add(TitleBarEnum.ORDER_COUNT);
 			break;
