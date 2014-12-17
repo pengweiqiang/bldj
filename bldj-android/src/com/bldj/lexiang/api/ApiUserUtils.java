@@ -372,6 +372,22 @@ public class ApiUserUtils {
 		ApiUtils.getParseModel(params, ReqUrls.CHECK_CODE, false,
 				requestCallback, MethodType.UPDATE, context);
 	}
+	/**
+	 * 获取我的档案
+	 * @param context
+	 * @param id
+	 * @param limit
+	 * @param dealDate
+	 * @param requestCallBack
+	 */
+	public static void getMyFiles(Context context,long id ,int limit,String dealDate,RequestCallback requestCallBack){
+//		/user/getArchives?id=21&dealDate=20141216&limit=3
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.LIMIT, limit);
+		params.put("dealDate", dealDate);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_MY_FILES,false, requestCallBack, MethodType.UPDATE, context);
+	}
 
 	// /**
 	// * 获取用户个人中心界面
