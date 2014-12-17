@@ -22,6 +22,7 @@
             <ImageView 
 	              android:layout_width="wrap_content"
 	              android:layout_height="wrap_content"
+	              android:layout_gravity="center"
 	              android:src="@drawable/appoint_username"
 	              />
             <EditText 
@@ -50,14 +51,15 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/border"
-             android:padding="10dp"
+            android:padding="5dp"
             >
             <ImageView 
 	              android:layout_width="wrap_content"
 	              android:layout_height="wrap_content"
 	              android:src="@drawable/appoint_phone"
+	              android:layout_gravity="center"
 	              />
             <EditText 
                 android:id="@+id/contact_phone"
@@ -115,7 +117,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:padding="10dp"
             android:gravity="center"
             android:background="@drawable/border"
