@@ -18,6 +18,7 @@
             android:layout_weight="1"
             android:layout_margin="5dip"
              android:gravity="center"
+             android:drawableRight="@drawable/btn_down_open"
             />
         <TextView 
             android:id="@+id/order_price"
@@ -27,6 +28,7 @@
             android:layout_weight="1"
             android:layout_margin="5dip"
              android:gravity="center"
+             android:drawableRight="@drawable/btn_down_open"
             />
         <TextView 
             android:id="@+id/order_team"
@@ -36,6 +38,7 @@
             android:layout_weight="1"
             android:layout_margin="5dip"
              android:gravity="center"
+             android:drawableRight="@drawable/btn_down_open"
             />
     </LinearLayout>
     
