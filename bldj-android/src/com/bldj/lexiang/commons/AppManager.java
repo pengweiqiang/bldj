@@ -1,5 +1,6 @@
 package com.bldj.lexiang.commons;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 import android.app.Activity;
@@ -81,15 +82,24 @@ public class AppManager {
 	 * 结束指定类名的Activity
 	 */
 	public void finishActivity(Class<?> cls) {
-		for (Activity activity : activityStack) {
-			if (activity.getClass().equals(cls)) {
-				finishActivity(activity);
-			}
-		}
+//		for (Activity activity : activityStack) {
+//			if (activity.getClass().equals(cls)) {
+//				finishActivity(activity);
+//			}
+//		}
+		 Iterator<Activity> itr = activityStack.iterator();  
+		 while(itr.hasNext()){
+			 Activity activity = itr.next();
+			 if(activity.getClass().equals(cls)){
+				 itr.remove();
+				 activity.finish();
+				 activity = null;
+			 }
+		 }
 	}
 	
 	/**
-	 * 结束�?��Activity
+	 * 结束所有的Activity
 	 */
 	public void finishAllActivity() {
 		for (int i = 0, size = activityStack.size(); i < size; i++) {
