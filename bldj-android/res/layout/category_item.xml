@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
+    android:layout_marginBottom="3dip"
     android:background="@color/white" >
 
     <LinearLayout
@@ -19,12 +20,14 @@
             android:layout_width="10dip"
             android:layout_height="10dip"
             android:layout_margin="2dp"
+            android:visibility="gone"
             android:background="@drawable/category_circle" />
 
         <com.bldj.lexiang.view.CircleView
             android:id="@+id/title_circle2"
-            android:layout_width="10dip"
-            android:layout_height="10dip" />
+            android:layout_gravity="center|center_vertical"
+            android:layout_width="20dip"
+            android:layout_height="20dip" />
 
         <TextView
             android:id="@+id/category_name"
