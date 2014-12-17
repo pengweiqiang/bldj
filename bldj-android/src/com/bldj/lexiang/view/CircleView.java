@@ -20,7 +20,7 @@ public class CircleView extends View {
 
 	public CircleView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		// TODO Auto-generated constructor stub
+		invalidate();
 	}
 
 
@@ -31,7 +31,7 @@ public class CircleView extends View {
 		// 创建画笔
 		p = new Paint();
 		Random rand = new Random();
-		int index = rand.nextInt(20);
+		int index = rand.nextInt(21);
 		int color = Color.RED;
 		switch (index) {
 		case 0:
@@ -74,13 +74,13 @@ public class CircleView extends View {
 			color = this.getContext().getResources().getColor(R.color.color_random_thirteen);
 			break;
 		case 13:
-			color = this.getContext().getResources().getColor(R.color.color_album_gray);
+			color = this.getContext().getResources().getColor(R.color.app_title_color);
 			break;
 		case 14:
 			color = this.getContext().getResources().getColor(R.color.color_font_blue);
 			break;
 		case 15:
-			color = this.getContext().getResources().getColor(R.color.blue);
+			color = this.getContext().getResources().getColor(R.color.line_company_package4);
 			break;
 		case 16:
 			color =	Color.CYAN;
@@ -89,23 +89,24 @@ public class CircleView extends View {
 			color = Color.LTGRAY;
 			break;
 		case 18:
-			color = Color.CYAN;
+			color = this.getContext().getResources().getColor(R.color.color_text_select_info);
 			break;
-//		case 19:
-//			color = this.getContext().getResources().getColor(R.color.color_random_two);
-//			break;
-//		case 20:
-//			color = this.getContext().getResources().getColor(R.color.color_random_two);
-//			break;
+		case 19:
+			color = this.getContext().getResources().getColor(R.color.line_company_package2);
+			break;
+		case 20:
+			color = this.getContext().getResources().getColor(R.color.line_company_package3);
+			break;
 		default:
 			break;
 		}
+		System.out.println("123:::::::::::::::::"+index);
 		p.setColor(color);// 设置红色
 
 //		canvas.drawText("画圆：", 10, 20, p);// 画文本
 //		canvas.drawCircle(60, 20, 10, p);// 小圆
 		p.setAntiAlias(true);// 设置画笔的锯齿效果。 true是去除，大家一看效果就明白了
-		canvas.drawCircle(60, 20, 10, p);// 大圆
+		canvas.drawCircle(13, 14, 10, p);// 大圆
 
 	}
 }
