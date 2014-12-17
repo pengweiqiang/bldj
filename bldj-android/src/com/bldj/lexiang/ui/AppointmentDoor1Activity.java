@@ -131,7 +131,10 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 20) {
 			address = data.getStringExtra("address");
-			btn_address.setText(address);
+			if(!StringUtils.isEmpty(address)){
+				btn_address.setText(address);
+				SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",address);
+			}
 		}
 	}
 
