@@ -56,7 +56,7 @@
            android:drawableTop="@drawable/title_skill"
            android:layout_marginRight="8dip"
            android:drawablePadding="3dip"
-           android:text="推拿技能培训"
+           android:text="中医知识培训"
            />
         <TextView 
            android:layout_width="0dip"
@@ -66,7 +66,7 @@
            android:layout_marginRight="8dip"
            android:drawablePadding="3dip"
            android:drawableTop="@drawable/title_product_explain"
-           android:text="产品使用规范"
+           android:text="按摩手法实操"
            />
          <TextView 
            android:layout_width="0dip"
@@ -75,7 +75,7 @@
            android:layout_height="wrap_content"
             android:layout_marginRight="8dip"
             android:drawableTop="@drawable/title_standard"
-           android:text="仪表礼仪规范"
+           android:text="标准礼仪规范"
            android:drawablePadding="3dip"
            />
        
