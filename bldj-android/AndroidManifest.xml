@@ -133,6 +133,11 @@
             android:name=".ui.MyCollectFragmentActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 我的档案界面 -->
+        <activity
+            android:name=".ui.MyFilesActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- 地址列表界面 -->
         <activity
             android:name=".ui.AddressesActivity"
