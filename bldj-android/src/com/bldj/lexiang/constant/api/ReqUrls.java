@@ -219,6 +219,10 @@ public interface ReqUrls {
 	 */
 	public static final String ALIPAY_NOTIFY_URL = Connection_Type_Common+DEFAULT_REQ_HOST_IP + "/pay/notify";
 	
+	/**
+	 * 我的文档
+	 */
+	public static final String REQUEST_MY_FILES = "/user/getArchives";
 
 
     /**收藏App**/
