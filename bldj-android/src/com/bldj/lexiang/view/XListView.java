@@ -219,6 +219,7 @@ public class XListView extends ListView implements OnScrollListener {
 	public void setFootHintText(int pageNumber,int count,String str){
 		if(count == 0){//上次加载为0,本次加载数据也为0
 			mFootHintView.setText(str);
+			mFooterView.show();
 		}else if(count < (pageNumber+1)*ApiConstants.LIMIT){//本次加载数据为0
 			mFooterView.setOnClickListener(null);
 //			mFootHintView.setText("加载完毕");
