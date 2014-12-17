@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@color/white"
-                    android:drawableLeft="@drawable/version"
+                    android:drawableLeft="@drawable/my_file"
                     android:drawablePadding="10dp"
                     android:drawableRight="@drawable/btn_img_open"
                     android:gravity="left|center"
