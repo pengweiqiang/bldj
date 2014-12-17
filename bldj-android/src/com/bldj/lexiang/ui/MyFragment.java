@@ -309,7 +309,8 @@ public class MyFragment extends BaseFragment {
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				if (checkIsLogin()) {
-
+					Intent intent = new Intent(mActivity,MyFilesActivity.class);
+					startActivity(intent);
 				}
 
 			}
