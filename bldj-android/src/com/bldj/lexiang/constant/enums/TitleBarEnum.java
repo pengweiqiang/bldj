@@ -16,8 +16,8 @@ public enum TitleBarEnum {
 	ORDER_PRICE(6,"价格排序",1),
 	
 	PRICE_NONE(7,"价格区间"),
-	PRICE_ORDER1(8,"100-300"),
-	PRICE_ORDER2(9,"300-500"),
+	PRICE_ORDER1(8,"100-300",100,300),
+	PRICE_ORDER2(9,"300-500",300,500),
 	
 	
 	TYPE_ORDER_ALL(10,"全部",2),
@@ -25,11 +25,12 @@ public enum TitleBarEnum {
 	TYPE_ORDER_MANY(12,"多人",1),
 	TYPE_ORDER_SINGLE(13,"个人",0),
 	//0时间 3均价 4累计成交量 5距离
-	ORDER_DEFAULT(14,"默认排序"),
+	ORDER_DEFAULT(14,"默认排序",0),
+	ORDER_PRICE_SELLER(25,"价格排序",3),
 	ORDER_DISTANCE(15,"距离排序",5),
 	ORDER_COUNT(16,"接单次数",4),
 	
-	WORK_3_BIG(17,"三年工作以上",3),
+	WORK_3_BIG(17,"三年工作以上",3,-1),
 	WORK_3_5(18,"工作3-5年",3,5),
 	WORK_5_10(19,"工作5-10年",5,10),
 	
