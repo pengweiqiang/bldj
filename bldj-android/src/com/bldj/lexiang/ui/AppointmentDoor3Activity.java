@@ -325,7 +325,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	private void aliPay(final Order order) {
 		try {
-			Log.i("ExternalPartner", "onItemClick");
+//			Log.i("ExternalPartner", "onItemClick");
 			String info = getNewOrderInfo(order);
 			String sign = Rsa.sign(info, payType.getRsaPrivateKey());
 			sign = URLEncoder.encode(sign);
@@ -439,10 +439,10 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	 * @param orderNum
 	 */
 	private void paySuccessOrCancelPay(){
+		AppManager.getAppManager().finishActivity(AppointmentDoor1Activity.class);
+		AppManager.getAppManager().finishActivity(AppointmentDoor2Activity.class);
 		Intent intent = new Intent(mContext,MyOrdersActivity.class);
 		startActivity(intent);
-//		AppManager.getAppManager().finishActivity(AppointmentDoor1Activity.class);
-//		AppManager.getAppManager().finishActivity(AppointmentDoor2Activity.class);
 		finish();
 	}
 
