@@ -41,7 +41,9 @@ public class ApiSellerUtils {
 		params.put("startPrice",startPrice);
 		params.put("endPrice", endPrice);
 		params.put("startWorkyear", startWorkyear);
-		params.put("endWorkyear", endWorkyear);
+		if(endWorkyear!=-1){
+			params.put("endWorkyear", endWorkyear);
+		}
 		params.put("orderbyTag", orderbyTag);
 		params.put("lat", lat);
 		params.put("lon", lon);
