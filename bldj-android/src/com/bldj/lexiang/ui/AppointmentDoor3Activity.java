@@ -37,6 +37,7 @@ import com.bldj.lexiang.api.vo.PayType;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -440,6 +441,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private void paySuccessOrCancelPay(){
 		Intent intent = new Intent(mContext,MyOrdersActivity.class);
 		startActivity(intent);
+//		AppManager.getAppManager().finishActivity(AppointmentDoor1Activity.class);
+//		AppManager.getAppManager().finishActivity(AppointmentDoor2Activity.class);
+		finish();
 	}
 
 }
