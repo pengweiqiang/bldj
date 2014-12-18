@@ -149,7 +149,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 	}
 
 	private void getData(String date) {
-		ApiBuyUtils.getScheduled(mContext, user.getUserId(), 0, date,
+		ApiBuyUtils.getScheduled(mContext, user.getUserId(), product.getId(), date,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
