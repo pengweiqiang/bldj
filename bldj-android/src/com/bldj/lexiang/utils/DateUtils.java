@@ -57,6 +57,28 @@ public class DateUtils {
         return calendar.getTime();
     }
     
+    public static String getDateAfterSomeDay(String nowdateStr,int intervalDay){
+    	Date nowdate;
+    	String afterDateStr = "";
+		try {
+			nowdate = DateUtil.getDate(nowdateStr, DateUtil.CUSTOM_PATTERN_SCHEDULED);
+			Calendar calendar = Calendar.getInstance();
+	        calendar.setTimeInMillis(nowdate.getTime());
+	        calendar.add(Calendar.DAY_OF_MONTH, intervalDay);
+	        calendar.set(Calendar.HOUR_OF_DAY, 0);
+	        calendar.set(Calendar.MINUTE, 0);
+	        calendar.set(Calendar.SECOND, 0);
+	        Date afterdate = calendar.getTime();
+	        afterDateStr = DateUtil.getDateString(afterdate, DateUtil.CUSTOM_PATTERN_SCHEDULED);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+        
+        return afterDateStr;
+    }
+    
     /**
      * 获取指定日期时间几小时后的整点时间（分秒都为0）
      * 
