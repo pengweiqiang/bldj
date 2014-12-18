@@ -79,6 +79,7 @@ public class MyFileAdapter extends BaseListAdapter {
 		holder.tv_year.setText(year);
 		holder.tv_year_small.setText(year);
 		holder.tv_date.setText(date);
+		holder.tv_content.setText(myFile.getContent());
 		if(position == 0){
 			holder.ll_start.setVisibility(View.VISIBLE);
 			holder.iv_end.setVisibility(View.GONE);
@@ -96,6 +97,18 @@ public class MyFileAdapter extends BaseListAdapter {
 		}else{
 			holder.iv_leaf1.setVisibility(View.GONE);
 			holder.iv_leaf2.setVisibility(View.VISIBLE);
+		}
+		
+		if(position%5==0){
+			holder.tv_content.setBackground(mContext.getResources().getDrawable(R.drawable.myfile_bg1));
+		}else if(position%5==1){
+			holder.tv_content.setBackground(mContext.getResources().getDrawable(R.drawable.myfile_bg2));
+		}else if(position%5==2){
+			holder.tv_content.setBackground(mContext.getResources().getDrawable(R.drawable.myfile_bg3));
+		}else if(position%5==3){
+			holder.tv_content.setBackground(mContext.getResources().getDrawable(R.drawable.myfile_bg4));
+		}else {
+			holder.tv_content.setBackground(mContext.getResources().getDrawable(R.drawable.myfile_bg5));
 		}
 		
 		
