@@ -416,7 +416,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 				int imemoEnd = result.indexOf("};memo=");
 				
 				tradeStatus = result.substring(imemoStart, imemoEnd);
-				
+				MyApplication.getInstance().sellerVo = null;
 				if("9000".equals(tradeStatus)){//支付成功
 //					paySuccess(orderNum);
 					ToastUtils.showToast(mContext, "支付成功！");
