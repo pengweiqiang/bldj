@@ -84,7 +84,6 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle(product.getName());
 		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
@@ -112,7 +111,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	}
 
 	private void initData() {
-
+		mActionBar.setTitle(product.getName());
 		// 获取此产品是否收藏过
 		if (isFav) {
 			tv_fav.setChecked(true);
