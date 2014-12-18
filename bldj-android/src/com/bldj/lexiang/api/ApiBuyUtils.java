@@ -167,5 +167,18 @@ public class ApiBuyUtils {
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_PAY_TYPE, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
+	/**
+	 * 获取支付参数
+	 * @param context
+	 * @param id
+	 * @param requestCallback
+	 */
+	public static void getPayTypeById(Context context,long id ,RequestCallback requestCallback){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_PAY_TYPE_BYID, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+		
+	}
 
 }

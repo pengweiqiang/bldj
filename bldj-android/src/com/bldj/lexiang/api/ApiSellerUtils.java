@@ -99,5 +99,17 @@ public class ApiSellerUtils {
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_SCORES, false,
 				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 	}
+	/**
+	 * 获取美容师个人信息
+	 * @param context
+	 * @param id
+	 * @param requestCallback
+	 */
+	public static void getSellerById(Context context,long id,RequestCallback requestCallback){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_BYID, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+	}
 	
 }
