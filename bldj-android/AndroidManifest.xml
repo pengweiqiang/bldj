@@ -79,6 +79,11 @@
             android:name=".ui.SellerPersonalActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity android:name=".ui.SellerServiceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/dialog"
+            >
+        </activity>
         <!-- 养生产品详情页 -->
         <activity
             android:name=".ui.HealthProductDetailActivity"
