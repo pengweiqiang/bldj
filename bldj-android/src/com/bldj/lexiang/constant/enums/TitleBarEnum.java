@@ -40,7 +40,10 @@ public enum TitleBarEnum {
 	
 	CITY_BEIJING(22,"北京"),
 	CITY_GUANGZHOU(23,"广州"),
-	CITY_SHENZHEN(24,"深圳");
+	CITY_SHENZHEN(24,"深圳"),
+	
+	SELLER_FAV(26,"收藏"),
+	SELLER_SHARE(27,"分享");
 	
 	private int index;
 	
