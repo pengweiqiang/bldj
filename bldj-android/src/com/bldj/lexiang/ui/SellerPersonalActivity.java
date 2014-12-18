@@ -3,26 +3,46 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.adapter.GroupAdapter;
+import com.bldj.lexiang.api.ApiSellerUtils;
 import com.bldj.lexiang.api.vo.Evals;
+import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
+import com.bldj.lexiang.commons.Constant;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.db.DatabaseUtil;
+import com.bldj.lexiang.utils.DeviceInfo;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -46,6 +66,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 	private TextView tv_level;
 	private Button btn_collect;
 	private Button btn_share;
+	private Button btn_appointseller;
 	private RadioGroup rg_title; 
 	 private RadioButton rb_msg, rb_service, rb_work;
 
@@ -61,6 +82,12 @@ public class SellerPersonalActivity extends FragmentActivity {
 
 	ShareUtil shareUtil;
 
+	
+	private PopupWindow popupWindow;
+	private View view;
+	private ListView lv_group;
+	private List<TitleBarEnum> groups;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.seller_personal);
@@ -86,7 +113,14 @@ public class SellerPersonalActivity extends FragmentActivity {
 						finish();
 					}
 				});
-		actionBar.hideRightActionButton();
+//		actionBar.hideRightActionButton();
+		actionBar.setRightTextActionButton("更多", new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				buildTitleBar(v);
+			}
+		});
 	}
 
 	public void initView() {
@@ -102,6 +136,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 		tv_work = (TextView) findViewById(R.id.work);
 		btn_collect = (Button) findViewById(R.id.collect);
 		btn_share = (Button) findViewById(R.id.share);
+		btn_appointseller = (Button)findViewById(R.id.appointseller);
 		rg_title = (RadioGroup) findViewById(R.id.rg_title);
 		rb_msg = (RadioButton)findViewById(R.id.radio_msg);
 		rb_service = (RadioButton)findViewById(R.id.radio_service);
@@ -258,6 +293,14 @@ public class SellerPersonalActivity extends FragmentActivity {
 						SendMessageToWX.Req.WXSceneTimeline);
 			}
 		});
+		//预约次美容师-->弹出下面的服务项目
+		btn_appointseller.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
 
 		rg_title.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -280,6 +323,106 @@ public class SellerPersonalActivity extends FragmentActivity {
 	public Seller getSellerVo() {
 		return sellerVo;
 	}
+	
+	private void buildTitleBar(View parent) {
+		DeviceInfo.setContext(this);
+		groups = new ArrayList<TitleBarEnum>();
+			groups.add(TitleBarEnum.SELLER_FAV);
+			groups.add(TitleBarEnum.SELLER_SHARE);
+		if (popupWindow == null) {
+			view = LayoutInflater.from(this).inflate(R.layout.group_list,
+					null);
+			lv_group = (ListView) view.findViewById(R.id.lvGroup);
+			
+			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
+					- parent.getWidth()-20, LayoutParams.WRAP_CONTENT);
+		}
+		GroupAdapter groupAdapter = new GroupAdapter(this, groups);
+		lv_group.setAdapter(groupAdapter);
+		popupWindow.setFocusable(true);
+		popupWindow.setOutsideTouchable(true);
+		popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
+		popupWindow.showAsDropDown(parent,0,20);
+		lv_group.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+				if(position == 0){
+					if (!isFav) {
+						long row = DatabaseUtil.getInstance(
+								SellerPersonalActivity.this).insertSeller(sellerVo);
+						if (row > 0) {
+							isFav = true;
+//							ToastUtils.showToast(SellerPersonalActivity.this,
+//									"收藏成功");
+							btn_collect.setText("已收藏");
+						} else {
+//							ToastUtils.showToast(SellerPersonalActivity.this,
+//									"该美容师已经收藏");
+						}
+					} else {
+						int row = DatabaseUtil.getInstance(
+								SellerPersonalActivity.this).deleteFavSeller(
+								sellerVo.getId());
+						if (row > 0) {
+							isFav = false;
+//							ToastUtils.showToast(SellerPersonalActivity.this,
+//									"取消收藏");
+							btn_collect.setText("收藏");
+						} else {
+							ToastUtils.showToast(SellerPersonalActivity.this,
+									"取消收藏失败，稍后请重试！");
+						}
+					}
+				}else{
+					ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
+					shareUtil.sendMsgToWX("健康送到家，方便你我他",
+							SendMessageToWX.Req.WXSceneTimeline);
+				}
+				if (popupWindow != null) {
+					popupWindow.dismiss();
+				}
+			}
+		});
+	}
+
+	/**
+	 * 获取养生服务数据
+	 */
+	private void getData() {
+//		ApiSellerUtils.getSellerProduct(this, sellerVo.getId(), pageNumber, ApiConstants.LIMIT,
+//				new HttpConnectionUtil.RequestCallback() {
+//
+//					@Override
+//					public void execute(ParseModel parseModel) {
+//						progressBar.setVisibility(View.GONE);
+//						mListView.setVisibility(View.VISIBLE);
+//						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+//								.getStatus())) {
+//							ToastUtils.showToast(this, parseModel.getMsg());
+//							return;
+//
+//						} else {
+//							List<Product> productsList = JsonUtils.fromJson(
+//									parseModel.getData().toString(),
+//									new TypeToken<List<Product>>() {
+//									});
+//
+//							if (pageNumber == 0) {
+//								products.clear();
+//							}
+//							products.addAll(productsList);
+//
+//							listAdapter.notifyDataSetChanged();
+//							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+//						}
+//
+//					}
+//				});
+	}
+
 
 	/**
 	 * 获取美容师的评价
