@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,8 +16,10 @@ import android.widget.TextView;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.Seller;
+import com.bldj.lexiang.commons.AppManager;
+import com.bldj.lexiang.ui.AppointmentDoor1Activity;
 import com.bldj.lexiang.ui.HealthProductDetailActivity;
-import com.bldj.lexiang.ui.SellerPersonalActivity;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class HomeAdapter extends BaseListAdapter {
@@ -26,18 +27,20 @@ public class HomeAdapter extends BaseListAdapter {
 	private Context mContext;
 	private List<Product> dataList;
 	private LayoutInflater mInflater;
-	private int type = 0;//1是美容师下面的服务项目，进入三步骤时不需要进入第二步
-
+	private int type = 0;//1是美容师下面的服务项目，进入三步骤时不需要进入第二步   2.从（我要预约他）按钮进入
+	private Seller sellerVo;
+	
 	public HomeAdapter(Context c, List<Product> dataList) {
 		this.mContext = c;
 		this.dataList = dataList;
 		this.mInflater = LayoutInflater.from(mContext);
 	}
-	public HomeAdapter(Context c,List<Product> dataList,int type){
+	public HomeAdapter(Context c,List<Product> dataList,int type,Seller sellerVo){
 		this.mContext = c;
 		this.dataList = dataList;
 		this.mInflater = LayoutInflater.from(mContext);
 		this.type = type;
+		this.sellerVo = sellerVo;
 	}
 
 	@Override
@@ -109,8 +112,15 @@ public class HomeAdapter extends BaseListAdapter {
 
 			@Override
 			public void onClick(View arg0) {
-				if(type == 1){
-					MyApplication.getInstance().sellerVo = ((SellerPersonalActivity)mContext).getSellerVo();
+				if(type == 1){//服务项目，进入单品页--》预约第一步--》第三部
+					MyApplication.getInstance().sellerVo = sellerVo;
+				}else if(type == 2){//我要预约他，直接进入预约第一步--》第三部。
+					MyApplication.getInstance().sellerVo = sellerVo;
+					Intent intentAppoint  = new Intent(mContext,AppointmentDoor1Activity.class);
+					intentAppoint.putExtra("product", productItem.get(0));
+					mContext.startActivity(intentAppoint);
+					AppManager.getAppManager().finishActivity(mContext.getClass());
+					return;
 				}
 				Intent intent = new Intent(mContext,
 						HealthProductDetailActivity.class);
@@ -139,7 +149,14 @@ public class HomeAdapter extends BaseListAdapter {
 				@Override
 				public void onClick(View arg0) {
 					if(type == 1){
-						MyApplication.getInstance().sellerVo = ((SellerPersonalActivity)mContext).getSellerVo();
+						MyApplication.getInstance().sellerVo = sellerVo;
+					}else if(type == 2){
+						MyApplication.getInstance().sellerVo = sellerVo;
+						Intent intentAppoint  = new Intent(mContext,AppointmentDoor1Activity.class);
+						intentAppoint.putExtra("product", productItem.get(1));
+						mContext.startActivity(intentAppoint);
+						AppManager.getAppManager().finishActivity(mContext.getClass());
+						return;
 					}
 					Intent intent = new Intent(mContext,
 							HealthProductDetailActivity.class);
