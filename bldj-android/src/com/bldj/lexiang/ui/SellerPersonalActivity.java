@@ -47,6 +47,7 @@ import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.CustomViewPager;
+import com.bldj.lexiang.view.LoadingDialog;
 import com.bldj.universalimageloader.core.ImageLoader;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
@@ -67,8 +68,8 @@ public class SellerPersonalActivity extends FragmentActivity {
 	private Button btn_collect;
 	private Button btn_share;
 	private Button btn_appointseller;
-	private RadioGroup rg_title; 
-	 private RadioButton rb_msg, rb_service, rb_work;
+	private RadioGroup rg_title;
+	private RadioButton rb_msg, rb_service, rb_work;
 
 	ActionBar mActionBar;
 	CustomViewPager mViewPager;
@@ -76,35 +77,39 @@ public class SellerPersonalActivity extends FragmentActivity {
 	RatingBar star_ratingbar;
 
 	Seller sellerVo;
+	long sellerId;
 
 	Evals evals;// 评价
 	boolean isFav;// 是否收藏
 
 	ShareUtil shareUtil;
 
-	
 	private PopupWindow popupWindow;
 	private View view;
 	private ListView lv_group;
 	private List<TitleBarEnum> groups;
-	
+	LoadingDialog loading;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.seller_personal);
 		super.onCreate(savedInstanceState);
 
 		sellerVo = (Seller) this.getIntent().getSerializableExtra("seller");
+		sellerId = this.getIntent().getLongExtra("sellerId", 0);
 
 		initView();
 		initData();
 		initListener();
 
+		shareUtil = new ShareUtil(this);
+		shareUtil.initWX();
 	}
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle(sellerVo.getNickname());
-		findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.white));
+		findViewById(R.id.actionBarLayout).setBackgroundColor(
+				getResources().getColor(R.color.white));
 		actionBar.setTitleTextColor(R.color.app_title_color);
 		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
 				new OnClickListener() {
@@ -113,14 +118,15 @@ public class SellerPersonalActivity extends FragmentActivity {
 						finish();
 					}
 				});
-//		actionBar.hideRightActionButton();
-		actionBar.setRightTextActionButton("", R.drawable.seller_more,false,new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				buildTitleBar(v);
-			}
-		});
+		// actionBar.hideRightActionButton();
+		actionBar.setRightTextActionButton("", R.drawable.seller_more, false,
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						buildTitleBar(v);
+					}
+				});
 	}
 
 	public void initView() {
@@ -136,13 +142,52 @@ public class SellerPersonalActivity extends FragmentActivity {
 		tv_work = (TextView) findViewById(R.id.work);
 		btn_collect = (Button) findViewById(R.id.collect);
 		btn_share = (Button) findViewById(R.id.share);
-		btn_appointseller = (Button)findViewById(R.id.appointseller);
+		btn_appointseller = (Button) findViewById(R.id.appointseller);
 		rg_title = (RadioGroup) findViewById(R.id.rg_title);
-		rb_msg = (RadioButton)findViewById(R.id.radio_msg);
-		rb_service = (RadioButton)findViewById(R.id.radio_service);
-		rb_work = (RadioButton)findViewById(R.id.radio_work);
-		star_ratingbar = (RatingBar)findViewById(R.id.ratingBar);
-		
+		rb_msg = (RadioButton) findViewById(R.id.radio_msg);
+		rb_service = (RadioButton) findViewById(R.id.radio_service);
+		rb_work = (RadioButton) findViewById(R.id.radio_work);
+		star_ratingbar = (RatingBar) findViewById(R.id.ratingBar);
+
+	}
+
+	private void initData() {
+
+		if (sellerVo == null) {
+			getSellerById();
+			return;
+		}
+		mActionBar.setTitle(sellerVo.getNickname());
+		// 获取此美容师是否收藏过
+		isFav = DatabaseUtil.getInstance(this).checkFavSeller(sellerVo.getId());
+		if (isFav) {
+			btn_collect.setText("已收藏");
+		}
+
+		ImageLoader.getInstance().displayImage(
+				sellerVo.getHeadurl(),
+				imageHead,
+				MyApplication.getInstance().getOptions(
+						R.drawable.default_head_image));
+		tv_order_count.setText("共接单" + sellerVo.getDealnumSum() + "次");
+		tv_price.setText("均价：￥" + String.valueOf(sellerVo.getAvgPrice()));
+		tv_username.setText(sellerVo.getNickname());
+		String levelStr = "";
+		if (sellerVo.getDealnumSum() < 20) {
+			// levelStr = "★";
+			star_ratingbar.setNumStars(1);
+		} else if (sellerVo.getDealnumSum() >= 20
+				&& sellerVo.getDealnumSum() < 200) {
+			star_ratingbar.setNumStars(2);
+		} else if (sellerVo.getDealnumSum() >= 200) {
+			// levelStr = "★★";
+			star_ratingbar.setNumStars(3);
+		} else {
+			// levelStr = "★★★★";
+			star_ratingbar.setNumStars(5);
+		}
+		// tv_level.setText(levelStr);
+		tv_work.setText("年龄：" + sellerVo.getUserGrade());
 
 		// 实例化对象
 		list = new ArrayList<Fragment>();
@@ -213,41 +258,6 @@ public class SellerPersonalActivity extends FragmentActivity {
 
 	}
 
-	private void initData() {
-
-		shareUtil = new ShareUtil(this);
-		shareUtil.initWX();
-
-		// 获取此美容师是否收藏过
-		isFav = DatabaseUtil.getInstance(this).checkFavSeller(sellerVo.getId());
-		if (isFav) {
-			btn_collect.setText("已收藏");
-		}
-
-		ImageLoader.getInstance().displayImage(sellerVo.getHeadurl(),
-				imageHead,
-				MyApplication.getInstance().getOptions(R.drawable.default_head_image));
-		tv_order_count.setText("共接单" + sellerVo.getDealnumSum() + "次");
-		tv_price.setText("均价：￥" + String.valueOf(sellerVo.getAvgPrice()));
-		tv_username.setText(sellerVo.getNickname());
-		String levelStr = "";
-		if(sellerVo.getDealnumSum()<20){
-//			levelStr = "★";
-			star_ratingbar.setNumStars(1);
-		}else if(sellerVo.getDealnumSum()>=20 && sellerVo.getDealnumSum()<200){
-			star_ratingbar.setNumStars(2);
-		}else if(sellerVo.getDealnumSum()>=200){
-//			levelStr = "★★";
-			star_ratingbar.setNumStars(3);
-		}else{
-//			levelStr = "★★★★";
-			star_ratingbar.setNumStars(5);
-		}
-//		tv_level.setText(levelStr);
-		tv_work.setText("年龄：" + sellerVo.getUserGrade());
-
-	}
-
 	public void initListener() {
 		// 收藏
 		btn_collect.setOnClickListener(new View.OnClickListener() {
@@ -259,12 +269,12 @@ public class SellerPersonalActivity extends FragmentActivity {
 							SellerPersonalActivity.this).insertSeller(sellerVo);
 					if (row > 0) {
 						isFav = true;
-//						ToastUtils.showToast(SellerPersonalActivity.this,
-//								"收藏成功");
+						// ToastUtils.showToast(SellerPersonalActivity.this,
+						// "收藏成功");
 						btn_collect.setText("已收藏");
 					} else {
-//						ToastUtils.showToast(SellerPersonalActivity.this,
-//								"该美容师已经收藏");
+						// ToastUtils.showToast(SellerPersonalActivity.this,
+						// "该美容师已经收藏");
 					}
 				} else {
 					int row = DatabaseUtil.getInstance(
@@ -272,8 +282,8 @@ public class SellerPersonalActivity extends FragmentActivity {
 							sellerVo.getId());
 					if (row > 0) {
 						isFav = false;
-//						ToastUtils.showToast(SellerPersonalActivity.this,
-//								"取消收藏");
+						// ToastUtils.showToast(SellerPersonalActivity.this,
+						// "取消收藏");
 						btn_collect.setText("收藏");
 					} else {
 						ToastUtils.showToast(SellerPersonalActivity.this,
@@ -293,47 +303,49 @@ public class SellerPersonalActivity extends FragmentActivity {
 						SendMessageToWX.Req.WXSceneTimeline);
 			}
 		});
-		//预约次美容师-->弹出下面的服务项目
+		// 预约次美容师-->弹出下面的服务项目
 		btn_appointseller.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
+				Intent intent = new Intent(SellerPersonalActivity.this,
+						SellerServiceActivity.class);
+				intent.putExtra("seller", sellerVo);
+				startActivity(intent);
 			}
 		});
 
 		rg_title.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                case R.id.radio_msg:
-                	mViewPager.setCurrentItem(0, false);
-                    break;
-                case R.id.radio_service:
-                	mViewPager.setCurrentItem(1, false);
-                    break;
-                case R.id.radio_work:
-                	mViewPager.setCurrentItem(2, false);
-                    break;
-                }
-            }
-        });
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				switch (checkedId) {
+				case R.id.radio_msg:
+					mViewPager.setCurrentItem(0, false);
+					break;
+				case R.id.radio_service:
+					mViewPager.setCurrentItem(1, false);
+					break;
+				case R.id.radio_work:
+					mViewPager.setCurrentItem(2, false);
+					break;
+				}
+			}
+		});
 	}
 
 	public Seller getSellerVo() {
 		return sellerVo;
 	}
-	
+
 	private void buildTitleBar(View parent) {
 		DeviceInfo.setContext(this);
 		groups = new ArrayList<TitleBarEnum>();
-			groups.add(TitleBarEnum.SELLER_FAV);
-			groups.add(TitleBarEnum.SELLER_SHARE);
+		groups.add(TitleBarEnum.SELLER_FAV);
+		groups.add(TitleBarEnum.SELLER_SHARE);
 		if (popupWindow == null) {
-			view = LayoutInflater.from(this).inflate(R.layout.group_list,
-					null);
+			view = LayoutInflater.from(this).inflate(R.layout.group_list, null);
 			lv_group = (ListView) view.findViewById(R.id.lvGroup);
-			
+
 			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
 					- parent.getWidth(), LayoutParams.WRAP_CONTENT);
 		}
@@ -349,18 +361,19 @@ public class SellerPersonalActivity extends FragmentActivity {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
 					int position, long id) {
-				if(position == 0){
+				if (position == 0) {
 					if (!isFav) {
 						long row = DatabaseUtil.getInstance(
-								SellerPersonalActivity.this).insertSeller(sellerVo);
+								SellerPersonalActivity.this).insertSeller(
+								sellerVo);
 						if (row > 0) {
 							isFav = true;
-//							ToastUtils.showToast(SellerPersonalActivity.this,
-//									"收藏成功");
+							// ToastUtils.showToast(SellerPersonalActivity.this,
+							// "收藏成功");
 							btn_collect.setText("已收藏");
 						} else {
-//							ToastUtils.showToast(SellerPersonalActivity.this,
-//									"该美容师已经收藏");
+							// ToastUtils.showToast(SellerPersonalActivity.this,
+							// "该美容师已经收藏");
 						}
 					} else {
 						int row = DatabaseUtil.getInstance(
@@ -368,16 +381,17 @@ public class SellerPersonalActivity extends FragmentActivity {
 								sellerVo.getId());
 						if (row > 0) {
 							isFav = false;
-//							ToastUtils.showToast(SellerPersonalActivity.this,
-//									"取消收藏");
+							// ToastUtils.showToast(SellerPersonalActivity.this,
+							// "取消收藏");
 							btn_collect.setText("收藏");
 						} else {
 							ToastUtils.showToast(SellerPersonalActivity.this,
 									"取消收藏失败，稍后请重试！");
 						}
 					}
-				}else{
-					ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
+				} else {
+					ToastUtils
+							.showToast(SellerPersonalActivity.this, "分享微信...");
 					shareUtil.sendMsgToWX("健康送到家，方便你我他",
 							SendMessageToWX.Req.WXSceneTimeline);
 				}
@@ -389,40 +403,65 @@ public class SellerPersonalActivity extends FragmentActivity {
 	}
 
 	/**
+	 * 通过sellerid获取美容师信息
+	 */
+	private void getSellerById() {
+		loading = new LoadingDialog(this);
+		loading.show();
+		ApiSellerUtils.getSellerById(this, sellerId,
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						loading.cancel();
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							ToastUtils.showToast(SellerPersonalActivity.this,
+									parseModel.getMsg());
+						} else {
+							sellerVo = JsonUtils.fromJson(parseModel.getData()
+									.toString(), Seller.class);
+							initData();
+						}
+					}
+				});
+	}
+
+	/**
 	 * 获取养生服务数据
 	 */
 	private void getData() {
-//		ApiSellerUtils.getSellerProduct(this, sellerVo.getId(), pageNumber, ApiConstants.LIMIT,
-//				new HttpConnectionUtil.RequestCallback() {
-//
-//					@Override
-//					public void execute(ParseModel parseModel) {
-//						progressBar.setVisibility(View.GONE);
-//						mListView.setVisibility(View.VISIBLE);
-//						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
-//								.getStatus())) {
-//							ToastUtils.showToast(this, parseModel.getMsg());
-//							return;
-//
-//						} else {
-//							List<Product> productsList = JsonUtils.fromJson(
-//									parseModel.getData().toString(),
-//									new TypeToken<List<Product>>() {
-//									});
-//
-//							if (pageNumber == 0) {
-//								products.clear();
-//							}
-//							products.addAll(productsList);
-//
-//							listAdapter.notifyDataSetChanged();
-//							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
-//						}
-//
-//					}
-//				});
+		// ApiSellerUtils.getSellerProduct(this, sellerVo.getId(), pageNumber,
+		// ApiConstants.LIMIT,
+		// new HttpConnectionUtil.RequestCallback() {
+		//
+		// @Override
+		// public void execute(ParseModel parseModel) {
+		// progressBar.setVisibility(View.GONE);
+		// mListView.setVisibility(View.VISIBLE);
+		// if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+		// .getStatus())) {
+		// ToastUtils.showToast(this, parseModel.getMsg());
+		// return;
+		//
+		// } else {
+		// List<Product> productsList = JsonUtils.fromJson(
+		// parseModel.getData().toString(),
+		// new TypeToken<List<Product>>() {
+		// });
+		//
+		// if (pageNumber == 0) {
+		// products.clear();
+		// }
+		// products.addAll(productsList);
+		//
+		// listAdapter.notifyDataSetChanged();
+		// mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+		// }
+		//
+		// }
+		// });
 	}
-
 
 	/**
 	 * 获取美容师的评价
