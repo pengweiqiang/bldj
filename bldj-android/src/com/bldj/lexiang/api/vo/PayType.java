@@ -18,6 +18,7 @@ public class PayType  implements Serializable{
 	private String payNum;
 	private String rsaPublicKey;
 	private String rsaPrivateKey;
+	private String callbackUrl;
 	
 	
 	public long getId() {
@@ -79,6 +80,12 @@ public class PayType  implements Serializable{
 	}
 	public void setRsaPrivateKey(String rsaPrivateKey) {
 		this.rsaPrivateKey = rsaPrivateKey;
+	}
+	public String getCallbackUrl() {
+		return callbackUrl;
+	}
+	public void setCallbackUrl(String callbackUrl) {
+		this.callbackUrl = callbackUrl;
 	}
 	
 	
