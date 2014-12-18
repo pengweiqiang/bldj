@@ -10,12 +10,14 @@ public class Order  implements Serializable{
 	//
 	private String orderNum;//订单号
 	private double orderPay;//订单总额
-	private String createtime;//xiadan shijian 
+	private String createtime;//下单时间
 	private int status;//下单状态
 	private String statusStr;//状态
+	private long productId;//产品id
 	private String proName;//产品名称
 	private String sellerName;//卖家名称
 	private long sellerId;//卖家id
+	private int payType;//支付方式
 	
 	
 	
@@ -55,6 +57,12 @@ public class Order  implements Serializable{
 	public void setStatusStr(String statusStr) {
 		this.statusStr = statusStr;
 	}
+	public long getProductId() {
+		return productId;
+	}
+	public void setProductId(long productId) {
+		this.productId = productId;
+	}
 	public String getProName() {
 		return proName;
 	}
@@ -66,6 +74,12 @@ public class Order  implements Serializable{
 	}
 	public void setSellerName(String sellerName) {
 		this.sellerName = sellerName;
+	}
+	public int getPayType() {
+		return payType;
+	}
+	public void setPayType(int payType) {
+		this.payType = payType;
 	}
 	
 	
