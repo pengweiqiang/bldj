@@ -115,13 +115,23 @@ public class AppointmentDoor1Activity extends BaseActivity {
 					ToastUtils.showToast(mContext, "请选择地址");
 					return;
 				}
-				Intent intent = new Intent(AppointmentDoor1Activity.this,
-						AppointmentDoor2Activity.class);
-				intent.putExtra("time", date + " " + time);
-				intent.putExtra("timeIndex", index);
-				intent.putExtra("product", product);
-				intent.putExtra("address", address);
-				startActivity(intent);
+				if(MyApplication.getInstance().sellerVo != null){//从美容师界面跳转过来，不需要进入第二步
+					Intent intent = new Intent(AppointmentDoor1Activity.this,AppointmentDoor3Activity.class);
+					intent.putExtra("time", date + " " + time);
+					intent.putExtra("seller", MyApplication.getInstance().sellerVo);
+					intent.putExtra("timeIndex", index);
+					intent.putExtra("product", product);
+					intent.putExtra("address", address);
+					startActivity(intent);
+				}else{
+					Intent intent = new Intent(AppointmentDoor1Activity.this,
+							AppointmentDoor2Activity.class);
+					intent.putExtra("time", date + " " + time);
+					intent.putExtra("timeIndex", index);
+					intent.putExtra("product", product);
+					intent.putExtra("address", address);
+					startActivity(intent);
+				}
 			}
 		});
 	}

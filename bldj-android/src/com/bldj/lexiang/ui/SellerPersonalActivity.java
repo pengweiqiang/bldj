@@ -114,7 +114,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 					}
 				});
 //		actionBar.hideRightActionButton();
-		actionBar.setRightTextActionButton("更多", new OnClickListener() {
+		actionBar.setRightTextActionButton("", R.drawable.seller_more,false,new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -335,7 +335,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 			lv_group = (ListView) view.findViewById(R.id.lvGroup);
 			
 			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
-					- parent.getWidth()-20, LayoutParams.WRAP_CONTENT);
+					- parent.getWidth(), LayoutParams.WRAP_CONTENT);
 		}
 		GroupAdapter groupAdapter = new GroupAdapter(this, groups);
 		lv_group.setAdapter(groupAdapter);
@@ -344,7 +344,7 @@ public class SellerPersonalActivity extends FragmentActivity {
 		popupWindow.setBackgroundDrawable(new BitmapDrawable());
 
 		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
-		popupWindow.showAsDropDown(parent,0,20);
+		popupWindow.showAsDropDown(parent);
 		lv_group.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,

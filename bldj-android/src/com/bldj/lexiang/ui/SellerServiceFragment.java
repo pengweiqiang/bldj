@@ -77,7 +77,7 @@ public class SellerServiceFragment extends BaseFragment implements
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		products = new ArrayList<Product>();
-		listAdapter = new HomeAdapter(mActivity, products);
+		listAdapter = new HomeAdapter(mActivity, products,1);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
