@@ -182,6 +182,10 @@ public interface ReqUrls {
 	 * 获取支付方式
 	 */
 	public static final String REQUEST_PAY_TYPE = "/pay/getPays";
+	/**
+	 * 通过支付id获取支付参数
+	 */
+	public static final String REQUEST_PAY_TYPE_BYID = "/pay/getPayByCode";
 	
 	/**
 	 * 获取美容师列表
@@ -201,7 +205,10 @@ public interface ReqUrls {
 	 * 获取美容师评论列表
 	 */
 	public static final String REQUEST_SELLER_SCORES = "/seller/getSellerScores";
-	
+	/**
+	 * 获取美容师个人信息
+	 */
+	public static final String REQUEST_SELLER_BYID = "/seller/getSellerById";
 	/**
 	 * 版本升级
 	 */
@@ -217,7 +224,7 @@ public interface ReqUrls {
 	/**
 	 * 支付宝回调地址
 	 */
-	public static final String ALIPAY_NOTIFY_URL = Connection_Type_Common+DEFAULT_REQ_HOST_IP + "/pay/notify";
+//	public static final String ALIPAY_NOTIFY_URL = Connection_Type_Common+DEFAULT_REQ_HOST_IP + "/pay/notify";
 	
 	/**
 	 * 我的文档
