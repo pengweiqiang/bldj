@@ -157,9 +157,9 @@ public class OrderDetail2Activity extends BaseActivity {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(OrderDetail2Activity.this,SellerPersonalActivity.class);
-				intent.putExtra("id", order.getSellerId());
-				startActivity(intent);
+//				Intent intent = new Intent(OrderDetail2Activity.this,SellerPersonalActivity.class);
+//				intent.putExtra("id", order.getSellerId());
+//				startActivity(intent);
 			}
 		});
 		/*
