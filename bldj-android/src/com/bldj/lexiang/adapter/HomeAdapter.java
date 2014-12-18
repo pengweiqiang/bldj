@@ -18,6 +18,7 @@ import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.ui.HealthProductDetailActivity;
+import com.bldj.lexiang.ui.SellerPersonalActivity;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class HomeAdapter extends BaseListAdapter {
@@ -25,11 +26,18 @@ public class HomeAdapter extends BaseListAdapter {
 	private Context mContext;
 	private List<Product> dataList;
 	private LayoutInflater mInflater;
+	private int type = 0;//1是美容师下面的服务项目，进入三步骤时不需要进入第二步
 
 	public HomeAdapter(Context c, List<Product> dataList) {
 		this.mContext = c;
 		this.dataList = dataList;
 		this.mInflater = LayoutInflater.from(mContext);
+	}
+	public HomeAdapter(Context c,List<Product> dataList,int type){
+		this.mContext = c;
+		this.dataList = dataList;
+		this.mInflater = LayoutInflater.from(mContext);
+		this.type = type;
 	}
 
 	@Override
@@ -101,6 +109,9 @@ public class HomeAdapter extends BaseListAdapter {
 
 			@Override
 			public void onClick(View arg0) {
+				if(type == 1){
+					MyApplication.getInstance().sellerVo = ((SellerPersonalActivity)mContext).getSellerVo();
+				}
 				Intent intent = new Intent(mContext,
 						HealthProductDetailActivity.class);
 				intent.putExtra("product", productItem.get(0));
@@ -127,6 +138,9 @@ public class HomeAdapter extends BaseListAdapter {
 
 				@Override
 				public void onClick(View arg0) {
+					if(type == 1){
+						MyApplication.getInstance().sellerVo = ((SellerPersonalActivity)mContext).getSellerVo();
+					}
 					Intent intent = new Intent(mContext,
 							HealthProductDetailActivity.class);
 					intent.putExtra("product", productItem.get(1));

@@ -10,6 +10,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MyLocationData;
+import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.utils.JsonUtils;
@@ -39,6 +40,7 @@ public class MyApplication extends Application {
 	public LocationClient mLocationClient;
 	public MyLocationListener mMyLocationListener;
 	public String addressStr = "";
+	public Seller sellerVo = null;
 
 	public static MyApplication getInstance() {
 		return myApplication;
