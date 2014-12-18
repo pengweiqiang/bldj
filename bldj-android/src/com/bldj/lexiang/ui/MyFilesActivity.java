@@ -91,8 +91,8 @@ IXListViewListener {
 	 */
 	private void getData() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		String dealDate = "";
-		ApiUserUtils.getMyFiles(MyFilesActivity.this,user.getUserId(), ApiConstants.LIMIT,
+		String dealDate = "20141216";//?????日期从哪里选择，还有分页数据
+		ApiUserUtils.getMyFiles(MyFilesActivity.this,21, ApiConstants.LIMIT,
 				dealDate,
 				new HttpConnectionUtil.RequestCallback() {
 
