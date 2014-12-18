@@ -1,6 +1,7 @@
 package com.bldj.lexiang.ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.os.Bundle;
@@ -11,14 +12,14 @@ import android.widget.ProgressBar;
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.adapter.MyFileAdapter;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.MyFiles;
 import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.DateUtil;
+import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -44,6 +45,7 @@ IXListViewListener {
 	private List<MyFiles> myFiles;
 
 	private int pageNumber = 0;
+	String dealDate = DateUtil.getDateString(new Date(), DateUtil.CUSTOM_PATTERN_SCHEDULED);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +92,9 @@ IXListViewListener {
 	 * 获取养生服务数据
 	 */
 	private void getData() {
+		ToastUtils.showToast(mContext, dealDate);
 		User user = MyApplication.getInstance().getCurrentUser();
-		String dealDate = "20141216";//?????日期从哪里选择，还有分页数据
-		ApiUserUtils.getMyFiles(MyFilesActivity.this,21, ApiConstants.LIMIT,
+		ApiUserUtils.getMyFiles(MyFilesActivity.this,user.getUserId(), 5,
 				dealDate,
 				new HttpConnectionUtil.RequestCallback() {
 
@@ -112,9 +114,9 @@ IXListViewListener {
 									new TypeToken<List<MyFiles>>() {
 									});
 
-//							if (pageNumber == 0) {
-//								myFilesList.clear();
-//							}
+							if (pageNumber == 0) {
+								myFiles.clear();
+							}
 							myFiles.addAll(myFilesList);
 
 							listAdapter.notifyDataSetChanged();
@@ -128,12 +130,14 @@ IXListViewListener {
 	@Override
 	public void onRefresh() {
 		pageNumber = 0;
+		dealDate = DateUtil.getDateString(new Date(), DateUtil.CUSTOM_PATTERN_SCHEDULED);
 		getData();
 	}
 
 	@Override
 	public void onLoadMore() {
 		pageNumber++;
+		dealDate = DateUtils.getDateAfterSomeDay(dealDate, -5);//?????日期从哪里选择，还有分页数据
 		getData();
 	}
 
