@@ -13,6 +13,7 @@ public class DBHelper extends SQLiteOpenHelper{
 	public static final int DATA_BASE_VERSION = 1;
 	public static final String TABLE_NAME_PRODUCT = "fav_product";//经络养生
 	public static final String TABLE_NAME_SELLER = "fav_seller";//美容师
+	public static final String TABLE_NAME_BANNER = "banner";//首页广告栏
 
 	private SQLiteDatabase mDb;
 	
@@ -26,6 +27,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		// TODO Auto-generated method stub
 		onCreateProductTable(db);
 		onCreateSellerTable(db);
+//		onCreateBannerTable(db);
 	}
 
 	@Override
@@ -65,6 +67,13 @@ public class DBHelper extends SQLiteOpenHelper{
 		String DEALNUMSUM = "dealnumSum";
 		String DISTANCE = "distance";
 		
+	}
+	interface BannerTable{
+		String _ID = "_id";
+		String NAME = "name";
+		String PICURL = "picurl";
+		String LEAVETIME = "leavetime";
+		String ACTIONURL = "actionUrl";
 	}
 	/**
 	 * 产品收藏
@@ -113,6 +122,21 @@ public class DBHelper extends SQLiteOpenHelper{
 	      		.append(SellerTable.DEALNUMSUM).append(" integer,")
 	      		.append(SellerTable.DISTANCE).append(" double );");
 	      db.execSQL(favStr.toString());
+	}
+	/**
+	 * 首页广告栏
+	 * @param db
+	 */
+	private void onCreateBannerTable(SQLiteDatabase db){
+		StringBuilder banner = new StringBuilder();
+		banner.append("CREATE TABLE IF NOT EXISTS ")
+   		.append(DBHelper.TABLE_NAME_BANNER)
+   		.append(" ( ").append(BannerTable._ID).append(" INTEGER PRIMARY KEY AUTOINCREMENT,")
+   		.append(BannerTable.NAME).append(" varchar(100),")
+   		.append(BannerTable.PICURL).append(" text,")
+   		.append(BannerTable.LEAVETIME).append(" varchar(100),")
+   		.append(BannerTable.ACTIONURL).append(" text );");
+   		db.execSQL(banner.toString());
 	}
 	
 	
