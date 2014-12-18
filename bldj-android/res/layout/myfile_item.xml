@@ -61,7 +61,7 @@
         <View
             android:id="@+id/line"
             android:layout_width="65dip"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_below="@+id/year_item"
             android:layout_centerVertical="true"
             android:layout_marginTop="8dip"
