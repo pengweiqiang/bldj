@@ -370,18 +370,19 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		sb.append("\"&subject=\"");
 		sb.append(order.getProName());
 		sb.append("\"&body=\"");
-		if(product.getOneword()!=null && product.getOneword().length()>512){
-			sb.append(product.getOneword().subSequence(0, 512));
-		}else{
-			sb.append(product.getOneword());
-		}
+		sb.append(order.getProName());
+//		if(product.getOneword()!=null && product.getOneword().length()>512){
+//			sb.append(product.getOneword().subSequence(0, 512));
+//		}else{
+//			sb.append(product.getOneword());
+//		}
 		sb.append("\"&total_fee=\"");
 		sb.append(String.valueOf(order.getOrderPay()));
 		sb.append("\"&notify_url=\"");
 
 		// 网址需要做URL编码
 		sb.append(URLEncoder
-				.encode(ReqUrls.ALIPAY_NOTIFY_URL));
+				.encode(payType.getCallbackUrl()));
 		sb.append("\"&service=\"mobile.securitypay.pay");
 		sb.append("\"&_input_charset=\"UTF-8");
 		sb.append("\"&return_url=\"");
