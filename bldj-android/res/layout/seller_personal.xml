@@ -91,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dip"
                     android:text="收藏"
+                    android:visibility="gone"
                     android:textColor="@color/white"
                     android:background="@drawable/btn_coners"
                     android:textSize="12sp" />
@@ -100,6 +101,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="30dip"
                     android:text="分享"
+                    android:visibility="gone"
+                    android:textColor="@color/white"
+                    android:background="@drawable/btn_coners"
+                    android:textSize="12sp" />
+                    
+                <Button
+                    android:id="@+id/appointseller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dip"
+                    android:text="预约美容师"
                     android:textColor="@color/white"
                     android:background="@drawable/btn_coners"
                     android:textSize="12sp" />
