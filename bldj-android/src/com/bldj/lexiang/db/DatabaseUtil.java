@@ -7,8 +7,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.bldj.lexiang.api.vo.Ad;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
+import com.bldj.lexiang.db.DBHelper.BannerTable;
 import com.bldj.lexiang.db.DBHelper.ProductTable;
 import com.bldj.lexiang.db.DBHelper.SellerTable;
 
@@ -427,6 +429,86 @@ public class DatabaseUtil {
 		}
 
 	}
+	
+	/**
+	 * 缓存首页广告
+	 * 
+	 * @param products
+	 */
+	public void insertBannerList(List<Ad> ads) {
+//		Cursor cursor = null;
+		if (ads != null && !ads.isEmpty()) {
+			dbHelper.delete(DBHelper.TABLE_NAME_BANNER, null, null);
+			for (Ad ad : ads) {
+
+//				String where = ProductTable.PRODUCTID + " = " + product.getId();
+//				cursor = dbHelper.query(DBHelper.TABLE_NAME_PRODUCT, null,
+//						where, null, null, null, null);
+//				if (cursor != null && cursor.getCount() > 0) {
+//					cursor.moveToFirst();
+//					// ContentValues conv = new ContentValues();
+//					//
+//					// dbHelper.update(DBHelper.TABLE_NAME_QIANGYU, conv, where,
+//					// null);
+//				} else {
+					ContentValues cv = new ContentValues();
+					cv.put(BannerTable.NAME, ad.getName());
+					cv.put(BannerTable.PICURL, ad.getPicurl());
+					cv.put(BannerTable.LEAVETIME, ad.getLeavetime());
+					cv.put(BannerTable.ACTIONURL, ad.getActionUrl());
+					long uri = dbHelper.insert(DBHelper.TABLE_NAME_BANNER,
+							null, cv);
+					System.out.println("缓存数据："+uri);
+
+//				}
+
+			}
+		}
+//		if (cursor != null) {
+//			cursor.close();
+//			dbHelper.close();
+//		}
+
+	}
+	
+	
+	/**
+	 * 获取收藏的美容师列表
+	 * 
+	 * @param pageNum
+	 * @param limit
+	 * @return
+	 */
+	public ArrayList<Ad> queryAds() {
+		ArrayList<Ad> contents = null;
+
+		// ContentResolver resolver = context.getContentResolver();
+		// String where = "1=1 order by _id Limit "+String.valueOf(40)+
+		// " Offset " +String.valueOf(0);
+		Cursor cursor = dbHelper.query(DBHelper.TABLE_NAME_SELLER, null, null,
+				null, null, null, null);
+		if (cursor == null) {
+			return null;
+		}
+		contents = new ArrayList<Ad>();
+		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+			Ad content = new Ad();
+			content.setName(cursor.getString(1));
+			content.setPicurl(cursor.getString(2));
+			content.setLeavetime(cursor.getString(3));
+			content.setActionUrl(cursor.getString(4));
+
+			contents.add(content);
+		}
+		if (cursor != null) {
+			cursor.close();
+		}
+		// if (contents.size() > 0) {
+		// return contents;
+		// }
+		return contents;
+	}
+	
 
 	/**
 	 * 获取产品明细
