@@ -56,24 +56,62 @@ public class MyFileAdapter extends BaseListAdapter {
 			holder = new ViewHolder();
 
 			convertView = mInflater.inflate(R.layout.myfile_item, null);
+			holder.tv_year = (TextView)convertView.findViewById(R.id.year);
+			holder.tv_year_small = (TextView) convertView.findViewById(R.id.year_item);
+			holder.tv_date = (TextView)convertView.findViewById(R.id.date);
+			holder.iv_leaf1 = (ImageView)convertView.findViewById(R.id.leaf1);
+			holder.iv_leaf2 = (ImageView)convertView.findViewById(R.id.leaf2);
+			holder.tv_content = (TextView)convertView.findViewById(R.id.content);
+			holder.ll_start = (LinearLayout)convertView.findViewById(R.id.start);
+			holder.iv_end = (ImageView)convertView.findViewById(R.id.end);
 			
 			convertView.setTag(holder);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
+		String year = "2014";
+		String date = "1205";
+		if(myFile.getContent().length()>4){
+			year = myFile.getDealdate().subSequence(0, 4).toString();
+			date = myFile.getDealdate().substring(4);
+		}
+		holder.tv_year.setText(year);
+		holder.tv_year_small.setText(year);
+		holder.tv_date.setText(date);
+		if(position == 0){
+			holder.ll_start.setVisibility(View.VISIBLE);
+			holder.iv_end.setVisibility(View.GONE);
+		}else if(position<dataList.size()-1){
+			holder.ll_start.setVisibility(View.GONE);
+			holder.iv_end.setVisibility(View.GONE);
+		}else{
+			holder.ll_start.setVisibility(View.GONE);
+			holder.iv_end.setVisibility(View.VISIBLE);
+		}
+		
+		if(position%2==0){
+			holder.iv_leaf1.setVisibility(View.VISIBLE);
+			holder.iv_leaf2.setVisibility(View.GONE);
+		}else{
+			holder.iv_leaf1.setVisibility(View.GONE);
+			holder.iv_leaf2.setVisibility(View.VISIBLE);
+		}
+		
 		
 
 		return convertView;
 	}
 
 	public final class ViewHolder {
-		public ImageView img, img2;
-//		public TextView title, title2;
-		public TextView price, price2;
-		public TextView yixiujia_price,yixiujia_price2;
-		public TextView name, name2;
-		public LinearLayout frameOne, frameTwo;
+		public TextView tv_year;
+		public TextView tv_date;
+		public TextView tv_year_small;
+		public ImageView iv_leaf1;
+		public ImageView iv_leaf2;
+		public TextView tv_content;
+		public LinearLayout ll_start;
+		public ImageView iv_end;
 	}
 
 }
