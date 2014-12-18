@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Message;
@@ -30,6 +31,7 @@ import com.bldj.lexiang.alipay.Rsa;
 import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.api.ReqUrls;
@@ -54,14 +56,14 @@ public class OrderDetail2Activity extends BaseActivity {
 	private Order order;
 
 	private User user;
-	private TextView tv_order_time;
-	private TextView tv_order_num;
-	private TextView tv_order_pay;
+	private TextView tv_order_time;//订单时间
+	private TextView tv_order_num;//订单号
+	private TextView tv_order_pay;//订单金额
 	private Button btn_confirm;
 	private Button btn_cancel_order;
-	private Button btn_use_code;
-	private TextView tv_code;
-	private TextView tv_coupon;
+	private TextView tv_order_product;
+	private TextView tv_order_sellerName;
+	private TextView tv_orderStatus;
 
 	// private RadioButton rb_aliay, rb_weixin, rb_union;
 
@@ -87,7 +89,7 @@ public class OrderDetail2Activity extends BaseActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("订单详情");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -108,15 +110,12 @@ public class OrderDetail2Activity extends BaseActivity {
 
 		btn_confirm = (Button) findViewById(R.id.confirm);
 		btn_cancel_order = (Button) findViewById(R.id.cancel);
-		btn_use_code = (Button) findViewById(R.id.use_code);
+		tv_order_product = (TextView) findViewById(R.id.order_product);
 		tv_order_num = (TextView) findViewById(R.id.order_num);
-		tv_order_pay = (TextView) findViewById(R.id.order_real_pay);
+		tv_order_pay = (TextView) findViewById(R.id.order_pay);
 		tv_order_time = (TextView) findViewById(R.id.order_time);
-		tv_code = (TextView) findViewById(R.id.code);
-		tv_coupon = (TextView)findViewById(R.id.order_coupons);
-		// rb_aliay = (RadioButton) findViewById(R.id.aliay_pay);
-		// rb_weixin = (RadioButton) findViewById(R.id.weixin_pay);
-		// rb_union = (RadioButton) findViewById(R.id.union_pay);
+		tv_order_sellerName = (TextView) findViewById(R.id.order_seller);
+		tv_orderStatus = (TextView) findViewById(R.id.order_status);
 		
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
@@ -132,14 +131,37 @@ public class OrderDetail2Activity extends BaseActivity {
 			btn_cancel_order.setVisibility(View.VISIBLE);
 		}
 		tv_order_time.setText(order.getCreatetime());
-		tv_order_pay.setText(String.valueOf(order.getOrderPay()));
+		tv_order_pay.setText(String.valueOf("￥"+order.getOrderPay()));
 		tv_order_num.setText(order.getOrderNum());
-		tv_coupon.setText("无");
+		tv_order_product.setText(order.getProName());
+		tv_order_sellerName.setText(order.getSellerName());
+		tv_orderStatus.setText(order.getStatusStr());
 	}
 
 	@Override
 	public void initListener() {
-
+		//点击产品进入产品明细
+		tv_order_product.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(OrderDetail2Activity.this,HealthProductDetailActivity.class);
+				Product product = new Product();
+				product.setId(order.getProductId());
+				intent.putExtra("product", product);
+				startActivity(intent);
+			}
+		});
+		//点击美容师进入个人页面
+		tv_order_sellerName.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(OrderDetail2Activity.this,SellerPersonalActivity.class);
+				intent.putExtra("id", order.getSellerId());
+				startActivity(intent);
+			}
+		});
 		/*
 		 * rb_aliay.setOnCheckedChangeListener(new
 		 * CompoundButton.OnCheckedChangeListener() {
