@@ -90,6 +90,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	// 广告条 end
 	private int pageNumber = 0;
 	private boolean isFirst = true;// 首次进入app先从缓存加载产品数据
+//	private boolean isFirstLoadAd = true;//首次进入app先从缓存加载广告栏
 
 	private LinearLayout tab_find, tab_company, tab_reserve;
 
@@ -351,6 +352,18 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	 * 获取首页广告数据
 	 */
 	private void getAdLists() {
+//		if(isFirstLoadAd){
+//			ads = DatabaseUtil.getInstance(mActivity).queryAds();
+//			if(ads!=null && !ads.isEmpty()){
+//				infoView.findViewById(R.id.progress_banner)
+//				.setVisibility(View.GONE);
+//				infoView.findViewById(R.id.fl_banner).setVisibility(
+//				View.VISIBLE);
+//				bannerView.setVisibility(View.VISIBLE);
+//				addBannerView();
+//				return;
+//			}
+//		}
 		ApiHomeUtils.getAdList(mActivity.getApplicationContext(),
 				ApiConstants.LIMIT, 1,
 				new HttpConnectionUtil.RequestCallback() {
