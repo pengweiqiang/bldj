@@ -141,8 +141,14 @@
     <string name="union_pay_tip">信用卡支付支持储蓄卡，无需开通网银</string>
     <string name="order_num">订单号：</string>
     <string name="order_time">下单时间：</string>
+    <string name="order_info">订单信息</string>
+    <string name="product_info">产品信息</string>
     <string name="order_pay">应付金额：</string>
+    <string name="order_status">订单状态：</string>
+    <string name="order_pay_count">订单金额：</string>
     <string name="order_real_pay">实付金额：</string>
+    <string name="order_product_name">产品名称：</string>
+    <string name="order_seller_name">理疗师名称：</string>
     <string name="msg_load_ing">加载中...</string>
     <string name="input_company_name">请输入企业名称</string>
     <string name="input_contact">请输入联系方式</string>
