@@ -92,7 +92,6 @@ IXListViewListener {
 	 * 获取养生服务数据
 	 */
 	private void getData() {
-		ToastUtils.showToast(mContext, dealDate);
 		User user = MyApplication.getInstance().getCurrentUser();
 		ApiUserUtils.getMyFiles(MyFilesActivity.this,user.getUserId(), 5,
 				dealDate,
