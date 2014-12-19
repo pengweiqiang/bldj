@@ -86,6 +86,7 @@
     <color name="bg_company_package4">#edbbc4</color>
     <color name="line_company_package4">#c41b40</color>
     <color name="color_package1_title">#b8091e</color>
+    <color name="color_address_btn">#fad1a2</color>
     
     
     <!-- 登录验证对话框 -->
