@@ -50,8 +50,6 @@ public class LoginFragment extends BaseFragment {
 		initView();
 		
 		initListener();
-		
-		
 		return infoView;
 	}
 	/**
@@ -110,10 +108,23 @@ public class LoginFragment extends BaseFragment {
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent(mActivity,ForgetPwdActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, 13);
 			}
 		});
 		
 	}
 
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == 21){
+			String name = data.getStringExtra("name");
+			if(!StringUtils.isEmpty(name)){
+				et_phone.setText(name);
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	
 }
