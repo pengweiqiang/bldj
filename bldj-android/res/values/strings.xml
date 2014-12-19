@@ -153,6 +153,7 @@
     <string name="input_company_name">请输入企业名称</string>
     <string name="input_contact">请输入联系方式</string>
     <string name="input_contactor">请输入联系人</string>
+    <string name="username">姓名：</string>
     <string name="pay_by_wx">通过微信支付</string>
     <string name="check_pay">检查微信版本是否支持支付</string>
     <string name="input_reqkey">输入reqkey</string>
