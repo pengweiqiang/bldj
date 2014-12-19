@@ -127,7 +127,8 @@ public class ActionBar extends FrameLayout {
 			drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 			mRightTextActionTextView.setCompoundDrawables(drawable,null,null,null);
 		}
-		mRightTextActionTextView.setOnClickListener(listener);
+//		mRightTextActionTextView.setOnClickListener(listener);
+		mRightTextTitleView.setOnClickListener(listener);
 		mRightTextTitleView.setVisibility(View.VISIBLE);
 //		mRightTextActionTextView.setVisibility(View.VISIBLE);
 		mRightIconActionButton.setVisibility(View.INVISIBLE);
