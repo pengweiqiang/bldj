@@ -308,10 +308,12 @@ public class SellerPersonalActivity extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(SellerPersonalActivity.this,
-						SellerServiceActivity.class);
-				intent.putExtra("seller", sellerVo);
-				startActivity(intent);
+				if(checkIsLogin()){
+					Intent intent = new Intent(SellerPersonalActivity.this,
+							SellerServiceActivity.class);
+					intent.putExtra("seller", sellerVo);
+					startActivity(intent);
+				}
 			}
 		});
 
@@ -425,6 +427,21 @@ public class SellerPersonalActivity extends FragmentActivity {
 						}
 					}
 				});
+	}
+	
+	/**
+	 * 判断是否登录
+	 * 
+	 * @return
+	 */
+	private boolean checkIsLogin() {
+		if (MyApplication.getInstance().getCurrentUser() == null) {
+			Intent intent = new Intent(this,
+					RegisterAndLoginActivity.class);
+			startActivity(intent);
+			return false;
+		}
+		return true;
 	}
 
 	/**
