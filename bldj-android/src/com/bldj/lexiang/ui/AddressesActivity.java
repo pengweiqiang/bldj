@@ -62,14 +62,14 @@ public class AddressesActivity extends BaseActivity{
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("常用地址");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						finish();
 					}
 				});
-		actionBar.setRightTextActionButton("添加", new OnClickListener() {
+		actionBar.setRightTextActionButton("", R.drawable.address_add, true, new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
