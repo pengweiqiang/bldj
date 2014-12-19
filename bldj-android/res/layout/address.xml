@@ -2,21 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
+        android:layout_marginBottom="10dip"
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
 
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c9c9c9"
+        />
     <ListView
         android:id="@+id/jlys_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_marginTop="2dip"
         android:divider="#00000000"
+        android:background="@color/white"
         android:listSelector="@android:color/transparent"
         android:visibility="gone" />
 
