@@ -10,18 +10,14 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="10dip"
-        android:layout_marginTop="10dip" >
+         >
     </com.bldj.lexiang.view.ActionBar>
- 	<View 
-        android:layout_width="match_parent"
-        android:layout_height="0.2dp"
-        android:background="@color/line"
-        />
    <RadioGroup
         android:id="@+id/rg_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/border"
+        android:layout_marginBottom="10dip"
         android:orientation="horizontal" >
 
         <RadioButton
@@ -30,6 +26,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dip"
             android:paddingBottom="10dip"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
             android:layout_weight="1"
             android:textColor="@color/title_tab_button_text"
             android:button="@android:color/transparent"
@@ -38,7 +36,7 @@
             android:gravity="center"
             android:text="给自己预约" />
         <View 
-            android:layout_width="1dp"
+            android:layout_width="1px"
             android:layout_height="match_parent"
             android:background="@color/line"
             android:layout_marginTop="5dip"
@@ -49,6 +47,8 @@
             android:id="@+id/radio_other"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginRight="8dip"
             android:layout_weight="1"
             android:paddingTop="10dip"
             android:background="@drawable/bg_tab_selector"
@@ -59,12 +59,11 @@
             android:text="给他人预约" /> 
 
     </RadioGroup>
-    <View 
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="@color/black"
-        />
-
+	<View 
+	    android:layout_width="match_parent"
+	    android:layout_height="1px"
+	    android:background="@color/line"
+	    />
     <com.bldj.lexiang.view.CustomViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
