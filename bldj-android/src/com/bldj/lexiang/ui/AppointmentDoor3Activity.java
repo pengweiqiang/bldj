@@ -366,7 +366,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		sb.append("partner=\"");
 		sb.append(payType.getPayId());
 		sb.append("\"&out_trade_no=\"");
-		sb.append(order.getOrderNum());
+		//out_trade_no：当前登录的用户id@理疗师id@订单号@优惠券id
+		sb.append(user.getUserId()+"-"+seller.getId()+"-"+order.getOrderNum()+"-"+(coupon==null?0:coupon.getId()));
 		sb.append("\"&subject=\"");
 		sb.append(order.getProName());
 		sb.append("\"&body=\"");
@@ -377,7 +378,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 //			sb.append(product.getOneword());
 //		}
 		sb.append("\"&total_fee=\"");
-		sb.append(String.valueOf(order.getOrderPay()));
+		sb.append(String.valueOf(/*order.getOrderPay()*/"0.01"));
 		sb.append("\"&notify_url=\"");
 
 		// 网址需要做URL编码
