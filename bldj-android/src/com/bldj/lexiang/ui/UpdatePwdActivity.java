@@ -45,7 +45,7 @@ public class UpdatePwdActivity extends BaseActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("修改密码");
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -76,14 +76,17 @@ public class UpdatePwdActivity extends BaseActivity {
 				String new_pwd = et_new_pwd.getText().toString().trim();
 				String new_pwd2 = et_new_pwd2.getText().toString().trim();
 				if(StringUtils.isEmpty(old_pwd)){
+					et_old_pwd.requestFocus();
 					ToastUtils.showToast(UpdatePwdActivity.this, "请输入旧密码");
 					return;
 				}
 				if(StringUtils.isEmpty(new_pwd)){
 					ToastUtils.showToast(UpdatePwdActivity.this, "请输入新密码");
+					et_new_pwd.requestFocus();
 					return;
 				}
 				if(StringUtils.isEmpty(new_pwd2)){
+					et_new_pwd2.requestFocus();
 					ToastUtils.showToast(UpdatePwdActivity.this, "请再次输入密码");
 					return;
 				}
