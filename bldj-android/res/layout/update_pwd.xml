@@ -2,82 +2,93 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_height="48dp" >
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip"
-        android:orientation="horizontal" >
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="0dip"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/input_old_pwd" />
+            android:layout_margin="10dip"
+            android:orientation="horizontal" >
 
-        <com.bldj.lexiang.view.ClearEditText
-            android:id="@+id/old_pwd"
-            android:layout_width="0dip"
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/input_old_pwd" />
+
+            <com.bldj.lexiang.view.ClearEditText
+                android:id="@+id/old_pwd"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_weight="1" />
+            android:layout_margin="10dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/input_new_pwd2" />
+
+            <com.bldj.lexiang.view.ClearEditText
+                android:id="@+id/new_pwd"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/input_new_pwd_again" />
+
+            <com.bldj.lexiang.view.ClearEditText
+                android:id="@+id/new_pwd2"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dip"
+            android:background="@drawable/btn_coners"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:text="@string/confirm_update"
+            android:textColor="@color/white" />
     </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip"
-        android:orientation="horizontal" >
 
-        <TextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/input_new_pwd2" />
-
-        <com.bldj.lexiang.view.ClearEditText
-            android:id="@+id/new_pwd"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_weight="1" />
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dip"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/input_new_pwd_again" />
-
-        <com.bldj.lexiang.view.ClearEditText
-            android:id="@+id/new_pwd2"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_weight="1" />
-    </LinearLayout>
-
-    
-    <Button 
-        android:id="@+id/btn_confirm"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dip"
-        android:layout_height="wrap_content"
-        android:text="@string/confirm_update"
-        android:layout_gravity="center"
-        />
-    
 </LinearLayout>
