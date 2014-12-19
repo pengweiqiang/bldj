@@ -42,6 +42,7 @@ import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
+import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.LoadingDialog;
@@ -102,8 +103,8 @@ public class OrderDetail2Activity extends BaseActivity {
 						finish();
 					}
 				});
-		actionBar.setRightTextActionButton("分享", new OnClickListener() {
-
+		actionBar.setRightTextActionButton("", R.drawable.btn_share, true, new View.OnClickListener() {
+			
 			@Override
 			public void onClick(View parent) {
 				buildTitleBar(parent);
@@ -287,7 +288,7 @@ public class OrderDetail2Activity extends BaseActivity {
 	
 	private void aliPay(final Order order) {
 		try {
-			Log.i("ExternalPartner", "onItemClick");
+//			Log.i("ExternalPartner", "onItemClick");
 			String info = getNewOrderInfo(order);
 			String sign = Rsa.sign(info, payType.getRsaPrivateKey());
 			sign = URLEncoder.encode(sign);
@@ -326,7 +327,8 @@ public class OrderDetail2Activity extends BaseActivity {
 		sb.append("partner=\"");
 		sb.append(payType.getPayId());
 		sb.append("\"&out_trade_no=\"");
-		sb.append(order.getOrderNum());
+//		sb.append(order.getOrderNum());
+		sb.append(URLEncoder.encode(user.getUserId()+"-"+order.getSellerId()+"-"+order.getOrderNum()+"-"+(StringUtils.isEmpty(order.getCouponsId())?0:order.getCouponsId())));
 		sb.append("\"&subject=\"");
 		sb.append(order.getProName());
 		sb.append("\"&body=\"");
