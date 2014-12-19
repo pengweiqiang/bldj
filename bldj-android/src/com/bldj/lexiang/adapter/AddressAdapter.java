@@ -120,7 +120,11 @@ public class AddressAdapter extends BaseListAdapter {
 
 			}
 		});
-
+		if(position %2==1){
+			convertView.setBackgroundColor(context.getResources().getColor(R.color.home_bg));
+		}else {
+			convertView.setBackgroundColor(context.getResources().getColor(R.color.white));
+		}
 		return convertView;
 	}
 
