@@ -388,6 +388,17 @@ public class ApiUserUtils {
 		params.put("dealDate", dealDate);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_MY_FILES,false, requestCallBack, MethodType.UPDATE, context);
 	}
+	/**
+	 * 获取验证码
+	 * @param context
+	 * @param mobile
+	 * @param requestCallBack
+	 */
+	public static void getCode(Context context,String mobile,RequestCallback requestCallBack){
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put("mobile", mobile);
+		ApiUtils.getParseModel(params, ReqUrls.GET_CODE,false, requestCallBack, MethodType.UPDATE, context);
+	}
 
 	// /**
 	// * 获取用户个人中心界面
