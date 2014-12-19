@@ -116,7 +116,7 @@
     <string name="orin_price">原价</string>
     <string name="download_fail">下载出错</string>
     <string name="price">单价:</string>
-    <string name="order_status">订单状态:</string>
+    <string name="order_status">订单状态：</string>
     <string name="send">赠送</string>
     <string name="introduction">简介：</string>
     <string name="related_recommendation">相关推荐：</string>
