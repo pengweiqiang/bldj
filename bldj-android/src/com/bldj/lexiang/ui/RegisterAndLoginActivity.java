@@ -52,14 +52,14 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register_login);
-
 		// initTabLine();
 
 		initView();
 
 		initListener();
+		
 	}
-
+	
 	/*
 	 * private void initTabLine() { // 获取显示屏信息 Display display =
 	 * getWindow().getWindowManager().getDefaultDisplay(); // 得到显示屏宽度
@@ -72,34 +72,7 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 	 * tabline.setLayoutParams(lp); }
 	 */
 
-	// // 登录
-	// btn_login.setOnClickListener(new View.OnClickListener() {
-	//
-	// @Override
-	// public void onClick(View arg0) {
-	// ApiUserUtils.login(
-	// RegisterAndLoginActivity.this.getApplicationContext(),
-	// "", "", new RequestCallback() {
-	//
-	// public void execute(ParseModel parseModel) {
-	// if (ApiConstants.RESULT_SUCCESS
-	// .equals(parseModel.getStatus())) {// 登录成功
-	// User user = JsonUtils.fromJson(parseModel
-	// .getData().toString(), User.class);
-	// user.getUsername();
-	//
-	// application.setUser(user);// 保存user全局
-	//
-	// } else if (NetUtil.NET_ERR == Integer
-	// .valueOf(parseModel.getStatus())) {// 网络异常
-	// DialogUtil.showToast(
-	// RegisterAndLoginActivity.this,
-	// parseModel.getMsg());
-	// }
-	// }
-	// });
-	// }
-	// });
+
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle("登录");
@@ -156,14 +129,6 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 
 			@Override
 			public void onPageSelected(int position) {
-				// 当页面被选择时，先讲3个textview的字体颜色初始化成黑
-				// tv1.setTextColor(Color.BLACK);
-				// tv2.setTextColor(Color.BLACK);
-				// tv3.setTextColor(Color.BLACK);
-				//
-				// // 再改变当前选择页（position）对应的textview颜色
-//				currentPage = position;
-//				mViewPager.setCurrentItem(position,false);
 				if(position == 0){
 					login_menu.setChecked(true);
 				}else if(position ==1){
