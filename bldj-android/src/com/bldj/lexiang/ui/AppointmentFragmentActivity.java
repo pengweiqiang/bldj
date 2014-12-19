@@ -59,7 +59,7 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 						finish();
 					}
 				});
-		actionBar.setRightTextActionButton("常用地址", R.drawable.common_address,false,new OnClickListener() {
+		actionBar.setRightTextActionButton("", R.drawable.common_address,true,new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
