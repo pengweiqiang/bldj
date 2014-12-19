@@ -3,6 +3,7 @@ package com.bldj.lexiang.view;
 import java.util.Random;
 
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.utils.DeviceInfo;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -100,13 +101,13 @@ public class CircleView extends View {
 		default:
 			break;
 		}
-		System.out.println("123:::::::::::::::::"+index);
 		p.setColor(color);// 设置红色
 
 //		canvas.drawText("画圆：", 10, 20, p);// 画文本
 //		canvas.drawCircle(60, 20, 10, p);// 小圆
+		int dp = DeviceInfo.px2dip(getContext(), 16);
 		p.setAntiAlias(true);// 设置画笔的锯齿效果。 true是去除，大家一看效果就明白了
-		canvas.drawCircle(13, 14, 10, p);// 大圆
+		canvas.drawCircle(DeviceInfo.dp2px(getContext(), 10), DeviceInfo.dp2px(getContext(), 11), DeviceInfo.dp2px(getContext(), 8), p);// 大圆
 
 	}
 }
