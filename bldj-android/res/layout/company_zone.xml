@@ -76,7 +76,7 @@
                     android:gravity="left"
                     android:text="@string/company_name" />
 
-                <EditText
+                <com.bldj.lexiang.view.ClearEditText
                     android:id="@+id/company_name"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
                     android:gravity="left"
                     android:text="@string/company_contact_type" />
 
-                <EditText
+                <com.bldj.lexiang.view.ClearEditText
                     android:id="@+id/company_contact_type"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     android:gravity="left"
                     android:text="@string/company_contact" />
 
-                <EditText
+                <com.bldj.lexiang.view.ClearEditText
                     android:id="@+id/company_contact"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                     android:gravity="left"
                     android:text="@string/company_address" />
 
-                <EditText
+                <com.bldj.lexiang.view.ClearEditText
                     android:id="@+id/company_address"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"

@@ -12,7 +12,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         >
-	    <EditText 
+	    <com.bldj.lexiang.view.ClearEditText 
 	        android:layout_weight="1"
 	        android:id="@+id/phone"
 	        android:layout_width="0dip"
@@ -31,7 +31,7 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="10dip"
         >
-     <EditText 
+     <com.bldj.lexiang.view.ClearEditText 
         android:id="@+id/password"
         android:layout_weight="1"
         android:layout_margin="10dip"

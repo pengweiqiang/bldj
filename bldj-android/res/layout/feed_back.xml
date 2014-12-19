@@ -15,7 +15,7 @@
         android:layout_margin="10dip"
         android:orientation="vertical"
         >
-    <EditText 
+    <com.bldj.lexiang.view.ClearEditText 
         android:id="@+id/suggestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -28,15 +28,17 @@
             android:layout_margin="10dip"
             android:orientation="horizontal" >
 
-            <EditText
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/phone"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="phone"
                 android:drawableLeft="@drawable/et_username"
+                android:drawableRight="@drawable/delete_selector"
                 android:gravity="center"
                 android:hint="@string/input_phone" />
+            
         </LinearLayout>
 
         <LinearLayout
@@ -45,7 +47,7 @@
             android:layout_margin="10dip"
             android:orientation="horizontal" >
 
-            <EditText
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/code"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
@@ -70,7 +72,7 @@
             android:layout_margin="10dip"
             android:orientation="horizontal" >
 
-            <EditText
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/new_pwd"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
