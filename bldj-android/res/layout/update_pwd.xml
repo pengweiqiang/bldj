@@ -22,7 +22,7 @@
             android:layout_weight="0.5"
             android:text="@string/input_old_pwd" />
 
-        <EditText
+        <com.bldj.lexiang.view.ClearEditText
             android:id="@+id/old_pwd"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:layout_weight="0.5"
             android:text="@string/input_new_pwd2" />
 
-        <EditText
+        <com.bldj.lexiang.view.ClearEditText
             android:id="@+id/new_pwd"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_weight="0.5"
             android:text="@string/input_new_pwd_again" />
 
-        <EditText
+        <com.bldj.lexiang.view.ClearEditText
             android:id="@+id/new_pwd2"
             android:layout_width="0dip"
             android:layout_height="wrap_content"

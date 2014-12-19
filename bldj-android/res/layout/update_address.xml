@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/contact_name" />
 
-            <EditText
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/contact_name"
                 android:paddingLeft="110dip"
                 android:editable="false"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/contact_phone" />
 
-            <EditText
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/contact_phone"
                 android:editable="false"
                 android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/company_address" />
 
-            <EditText
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/contact_address"
                 android:layout_width="match_parent"
                 android:paddingLeft="110dip"

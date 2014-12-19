@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <EditText
+    <com.bldj.lexiang.view.ClearEditText
         android:id="@+id/searchC"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
