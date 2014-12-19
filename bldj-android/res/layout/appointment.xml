@@ -33,6 +33,7 @@
             android:layout_weight="1"
             android:textColor="@color/title_tab_button_text"
             android:button="@android:color/transparent"
+            android:background="@drawable/bg_tab_selector"
             android:checked="true"
             android:gravity="center"
             android:text="给自己预约" />
@@ -40,8 +41,8 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="@color/line"
-            android:layout_marginTop="4dip"
-            android:layout_marginBottom="4dip"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
             />
 
         <RadioButton
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingTop="10dip"
-            
+            android:background="@drawable/bg_tab_selector"
             android:paddingBottom="10dip"
             android:textColor="@color/title_tab_button_text"
             android:button="@android:color/transparent"
