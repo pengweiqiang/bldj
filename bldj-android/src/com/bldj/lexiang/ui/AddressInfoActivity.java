@@ -57,14 +57,14 @@ public class AddressInfoActivity extends BaseActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle(title);
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back,
+		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
-		actionBar.setRightTextActionButton("完成", new OnClickListener() {
+		actionBar.setRightTextActionButton("", R.drawable.add_finish, true, new OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
@@ -72,14 +72,17 @@ public class AddressInfoActivity extends BaseActivity {
 				String address = et_contact_address.getText().toString().trim();
 				String phone = et_contact_phone.getText().toString().trim();
 				if(StringUtils.isEmpty(name)){
+					et_contact_name.requestFocus();
 					ToastUtils.showToast(AddressInfoActivity.this, "联系人姓名不能为空！");
 					return;
 				}
 				if(StringUtils.isEmpty(phone)){
+					et_contact_phone.requestFocus();
 					ToastUtils.showToast(AddressInfoActivity.this, "手机号码不能为空！");
 					return;
 				}
 				if(StringUtils.isEmpty(address)){
+					et_contact_address.requestFocus();
 					ToastUtils.showToast(AddressInfoActivity.this, "详细地址不能为空！");
 					return;
 				}
