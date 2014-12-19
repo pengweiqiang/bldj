@@ -62,6 +62,8 @@ public class LoginFragment extends BaseFragment {
 		tv_forgetPwd = (TextView)infoView.findViewById(R.id.forget_pwd);
 		btn_login = (Button)infoView.findViewById(R.id.login);
 		
+		et_phone.requestFocus();
+		
 	}
 	/**
 	 * 事件初始化
