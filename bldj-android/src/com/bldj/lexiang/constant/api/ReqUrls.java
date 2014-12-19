@@ -137,6 +137,10 @@ public interface ReqUrls {
 	 */
 	public static final String CHECK_CODE = "/user/checkCode";
 	/**
+	 * 获取验证码
+	 */
+	public static final String GET_CODE = "/user/getVerifiCode";
+	/**
 	 * 获取精品及热门推荐接口
 	 */
 	public static final String REQUEST_HOT_PRODUCT = "/pro/getProducts";
