@@ -378,7 +378,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 //			sb.append(product.getOneword());
 //		}
 		sb.append("\"&total_fee=\"");
-		sb.append(String.valueOf(/*order.getOrderPay()*/"0.01"));
+		sb.append(String.valueOf(order.getOrderPay()));
 		sb.append("\"&notify_url=\"");
 
 		// 网址需要做URL编码
