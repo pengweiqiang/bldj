@@ -18,9 +18,16 @@ public class Order  implements Serializable{
 	private String sellerName;//卖家名称
 	private long sellerId;//卖家id
 	private int payType;//支付方式
+	private String couponsId;//优惠卷id
 	
 	
 	
+	public String getCouponsId() {
+		return couponsId;
+	}
+	public void setCouponsId(String couponsId) {
+		this.couponsId = couponsId;
+	}
 	public long getSellerId() {
 		return sellerId;
 	}
