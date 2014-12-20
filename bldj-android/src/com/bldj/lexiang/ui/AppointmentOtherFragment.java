@@ -31,7 +31,7 @@ import com.bldj.lexiang.view.CustomerSpinner;
 public class AppointmentOtherFragment extends BaseFragment {
 
 	View infoView;
-	private Button btn_contact;
+	private TextView btn_contact;
 	private Button btn_next;
 	private EditText et_contactName;
 	private EditText et_contactPhone;
@@ -67,7 +67,7 @@ public class AppointmentOtherFragment extends BaseFragment {
 	 * 初始化控件
 	 */
 	private void initView() {
-		btn_contact = (Button) infoView.findViewById(R.id.contacts);
+		btn_contact = (TextView) infoView.findViewById(R.id.contacts);
 		btn_next = (Button) infoView.findViewById(R.id.btn_next);
 		et_contactName = (EditText) infoView.findViewById(R.id.contact_name);
 		et_contactPhone = (EditText) infoView.findViewById(R.id.contact_phone);
