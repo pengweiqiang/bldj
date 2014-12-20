@@ -32,14 +32,17 @@
                 android:hint="@string/input_contact_name"
                 android:layout_weight="1"
                 />
-            <Button 
+            <TextView 
                 android:id="@+id/contacts"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:text="联系人"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="通讯录"
                 android:textSize="13sp"
-                android:textColor="@color/white"
-                android:background="@drawable/btn_coners"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="@color/app_title_color"
+                android:background="@drawable/btn_address"
                 />
             
             
