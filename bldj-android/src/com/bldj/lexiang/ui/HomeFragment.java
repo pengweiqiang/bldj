@@ -94,7 +94,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 	private LinearLayout tab_find, tab_company, tab_reserve;
 
-	private PopupWindow popupWindow;
 	private View view;
 	private ListView lv_group;
 	private List<TitleBarEnum> groups;
@@ -249,14 +248,19 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			groups.add(TitleBarEnum.SHARE);
 			groups.add(TitleBarEnum.ZHAOPIN);
 		}
-		if (popupWindow == null) {
+		final PopupWindow popupWindow;
+//		if (popupWindow == null) {
 			view = LayoutInflater.from(mActivity).inflate(R.layout.group_list,
 					null);
 			lv_group = (ListView) view.findViewById(R.id.lvGroup);
+			if(index == 0){
+				popupWindow = new PopupWindow(view, parent.getWidth()+20, LayoutParams.WRAP_CONTENT);
+			}else{
+				popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
+						- parent.getWidth(), LayoutParams.WRAP_CONTENT);
+			}
 			
-			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
-					- parent.getWidth(), LayoutParams.WRAP_CONTENT);
-		}
+//		}
 		GroupAdapter groupAdapter = new GroupAdapter(mActivity, groups);
 		lv_group.setAdapter(groupAdapter);
 		popupWindow.setFocusable(true);
@@ -265,7 +269,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
 		if(index == 0){
-			popupWindow.showAsDropDown(parent, 0, 0);
+			popupWindow.showAsDropDown(parent);
 		}else{
 			popupWindow.showAsDropDown(parent);
 		}
