@@ -110,6 +110,8 @@
                     android:id="@+id/appointseller"
                     android:layout_width="wrap_content"
                     android:layout_height="30dip"
+                    android:paddingLeft="2dp"
+                    android:paddingRight="2dp"
                     android:text="我要预约他"
                     android:textColor="@color/white"
                     android:background="@drawable/btn_coners"
@@ -135,22 +137,24 @@
                      />
                 <RatingBar  android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
-                android:layout_height="13dp"
-                android:layout_gravity="bottom"
-                android:numStars="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:paddingTop="1dip"
                 style="@style/MyRatingBar"
-                android:visibility="visible"
                 />
-
                 <TextView
                     android:id="@+id/order_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/level"
+                    android:layout_alignRight="@+id/ratingBar"
                      android:textSize="12sp"
                      android:layout_marginLeft="6dip"
                      android:textColor="@color/grey"
                     android:text="共接单21次" />
+
+                
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
