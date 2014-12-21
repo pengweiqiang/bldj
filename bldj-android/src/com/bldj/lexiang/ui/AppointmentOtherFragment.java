@@ -1,6 +1,7 @@
 package com.bldj.lexiang.ui;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -19,8 +20,11 @@ import android.widget.TextView;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
+import com.bldj.lexiang.utils.DateUtil;
 import com.bldj.lexiang.utils.StringUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.CustomerSpinner;
+import com.bldj.lexiang.view.DateTimePickDialogUtil;
 
 /**
  * 为他人预约
@@ -35,7 +39,7 @@ public class AppointmentOtherFragment extends BaseFragment {
 	private Button btn_next;
 	private EditText et_contactName;
 	private EditText et_contactPhone;
-	private TextView btn_time;
+	private Button btn_time;
 	private TextView tv_address_detail;
 	private TextView btn_city;
 	private Button btn_location;
@@ -73,10 +77,10 @@ public class AppointmentOtherFragment extends BaseFragment {
 		et_contactPhone = (EditText) infoView.findViewById(R.id.contact_phone);
 		tv_address_detail = (TextView) infoView
 				.findViewById(R.id.contact_address);
-		btn_time = (TextView) infoView.findViewById(R.id.btn_appoint_time);
+		btn_time = (Button) infoView.findViewById(R.id.btn_appoint_time);
 		btn_city = (Button) infoView.findViewById(R.id.btn_city);
 		btn_location = (Button) infoView.findViewById(R.id.btn_location);
-		
+		btn_time.setTag(false);
 		
 		spinner = (CustomerSpinner)infoView.findViewById(R.id.spinner_city);
 		citys.add(TitleBarEnum.CITY_BEIJING.getMsg());
@@ -105,6 +109,23 @@ public class AppointmentOtherFragment extends BaseFragment {
 
 			@Override
 			public void onClick(View v) {
+				String contactName = et_contactName.getText().toString().trim();
+				if(StringUtils.isEmpty(contactName)){
+					et_contactName.requestFocus();
+					ToastUtils.showToast(mActivity, "请输入联系人的姓名");
+					return;
+				}
+				String contactPhone = et_contactPhone.getText().toString().trim();
+				if(StringUtils.isEmpty(contactPhone)){
+					et_contactPhone.requestFocus();
+					ToastUtils.showToast(mActivity, "请输入联系人的手机号码");
+					return;
+				}
+				if(!(Boolean)btn_time.getTag()){
+					btn_time.requestFocus();
+					ToastUtils.showToast(mActivity, "请选择预约时间");
+					return;
+				}
 				Intent intent = new Intent(mActivity,
 						JLYSFragmentActivity.class);
 				startActivity(intent);
@@ -116,6 +137,15 @@ public class AppointmentOtherFragment extends BaseFragment {
 			public void onClick(View arg0) {
 				Intent intent = new Intent(mActivity,MapLocationActivity.class);
 				startActivityForResult(intent, 123);
+			}
+		});
+		btn_time.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
+						mActivity, DateUtil.getDateString(new Date(), DateUtil.CUSTOM_PATTERN2));
+				dateTimePicKDialog.dateTimePicKDialog(btn_time);
 			}
 		});
 	}
