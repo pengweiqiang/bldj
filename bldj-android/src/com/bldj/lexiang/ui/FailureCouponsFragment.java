@@ -114,7 +114,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 							coupons.addAll(couponsList);
 
 							listAdapter.notifyDataSetChanged();
-							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"亲，你没有已失效优惠卷");
 						}
 
 					}
