@@ -1,90 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.bldj.lexiang.view.SpringScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:scrollbars="none" >
+    android:fillViewport="true"
+    android:scrollbars="none" > -->
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <LinearLayout 
-             android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/border"
-             android:padding="5dp"
-            >
-            <ImageView 
-	              android:layout_width="wrap_content"
-	              android:layout_height="wrap_content"
-	              android:layout_gravity="center"
-	              android:paddingLeft="10dip"
-	              android:paddingRight="10dip"
-	              android:src="@drawable/appoint_username"
-	              />
-            <com.bldj.lexiang.view.ClearEditText 
+            android:padding="5dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:src="@drawable/appoint_username" />
+
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/contact_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_contact_name"
                 android:layout_weight="1"
-                android:textSize="15sp"
-                />
-            <TextView 
+                android:hint="@string/input_contact_name"
+                android:textSize="15sp" />
+
+            <TextView
                 android:id="@+id/contacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dip"
-                android:text="通讯录"
-                android:textSize="13sp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="8dip"
                 android:layout_marginRight="2dip"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:textColor="@color/app_title_color"
                 android:background="@drawable/btn_address"
-                />
-            
-            
+                android:gravity="center"
+                android:padding="5dip"
+                android:text="通讯录"
+                android:textColor="@color/app_title_color"
+                android:textSize="13sp" />
         </LinearLayout>
-        
-        <LinearLayout 
-             android:layout_width="fill_parent"
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/border"
-            android:padding="5dp"
-            >
-            <ImageView 
-	              android:layout_width="wrap_content"
-	              android:layout_height="wrap_content"
-	              android:src="@drawable/appoint_phone"
-	              android:paddingLeft="10dip"
-	              android:paddingRight="10dip"
-	              android:layout_gravity="center"
-	              />
-            <com.bldj.lexiang.view.ClearEditText 
+            android:padding="5dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:src="@drawable/appoint_phone" />
+
+            <com.bldj.lexiang.view.ClearEditText
                 android:id="@+id/contact_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/input_contact_phone"
-                android:inputType="phone"
-                android:textSize="15sp"
                 android:layout_marginRight="10dip"
                 android:layout_weight="1"
-                />
-            
-            
+                android:hint="@string/input_contact_phone"
+                android:inputType="phone"
+                android:textSize="15sp" />
         </LinearLayout>
-        
+
         <Button
             android:id="@+id/btn_appoint_time"
             android:layout_width="fill_parent"
@@ -101,7 +96,8 @@
             android:padding="10dp"
             android:text="@string/select_appoint_time"
             android:textColor="@color/grey"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/btn_city"
@@ -120,21 +116,20 @@
             android:paddingTop="10dp"
             android:text="@string/select_city"
             android:textColor="@color/grey"
-            android:visibility="gone"
-            android:textSize="15sp" />
-        
-         <LinearLayout
+            android:textSize="15sp"
+            android:visibility="gone" />
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:padding="10dp"
-            android:gravity="center"
-            android:visibility="gone"
             android:background="@drawable/border"
-             >
+            android:gravity="center"
+            android:padding="10dp"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -143,13 +138,12 @@
 
             <com.bldj.lexiang.view.CustomerSpinner
                 android:id="@+id/spinner_city"
-                android:layout_weight="1"
-                android:background="@drawable/bg_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 />
-            
-             <ImageView
+                android:layout_weight="1"
+                android:background="@drawable/bg_spinner" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/btn_img_open" />
@@ -164,26 +158,62 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/border"
-            android:drawableLeft="@drawable/appoint_address"
-            android:drawablePadding="15dp"
+            android:drawableLeft="@drawable/appoint_gps"
+            android:drawablePadding="20dp"
             android:drawableRight="@drawable/btn_img_open"
             android:gravity="left|center"
-            android:padding="10dp"
-            android:text="@string/select_address"
+            android:padding="10dip"
+            android:hint="@string/select_location"
             android:textColor="@color/grey"
             android:textSize="15sp" />
 
         <ListView
             android:id="@+id/locations_list"
             android:layout_width="match_parent"
-            android:background="@color/home_bg"
             android:layout_height="130dip"
             android:layout_gravity="center"
-            android:layout_marginLeft="30dp"
+            android:layout_marginLeft="45dp"
             android:layout_marginRight="25dp"
-            android:layout_marginTop="2dp" >
+            android:layout_marginTop="2dp"
+            android:background="@color/home_bg" >
         </ListView>
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border"
+            android:padding="5dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="8dip"
+                android:paddingRight="8dip"
+                android:src="@drawable/appoint_address" />
+
+            <com.bldj.lexiang.view.ClearEditText
+                android:id="@+id/et_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:hint="@string/select_address"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/btn_img_open"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -205,11 +235,11 @@
 
                 <RadioButton
                     android:id="@+id/radio_service_head"
+                    style="@style/CustomRadioButtonTheme"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
                     android:text="养生"
-                    style="@style/CustomRadioButtonTheme"
                     android:textSize="@dimen/compnay_radio_textSize" >
                 </RadioButton>
             </RadioGroup>
@@ -218,12 +248,12 @@
         <Button
             android:id="@+id/btn_next"
             android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dip"
             android:background="@drawable/btn_coners"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:text="@string/next" />
+            android:text="@string/next"
+            android:textColor="@color/white" />
     </LinearLayout>
 
-</com.bldj.lexiang.view.SpringScrollView>
+<!-- </ScrollView> -->
