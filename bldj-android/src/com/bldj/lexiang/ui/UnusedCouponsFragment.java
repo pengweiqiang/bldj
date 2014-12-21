@@ -146,7 +146,7 @@ public class UnusedCouponsFragment extends BaseFragment implements
 
 							listAdapter.notifyDataSetChanged();
 							mListView.onLoadFinish(pageNumber,
-									listAdapter.getCount(), "加载完毕");
+									listAdapter.getCount(), "亲，你没有优惠卷");
 						}
 
 					}
