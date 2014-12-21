@@ -65,7 +65,7 @@
     <!-- 下载管理 -->
 	<color name="white">#ffffffff</color>  
 	<color name="line">#c9c9c9</color>
-	<color name="home_bg">#fff0f0f0</color> 
+	<color name="home_bg">#f0f0f0</color> 
     <color name="orange">#ffffdfd2</color> 
     <color name="update_all_dis_color">#ffbebebe</color>    
     <color name="common_text_color">#ff666666</color>
