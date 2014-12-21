@@ -102,6 +102,7 @@
         <!-- 我要预约 -->
         <activity
             android:name=".ui.AppointmentFragmentActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" >
         </activity>
         <!-- 上门预约1 -->
