@@ -95,12 +95,16 @@ public class JlysHealthAdapter extends BaseListAdapter {
 		holder.tv_order_count.setText(style);
 		if (seller.getDealnumSum() < 20) {
 			holder.tv_level.setNumStars(1);
+			holder.tv_level.setRating(1);
 		} else if (seller.getDealnumSum() >= 20 && seller.getDealnumSum() < 200) {
 			holder.tv_level.setNumStars(2);
+			holder.tv_level.setRating(2);
 		} else if (seller.getDealnumSum() >= 200) {
 			holder.tv_level.setNumStars(3);
+			holder.tv_level.setRating(3);
 		} else {
 			holder.tv_level.setNumStars(5);
+			holder.tv_level.setRating(5);
 		}
 
 		return convertView;
