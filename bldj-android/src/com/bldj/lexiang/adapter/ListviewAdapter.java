@@ -35,9 +35,9 @@ public class ListviewAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Object getItem(int arg0) {
+	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return arg0;
+		return list.get(position);
 	}
 
 	@Override
