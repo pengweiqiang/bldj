@@ -1,5 +1,8 @@
 package com.bldj.lexiang;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +12,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.MyLocationData;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
@@ -40,7 +42,9 @@ public class MyApplication extends Application {
 	public LocationClient mLocationClient;
 	public MyLocationListener mMyLocationListener;
 	public String addressStr = "";
-	public Seller sellerVo = null;
+	public Seller sellerVo = null;//当前选中的美容师
+	
+	public Map<String,String> appointMap = new HashMap<String, String>();//我要预约的时间，姓名等等
 
 	public static MyApplication getInstance() {
 		return myApplication;
