@@ -76,7 +76,7 @@ public class GroupAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.groupItem.setTextColor(Color.BLACK);
+		holder.groupItem.setTextColor(Color.WHITE);
 		holder.groupItem.setText(list.get(position).getMsg());
 		return convertView;
 	}
