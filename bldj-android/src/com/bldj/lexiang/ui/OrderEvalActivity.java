@@ -20,6 +20,7 @@ import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
 /**
@@ -40,6 +41,8 @@ public class OrderEvalActivity extends BaseActivity {
 	private TextView tv_sellerName;
 	private TextView tv_order_time;
 	ShareUtil shareUtil;
+	
+	LoadingDialog loading;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,17 +121,20 @@ public class OrderEvalActivity extends BaseActivity {
 				}else if(checkId ==R.id.radio_bad){
 					checkId = 2;
 				}
-					
+				loading = new LoadingDialog(mContext);
+				loading.show();
 				ApiUserUtils.unifor(OrderEvalActivity.this, userId, suggestion, 2, nickname, username, 
 						String.valueOf(order.getOrderNum()), order.getProName(), order.getSellerName(),checkId , order.getSellerId(), new HttpConnectionUtil.RequestCallback(){
 
 							@Override
 							public void execute(ParseModel parseModel) {
+								loading.cancel();
 								if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 										.getStatus())) {
 									ToastUtils.showToast(OrderEvalActivity.this, parseModel.getMsg());
 								}else{
 									ToastUtils.showToast(OrderEvalActivity.this, "感谢您提出宝贵的意见");
+									finish();
 								}
 							}
 					
