@@ -9,6 +9,7 @@
            android:layout_margin="2dp"
             android:layout_width="wrap_content"  
             android:text="理疗师招聘"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
              />  
