@@ -3,6 +3,10 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.HomeAdapter;
@@ -14,14 +18,8 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
-import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
-
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ProgressBar;
 
 /**
  * 美容师个人的服务项目
