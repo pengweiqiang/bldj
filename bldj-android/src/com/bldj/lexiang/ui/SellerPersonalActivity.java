@@ -4,50 +4,42 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
-import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.api.ApiSellerUtils;
 import com.bldj.lexiang.api.vo.Evals;
 import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
-import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.db.DatabaseUtil;
-import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.ActionItem;
 import com.bldj.lexiang.view.CustomViewPager;
 import com.bldj.lexiang.view.LoadingDialog;
+import com.bldj.lexiang.view.TitlePopup;
+import com.bldj.lexiang.view.TitlePopup.OnItemOnClickListener;
 import com.bldj.universalimageloader.core.ImageLoader;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
@@ -57,7 +49,7 @@ import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
  * @author will
  * 
  */
-public class SellerPersonalActivity extends FragmentActivity {
+public class SellerPersonalActivity extends FragmentActivity{
 
 	private ImageView imageHead;
 	private TextView tv_username;
@@ -84,11 +76,10 @@ public class SellerPersonalActivity extends FragmentActivity {
 
 	ShareUtil shareUtil;
 
-	private PopupWindow popupWindow;
-	private View view;
-	private ListView lv_group;
-	private List<TitleBarEnum> groups;
 	LoadingDialog loading;
+	
+	//定义标题栏弹窗按钮
+	private TitlePopup titlePopup;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -344,30 +335,17 @@ public class SellerPersonalActivity extends FragmentActivity {
 	}
 
 	private void buildTitleBar(View parent) {
-		DeviceInfo.setContext(this);
-		groups = new ArrayList<TitleBarEnum>();
-		groups.add(TitleBarEnum.SELLER_FAV);
-		groups.add(TitleBarEnum.SELLER_SHARE);
-		if (popupWindow == null) {
-			view = LayoutInflater.from(this).inflate(R.layout.group_list, null);
-			lv_group = (ListView) view.findViewById(R.id.lvGroup);
+		//实例化标题栏弹窗
+		titlePopup = new TitlePopup(this, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		//给标题栏弹窗添加子类
+		titlePopup.addAction(new ActionItem(this, "收藏", R.drawable.seller_sc));
+		titlePopup.addAction(new ActionItem(this, "分享", R.drawable.seller_share));
+		titlePopup.show(parent);
+		titlePopup.setItemOnClickListener(new OnItemOnClickListener() {
 
-			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
-					- parent.getWidth(), LayoutParams.WRAP_CONTENT);
-		}
-		GroupAdapter groupAdapter = new GroupAdapter(this, groups);
-		lv_group.setAdapter(groupAdapter);
-		popupWindow.setFocusable(true);
-		popupWindow.setOutsideTouchable(true);
-		popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-		 popupWindow.showAsDropDown(parent, 0, 0);
-//		popupWindow.showAsDropDown(parent);
-		lv_group.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view,
-					int position, long id) {
-				if (position == 0) {
+			public void onItemClick(ActionItem item, int position) {
+				if(position==0){
 					if (!isFav) {
 						long row = DatabaseUtil.getInstance(
 								SellerPersonalActivity.this).insertSeller(
@@ -395,16 +373,13 @@ public class SellerPersonalActivity extends FragmentActivity {
 									"取消收藏失败，稍后请重试！");
 						}
 					}
-				} else {
-					ToastUtils
-							.showToast(SellerPersonalActivity.this, "分享微信...");
+				}else{
+					ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
 					shareUtil.sendMsgToWX("健康送到家，方便你我他",
-							SendMessageToWX.Req.WXSceneTimeline);
-				}
-				if (popupWindow != null) {
-					popupWindow.dismiss();
+					SendMessageToWX.Req.WXSceneTimeline);
 				}
 			}
+			
 		});
 	}
 
