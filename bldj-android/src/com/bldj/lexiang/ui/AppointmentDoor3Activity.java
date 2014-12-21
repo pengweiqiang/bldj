@@ -84,6 +84,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private List<PayType> payTypeList;// 支付方式
 	private ListView mListView;
 	private PayTypeAdapter listAdapter;
+	
+	Order order = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -157,48 +159,72 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				if (listAdapter.getCheckPosition() == -1) {
-					ToastUtils.showToast(mContext, "请选择支付方式");
+				if(order !=null){//已经有订单号，防止重复下单
+					if(payType.getCode() == 1){//支付宝支付
+						aliPay(order);
+					}else if(payType.getCode() == 2){//银联支付
+						
+					}
+					
 					return;
 				}
-				payType = payTypeList.get(listAdapter.getCheckPosition());
-				String serviceTime = time.substring(0, time.indexOf(" ")) + "@"
-						+ timeIndex;
-				long couponId = 0;
-				if (coupon != null) {
-					couponId = coupon.getId();
-				}
-
-				ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
-						user.getUserId(), user.getUsername(), seller.getId(),
-						seller.getNickname(), product.getId(),
-						product.getName(), orderPay, user.getUsername(), 1,
-						user.getUsername(), user.getMobile(), detailAddress,
-						"", payType.getCode(), couponId, serviceTime,
-						new HttpConnectionUtil.RequestCallback() {
-							@Override
-							public void execute(ParseModel parseModel) {
-								if (!ApiConstants.RESULT_SUCCESS
-										.equals(parseModel.getStatus())) {
-									ToastUtils.showToast(
-											AppointmentDoor3Activity.this,
-											parseModel.getMsg());
-									return;
-
-								} else {
-									Order order = (Order) JsonUtils.fromJson(
-											parseModel.getData().toString(),
-											Order.class);
-									if(payType.getCode() == 1){//支付宝支付
-										aliPay(order);
-									}else if(payType.getCode() == 2){//银联支付
-										
+					if (listAdapter.getCheckPosition() == -1) {
+						ToastUtils.showToast(mContext, "请选择支付方式");
+						return;
+					}
+					payType = payTypeList.get(listAdapter.getCheckPosition());
+					String serviceTime = time.substring(0, time.indexOf(" ")) + "@"
+							+ timeIndex;
+					long couponId = 0;
+					if (coupon != null) {
+						couponId = coupon.getId();
+					}
+					String contactor = user.getUsername();
+					String mobile = user.getMobile();
+					if(!MyApplication.getInstance().appointMap.isEmpty()){//从首页我要预约进入下单
+						if(MyApplication.getInstance().appointMap.containsKey("address")){
+							detailAddress = MyApplication.getInstance().appointMap.get("address");
+						}
+						if(MyApplication.getInstance().appointMap.containsKey("contactor")){
+							contactor = MyApplication.getInstance().appointMap.get("contactor");
+						}
+						if(MyApplication.getInstance().appointMap.containsKey("mobile")){
+							mobile = MyApplication.getInstance().appointMap.get("mobile");
+						}
+					}
+	
+					ApiBuyUtils.createOrder(AppointmentDoor3Activity.this,
+							user.getUserId(), user.getUsername(), seller.getId(),
+							seller.getNickname(), product.getId(),
+							product.getName(), orderPay, user.getUsername(), 0,
+							contactor, mobile, detailAddress,
+							"", payType.getCode(), couponId, serviceTime,
+							new HttpConnectionUtil.RequestCallback() {
+								@Override
+								public void execute(ParseModel parseModel) {
+									if (!ApiConstants.RESULT_SUCCESS
+											.equals(parseModel.getStatus())) {
+										ToastUtils.showToast(
+												AppointmentDoor3Activity.this,
+												parseModel.getMsg());
+										return;
+	
+									} else {//下单成功
+										MyApplication.getInstance().appointMap.clear();
+										order = (Order) JsonUtils.fromJson(
+												parseModel.getData().toString(),
+												Order.class);
+										if(payType.getCode() == 1){//支付宝支付
+											aliPay(order);
+										}else if(payType.getCode() == 2){//银联支付
+											
+										}
+										return;
 									}
-									return;
 								}
-							}
-						});
-
+							});
+	
+				
 			}
 		});
 
@@ -228,9 +254,14 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									return;
 
 								} else {
-									System.out.println(parseModel.getData()
-											.toString());
-									codePrice = 12;
+//									System.out.println(parseModel.getData()
+//											.toString());
+									try{
+										codePrice = Double.valueOf((parseModel.getData().getAsString()));
+									}catch(Exception e){
+										codePrice = 0;
+										ToastUtils.showToast(mContext, e.toString());
+									}
 									showOrderPay(2);
 								}
 							}

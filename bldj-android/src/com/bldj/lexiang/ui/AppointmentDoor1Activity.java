@@ -111,7 +111,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 					ToastUtils.showToast(mContext, "请选择时间");
 					return;
 				}
-				if (StringUtils.isEmpty(address)) {
+				if (StringUtils.isEmpty(address) || "null".equals(address)) {
 					ToastUtils.showToast(mContext, "请选择地址");
 					return;
 				}

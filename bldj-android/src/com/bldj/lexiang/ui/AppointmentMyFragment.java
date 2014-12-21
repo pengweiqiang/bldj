@@ -11,12 +11,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.ListviewAdapter;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.utils.DateUtil;
+import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.CustomerSpinner;
@@ -34,10 +37,10 @@ public class AppointmentMyFragment extends BaseFragment {
 	private Button btn_next;
 
 	
-	Button btn_address;
+	EditText et_address;
 	Button btn_location;
 	Button btn_time;
-	String address;
+//	String address;//预约地点
 	ListView locatioListView;
 	ArrayList<String> locationList;
 	ListviewAdapter listadapter;
@@ -47,7 +50,7 @@ public class AppointmentMyFragment extends BaseFragment {
 	private ArrayAdapter<String> adapter;
 	
 	
-	private String time;
+	private String time;//预约时间
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -70,14 +73,14 @@ public class AppointmentMyFragment extends BaseFragment {
 	 */
 	private void initView(){
 		btn_next = (Button)infoView.findViewById(R.id.btn_next);
-		btn_address = (Button)infoView.findViewById(R.id.btn_address);
+		et_address = (EditText)infoView.findViewById(R.id.btn_address);
 		btn_location = (Button)infoView.findViewById(R.id.btn_location);
 		btn_time = (Button) infoView.findViewById(R.id.btn_appoint_time);
 		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
 		btn_time.setTag(false);
 		
 		btn_location.setText(MyApplication.getInstance().addressStr);
-		btn_address.setText(MyApplication.getInstance().addressStr);
+//		btn_address.setText(MyApplication.getInstance().addressStr);
 		
 		//城市
 //		spinner = (CustomerSpinner)infoView.findViewById(R.id.spinner_city);
@@ -108,6 +111,7 @@ public class AppointmentMyFragment extends BaseFragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long arg3) {
 				listadapter.setCurrentItem(position);
+				et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
 			}
 			
 		});
@@ -117,18 +121,21 @@ public class AppointmentMyFragment extends BaseFragment {
 			
 			@Override
 			public void onClick(View v) {
-				if(!(Boolean)btn_time.getTag()){
-					btn_time.requestFocus();
-					ToastUtils.showToast(mActivity, "请选择预约时间");
-					return;
-				}
-				String addressLocation = btn_address.getText().toString();
+				time = btn_time.getText().toString();
+//				if(!(Boolean)btn_time.getTag()){
+//					btn_time.requestFocus();
+//					ToastUtils.showToast(mActivity, "请选择预约时间");
+//					return;
+//				}
+				String addressLocation = et_address.getText().toString();
 				if(StringUtils.isEmpty(addressLocation)){
+					et_address.requestFocus();
 					ToastUtils.showToast(mActivity, "请输入预约地址");
 					return;
 				}
-				MyApplication.getInstance().appointMap.put("time", time);
-				MyApplication.getInstance().appointMap.put("address", address);
+//				MyApplication.getInstance().appointMap.put("time", time);
+				SharePreferenceManager.saveBatchSharedPreference(mActivity, Constant.FILE_NAME, "address",addressLocation);
+				MyApplication.getInstance().appointMap.put("address", addressLocation);
 				Intent intent = new Intent(mActivity,JLYSFragmentActivity.class);
 				startActivity(intent);
 			}
@@ -137,8 +144,8 @@ public class AppointmentMyFragment extends BaseFragment {
 			
 			@Override
 			public void onClick(View arg0) {
-				Intent intent = new Intent(mActivity,MapLocationActivity.class);
-				startActivityForResult(intent, 123);
+//				Intent intent = new Intent(mActivity,MapLocationActivity.class);
+//				startActivityForResult(intent, 123);
 			}
 		});
 		btn_time.setOnClickListener(new View.OnClickListener() {
@@ -152,16 +159,16 @@ public class AppointmentMyFragment extends BaseFragment {
 		});
 	}
 
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(resultCode == 20){
-			address = data.getStringExtra("address");
-			if(!StringUtils.isEmpty(address)){
-				btn_location.setText(address);
-			}
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}
+//	@Override
+//	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		if(resultCode == 20){
+//			address = data.getStringExtra("address");
+//			if(!StringUtils.isEmpty(address)){
+//				btn_location.setText(address);
+//			}
+//		}
+//		super.onActivityResult(requestCode, resultCode, data);
+//	}
 	
 	
 	
