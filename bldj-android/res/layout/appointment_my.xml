@@ -108,11 +108,12 @@
         <ListView
             android:id="@+id/locations_list"
             android:layout_width="match_parent"
-            android:layout_height="100dip"
+            android:background="@color/home_bg"
+            android:layout_height="130dip"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp" >
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="2dp" >
         </ListView>
 
         <Button
@@ -128,8 +129,8 @@
             android:drawablePadding="15dp"
             android:drawableRight="@drawable/btn_img_open"
             android:gravity="left|center"
+            android:hint="@string/select_address"
             android:padding="10dp"
-            android:text="@string/select_address"
             android:textColor="@color/grey"
             android:textSize="15sp" />
 

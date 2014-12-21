@@ -187,9 +187,6 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_launcher" />
         </LinearLayout>
-        </LinearLayout>
-        </com.bldj.lexiang.view.SpringScrollView>
-
         <Button
             android:id="@+id/btn_confirm"
             android:layout_width="150dip"
@@ -198,5 +195,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/submit" />
+        </LinearLayout>
+        
+        </com.bldj.lexiang.view.SpringScrollView>
+
+        
     </LinearLayout>
 
