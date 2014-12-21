@@ -23,6 +23,8 @@
 	              android:layout_width="wrap_content"
 	              android:layout_height="wrap_content"
 	              android:layout_gravity="center"
+	              android:paddingLeft="10dip"
+	              android:paddingRight="10dip"
 	              android:src="@drawable/appoint_username"
 	              />
             <com.bldj.lexiang.view.ClearEditText 
@@ -31,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/input_contact_name"
                 android:layout_weight="1"
+                android:textSize="15sp"
                 />
             <TextView 
                 android:id="@+id/contacts"
@@ -39,6 +42,8 @@
                 android:padding="5dip"
                 android:text="通讯录"
                 android:textSize="13sp"
+                android:layout_marginLeft="8dip"
+                android:layout_marginRight="2dip"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/app_title_color"
@@ -62,6 +67,8 @@
 	              android:layout_width="wrap_content"
 	              android:layout_height="wrap_content"
 	              android:src="@drawable/appoint_phone"
+	              android:paddingLeft="10dip"
+	              android:paddingRight="10dip"
 	              android:layout_gravity="center"
 	              />
             <com.bldj.lexiang.view.ClearEditText 
@@ -70,6 +77,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/input_contact_phone"
                 android:inputType="phone"
+                android:textSize="15sp"
+                android:layout_marginRight="10dip"
                 android:layout_weight="1"
                 />
             
@@ -167,11 +176,12 @@
         <ListView
             android:id="@+id/locations_list"
             android:layout_width="match_parent"
-            android:layout_height="100dip"
+            android:background="@color/home_bg"
+            android:layout_height="130dip"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp" >
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="2dp" >
         </ListView>
 
 
