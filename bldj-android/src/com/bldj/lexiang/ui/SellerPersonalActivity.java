@@ -176,15 +176,19 @@ public class SellerPersonalActivity extends FragmentActivity {
 		if (sellerVo.getDealnumSum() < 20) {
 			// levelStr = "★";
 			star_ratingbar.setNumStars(1);
+			star_ratingbar.setRating(1);
 		} else if (sellerVo.getDealnumSum() >= 20
 				&& sellerVo.getDealnumSum() < 200) {
 			star_ratingbar.setNumStars(2);
+			star_ratingbar.setRating(2);
 		} else if (sellerVo.getDealnumSum() >= 200) {
 			// levelStr = "★★";
 			star_ratingbar.setNumStars(3);
+			star_ratingbar.setRating(3);
 		} else {
 			// levelStr = "★★★★";
 			star_ratingbar.setNumStars(5);
+			star_ratingbar.setRating(5);
 		}
 		// tv_level.setText(levelStr);
 		tv_work.setText("年龄：" + sellerVo.getUserGrade());
