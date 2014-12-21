@@ -93,10 +93,11 @@
 
                 <RatingBar  android:id="@+id/level"
                 android:layout_width="wrap_content"
-                android:layout_height="13dp"
+                android:layout_height="wrap_content"
                 android:numStars="1"
                 android:focusable="false"
                 android:clickable="false"
+                android:isIndicator="true"
                 style="@style/MyRatingBar"
                 android:visibility="visible"
                 />
