@@ -357,8 +357,8 @@ public class SellerPersonalActivity extends FragmentActivity {
 		popupWindow.setOutsideTouchable(true);
 		popupWindow.setBackgroundDrawable(new BitmapDrawable());
 
-		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
-		popupWindow.showAsDropDown(parent);
+		 popupWindow.showAsDropDown(parent, 0, 0);
+//		popupWindow.showAsDropDown(parent);
 		lv_group.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view,
