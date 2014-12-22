@@ -45,6 +45,7 @@ public class MyApplication extends Application {
 	public Seller sellerVo = null;//当前选中的美容师
 	
 	public Map<String,String> appointMap = new HashMap<String, String>();//我要预约的时间，姓名等等
+	public String street = "";//当前街道地点
 
 	public static MyApplication getInstance() {
 		return myApplication;
@@ -147,6 +148,8 @@ public class MyApplication extends Application {
 			String district = location.getDistrict();
 			addressStr = location.getAddrStr();
 			radius = location.getRadius();
+			street = city+district+location.getStreet();
+			String streeNum = location.getStreetNumber();
 			System.out.println("province:" + province + "  city:" + city
 					+ "  district:" + district + "  addressStr:" + addressStr);
 			if (lat == location.getLatitude() && lon == location.getLongitude()) {
