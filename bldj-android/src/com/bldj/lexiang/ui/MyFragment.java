@@ -585,13 +585,9 @@ public class MyFragment extends BaseFragment {
 //							ToastUtils.showToast(mActivity, parseModel.getMsg());
 						} else {
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
-							user.setHeadurl(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+parseModel.getData().getAsString());
+							user.setHeadurl(parseModel.getData().getAsString());
 							MyApplication.getInstance().setUser(user);
-							ImageLoader.getInstance().displayImage(
-									user.getHeadurl(),
-									image_head,
-									MyApplication.getInstance().getOptions(
-											R.drawable.default_head_image));
+							initData();
 						}
 					}
 				});
