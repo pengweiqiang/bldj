@@ -27,9 +27,9 @@
             
         <com.bldj.lexiang.view.RoundImageView
                     android:id="@+id/head_img"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="10dip"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_marginLeft="5dip"
                     android:layout_marginRight="5dip"
                     android:layout_centerVertical="true"
                     android:src="@drawable/default_head_image"
