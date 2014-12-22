@@ -93,6 +93,16 @@ public class ForgetPwdActivity extends BaseActivity {
 					ToastUtils.showToast(ForgetPwdActivity.this, "请输入您的新密码");
 					return;
 				}
+				String tagCode = (String)et_code.getTag();
+				if(StringUtils.isEmpty(tagCode)){
+					ToastUtils.showToast(ForgetPwdActivity.this, "请先获取验证码");
+					return;
+				}
+				if(!code.equals(tagCode)){
+					et_code.requestFocus();
+					ToastUtils.showToast(ForgetPwdActivity.this, "验证码错误");
+					return;
+				}
 				loading = new LoadingDialog(mContext);
 				loading.show();
 				ApiUserUtils.forgetPwd(ForgetPwdActivity.this, phone, password,
@@ -146,7 +156,7 @@ public class ForgetPwdActivity extends BaseActivity {
 										String code = parseModel.getData()
 												.getAsString();
 										if (!StringUtils.isEmpty(code)) {
-											et_code.setText(code);
+											et_code.setTag(code);
 										}
 
 									} else {

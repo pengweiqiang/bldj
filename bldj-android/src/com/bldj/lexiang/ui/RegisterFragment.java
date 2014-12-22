@@ -98,6 +98,16 @@ public class RegisterFragment extends BaseFragment {
 					ToastUtils.showToast(mActivity, "密码不能为空");
 					return;
 				}
+				String tagCode = (String)et_code.getTag();
+				if(StringUtils.isEmpty(tagCode)){
+					ToastUtils.showToast(mActivity, "请先获取验证码");
+					return;
+				}
+				if(!code.equals(tagCode)){
+					et_code.requestFocus();
+					ToastUtils.showToast(mActivity, "验证码错误");
+					return;
+				}
 
 				loading = new LoadingDialog(mActivity, "注册中...");
 				loading.show();
@@ -153,7 +163,7 @@ public class RegisterFragment extends BaseFragment {
 										String code = parseModel.getData()
 												.getAsString();
 										if (!StringUtils.isEmpty(code)) {
-											et_code.setText(code);
+											et_code.setTag(code);
 										}
 	
 									} else {
