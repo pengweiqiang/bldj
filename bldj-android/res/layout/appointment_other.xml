@@ -149,7 +149,7 @@
                 android:src="@drawable/btn_img_open" />
         </LinearLayout>
 
-        <Button
+        <com.bldj.lexiang.view.ClearEditText
             android:id="@+id/btn_location"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -162,6 +162,7 @@
             android:drawablePadding="20dp"
             android:drawableRight="@drawable/btn_img_open"
             android:gravity="left|center"
+            android:enabled="false"
             android:padding="10dip"
             android:hint="@string/select_location"
             android:textColor="@color/grey"
