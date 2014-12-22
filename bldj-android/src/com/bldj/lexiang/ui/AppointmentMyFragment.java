@@ -131,7 +131,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		 */
 		mSuggestionSearch
 				.requestSuggestion((new SuggestionSearchOption())
-						.keyword(btn_location.getText().toString()).city(city));
+						.keyword(MyApplication.getInstance().street).city(city));
 		
 		//城市
 //		spinner = (CustomerSpinner)infoView.findViewById(R.id.spinner_city);
