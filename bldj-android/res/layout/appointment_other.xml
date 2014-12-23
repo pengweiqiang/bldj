@@ -163,6 +163,7 @@
             android:drawableRight="@drawable/btn_img_open"
             android:gravity="left|center"
             android:enabled="false"
+            android:clickable="false"
             android:padding="10dip"
             android:hint="@string/select_location"
             android:textColor="@color/grey"
