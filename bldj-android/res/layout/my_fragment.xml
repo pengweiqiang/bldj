@@ -16,7 +16,7 @@
         android:background="@drawable/border" >
     </com.bldj.lexiang.view.ActionBar>
 
-    <ScrollView
+    <com.bldj.lexiang.view.SpringScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:scrollbars="none" >
@@ -236,6 +236,6 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
         </LinearLayout>
-    </ScrollView>
+    </com.bldj.lexiang.view.SpringScrollView>
 
 </LinearLayout>
