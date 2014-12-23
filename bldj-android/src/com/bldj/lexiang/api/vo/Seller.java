@@ -26,6 +26,7 @@ public class Seller implements Serializable{
 	private int workyear;
 	private int dealnumSum;
 	private double distance;
+	private String detailUrl;
 	
 	
 	
@@ -106,6 +107,12 @@ public class Seller implements Serializable{
 	}
 	public void setDistance(double distance) {
 		this.distance = distance;
+	}
+	public String getDetailUrl() {
+		return detailUrl;
+	}
+	public void setDetailUrl(String detailUrl) {
+		this.detailUrl = detailUrl;
 	}
 	
 	
