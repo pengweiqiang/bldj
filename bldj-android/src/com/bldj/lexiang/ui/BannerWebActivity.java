@@ -113,7 +113,7 @@ public class BannerWebActivity extends BaseActivity {
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
 		actionBar.setTitle(name);
-		actionBar.setLeftActionButton(R.drawable.ic_menu_back, new View.OnClickListener() {
+		actionBar.setLeftActionButton(R.drawable.btn_back, new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
