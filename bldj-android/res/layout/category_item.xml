@@ -74,7 +74,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/category_image_height"
                 android:padding="1dip"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/eg" />
 
             <TextView
@@ -100,7 +100,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/category_image_height"
                 android:padding="2dip"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/eg" />
 
             <TextView
@@ -126,7 +126,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/category_image_height"
                 android:padding="2dip"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/eg" />
 
             <TextView
@@ -152,7 +152,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/category_image_height"
                 android:padding="2dip"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/eg" />
 
             <TextView
