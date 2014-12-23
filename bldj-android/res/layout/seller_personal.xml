@@ -110,12 +110,13 @@
                     android:id="@+id/appointseller"
                     android:layout_width="wrap_content"
                     android:layout_height="30dip"
-                    android:paddingLeft="2dp"
-                    android:paddingRight="2dp"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
                     android:text="我要预约他"
+                    android:textSize="15sp"
                     android:textColor="@color/white"
                     android:background="@drawable/btn_coners"
-                    android:textSize="12sp" />
+                     />
             </LinearLayout>
 
             <LinearLayout
@@ -191,7 +192,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
-            android:background="@color/home_bg"
+            android:background="@color/line"
             />
 
         <RadioButton
@@ -212,7 +213,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
-            android:background="@color/home_bg"
+            android:background="@color/line"
             />
 
         <RadioButton
