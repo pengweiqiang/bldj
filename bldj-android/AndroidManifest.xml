@@ -79,6 +79,11 @@
             android:name=".ui.SellerPersonalActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- 显示大头像 -->
+        <activity
+            android:name=".ui.ImageViewActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity android:name=".ui.SellerServiceActivity"
             android:screenOrientation="portrait"
             android:theme="@style/dialog"
