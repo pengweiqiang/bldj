@@ -111,6 +111,8 @@ public class OrderAdapter extends BaseListAdapter {
 					context.startActivity(intent);
 				}
 			});
+		}else{
+			holder.tv_eval.setVisibility(View.GONE);
 		}
 
 		return convertView;
