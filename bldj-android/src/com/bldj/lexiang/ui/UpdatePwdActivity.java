@@ -1,9 +1,11 @@
 package com.bldj.lexiang.ui;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -34,11 +36,12 @@ public class UpdatePwdActivity extends BaseActivity {
 	private EditText et_new_pwd2;
 	LoadingDialog loading;
 	
+	InputMethodManager manager ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.update_pwd);
 		
-		
+		manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); 
 		super.onCreate(savedInstanceState);
 	}
 
@@ -116,4 +119,14 @@ public class UpdatePwdActivity extends BaseActivity {
 		});
 	}
 
+	@Override  
+	 public boolean onTouchEvent(MotionEvent event) {  
+	  // TODO Auto-generated method stub  
+	  if(event.getAction() == MotionEvent.ACTION_DOWN){  
+	     if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){  
+	       manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
+	     }  
+	  }  
+	  return super.onTouchEvent(event);  
+	 } 
 }
