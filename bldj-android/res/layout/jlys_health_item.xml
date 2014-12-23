@@ -125,6 +125,8 @@
             android:layout_marginBottom="5dip"
             android:layout_marginLeft="4dip"
              android:layout_marginRight="3dip"
+             android:maxLines="3"
+             android:ellipsize="end"
             android:layout_toRightOf="@+id/headImage"
             android:text="毕业于北京中医药大学，10年理疗经验。擅长颈、肩、腰、背等，从师5年临床实验"
             android:textSize="12sp" />
