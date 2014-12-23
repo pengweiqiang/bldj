@@ -2,33 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
       <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
+        android:layout_margin="1dp"
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
     
-    <LinearLayout 
+    <FrameLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dip"
         android:orientation="vertical"
+        android:layout_marginTop="10dip"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
         >
     <com.bldj.lexiang.view.ClearEditText 
         android:id="@+id/suggestion"
+        android:background="@drawable/border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lines="9"
+        android:gravity="top"
+        android:padding="10dip"
+        android:hint="@string/input_suggestion"
         />
     <TextView 
+        android:id="@+id/tv_str_length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/input_suggestion"
+        android:textColor="@color/grey"
+        android:padding="5dp"
+        android:layout_gravity="bottom|right"
+        android:text="0/500"
         />
     
+    </FrameLayout>
     
-    </LinearLayout>
+    <Button 
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_coners"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:text="发送"
+        />
     
 
 </LinearLayout>
