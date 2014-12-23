@@ -338,7 +338,7 @@ public class SellerPersonalActivity extends FragmentActivity{
 		//实例化标题栏弹窗
 		titlePopup = new TitlePopup(this, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		//给标题栏弹窗添加子类
-		titlePopup.addAction(new ActionItem(this, "收藏", R.drawable.seller_sc));
+		titlePopup.addAction(new ActionItem(this, isFav?"已收藏":"收藏", R.drawable.seller_sc));
 		titlePopup.addAction(new ActionItem(this, "分享", R.drawable.seller_share));
 		titlePopup.show(parent);
 		titlePopup.setItemOnClickListener(new OnItemOnClickListener() {
