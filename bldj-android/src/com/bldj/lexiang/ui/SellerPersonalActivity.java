@@ -254,6 +254,16 @@ public class SellerPersonalActivity extends FragmentActivity{
 	}
 
 	public void initListener() {
+		imageHead.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(SellerPersonalActivity.this,ImageViewActivity.class);
+				intent.putExtra("url", sellerVo.getHeadurl());
+				intent.putExtra("name", sellerVo.getNickname());
+				startActivity(intent);
+			}
+		});
 		// 收藏
 		btn_collect.setOnClickListener(new View.OnClickListener() {
 

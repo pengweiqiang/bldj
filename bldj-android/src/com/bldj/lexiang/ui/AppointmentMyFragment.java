@@ -4,31 +4,33 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
 import com.baidu.mapapi.search.geocode.GeoCoder;
 import com.baidu.mapapi.search.geocode.OnGetGeoCoderResultListener;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiBoundSearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
@@ -63,6 +65,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	EditText et_address;
 	EditText btn_location;
 	Button btn_time;
+	LinearLayout layout;
 //	String address;//预约地点
 	ListView locatioListView;
 	ArrayList<String> locationList;
@@ -78,6 +81,8 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	GeoCoder mSearch = null;//搜索模块，也可去掉地图模块独立使用
 	private SuggestionSearch mSuggestionSearch = null;
 	String city ;
+	
+	InputMethodManager manager ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,7 +101,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		mPoiSearch.setOnGetPoiSearchResultListener(this);
 		mSuggestionSearch = SuggestionSearch.newInstance();
 		mSuggestionSearch.setOnGetSuggestionResultListener(this);
-		
+		manager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE); 
 		
 	}
 
@@ -139,6 +144,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		btn_location = (EditText)infoView.findViewById(R.id.btn_location);
 		btn_time = (Button) infoView.findViewById(R.id.btn_appoint_time);
 		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
+		layout = (LinearLayout)infoView.findViewById(R.id.layout);
 		btn_time.setTag(false);
 		
 		btn_location.setText(MyApplication.getInstance().addressStr);
@@ -173,7 +179,18 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	 * 事件初始化
 	 */
 	private void initListener(){
-		
+		layout.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				 if(event.getAction() == MotionEvent.ACTION_DOWN){  
+				     if(mActivity.getCurrentFocus()!=null && mActivity.getCurrentFocus().getWindowToken()!=null){  
+				       manager.hideSoftInputFromWindow(mActivity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
+				     }  
+				  }  
+				  return false;
+			}
+		});
 		btn_location.addTextChangedListener(new TextWatcher() {
 
 			@Override
