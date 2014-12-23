@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
-            android:background="@color/home_bg"
+            android:background="@color/line"
             />
 
         <LinearLayout
@@ -85,7 +85,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="5dip"
             android:layout_marginBottom="5dip"
-            android:background="@color/home_bg"
+            android:background="@color/line"
             />
         
         <LinearLayout
