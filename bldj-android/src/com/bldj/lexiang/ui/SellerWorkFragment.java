@@ -43,7 +43,7 @@ public class SellerWorkFragment extends BaseFragment {
 		infoView = inflater.inflate(R.layout.pay_web, container, false);
 		
 		if(((SellerPersonalActivity)mActivity).getSellerVo()!=null){
-			url = ((SellerPersonalActivity)mActivity).getSellerVo().getHeadurl();
+			url = ((SellerPersonalActivity)mActivity).getSellerVo().getDetailUrl();
 			
 		}
 		
