@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.baidu.mapapi.model.LatLng;
@@ -110,6 +111,24 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		
 		return infoView;
 	}
+	
+	public void setListViewHeightBasedOnChildren(ListView listView) {  
+        ListAdapter listAdapter = listView.getAdapter();  
+        if (listAdapter == null) {  
+            return;  
+        }  
+        int totalHeight = 0;  
+        for (int i = 0; i < listAdapter.getCount(); i++) {  
+            View listItem = listAdapter.getView(i, null, listView);  
+            listItem.measure(0, 0);  
+            totalHeight += listItem.getMeasuredHeight();  
+        }  
+        ViewGroup.LayoutParams params = listView.getLayoutParams();  
+        params.height = totalHeight  
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1))  
+                + 15;  
+        listView.setLayoutParams(params);  
+    }  
 
 	/**
 	 * 初始化控件
@@ -294,6 +313,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 //			lvAddress.setSelection(mAdapter.getCount());
 		}
 		listadapter.notifyDataSetChanged();
+//		setListViewHeightBasedOnChildren(locatioListView);
 	}
 
 //	@Override
