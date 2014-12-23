@@ -25,10 +25,10 @@
         <ImageView
             android:id="@+id/product_img"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/home_image_height"
+            android:layout_height="@dimen/health_image_height"
             android:layout_gravity="center_horizontal"
             android:padding="5dp"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:src="@drawable/default_image" />
 
         <LinearLayout
