@@ -515,15 +515,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View v) {
-				/*
-				 * tab_find.setBackground(getResources().getDrawable(
-				 * R.drawable.tab_btn_selected1));
-				 * tab_company.setBackground(mActivity
-				 * .getResources().getDrawable( R.drawable.tab_btn2));
-				 * tab_reserve
-				 * .setBackground(mActivity.getResources().getDrawable(
-				 * R.drawable.tab_btn3));
-				 */
 
 				Intent intent = new Intent(mActivity,
 						JLYSFragmentActivity.class);
@@ -537,14 +528,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View v) {
-				/*
-				 * tab_company.setBackground(getResources().getDrawable(
-				 * R.drawable.tab_btn_selected2));
-				 * tab_find.setBackground(getResources().getDrawable(
-				 * R.drawable.tab_btn1));
-				 * tab_reserve.setBackground(getResources().getDrawable(
-				 * R.drawable.tab_btn3));
-				 */
 				if (MyApplication.getInstance().getCurrentUser() == null) {
 					Intent intent = new Intent(mActivity,
 							RegisterAndLoginActivity.class);
@@ -561,14 +544,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View v) {
-				/*
-				 * tab_reserve.setBackground(getResources().getDrawable(
-				 * R.drawable.tab_btn_selected3));
-				 * tab_find.setBackground(getResources().getDrawable(
-				 * R.drawable.tab_btn1));
-				 * tab_company.setBackground(getResources().getDrawable(
-				 * R.drawable.tab_btn2));
-				 */
 				if (MyApplication.getInstance().getCurrentUser() == null) {
 					Intent intent = new Intent(mActivity,
 							RegisterAndLoginActivity.class);
@@ -581,17 +556,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			}
 		});
 
-		/*
-		 * mListView.setOnItemClickListener(new
-		 * AdapterView.OnItemClickListener() {
-		 * 
-		 * @Override public void onItemClick(AdapterView<?> arg0, View arg1, int
-		 * position, long arg3) { Intent intent = new
-		 * Intent(mActivity,HealthProductDetailActivity.class);
-		 * startActivity(intent); }
-		 * 
-		 * });
-		 */
 	}
 
 	@Override
