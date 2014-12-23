@@ -102,6 +102,7 @@ public class OrderEvalActivity extends BaseActivity {
 			public void onClick(View arg0) {
 				String suggestion = et_suggestion.getText().toString().trim();
 				if(StringUtils.isEmpty(suggestion)){
+					et_suggestion.requestFocus();
 					ToastUtils.showToast(OrderEvalActivity.this, "请输入您的宝贵意见");
 					return ;
 				}
