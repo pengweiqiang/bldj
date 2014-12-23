@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_bg"
     android:orientation="vertical" >
 
     <com.bldj.lexiang.view.ActionBar
@@ -13,47 +14,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="10dip"
         android:gravity="center"
         android:orientation="vertical" >
+        <View 
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            />
 
         <Button
             android:id="@+id/btn_share_sina"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/border"
-            android:drawableLeft="@drawable/btn_img_my_homepage"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/share_sina"
             android:drawablePadding="15dp"
             android:drawableRight="@drawable/btn_img_open"
             android:gravity="left|center"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:textColor="@color/grey"
             android:text="@string/share_sina"
             android:textSize="18sp" />
+         <View 
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            />
 
         <Button
             android:id="@+id/btn_share_weixin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/border"
-            android:drawableLeft="@drawable/btn_img_my_homepage"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/share_weixin"
             android:drawablePadding="15dp"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
             android:drawableRight="@drawable/btn_img_open"
             android:gravity="left|center"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:text="@string/share_weixin"
+             android:textColor="@color/grey"
             android:textSize="18sp" />
+         <View 
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            />
     </LinearLayout>
 
 </LinearLayout>
