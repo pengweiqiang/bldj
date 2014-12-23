@@ -9,6 +9,7 @@
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
+        android:background="@drawable/border"
         android:layout_marginBottom="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
@@ -28,6 +29,8 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:textColor="@color/grey"
+                android:gravity="right"
                 android:text="@string/input_old_pwd" />
 
             <com.bldj.lexiang.view.ClearEditText
@@ -48,6 +51,8 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:gravity="right"
+                android:textColor="@color/grey"
                 android:text="@string/input_new_pwd2" />
 
             <com.bldj.lexiang.view.ClearEditText
@@ -67,6 +72,8 @@
             <TextView
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:gravity="right"
                 android:layout_weight="0.5"
                 android:text="@string/input_new_pwd_again" />
 
@@ -80,10 +87,12 @@
 
         <Button
             android:id="@+id/btn_confirm"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dip"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/btn_coners"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
