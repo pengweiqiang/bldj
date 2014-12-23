@@ -52,7 +52,7 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("企业专区");
+		actionBar.setTitle("优惠特区");
 		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
