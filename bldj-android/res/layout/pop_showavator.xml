@@ -2,12 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#88000000" >
+    android:background="#77000000" >
 
     <LinearLayout
+        android:id="@+id/choose"
+        android:layout_above="@+id/layout_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/pop_bg"
         android:orientation="vertical" >
 
@@ -20,20 +23,21 @@
 
             <TextView
                 android:layout_centerInParent="true"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawablePadding="20dp"
-                android:paddingTop="10dip"
-                android:paddingBottom="10dip"
+                android:textColor="@color/grey"
+                android:paddingTop="6dip"
+                android:paddingBottom="6dip"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:text="拍照" />
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/grey" >
+            android:layout_height="1px"
+            android:background="@color/line" >
         </View>
 
         <RelativeLayout
@@ -47,13 +51,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:layout_margin="10dp"
+                android:layout_margin="8dp"
                 android:drawablePadding="20dp"
-                android:paddingTop="10dip"
-                android:paddingBottom="10dip"
+                android:textColor="@color/grey"
+                android:paddingTop="6dip"
+                android:paddingBottom="6dip"
                 android:gravity="center"
+                android:textSize="18sp"
                 android:text="从本地上传" />
         </RelativeLayout>
+        
+      
     </LinearLayout>
+    
+      <RelativeLayout
+            android:id="@+id/layout_cancel"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/pop_bg"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
+            android:clickable="true" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="8dp"
+                android:textColor="@color/grey"
+                android:paddingTop="6dip"
+                android:textSize="18sp"
+                android:paddingBottom="6dip"
+                android:gravity="center"
+                android:text="取消" />
+        </RelativeLayout>
 
 </RelativeLayout>
