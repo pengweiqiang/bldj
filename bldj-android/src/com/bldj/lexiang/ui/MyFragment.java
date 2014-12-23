@@ -371,6 +371,7 @@ public class MyFragment extends BaseFragment {
 
 	RelativeLayout layout_choose;
 	RelativeLayout layout_photo;
+	RelativeLayout layout_cancel;
 	PopupWindow avatorPop;
 
 	public String filePath = "";
@@ -380,6 +381,7 @@ public class MyFragment extends BaseFragment {
 				R.layout.pop_showavator, null);
 		layout_choose = (RelativeLayout) view.findViewById(R.id.layout_choose);
 		layout_photo = (RelativeLayout) view.findViewById(R.id.layout_photo);
+		layout_cancel = (RelativeLayout) view.findViewById(R.id.layout_cancel);
 		layout_photo.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -402,6 +404,7 @@ public class MyFragment extends BaseFragment {
 				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 				startActivityForResult(intent, 0);
+				avatorPop.dismiss();
 			}
 		});
 		layout_choose.setOnClickListener(new OnClickListener() {
@@ -417,6 +420,14 @@ public class MyFragment extends BaseFragment {
 				intent.setDataAndType(
 						MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 				startActivityForResult(intent, 1);
+				avatorPop.dismiss();
+			}
+		});
+		layout_cancel.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				avatorPop.dismiss();
 			}
 		});
 
@@ -440,7 +451,7 @@ public class MyFragment extends BaseFragment {
 		avatorPop.setOutsideTouchable(true);
 		avatorPop.setBackgroundDrawable(new BitmapDrawable());
 		// 动画效果 从底部弹起
-		// avatorPop.setAnimationStyle(R.style.Animations_GrowFromBottom);
+//		 avatorPop.setAnimationStyle(R.anim.activity_bottom_in);
 		avatorPop.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
 	}
 
