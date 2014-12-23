@@ -1,8 +1,11 @@
 package com.bldj.lexiang.ui;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,6 +38,8 @@ public class CompanyZoneActivity extends BaseActivity {
 	private TextView et_service_type_name;//选择的套餐服务
 	private String service_type_name;
 	private int serviceTypeIndex;
+	
+	InputMethodManager manager ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class CompanyZoneActivity extends BaseActivity {
 		onConfigureActionBar(mActionBar);
 		
 		et_service_type_name.setText(service_type_name);
+		manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); 
 	}
 
 	// 设置activity的导航条
@@ -128,5 +134,17 @@ public class CompanyZoneActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	@Override  
+	 public boolean onTouchEvent(MotionEvent event) {  
+	  // TODO Auto-generated method stub  
+	  if(event.getAction() == MotionEvent.ACTION_DOWN){  
+	     if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){  
+	       manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
+	     }  
+	  }  
+	  return super.onTouchEvent(event);  
+	 } 
+
 
 }
