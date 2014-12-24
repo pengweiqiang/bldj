@@ -47,6 +47,7 @@ import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.CustomerSpinner;
 import com.bldj.lexiang.view.DateTimePickDialogUtil;
+import com.bldj.lexiang.view.SpringScrollView;
 
 /**
  * 为自己预约
@@ -83,6 +84,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	String city ;
 	
 	InputMethodManager manager ;
+	SpringScrollView scrollView;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -145,6 +147,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		btn_time = (Button) infoView.findViewById(R.id.btn_appoint_time);
 		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
 		layout = (LinearLayout)infoView.findViewById(R.id.layout);
+		scrollView = (SpringScrollView)infoView.findViewById(R.id.scrollView);
 		btn_time.setTag(false);
 		
 		btn_location.setText(MyApplication.getInstance().addressStr);
@@ -179,7 +182,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	 * 事件初始化
 	 */
 	private void initListener(){
-		layout.setOnTouchListener(new OnTouchListener() {
+		scrollView.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
