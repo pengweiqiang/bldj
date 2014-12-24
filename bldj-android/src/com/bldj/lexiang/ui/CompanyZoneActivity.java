@@ -40,6 +40,7 @@ import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.LoadingDialog;
+import com.bldj.lexiang.view.SpringScrollView;
 
 /**
  * 企业专区
@@ -77,6 +78,8 @@ public class CompanyZoneActivity extends BaseActivity {
 	private PayTypeAdapter listAdapter;
 
 	int type;//0优惠特区  1企业专区
+	
+	SpringScrollView scrollView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.company_zone);
@@ -128,11 +131,26 @@ public class CompanyZoneActivity extends BaseActivity {
 		tv_price = (TextView) findViewById(R.id.price);
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		mListView = (ListView) findViewById(R.id.paytype_listView);
+		scrollView = (SpringScrollView)findViewById(R.id.scrollView);
 
 	}
 
 	@Override
 	public void initListener() {
+		scrollView.setOnTouchListener(new View.OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					if (getCurrentFocus() != null
+							&& getCurrentFocus().getWindowToken() != null) {
+						manager.hideSoftInputFromWindow(getCurrentFocus()
+								.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+					}
+				}
+				return false;
+			}
+		});
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
 
 			@Override
