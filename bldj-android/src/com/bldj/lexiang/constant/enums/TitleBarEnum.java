@@ -10,6 +10,7 @@ public enum TitleBarEnum {
 	FEEDBACK(1,"意见反馈"),	
 	SHARE(2,"分享好友"),	
 	ZHAOPIN(3,"理疗师招聘"), 
+	COMPANY(4,"企业专区"), 
 	
 	ORDER_SALE(4,"销量排序",2),
 	ORDER_TIME(5,"时间排序",0),
