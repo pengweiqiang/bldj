@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="340dp"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.bldj.lexiang.view.ActionBar
+        android:id="@+id/actionBar"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" >
+    </com.bldj.lexiang.view.ActionBar>
+
+     <ListView
+         android:layout_below="@+id/actionBar"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:listSelector="@android:color/transparent"
+        android:divider="#00000000"
+        android:layout_above="@+id/finish"
+        android:visibility="gone" />
+      
+       <ProgressBar
+           android:layout_below="@+id/actionBar"
+        android:id="@+id/progress_listView"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:max="100"
+        android:layout_above="@+id/finish"
+        android:visibility="visible" />
+	
+       <Button 
+           android:id="@+id/finish"
+           android:layout_alignParentBottom="true"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:text="@string/finish"
+           android:background="@drawable/btn_coners_app_bg"
+           android:textColor="@color/app_title_color"
+           android:layout_centerHorizontal="true"
+           android:paddingLeft="10dp"
+           android:paddingRight="10dp"
+           android:layout_margin="5dp"
+           />
+</RelativeLayout>
