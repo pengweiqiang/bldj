@@ -147,6 +147,10 @@ public class CompanyZoneActivity extends BaseActivity {
 						ToastUtils.showToast(CompanyZoneActivity.this, "请输入企业名称");
 						return;
 					}
+				}else{
+					companyName = "";
+					payType = new PayType();
+					payType.setCode(0);
 				}
 				if (StringUtils.isEmpty(concactType)) {
 					et_contact_type.requestFocus();
