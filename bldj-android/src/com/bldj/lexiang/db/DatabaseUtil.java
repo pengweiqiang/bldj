@@ -163,6 +163,7 @@ public class DatabaseUtil {
 			cv.put(SellerTable.WORKYEAR, seller.getWorkyear());
 			cv.put(SellerTable.DEALNUMSUM, seller.getDealnumSum());
 			cv.put(SellerTable.DISTANCE, seller.getDistance());
+			cv.put(SellerTable.DETAILURL, seller.getDetailUrl());
 
 			uri = dbHelper.insert(DBHelper.TABLE_NAME_SELLER, null, cv);
 		}
@@ -370,6 +371,7 @@ public class DatabaseUtil {
 			content.setWorkyear(cursor.getInt(11));
 			content.setDealnumSum(cursor.getInt(12));
 			content.setDistance(cursor.getDouble(13));
+			content.setDetailUrl(cursor.getString(14));
 
 			contents.add(content);
 		}
