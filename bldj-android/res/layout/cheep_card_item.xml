@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+   	<RelativeLayout
+                android:id="@+id/cheep_package"
+                android:layout_width="match_parent"
+                android:layout_height="100dip"
+                android:layout_margin="7dip"
+                android:background="@color/bg_company_package2"
+                android:orientation="vertical" >
+
+                <View
+                    android:id="@+id/line_view"
+                    android:layout_width="3dip"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_company_package2" />
+
+                <LinearLayout
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dip"
+                    android:orientation="horizontal"
+                    android:paddingTop="8dip" >
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/line_company_package2"
+                        android:paddingLeft="6dip"
+                        android:paddingRight="6dip"
+                        android:paddingTop="2dip"
+                        android:paddingBottom="2dip"
+                        android:text="2万元"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dip"
+                        android:visibility="gone"
+                        android:text="@string/package_service" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/package_info1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_2_info1"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/package_info2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package_info1"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_2_info2"
+                    android:textSize="13sp" />
+                <TextView
+                    android:id="@+id/package_info3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/package_info2"
+                    android:layout_marginLeft="20dip"
+                    android:paddingTop="3dip"
+                    android:text="@string/package_2_info3"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+</LinearLayout>
