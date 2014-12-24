@@ -8,6 +8,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,8 +91,14 @@ public class CheepCardsAdapter extends BaseListAdapter {
 		}
 		holder.rl_backgroud.setBackgroundColor(Color.parseColor("#"+colors[0]));
 		holder.line_view.setBackgroundColor(Color.parseColor("#"+colors[1]));
-		holder.tv_name.setText(cheepCard.getName());
 		
+		SpannableStringBuilder style=new SpannableStringBuilder(cheepCard.getName());  
+        style.setSpan(new BackgroundColorSpan(Color.parseColor("#"+colors[1])),0,cheepCard.getName().indexOf("元"),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);  
+        style.setSpan(
+				new ForegroundColorSpan(Color.WHITE), 0, cheepCard.getName().indexOf("元"),
+				Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        holder.tv_name.setText(style);  
+        holder.tv_name.setPadding(4, 2, 4, 2);
 		
 
 		return convertView;
