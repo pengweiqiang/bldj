@@ -66,6 +66,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		String WORKYEAR = "workyear";
 		String DEALNUMSUM = "dealnumSum";
 		String DISTANCE = "distance";
+		String DETAILURL = "detailUrl";
 		
 	}
 	interface BannerTable{
@@ -120,7 +121,8 @@ public class DBHelper extends SQLiteOpenHelper{
 	      		.append(SellerTable.HEADURL).append(" text,")
 	      		.append(SellerTable.WORKYEAR).append(" integer,")
 	      		.append(SellerTable.DEALNUMSUM).append(" integer,")
-	      		.append(SellerTable.DISTANCE).append(" double );");
+	      		.append(SellerTable.DISTANCE).append(" double ,")
+	      		.append(SellerTable.DETAILURL).append(" text );");
 	      db.execSQL(favStr.toString());
 	}
 	/**
