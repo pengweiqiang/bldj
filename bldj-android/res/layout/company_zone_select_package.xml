@@ -13,11 +13,11 @@
         android:layout_marginTop="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
-    <com.bldj.lexiang.view.SpringScrollView
+<!--     <com.bldj.lexiang.view.SpringScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@color/white"
-        android:scrollbars="none" >
+        android:scrollbars="none" > -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,8 +37,26 @@
                 android:paddingLeft="5dip"
                 android:text="@string/select_company_package"
                 android:textColor="@color/grey" />
+            
+                  <com.bldj.lexiang.view.XListView
+				        android:id="@+id/listview"
+				        android:layout_width="match_parent"
+				        android:layout_height="match_parent"
+				        android:layout_weight="1"
+				        android:listSelector="@android:color/transparent"
+				        android:divider="#00000000"
+				        android:visibility="gone" />
+      
+			       <ProgressBar
+			        android:id="@+id/progress_listView"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_gravity="center"
+			        android:layout_weight="1"
+			        android:max="100"
+			        android:visibility="visible" />
 
-            <LinearLayout
+           <!--  <LinearLayout
                 android:id="@+id/package1"
                 android:layout_width="match_parent"
                 android:layout_height="100dip"
@@ -271,7 +289,7 @@
                     android:text="@string/package_4_info3"
                     android:textSize="13sp" />
             </RelativeLayout>
-
+ -->
             <Button
                 android:id="@+id/btn_next"
                 android:layout_width="100dip"
@@ -285,6 +303,6 @@
                 android:text="@string/next"
                 android:textColor="@color/white" />
         </LinearLayout>
-    </com.bldj.lexiang.view.SpringScrollView>
+    <!-- </com.bldj.lexiang.view.SpringScrollView> -->
 
 </LinearLayout>
