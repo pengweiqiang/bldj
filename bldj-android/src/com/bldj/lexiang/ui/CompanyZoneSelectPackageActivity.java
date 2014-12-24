@@ -1,5 +1,7 @@
 package com.bldj.lexiang.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,12 +12,25 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bldj.gson.reflect.TypeToken;
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.adapter.CheepCardsAdapter;
+import com.bldj.lexiang.api.ApiHomeUtils;
+import com.bldj.lexiang.api.vo.CheepCards;
+import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.XListView;
+import com.bldj.lexiang.view.XListView.IXListViewListener;
 
 /**
  * 企业专区-->选择套餐
@@ -24,22 +39,28 @@ import com.bldj.lexiang.view.ActionBar;
  * 
  */
 public class CompanyZoneSelectPackageActivity extends BaseActivity implements
-		OnClickListener {
+		OnClickListener,IXListViewListener {
 
 	ActionBar mActionBar;
 
 	Button btn_next;
-	LinearLayout layout_package1;
-	View layout_package2;
-	View layout_package3;
-	View layout_package4;
+//	LinearLayout layout_package1;
+//	View layout_package2;
+//	View layout_package3;
+//	View layout_package4;
 
-	TextView tv_package1_title;
-	TextView tvpackage2_info1,tvpackage2_info2,tvpackage2_info3;
-	TextView tvpackage_3_info1,tvpackage_3_info2,tvpackage_3_info3;
-	TextView tvpackage_4_info1,tvpackage_4_info2,tvpackage_4_info3;
+//	TextView tv_package1_title;
+//	TextView tvpackage2_info1,tvpackage2_info2,tvpackage2_info3;
+//	TextView tvpackage_3_info1,tvpackage_3_info2,tvpackage_3_info3;
+//	TextView tvpackage_4_info1,tvpackage_4_info2,tvpackage_4_info3;
+//	LoadingDialog loading;
 	
-
+	int pageNumber = 0;
+	private XListView mListView;
+	private ProgressBar progressBar;
+	List<CheepCards> cheepCardList;
+	CheepCardsAdapter listAdapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.company_zone_select_package);
@@ -47,7 +68,13 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 
-		initData();
+		cheepCardList = new ArrayList<CheepCards>();
+		listAdapter = new CheepCardsAdapter(this, cheepCardList);
+		mListView.setAdapter(listAdapter);
+		mListView.setPullLoadEnable(true);
+		mListView.setXListViewListener(this);
+		getData();
+		//		initData();
 	}
 
 	// 设置activity的导航条
@@ -65,39 +92,42 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 
 	@Override
 	public void initView() {
-		btn_next = (Button) findViewById(R.id.btn_next);
+//		btn_next = (Button) findViewById(R.id.btn_next);
 
-		layout_package1 = (LinearLayout) findViewById(R.id.package1);
-		layout_package2 = findViewById(R.id.package2);
-		layout_package3 = findViewById(R.id.package3);
-		layout_package4 = findViewById(R.id.package4);
-		tv_package1_title = (TextView) findViewById(R.id.package1_title);
-		tvpackage2_info1 = (TextView) findViewById(R.id.package2_info1);
-		tvpackage2_info2 = (TextView) findViewById(R.id.package2_info2);
-		tvpackage2_info3 = (TextView) findViewById(R.id.package2_info3);
-		tvpackage_3_info1 = (TextView) findViewById(R.id.package_3_info1);
-		tvpackage_3_info2 = (TextView) findViewById(R.id.package_3_info2);
-		tvpackage_3_info3 = (TextView) findViewById(R.id.package_3_info3);
-		tvpackage_4_info1 = (TextView) findViewById(R.id.package_4_info_1);
-		tvpackage_4_info2 = (TextView) findViewById(R.id.package_4_info_2);
-		tvpackage_4_info3 = (TextView) findViewById(R.id.package_4_info_3);
+//		layout_package1 = (LinearLayout) findViewById(R.id.package1);
+//		layout_package2 = findViewById(R.id.package2);
+//		layout_package3 = findViewById(R.id.package3);
+//		layout_package4 = findViewById(R.id.package4);
+//		tv_package1_title = (TextView) findViewById(R.id.package1_title);
+//		tvpackage2_info1 = (TextView) findViewById(R.id.package2_info1);
+//		tvpackage2_info2 = (TextView) findViewById(R.id.package2_info2);
+//		tvpackage2_info3 = (TextView) findViewById(R.id.package2_info3);
+//		tvpackage_3_info1 = (TextView) findViewById(R.id.package_3_info1);
+//		tvpackage_3_info2 = (TextView) findViewById(R.id.package_3_info2);
+//		tvpackage_3_info3 = (TextView) findViewById(R.id.package_3_info3);
+//		tvpackage_4_info1 = (TextView) findViewById(R.id.package_4_info_1);
+//		tvpackage_4_info2 = (TextView) findViewById(R.id.package_4_info_2);
+//		tvpackage_4_info3 = (TextView) findViewById(R.id.package_4_info_3);
+		
+		progressBar = (ProgressBar)findViewById(R.id.progress_listView);
+		mListView = (XListView)findViewById(R.id.listview);
 	}
 
 	private void initData() {
 		// 企业0元体验中的0字体变红
-		setIndexTextColor(tv_package1_title,R.color.color_package1_title);
-		// 企业0元体验中的0字体变红
-		setIndexTextColor(tvpackage2_info1,R.color.line_company_package2);
-		setIndexTextColor(tvpackage2_info2,R.color.line_company_package2);
-		setIndexTextColor(tvpackage2_info3,R.color.line_company_package2);
-		
-		setIndexTextColor(tvpackage_3_info1,R.color.line_company_package3);
-		setIndexTextColor(tvpackage_3_info2,R.color.line_company_package3);
-		setIndexTextColor(tvpackage_3_info3,R.color.line_company_package3);
-		
-		setIndexTextColor(tvpackage_4_info1,R.color.line_company_package4);
-		setIndexTextColor(tvpackage_4_info2,R.color.line_company_package4);
-		setIndexTextColor(tvpackage_4_info3,R.color.line_company_package4);
+//		setIndexTextColor(tv_package1_title,R.color.color_package1_title);
+//		// 企业0元体验中的0字体变红
+//		setIndexTextColor(tvpackage2_info1,R.color.line_company_package2);
+//		setIndexTextColor(tvpackage2_info2,R.color.line_company_package2);
+//		setIndexTextColor(tvpackage2_info3,R.color.line_company_package2);
+//		
+//		setIndexTextColor(tvpackage_3_info1,R.color.line_company_package3);
+//		setIndexTextColor(tvpackage_3_info2,R.color.line_company_package3);
+//		setIndexTextColor(tvpackage_3_info3,R.color.line_company_package3);
+//		
+//		setIndexTextColor(tvpackage_4_info1,R.color.line_company_package4);
+//		setIndexTextColor(tvpackage_4_info2,R.color.line_company_package4);
+//		setIndexTextColor(tvpackage_4_info3,R.color.line_company_package4);
 
 	}
 	
@@ -119,7 +149,27 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 
 	@Override
 	public void initListener() {
-		layout_package1.setOnClickListener(new OnClickListener() {
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				if (MyApplication.getInstance().getCurrentUser() == null) {
+					Intent intent = new Intent(CompanyZoneSelectPackageActivity.this,
+							RegisterAndLoginActivity.class);
+					startActivity(intent);
+					return;
+				}
+				CheepCards cheepCard = (CheepCards)listAdapter.getItem(position-1);
+				Intent intent = new Intent(CompanyZoneSelectPackageActivity.this,CompanyZoneActivity.class);
+				intent.putExtra("serviceTypeIndex", position);
+				intent.putExtra("serviceTypeName",cheepCard.getName());
+				intent.putExtra("price", cheepCard.getPrice());
+				startActivity(intent);
+			}
+			
+		});
+		/*layout_package1.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
@@ -170,7 +220,50 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 						+ getResources().getString(R.string.package_service));
 				startActivity(intent);
 			}
+		});*/
+	}
+	/**
+	 * 获取优惠特区列表
+	 */
+	private void getData(){
+//		loading = new LoadingDialog(mContext);
+//		loading.show();
+		ApiHomeUtils.getCheapCards(mContext, pageNumber, ApiConstants.LIMIT, new HttpConnectionUtil.RequestCallback() {
+			
+			@Override
+			public void execute(ParseModel parseModel) {
+				progressBar.setVisibility(View.GONE);
+				mListView.setVisibility(View.VISIBLE);
+				if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+						.getStatus())) {
+					 ToastUtils.showToast(CompanyZoneSelectPackageActivity.this,parseModel.getMsg());
+				} else {
+					List<CheepCards> cheepCardNewList = JsonUtils.fromJson(
+							parseModel.getData().toString(),
+							new TypeToken<List<CheepCards>>() {
+							});
+					if(pageNumber==0){
+						cheepCardList.clear();
+					}
+					cheepCardList.addAll(cheepCardNewList);
+
+					listAdapter.notifyDataSetChanged();
+					mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"没有数据");
+				}
+			}
 		});
+	}
+
+	@Override
+	public void onRefresh() {
+		pageNumber=0;
+		getData();
+	}
+
+	@Override
+	public void onLoadMore() {
+		pageNumber++;
+		getData();
 	}
 
 }

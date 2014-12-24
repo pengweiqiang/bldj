@@ -247,6 +247,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			groups.add(TitleBarEnum.FEEDBACK);
 			groups.add(TitleBarEnum.SHARE);
 			groups.add(TitleBarEnum.ZHAOPIN);
+			groups.add(TitleBarEnum.COMPANY);
 		}
 		final PopupWindow popupWindow;
 //		if (popupWindow == null) {
@@ -294,6 +295,12 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						startActivity(intent);
 					} else if (position == TitleBarEnum.ZHAOPIN.getIndex()) {
 						Intent intent = new Intent(mActivity, AuthentActivity.class);
+						startActivity(intent);
+					}else if(position == TitleBarEnum.COMPANY.getIndex()){
+						Intent intent = new Intent(mActivity, CompanyZoneActivity.class);
+						intent.putExtra("serviceTypeName", "企业专区0元");
+						intent.putExtra("price", 0);
+						intent.putExtra("type", 1);
 						startActivity(intent);
 					}
 				
@@ -528,12 +535,6 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 			@Override
 			public void onClick(View v) {
-				if (MyApplication.getInstance().getCurrentUser() == null) {
-					Intent intent = new Intent(mActivity,
-							RegisterAndLoginActivity.class);
-					startActivity(intent);
-					return;
-				}
 				Intent intent = new Intent(mActivity,
 						CompanyZoneSelectPackageActivity.class);
 				startActivity(intent);
