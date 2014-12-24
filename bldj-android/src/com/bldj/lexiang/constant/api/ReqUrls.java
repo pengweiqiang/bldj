@@ -224,6 +224,10 @@ public interface ReqUrls {
 	 * 企业专区
 	 */
 	public static final String REQUEST_COMPANY_ZONE = "/user/enterOrderGenerate";
+	/**
+	 * 获取企业专区列表
+	 */
+	public static final String REQUEST_CHEAP_CARDS="/pro/getCheapCards";
 	
 	/**
 	 * 支付宝回调地址
