@@ -45,7 +45,7 @@ public class DialogUtil {
 	 * @param negativeId
 	 * @param callback
 	 */
-	public static void createAlertDialog(Context ctx, int head, int tip, int positiveId, int negativeId,
+	public static void createAlertDialog(Context ctx, int head, String tip, int positiveId, int negativeId,
 			final AlertDialogOperate callback) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		if (-1 != head) {
@@ -73,7 +73,9 @@ public class DialogUtil {
 				}
 			});
 		}
-		builder.create().show();
+		Dialog dialog = builder.create();
+		dialog.setCanceledOnTouchOutside(false);
+		dialog.show();
 	}
 	
 	/**
