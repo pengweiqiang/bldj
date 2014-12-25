@@ -31,7 +31,7 @@ public enum TitleBarEnum {
 	ORDER_DISTANCE(15,"距离排序",5),
 	ORDER_COUNT(16,"接单次数",4),
 	
-	WORK_3_BIG(17,"三年工作以上",3,-1),
+	WORK_3_BIG(17,"三年以下",0,3),
 	WORK_3_5(18,"工作3-5年",3,5),
 	WORK_5_10(19,"工作5-10年",5,10),
 	
