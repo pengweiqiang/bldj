@@ -58,7 +58,7 @@
     <string name="authent">我要认证</string>
     <string name="logout">退出</string>
     <string name="jlys">经络养生</string>
-    <string name="kmrs">看美容师</string>
+    <string name="kmrs">看理疗师</string>
     <string name="health_service">养生服务</string>
     <string name="see_health_division">看养生师</string>
     <string name="input_suggestion">请输入您的宝贵意见</string>
@@ -112,7 +112,7 @@
     <string name="input_phone2">请输入手机号码</string>
     <string name="submit_auth">立即认证</string>
     <string name="auth_type">认证类型：</string>
-    <string name="auth_item_seller">美容师</string>
+    <string name="auth_item_seller">理疗师</string>
     <string name="all">全部</string>
     <string name="single_project">单人项目</string>
     <string name="team">团体</string>
