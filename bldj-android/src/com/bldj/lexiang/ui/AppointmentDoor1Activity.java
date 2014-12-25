@@ -15,6 +15,7 @@ import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Scheduled;
+import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
@@ -41,7 +42,8 @@ public class AppointmentDoor1Activity extends BaseActivity {
 	int index = 0;// 时间 4*4 具体的位置
 	TextView btn_address;
 	String address;
-	Product product;
+	Product product;//选择的产品
+	Seller seller;//选择理疗师
 	User user;
 	Date nowdate = new Date();
 	// GridView gridView;
@@ -53,6 +55,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		setContentView(R.layout.appointment_door1);
 		super.onCreate(savedInstanceState);
 		product = (Product) this.getIntent().getSerializableExtra("product");
+		seller = (Seller) this.getIntent().getSerializableExtra("seller");
 		user = MyApplication.getInstance().getCurrentUser();
 
 		initScheduledView();
@@ -115,23 +118,19 @@ public class AppointmentDoor1Activity extends BaseActivity {
 					ToastUtils.showToast(mContext, "请选择地址");
 					return;
 				}
-				if(MyApplication.getInstance().sellerVo != null){//从美容师界面跳转过来，不需要进入第二步
-					Intent intent = new Intent(AppointmentDoor1Activity.this,AppointmentDoor3Activity.class);
-					intent.putExtra("time", date + " " + time);
-					intent.putExtra("seller", MyApplication.getInstance().sellerVo);
-					intent.putExtra("timeIndex", index);
-					intent.putExtra("product", product);
-					intent.putExtra("address", address);
-					startActivity(intent);
-				}else{
-					Intent intent = new Intent(AppointmentDoor1Activity.this,
-							AppointmentDoor2Activity.class);
-					intent.putExtra("time", date + " " + time);
-					intent.putExtra("timeIndex", index);
-					intent.putExtra("product", product);
-					intent.putExtra("address", address);
-					startActivity(intent);
+				Intent intent = new Intent();
+				if(seller != null){//从美容师界面跳转过来，不需要进入第二步选择美容师
+					intent.setClass(mContext, AppointmentDoor3Activity.class);
+					intent.putExtra("seller", seller);
+				}else{//直接从产品详情进入，需要进行选择美容师第二步
+					intent.setClass(mContext, AppointmentDoor2Activity.class);
 				}
+				intent.putExtra("time", date + " " + time);
+				intent.putExtra("timeIndex", index);
+				intent.putExtra("product", product);
+				intent.putExtra("address", address);
+				startActivity(intent);
+				
 			}
 		});
 	}
@@ -149,7 +148,8 @@ public class AppointmentDoor1Activity extends BaseActivity {
 	}
 
 	private void getData(String date) {
-		ApiBuyUtils.getScheduled(mContext, user.getUserId(), product.getId(), date,
+		long sellerId = seller==null?0:seller.getId();
+		ApiBuyUtils.getScheduled(mContext, user.getUserId(), sellerId, date,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override

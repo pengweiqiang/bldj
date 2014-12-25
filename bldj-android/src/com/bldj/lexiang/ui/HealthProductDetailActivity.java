@@ -25,6 +25,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -45,7 +46,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	ActionBar mActionBar;
 	private Product product;
-
+	private Seller seller;
 	private ImageView product_img;
 	private TextView tv_time;// 时长
 	private TextView tv_price;// 当前价
@@ -66,6 +67,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 		setContentView(R.layout.health_product_detail);
 		super.onCreate(savedInstanceState);
 		product = (Product) this.getIntent().getSerializableExtra("product");
+		seller = (Seller) this.getIntent().getSerializableExtra("seller");
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 
@@ -245,6 +247,9 @@ public class HealthProductDetailActivity extends BaseActivity {
 				}
 				Intent intent = new Intent(HealthProductDetailActivity.this,
 						AppointmentDoor1Activity.class);
+				if(seller!=null){
+					intent.putExtra("seller", seller);
+				}
 				intent.putExtra("product", product);
 				startActivity(intent);
 			}
