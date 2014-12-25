@@ -3,6 +3,7 @@ package com.bldj.lexiang.adapter;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ public class ListviewAdapter extends BaseAdapter {
 	private Context context;
 	private ArrayList<String> list;
 	private int type;//地址
-	private int currentItem = 0;
+	private int currentItem = -1;
 	public ListviewAdapter(Context context, ArrayList<String> list) {
 		this.context = context;
 		this.list = list;
@@ -56,13 +57,13 @@ public class ListviewAdapter extends BaseAdapter {
 		}
 		TextView textView = (TextView) convertView.findViewById(R.id.itemText);
 		textView.setText(list.get(position));
-//		if(type == 1){
-//			if(currentItem == position){
-//				convertView.setBackgroundColor(context.getResources().getColor(R.color.app_bg_color));
-//			}else{
-//				convertView.setBackgroundColor(Color.TRANSPARENT);
-//			}
-//		}
+		if(type == 1){
+			if(currentItem == position){
+				textView.setTextColor(context.getResources().getColor(R.color.white));
+			}else{
+				textView.setTextColor(context.getResources().getColor(R.color.grey));
+			}
+		}
 		return convertView;
 	}
 

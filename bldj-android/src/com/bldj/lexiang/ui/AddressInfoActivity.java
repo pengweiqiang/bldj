@@ -9,6 +9,7 @@ import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -84,6 +85,11 @@ public class AddressInfoActivity extends BaseActivity {
 				if(StringUtils.isEmpty(address)){
 					et_contact_address.requestFocus();
 					ToastUtils.showToast(AddressInfoActivity.this, "详细地址不能为空！");
+					return;
+				}
+				if(!PatternUtils.checkPhoneNum(phone)){
+					et_contact_phone.requestFocus();
+					ToastUtils.showToast(AddressInfoActivity.this, "请输入正确的手机号");
 					return;
 				}
 				//TODO 调用接口

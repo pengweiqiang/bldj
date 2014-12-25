@@ -8,6 +8,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -46,6 +47,7 @@ import com.bldj.lexiang.adapter.ListviewAdapter;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.utils.DateUtil;
+import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -209,6 +211,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 				mSuggestionSearch
 						.requestSuggestion((new SuggestionSearchOption())
 								.keyword(cs.toString()).city(city));
+				
 			}
 		});
 		locatioListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -216,10 +219,15 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long arg3) {
-				listadapter.setCurrentItem(position);
+//				listadapter.setCurrentItem(position);
+				
 				if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
 					et_address.setText(btn_location.getText().toString());
+				}else if(et_address.getText().toString().equals(btn_location.getText().toString()+(String)listadapter.getItem(position))){
+					et_address.setText("");
+					view.setBackgroundColor(Color.TRANSPARENT);
 				}else{
+					view.setBackgroundColor(mActivity.getResources().getColor(R.color.app_bg_color));
 					et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
 				}
 			}
@@ -254,6 +262,11 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 				if(StringUtils.isEmpty(et_address.getText().toString().trim())){
 					et_address.requestFocus();
 					ToastUtils.showToast(mActivity, "请输入预约地址");
+					return;
+				}
+				if(!PatternUtils.checkPhoneNum(contactPhone)){
+					et_contactPhone.requestFocus();
+					ToastUtils.showToast(mActivity, "请输入正确的手机号码");
 					return;
 				}
 				String addressLocation = et_address.getText().toString();

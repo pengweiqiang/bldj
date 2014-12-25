@@ -58,7 +58,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 /**
- * 精品推荐
+ * 首页
  * 
  * @author will
  * 
