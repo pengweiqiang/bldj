@@ -169,8 +169,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	 * 获取美容师数据
 	 */
 	private void getSellers() {
-		ApiSellerUtils.getSellers(AppointmentDoor2Activity.this, pageNumber, ApiConstants.LIMIT, 0, 0, 
-				1, 5, 0,0,0, new HttpConnectionUtil.RequestCallback() {
+		ApiSellerUtils.getSellerByProIdAndDate(AppointmentDoor2Activity.this,product.getId(),time.substring(0,time.indexOf(" ")) ,pageNumber,ApiConstants.LIMIT, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
