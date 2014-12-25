@@ -10,6 +10,7 @@ public class DateUtil {
 	public static final String DEFAULT_PATTERN = "yyyy-MM-dd HH:mm:ss";
 	public static final String CUSTOM_PATTERN = "yyyy-MM-dd HH-mm-ss";
 	public static final String CUSTOM_PATTERN2 = "yyyy年MM月dd日 HH:mm";
+	public static final String CUSTOM_PATTERN3 = "yyyyMMdd HH:mm";
 	public static final String FULL_PATTERN = "yyyy-MM-dd HH:mm:ss SSS";
 	public static final String TRIM_PATTERN = "yyyyMMddHHmmss";
 	public static final String SIMPLY_PATTERN = "HH:mm";
