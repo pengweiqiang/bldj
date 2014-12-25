@@ -89,13 +89,15 @@ public class CheepCardsAdapter extends BaseListAdapter {
 				setIndexTextColor(holder.tv_package3,"#"+colors[1]);
 			}
 		}
+		String name = cheepCard.getName().replace("元", "元   ");
+		name = " "+name;
 		holder.rl_backgroud.setBackgroundColor(Color.parseColor("#"+colors[0]));
 		holder.line_view.setBackgroundColor(Color.parseColor("#"+colors[1]));
 		
-		SpannableStringBuilder style=new SpannableStringBuilder(cheepCard.getName());  
-        style.setSpan(new BackgroundColorSpan(Color.parseColor("#"+colors[1])),0,cheepCard.getName().indexOf("元"),Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);  
+		SpannableStringBuilder style=new SpannableStringBuilder(name);  
+        style.setSpan(new BackgroundColorSpan(Color.parseColor("#"+colors[1])),0,name.indexOf("元")+2,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);  
         style.setSpan(
-				new ForegroundColorSpan(Color.WHITE), 0, cheepCard.getName().indexOf("元"),
+				new ForegroundColorSpan(Color.WHITE), 0, name.indexOf("元")+2,
 				Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         holder.tv_name.setText(style);  
         holder.tv_name.setPadding(4, 2, 4, 2);
