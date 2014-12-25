@@ -73,14 +73,15 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 		shareUtil = new ShareUtil(this);
 		shareUtil.initWX();
-
+		
+		getProduct();
 	}
 	
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		getProduct();
+//		getProduct();
 	}
 
 
