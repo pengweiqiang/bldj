@@ -105,9 +105,9 @@ public class ShareUtil {
 	 * @param text  分享内容
 	 * @param sendType 分享类型  1---分享到好友  2---分享到朋友圈
 	 */
-	public void sendWebPageToWX(String text, int sendType) {
+	public void sendWebPageToWX(String text, int sendType,String webpageUrl) {
 		WXWebpageObject webpage = new WXWebpageObject();
-		webpage.webpageUrl = "http://www.baidu.com";
+		webpage.webpageUrl = webpageUrl;
 		WXMediaMessage msg = new WXMediaMessage(webpage);
 		if (sendType == SendMessageToWX.Req.WXSceneTimeline) {
 			msg.title = text;
@@ -124,5 +124,9 @@ public class ShareUtil {
 		req.message = msg;
 		req.scene = sendType;
 		api.sendReq(req);
+	}
+	
+	public void sendWebPageToWX(String text, int sendType) {
+		sendWebPageToWX(text, sendType,"http://www.baidu.com");
 	}
 }
