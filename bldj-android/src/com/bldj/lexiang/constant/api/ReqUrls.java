@@ -206,6 +206,10 @@ public interface ReqUrls {
 	 */
 	public static final String REQUEST_SELLER_PRODUCTS = "/seller/getSellerProducts";
 	/**
+	 * 获取可预约美容师产品列表
+	 */
+	public static final String REQUEST_SELLER_SCHEDULED = "/seller/getScheduledSellers";
+	/**
 	 * 获取美容师评论列表
 	 */
 	public static final String REQUEST_SELLER_SCORES = "/seller/getSellerScores";
