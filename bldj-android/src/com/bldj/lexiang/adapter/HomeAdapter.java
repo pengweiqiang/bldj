@@ -112,19 +112,21 @@ public class HomeAdapter extends BaseListAdapter {
 
 			@Override
 			public void onClick(View arg0) {
+				Intent intent = new Intent();
 				if(type == 1){//服务项目，进入单品页--》预约第一步--》第三部
-					MyApplication.getInstance().sellerVo = sellerVo;
+					intent.setClass(mContext, HealthProductDetailActivity.class);
+					intent.putExtra("product", productItem.get(0));
+					intent.putExtra("seller", sellerVo);
 				}else if(type == 2){//我要预约他，直接进入预约第一步--》第三部。
-					MyApplication.getInstance().sellerVo = sellerVo;
-					Intent intentAppoint  = new Intent(mContext,AppointmentDoor1Activity.class);
-					intentAppoint.putExtra("product", productItem.get(0));
-					mContext.startActivity(intentAppoint);
+					intent.setClass(mContext, AppointmentDoor1Activity.class);
+					intent.putExtra("product", productItem.get(0));
+					intent.putExtra("seller", sellerVo);
 					AppManager.getAppManager().finishActivity(mContext.getClass());
-					return;
+				}else if(type == 0){//首页，分类
+					intent.setClass(mContext, HealthProductDetailActivity.class);
+					intent.putExtra("product", productItem.get(0));
 				}
-				Intent intent = new Intent(mContext,
-						HealthProductDetailActivity.class);
-				intent.putExtra("product", productItem.get(0));
+				
 				mContext.startActivity(intent);
 			}
 		});
@@ -148,19 +150,21 @@ public class HomeAdapter extends BaseListAdapter {
 
 				@Override
 				public void onClick(View arg0) {
-					if(type == 1){
-						MyApplication.getInstance().sellerVo = sellerVo;
-					}else if(type == 2){
-						MyApplication.getInstance().sellerVo = sellerVo;
-						Intent intentAppoint  = new Intent(mContext,AppointmentDoor1Activity.class);
-						intentAppoint.putExtra("product", productItem.get(1));
-						mContext.startActivity(intentAppoint);
+					Intent intent = new Intent();
+					if(type == 1){//理疗师界面下的服务项目
+						intent.setClass(mContext, HealthProductDetailActivity.class);
+						intent.putExtra("product", productItem.get(1));
+						intent.putExtra("seller", sellerVo);
+						mContext.startActivity(intent);
+					}else if(type == 2){//点击我要预约他
+						intent.setClass(mContext, AppointmentDoor1Activity.class);
+						intent.putExtra("product", productItem.get(1));
+						intent.putExtra("seller", sellerVo);
 						AppManager.getAppManager().finishActivity(mContext.getClass());
-						return;
+					}else if(type ==0){//首页，分类
+						intent.setClass(mContext, HealthProductDetailActivity.class);
+						intent.putExtra("product", productItem.get(1));
 					}
-					Intent intent = new Intent(mContext,
-							HealthProductDetailActivity.class);
-					intent.putExtra("product", productItem.get(1));
 					mContext.startActivity(intent);
 				}
 			});
