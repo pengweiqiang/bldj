@@ -38,6 +38,7 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
+import com.bldj.lexiang.utils.DateUtil;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
@@ -140,7 +141,7 @@ public class OrderDetail2Activity extends BaseActivity {
 		}else{
 			ll_btn.setVisibility(View.GONE);
 		}
-		tv_order_time.setText(order.getCreatetime());
+		tv_order_time.setText(DateUtil.getDateString(order.getCreatetime(),DateUtil.TRIM_PATTERN,DateUtil.CUSTOM_PATTERN2));
 		tv_order_pay.setText(String.valueOf("￥"+order.getOrderPay()));
 		tv_order_num.setText(order.getOrderNum());
 		tv_order_product.setText(order.getProName());
