@@ -71,7 +71,7 @@ public class SharedFriendActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				ToastUtils.showToast(mContext, "分享微信...");
-				shareUtil.sendMsgToWX("健康送到家，方便你我他",
+				shareUtil.sendWebPageToWX("健康送到家，方便你我他",
 						SendMessageToWX.Req.WXSceneTimeline);
 			}
 		});

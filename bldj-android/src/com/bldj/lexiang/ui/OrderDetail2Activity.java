@@ -249,7 +249,7 @@ public class OrderDetail2Activity extends BaseActivity {
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN
 						.getIndex()) {
 					ToastUtils.showToast(mContext, "分享微信...");
-					shareUtil.sendMsgToWX("健康送到家，方便你我他",
+					shareUtil.sendWebPageToWX("健康送到家，方便你我他",
 							SendMessageToWX.Req.WXSceneTimeline);
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT
 						.getIndex()) {
