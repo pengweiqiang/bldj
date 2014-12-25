@@ -42,7 +42,7 @@ public class MyApplication extends Application {
 	public LocationClient mLocationClient;
 	public MyLocationListener mMyLocationListener;
 	public String addressStr = "";
-	public Seller sellerVo = null;//当前选中的美容师
+//	public Seller sellerVo = null;//当前选中的美容师
 	
 	public Map<String,String> appointMap = new HashMap<String, String>();//我要预约的时间，姓名等等
 	public String street = "";//当前街道地点
