@@ -112,4 +112,21 @@ public class ApiSellerUtils {
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
 	
+	/**
+	 * 获取可预约美容师列表
+	 * @param context
+	 * @param proId
+	 * @param dealDate
+	 * @param requestCallback
+	 */
+	public static void getSellerByProIdAndDate(Context context,long proId,String dealDate,int start,int limit,RequestCallback requestCallback){
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put("proId", proId);
+		params.put("dealDate", dealDate);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_SCHEDULED, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+	}
+	
 }
