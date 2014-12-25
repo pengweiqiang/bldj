@@ -16,6 +16,7 @@ import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -96,6 +97,11 @@ public class ForgetPwdActivity extends BaseActivity {
 				String tagCode = (String)et_code.getTag();
 				if(StringUtils.isEmpty(tagCode)){
 					ToastUtils.showToast(ForgetPwdActivity.this, "请先获取验证码");
+					return;
+				}
+				if(!PatternUtils.checkPhoneNum(phone)){
+					et_phone.requestFocus();
+					ToastUtils.showToast(ForgetPwdActivity.this, "请输入正确的手机号");
 					return;
 				}
 				if(!code.equals(tagCode)){

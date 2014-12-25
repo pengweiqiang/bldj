@@ -18,6 +18,7 @@ import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -83,6 +84,11 @@ public class LoginFragment extends BaseFragment {
 				if(StringUtils.isEmpty(password)){
 					et_password.requestFocus();
 					ToastUtils.showToast(mActivity, "密码不能为空");
+					return;
+				}
+				if(!PatternUtils.checkPhoneNum(phone)){
+					et_phone.requestFocus();
+					ToastUtils.showToast(mActivity, "请输入正确的手机号");
 					return;
 				}
 				loading = new LoadingDialog(mActivity, "登录中...");

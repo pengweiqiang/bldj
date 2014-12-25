@@ -20,6 +20,7 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.LoadingDialog;
@@ -103,6 +104,11 @@ public class RegisterFragment extends BaseFragment {
 					ToastUtils.showToast(mActivity, "请先获取验证码");
 					return;
 				}
+				if(!PatternUtils.checkPhoneNum(phone)){
+					et_phone.requestFocus();
+					ToastUtils.showToast(mActivity, "请输入正确的手机号");
+					return;
+				}
 				if(!code.equals(tagCode)){
 					et_code.requestFocus();
 					ToastUtils.showToast(mActivity, "验证码错误");
@@ -147,6 +153,11 @@ public class RegisterFragment extends BaseFragment {
 				if (StringUtils.isEmpty(mobile)) {
 					et_phone.requestFocus();
 					ToastUtils.showToast(mActivity, "请输入手机号码获取验证码");
+					return;
+				}
+				if(!PatternUtils.checkPhoneNum(mobile)){
+					et_phone.requestFocus();
+					ToastUtils.showToast(mActivity, "请输入正确的手机号");
 					return;
 				}
 				regainCode();

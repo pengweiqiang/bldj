@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,6 +24,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.geocode.GeoCodeResult;
@@ -229,10 +231,21 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long arg3) {
-				listadapter.setCurrentItem(position);
+//				listadapter.setCurrentItem(position);
+//				if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
+//					et_address.setText(btn_location.getText().toString());
+//				}else if(et_address.getText().toString().equals(btn_location.getText().toString()+(String)listadapter.getItem(position))){
+//					et_address.setText("");
+//				}else {
+//					et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
+//				}
 				if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
 					et_address.setText(btn_location.getText().toString());
+				}else if(et_address.getText().toString().equals(btn_location.getText().toString()+(String)listadapter.getItem(position))){
+					et_address.setText("");
+					view.setBackgroundColor(Color.TRANSPARENT);
 				}else{
+					view.setBackgroundColor(mActivity.getResources().getColor(R.color.app_bg_color));
 					et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
 				}
 			}

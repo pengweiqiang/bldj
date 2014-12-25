@@ -82,7 +82,7 @@ public class CategoryAdapter extends BaseListAdapter {
 
 			holder.tv_category_name = (TextView) convertView
 					.findViewById(R.id.category_name);
-			holder.title_circle = (View)convertView.findViewById(R.id.title_circle);
+//			holder.title_circle = (View)convertView.findViewById(R.id.title_circle);
 			holder.tv_more = (TextView)convertView.findViewById(R.id.more);
 
 			convertView.setTag(holder);
@@ -90,19 +90,19 @@ public class CategoryAdapter extends BaseListAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		CircleView c = (CircleView)convertView.findViewById(R.id.title_circle2);
-		c.invalidate();
+		/*CircleView c = (CircleView)convertView.findViewById(R.id.title_circle2);
+		c.invalidate();*/
 		holder.tv_category_name.setText(category.getName());
-		int res = context.getResources().getColor(R.color.color_random_one);
-		Random rand = new Random();
-		int i = rand.nextInt(10);
-		if(i==0){
-			holder.title_circle.setBackgroundColor(res);
-		}else if(i==1){
-			holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_two));
-		}else if(i==2){
-			holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_three));
-		}
+//		int res = context.getResources().getColor(R.color.color_random_one);
+//		Random rand = new Random();
+//		int i = rand.nextInt(10);
+//		if(i==0){
+//			holder.title_circle.setBackgroundColor(res);
+//		}else if(i==1){
+//			holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_two));
+//		}else if(i==2){
+//			holder.title_circle.setBackgroundColor(context.getResources().getColor(R.color.color_random_three));
+//		}
 		
 
 		if (products != null && products.size() > 0) {
@@ -215,7 +215,7 @@ public class CategoryAdapter extends BaseListAdapter {
 
 	public final class ViewHolder {
 		public TextView tv_category_name;
-		public View title_circle;
+//		public View title_circle;
 		public RelativeLayout frame1,frame2,frame3,frame4;
 		public ImageView imageView1, imageView2, imageView3, imageView4;
 		public TextView tv_product_name1, tv_product_name2, tv_product_name3,
