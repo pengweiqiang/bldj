@@ -151,7 +151,7 @@ public class MyApplication extends Application {
 			street = city+district+location.getStreet();
 			String streeNum = location.getStreetNumber();
 			System.out.println("province:" + province + "  city:" + city
-					+ "  district:" + district + "  addressStr:" + addressStr);
+					+ "  district:" + district + "  addressStr:" + addressStr+"  street "+street+"  streemNum:"+streeNum);
 			if (lat == location.getLatitude() && lon == location.getLongitude()) {
 				// 若两次请求获取到的地理位置坐标是相同的，则不再定位
 				if (!StringUtils.isEmpty(city)) {
