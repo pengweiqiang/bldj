@@ -17,8 +17,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center|center_vertical"
+            android:layout_weight="2"
+            android:gravity="center"
             android:orientation="horizontal"
              >
 
@@ -27,23 +27,27 @@
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_horizontal"
                 android:layout_weight="1"
                 android:text="￥50"
                 android:textStyle="bold"
                 android:textColor="#ffae00"
-                android:textSize="40sp" />
+                android:textSize="37sp" />
 			<RelativeLayout 
 			    android:layout_width="wrap_content"
 			    android:layout_height="match_parent"
-			    android:layout_gravity="center"
 			    android:layout_weight="1"
-			    android:gravity="center"
+			    android:layout_marginRight="3dp"
+			    android:paddingLeft="5dp"
+			    android:gravity="center_vertical|left"
 			    >
 				 <TextView
 	                android:id="@+id/name"
 	                android:layout_width="wrap_content"
 	                android:layout_height="wrap_content"
 	                android:layout_centerVertical="true"
+	                android:layout_centerHorizontal="true"
 	                android:text="优惠卷"
 	                android:textSize="20sp"
 	                android:textColor="@color/grey"
@@ -52,34 +56,38 @@
 	                android:id="@+id/description"
 	                android:layout_below="@+id/name"
 	                android:layout_width="wrap_content"
+	                 android:layout_centerVertical="true"
+	                android:layout_centerHorizontal="true"
+	                android:layout_marginTop="3dp"
 	                android:layout_height="wrap_content"
 	                android:text="分享好友优惠卷"
 	                android:textColor="@color/grey"
-	                android:textSize="12sp" />
+	                android:textSize="13sp" />
 	          
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="5dp"
+            android:gravity="center_vertical"
             android:layout_weight="1"
-            android:gravity="right|center_vertical"
-            android:orientation="vertical"
-            android:paddingRight="4dip" >
+            android:paddingRight="1dip" >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="使用期限"
+                android:id="@+id/date"
+                android:layout_centerInParent="true"
                 android:textColor="@color/grey" />
 
             <TextView
                 android:id="@+id/starttime"
+                android:layout_below="@+id/date"
                 android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:layout_marginTop="4dip"
                 android:text="2014-12-01"
                 android:textColor="@color/light_green"
@@ -87,14 +95,15 @@
 
             <TextView
                 android:id="@+id/endtime"
+                android:layout_below="@+id/starttime"
                 android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
                 android:layout_marginTop="4dip"
                 android:text="2016-01-01"
                 android:textColor="@color/light_green"
                 android:textSize="13sp" />
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>
