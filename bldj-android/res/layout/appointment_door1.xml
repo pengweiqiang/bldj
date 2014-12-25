@@ -350,7 +350,7 @@
                     android:id="@+id/btn_next"
                     android:layout_width="120dip"
                     android:layout_height="40dip"
-                    android:background="@drawable/coners"
+                    android:background="@drawable/btn_coners"
                     android:gravity="center"
                     android:text="@string/next"
                     android:textColor="@color/white" />
