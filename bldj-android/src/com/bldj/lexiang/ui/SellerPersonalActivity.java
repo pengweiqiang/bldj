@@ -304,8 +304,8 @@ public class SellerPersonalActivity extends FragmentActivity{
 			@Override
 			public void onClick(View arg0) {
 				ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
-				shareUtil.sendMsgToWX("健康送到家，方便你我他",
-						SendMessageToWX.Req.WXSceneTimeline);
+				shareUtil.sendWebPageToWX("健康送到家，方便你我他",
+						SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
 			}
 		});
 		// 预约次美容师-->弹出下面的服务项目
@@ -385,8 +385,8 @@ public class SellerPersonalActivity extends FragmentActivity{
 					}
 				}else{
 					ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
-					shareUtil.sendMsgToWX("健康送到家，方便你我他",
-					SendMessageToWX.Req.WXSceneTimeline);
+					shareUtil.sendWebPageToWX("健康送到家，方便你我他",
+					SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
 				}
 			}
 			
