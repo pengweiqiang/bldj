@@ -15,7 +15,7 @@
 
     <com.bldj.lexiang.view.SpringScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:id="@+id/scrollView"
         android:scrollbars="none" >
@@ -328,13 +328,14 @@
                     android:listSelector="@android:color/transparent" >
                 </ListView>
             </LinearLayout>
-
-            <LinearLayout
+              <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/company_margin_button_top"
-                android:gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:gravity="bottom|center_horizontal"
+                android:paddingBottom="5dp"
+                android:padding="8dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 android:weightSum="1" >
 
@@ -347,7 +348,9 @@
                     android:text="@string/finish"
                     android:textColor="@color/white" />
             </LinearLayout>
+
         </LinearLayout>
     </com.bldj.lexiang.view.SpringScrollView>
+    
 
 </LinearLayout>
