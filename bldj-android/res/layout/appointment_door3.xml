@@ -359,7 +359,7 @@
                         android:id="@+id/btn_use_code"
                         android:layout_width="wrap_content"
                         android:layout_height="25dp"
-                        android:background="@drawable/coners"
+                        android:background="@drawable/btn_coners"
                         android:text="使用电子卷"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
@@ -402,7 +402,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dip"
-                android:background="@drawable/coners"
+                android:background="@drawable/btn_coners"
                 android:paddingLeft="40dip"
                 android:paddingRight="40dip"
                 android:text="@string/confirm"
