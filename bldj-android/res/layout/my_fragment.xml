@@ -10,10 +10,7 @@
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="10dip"
-        android:background="@drawable/border" >
+         >
     </com.bldj.lexiang.view.ActionBar>
 
     <com.bldj.lexiang.view.SpringScrollView
@@ -231,7 +228,7 @@
                 android:paddingRight="60dip"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="5dip"
-                android:background="@drawable/coners"
+                android:background="@drawable/btn_coners"
                 android:text="@string/login"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
