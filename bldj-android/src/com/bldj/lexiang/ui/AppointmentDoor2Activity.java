@@ -149,7 +149,11 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 				if (mSelectedView == null) {
                     arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
                     mSelectedView = arg1;
-                } else {
+                }else if(arg1 == mSelectedView){
+                	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
+                	mSeletedSeller = null;
+                	return;
+                }else {
                 	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
                 	arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
                     mSelectedView = arg1;

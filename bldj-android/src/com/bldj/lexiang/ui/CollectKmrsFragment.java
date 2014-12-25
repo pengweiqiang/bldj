@@ -127,7 +127,7 @@ public class CollectKmrsFragment extends BaseFragment implements
 		sellers.addAll(sellersList);
 
 		listAdapter.notifyDataSetChanged();
-		mListView.onLoadFinish(pageNumber, sellers.size(), "亲，你没有收藏美容师");
+		mListView.onLoadFinish(pageNumber, sellers.size(), "亲，你没有收藏理疗师");
 
 	}
 
