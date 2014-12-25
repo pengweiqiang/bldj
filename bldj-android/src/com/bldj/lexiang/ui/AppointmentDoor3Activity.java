@@ -40,6 +40,7 @@ import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.api.ReqUrls;
+import com.bldj.lexiang.utils.DateUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.StringUtils;
@@ -107,7 +108,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		getPayType();
 	}
 	private void initData(){
-		tv_time.setText(time);
+		tv_time.setText(DateUtil.getDateString(time,DateUtil.CUSTOM_PATTERN3,DateUtil.CUSTOM_PATTERN2));
 		tv_sellerName.setText(seller.getNickname());
 
 		orderPay = product.getCurPrice();
