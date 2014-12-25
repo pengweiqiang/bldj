@@ -105,9 +105,10 @@ public class SellerProductAdapter extends BaseListAdapter {
 
 			@Override
 			public void onClick(View arg0) {
-					MyApplication.getInstance().sellerVo = sellerVo;
+//					MyApplication.getInstance().sellerVo = sellerVo;
 					Intent intentAppoint  = new Intent(mContext,AppointmentDoor1Activity.class);
 					intentAppoint.putExtra("product", productItem.get(0));
+					intentAppoint.putExtra("seller", sellerVo);
 					mContext.startActivity(intentAppoint);
 					AppManager.getAppManager().finishActivity(mContext.getClass());
 			}
@@ -132,9 +133,10 @@ public class SellerProductAdapter extends BaseListAdapter {
 
 				@Override
 				public void onClick(View arg0) {
-						MyApplication.getInstance().sellerVo = sellerVo;
+//						MyApplication.getInstance().sellerVo = sellerVo;
 						Intent intentAppoint  = new Intent(mContext,AppointmentDoor1Activity.class);
 						intentAppoint.putExtra("product", productItem.get(1));
+						intentAppoint.putExtra("seller", sellerVo);
 						mContext.startActivity(intentAppoint);
 						AppManager.getAppManager().finishActivity(mContext.getClass());
 				}
