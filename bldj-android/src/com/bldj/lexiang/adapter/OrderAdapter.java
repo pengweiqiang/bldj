@@ -13,6 +13,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
 import com.bldj.lexiang.ui.OrderEvalActivity;
+import com.bldj.lexiang.utils.DateUtil;
 
 public class OrderAdapter extends BaseListAdapter {
 
@@ -68,7 +69,7 @@ public class OrderAdapter extends BaseListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.tv_order_time.setText(order.getCreatetime());
+		holder.tv_order_time.setText(DateUtil.getDateString(order.getCreatetime(),DateUtil.TRIM_PATTERN,DateUtil.CRITICISM_PATTERN));
 		holder.tv_order_pay.setText("￥" + String.valueOf(order.getOrderPay()));
 		holder.tv_order_num.setText(order.getOrderNum());
 		holder.tv_order_status.setText(order.getStatusStr());
