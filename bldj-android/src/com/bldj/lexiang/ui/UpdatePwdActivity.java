@@ -97,6 +97,11 @@ public class UpdatePwdActivity extends BaseActivity {
 					ToastUtils.showToast(UpdatePwdActivity.this, "两次密码不一致");
 					return;
 				}
+				if(new_pwd.equals(old_pwd)){
+					et_new_pwd.requestFocus();
+					ToastUtils.showToast(UpdatePwdActivity.this, "新密码不能与旧密码一致");
+					return;
+				}
 				loading = new LoadingDialog(mContext);
 				loading.show();
 				User user = MyApplication.getInstance().getCurrentUser();
