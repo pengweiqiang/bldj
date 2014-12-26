@@ -1,10 +1,12 @@
 package com.bldj.lexiang.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,6 +40,8 @@ public class LoginFragment extends BaseFragment {
 	private Button btn_login;
 	private View infoView;
 	LoadingDialog loading ;
+	
+	InputMethodManager manager;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,7 +68,7 @@ public class LoginFragment extends BaseFragment {
 		btn_login = (Button)infoView.findViewById(R.id.login);
 		
 		et_phone.requestFocus();
-		
+		manager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE); 
 	}
 	/**
 	 * 事件初始化
