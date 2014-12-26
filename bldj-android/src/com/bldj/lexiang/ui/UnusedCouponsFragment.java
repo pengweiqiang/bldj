@@ -121,7 +121,7 @@ public class UnusedCouponsFragment extends BaseFragment implements
 	 */
 	private void getCoupons() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), -1, "", 3,
+		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), 0, "", 3,
 				pageNumber, ApiConstants.LIMIT, 0,
 				new HttpConnectionUtil.RequestCallback() {
 
