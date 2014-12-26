@@ -105,8 +105,7 @@ IXListViewListener {
 								.getStatus())) {
 							 ToastUtils.showToast(MyFilesActivity.this,
 							 parseModel.getMsg());
-							 return;
-							
+							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 						} else {
 							List<MyFiles> myFilesList = JsonUtils.fromJson(
 									parseModel.getData().toString(),

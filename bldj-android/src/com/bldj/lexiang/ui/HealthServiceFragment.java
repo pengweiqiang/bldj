@@ -154,6 +154,7 @@ public class HealthServiceFragment extends BaseFragment implements
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 							return;
 
 						} else {

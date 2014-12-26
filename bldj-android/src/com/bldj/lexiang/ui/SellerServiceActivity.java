@@ -82,7 +82,7 @@ IXListViewListener{
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							ToastUtils.showToast(SellerServiceActivity.this, parseModel.getMsg());
-							return;
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 
 						} else {
 							List<Product> productsList = JsonUtils.fromJson(

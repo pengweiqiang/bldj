@@ -103,6 +103,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							 ToastUtils.showToast(mActivity,parseModel.getMsg());
+							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 						} else {
 							List<Coupon> couponsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),

@@ -106,6 +106,7 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 						.getStatus())) {
 					 ToastUtils.showToast(mActivity,
 					 parseModel.getMsg());
+					 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 					 return;
 
 				} else {
