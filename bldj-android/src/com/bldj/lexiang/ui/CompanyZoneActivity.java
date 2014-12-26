@@ -185,6 +185,11 @@ public class CompanyZoneActivity extends BaseActivity {
 					ToastUtils.showToast(CompanyZoneActivity.this, "请输入详细地址");
 					return;
 				}
+				/*if (StringUtils.isEmpty(concactType)) {
+					et_contact_type.requestFocus();
+					ToastUtils.showToast(CompanyZoneActivity.this, "请输入联系方式");
+					return;
+				}*/
 				
 				if (price == -1) {
 					ToastUtils.showToast(mContext, "稍后请重试");

@@ -1,18 +1,21 @@
 package com.bldj.lexiang.ui;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -32,12 +35,14 @@ public class ApplyAuthentActivity extends BaseActivity {
 	private EditText et_phone;
 	private Button btn_auth;
 	
+	InputMethodManager manager;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.apply_authent);
 		super.onCreate(savedInstanceState);
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); 
 	}
 
 	// 设置activity的导航条
@@ -69,8 +74,31 @@ public class ApplyAuthentActivity extends BaseActivity {
 			public void onClick(View arg0) {
 				String realName = et_real_name.getText().toString().trim();
 				if(StringUtils.isEmpty(realName)){
+					et_real_name.requestFocus();
 					ToastUtils.showToast(ApplyAuthentActivity.this, "请输入您的真实姓名");
 					return ;
+				}
+				String email = et_email.getText().toString().trim();
+				if(StringUtils.isEmpty(email)){
+					et_email.requestFocus();
+					ToastUtils.showToast(ApplyAuthentActivity.this, "请输入邮箱");
+					return ;
+				}
+				if(!PatternUtils.checkEmail(email)){
+					et_email.requestFocus();
+					ToastUtils.showToast(ApplyAuthentActivity.this, "请输入正确的邮箱");
+					return;
+				}
+				String mobile = et_phone.getText().toString().trim();
+				if(StringUtils.isEmpty(mobile)){
+					et_phone.requestFocus();
+					ToastUtils.showToast(ApplyAuthentActivity.this, "请输入手机号");
+					return;
+				}
+				if(!PatternUtils.checkPhoneNum(mobile)){
+					et_phone.requestFocus();
+					ToastUtils.showToast(ApplyAuthentActivity.this, "请输入正确的手机号");
+					return;
 				}
 				Long phone = Long.parseLong(et_phone.getText().toString().trim());
 				String emial = et_email.getText().toString().trim();
@@ -92,5 +120,15 @@ public class ApplyAuthentActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	 public boolean onTouchEvent(MotionEvent event) {  
+		  // TODO Auto-generated method stub  
+		  if(event.getAction() == MotionEvent.ACTION_DOWN){  
+		     if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){  
+		       manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
+		     }  
+		  }  
+		  return super.onTouchEvent(event);  
+		 } 
 
 }

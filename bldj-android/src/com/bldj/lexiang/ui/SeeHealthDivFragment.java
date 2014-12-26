@@ -222,14 +222,17 @@ public class SeeHealthDivFragment extends BaseFragment implements
 			groups.add(TitleBarEnum.ORDER_COUNT);
 			break;
 		case 1:
-			groups.add(TitleBarEnum.PRICE_NONE);
+//			groups.add(TitleBarEnum.PRICE_NONE);
+			groups.add(TitleBarEnum.PRICE_ORDER0);
 			groups.add(TitleBarEnum.PRICE_ORDER1);
 			groups.add(TitleBarEnum.PRICE_ORDER2);
+			groups.add(TitleBarEnum.PRICE_ORDER3);
 			break;
 		case 2:
-			groups.add(TitleBarEnum.WORK_3_BIG);
+			groups.add(TitleBarEnum.WORK_3_SMALL);
 			groups.add(TitleBarEnum.WORK_3_5);
 			groups.add(TitleBarEnum.WORK_5_10);
+			groups.add(TitleBarEnum.WORK_10_BIG);
 			break;
 		}
 		if (popupWindow == null) {

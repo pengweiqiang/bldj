@@ -148,6 +148,11 @@ public class ForgetPwdActivity extends BaseActivity {
 							.showToast(ForgetPwdActivity.this, "请输入手机号码获取验证码");
 					return;
 				}
+				if(!PatternUtils.checkPhoneNum(mobile)){
+					et_phone.requestFocus();
+					ToastUtils.showToast(ForgetPwdActivity.this, "请输入正确的手机号");
+					return;
+				}
 				regainCode();
 				if (btn_getCode.isEnabled()) {
 					btn_getCode.setEnabled(false);

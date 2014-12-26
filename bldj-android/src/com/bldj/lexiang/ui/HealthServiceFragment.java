@@ -198,9 +198,11 @@ public class HealthServiceFragment extends BaseFragment implements
 			groups.add(TitleBarEnum.ORDER_PRICE);
 			break;
 		case 1:
-			groups.add(TitleBarEnum.PRICE_NONE);
+//			groups.add(TitleBarEnum.PRICE_NONE);
+			groups.add(TitleBarEnum.PRICE_ORDER0);
 			groups.add(TitleBarEnum.PRICE_ORDER1);
 			groups.add(TitleBarEnum.PRICE_ORDER2);
+			groups.add(TitleBarEnum.PRICE_ORDER3);
 			break;
 		case 2:
 			groups.add(TitleBarEnum.TYPE_ORDER_ALL);
