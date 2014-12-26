@@ -39,7 +39,9 @@ public class ApiSellerUtils {
 		params.put(ReqUrls.START, start);
 		params.put(ReqUrls.LIMIT, limit);
 		params.put("startPrice",startPrice);
-		params.put("endPrice", endPrice);
+		if(endPrice !=-1){
+			params.put("endPrice", endPrice);
+		}
 		params.put("startWorkyear", startWorkyear);
 		if(endWorkyear!=-1){
 			params.put("endWorkyear", endWorkyear);
