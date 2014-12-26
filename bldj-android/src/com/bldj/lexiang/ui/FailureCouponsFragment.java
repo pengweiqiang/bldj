@@ -93,7 +93,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	 */
 	private void getCoupons() {
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), -1, "", 3,pageNumber,ApiConstants.LIMIT,1,
+		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), 0, "", 3,pageNumber,ApiConstants.LIMIT,1,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
