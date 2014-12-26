@@ -40,7 +40,7 @@ public class ApiBuyUtils {
 	 * 
 	 * @param context
 	 * @param id 用户id
-	 * @param type 0电子券 1注册 2分享 -1获取所有
+	 * @param type -1：获取所有的 0：获取注册和分享的  1：只获取分享的
 	 * @param vcode 电子券码
 	 * @param method 0添加 3查询 4校验
 	 * @param start 起始页
