@@ -44,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dip"
-            android:paddingLeft="20dip"
-            android:text="12.05"
+            android:paddingLeft="8dip"
+            android:text="12月05日"
             android:textColor="@color/grey" />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/date"
             android:paddingLeft="27dip"
-            android:text="2014"
+            android:text="2014年"
             android:textColor="@color/grey"
             android:textSize="11sp" />
 

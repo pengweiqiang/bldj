@@ -104,7 +104,7 @@
                 android:layout_marginBottom="10dip"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/step2_unselected" />
+                android:src="@drawable/step2_normal" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,7 +148,7 @@
                 android:layout_marginBottom="10dip"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/step3_unselected" />
+                android:src="@drawable/step3__normal" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -157,7 +157,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginBottom="10dip"
                 android:layout_toRightOf="@+id/line_left"
-                android:src="@drawable/step3_unselected" />
+                android:src="@drawable/step3__normal" />
 
             <TextView
                 android:layout_width="wrap_content"
