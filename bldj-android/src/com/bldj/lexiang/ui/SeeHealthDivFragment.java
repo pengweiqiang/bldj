@@ -176,6 +176,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
 							sellers.clear();
 							listAdapter.notifyDataSetChanged();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 							return;
 
 						} else {

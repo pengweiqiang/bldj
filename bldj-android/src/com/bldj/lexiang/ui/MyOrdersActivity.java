@@ -111,7 +111,7 @@ IXListViewListener{
 								.getStatus())) {
 							 ToastUtils.showToast(MyOrdersActivity.this,
 							 parseModel.getMsg());
-							 return;
+							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 							
 						} else {
 							List<Order> ordersList = JsonUtils.fromJson(

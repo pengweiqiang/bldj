@@ -237,6 +237,7 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 				if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 						.getStatus())) {
 					 ToastUtils.showToast(CompanyZoneSelectPackageActivity.this,parseModel.getMsg());
+					 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 				} else {
 					List<CheepCards> cheepCardNewList = JsonUtils.fromJson(
 							parseModel.getData().toString(),
