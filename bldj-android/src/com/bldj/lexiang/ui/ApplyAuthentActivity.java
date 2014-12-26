@@ -19,6 +19,7 @@ import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 
 /**
  * 申请认证
@@ -36,6 +37,7 @@ public class ApplyAuthentActivity extends BaseActivity {
 	private Button btn_auth;
 	
 	InputMethodManager manager;
+	LoadingDialog loading;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.apply_authent);
@@ -102,11 +104,14 @@ public class ApplyAuthentActivity extends BaseActivity {
 				}
 				Long phone = Long.parseLong(et_phone.getText().toString().trim());
 				String emial = et_email.getText().toString().trim();
+				loading = new LoadingDialog(mContext);
+				loading.show();
 				ApiUserUtils.unifor(ApplyAuthentActivity.this, phone, "", 1, realName, emial, 
 						"", "", "", 0, 0, new HttpConnectionUtil.RequestCallback(){
 
 							@Override
 							public void execute(ParseModel parseModel) {
+								loading.cancel();
 								if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 										.getStatus())) {
 									ToastUtils.showToast(ApplyAuthentActivity.this, parseModel.getMsg());
