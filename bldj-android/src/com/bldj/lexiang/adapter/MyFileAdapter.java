@@ -73,7 +73,7 @@ public class MyFileAdapter extends BaseListAdapter {
 		String year = "2014";
 		String date = "1205";
 		if(myFile.getContent().length()>4){
-			year = myFile.getDealdate().subSequence(0, 4).toString();
+			year = myFile.getDealdate().subSequence(0, 4).toString()+"年";
 			date = myFile.getDealdate().substring(4);
 		}
 		holder.tv_year.setText(year);
