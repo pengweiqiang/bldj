@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper{
 	
 	public static final String DATA_BASE_NAME = "bldj_fav_db";
-	public static final int DATA_BASE_VERSION = 1;
+	public static final int DATA_BASE_VERSION = 2;
 	public static final String TABLE_NAME_PRODUCT = "fav_product";//经络养生
 	public static final String TABLE_NAME_SELLER = "fav_seller";//美容师
 	public static final String TABLE_NAME_BANNER = "banner";//首页广告栏
