@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,6 +83,7 @@ public class OrderDetail2Activity extends BaseActivity {
 
 	ShareUtil shareUtil;
 
+	int type =-1;//0取消订单成功  1 支付成功
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.order_detail2);
@@ -101,6 +103,9 @@ public class OrderDetail2Activity extends BaseActivity {
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						Intent data = new Intent();
+						data.putExtra("type", type);
+						setResult(23, data); 
 						finish();
 					}
 				});
@@ -204,6 +209,7 @@ public class OrderDetail2Activity extends BaseActivity {
 //									ToastUtils.showToast(
 //											OrderDetail2Activity.this,
 //											parseModel.getMsg());
+									type = 0;
 									tv_orderStatus.setText("已取消");
 									ll_btn.setVisibility(View.GONE);
 								}
@@ -402,6 +408,7 @@ public class OrderDetail2Activity extends BaseActivity {
 //					paySuccess(orderNum);
 //					ToastUtils.showToast(mContext, "支付成功！");
 					paySuccessOrCancelPay();
+					type = 1; 
 				}else if("6002".equals(tradeStatus)){//网络连接异常
 					ToastUtils.showToast(mContext, getResources().getString(R.string.NETWORK_ERROR));
 				}else if("4000".equals(tradeStatus)){//支付失败
@@ -419,6 +426,21 @@ public class OrderDetail2Activity extends BaseActivity {
 		tv_orderStatus.setText("已支付");
 		ll_btn.setVisibility(View.GONE);
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if(KeyEvent.KEYCODE_BACK == keyCode){
+			Intent data = new Intent();
+			data.putExtra("type", type);
+			setResult(23, data); 
+			finish();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	
+	
+	
 	
 
 }

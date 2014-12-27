@@ -19,6 +19,7 @@ import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.enums.OrderStatusEnum;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
@@ -45,6 +46,7 @@ IXListViewListener{
 
 	private int pageNumber = 0;
 	
+	private int selectOrderIndex = -1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.my_orders);
@@ -88,13 +90,34 @@ IXListViewListener{
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
 				Intent intent = new Intent(MyOrdersActivity.this,OrderDetail2Activity.class);
-				intent.putExtra("order", orders.get(position-1));
-				startActivity(intent);
+				selectOrderIndex = position-1;
+				intent.putExtra("order", orders.get(selectOrderIndex));
+				startActivityForResult(intent, 123);
 			}
 			
 		});
 	}
 	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		if(resultCode == 23){
+			int type = data.getIntExtra("type", -1);
+			if(selectOrderIndex !=-1){
+				if(type == 0){//取消订单
+					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.CANCLED);
+					orders.get(selectOrderIndex).setStatusStr("已取消");
+				}else if(type ==1){//支付成功
+					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.PAID_ONLINE);
+					orders.get(selectOrderIndex).setStatusStr("线上已支付");
+				}
+				listAdapter.notifyDataSetChanged();
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+
 	/**
 	 * 获取用户订单
 	 */
