@@ -20,6 +20,9 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.commons.Constant;
+import com.bldj.lexiang.utils.SharePreferenceManager;
+import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.CustomViewPager;
 
@@ -85,7 +88,8 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 						Intent intent = new Intent(
 								AppointmentFragmentActivity.this,
 								AddressesActivity.class);
-						startActivity(intent);
+						intent.putExtra("type", 1);
+						startActivityForResult(intent, 123);
 					}
 				});
 	}
@@ -231,6 +235,17 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 		// 退出时销毁定位
 		mLocClient.stop();
 		super.onDestroy();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 20) {
+			String address = data.getStringExtra("address");
+			if(!StringUtils.isEmpty(address)){
+				SharePreferenceManager.saveBatchSharedPreference(AppointmentFragmentActivity.this, Constant.FILE_NAME, "address",address);
+			}
+		}
 	}
 
 }

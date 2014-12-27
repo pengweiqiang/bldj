@@ -94,6 +94,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	InputMethodManager manager ;
 	SpringScrollView scrollView;
 	
+	View selectedView;//选中的地址列表
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -144,6 +145,11 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		btn_location.setText(MyApplication.getInstance().addressStr);
 		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
 			city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
+		}
+		
+		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
+		if(!StringUtils.isEmpty(address)){
+			et_address.setText(address);
 		}
 		/**
 		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
@@ -221,15 +227,32 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 					long arg3) {
 //				listadapter.setCurrentItem(position);
 				
-				if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
-					et_address.setText(btn_location.getText().toString());
-				}else if(et_address.getText().toString().equals(btn_location.getText().toString()+(String)listadapter.getItem(position))){
-					et_address.setText("");
+				if (selectedView == null) {
+		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);
+		            selectedView = view; 
+		            if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
+		            	et_address.setText(btn_location.getText().toString());
+		            }else{
+		            	et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
+		            }
+		        }else if(selectedView == view){//点击第二次取消
+		        	et_address.setText("");
+					((TextView)view.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
 					view.setBackgroundColor(Color.TRANSPARENT);
-				}else{
-					view.setBackgroundColor(mActivity.getResources().getColor(R.color.app_bg_color));
-					et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
-				}
+					selectedView = null;
+		        }
+				else {
+					selectedView.setBackgroundColor(Color.TRANSPARENT);
+		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);
+		            selectedView = view;
+		            if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
+		            	et_address.setText(btn_location.getText().toString());
+		            }else{
+		            	et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
+		            }
+		        }
 			}
 			
 		});
@@ -408,6 +431,14 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	public void onGetPoiResult(PoiResult arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
+		if(!StringUtils.isEmpty(address)){
+			et_address.setText(address);
+		}
 	}
 
 }
