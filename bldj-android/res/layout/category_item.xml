@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/title_ll"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dip"
         android:gravity="center_vertical"
@@ -40,10 +40,16 @@
 
         <TextView
             android:id="@+id/category_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dip"
             android:layout_gravity="center_vertical"
+            android:focusable ="true"    
+    		android:singleLine="true"  
+   	 		android:ellipsize="marquee"  
+    		android:marqueeRepeatLimit="marquee_forever"   
+    		android:focusableInTouchMode="true"  
+    		android:scrollHorizontally="true" 
             android:text="美容床" />
     </LinearLayout>
 
