@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
@@ -36,7 +38,9 @@ public class AddressesActivity extends BaseActivity{
 
 	ActionBar mActionBar;
 	
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	private ListView mListView;
 	private AddressAdapter listAdapter;
 	private List<Address> addresses;
@@ -82,12 +86,23 @@ public class AddressesActivity extends BaseActivity{
 
 	@Override
 	public void initView() {
-		progressBar = (ProgressBar)findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (ListView)findViewById(R.id.jlys_listview);
 	}
 
 	@Override
 	public void initListener() {
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getAddresses();
+			}
+		});
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -110,27 +125,41 @@ public class AddressesActivity extends BaseActivity{
 	}
 	
 
-	
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
+
 		
 	
 	/**
 	 * 获取地址列表数据
 	 */
 	private void getAddresses() {
+		showLoading();
 		long userId = MyApplication.getInstance().getCurrentUser().getUserId();
 		ApiUserUtils.addressManager(this.getApplicationContext(), 3, userId, "", "", "", 
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(AddressesActivity.this,parseModel.getMsg());
+							mListView.setVisibility(View.GONE);
+							rl_loadingFail.setVisibility(View.VISIBLE);
+//							 ToastUtils.showToast(AddressesActivity.this,parseModel.getMsg());
 							 return;
 
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							List<Address> sellersList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Address>>() {

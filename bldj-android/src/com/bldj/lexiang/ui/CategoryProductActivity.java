@@ -3,10 +3,12 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
@@ -15,10 +17,8 @@ import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
@@ -37,7 +37,9 @@ IXListViewListener {
 	private String categoryName;
 	
 	
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	private XListView mListView;
 	private HomeAdapter listAdapter;
 	private List<Product> products;
@@ -77,36 +79,59 @@ IXListViewListener {
 
 	@Override
 	public void initView() {
-		progressBar = (ProgressBar) 
-				findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView) findViewById(R.id.listview);
 	}
 
 	@Override
 	public void initListener() {
-		
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getData();
+			}
+		});
 	}
-	
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
+
 	/**
 	 * 获取养生服务数据
 	 */
 	private void getData() {
+		showLoading();
 		ApiProductUtils.getProductByCategoryByid(CategoryProductActivity.this, pageNumber, ApiConstants.LIMIT,
 				categoryId,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(CategoryProductActivity.this,
-							 parseModel.getMsg());
-							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+							mListView.setVisibility(View.GONE);
+							rl_loadingFail.setVisibility(View.VISIBLE);
+//							 ToastUtils.showToast(CategoryProductActivity.this,
+//							 parseModel.getMsg());
+//							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 							 return;
 							
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Product>>() {

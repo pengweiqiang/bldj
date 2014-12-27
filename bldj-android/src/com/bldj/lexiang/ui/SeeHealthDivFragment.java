@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -45,7 +48,9 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
 public class SeeHealthDivFragment extends BaseFragment implements
 		IXListViewListener {
 
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	private View infoView;
 	private XListView mListView;
 	private JlysHealthAdapter listAdapter;
@@ -103,8 +108,9 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	 */
 	private void initView() {
 
-		progressBar = (ProgressBar) infoView
-				.findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) infoView.findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) infoView.findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
 
 		tv_order_count = (TextView) infoView.findViewById(R.id.order_count);
@@ -117,6 +123,15 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	 * 事件初始化
 	 */
 	private void initListener() {
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getSellers();
+			}
+		});
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -156,11 +171,23 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		});
 
 	}
+	
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 
 	/**
 	 * 获取美容师数据
 	 */
 	private void getSellers() {
+		showLoading();
 		ApiSellerUtils.getSellers(mActivity, pageNumber, ApiConstants.LIMIT,
 				startPrice, endPrice, startWorker, endWorker, orderByTag,
 				MyApplication.getInstance().lat,
@@ -169,17 +196,20 @@ public class SeeHealthDivFragment extends BaseFragment implements
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							ToastUtils.showToast(mActivity, parseModel.getMsg());
+							mListView.setVisibility(View.GONE);
+							rl_loadingFail.setVisibility(View.VISIBLE);
+//							ToastUtils.showToast(mActivity, parseModel.getMsg());
 							sellers.clear();
 							listAdapter.notifyDataSetChanged();
-							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+//							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 							return;
 
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							List<Seller> sellersList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Seller>>() {

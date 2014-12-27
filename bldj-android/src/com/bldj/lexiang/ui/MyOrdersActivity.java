@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
@@ -20,10 +22,8 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
@@ -39,7 +39,9 @@ IXListViewListener{
 
 	ActionBar mActionBar;
 	
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	private XListView mListView;
 	private OrderAdapter listAdapter;
 	private List<Order> orders;
@@ -77,13 +79,24 @@ IXListViewListener{
 
 	@Override
 	public void initView() {
-		progressBar = (ProgressBar) 
-				findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView) findViewById(R.id.listview);
 	}
 
 	@Override
 	public void initListener() {
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getData();
+			}
+		});
+
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -117,26 +130,39 @@ IXListViewListener{
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 	/**
 	 * 获取用户订单
 	 */
 	private void getData() {
+		showLoading();
 		User user = MyApplication.getInstance().getCurrentUser();
 		ApiBuyUtils.getOrders(MyOrdersActivity.this, user.getUserId(),pageNumber,ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(MyOrdersActivity.this,
-							 parseModel.getMsg());
-							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+							mListView.setVisibility(View.GONE);
+							rl_loadingFail.setVisibility(View.VISIBLE);
+//							 ToastUtils.showToast(MyOrdersActivity.this,
+//							 parseModel.getMsg());
+//							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 							
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							List<Order> ordersList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Order>>() {

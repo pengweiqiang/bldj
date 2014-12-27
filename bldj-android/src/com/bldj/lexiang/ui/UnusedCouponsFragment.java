@@ -4,35 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.CouponsAdapter;
-import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.api.ApiBuyUtils;
-import com.bldj.lexiang.api.ApiProductUtils;
-import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Coupon;
 import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DateUtils;
-import com.bldj.lexiang.utils.HttpConnectionUtil.RequestCallback;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.utils.StringUtils;
-import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
@@ -45,7 +36,9 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
 public class UnusedCouponsFragment extends BaseFragment implements
 		IXListViewListener {
 
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	private View infoView;
 	private XListView mListView;
 	private CouponsAdapter listAdapter;
@@ -87,8 +80,9 @@ public class UnusedCouponsFragment extends BaseFragment implements
 	 */
 	private void initView() {
 
-		progressBar = (ProgressBar) infoView
-				.findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) infoView.findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) infoView.findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
 		type = ((CouponsFragmentActivity)mActivity).type;
 
@@ -98,6 +92,15 @@ public class UnusedCouponsFragment extends BaseFragment implements
 	 * 事件初始化
 	 */
 	private void initListener() {
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getCoupons();
+			}
+		});
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -115,11 +118,22 @@ public class UnusedCouponsFragment extends BaseFragment implements
 		});
 
 	}
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 
 	/**
 	 * 获取未使用优惠卷
 	 */
 	private void getCoupons() {
+		showLoading();
 		User user = MyApplication.getInstance().getCurrentUser();
 		ApiBuyUtils.couponsManage(mActivity, user.getUserId(), 0, "", 3,
 				pageNumber, ApiConstants.LIMIT, 0,
@@ -127,14 +141,17 @@ public class UnusedCouponsFragment extends BaseFragment implements
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							ToastUtils.showToast(mActivity, parseModel.getMsg());
-							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+							mListView.setVisibility(View.GONE);
+							rl_loadingFail.setVisibility(View.VISIBLE);
+//							ToastUtils.showToast(mActivity, parseModel.getMsg());
+//							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							List<Coupon> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Coupon>>() {

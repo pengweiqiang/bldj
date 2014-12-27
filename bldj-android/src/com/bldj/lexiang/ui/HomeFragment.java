@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Rect;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
@@ -71,7 +73,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	private MyListView mListView;
 	private HomeAdapter listAdapter;
 	private List<Product> products;
-	private ProgressBar progressbar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 
 	// 广告条 start
 	private GestureDetector mGestureDetector;
@@ -108,8 +112,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		tab_find = (LinearLayout) infoView.findViewById(R.id.tab_find);
 		tab_company = (LinearLayout) infoView.findViewById(R.id.tab_company);
 		tab_reserve = (LinearLayout) infoView.findViewById(R.id.tab_reserve);
-		progressbar = (ProgressBar) infoView
-				.findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) infoView.findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) infoView.findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 
 		mListView = (MyListView) infoView.findViewById(R.id.home_listview);
 		// bannerView =
@@ -402,18 +407,29 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 				});
 
 	}
-
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 	/**
 	 * 获取精品推荐数据
 	 */
 	private void getHotProduct() {
+		showLoading();
 		if(isFirst){
 			isFirst = false;
 			//获取缓存数据
 			List<Product> productsCache = DatabaseUtil.getInstance(mActivity).queryFavProduct(0, 0, 1);
 			
 			if(productsCache!=null && !productsCache.isEmpty()){
-				progressbar.setVisibility(View.GONE);
+//				progressbar.setVisibility(View.GONE);
+				rl_loading.setVisibility(View.GONE);
 				mListView.setVisibility(View.VISIBLE);
 				products.addAll(productsCache);
 				listAdapter.notifyDataSetChanged();
@@ -428,15 +444,19 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressbar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+//						progressbar.setVisibility(View.GONE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							ToastUtils.showToast(mActivity, parseModel.getMsg());
-							mListView.onLoadFinish(pageNumber,products.size(),"点击重试");
+							rl_loadingFail.setVisibility(View.VISIBLE);
+							mListView.setVisibility(View.GONE);
+//							ToastUtils.showToast(mActivity, parseModel.getMsg());
+//							mListView.onLoadFinish(pageNumber,products.size(),"点击重试");
 							return;
 
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							final List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Product>>() {
@@ -517,7 +537,15 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	 * 初始化点击事件
 	 */
 	private void initListener() {
-
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getHotProduct();
+			}
+		});
 		// 找理疗师
 		tab_find.setOnClickListener(new View.OnClickListener() {
 
