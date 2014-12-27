@@ -152,6 +152,8 @@
     <string name="order_product_name">产品名称：</string>
     <string name="order_seller_name">理疗师名称：</string>
     <string name="msg_load_ing">加载中...</string>
+    <string name="loading_text">努力加载中~</string>
+    <string name="loading_fail_text">网络连接失败 点击重新加载</string>
     <string name="input_company_name">请输入企业名称</string>
     <string name="input_contact">请输入联系方式</string>
     <string name="input_contactor">请输入联系人</string>
