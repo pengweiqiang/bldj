@@ -3,11 +3,14 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
@@ -16,7 +19,6 @@ import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.Category;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -38,13 +40,15 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 	private List<Category> categorys;
 	
 	private int pageNumber = 0;
-
+	
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		infoView = inflater.inflate(R.layout.hot_fragment, container, false);
-		
 		
 		initView();
 
@@ -79,7 +83,9 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 	private void initView(){
 		mActionBar = (ActionBar) infoView.findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
-		progressBar = (ProgressBar)infoView.findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) infoView.findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) infoView.findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 		mListView = (XListView)infoView.findViewById(R.id.listview);
 		
 		
@@ -88,28 +94,45 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 	 * 事件初始化
 	 */
 	private void initListener(){
-		
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getCategory();
+			}
+		});
 		
 	}
 	
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 	/**
 	 * 获取数据
 	 */
 	private void getCategory() {
+		showLoading();
 		ApiProductUtils.getCategory(mActivity, pageNumber, ApiConstants.LIMIT, new HttpConnectionUtil.RequestCallback() {
-
 			@Override
 			public void execute(ParseModel parseModel) {
-				progressBar.setVisibility(View.GONE);
-				mListView.setVisibility(View.VISIBLE);
+				rl_loading.setVisibility(View.GONE);
 				if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 						.getStatus())) {
-					 ToastUtils.showToast(mActivity,
-					 parseModel.getMsg());
-					 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+					 mListView.setVisibility(View.GONE);
+					 rl_loadingFail.setVisibility(View.VISIBLE);
 					 return;
 
 				} else {
+					mListView.setVisibility(View.VISIBLE);
 					List<Category> categoryList = JsonUtils.fromJson(
 							parseModel.getData().toString(),
 							new TypeToken<List<Category>>() {

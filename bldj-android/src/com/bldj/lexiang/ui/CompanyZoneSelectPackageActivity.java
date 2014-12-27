@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -14,7 +15,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
@@ -57,7 +59,9 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 	
 	int pageNumber = 0;
 	private XListView mListView;
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	List<CheepCards> cheepCardList;
 	CheepCardsAdapter listAdapter;
 	
@@ -109,7 +113,9 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 //		tvpackage_4_info2 = (TextView) findViewById(R.id.package_4_info_2);
 //		tvpackage_4_info3 = (TextView) findViewById(R.id.package_4_info_3);
 		
-		progressBar = (ProgressBar)findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView)findViewById(R.id.listview);
 	}
 
@@ -149,6 +155,15 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 
 	@Override
 	public void initListener() {
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getData();
+			}
+		});
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -222,23 +237,37 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 			}
 		});*/
 	}
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+	    	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 	/**
 	 * 获取优惠特区列表
 	 */
 	private void getData(){
 //		loading = new LoadingDialog(mContext);
 //		loading.show();
+		showLoading();
 		ApiHomeUtils.getCheapCards(mContext, pageNumber, ApiConstants.LIMIT, new HttpConnectionUtil.RequestCallback() {
 			
 			@Override
 			public void execute(ParseModel parseModel) {
-				progressBar.setVisibility(View.GONE);
-				mListView.setVisibility(View.VISIBLE);
+				rl_loading.setVisibility(View.GONE);
+				
 				if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 						.getStatus())) {
-					 ToastUtils.showToast(CompanyZoneSelectPackageActivity.this,parseModel.getMsg());
-					 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+					mListView.setVisibility(View.GONE);
+					rl_loadingFail.setVisibility(View.VISIBLE);
+//					 ToastUtils.showToast(CompanyZoneSelectPackageActivity.this,parseModel.getMsg());
+//					 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 				} else {
+					mListView.setVisibility(View.VISIBLE);
 					List<CheepCards> cheepCardNewList = JsonUtils.fromJson(
 							parseModel.getData().toString(),
 							new TypeToken<List<CheepCards>>() {

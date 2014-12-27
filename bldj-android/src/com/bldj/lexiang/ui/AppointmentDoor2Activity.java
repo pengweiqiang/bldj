@@ -5,13 +5,15 @@ import java.util.List;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ProgressBar;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
@@ -40,7 +42,9 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 
 	ActionBar mActionBar;
 
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	private XListView mListView;
 	private JlysHealthAdapter listAdapter;
 	private List<Seller> sellers;
@@ -86,7 +90,9 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 
 	@Override
 	public void initView() {
-		progressBar = (ProgressBar) findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView) findViewById(R.id.listview);
 
 		sellers = new ArrayList<Seller>();
@@ -103,6 +109,15 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 
 	@Override
 	public void initListener() {
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getSellers();
+			}
+		});
 		tv_callCustom.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -168,23 +183,39 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 
 		});
 	}
-
+	
+	
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
+	
 	/**
 	 * 获取美容师数据
 	 */
 	private void getSellers() {
+		showLoading();
 		ApiSellerUtils.getSellerByProIdAndDate(AppointmentDoor2Activity.this,product.getId(),time.substring(0,time.indexOf(" ")) ,pageNumber,ApiConstants.LIMIT, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							 ToastUtils.showToast(AppointmentDoor2Activity.this,parseModel.getMsg());
+							mListView.setVisibility(View.GONE);
+							rl_loadingFail.setVisibility(View.VISIBLE);
+//							 ToastUtils.showToast(AppointmentDoor2Activity.this,parseModel.getMsg());
 							 return;
 
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							List<Seller> sellersList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Seller>>() {
