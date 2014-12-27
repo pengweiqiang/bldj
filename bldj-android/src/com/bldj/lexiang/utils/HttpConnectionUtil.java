@@ -127,7 +127,7 @@ public class HttpConnectionUtil {
 				switch (message.what) {
 				case ApiConstants.RESULT_CODE: {
 					String backStr = message.getData().getString(ApiConstants.RESULT_BACK_STR);
-					backStr = backStr.replace("192.168.0.113", "220.113.10.11:8090");
+					backStr = backStr.replace("192.168.0.113", "220.113.10.11:8090");//正式上线记得去掉*******************************
 					System.out.println(url+"接口返回结果："+backStr);
 					if (callback != null && null != backStr)
 						callback.execute(getParseModel(backStr, methodType, context));
