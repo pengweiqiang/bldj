@@ -323,7 +323,7 @@
                 <ListView
                     android:id="@+id/paytype_listView"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="wrap_content"
                     android:divider="#00000000"
                     android:listSelector="@android:color/transparent" >
                 </ListView>
@@ -335,7 +335,7 @@
                 android:gravity="bottom|center_horizontal"
                 android:paddingBottom="5dp"
                 android:padding="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 android:weightSum="1" >
 
