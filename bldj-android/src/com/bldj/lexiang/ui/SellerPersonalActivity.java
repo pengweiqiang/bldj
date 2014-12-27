@@ -362,9 +362,9 @@ public class SellerPersonalActivity extends FragmentActivity{
 								sellerVo);
 						if (row > 0) {
 							isFav = true;
-							// ToastUtils.showToast(SellerPersonalActivity.this,
-							// "收藏成功");
-							btn_collect.setText("已收藏");
+							 ToastUtils.showToast(SellerPersonalActivity.this,
+							 "收藏成功");
+//							btn_collect.setText("已收藏");
 						} else {
 							// ToastUtils.showToast(SellerPersonalActivity.this,
 							// "该美容师已经收藏");
@@ -375,9 +375,9 @@ public class SellerPersonalActivity extends FragmentActivity{
 								sellerVo.getId());
 						if (row > 0) {
 							isFav = false;
-							// ToastUtils.showToast(SellerPersonalActivity.this,
-							// "取消收藏");
-							btn_collect.setText("收藏");
+							 ToastUtils.showToast(SellerPersonalActivity.this,
+							 "取消收藏");
+//							btn_collect.setText("收藏");
 						} else {
 							ToastUtils.showToast(SellerPersonalActivity.this,
 									"取消收藏失败，稍后请重试！");
