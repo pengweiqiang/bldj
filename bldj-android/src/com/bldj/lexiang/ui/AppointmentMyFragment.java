@@ -259,11 +259,12 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		            }
 		        }else if(selectedView == view){//点击第二次取消
 		        	et_address.setText("");
-					((TextView)view.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
 					view.setBackgroundColor(Color.TRANSPARENT);
+					((TextView)view.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
 					selectedView = null;
 		        }
 				else {
+					((TextView)selectedView.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
 					selectedView.setBackgroundColor(Color.TRANSPARENT);
 		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
 		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);

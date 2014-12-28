@@ -243,6 +243,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 					selectedView = null;
 		        }
 				else {
+					((TextView)selectedView.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
 					selectedView.setBackgroundColor(Color.TRANSPARENT);
 		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
 		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);
