@@ -3,9 +3,12 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
@@ -30,7 +33,9 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
 public class SellerServiceActivity extends BaseActivity  implements
 IXListViewListener{
 
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
 	private XListView mListView;
 	private HomeAdapter listAdapter;
 	private List<Product> products;
@@ -57,34 +62,54 @@ IXListViewListener{
 
 	@Override
 	public void initView() {
-		progressBar = (ProgressBar)findViewById(R.id.progress_listView);
+		rl_loading = (RelativeLayout) findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView) findViewById(R.id.listview);
 	}
 
 	@Override
 	public void initListener() {
-		// TODO Auto-generated method stub
-
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getData();
+			}
+		});
 	}
-	
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+	    	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 	/**
 	 * 获取养生服务数据
 	 */
 	private void getData() {
-		
+		showLoading();
 		ApiSellerUtils.getSellerProduct(this, sellerVo.getId(), pageNumber, ApiConstants.LIMIT,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
+						rl_loading.setVisibility(View.GONE);
+						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							ToastUtils.showToast(SellerServiceActivity.this, parseModel.getMsg());
-							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
-
+							rl_loadingFail.setVisibility(View.VISIBLE);
+//							ToastUtils.showToast(SellerServiceActivity.this, parseModel.getMsg());
+//							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+							mListView.setVisibility(View.GONE);
 						} else {
+							mListView.setVisibility(View.VISIBLE);
 							List<Product> productsList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Product>>() {
