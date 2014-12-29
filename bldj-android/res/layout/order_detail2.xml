@@ -217,7 +217,7 @@
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_coners_app_bg"
+            android:background="@drawable/btn_address"
             android:text="去支付"
             android:textColor="@color/app_title_color" />
 
@@ -226,11 +226,11 @@
             android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dip"
-            android:background="@drawable/btn_coners_grey"
+            android:background="@drawable/btn_address"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:text="@string/cancel_order"
-            android:textColor="@color/grey"
+            android:textColor="@color/app_title_color"
             android:visibility="visible" />
     </LinearLayout>
 
