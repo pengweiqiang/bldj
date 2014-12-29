@@ -100,7 +100,7 @@ public class OrderAdapter extends BaseListAdapter {
 		default:
 			break;
 		}
-		if (order.getStatus() == OrderStatusEnum.COMPLETE || order.getStatus() == OrderStatusEnum.PAID_OFFLINE || order.getStatus() == OrderStatusEnum.PAID_ONLINE) {//已完成才有评价
+		if (/*order.getStatus() == OrderStatusEnum.COMPLETE || */order.getStatus() == OrderStatusEnum.PAID_OFFLINE || order.getStatus() == OrderStatusEnum.PAID_ONLINE) {//已完成才有评价
 			holder.tv_eval.setVisibility(View.VISIBLE);
 			holder.tv_eval.setOnClickListener(new View.OnClickListener() {
 
