@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
+import com.bldj.lexiang.ui.MyOrdersActivity;
 import com.bldj.lexiang.ui.OrderEvalActivity;
 import com.bldj.lexiang.utils.DateUtil;
 
@@ -109,7 +110,7 @@ public class OrderAdapter extends BaseListAdapter {
 					// 启动用户评价界面
 					Intent intent = new Intent(context, OrderEvalActivity.class);
 					intent.putExtra("order", order);
-					context.startActivity(intent);
+					((MyOrdersActivity)context).startActivityForResult(intent, 22);
 				}
 			});
 		}else{
