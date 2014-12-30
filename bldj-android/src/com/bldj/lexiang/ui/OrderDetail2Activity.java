@@ -250,9 +250,13 @@ public class OrderDetail2Activity extends BaseActivity {
 
 				if (groups.get(position).getIndex() == TitleBarEnum.SHARE_SINA
 						.getIndex()) {
-					ToastUtils.showToast(OrderDetail2Activity.this,
-							TitleBarEnum.SHARE_SINA.getMsg() + "分享成功");
-					shared_addCode();
+					String shareUrl = 
+							ShareUtil.shareSina("健康送到家，方便你我他", "http://www.baidu.com", 
+									"http://img2.imgtn.bdimg.com/it/u=626942633,892821771&fm=21&gp=0.jpg");
+					Intent intent = new Intent(OrderDetail2Activity.this,BannerWebActivity.class);
+					intent.putExtra("url", shareUrl);
+					intent.putExtra("name", TitleBarEnum.SHARE_SINA.getMsg());
+					startActivity(intent);
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN
 						.getIndex()) {
 					ToastUtils.showToast(mContext, "分享微信...");
@@ -260,9 +264,13 @@ public class OrderDetail2Activity extends BaseActivity {
 							SendMessageToWX.Req.WXSceneTimeline);
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT
 						.getIndex()) {
-					ToastUtils.showToast(OrderDetail2Activity.this,
-							TitleBarEnum.SHARE_TENCENT.getMsg() + "分享成功");
-					shared_addCode();
+					String shareUrl = 
+							ShareUtil.shareQQ("健康送到家，方便你我他", "http://www.baidu.com", 
+									"http://img2.imgtn.bdimg.com/it/u=626942633,892821771&fm=21&gp=0.jpg");
+					Intent intent = new Intent(OrderDetail2Activity.this,BannerWebActivity.class);
+					intent.putExtra("url", shareUrl);
+					intent.putExtra("name", TitleBarEnum.SHARE_TENCENT.getMsg());
+					startActivity(intent);
 				}
 				if (popupWindow != null) {
 					popupWindow.dismiss();
