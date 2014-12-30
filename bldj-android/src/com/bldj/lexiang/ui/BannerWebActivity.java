@@ -1,21 +1,6 @@
 package com.bldj.lexiang.ui;
 
-//
-//                       __
-//                      /\ \   _
-//    ____    ____   ___\ \ \_/ \           _____    ___     ___
-//   / _  \  / __ \ / __ \ \    <     __   /\__  \  / __ \  / __ \
-//  /\ \_\ \/\  __//\  __/\ \ \\ \   /\_\  \/_/  / /\ \_\ \/\ \_\ \
-//  \ \____ \ \____\ \____\\ \_\\_\  \/_/   /\____\\ \____/\ \____/
-//   \/____\ \/____/\/____/ \/_//_/         \/____/ \/___/  \/___/
-//     /\____/
-//     \/___/
-//
-//  Powered by BeeFramework
-//
-
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -23,7 +8,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.view.ActionBar;
