@@ -4,23 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bldj.gson.reflect.TypeToken;
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.MallAdapter;
-import com.bldj.lexiang.api.ApiProductUtils;
+import com.bldj.lexiang.adapter.OrderAdapter;
+import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.User;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.utils.DateUtils;
+import com.bldj.lexiang.constant.enums.OrderStatusEnum;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -35,22 +40,25 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 	private View infoView;
 	private ActionBar mActionBar;
 	
-	private ProgressBar progressBar;
+	RelativeLayout rl_loading;//进度条
+	ImageView loading_ImageView;//加载动画
+	RelativeLayout rl_loadingFail;//加载失败
+	private LinearLayout ll_tabTitle;//表头
+	private LinearLayout ll_unLogin;
+	private Button btn_login;
 	private XListView mListView;
-	private MallAdapter listAdapter;
-	private List<Product> products;
-	
-	private ImageView company_zone;
+	private OrderAdapter listAdapter;
+	private List<Order> orders;
 	
 	private int pageNumber = 0;
+	
+	private int selectOrderIndex = -1;
 
-	private TextView tv_order_sales;
-	private TextView tv_order_price;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		infoView = inflater.inflate(R.layout.mall_fragment, container, false);
+		infoView = inflater.inflate(R.layout.my_orders, container, false);
 		initView();
 		onConfigureActionBar(mActionBar);
 
@@ -61,149 +69,211 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("商城");
+		actionBar.setTitle("订单");
+		infoView.findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+		actionBar.setTitleTextColor(R.color.white);
 		actionBar.hideLeftActionButton();
 		actionBar.hideRightActionButton();
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		products = new ArrayList<Product>();
-		listAdapter = new MallAdapter(mActivity, products);
+		
+		orders = new ArrayList<Order>();
+		listAdapter = new OrderAdapter(mActivity, orders);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
-		
-		getMallData();
+		getData();
 	}
+	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+		super.setUserVisibleHint(isVisibleToUser);
+		if (isVisibleToUser) {
+			// 相当于Fragment的onResume
+			User user = MyApplication.getInstance().getCurrentUser();
+			if(user!=null && orders.isEmpty()){
+				ll_unLogin.setVisibility(View.GONE);
+				rl_loading.setVisibility(View.VISIBLE);
+				ll_tabTitle.setVisibility(View.VISIBLE);
+				getData();
+			}else if(user == null && !orders.isEmpty()){
+				orders.clear();
+				showUnLogin();
+			}
+		} else {
+			// 相当于Fragment的onPause
+		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		User user = MyApplication.getInstance().getCurrentUser();
+		if(user!=null && orders.isEmpty()){
+			ll_unLogin.setVisibility(View.GONE);
+			rl_loading.setVisibility(View.VISIBLE);
+			ll_tabTitle.setVisibility(View.VISIBLE);
+			getData();
+		}else if(user == null && !orders.isEmpty()){
+			orders.clear();
+			showUnLogin();
+		}
+	}
+
 	/**
 	 * 初始化控件
 	 */
 	private void initView() {
 
 		mActionBar = (ActionBar) infoView.findViewById(R.id.actionBar);
-		progressBar = (ProgressBar)infoView.findViewById(R.id.progress_listView);
 		mListView = (XListView)infoView.findViewById(R.id.listview);
-		tv_order_sales = (TextView)infoView.findViewById(R.id.order_sales);
-		tv_order_price = (TextView)infoView.findViewById(R.id.order_price);
-		company_zone = (ImageView)infoView.findViewById(R.id.company_zone);
-	
+		rl_loading = (RelativeLayout) infoView.findViewById(R.id.progress_listView);
+		rl_loadingFail = (RelativeLayout) infoView.findViewById(R.id.loading_fail);
+		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
+		ll_tabTitle = (LinearLayout)infoView.findViewById(R.id.ll_tab_title);
+		ll_unLogin = (LinearLayout)infoView.findViewById(R.id.un_login);
+		btn_login = (Button)infoView.findViewById(R.id.login);
 	}
 	/**
 	 * 初始化事件
 	 */
 	private void initListener(){
-		
+		btn_login.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent intent = new Intent(mActivity,RegisterAndLoginActivity.class);
+//					startActivityForResult(intent, 22);
+					startActivity(intent);
+				}
+			});
+		//点击重试
+		rl_loadingFail.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				pageNumber = 0;
+				getData();
+			}
+		});
 		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				//启动产品商品详细页
-				Intent intent = new Intent(mActivity,ProductDetailActivity.class);
-				startActivity(intent);
+				Intent intent = new Intent(mActivity,OrderDetail2Activity.class);
+				selectOrderIndex = position-1;
+				intent.putExtra("order", orders.get(selectOrderIndex));
+				startActivityForResult(intent, 123);
 			}
 			
-		});
-		company_zone.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				Intent intent = new Intent(mActivity,CompanyZoneActivity.class);
-				startActivity(intent);
-			}
 		});
 	}
-	
+	private void showLoading(){
+		rl_loadingFail.setVisibility(View.GONE);
+		if(pageNumber == 0){
+			rl_loading.setVisibility(View.VISIBLE);
+			AnimationDrawable animationDrawable = (AnimationDrawable) loading_ImageView.getBackground();
+        	animationDrawable.start();
+		}else{
+			rl_loading.setVisibility(View.GONE);
+		}
+	}
 	/**
-	 * 获取数据
+	 * 获取用户订单
 	 */
-	private void getMallData() {
-		ApiProductUtils.getProducts(mActivity.getApplicationContext(), "1", 2,
-				0, 0, pageNumber, ApiConstants.LIMIT,
-				new HttpConnectionUtil.RequestCallback() {
-
-					@Override
-					public void execute(ParseModel parseModel) {
-						progressBar.setVisibility(View.GONE);
-						mListView.setVisibility(View.VISIBLE);
-						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
-								.getStatus())) {
-							// ToastUtils.showToast(mActivity,
-							// parseModel.getMsg());
-							// return;
-							List<Product> productsList = new ArrayList<Product>();
-
-							Product p1 = new Product();
-							p1.setName("商品" + (products.size() + 1));
-							p1.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i3/T11iAAFoNbXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-
-							Product p2 = new Product();
-							p2.setName("商品" + (products.size() + 2));
-							p2.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-
-							productsList.add(p1);
-							productsList.add(p2);
-							Product p3 = new Product();
-							p3.setName("商品" + (products.size() + 3));
-							p3.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB10ChmGFXXXXadaXXXSutbFXXX.jpg");
-							productsList.add(p3);
-
-							Product p4 = new Product();
-							p4.setName("商品" + (products.size() + 4));
-							p4.setPicurl("http://img02.taobaocdn.com/bao/uploaded/i1/TB1aK_JGFXXXXXzXVXXXXXXXXXX_!!0-item_pic.jpg_110x110.jpg");
-							productsList.add(p4);
-
-							Product p5 = new Product();
-							p5.setName("商品" + (products.size() + 5));
-							p5.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1rpHzGpXXXXXJaXXXSutbFXXX.jpg");
-							productsList.add(p5);
-
-							Product p6 = new Product();
-							p6.setName("商品" + (products.size() + 6));
-							p6.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1T2YnGpXXXXaFaXXXSutbFXXX.jpg");
-							productsList.add(p6);
-
-							Product p7 = new Product();
-							p7.setName("商品" + (products.size() + 7));
-							p7.setPicurl("http://img01.taobaocdn.com/imgextra/i1/1713844438/TB2TXsCaXXXXXbuXXXXXXXXXXXX-1713844438.jpg");
-							productsList.add(p7);
-
-							Product p8 = new Product();
-							p8.setName("商品" + (products.size() + 8));
-							p8.setPicurl("http://img.taobaocdn.com/bao/uploaded/TB1wguNGpXXXXcgXVXXSutbFXXX.jpg");
-							productsList.add(p8);
+	private void getData() {
+		showLoading();
+		User user = MyApplication.getInstance().getCurrentUser();
+		if(user!=null){
+			ApiBuyUtils.getOrders(mActivity, user.getUserId(),pageNumber,ApiConstants.LIMIT,
+					new HttpConnectionUtil.RequestCallback() {
+	
+						@Override
+						public void execute(ParseModel parseModel) {
+							rl_loading.setVisibility(View.GONE);
 							
-							if(pageNumber==0){
-								products.clear();
+							if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+									.getStatus())) {
+								mListView.setVisibility(View.GONE);
+								rl_loadingFail.setVisibility(View.VISIBLE);
+	//							 ToastUtils.showToast(MyOrdersActivity.this,
+	//							 parseModel.getMsg());
+	//							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+								
+							} else {
+								mListView.setVisibility(View.VISIBLE);
+								List<Order> ordersList = JsonUtils.fromJson(
+										parseModel.getData().toString(),
+										new TypeToken<List<Order>>() {
+										});
+	
+	//							if (pageNumber == 0) {
+									orders.clear();
+	//							}
+								orders.addAll(ordersList);
+//								Intent intent = new Intent(Constant.ACTION_MESSAGE_COUNT);
+//								intent.putExtra("countOrders", ordersList.size());
+//								mActivity.sendBroadcast(intent);
+								listAdapter.notifyDataSetChanged();
+								mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
 							}
-							products.addAll(productsList);
-
-							listAdapter.notifyDataSetChanged();
-							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
-
-						} else {
-							List<Product> productsList = JsonUtils.fromJson(
-									parseModel.getData().toString(),
-									new TypeToken<List<Product>>() {
-									});
+	
 						}
-
-					}
-				});
+					});
+		}else{
+			showUnLogin();
+		}
 	}
 
+	private void showUnLogin(){
+		ll_tabTitle.setVisibility(View.GONE);
+		rl_loading.setVisibility(View.GONE);
+		mListView.setVisibility(View.GONE);
+		rl_loadingFail.setVisibility(View.GONE);
+		ll_unLogin.setVisibility(View.VISIBLE);
+	}
 	@Override
 	public void onRefresh() {
-		pageNumber=0;
-		getMallData();
+		pageNumber = 0;
+		getData();
 	}
 
 	@Override
 	public void onLoadMore() {
 		pageNumber++;
-		getMallData();
+		getData();
 	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode == 23){//修改订单状态
+			int type = data.getIntExtra("type", -1);
+			if(selectOrderIndex !=-1){
+				if(type == 0){//取消订单
+					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.CANCLED);
+					orders.get(selectOrderIndex).setStatusStr("已取消");
+				}else if(type ==1){//支付成功
+					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.PAID_ONLINE);
+					orders.get(selectOrderIndex).setStatusStr("线上已支付");
+				}
+				listAdapter.notifyDataSetChanged();
+			}
+		}/*else if(resultCode == 24 && data != null){//登录成功
+			boolean isLogin = data.getBooleanExtra("isLogin", false);
+			if(isLogin){
+				ll_tabTitle.setVisibility(View.VISIBLE);
+				rl_loading.setVisibility(View.VISIBLE);
+				ll_unLogin.setVisibility(View.GONE);
+				pageNumber = 0;
+				getData();
+			}
+		}*/
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
 	
 	
 }
