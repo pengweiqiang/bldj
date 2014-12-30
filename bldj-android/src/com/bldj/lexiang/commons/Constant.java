@@ -39,5 +39,7 @@ public class Constant {
 	 * 我的头像保存目录
 	 */
 	public static String MyAvatarDir = "/sdcard/com.bldj.lexiang/head/";
+	
+	public static final String ACTION_MESSAGE_COUNT = "com.bldj.lexiang.action.MESSAGE_COUNT";
     
 }
