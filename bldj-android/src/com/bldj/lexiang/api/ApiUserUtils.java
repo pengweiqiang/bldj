@@ -66,11 +66,13 @@ public class ApiUserUtils {
 	 * @param password
 	 * @param requestCallBack
 	 */
-	public static void login(Context context, String username, String password,
+	public static void login(Context context, String username, String password,double lon,double lat,
 			RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.USERNAME, username);
 		params.put(ReqUrls.PASSWORD, password);
+		params.put(ReqUrls.USER_LON, lon);
+		params.put(ReqUrls.USER_LAT, lat);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_USER_LOGIN, false,
 				requestCallBack, MethodType.LOGIN, context,HttpMethod.GET);
 	}
