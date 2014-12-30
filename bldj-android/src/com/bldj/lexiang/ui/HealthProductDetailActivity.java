@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -57,6 +58,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	private CheckBox tv_fav;// 收藏
 	private TextView tv_custom_service;// 联系客服
 	private WebView webView;
+	private ProgressBar progressBar;
 	private Button btn_appointment_product;
 	boolean isFav;// 是否收藏
 
@@ -107,6 +109,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 		tv_shop_price = (TextView) findViewById(R.id.price_shop);
 		btn_invite = (TextView) findViewById(R.id.invite);
 		webView = (WebView) findViewById(R.id.webView_product_info);
+		progressBar = (ProgressBar)findViewById(R.id.web_progress);
 		btn_appointment_product = (Button) findViewById(R.id.appointment_product);
 		tv_custom_service = (TextView) findViewById(R.id.custom_service);
 		tv_fav = (CheckBox) findViewById(R.id.collect);
@@ -167,13 +170,13 @@ public class HealthProductDetailActivity extends BaseActivity {
 			public void onProgressChanged(WebView view, int newProgress) {
 				// TODO Auto-generated method stub
 				super.onProgressChanged(view, newProgress);
-				/*
-				 * if (newProgress == 100) {
-				 * progressBar.setVisibility(View.GONE); } else { if
-				 * (progressBar.getVisibility() == View.GONE)
-				 * progressBar.setVisibility(View.VISIBLE);
-				 * progressBar.setProgress(newProgress); }
-				 */
+				if (newProgress == 100) {
+	                progressBar.setVisibility(View.GONE);
+	            } else {
+	                if (progressBar.getVisibility() == View.GONE)
+	                	progressBar.setVisibility(View.VISIBLE);
+	                progressBar.setProgress(newProgress);
+	            }
 			}
 
 		};
