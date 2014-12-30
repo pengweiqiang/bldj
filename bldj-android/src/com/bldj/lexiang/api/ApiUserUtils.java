@@ -400,6 +400,15 @@ public class ApiUserUtils {
 		ApiUtils.getParseModel(params, ReqUrls.GET_CODE,false, requestCallBack, MethodType.UPDATE, context);
 	}
 
+	/**
+	 * 获取关于我们的地址、分享的各类文案等等常用信息
+	 * @param context
+	 * @param requestCallBack
+	 */
+	public static void getConfParams(Context context,RequestCallback requestCallBack){
+		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_CONFPARAMS,false, requestCallBack, MethodType.UPDATE, context);
+	}
 	// /**
 	// * 获取用户个人中心界面
 	// *
