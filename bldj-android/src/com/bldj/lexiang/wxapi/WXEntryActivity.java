@@ -95,7 +95,9 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 				result = "未知";
 				break;
 			}
-			ToastUtils.showToast(mContext, result);
+			if(!result.equals("分享取消")){
+				ToastUtils.showToast(mContext, result);
+			}
 			finish();
 			
 		}
