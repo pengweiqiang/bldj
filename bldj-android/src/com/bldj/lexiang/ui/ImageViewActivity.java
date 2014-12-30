@@ -1,14 +1,18 @@
 package com.bldj.lexiang.ui;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.universalimageloader.core.ImageLoader;
+import com.bldj.universalimageloader.core.listener.ImageLoadingProgressListener;
+import com.bldj.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 /**
  * 显示图片
@@ -20,6 +24,7 @@ public class ImageViewActivity extends BaseActivity {
 
 	ActionBar mActionBar;
 	private ImageView imageView;
+	private ProgressBar progressBar;
 	String imageUrl;
 	String name;
 	@Override
@@ -32,11 +37,32 @@ public class ImageViewActivity extends BaseActivity {
 		onConfigureActionBar(mActionBar);
 		
 		
-		ImageLoader.getInstance().displayImage(
-				imageUrl,
-				imageView,
-				MyApplication.getInstance().getOptions(
-						R.drawable.default_head_image));
+		
+		ImageLoader.getInstance()
+		.displayImage(imageUrl, imageView, 
+				MyApplication.getInstance().getOptions(R.drawable.default_head_image),
+				new SimpleImageLoadingListener(){
+
+					@Override
+					public void onLoadingComplete(String imageUri, View view,
+							Bitmap loadedImage) {
+						// TODO Auto-generated method stub
+						progressBar.setVisibility(View.GONE);
+						super.onLoadingComplete(imageUri, view, loadedImage);
+					}
+					
+			
+		},
+		//显示下载图片的进度条
+		new ImageLoadingProgressListener() {
+			
+			@Override
+			public void onProgressUpdate(String imageUri, View view, int current, int total) {
+				progressBar.setVisibility(View.VISIBLE);
+				int progress = Math.round(100.0f* current / total);
+				progressBar.setProgress(progress);
+			}
+		});
 	}
 
 	// 设置activity的导航条
@@ -55,6 +81,7 @@ public class ImageViewActivity extends BaseActivity {
 	@Override
 	public void initView() {
 		imageView = (ImageView)findViewById(R.id.image);
+		progressBar = (ProgressBar)findViewById(R.id.web_progress);
 	}
 
 	@Override
