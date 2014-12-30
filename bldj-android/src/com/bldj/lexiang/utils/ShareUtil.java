@@ -15,6 +15,11 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.bldj.lexiang.R;
 
+/**
+ * 分享工具类
+ * @author will
+ *
+ */
 public class ShareUtil {
 	
 	private Context context;
@@ -41,7 +46,7 @@ public class ShareUtil {
 	}
 
 	/**
-	 * 分享文本
+	 * 分享微信文本
 	 * @param text  分享内容
 	 * @param sendType 分享类型  1---分享到好友  2---分享到朋友圈
 	 */
@@ -129,4 +134,29 @@ public class ShareUtil {
 	public void sendWebPageToWX(String text, int sendType) {
 		sendWebPageToWX(text, sendType,"http://www.baidu.com");
 	}
+	
+	/**
+	 * 新浪微博分享地址
+	 * @param title
+	 * @param url
+	 * @param picUrl
+	 * @return
+	 */
+	public static String shareSina(String title,String url,String picUrl){
+		
+		String shareUrl = "http://v.t.sina.com.cn/share/share.php?title="+title+"&url="+url+"&content=utf-8&sourceUrl="+url+"&pic="+picUrl;
+		return shareUrl;
+	}
+	/**
+	 * 腾讯微博分享地址
+	 * @param content
+	 * @param url
+	 * @param picUrl
+	 * @return
+	 */
+	public static String shareQQ(String content,String url,String picUrl){
+		String shareUrl = "http://v.t.qq.com/share/share.php?title="+content+"&url="+url+"&url="+url+"&pic="+picUrl;
+		return shareUrl;
+	}
+	
 }
