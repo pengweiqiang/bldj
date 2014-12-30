@@ -232,6 +232,10 @@ public interface ReqUrls {
 	 * 获取企业专区列表
 	 */
 	public static final String REQUEST_CHEAP_CARDS="/pro/getCheapCards";
+	/**
+	 * 关于我们的地址、分享的各类文案等等常用信息
+	 */
+	public static final String REQUEST_CONFPARAMS = "/user/getConfParams";
 	
 	/**
 	 * 支付宝回调地址
