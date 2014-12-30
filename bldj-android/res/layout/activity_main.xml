@@ -39,16 +39,17 @@
                 android:id="@+id/hot"
                 android:layout_weight="1"
                 layout="@layout/main_tab_indicator_hot" />
-
+            
+			 <include
+                android:id="@+id/mall"
+                android:layout_weight="1"
+                layout="@layout/main_tab_indicator_mall" />
+            
             <include
                 android:id="@+id/my"
                 android:layout_weight="1"
                 layout="@layout/main_tab_indicator_my" />
 
-            <include
-                android:id="@+id/mall"
-                android:layout_weight="1"
-                layout="@layout/main_tab_indicator_mall" />
             <!-- </LinearLayout> -->
 
         </RadioGroup>
@@ -81,19 +82,19 @@
                 android:layout_weight="1"
                 android:visibility="invisible" />
             <!-- 占位置的button，以便适应不同分辨率手机 -->
-            <!-- 我的 -->
+            <!-- 商城 -->
 
             <Button
-                android:id="@+id/btn_my"
+                android:id="@+id/btn_mall"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
                 android:visibility="invisible" />
             <!-- 占位置的button，以便适应不同分辨率手机 -->
-            <!-- 商城 -->
+            <!-- 我的 -->
 
             <Button
-                android:id="@+id/btn_mall"
+                android:id="@+id/btn_my"
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
