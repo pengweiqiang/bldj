@@ -97,7 +97,7 @@ public class LoginFragment extends BaseFragment {
 				}
 				loading = new LoadingDialog(mActivity, "登录中...");
 				loading.show();
-				 ApiUserUtils.login(mActivity, phone, password, new RequestCallback() {
+				 ApiUserUtils.login(mActivity, phone, password, MyApplication.lon, MyApplication.lat,new RequestCallback() {
 					
 					@Override
 					public void execute(ParseModel parseModel) {
