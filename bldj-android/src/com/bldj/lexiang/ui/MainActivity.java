@@ -1,6 +1,10 @@
 package com.bldj.lexiang.ui;
 
 import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +28,7 @@ import com.baidu.location.LocationClientOption.LocationMode;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.commons.AppManager;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.BadgeView;
 import com.umeng.update.UmengUpdateAgent;
@@ -44,13 +49,15 @@ public class MainActivity extends FragmentActivity implements
 	protected ViewPager mViewPager;
 
 	protected FragmentManager mFragmentManager;
-	int[] tabIds = { R.id.home, R.id.hot, R.id.my, R.id.mall };
+	int[] tabIds = { R.id.home, R.id.hot, R.id.mall,R.id.my };
 
 	// 定位获取当前用户的地理位置
 	private LocationClient mLocationClient;
 	
-	private Button btn_my;//显示我的按钮右上角具体的数字
+	private Button btn_mall;//显示订单按钮右上角具体的数字
 	private BadgeView myBadgeView;
+	//总数统计 start
+	public static int count = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +67,11 @@ public class MainActivity extends FragmentActivity implements
 		mFragmentManager = getSupportFragmentManager();
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);
 		mTabIndicators = (RadioGroup) findViewById(R.id.tabIndicators);
-		btn_my = (Button)findViewById(R.id.btn_my);
-		myBadgeView = remind(0);
+		btn_mall = (Button)findViewById(R.id.btn_mall);
+		myBadgeView = remind(2);
+		
+		IntentFilter countFilter = new IntentFilter(Constant.ACTION_MESSAGE_COUNT);
+		registerReceiver(mCountMsgReceiver, countFilter);
 
 		mAdapter = new FragmentPagerAdapter(mFragmentManager) {
 
@@ -77,9 +87,9 @@ public class MainActivity extends FragmentActivity implements
 				} else if (position == 1) {
 					return mProductFragment = new HotProductFragment();
 				} else if (position == 2) {
-					return mMyFragment = new MyFragment();
-				} else if (position == 3) {
 					return mMallFragment = new MallFragment();
+				} else if (position == 3) {
+					return mMyFragment = new MyFragment();
 				}
 				return null;
 			}
@@ -188,7 +198,7 @@ public class MainActivity extends FragmentActivity implements
 	}
 	
 	private BadgeView remind(int count) { //BadgeView的具体使用
-		BadgeView badge1 = new BadgeView(this, btn_my);// 创建一个BadgeView对象，view为你需要显示提醒的控件
+		BadgeView badge1 = new BadgeView(this, btn_mall);// 创建一个BadgeView对象，view为你需要显示提醒的控件
 		if(count>99){//当消息数量大于99，显示99+
 			badge1.setText("99+");
 		}else{
@@ -207,5 +217,24 @@ public class MainActivity extends FragmentActivity implements
 		}
 		return badge1;
 	}
+	
+	/**
+	 * 显示订单数量红点
+	 */
+	private BroadcastReceiver mCountMsgReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (Constant.ACTION_MESSAGE_COUNT.equals(intent.getAction())) {
+				count = intent.getIntExtra("countOrders", count);
+				
+				if(count>0 && !myBadgeView.isShown()){
+					myBadgeView.show();
+				}else if(count<=0 && myBadgeView.isShown()){
+					myBadgeView.hide();
+				}
+				myBadgeView.setText(String.valueOf(count));
+			}
+		}
+	};
 
 }
