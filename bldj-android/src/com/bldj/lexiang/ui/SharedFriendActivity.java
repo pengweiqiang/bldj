@@ -6,6 +6,7 @@ import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -62,8 +63,13 @@ public class SharedFriendActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
+				String shareUrl = 
+						ShareUtil.shareSina("健康送到家，方便你我他", "http://www.baidu.com", 
+								"http://img2.imgtn.bdimg.com/it/u=626942633,892821771&fm=21&gp=0.jpg");
+				Intent intent = new Intent(SharedFriendActivity.this,BannerWebActivity.class);
+				intent.putExtra("url", shareUrl);
+				intent.putExtra("name", "新浪分享");
+				startActivity(intent);
 			}
 		});
 		btn_weixin.setOnClickListener(new View.OnClickListener() {
