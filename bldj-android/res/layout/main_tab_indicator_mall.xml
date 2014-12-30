@@ -3,6 +3,6 @@
     android:id="@+id/tabWorkButton"
     style="@style/MainTabButton"
     android:drawableTop="@drawable/ic_tab_mall"
-    android:text="@string/tab_mall" >
+    android:text="@string/tab_order" >
 
 </RadioButton>
