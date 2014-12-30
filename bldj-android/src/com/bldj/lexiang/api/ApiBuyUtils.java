@@ -131,13 +131,17 @@ public class ApiBuyUtils {
 	 * 获取用户订单
 	 * @param context
 	 * @param id
+	 * @param start
+	 * @param limit
+	 * @param status 0未支付 1支付 2取消
 	 * @param requestCallback
 	 */
-	public static void getOrders(Context context,long id,int start,int limit,RequestCallback requestCallback){
+	public static void getOrders(Context context,long id,int start,int limit,int status,RequestCallback requestCallback){
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, id);
 		params.put(ReqUrls.START, start);
 		params.put(ReqUrls.LIMIT, limit);
+		params.put("status", status);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ORDERS, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
