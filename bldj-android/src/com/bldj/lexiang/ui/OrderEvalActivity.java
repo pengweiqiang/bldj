@@ -1,20 +1,35 @@
 package com.bldj.lexiang.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.enums.TitleBarEnum;
+import com.bldj.lexiang.utils.DateUtil;
+import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.StringUtils;
@@ -44,6 +59,11 @@ public class OrderEvalActivity extends BaseActivity {
 	
 	LoadingDialog loading;
 	
+	private PopupWindow popupWindow;
+	private View view;
+	private ListView lv_group;
+	private List<TitleBarEnum> groups;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.order_eval);
@@ -70,8 +90,9 @@ public class OrderEvalActivity extends BaseActivity {
 		actionBar.setRightTextActionButton("分享",R.drawable.btn_share,true, new View.OnClickListener() {
 			
 			@Override
-			public void onClick(View arg0) {
-				shareUtil.sendWebPageToWX(order.getProName(), SendMessageToWX.Req.WXSceneTimeline);
+			public void onClick(View parent) {
+//				shareUtil.sendWebPageToWX(order.getProName(), SendMessageToWX.Req.WXSceneTimeline);
+				buildTitleBar(parent);
 			}
 		});
 	}
@@ -91,7 +112,7 @@ public class OrderEvalActivity extends BaseActivity {
 		tv_orderNum.setText(order.getOrderNum());
 		tv_productName.setText(order.getProName());
 		tv_sellerName.setText(order.getSellerName());
-		tv_order_time.setText(order.getCreatetime());
+		tv_order_time.setText(DateUtil.getDateString(order.getCreatetime(),DateUtil.TRIM_PATTERN,DateUtil.CRITICISM_PATTERN));
 	}
 
 	@Override
@@ -141,6 +162,66 @@ public class OrderEvalActivity extends BaseActivity {
 					
 					
 				});
+			}
+		});
+	}
+	
+	
+	private void buildTitleBar(View parent) {
+		DeviceInfo.setContext(this);
+		if (popupWindow == null) {
+			view = LayoutInflater.from(this).inflate(R.layout.group_list, null);
+			lv_group = (ListView) view.findViewById(R.id.lvGroup);
+			groups = new ArrayList<TitleBarEnum>();
+			groups.add(TitleBarEnum.SHARE_SINA);
+			groups.add(TitleBarEnum.SHARE_WEIXIN);
+			groups.add(TitleBarEnum.SHARE_TENCENT);
+			GroupAdapter groupAdapter = new GroupAdapter(this, groups);
+			lv_group.setAdapter(groupAdapter);
+			popupWindow = new PopupWindow(view, DeviceInfo.getScreenWidth() / 2
+					- parent.getWidth(), LayoutParams.WRAP_CONTENT);
+		}
+		popupWindow.setFocusable(true);
+		popupWindow.setOutsideTouchable(true);
+		popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
+		// WindowManager windowManager = (WindowManager)
+		// this.getActivity().getSystemService(Context.WINDOW_SERVICE);
+
+		// popupWindow.showAsDropDown(parent, popupWindow.getWidth(), 0);
+		popupWindow.showAsDropDown(parent);
+		lv_group.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+
+				if (groups.get(position).getIndex() == TitleBarEnum.SHARE_SINA
+						.getIndex()) {
+					String shareUrl = 
+							ShareUtil.shareSina("健康送到家，方便你我他", "http://www.baidu.com", 
+									"http://img2.imgtn.bdimg.com/it/u=626942633,892821771&fm=21&gp=0.jpg");
+					Intent intent = new Intent(OrderEvalActivity.this,BannerWebActivity.class);
+					intent.putExtra("url", shareUrl);
+					intent.putExtra("name", TitleBarEnum.SHARE_SINA.getMsg());
+					startActivity(intent);
+				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN
+						.getIndex()) {
+					ToastUtils.showToast(mContext, "分享微信...");
+					shareUtil.sendWebPageToWX("健康送到家，方便你我他",
+							SendMessageToWX.Req.WXSceneTimeline);
+				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT
+						.getIndex()) {
+					String shareUrl = 
+							ShareUtil.shareQQ("健康送到家，方便你我他", "http://www.baidu.com", 
+									"http://img2.imgtn.bdimg.com/it/u=626942633,892821771&fm=21&gp=0.jpg");
+					Intent intent = new Intent(OrderEvalActivity.this,BannerWebActivity.class);
+					intent.putExtra("url", shareUrl);
+					intent.putExtra("name", TitleBarEnum.SHARE_TENCENT.getMsg());
+					startActivity(intent);
+				}
+				if (popupWindow != null) {
+					popupWindow.dismiss();
+				}
 			}
 		});
 	}
