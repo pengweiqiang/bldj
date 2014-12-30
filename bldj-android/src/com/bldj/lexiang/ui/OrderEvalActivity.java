@@ -64,6 +64,7 @@ public class OrderEvalActivity extends BaseActivity {
 	private ListView lv_group;
 	private List<TitleBarEnum> groups;
 	
+	private boolean evalSuccess;//评价成功
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.order_eval);
@@ -84,6 +85,9 @@ public class OrderEvalActivity extends BaseActivity {
 				new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent data = new Intent();
+				data.putExtra("eval", evalSuccess);
+				setResult(24, data); 
 				finish();
 			}
 		});
@@ -156,6 +160,10 @@ public class OrderEvalActivity extends BaseActivity {
 									ToastUtils.showToast(OrderEvalActivity.this, parseModel.getMsg());
 								}else{
 									ToastUtils.showToast(OrderEvalActivity.this, "感谢您提出宝贵的意见");
+									evalSuccess =  true;
+									Intent data = new Intent();
+									data.putExtra("eval", evalSuccess);
+									setResult(24, data); 
 									finish();
 								}
 							}

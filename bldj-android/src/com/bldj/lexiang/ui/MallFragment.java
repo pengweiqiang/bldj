@@ -188,7 +188,8 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		showLoading();
 		User user = MyApplication.getInstance().getCurrentUser();
 		if(user!=null){
-			ApiBuyUtils.getOrders(mActivity, user.getUserId(),pageNumber,ApiConstants.LIMIT,
+			//查询订单
+			ApiBuyUtils.getOrders(mActivity, user.getUserId(),pageNumber,ApiConstants.LIMIT,ApiConstants.MAX_STATUS,
 					new HttpConnectionUtil.RequestCallback() {
 	
 						@Override
@@ -223,6 +224,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 	
 						}
 					});
+			
 		}else{
 			showUnLogin();
 		}

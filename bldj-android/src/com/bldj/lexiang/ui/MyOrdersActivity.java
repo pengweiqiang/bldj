@@ -115,7 +115,7 @@ IXListViewListener{
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
-		if(resultCode == 23){
+		if(resultCode == 23){//修改订单状态
 			int type = data.getIntExtra("type", -1);
 			if(selectOrderIndex !=-1){
 				if(type == 0){//取消订单
@@ -126,6 +126,16 @@ IXListViewListener{
 					orders.get(selectOrderIndex).setStatusStr("线上已支付");
 				}
 				listAdapter.notifyDataSetChanged();
+			}
+		}else if(resultCode == 24){//用户评价
+			boolean evalSuccess = data.getBooleanExtra("eval",false);
+			if(selectOrderIndex !=-1){
+				if(evalSuccess){//评价成功
+					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.COMPLETE);
+					orders.get(selectOrderIndex).setStatusStr("交易完成");
+					listAdapter.notifyDataSetChanged();
+				}
+				
 			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
@@ -146,7 +156,7 @@ IXListViewListener{
 	private void getData() {
 		showLoading();
 		User user = MyApplication.getInstance().getCurrentUser();
-		ApiBuyUtils.getOrders(MyOrdersActivity.this, user.getUserId(),pageNumber,ApiConstants.LIMIT,
+		ApiBuyUtils.getOrders(MyOrdersActivity.this, user.getUserId(),pageNumber,ApiConstants.LIMIT,ApiConstants.MAX_STATUS,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
