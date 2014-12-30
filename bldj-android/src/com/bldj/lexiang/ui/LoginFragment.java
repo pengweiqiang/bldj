@@ -106,6 +106,9 @@ public class LoginFragment extends BaseFragment {
 							User user = JsonUtils.fromJson(parseModel.getData().toString(), User.class);
 							MyApplication.getInstance().setUser(user);
 							SharePreferenceManager.saveBatchSharedPreference(mActivity, Constant.FILE_NAME, "user", JsonUtils.toJson(user));
+							/*Intent data = new Intent();
+							data.putExtra("isLogin", true);
+							mActivity.setResult(24, data); */
 							mActivity.finish();
 						}else{
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
