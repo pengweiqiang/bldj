@@ -1,5 +1,7 @@
 package com.bldj.lexiang.ui;
 
+import java.util.List;
+
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -25,10 +27,18 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
+import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.vo.Order;
+import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.commons.Constant;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.BadgeView;
 import com.umeng.update.UmengUpdateAgent;
@@ -68,7 +78,7 @@ public class MainActivity extends FragmentActivity implements
 		mViewPager = (ViewPager) findViewById(R.id.viewpager);
 		mTabIndicators = (RadioGroup) findViewById(R.id.tabIndicators);
 		btn_mall = (Button)findViewById(R.id.btn_mall);
-		myBadgeView = remind(2);
+		myBadgeView = remind(0);
 		
 		IntentFilter countFilter = new IntentFilter(Constant.ACTION_MESSAGE_COUNT);
 		registerReceiver(mCountMsgReceiver, countFilter);
@@ -208,8 +218,8 @@ public class MainActivity extends FragmentActivity implements
 		badge1.setTextColor(Color.WHITE); // 文本颜色
 		badge1.setBadgeBackgroundColor(Color.RED); // 提醒信息的背景颜色，自己设置
 		badge1.setTextSize(12); // 文本大小
-		//badge1.setBadgeMargin(3, 3); // 水平和竖直方向的间距
-		badge1.setBadgeMargin(1); //各边间隔
+		badge1.setBadgeMargin(3, 3); // 水平和竖直方向的间距
+//		badge1.setBadgeMargin(1); //各边间隔
 		// badge1.toggle(); //显示效果，如果已经显示，则影藏，如果影藏，则显示
 		if(count>0){
 			badge1.show();// 只有显示
@@ -237,4 +247,36 @@ public class MainActivity extends FragmentActivity implements
 		}
 	};
 
+	@Override
+	protected void onResume() {
+		User user = MyApplication.getInstance().getCurrentUser();
+		if(user!=null){
+			//查询未支付订单数量
+			ApiBuyUtils.getOrders(this, user.getUserId(),0,ApiConstants.MAX_STATUS,0,
+					new HttpConnectionUtil.RequestCallback() {
+	
+						@Override
+						public void execute(ParseModel parseModel) {
+							
+							if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+									.getStatus())) {
+								
+							} else {
+								List<Order> ordersList = JsonUtils.fromJson(
+										parseModel.getData().toString(),
+										new TypeToken<List<Order>>() {
+										});
+								
+								Intent intent = new Intent(Constant.ACTION_MESSAGE_COUNT);
+								intent.putExtra("countOrders", ordersList.size());
+								sendBroadcast(intent);
+							}
+	
+						}
+					});
+		}
+		super.onResume();
+	}
+	
+	
 }
