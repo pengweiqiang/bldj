@@ -66,4 +66,6 @@ public interface ApiConstants {
     
     public static final int LIMIT = 10;
     
+    public static final int MAX_STATUS = 99999;
+    
 }
