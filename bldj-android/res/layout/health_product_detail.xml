@@ -285,12 +285,20 @@
             android:background="@color/line" />
     </LinearLayout>
 
+    <ProgressBar
+        	android:layout_below="@+id/center_info"
+            android:id="@+id/web_progress"
+            style="@style/ProgressBarHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:max="100"
+            android:visibility="visible" />
     <WebView
         android:id="@+id/webView_product_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_info"
-        android:layout_below="@+id/center_info"
+        android:layout_below="@+id/web_progress"
         />
     
     <View
