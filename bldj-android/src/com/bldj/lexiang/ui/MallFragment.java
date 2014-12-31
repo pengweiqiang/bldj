@@ -311,5 +311,11 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 			}
 		}
 	};
+
+	@Override
+	public void onDestroy() {
+		mActivity.unregisterReceiver(mCountMsgReceiver);
+		super.onDestroy();
+	}
 	
 }
