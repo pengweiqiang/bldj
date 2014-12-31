@@ -90,7 +90,10 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 //		getData();
-		
+		User user = MyApplication.getInstance().getCurrentUser();
+		if(user ==null){
+			showUnLogin();
+		}
 	}
 	
 	@Override
