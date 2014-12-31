@@ -235,6 +235,8 @@ public class MyFragment extends BaseFragment {
 					SharePreferenceManager.saveBatchSharedPreference(mActivity,
 							Constant.FILE_NAME, "user", "");
 					initData();
+					((MainActivity)mActivity).count = 0;
+					((MainActivity)mActivity).showCount();
 				}
 				
 			}
