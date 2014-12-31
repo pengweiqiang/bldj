@@ -251,8 +251,7 @@ public class OrderDetail2Activity extends BaseActivity {
 				if (groups.get(position).getIndex() == TitleBarEnum.SHARE_SINA
 						.getIndex()) {
 					String shareUrl = 
-							ShareUtil.shareSina("健康送到家，方便你我他", "http://www.baidu.com", 
-									"http://img2.imgtn.bdimg.com/it/u=626942633,892821771&fm=21&gp=0.jpg");
+							ShareUtil.shareSina("健康送到家，方便你我他", "", "");
 					Intent intent = new Intent(OrderDetail2Activity.this,BannerWebActivity.class);
 					intent.putExtra("url", shareUrl);
 					intent.putExtra("name", TitleBarEnum.SHARE_SINA.getMsg());
@@ -261,12 +260,11 @@ public class OrderDetail2Activity extends BaseActivity {
 						.getIndex()) {
 					ToastUtils.showToast(mContext, "分享微信...");
 					shareUtil.sendWebPageToWX("健康送到家，方便你我他",
-							SendMessageToWX.Req.WXSceneTimeline);
+							SendMessageToWX.Req.WXSceneTimeline,"");
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT
 						.getIndex()) {
 					String shareUrl = 
-							ShareUtil.shareQQ("健康送到家，方便你我他", "http://www.baidu.com", 
-									"http://img2.imgtn.bdimg.com/it/u=626942633,892821771&fm=21&gp=0.jpg");
+							ShareUtil.shareQQ("健康送到家，方便你我他", "", "");
 					Intent intent = new Intent(OrderDetail2Activity.this,BannerWebActivity.class);
 					intent.putExtra("url", shareUrl);
 					intent.putExtra("name", TitleBarEnum.SHARE_TENCENT.getMsg());
