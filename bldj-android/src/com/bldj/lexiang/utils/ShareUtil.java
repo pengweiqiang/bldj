@@ -13,7 +13,6 @@ import com.tencent.mm.sdk.modelmsg.WXTextObject;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 
 /**
@@ -113,15 +112,12 @@ public class ShareUtil {
 	 */
 	public void sendWebPageToWX(String text, int sendType,String webpageUrl) {
 		WXWebpageObject webpage = new WXWebpageObject();
-		/*if(StringUtils.isEmpty(webpageUrl)){
-			webpageUrl = MyApplication.getInstance().getConfParams().getAboutUsUrl();
-		}*/
 		webpage.webpageUrl = webpageUrl;
 		WXMediaMessage msg = new WXMediaMessage(webpage);
 		if (sendType == SendMessageToWX.Req.WXSceneTimeline) {
 			msg.title = text;
 		} else {
-			msg.title = "脉度理疗";
+			msg.title = "便利到家";
 		}
 		msg.description = text;
 		Bitmap thumb = BitmapFactory.decodeResource(context.getResources(),
@@ -136,8 +132,9 @@ public class ShareUtil {
 	}
 	
 	public void sendWebPageToWX(String text, int sendType) {
-		sendWebPageToWX(text, sendType,MyApplication.getInstance().getConfParams().getAboutUsUrl());
-	}
+		sendWebPageToWX(text, sendType,"http://www.baidu.com");
+	} 
+	
 	/**
 	 * 新浪微博分享地址
 	 * @param title
@@ -146,9 +143,7 @@ public class ShareUtil {
 	 * @return
 	 */
 	public static String shareSina(String title,String url,String picUrl){
-		if(StringUtils.isEmpty(url)){
-			url = MyApplication.getInstance().getConfParams().getAboutUsUrl();
-		}
+		
 		String shareUrl = "http://v.t.sina.com.cn/share/share.php?title="+title+"&url="+url+"&content=utf-8&sourceUrl="+url+"&pic="+picUrl;
 		return shareUrl;
 	}
@@ -160,9 +155,6 @@ public class ShareUtil {
 	 * @return
 	 */
 	public static String shareQQ(String content,String url,String picUrl){
-		if(StringUtils.isEmpty(url)){
-			url = MyApplication.getInstance().getConfParams().getAboutUsUrl();
-		}
 		String shareUrl = "http://v.t.qq.com/share/share.php?title="+content+"&url="+url+"&url="+url+"&pic="+picUrl;
 		return shareUrl;
 	}
