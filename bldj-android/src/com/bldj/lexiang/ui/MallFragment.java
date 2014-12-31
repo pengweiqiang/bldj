@@ -297,12 +297,17 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 				if(orders!=null){
 					orders.clear();
 				}
-				ArrayList<Order> ordersList  = (ArrayList<Order>)intent.getSerializableExtra("orders");
-				orders.addAll(ordersList);
-				rl_loading.setVisibility(View.GONE);
-				listAdapter.notifyDataSetChanged();
-				mListView.setVisibility(View.VISIBLE);
-				mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+				boolean logout = intent.getBooleanExtra("isLogout", false);
+				if(logout){
+					showUnLogin();
+				}else{
+					ArrayList<Order> ordersList  = (ArrayList<Order>)intent.getSerializableExtra("orders");
+					orders.addAll(ordersList);
+					rl_loading.setVisibility(View.GONE);
+					listAdapter.notifyDataSetChanged();
+					mListView.setVisibility(View.VISIBLE);
+					mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+				}
 			}
 		}
 	};
