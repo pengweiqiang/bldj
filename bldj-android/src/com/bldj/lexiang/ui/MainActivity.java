@@ -237,7 +237,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 	};*/
 	
-	private void showCount(){
+	public void showCount(){
 //		count = intent.getIntExtra("countOrders", count);
 		
 		if(count>0 && !myBadgeView.isShown()){
