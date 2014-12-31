@@ -116,20 +116,20 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		}
 	}
 	
-//	@Override
-//	public void onResume() {
-//		super.onResume();
-//		User user = MyApplication.getInstance().getCurrentUser();
-//		if(user!=null && orders.isEmpty()){
-//			ll_unLogin.setVisibility(View.GONE);
-//			rl_loading.setVisibility(View.VISIBLE);
-//			ll_tabTitle.setVisibility(View.VISIBLE);
-////			getData();
-//		}else if(user == null && !orders.isEmpty()){
-//			orders.clear();
-//			showUnLogin();
-//		}
-//	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		User user = MyApplication.getInstance().getCurrentUser();
+		if(user!=null && orders.isEmpty()){
+			ll_unLogin.setVisibility(View.GONE);
+			rl_loading.setVisibility(View.VISIBLE);
+			ll_tabTitle.setVisibility(View.VISIBLE);
+//			getData();
+		}else if(user == null && !orders.isEmpty()){
+			orders.clear();
+			showUnLogin();
+		}
+	}
 
 	/**
 	 * 初始化控件
