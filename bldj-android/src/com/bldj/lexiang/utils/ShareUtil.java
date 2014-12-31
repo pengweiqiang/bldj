@@ -13,6 +13,7 @@ import com.tencent.mm.sdk.modelmsg.WXTextObject;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 
 /**
@@ -114,11 +115,11 @@ public class ShareUtil {
 		WXWebpageObject webpage = new WXWebpageObject();
 		webpage.webpageUrl = webpageUrl;
 		WXMediaMessage msg = new WXMediaMessage(webpage);
-		if (sendType == SendMessageToWX.Req.WXSceneTimeline) {
-			msg.title = text;
-		} else {
-			msg.title = "便利到家";
-		}
+//		if (sendType == SendMessageToWX.Req.WXSceneTimeline) {
+		msg.title = text;
+//		} else {
+//			msg.title = "便利到家";
+//		}
 		msg.description = text;
 		Bitmap thumb = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.ic_launcher);
@@ -132,7 +133,7 @@ public class ShareUtil {
 	}
 	
 	public void sendWebPageToWX(String text, int sendType) {
-		sendWebPageToWX(text, sendType,"http://www.baidu.com");
+		sendWebPageToWX(text, sendType,MyApplication.getInstance().getConfParams().getAboutUsUrl());
 	} 
 	
 	/**
