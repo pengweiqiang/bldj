@@ -12,9 +12,13 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
-import com.bldj.lexiang.api.vo.Seller;
+import com.bldj.lexiang.api.ApiUserUtils;
+import com.bldj.lexiang.api.vo.ConfParams;
+import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
+import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
@@ -33,8 +37,8 @@ public class MyApplication extends Application {
 
 	public static double lat;
 	public static double lon;
-	public static String city = "";//当前定位城市
-	public static float radius; 
+	public static String city = "";// 当前定位城市
+	public static float radius;
 
 	private static MyApplication myApplication = null;
 	private User user = null;// 全局用户
@@ -42,10 +46,10 @@ public class MyApplication extends Application {
 	public LocationClient mLocationClient;
 	public MyLocationListener mMyLocationListener;
 	public String addressStr = "";
-//	public Seller sellerVo = null;//当前选中的美容师
-	
-	public Map<String,String> appointMap = new HashMap<String, String>();//我要预约的时间，姓名等等
-	public String street = "";//当前街道地点
+	// public Seller sellerVo = null;//当前选中的美容师
+
+	public Map<String, String> appointMap = new HashMap<String, String>();// 我要预约的时间，姓名等等
+	public String street = "";// 当前街道地点
 
 	public static MyApplication getInstance() {
 		return myApplication;
@@ -57,6 +61,12 @@ public class MyApplication extends Application {
 
 	public User getCurrentUser() {
 		return user;
+	}
+
+	private ConfParams confParams;
+
+	public ConfParams getConfParams() {
+		return confParams;
 	}
 
 	@Override
@@ -74,6 +84,7 @@ public class MyApplication extends Application {
 		}
 		initBaiduLocClient();
 
+		getConfParamsByHttp();
 	}
 
 	/**
@@ -105,7 +116,7 @@ public class MyApplication extends Application {
 				.showImageForEmptyUri(drawableId).showImageOnFail(drawableId)
 				.resetViewBeforeLoading(true).cacheInMemory(true)
 				.cacheOnDisc(true).imageScaleType(ImageScaleType.EXACTLY)
-				.bitmapConfig(Bitmap.Config.RGB_565).build(); 
+				.bitmapConfig(Bitmap.Config.RGB_565).build();
 	}
 
 	/**
@@ -136,22 +147,23 @@ public class MyApplication extends Application {
 			// Receive Location
 			// double latitude = location.getLatitude();
 			// double longtitude = location.getLongitude();
-			
-//			MyLocationData locData = new MyLocationData.Builder()
-//			.accuracy(location.getRadius())
-//			// 此处设置开发者获取到的方向信息，顺时针0-360
-//			.direction(100).latitude(location.getLatitude())
-//			.longitude(location.getLongitude()).build();
-			
+
+			// MyLocationData locData = new MyLocationData.Builder()
+			// .accuracy(location.getRadius())
+			// // 此处设置开发者获取到的方向信息，顺时针0-360
+			// .direction(100).latitude(location.getLatitude())
+			// .longitude(location.getLongitude()).build();
+
 			String province = location.getProvince();
 			city = location.getCity();
 			String district = location.getDistrict();
 			addressStr = location.getAddrStr();
 			radius = location.getRadius();
-			street = city+district+location.getStreet();
+			street = city + district + location.getStreet();
 			String streeNum = location.getStreetNumber();
 			System.out.println("province:" + province + "  city:" + city
-					+ "  district:" + district + "  addressStr:" + addressStr+"  street "+street+"  streemNum:"+streeNum);
+					+ "  district:" + district + "  addressStr:" + addressStr
+					+ "  street " + street + "  streemNum:" + streeNum);
 			if (lat == location.getLatitude() && lon == location.getLongitude()) {
 				// 若两次请求获取到的地理位置坐标是相同的，则不再定位
 				if (!StringUtils.isEmpty(city)) {
@@ -171,6 +183,29 @@ public class MyApplication extends Application {
 			lat = location.getLatitude();
 			lon = location.getLongitude();
 		}
+	}
+
+	/**
+	 * 获取文案配置信息
+	 */
+	private void getConfParamsByHttp() {
+		ApiUserUtils.getConfParams(this,
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						ConfParams confParams;
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							confParams = ConfParams.getDefaultConfParams();
+						} else {
+							confParams = JsonUtils.fromJson(parseModel
+									.getData().toString(), ConfParams.class);
+
+						}
+						MyApplication.this.confParams = confParams;
+					}
+				});
 	}
 
 }
