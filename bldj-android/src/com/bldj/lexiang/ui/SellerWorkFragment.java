@@ -76,7 +76,7 @@ public class SellerWorkFragment extends BaseFragment {
 
 		webView.setInitialScale(25);
 		WebSettings webSettings = webView.getSettings();
-//		webSettings.setJavaScriptEnabled(true);
+		webSettings.setJavaScriptEnabled(true);
 		webSettings.setBuiltInZoomControls(false);
 		webSettings.setSupportZoom(true);
 
