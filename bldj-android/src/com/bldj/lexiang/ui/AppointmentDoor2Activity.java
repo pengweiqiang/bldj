@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.JlysHealthAdapter;
 import com.bldj.lexiang.api.ApiSellerUtils;
@@ -73,6 +74,8 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		initListener();
 
 		getSellers();
+		
+		tv_callCustom.setText(MyApplication.getInstance().getConfParams().getServiceNum());
 	}
 
 	// 设置activity的导航条
