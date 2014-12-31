@@ -288,7 +288,8 @@ public class HealthProductDetailActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				//用intent启动拨打电话  
-                Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+getResources().getString(R.string.appointment_door_tips2)));  
+				String tel = MyApplication.getInstance().getConfParams().getServiceNum();
+                Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+tel));  
                 startActivity(intent);  
 			}
 		});
