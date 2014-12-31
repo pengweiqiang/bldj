@@ -42,7 +42,7 @@ public class BannerWebActivity extends BaseActivity {
 
 		webView.setInitialScale(25);
 		WebSettings webSettings = webView.getSettings();
-//		webSettings.setJavaScriptEnabled(true);
+		webSettings.setJavaScriptEnabled(true);
 		webSettings.setBuiltInZoomControls(true);
 		webSettings.setSupportZoom(true);
 
