@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.baidu.mapapi.search.core.PoiInfo;
@@ -86,7 +87,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	String city ;
 	
 	InputMethodManager manager ;
-	SpringScrollView scrollView;
+	ScrollView scrollView;
 	
 	private View selectedView;//选中的地址
 	@Override
@@ -151,7 +152,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		btn_time = (Button) infoView.findViewById(R.id.btn_appoint_time);
 		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
 		layout = (LinearLayout)infoView.findViewById(R.id.layout);
-		scrollView = (SpringScrollView)infoView.findViewById(R.id.scrollView);
+		scrollView = (ScrollView)infoView.findViewById(R.id.scrollView);
 		btn_time.setTag(false);
 		
 		btn_location.setText(MyApplication.getInstance().addressStr);

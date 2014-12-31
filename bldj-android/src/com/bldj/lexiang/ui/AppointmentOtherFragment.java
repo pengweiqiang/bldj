@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -92,7 +93,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	
 	LinearLayout layout;
 	InputMethodManager manager ;
-	SpringScrollView scrollView;
+	ScrollView scrollView;
 	
 	View selectedView;//选中的地址列表
 	@Override
@@ -138,7 +139,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		et_address = (EditText) infoView.findViewById(R.id.et_address);
 		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
 		layout = (LinearLayout)infoView.findViewById(R.id.layout);
-		scrollView = (SpringScrollView)infoView.findViewById(R.id.scrollView);
+		scrollView = (ScrollView)infoView.findViewById(R.id.scrollView);
 		btn_time.setTag(false);
 		
 		
