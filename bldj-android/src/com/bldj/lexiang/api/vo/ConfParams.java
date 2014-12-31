@@ -78,5 +78,11 @@ public class ConfParams  implements Serializable{
 		this.serviceEmail = serviceEmail;
 	}
 	
+	public static ConfParams getDefaultConfParams(){
+		ConfParams c = new ConfParams();
+		c.setAboutUsUrl("http://www.maidu360.com/home/d");
+		c.setServiceNum("4006200606");
+		return c;
+	}
 	
 }
