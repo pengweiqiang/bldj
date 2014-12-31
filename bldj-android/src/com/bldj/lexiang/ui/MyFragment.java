@@ -237,6 +237,9 @@ public class MyFragment extends BaseFragment {
 					initData();
 					((MainActivity)mActivity).count = 0;
 					((MainActivity)mActivity).showCount();
+					Intent intent = new Intent(Constant.ACTION_MESSAGE_COUNT);
+					intent.putExtra("isLogout", true);
+					mActivity.sendBroadcast(intent);
 				}
 				
 			}
