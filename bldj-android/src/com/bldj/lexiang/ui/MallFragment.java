@@ -3,7 +3,10 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -79,12 +82,15 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
+		IntentFilter countFilter = new IntentFilter(Constant.ACTION_MESSAGE_COUNT);
+		mActivity.registerReceiver(mCountMsgReceiver, countFilter);
 		orders = new ArrayList<Order>();
 		listAdapter = new OrderAdapter(mActivity, orders);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
-		getData();
+//		getData();
+		
 	}
 	
 	@Override
@@ -93,13 +99,16 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		if (isVisibleToUser) {
 			// 相当于Fragment的onResume
 			User user = MyApplication.getInstance().getCurrentUser();
-			if(user!=null && orders.isEmpty()){
+			if(user!=null && !orders.isEmpty()){
 				ll_unLogin.setVisibility(View.GONE);
-				rl_loading.setVisibility(View.VISIBLE);
+				rl_loading.setVisibility(View.GONE);
 				ll_tabTitle.setVisibility(View.VISIBLE);
-				getData();
-			}else if(user == null && !orders.isEmpty()){
-				orders.clear();
+				mListView.setVisibility(View.VISIBLE);
+//				getData();
+			}else if(user == null){
+				if(!orders.isEmpty()){
+					orders.clear();
+				}
 				showUnLogin();
 			}
 		} else {
@@ -107,20 +116,20 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		}
 	}
 	
-	@Override
-	public void onResume() {
-		super.onResume();
-		User user = MyApplication.getInstance().getCurrentUser();
-		if(user!=null && orders.isEmpty()){
-			ll_unLogin.setVisibility(View.GONE);
-			rl_loading.setVisibility(View.VISIBLE);
-			ll_tabTitle.setVisibility(View.VISIBLE);
-			getData();
-		}else if(user == null && !orders.isEmpty()){
-			orders.clear();
-			showUnLogin();
-		}
-	}
+//	@Override
+//	public void onResume() {
+//		super.onResume();
+//		User user = MyApplication.getInstance().getCurrentUser();
+//		if(user!=null && orders.isEmpty()){
+//			ll_unLogin.setVisibility(View.GONE);
+//			rl_loading.setVisibility(View.VISIBLE);
+//			ll_tabTitle.setVisibility(View.VISIBLE);
+////			getData();
+//		}else if(user == null && !orders.isEmpty()){
+//			orders.clear();
+//			showUnLogin();
+//		}
+//	}
 
 	/**
 	 * 初始化控件
@@ -188,7 +197,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		showLoading();
 		User user = MyApplication.getInstance().getCurrentUser();
 		if(user!=null){
-			//查询订单
+			//查询未支付订单
 			ApiBuyUtils.getOrders(mActivity, user.getUserId(),pageNumber,ApiConstants.LIMIT,0,
 					new HttpConnectionUtil.RequestCallback() {
 	
@@ -200,9 +209,6 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 									.getStatus())) {
 								mListView.setVisibility(View.GONE);
 								rl_loadingFail.setVisibility(View.VISIBLE);
-	//							 ToastUtils.showToast(MyOrdersActivity.this,
-	//							 parseModel.getMsg());
-	//							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
 								
 							} else {
 								mListView.setVisibility(View.VISIBLE);
@@ -257,9 +263,11 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 				if(type == 0){//取消订单
 					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.CANCLED);
 					orders.get(selectOrderIndex).setStatusStr("已取消");
+					orders.remove(selectOrderIndex);
 				}else if(type ==1){//支付成功
 					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.PAID_ONLINE);
 					orders.get(selectOrderIndex).setStatusStr("线上已支付");
+					orders.remove(selectOrderIndex);
 				}
 				listAdapter.notifyDataSetChanged();
 			}
@@ -276,6 +284,24 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
-	
+	/**
+	 * 显示订单数量红点
+	 */
+	private BroadcastReceiver mCountMsgReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (Constant.ACTION_MESSAGE_COUNT.equals(intent.getAction())) {
+				if(orders!=null){
+					orders.clear();
+				}
+				ArrayList<Order> ordersList  = (ArrayList<Order>)intent.getSerializableExtra("orders");
+				orders.addAll(ordersList);
+				rl_loading.setVisibility(View.GONE);
+				listAdapter.notifyDataSetChanged();
+				mListView.setVisibility(View.VISIBLE);
+				mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+			}
+		}
+	};
 	
 }

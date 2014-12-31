@@ -2,11 +2,14 @@ package com.bldj.lexiang.api.vo;
 
 import java.io.Serializable;
 
-public class Order  implements Serializable{
+public class Order implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7889547444319575287L;
+	private static final long serialVersionUID = 2250114860985158962L;
+	/**
+	 * 
+	 */
 	//
 	private String orderNum;//订单号
 	private double orderPay;//订单总额
@@ -88,7 +91,5 @@ public class Order  implements Serializable{
 	public void setPayType(int payType) {
 		this.payType = payType;
 	}
-	
-	
 	
 }
