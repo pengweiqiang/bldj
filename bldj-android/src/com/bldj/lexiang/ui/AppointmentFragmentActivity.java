@@ -218,11 +218,12 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 				return;
 			if (MyApplication.lat == location.getLatitude() && MyApplication.lon == location.getLongitude()) {
 				mLocClient.stop();
+			}else{
+				MyApplication.getInstance().addressStr = location.getAddrStr();
+				MyApplication.lat = location.getLatitude();
+				MyApplication.lon = location.getLongitude();
+				MyApplication.getInstance().street = location.getStreet();
 			}
-			MyApplication.getInstance().addressStr = location.getAddrStr();
-			MyApplication.lat = location.getLatitude();
-			MyApplication.lon = location.getLongitude();
-			MyApplication.getInstance().street = location.getStreet();
 			
 		}
 
