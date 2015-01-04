@@ -113,17 +113,24 @@ public class ShareUtil {
 	 */
 	public void sendWebPageToWX(String text, int sendType,String webpageUrl) {
 		WXWebpageObject webpage = new WXWebpageObject();
-		webpage.webpageUrl = webpageUrl;
+		if(StringUtils.isEmpty(webpageUrl)){
+			webpage.webpageUrl = MyApplication.getInstance().getConfParams().getAboutUsUrl();
+		}else{
+			webpage.webpageUrl = webpageUrl;
+		}
 		WXMediaMessage msg = new WXMediaMessage(webpage);
-//		if (sendType == SendMessageToWX.Req.WXSceneTimeline) {
-		msg.title = text;
-//		} else {
-//			msg.title = "便利到家";
-//		}
+		if (sendType == SendMessageToWX.Req.WXSceneTimeline) {
+			msg.title = text;
+		} else {
+			msg.title = "脉度理疗";
+		}
 		msg.description = text;
 		Bitmap thumb = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.ic_launcher);
-		msg.thumbData = Util.bmpToByteArray(thumb, true);
+		Bitmap thumbBmp = Bitmap.createScaledBitmap(thumb, 80,
+				80, true);
+		thumb.recycle();
+		msg.thumbData = Util.bmpToByteArray(thumbBmp, true); // 设置缩略图
 
 		SendMessageToWX.Req req = new SendMessageToWX.Req();
 		req.transaction = String.valueOf(System.currentTimeMillis());
@@ -132,10 +139,6 @@ public class ShareUtil {
 		api.sendReq(req);
 	}
 	
-	public void sendWebPageToWX(String text, int sendType) {
-		sendWebPageToWX(text, sendType,MyApplication.getInstance().getConfParams().getAboutUsUrl());
-	} 
-	
 	/**
 	 * 新浪微博分享地址
 	 * @param title
@@ -143,7 +146,7 @@ public class ShareUtil {
 	 * @param picUrl
 	 * @return
 	 */
-	public static String shareSina(String title,String url,String picUrl){
+	public String shareSina(String title,String url,String picUrl){
 		
 		String shareUrl = "http://v.t.sina.com.cn/share/share.php?title="+title+"&url="+url+"&content=utf-8&sourceUrl="+url+"&pic="+picUrl;
 		return shareUrl;
@@ -155,7 +158,7 @@ public class ShareUtil {
 	 * @param picUrl
 	 * @return
 	 */
-	public static String shareQQ(String content,String url,String picUrl){
+	public String shareQQ(String content,String url,String picUrl){
 		String shareUrl = "http://v.t.qq.com/share/share.php?title="+content+"&url="+url+"&url="+url+"&pic="+picUrl;
 		return shareUrl;
 	}
