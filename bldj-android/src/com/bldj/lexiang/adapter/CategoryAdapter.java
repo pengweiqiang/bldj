@@ -111,7 +111,7 @@ public class CategoryAdapter extends BaseListAdapter {
 					product1.getPicurl(),
 					holder.imageView1,
 					MyApplication.getInstance().getOptions(
-							R.drawable.eg));
+							R.drawable.ic_launcher));
 			holder.tv_product_name1.setText(product1.getName());
 
 			holder.frame1.setOnClickListener(new View.OnClickListener() {
