@@ -59,8 +59,7 @@ import com.bldj.lexiang.view.SpringScrollView;
  * 
  */
 public class AppointmentMyFragment extends BaseFragment implements
-OnGetPoiSearchResultListener, OnGetSuggestionResultListener,
-OnItemClickListener, OnGetGeoCoderResultListener{
+ OnGetSuggestionResultListener{
 	
 	View infoView;
 	private Button btn_next;
@@ -101,13 +100,12 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 //		mSuggestionSearch = SuggestionSearch.newInstance();
 //		mSuggestionSearch.setOnGetSuggestionResultListener(this);
 		
-		mSearch = GeoCoder.newInstance();
-		mSearch.setOnGetGeoCodeResultListener(this);
+//		mSearch = GeoCoder.newInstance();
+//		mSearch.setOnGetGeoCodeResultListener(this);
 
-		mPoiSearch = PoiSearch.newInstance();
-		mPoiSearch.setOnGetPoiSearchResultListener(this);
-		mSuggestionSearch = SuggestionSearch.newInstance();
-		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+//		mPoiSearch = PoiSearch.newInstance();
+//		mPoiSearch.setOnGetPoiSearchResultListener(this);
+	
 		manager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE); 
 		
 	}
@@ -168,6 +166,8 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		/**
 		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
 		 */
+		mSuggestionSearch = SuggestionSearch.newInstance();
+		mSuggestionSearch.setOnGetSuggestionResultListener(this);
 		mSuggestionSearch
 				.requestSuggestion((new SuggestionSearchOption())
 						.keyword(MyApplication.getInstance().street).city(city));
@@ -342,36 +342,7 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		});
 	}
 
-	@Override
-	public void onGetPoiDetailResult(PoiDetailResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGetPoiResult(PoiResult arg0) {
-		// TODO Auto-generated method stub
-		List<PoiInfo> poiInfos =arg0.getAllPoi();
-	}
-
-	@Override
-	public void onGetGeoCodeResult(GeoCodeResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void onGetSuggestionResult(SuggestionResult res) {
 		if (res == null || res.getAllSuggestions() == null) {
@@ -384,10 +355,11 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		}
 		locationList.clear();
 		for (SuggestionResult.SuggestionInfo info : res.getAllSuggestions()) {
-//			Log.e("TAG", info.key);
 			if (info != null) {
 //				mAdapter.add(info);
-				locationList.add(info.key);
+				if(!locationList.contains(info.key)){
+					locationList.add(info.key);
+				}
 			}
 //			mAdapter.notifyDataSetChanged();// 默认聚焦最后一行
 //			lvAddress.setSelection(mAdapter.getCount());
@@ -404,6 +376,13 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 			et_address.setText(address);
 		}
 	}
+
+	@Override
+	public void onDestroy() {
+		mSuggestionSearch.destroy();
+		super.onDestroy();
+	}
+	
 
 	
 	
