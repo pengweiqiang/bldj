@@ -100,13 +100,11 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		mSearch = GeoCoder.newInstance();
-		mSearch.setOnGetGeoCodeResultListener(this);
+//		mSearch = GeoCoder.newInstance();
+//		mSearch.setOnGetGeoCodeResultListener(this);
 
-		mPoiSearch = PoiSearch.newInstance();
-		mPoiSearch.setOnGetPoiSearchResultListener(this);
-		mSuggestionSearch = SuggestionSearch.newInstance();
-		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+//		mPoiSearch = PoiSearch.newInstance();
+//		mPoiSearch.setOnGetPoiSearchResultListener(this);
 		manager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE); 
 	}
 
@@ -155,6 +153,10 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		/**
 		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
 		 */
+		
+		mSuggestionSearch = SuggestionSearch.newInstance();
+		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+		
 		mSuggestionSearch
 				.requestSuggestion((new SuggestionSearchOption())
 						.keyword(MyApplication.getInstance().street).city(city));
@@ -415,7 +417,9 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 //			Log.e("TAG", info.key);
 			if (info != null) {
 //				mAdapter.add(info);
-				locationList.add(info.key);
+				if(!locationList.contains(info.key)){
+					locationList.add(info.key);
+				}
 			}
 //			mAdapter.notifyDataSetChanged();// 默认聚焦最后一行
 //			lvAddress.setSelection(mAdapter.getCount());
@@ -441,6 +445,11 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		if(!StringUtils.isEmpty(address)){
 			et_address.setText(address);
 		}
+	}
+	@Override
+	public void onDestroy() {
+		mSuggestionSearch.destroy();
+		super.onDestroy();
 	}
 
 }
