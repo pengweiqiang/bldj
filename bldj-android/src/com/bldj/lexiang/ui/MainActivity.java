@@ -65,6 +65,7 @@ public class MainActivity extends FragmentActivity implements
 	private BadgeView myBadgeView;
 	//总数统计 start
 	public static int count = 0;
+	private int index = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,12 +111,16 @@ public class MainActivity extends FragmentActivity implements
 				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
+						User user = MyApplication.getInstance().getCurrentUser();
 						for (int i = 0; i < tabIds.length; i++) {
 							if (checkedId == tabIds[i]) {
+								index = i;
+								if(user ==null && i>=2){
+									Intent intent = new Intent(MainActivity.this,RegisterAndLoginActivity.class);
+									startActivity(intent);
+									return;
+								}
 								mViewPager.setCurrentItem(i, false);
-								// if (tabIds[i] == R.id.info) {
-								//
-								// }
 								break;
 							}
 						}
@@ -126,6 +131,15 @@ public class MainActivity extends FragmentActivity implements
 		initLocClient();
 		UmengUpdateAgent.setUpdateCheckConfig(false);
 		UmengUpdateAgent.update(this);
+	}
+	
+	@Override
+	protected void onStop() {
+		if(mViewPager.getCurrentItem() != index){
+			mViewPager.setCurrentItem(index, false);
+		}
+		super.onStop();
+		
 	}
 
 	/*
