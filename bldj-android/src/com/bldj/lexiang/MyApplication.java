@@ -189,23 +189,25 @@ public class MyApplication extends Application {
 	 * 获取文案配置信息
 	 */
 	private void getConfParamsByHttp() {
-		ApiUserUtils.getConfParams(this,
-				new HttpConnectionUtil.RequestCallback() {
-
-					@Override
-					public void execute(ParseModel parseModel) {
-						ConfParams confParams;
-						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
-								.getStatus())) {
-							confParams = ConfParams.getDefaultConfParams();
-						} else {
-							confParams = JsonUtils.fromJson(parseModel
-									.getData().toString(), ConfParams.class);
-
+		if(confParams==  null){
+			ApiUserUtils.getConfParams(this,
+					new HttpConnectionUtil.RequestCallback() {
+	
+						@Override
+						public void execute(ParseModel parseModel) {
+							ConfParams confParams;
+							if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+									.getStatus())) {
+								confParams = ConfParams.getDefaultConfParams();
+							} else {
+								confParams = JsonUtils.fromJson(parseModel
+										.getData().toString(), ConfParams.class);
+	
+							}
+							MyApplication.this.confParams = confParams;
 						}
-						MyApplication.this.confParams = confParams;
-					}
-				});
+					});
+		}
 	}
 
 }
