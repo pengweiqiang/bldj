@@ -89,7 +89,7 @@
                 android:layout_height="@dimen/category_image_height"
                 android:padding="1dip"
                 android:scaleType="centerCrop"
-                android:src="@drawable/eg" />
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/product_name1"
@@ -115,7 +115,7 @@
                 android:layout_height="@dimen/category_image_height"
                 android:padding="2dip"
                 android:scaleType="centerCrop"
-                android:src="@drawable/eg" />
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/product_name2"
@@ -141,7 +141,7 @@
                 android:layout_height="@dimen/category_image_height"
                 android:padding="2dip"
                 android:scaleType="centerCrop"
-                android:src="@drawable/eg" />
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/product_name3"
@@ -167,7 +167,7 @@
                 android:layout_height="@dimen/category_image_height"
                 android:padding="2dip"
                 android:scaleType="centerCrop"
-                android:src="@drawable/eg" />
+                android:src="@drawable/ic_launcher" />
 
             <TextView
                 android:id="@+id/product_name4"
