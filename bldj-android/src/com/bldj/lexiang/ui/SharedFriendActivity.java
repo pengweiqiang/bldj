@@ -1,5 +1,6 @@
 package com.bldj.lexiang.ui;
 
+import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
@@ -64,7 +65,7 @@ public class SharedFriendActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				String shareUrl = 
-						ShareUtil.shareSina("健康送到家，方便你我他", "", "");
+						shareUtil.shareSina("健康送到家，方便你我他", "", "");
 				Intent intent = new Intent(SharedFriendActivity.this,BannerWebActivity.class);
 				intent.putExtra("url", shareUrl);
 				intent.putExtra("name", "新浪分享");
@@ -77,7 +78,9 @@ public class SharedFriendActivity extends BaseActivity {
 			public void onClick(View arg0) {
 				ToastUtils.showToast(mContext, "分享微信...");
 				shareUtil.sendWebPageToWX("健康送到家，方便你我他",
-						SendMessageToWX.Req.WXSceneTimeline);
+						SendMessageToWX.Req.WXSceneTimeline,MyApplication.getInstance().getConfParams().getAboutUsUrl());
+//				shareUtil.sendImgToWX("健康送到家，方便你我他",
+//						SendMessageToWX.Req.WXSceneTimeline);
 			}
 		});
 	}
