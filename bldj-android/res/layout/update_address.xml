@@ -37,6 +37,7 @@
                 android:paddingLeft="110dip"
                 android:editable="false"
                 android:clickable="false"
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -57,6 +58,7 @@
                 android:id="@+id/contact_phone"
                 android:editable="false"
                 android:clickable="false"
+                android:enabled="false"
                 android:layout_width="match_parent"
                 android:paddingLeft="110dip"
                 android:layout_height="wrap_content" />
