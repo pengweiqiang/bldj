@@ -19,6 +19,7 @@ public class BannerWebActivity extends BaseActivity {
 	private String name;
 	private String url;
 	private ProgressBar progressBar;
+	Object mJsObj = new JSInterface();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,4 +103,9 @@ public class BannerWebActivity extends BaseActivity {
 		});
 		actionBar.hideRightActionButton();
 	}
+	
+	 class JSInterface {
+	        
+	    }
+	
 }
