@@ -172,7 +172,7 @@
             android:background="@drawable/good_list_bg"
             android:divider="#00000000"
             android:visibility="gone" /> -->
-            <WebView 
+            <com.bldj.lexiang.view.WebViewEx 
                 android:id="@+id/webView_product"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
