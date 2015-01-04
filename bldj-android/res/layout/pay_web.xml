@@ -17,9 +17,9 @@
             android:layout_height="2dp"
             android:max="100"
             android:visibility="visible" />
-    <WebView
+    <com.bldj.lexiang.view.WebViewEx
         android:id="@+id/webview"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
