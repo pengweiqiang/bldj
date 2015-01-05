@@ -17,12 +17,18 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="@dimen/banner_image_height" />
 	
-	    <FrameLayout
+	    <!-- <FrameLayout
 	        android:layout_width="wrap_content"
 	        android:layout_height="15dp"
 	        android:layout_gravity="center_horizontal|bottom"
 	        android:layout_marginBottom="3dp"
-	        android:background="@drawable/index_carsouel_bg" >
+	        android:background="@drawable/index_carsouel_bg" > -->
+	        <FrameLayout
+	        android:layout_width="wrap_content"
+	        android:layout_height="15dp"
+	        android:layout_gravity="center_horizontal|bottom"
+	        android:layout_marginBottom="3dp"
+	         >
 	
 	        <com.bldj.lexiang.view.CirclePageIndicator
 	            android:id="@+id/indicator"
