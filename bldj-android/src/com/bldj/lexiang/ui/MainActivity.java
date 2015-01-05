@@ -238,7 +238,7 @@ public class MainActivity extends BaseFragmentActivity implements
 		badge1.setTextColor(Color.WHITE); // 文本颜色
 		badge1.setBadgeBackgroundColor(Color.RED); // 提醒信息的背景颜色，自己设置
 		badge1.setTextSize(12); // 文本大小
-		badge1.setBadgeMargin(8, 6); // 水平和竖直方向的间距
+		badge1.setBadgeMargin(25, 6); // 水平和竖直方向的间距
 //		badge1.setBadgeMargin(1); //各边间隔
 		// badge1.toggle(); //显示效果，如果已经显示，则影藏，如果影藏，则显示
 		if(count>0){
