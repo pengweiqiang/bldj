@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.bldj.lexiang.GlobalConfig;
+import com.bldj.lexiang.MyApplication;
+import com.bldj.lexiang.constant.api.ReqUrls;
 
 /**
  * 添加请求头
@@ -38,6 +40,8 @@ public class HttpClientAddHeaders {
 		}
 		headers.put("version",GlobalConfig.VERSION_NAME_V);//客户端版本
 		headers.put("appname",GlobalConfig.APP_NAME);//客户端名称
+		headers.put(ReqUrls.USER_LON, MyApplication.lon);
+		headers.put(ReqUrls.USER_LAT, MyApplication.lat);
 //        headers.put("userId",GlobalConfig.USER_ID);
 //        headers.put("enterId",GlobalConfig.ENTER_ID);
 //		if("".equals(GlobalConfig.EQUIPMENT_V)){
