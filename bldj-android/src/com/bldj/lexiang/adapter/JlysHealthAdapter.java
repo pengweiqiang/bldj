@@ -3,6 +3,7 @@ package com.bldj.lexiang.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -17,6 +18,7 @@ import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.ConfParams;
 import com.bldj.lexiang.api.vo.Seller;
+import com.bldj.lexiang.ui.SellerPersonalActivity;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.universalimageloader.core.ImageLoader;
 
@@ -51,7 +53,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		Seller seller = (Seller) getItem(position);
+		final Seller seller = (Seller) getItem(position);
 		if (null == convertView) {
 			holder = new ViewHolder();
 
@@ -92,6 +94,17 @@ public class JlysHealthAdapter extends BaseListAdapter {
 		int level = ConfParams.getStarRuleCount(seller.getDealnumSum(), MyApplication.getInstance().getConfParams().getStarRule());
 		holder.tv_level.setNumStars(level);
 		holder.tv_level.setRating(level);
+		holder.headImg.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// 启动美容师个人界面
+				Intent intent = new Intent(context,
+						SellerPersonalActivity.class);
+				intent.putExtra("seller", seller);
+				context.startActivity(intent);
+			}
+		});
 
 		return convertView;
 	}
