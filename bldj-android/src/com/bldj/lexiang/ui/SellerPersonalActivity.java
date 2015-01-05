@@ -304,7 +304,7 @@ public class SellerPersonalActivity extends FragmentActivity{
 			@Override
 			public void onClick(View arg0) {
 				ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
-				shareUtil.sendWebPageToWX("健康送到家，方便你我他",
+				shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
 						SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
 			}
 		});
@@ -385,7 +385,7 @@ public class SellerPersonalActivity extends FragmentActivity{
 					}
 				}else{
 					ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
-					shareUtil.sendWebPageToWX("健康送到家，方便你我他",
+					shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
 					SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
 				}
 			}
