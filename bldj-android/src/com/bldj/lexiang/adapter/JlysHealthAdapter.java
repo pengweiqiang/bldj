@@ -1,27 +1,22 @@
 package com.bldj.lexiang.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.ConfParams;
 import com.bldj.lexiang.api.vo.Seller;
-import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.universalimageloader.core.ImageLoader;
 
@@ -93,19 +88,10 @@ public class JlysHealthAdapter extends BaseListAdapter {
 		SpannableStringBuilder style=new SpannableStringBuilder(orderCount);
 		style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.app_title_color)),3,orderCount.indexOf("次"),Spannable.SPAN_EXCLUSIVE_INCLUSIVE); 
 		holder.tv_order_count.setText(style);
-		if (seller.getDealnumSum() < 20) {
-			holder.tv_level.setNumStars(1);
-			holder.tv_level.setRating(1);
-		} else if (seller.getDealnumSum() >= 20 && seller.getDealnumSum() < 200) {
-			holder.tv_level.setNumStars(2);
-			holder.tv_level.setRating(2);
-		} else if (seller.getDealnumSum() >= 200) {
-			holder.tv_level.setNumStars(3);
-			holder.tv_level.setRating(3);
-		} else {
-			holder.tv_level.setNumStars(5);
-			holder.tv_level.setRating(5);
-		}
+		
+		int level = ConfParams.getStarRuleCount(seller.getDealnumSum(), MyApplication.getInstance().getConfParams().getStarRule());
+		holder.tv_level.setNumStars(level);
+		holder.tv_level.setRating(level);
 
 		return convertView;
 	}
