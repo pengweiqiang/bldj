@@ -87,6 +87,7 @@
     <string name="appointment_other">给他人预约</string>
     <string name="unused">未使用</string>
     <string name="failure">已失效</string>
+    <string name="share_tencent">分享到腾讯微博</string>
     <string name="share_sina">分享到新浪微博</string>
     <string name="share_weixin">分享到朋友圈</string>
     <string name="eval_good">好评</string>
