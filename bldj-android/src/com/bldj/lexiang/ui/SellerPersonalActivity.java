@@ -50,7 +50,7 @@ import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
  * @author will
  * 
  */
-public class SellerPersonalActivity extends FragmentActivity{
+public class SellerPersonalActivity extends BaseFragmentActivity{
 
 	private ImageView imageHead;
 	private TextView tv_username;

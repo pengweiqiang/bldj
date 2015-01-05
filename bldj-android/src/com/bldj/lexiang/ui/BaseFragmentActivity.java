@@ -1,13 +1,13 @@
 package com.bldj.lexiang.ui;
 
-import com.bldj.lexiang.MyApplication;
-import com.bldj.lexiang.commons.AppManager;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.bldj.lexiang.commons.AppManager;
+import com.umeng.message.PushAgent;
 
 public class BaseFragmentActivity extends FragmentActivity{
 
@@ -16,6 +16,7 @@ public class BaseFragmentActivity extends FragmentActivity{
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		AppManager.getAppManager().addActivity(this);
+		PushAgent.getInstance(this).onAppStart();
 	}
 
 	@Override

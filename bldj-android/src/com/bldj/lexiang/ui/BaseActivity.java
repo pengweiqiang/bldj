@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.commons.AppManager;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
 
 public abstract class BaseActivity extends Activity implements OnClickListener {
 
@@ -23,6 +24,7 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 		
 		super.onCreate(savedInstanceState);
 		AppManager.getAppManager().addActivity(this);
+		PushAgent.getInstance(this).onAppStart();
 		
 		initView();
 		mContext = this;
