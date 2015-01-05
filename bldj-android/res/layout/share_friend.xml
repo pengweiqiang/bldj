@@ -21,7 +21,28 @@
             android:layout_height="1px"
             android:background="@color/line"
             />
-
+		<Button
+            android:id="@+id/btn_share_tencent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/tencent_weibo"
+            android:drawablePadding="15dp"
+            android:drawableRight="@drawable/btn_img_open"
+            android:gravity="left|center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:textColor="@color/grey"
+            android:text="@string/share_tencent"
+            android:textSize="18sp" />
+         <View 
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            />
         <Button
             android:id="@+id/btn_share_sina"
             android:layout_width="fill_parent"
