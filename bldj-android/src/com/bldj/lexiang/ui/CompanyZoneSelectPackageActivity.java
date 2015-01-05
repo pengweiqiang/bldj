@@ -278,7 +278,7 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 					cheepCardList.addAll(cheepCardNewList);
 
 					listAdapter.notifyDataSetChanged();
-					mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"没有数据");
+					mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"");
 				}
 			}
 		});
