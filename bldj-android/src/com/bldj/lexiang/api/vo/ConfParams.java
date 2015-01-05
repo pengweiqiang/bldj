@@ -103,5 +103,38 @@ public class ConfParams  implements Serializable{
 		c.setRecruitTxt("http://dwz.cn/zGzfl");
 		return c;
 	}
+	/**
+	 * 获取星级数
+	 * @return
+	 */
+	public static int getStarRuleCount(int currentCount,String starRule){
+		int level = 1;
+		try{
+			String []starRules = starRule.split(";");//10;30;50;100   1颗星  [0，10）   二颗星 [10,30)  三颗星[30,50)
+			if(starRules.length>0){
+				if(currentCount < Integer.valueOf(starRules[0])){//少于第一数
+					level = 1;
+					return level;
+				}
+				if(currentCount > Integer.valueOf(starRules[starRules.length-1])){//大于最后一个数
+					level = 5;
+					return level;
+				}
+			}
+			for (int i = 0; i < starRules.length; i++) {
+				int star = Integer.valueOf(starRules[i]);
+				int end = Integer.valueOf(starRules[i+1]);
+				if(currentCount >= star && currentCount < end){
+					level = i+2;
+					break;
+				}
+				
+				
+			}
+		}catch(Exception e){
+			
+		}
+		return level;
+	}
 	
 }
