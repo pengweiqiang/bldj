@@ -149,7 +149,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 
 	private void getData(String date) {
 		long sellerId = seller==null?0:seller.getId();
-		ApiBuyUtils.getScheduled(mContext, user.getUserId(), sellerId, date,
+		ApiBuyUtils.getScheduled(mContext, sellerId, product.getId(), date,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -389,6 +389,8 @@ public class AppointmentDoor1Activity extends BaseActivity {
 			bgView.setBackgroundColor(getResources().getColor(
 					R.color.scheduled_grey));
 			time.setText(cannotAppointment);
+			bgView.setClickable(false);
+			bgView.setEnabled(false);
 		}
 	}
 
