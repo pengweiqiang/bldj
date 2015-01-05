@@ -219,7 +219,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		time9.setTag("15:00");
 		time10.setTag("16:00");
 		time11.setTag("17:00");
-		time12.setTag("17:50");
+		time12.setTag("17:30");
 		time13.setTag("18:00");
 		time14.setTag("19:00");
 		time15.setTag("20:00");
