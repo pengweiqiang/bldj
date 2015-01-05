@@ -28,6 +28,7 @@ import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.ApiVersionUtils;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
@@ -38,9 +39,11 @@ import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.BadgeView;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UmengRegistrar;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends FragmentActivity implements
+public class MainActivity extends BaseFragmentActivity implements
 		OnPageChangeListener {
 	// 精品推荐
 	protected HomeFragment mHomeFragment;
@@ -131,6 +134,12 @@ public class MainActivity extends FragmentActivity implements
 		initLocClient();
 		UmengUpdateAgent.setUpdateCheckConfig(false);
 		UmengUpdateAgent.update(this);
+		
+		//umeng push 
+		PushAgent mPushAgent = PushAgent.getInstance(MainActivity.this);
+		mPushAgent.enable();
+//		checVersion();
+//		String device_token = UmengRegistrar.getRegistrationId(this);
 	}
 	
 	@Override
@@ -293,5 +302,23 @@ public class MainActivity extends FragmentActivity implements
 		super.onResume();
 	}
 	
+	/**
+	 * 检查更新
+	 */
+	private void checVersion(){
+		ApiVersionUtils.checkVersion(MainActivity.this,
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						if (!ApiConstants.RESULT_SUCCESS
+								.equals(parseModel.getStatus())) {
+						} else {
+							ToastUtils.showToast(MainActivity.this,
+									parseModel.getMsg());
+						}
+					}
+				});
+	}
 	
 }
