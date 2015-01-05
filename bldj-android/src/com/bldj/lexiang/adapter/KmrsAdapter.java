@@ -1,6 +1,5 @@
 package com.bldj.lexiang.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -10,14 +9,13 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.api.vo.Product;
+import com.bldj.lexiang.api.vo.ConfParams;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.universalimageloader.core.ImageLoader;
 
@@ -88,18 +86,8 @@ public class KmrsAdapter extends BaseListAdapter {
 				+ "公里"));
 		holder.tv_age.setText(String.valueOf(seller.getUserGrade()));
 
-		if (seller.getDealnumSum() < 20) {
-			// levelStr = "★";
-			holder.feedBack.setNumStars(1);
-		} else if (seller.getDealnumSum() >= 20 && seller.getDealnumSum() < 200) {
-			holder.feedBack.setNumStars(2);
-		} else if (seller.getDealnumSum() >= 200) {
-			// levelStr = "★★";
-			holder.feedBack.setNumStars(3);
-		} else {
-			// levelStr = "★★★★";
-			holder.feedBack.setNumStars(5);
-		}
+		int level = ConfParams.getStarRuleCount(seller.getDealnumSum(), MyApplication.getInstance().getConfParams().getStarRule());
+		holder.feedBack.setNumStars(level);
 
 		String orderCount = "共接单" + seller.getDealnumSum() + "次";
 		SpannableStringBuilder style = new SpannableStringBuilder(orderCount);
