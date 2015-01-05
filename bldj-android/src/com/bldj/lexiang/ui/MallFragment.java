@@ -54,7 +54,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 	private List<Order> orders;
 	
 	private int pageNumber = 0;
-	
+	int type;//查询订单类型
 	private int selectOrderIndex = -1;
 
 	@Override
@@ -108,6 +108,9 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 				ll_tabTitle.setVisibility(View.VISIBLE);
 				mListView.setVisibility(View.VISIBLE);
 //				getData();
+			}else if(user!=null && orders.isEmpty()){
+				type = ApiConstants.MAX_STATUS;
+				getData();
 			}else if(user == null){
 				if(!orders.isEmpty()){
 					orders.clear();
@@ -167,6 +170,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 			@Override
 			public void onClick(View arg0) {
 				pageNumber = 0;
+				type = 0;
 				getData();
 			}
 		});
@@ -201,7 +205,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		User user = MyApplication.getInstance().getCurrentUser();
 		if(user!=null){
 			//查询未支付订单
-			ApiBuyUtils.getOrders(mActivity, user.getUserId(),pageNumber,ApiConstants.LIMIT,0,
+			ApiBuyUtils.getOrders(mActivity, user.getUserId(),pageNumber,ApiConstants.LIMIT,type,
 					new HttpConnectionUtil.RequestCallback() {
 	
 						@Override
