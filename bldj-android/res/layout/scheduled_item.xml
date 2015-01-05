@@ -359,7 +359,7 @@
                 android:layout_centerInParent="true"
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/btn_time"
-                android:text="17:50" />
+                android:text="17:30" />
 
             <TextView
                 android:id="@+id/tv_status12"
