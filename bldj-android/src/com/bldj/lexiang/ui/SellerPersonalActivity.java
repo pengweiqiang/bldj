@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiSellerUtils;
+import com.bldj.lexiang.api.vo.ConfParams;
 import com.bldj.lexiang.api.vo.Evals;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Seller;
@@ -163,25 +164,9 @@ public class SellerPersonalActivity extends FragmentActivity{
 		tv_order_count.setText("共接单" + sellerVo.getDealnumSum() + "次");
 		tv_price.setText("均价：￥" + String.valueOf(sellerVo.getAvgPrice()));
 		tv_username.setText(sellerVo.getNickname());
-		String levelStr = "";
-		if (sellerVo.getDealnumSum() < 20) {
-			// levelStr = "★";
-			star_ratingbar.setNumStars(1);
-			star_ratingbar.setRating(1);
-		} else if (sellerVo.getDealnumSum() >= 20
-				&& sellerVo.getDealnumSum() < 200) {
-			star_ratingbar.setNumStars(2);
-			star_ratingbar.setRating(2);
-		} else if (sellerVo.getDealnumSum() >= 200) {
-			// levelStr = "★★";
-			star_ratingbar.setNumStars(3);
-			star_ratingbar.setRating(3);
-		} else {
-			// levelStr = "★★★★";
-			star_ratingbar.setNumStars(5);
-			star_ratingbar.setRating(5);
-		}
-		// tv_level.setText(levelStr);
+		int level = ConfParams.getStarRuleCount(sellerVo.getDealnumSum(), MyApplication.getInstance().getConfParams().getStarRule());
+		star_ratingbar.setNumStars(level);
+		star_ratingbar.setRating(level);
 		tv_work.setText("年龄：" + sellerVo.getUserGrade());
 
 		// 实例化对象
