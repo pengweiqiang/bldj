@@ -290,7 +290,10 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 					SharePreferenceManager.saveBatchSharedPreference(mActivity, Constant.LOCATION, "city", groups.get(position).getMsg());
 				}else if (index == 1){
 					if (position == TitleBarEnum.ABOUT.getIndex()) {
-						Intent intent = new Intent(mActivity, AboutActivity.class);
+						Intent intent = new Intent(mActivity,
+								BannerWebActivity.class);
+						intent.putExtra("url", MyApplication.getInstance().getConfParams().getAboutUsUrl());
+						intent.putExtra("name", "关于我们");
 						startActivity(intent);
 					} else if (position == TitleBarEnum.FEEDBACK.getIndex()) {
 						Intent intent = new Intent(mActivity,
@@ -301,7 +304,10 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 								SharedFriendActivity.class);
 						startActivity(intent);
 					} else if (position == TitleBarEnum.ZHAOPIN.getIndex()) {
-						Intent intent = new Intent(mActivity, AuthentActivity.class);
+						Intent intent = new Intent(mActivity,
+								BannerWebActivity.class);
+						intent.putExtra("url", MyApplication.getInstance().getConfParams().getRecruitTxt());
+						intent.putExtra("name", "理疗师招聘");
 						startActivity(intent);
 					}else if(position == TitleBarEnum.COMPANY.getIndex()){
 						Intent intent = new Intent(mActivity, CompanyZoneActivity.class);
