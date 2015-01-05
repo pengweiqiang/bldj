@@ -222,8 +222,8 @@ public class XListView extends ListView implements OnScrollListener {
 			mFooterView.show();
 		}else if(count < (pageNumber+1)*ApiConstants.LIMIT){//本次加载数据为0
 			mFooterView.setOnClickListener(null);
-//			mFootHintView.setText("加载完毕");
-			mFooterView.hide();
+			mFootHintView.setText("已经到最后一页了");
+//			mFooterView.hide();
 		}
 	}
 
