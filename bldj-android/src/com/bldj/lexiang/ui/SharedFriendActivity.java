@@ -22,6 +22,7 @@ import android.widget.Button;
 public class SharedFriendActivity extends BaseActivity {
 
 	ActionBar mActionBar;
+	private Button btn_tencent;
 	private Button btn_sina;
 	private Button btn_weixin;
 
@@ -54,12 +55,25 @@ public class SharedFriendActivity extends BaseActivity {
 
 	@Override
 	public void initView() {
+		btn_tencent = (Button) findViewById(R.id.btn_share_tencent);
 		btn_sina = (Button) findViewById(R.id.btn_share_sina);
 		btn_weixin = (Button) findViewById(R.id.btn_share_weixin);
 	}
 
 	@Override
 	public void initListener() {
+		btn_tencent.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				String shareUrl = 
+						shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareAppTxt(), "", "");
+				Intent intent = new Intent(SharedFriendActivity.this,BannerWebActivity.class);
+				intent.putExtra("url", shareUrl);
+				intent.putExtra("name", "腾讯微博分享");
+				startActivity(intent);
+			}
+		});
 		btn_sina.setOnClickListener(new View.OnClickListener() {
 
 			@Override
