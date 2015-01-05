@@ -86,7 +86,7 @@ public class PayTypeAdapter extends BaseListAdapter {
 		tv_username.setText(payType.getDescription());
 		if(!StringUtils.isEmpty(payType.getIconPic())){
 			ImageLoader.getInstance().displayImage(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+payType.getIconPic(), iv_image,
-					MyApplication.getInstance().getOptions(R.drawable.ic_launcher));
+					MyApplication.getInstance().getOptions(R.drawable.default_icon));
 		}
 
 		return convertView;
