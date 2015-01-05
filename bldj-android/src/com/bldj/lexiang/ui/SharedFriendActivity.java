@@ -65,7 +65,7 @@ public class SharedFriendActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				String shareUrl = 
-						shareUtil.shareSina("健康送到家，方便你我他", "", "");
+						shareUtil.shareSina(MyApplication.getInstance().getConfParams().getShareAppTxt(), "", "");
 				Intent intent = new Intent(SharedFriendActivity.this,BannerWebActivity.class);
 				intent.putExtra("url", shareUrl);
 				intent.putExtra("name", "新浪分享");
@@ -77,7 +77,7 @@ public class SharedFriendActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				ToastUtils.showToast(mContext, "分享微信...");
-				shareUtil.sendWebPageToWX("健康送到家，方便你我他",
+				shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareAppTxt(),
 						SendMessageToWX.Req.WXSceneTimeline,MyApplication.getInstance().getConfParams().getAboutUsUrl());
 //				shareUtil.sendImgToWX("健康送到家，方便你我他",
 //						SendMessageToWX.Req.WXSceneTimeline);
