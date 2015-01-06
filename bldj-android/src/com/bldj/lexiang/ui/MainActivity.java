@@ -117,12 +117,13 @@ public class MainActivity extends BaseFragmentActivity implements
 						User user = MyApplication.getInstance().getCurrentUser();
 						for (int i = 0; i < tabIds.length; i++) {
 							if (checkedId == tabIds[i]) {
-								index = i;
-								if(user ==null && i>=2){
+//								index = i;
+								if(user ==null && i == 2){
 									Intent intent = new Intent(MainActivity.this,RegisterAndLoginActivity.class);
 									startActivity(intent);
 									return;
 								}
+								index = i;
 								mViewPager.setCurrentItem(i, false);
 								break;
 							}
@@ -144,9 +145,11 @@ public class MainActivity extends BaseFragmentActivity implements
 	
 	@Override
 	protected void onStop() {
-		if(mViewPager.getCurrentItem() != index){
-			mViewPager.setCurrentItem(index, false);
-		}
+//		if(mViewPager.getCurrentItem() != index){
+//			
+//		}
+		mViewPager.setCurrentItem(index, false);
+		mTabIndicators.check(tabIds[index]);
 		super.onStop();
 		
 	}
