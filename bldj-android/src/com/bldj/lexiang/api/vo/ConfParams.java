@@ -23,6 +23,8 @@ public class ConfParams  implements Serializable{
 	private String serviceEmail;//客服邮件
 	
 	private String starRule;//星级判断   x<10 一颗星   10<=x<30 两颗星 左闭右开以此类推  eg:"10;30;50;100"
+	
+	private String mobileRule;//手机号校验正则表达式
 
 	public String getAboutUsUrl() {
 		return aboutUsUrl;
@@ -88,6 +90,14 @@ public class ConfParams  implements Serializable{
 		this.starRule = starRule;
 	}
 	
+	public String getMobileRule() {
+		return mobileRule;
+	}
+
+	public void setMobileRule(String mobileRule) {
+		this.mobileRule = mobileRule;
+	}
+
 	/**
 	 * 默认常量配置，防止网络连接失败
 	 * @return
@@ -101,6 +111,7 @@ public class ConfParams  implements Serializable{
 		c.setShareProTxt("公司请了脉度推拿师付上门给做推拿调理，效果真心不错。好东西大家来分享,下载地址:http://t.cn/RZcPd90");
 		c.setShareSellerTxt("网上搜索找百度，上门推拿找脉度。度娘度哥度姐真给力！下载地址:http://t.cn/RZcPd90");
 		c.setRecruitTxt("http://dwz.cn/zGzfl");
+		c.setMobileRule("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
 		return c;
 	}
 	/**
