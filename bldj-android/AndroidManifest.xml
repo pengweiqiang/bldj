@@ -132,7 +132,7 @@
         <!-- 登录注册界面 -->
         <activity
             android:name=".ui.RegisterAndLoginActivity"
-            android:launchMode="singleTask"
+            android:launchMode="standard"
             android:screenOrientation="portrait" >
         </activity>
         <!-- 经络养生 -->
