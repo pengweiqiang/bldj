@@ -68,7 +68,7 @@ public class MainActivity extends BaseFragmentActivity implements
 	private BadgeView myBadgeView;
 	//总数统计 start
 	public static int count = 0;
-	private int index = 0;
+	private int checkId = tabIds[0];
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -115,22 +115,23 @@ public class MainActivity extends BaseFragmentActivity implements
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						User user = MyApplication.getInstance().getCurrentUser();
-						for (int i = 0; i < tabIds.length; i++) {
-							if (checkedId == tabIds[i]) {
-//								index = i;
-								if(user ==null && i == 2){
-									Intent intent = new Intent(MainActivity.this,RegisterAndLoginActivity.class);
-									startActivity(intent);
-									return;
+						if(user ==null && checkedId == tabIds[2]){//点击订单，并且没有登录，跳入登录
+							Intent intent = new Intent(MainActivity.this.getApplicationContext(),
+									RegisterAndLoginActivity.class);
+							intent.putExtra("type", 11);
+							startActivityForResult(intent, 0);
+						}else{
+							for (int i = 0; i < tabIds.length; i++) {
+								if (checkedId == tabIds[i]) {
+									checkId = tabIds[i];
+									mViewPager.setCurrentItem(i, false);
+									break;
 								}
-								index = i;
-								mViewPager.setCurrentItem(i, false);
-								break;
 							}
 						}
 					}
 				});
-		setCurrentTabId(R.id.home);
+//		setCurrentTabId(R.id.home);
 		//开启定位
 		initLocClient();
 		UmengUpdateAgent.setUpdateCheckConfig(false);
@@ -145,11 +146,9 @@ public class MainActivity extends BaseFragmentActivity implements
 	
 	@Override
 	protected void onStop() {
-//		if(mViewPager.getCurrentItem() != index){
-//			
-//		}
-		mViewPager.setCurrentItem(index, false);
-		mTabIndicators.check(tabIds[index]);
+		if(mTabIndicators.getCheckedRadioButtonId()!=checkId){
+			setCurrentTabId(checkId);
+		}
 		super.onStop();
 		
 	}
@@ -323,5 +322,17 @@ public class MainActivity extends BaseFragmentActivity implements
 					}
 				});
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == 321) {
+			boolean isLogin = data.getBooleanExtra("isLogin", false);
+			if(isLogin){
+				setCurrentTabId(R.id.mall);
+			}
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
 	
 }
