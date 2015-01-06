@@ -76,6 +76,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	// private RadioButton rb_aliay, rb_weixin, rb_union;
 
 	private double orderPay;// 最后总金额
+	private TextView tv_couponPrice;//优惠卷金额
+	private TextView tv_electCodePrice;//电子券金额
+	private TextView tv_orderPrice;//订单原本金额
 	private TextView tv_orderPay;
 	private PayType payType;
 
@@ -114,6 +117,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		orderPay = product.getCurPrice();
 		showOrderPay(0);
 		tv_productName.setText(product.getName());
+		tv_orderPrice.setText("￥"+orderPay);
 	}
 
 	// 设置activity的导航条
@@ -138,6 +142,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_productName = (TextView) findViewById(R.id.product_name);
 		tv_sellerName = (TextView) findViewById(R.id.seller_name);
 		tv_orderPay = (TextView)findViewById(R.id.real_pay);
+		tv_orderPrice = (TextView)findViewById(R.id.order_price);
+		tv_couponPrice = (TextView)findViewById(R.id.coupons_price);
+		tv_electCodePrice = (TextView)findViewById(R.id.elect_code_price);
 		/*
 		 * rb_aliay = (RadioButton) findViewById(R.id.aliay_pay); rb_weixin =
 		 * (RadioButton) findViewById(R.id.weixin_pay); rb_union = (RadioButton)
@@ -238,7 +245,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 				if (StringUtils.isEmpty(vcode)) {
 					et_code.requestFocus();
 					ToastUtils.showToast(AppointmentDoor3Activity.this,
-							"请输入电子卷码");
+							"请输入电子券码");
 					return;
 				}
 				ApiBuyUtils.couponsManage(AppointmentDoor3Activity.this,
@@ -263,6 +270,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 										codePrice = 0;
 										ToastUtils.showToast(mContext, e.toString());
 									}
+									tv_electCodePrice.setText("￥"+codePrice);//显示电子券码
 									showOrderPay(2);
 								}
 							}
@@ -286,8 +294,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == 20) {//选择优惠卷
 			coupon = (Coupon) data.getSerializableExtra("coupon");
-			tv_coupons.setText(coupon.getName() + " ￥:" + coupon.getPrice());
+			tv_coupons.setText(coupon.getName() + " ￥" + coupon.getPrice());
 			couponPrice = coupon.getPrice();
+			tv_couponPrice.setText(" ￥"+couponPrice);
 			showOrderPay(1);
 		}
 		super.onActivityResult(requestCode, resultCode, data);
@@ -319,7 +328,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	
 	private void showOrderPay(int type){
 		
-		tv_orderPay.setText("实际支付：￥"+String.valueOf(caluOrderPay(type)));
+		tv_orderPay.setText("￥"+String.valueOf(caluOrderPay(type)));
 		
 	}
 	/**
