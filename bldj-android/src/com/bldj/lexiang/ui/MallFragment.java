@@ -271,12 +271,14 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.CANCLED);
 					orders.get(selectOrderIndex).setStatusStr("已取消");
 					orders.remove(selectOrderIndex);
+					listAdapter.notifyDataSetChanged();
 				}else if(type ==1){//支付成功
 					orders.get(selectOrderIndex).setStatus(OrderStatusEnum.PAID_ONLINE);
 					orders.get(selectOrderIndex).setStatusStr("线上已支付");
 					orders.remove(selectOrderIndex);
+					listAdapter.notifyDataSetChanged();
 				}
-				listAdapter.notifyDataSetChanged();
+				
 			}
 		}/*else if(resultCode == 24 && data != null){//登录成功
 			boolean isLogin = data.getBooleanExtra("isLogin", false);
@@ -298,15 +300,28 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			if (Constant.ACTION_MESSAGE_COUNT.equals(intent.getAction())) {
-				if(orders!=null){
-					orders.clear();
-				}
+//				if(orders!=null){
+//					orders.clear();
+//				}
 				boolean logout = intent.getBooleanExtra("isLogout", false);
 				if(logout){
 					showUnLogin();
 				}else{
 					ArrayList<Order> ordersList  = (ArrayList<Order>)intent.getSerializableExtra("orders");
-					orders.addAll(ordersList);
+					if(ordersList.isEmpty()){
+						for(Order order: orders){
+							if(order.getStatus() == OrderStatusEnum.NO_PAID){
+								orders.remove(order);
+							}
+						}
+						
+					}else{
+						if(orders!=null){
+							orders.clear();
+						}
+						orders.addAll(ordersList);
+					}
+					
 					rl_loading.setVisibility(View.GONE);
 					listAdapter.notifyDataSetChanged();
 					mListView.setVisibility(View.VISIBLE);
