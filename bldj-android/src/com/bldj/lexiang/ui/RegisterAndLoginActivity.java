@@ -6,18 +6,10 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -53,7 +45,6 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register_login);
 		// initTabLine();
-
 		initView();
 
 		initListener();
@@ -80,7 +71,7 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						finish();
+				        finish();  
 					}
 				});
 		actionBar.hideRightActionButton();
@@ -139,7 +130,6 @@ public class RegisterAndLoginActivity extends BaseFragmentActivity {
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				Log.i("tuzi", arg0 + "," + arg1 + "," + arg2);
 
 				// // 取得该控件的实例
 				// LinearLayout.LayoutParams ll =
