@@ -3,6 +3,8 @@ package com.bldj.lexiang.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.bldj.lexiang.MyApplication;
+
 /**
  * 正则校验
  * 
@@ -91,7 +93,11 @@ public class PatternUtils {
 	}
 	
 	public static boolean checkPhoneNum(String num) {
-		Pattern pattern = Pattern.compile(sPhone_Pattern);
+		String phonePattern = MyApplication.getInstance().getConfParams().getMobileRule();
+		if(StringUtils.isEmpty(phonePattern)){
+			phonePattern = sPhone_Pattern;
+		}
+		Pattern pattern = Pattern.compile(phonePattern);
 		Matcher matcher = pattern.matcher(num);
 		return matcher.matches();
 	}
