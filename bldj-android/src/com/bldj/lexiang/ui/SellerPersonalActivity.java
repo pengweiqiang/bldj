@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -39,6 +40,7 @@ import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.ActionItem;
 import com.bldj.lexiang.view.CustomViewPager;
 import com.bldj.lexiang.view.LoadingDialog;
+import com.bldj.lexiang.view.SharePopupWindow;
 import com.bldj.lexiang.view.TitlePopup;
 import com.bldj.lexiang.view.TitlePopup.OnItemOnClickListener;
 import com.bldj.universalimageloader.core.ImageLoader;
@@ -81,6 +83,7 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 	
 	//定义标题栏弹窗按钮
 	private TitlePopup titlePopup;
+	SharePopupWindow pop ;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -287,10 +290,42 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 		btn_share.setOnClickListener(new View.OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
-				ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
-				shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
-						SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
+			public void onClick(View view) {
+				pop = new SharePopupWindow(SellerPersonalActivity.this,new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int position, long arg3) {
+						switch (position) {
+						case 0://微信分享
+							ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
+							shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
+									SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
+							break;
+						case 1://新浪
+							String shareUrlSina = shareUtil.shareSina(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
+							Intent intent = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
+							intent.putExtra("url", shareUrlSina);
+							intent.putExtra("name", "新浪微博分享");
+							startActivity(intent);
+							break;
+						case 2://腾讯
+							String shareUrlQQ = shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
+							Intent intentQQ = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
+							intentQQ.putExtra("url", shareUrlQQ);
+							intentQQ.putExtra("name", "腾讯微博分享");
+							startActivity(intentQQ);
+							break;
+
+						default:
+							break;
+						}
+						pop.dismiss();
+					}
+					
+				});  
+				//显示窗口  
+				pop.showAtLocation(view,Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 			}
 		});
 		// 预约次美容师-->弹出下面的服务项目
@@ -329,7 +364,7 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 		return sellerVo;
 	}
 
-	private void buildTitleBar(View parent) {
+	private void buildTitleBar(final View parent) {
 		//实例化标题栏弹窗
 		titlePopup = new TitlePopup(this, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		//给标题栏弹窗添加子类
@@ -369,9 +404,41 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 						}
 					}
 				}else{
-					ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
-					shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
-					SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
+					pop = new SharePopupWindow(SellerPersonalActivity.this,new OnItemClickListener() {
+
+						@Override
+						public void onItemClick(AdapterView<?> arg0, View arg1,
+								int position, long arg3) {
+							switch (position) {
+							case 0://微信分享
+								ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
+								shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
+										SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
+								break;
+							case 1://新浪
+								String shareUrlSina = shareUtil.shareSina(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
+								Intent intent = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
+								intent.putExtra("url", shareUrlSina);
+								intent.putExtra("name", "新浪微博分享");
+								startActivity(intent);
+								break;
+							case 2://腾讯
+								String shareUrlQQ = shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
+								Intent intentQQ = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
+								intentQQ.putExtra("url", shareUrlQQ);
+								intentQQ.putExtra("name", "腾讯微博分享");
+								startActivity(intentQQ);
+								break;
+
+							default:
+								break;
+							}
+							pop.dismiss();
+						}
+						
+					});  
+					//显示窗口  
+					pop.showAtLocation(parent,Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 				}
 			}
 			

@@ -8,12 +8,15 @@ import android.os.Message;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -34,6 +37,7 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.SharePopupWindow;
 import com.bldj.universalimageloader.core.ImageLoader;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 
@@ -63,7 +67,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	boolean isFav;// 是否收藏
 
 	ShareUtil shareUtil;
-
+	SharePopupWindow pop ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.health_product_detail);
@@ -262,10 +266,42 @@ public class HealthProductDetailActivity extends BaseActivity {
 		btn_shared.setOnClickListener(new OnClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
-				ToastUtils.showToast(mContext, "分享微信...");
-				shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareProTxt(),
-						SendMessageToWX.Req.WXSceneTimeline,product.getProDetailUrl());
+			public void onClick(View view) {
+				pop = new SharePopupWindow(HealthProductDetailActivity.this,new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int position, long arg3) {
+						switch (position) {
+						case 0://微信分享
+							ToastUtils.showToast(mContext, "分享微信...");
+							shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareProTxt(),
+									SendMessageToWX.Req.WXSceneTimeline,product.getProDetailUrl());
+							break;
+						case 1://新浪
+							String shareUrlSina = shareUtil.shareSina(MyApplication.getInstance().getConfParams().getShareProTxt(), product.getProDetailUrl(), product.getPicurl());
+							Intent intent = new Intent(HealthProductDetailActivity.this,BannerWebActivity.class);
+							intent.putExtra("url", shareUrlSina);
+							intent.putExtra("name", "新浪微博分享");
+							startActivity(intent);
+							break;
+						case 2://腾讯
+							String shareUrlQQ = shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareProTxt(), product.getProDetailUrl(), product.getPicurl());
+							Intent intentQQ = new Intent(HealthProductDetailActivity.this,BannerWebActivity.class);
+							intentQQ.putExtra("url", shareUrlQQ);
+							intentQQ.putExtra("name", "腾讯微博分享");
+							startActivity(intentQQ);
+							break;
+
+						default:
+							break;
+						}
+						pop.dismiss();
+					}
+					
+				});  
+				//显示窗口  
+				pop.showAtLocation(view,Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 
 			}
 		});
