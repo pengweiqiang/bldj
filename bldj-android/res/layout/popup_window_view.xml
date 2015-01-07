@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_window_view_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_marginLeft="3dp"
+    android:layout_marginRight="3dp"
+    android:background="@drawable/popup_window_bg"
+    android:gravity="center_horizontal" >
+
+    <GridView
+        android:id="@+id/share_gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@color/white"
+        android:layout_marginRight="10dp"
+        android:listSelector="@android:color/transparent"
+        android:gravity="center_horizontal"
+        android:verticalSpacing="20dp" />
+    <View 
+        android:id="@+id/line"
+        android:layout_below="@+id/share_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/line"
+        />
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:layout_below="@+id/line"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:textColor="@color/grey"
+        android:gravity="center"
+        android:text="@string/cancel"
+        android:textSize="20sp" />
+
+</RelativeLayout>
