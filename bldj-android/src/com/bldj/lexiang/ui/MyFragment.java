@@ -456,6 +456,8 @@ public class MyFragment extends BaseFragment {
 		avatorPop.setTouchable(true);
 		avatorPop.setFocusable(true);
 		avatorPop.setOutsideTouchable(true);
+		// 设置SelectPicPopupWindow弹出窗体动画效果
+//		avatorPop.setAnimationStyle(R.style.popup_anim);
 		avatorPop.setBackgroundDrawable(new BitmapDrawable());
 		// 动画效果 从底部弹起
 //		 avatorPop.setAnimationStyle(R.anim.activity_bottom_in);
