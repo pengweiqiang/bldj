@@ -1,5 +1,7 @@
 package com.bldj.lexiang.ui;
 
+import java.util.ArrayList;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +20,10 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
+import com.baidu.mapapi.search.sug.SuggestionResult;
+import com.baidu.mapapi.search.sug.SuggestionSearch;
+import com.baidu.mapapi.search.sug.SuggestionSearchOption;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.commons.Constant;
@@ -33,10 +39,11 @@ import com.bldj.lexiang.view.CustomViewPager;
  * 
  */
 @SuppressLint("NewApi")
-public class AppointmentFragmentActivity extends BaseFragmentActivity {
+public class AppointmentFragmentActivity extends BaseFragmentActivity implements OnGetSuggestionResultListener{
 
 	CustomViewPager mViewPager;
 	private ActionBar mActionBar;
+	MainFragmentAdapter adapter;
 
 	// TabPageIndicator tabPageIndicator;
 
@@ -46,6 +53,12 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 	// 定位相关
 	LocationClient mLocClient;
 	public MyLocationListenner myListener = new MyLocationListenner();
+	
+	private SuggestionSearch mSuggestionSearch = null;
+	String city ;
+	ArrayList<String> locationList;
+	AppointmentOtherFragment appointOtherFragment;
+	AppointmentMyFragment appointMyFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +69,21 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 		initView();
 
 		initListener();
+		
+		
+		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "city", ""))) {
+			city = (String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "city", "");
+		}
+		/**
+		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+		 */
+		locationList = new ArrayList<String>();
+		mSuggestionSearch = SuggestionSearch.newInstance();
+		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+		
+		mSuggestionSearch
+				.requestSuggestion((new SuggestionSearchOption())
+						.keyword(MyApplication.getInstance().street).city(city));
 		
 		
 		// 定位初始化
@@ -106,7 +134,10 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 		rb_other = (RadioButton) findViewById(R.id.radio_other);
 		rg_title = (RadioGroup) findViewById(R.id.rg_title);
 
-		MainFragmentAdapter adapter = new MainFragmentAdapter(
+		appointOtherFragment = new AppointmentOtherFragment();
+		appointMyFragment = new AppointmentMyFragment();
+		
+		adapter = new MainFragmentAdapter(
 				getSupportFragmentManager());
 		// 绑定适配器
 		mViewPager.setAdapter(adapter);
@@ -179,11 +210,9 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 		public Fragment getItem(int position) {
 			switch (position) {
 			case 0:
-				return new AppointmentMyFragment();
-
+				return appointMyFragment;
 			case 1:
-				return new AppointmentOtherFragment();
-
+				return appointOtherFragment;
 			}
 			return null;
 		}
@@ -235,6 +264,7 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 	protected void onDestroy() {
 		// 退出时销毁定位
 		mLocClient.stop();
+		mSuggestionSearch.destroy();
 		super.onDestroy();
 	}
 	
@@ -247,6 +277,33 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity {
 				SharePreferenceManager.saveBatchSharedPreference(AppointmentFragmentActivity.this, Constant.FILE_NAME, "address",address);
 			}
 		}
+	}
+
+	
+	@Override
+	public void onGetSuggestionResult(SuggestionResult res) {
+		if (res == null || res.getAllSuggestions() == null) {
+//			Toast.makeText(AddressActivity.this, "没有更多了~", Toast.LENGTH_SHORT)
+//					.show();
+			locationList.clear();
+//			locationList.add(btn_location.getText().toString());
+		}else{
+			locationList.clear();
+			for (SuggestionResult.SuggestionInfo info : res.getAllSuggestions()) {
+	//			Log.e("TAG", info.key);
+				if (info != null) {
+	//				mAdapter.add(info);
+					if(!locationList.contains(info.key)){
+						locationList.add(info.key);
+					}
+				}
+	//			mAdapter.notifyDataSetChanged();// 默认聚焦最后一行
+	//			lvAddress.setSelection(mAdapter.getCount());
+			}
+		}
+		appointMyFragment.setSearchList(locationList);
+		appointOtherFragment.setSearchList(locationList);
+		
 	}
 
 }
