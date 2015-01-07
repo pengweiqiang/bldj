@@ -224,9 +224,9 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 										new TypeToken<List<Order>>() {
 										});
 	
-	//							if (pageNumber == 0) {
+								if (pageNumber == 0) {
 									orders.clear();
-	//							}
+								}
 								orders.addAll(ordersList);
 //								Intent intent = new Intent(Constant.ACTION_MESSAGE_COUNT);
 //								intent.putExtra("countOrders", ordersList.size());
