@@ -1,24 +1,24 @@
 package com.bldj.lexiang.ui;
 
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +27,6 @@ import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.PayTypeAdapter;
-import com.bldj.lexiang.alipay.Result;
 import com.bldj.lexiang.alipay.Rsa;
 import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.vo.Coupon;
@@ -39,7 +38,6 @@ import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.constant.api.ApiConstants;
-import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.utils.DateUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
@@ -80,6 +78,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private TextView tv_electCodePrice;//电子券金额
 	private TextView tv_orderPrice;//订单原本金额
 	private TextView tv_orderPay;
+	private EditText et_contactor;//联系人
+	private ScrollView scrollView;
 	private PayType payType;
 
 	private Coupon coupon;// 使用优惠卷
@@ -90,7 +90,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private PayTypeAdapter listAdapter;
 	
 	Order order = null;
-
+	
+	InputMethodManager manager ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.appointment_door3);
@@ -102,6 +103,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		product = (Product) this.getIntent().getSerializableExtra("product");
 		detailAddress = this.getIntent().getStringExtra("address");
 		user = MyApplication.getInstance().getCurrentUser();
+		manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		
 		initView();
 
@@ -145,6 +147,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_orderPrice = (TextView)findViewById(R.id.order_price);
 		tv_couponPrice = (TextView)findViewById(R.id.coupons_price);
 		tv_electCodePrice = (TextView)findViewById(R.id.elect_code_price);
+		et_contactor = (EditText)findViewById(R.id.contactor);
+		scrollView = (ScrollView)findViewById(R.id.scrollView);
 		/*
 		 * rb_aliay = (RadioButton) findViewById(R.id.aliay_pay); rb_weixin =
 		 * (RadioButton) findViewById(R.id.weixin_pay); rb_union = (RadioButton)
@@ -162,6 +166,18 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	@Override
 	public void initListener() {
+		scrollView.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				 if(event.getAction() == MotionEvent.ACTION_DOWN){  
+				     if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){  
+				       manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
+				     }  
+				  }  
+				  return false;
+			}
+		});
 		// 确定订单
 		btn_confirm.setOnClickListener(new View.OnClickListener() {
 
@@ -176,6 +192,12 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					
 					return;
 				}
+					String contactorStr = et_contactor.getText().toString().trim();
+					if(StringUtils.isEmpty(contactorStr)){
+						et_contactor.requestFocus();
+						ToastUtils.showToast(mContext, "请输入联系人");
+						return;
+					}
 					if (listAdapter.getCheckPosition() == -1) {
 						ToastUtils.showToast(mContext, "请选择支付方式");
 						return;
@@ -187,15 +209,15 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					if (coupon != null) {
 						couponId = coupon.getId();
 					}
-					String contactor = user.getUsername();
+					String contactor = et_contactor.getText().toString();
 					String mobile = user.getMobile();
 					if(!MyApplication.getInstance().appointMap.isEmpty()){//从首页我要预约进入下单
 						if(MyApplication.getInstance().appointMap.containsKey("address")){
 							detailAddress = MyApplication.getInstance().appointMap.get("address");
 						}
-						if(MyApplication.getInstance().appointMap.containsKey("contactor")){
-							contactor = MyApplication.getInstance().appointMap.get("contactor");
-						}
+//						if(MyApplication.getInstance().appointMap.containsKey("contactor")){
+//							contactor = MyApplication.getInstance().appointMap.get("contactor");
+//						}
 						if(MyApplication.getInstance().appointMap.containsKey("mobile")){
 							mobile = MyApplication.getInstance().appointMap.get("mobile");
 						}
@@ -489,4 +511,15 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		finish();
 	}
 
+	
+	@Override  
+	 public boolean onTouchEvent(MotionEvent event) {  
+	  // TODO Auto-generated method stub  
+	  if(event.getAction() == MotionEvent.ACTION_DOWN){  
+	     if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){  
+	       manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
+	     }  
+	  }  
+	  return super.onTouchEvent(event);  
+	 } 
 }
