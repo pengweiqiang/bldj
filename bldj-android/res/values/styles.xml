@@ -124,5 +124,10 @@
         <item name="android:indeterminateDrawable">@anim/loading</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    
+    <style name="popup_anim" parent="android:Animation">  
+        <item name="@android:windowEnterAnimation">@anim/activity_bottom_in</item>  
+        <item name="@android:windowExitAnimation">@anim/activity_top_in</item>
+    </style>  
 
 </resources>
