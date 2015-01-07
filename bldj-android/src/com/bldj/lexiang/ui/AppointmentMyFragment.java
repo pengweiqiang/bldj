@@ -105,6 +105,17 @@ public class AppointmentMyFragment extends BaseFragment implements
 
 //		mPoiSearch = PoiSearch.newInstance();
 //		mPoiSearch.setOnGetPoiSearchResultListener(this);
+		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
+			city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
+		}
+		/**
+		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+		 */
+		mSuggestionSearch = SuggestionSearch.newInstance();
+		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+		mSuggestionSearch
+				.requestSuggestion((new SuggestionSearchOption())
+						.keyword(MyApplication.getInstance().street).city(city));
 	
 		manager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE); 
 		
@@ -154,23 +165,13 @@ public class AppointmentMyFragment extends BaseFragment implements
 		btn_time.setTag(false);
 		
 		btn_location.setText(MyApplication.getInstance().addressStr);
-		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
-			city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
-		}
+		
 		
 		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
 		if(!StringUtils.isEmpty(address)){
 			et_address.setText(address);
 		}
 		
-		/**
-		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-		 */
-		mSuggestionSearch = SuggestionSearch.newInstance();
-		mSuggestionSearch.setOnGetSuggestionResultListener(this);
-		mSuggestionSearch
-				.requestSuggestion((new SuggestionSearchOption())
-						.keyword(MyApplication.getInstance().street).city(city));
 		
 		//城市
 //		spinner = (CustomerSpinner)infoView.findViewById(R.id.spinner_city);

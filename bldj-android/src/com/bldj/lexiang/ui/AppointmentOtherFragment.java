@@ -62,9 +62,7 @@ import com.bldj.lexiang.view.SpringScrollView;
  * @author will
  * 
  */
-public class AppointmentOtherFragment extends BaseFragment implements
-OnGetPoiSearchResultListener, OnGetSuggestionResultListener,
-OnItemClickListener, OnGetGeoCoderResultListener{
+public class AppointmentOtherFragment extends BaseFragment implements OnGetSuggestionResultListener{
 
 	View infoView;
 	private TextView btn_contact;
@@ -105,6 +103,21 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 
 //		mPoiSearch = PoiSearch.newInstance();
 //		mPoiSearch.setOnGetPoiSearchResultListener(this);
+		
+		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
+			city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
+		}
+		/**
+		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+		 */
+		
+		mSuggestionSearch = SuggestionSearch.newInstance();
+		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+		
+		mSuggestionSearch
+				.requestSuggestion((new SuggestionSearchOption())
+						.keyword(MyApplication.getInstance().street).city(city));
+		
 		manager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE); 
 	}
 
@@ -142,24 +155,13 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		
 		
 		btn_location.setText(MyApplication.getInstance().addressStr);
-		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
-			city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
-		}
+	
 		
 		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
 		if(!StringUtils.isEmpty(address)){
 			et_address.setText(address);
 		}
-		/**
-		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-		 */
 		
-		mSuggestionSearch = SuggestionSearch.newInstance();
-		mSuggestionSearch.setOnGetSuggestionResultListener(this);
-		
-		mSuggestionSearch
-				.requestSuggestion((new SuggestionSearchOption())
-						.keyword(MyApplication.getInstance().street).city(city));
 //		spinner = (CustomerSpinner)infoView.findViewById(R.id.spinner_city);
 //		citys.add(TitleBarEnum.CITY_BEIJING.getMsg());
 //		citys.add(TitleBarEnum.CITY_GUANGZHOU.getMsg());
@@ -385,24 +387,6 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 	}
 
 	@Override
-	public void onGetGeoCodeResult(GeoCodeResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGetReverseGeoCodeResult(ReverseGeoCodeResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void onGetSuggestionResult(SuggestionResult res) {
 		if (res == null || res.getAllSuggestions() == null) {
 //			Toast.makeText(AddressActivity.this, "没有更多了~", Toast.LENGTH_SHORT)
@@ -427,17 +411,6 @@ OnItemClickListener, OnGetGeoCoderResultListener{
 		listadapter.notifyDataSetChanged();
 	}
 
-	@Override
-	public void onGetPoiDetailResult(PoiDetailResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onGetPoiResult(PoiResult arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public void onResume() {
 		super.onResume();
