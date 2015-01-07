@@ -41,6 +41,6 @@
         android:textColor="@color/grey"
         android:gravity="center"
         android:text="@string/cancel"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 </RelativeLayout>
