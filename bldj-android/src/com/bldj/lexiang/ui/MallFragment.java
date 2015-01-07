@@ -85,7 +85,7 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		IntentFilter countFilter = new IntentFilter(Constant.ACTION_MESSAGE_COUNT);
 		mActivity.registerReceiver(mCountMsgReceiver, countFilter);
 		orders = new ArrayList<Order>();
-		listAdapter = new OrderAdapter(mActivity, orders);
+		listAdapter = new OrderAdapter(mActivity, orders,2);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
