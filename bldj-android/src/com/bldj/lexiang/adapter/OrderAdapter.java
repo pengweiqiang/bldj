@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
+import com.bldj.lexiang.ui.MainActivity;
 import com.bldj.lexiang.ui.MyOrdersActivity;
 import com.bldj.lexiang.ui.OrderEvalActivity;
 import com.bldj.lexiang.utils.DateUtil;
@@ -21,13 +22,19 @@ public class OrderAdapter extends BaseListAdapter {
 	private Context context;
 	private List<Order> dataList;
 	private LayoutInflater mInflater;
+	private int type = 0;
 
 	public OrderAdapter(Context c, List<Order> dataList) {
 		this.context = c;
 		this.dataList = dataList;
 		this.mInflater = LayoutInflater.from(context);
 	}
-
+	public OrderAdapter(Context c, List<Order> dataList,int type) {
+		this.type = type;
+		this.context = c;
+		this.dataList = dataList;
+		this.mInflater = LayoutInflater.from(context);
+	}
 	@Override
 	public int getCount() {
 		int count = dataList.size();
@@ -110,7 +117,11 @@ public class OrderAdapter extends BaseListAdapter {
 					// 启动用户评价界面
 					Intent intent = new Intent(context, OrderEvalActivity.class);
 					intent.putExtra("order", order);
-					((MyOrdersActivity)context).startActivityForResult(intent, 22);
+					if(type == 0){
+						((MyOrdersActivity)context).startActivityForResult(intent, 22);
+					}else if (type == 2){
+						((MainActivity)context).startActivityForResult(intent, 22);
+					}
 				}
 			});
 		}else{
