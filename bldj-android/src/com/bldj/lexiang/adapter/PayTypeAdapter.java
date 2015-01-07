@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -64,14 +65,28 @@ public class PayTypeAdapter extends BaseListAdapter {
 				.findViewById(R.id.pay_name);
 		ImageView iv_image = (ImageView) convertView
 				.findViewById(R.id.pay_image);
-		CheckBox check_pay = (CheckBox) convertView
+		final CheckBox check_pay = (CheckBox) convertView
 				.findViewById(R.id.pay_radio);
+		LinearLayout ll_pay = (LinearLayout)convertView.findViewById(R.id.ll_pay);
 		if(checkedIndex==position){
 			check_pay.setChecked(true);
 		}else{
 			check_pay.setChecked(false);
 		}
-		check_pay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		ll_pay.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				if(check_pay.isChecked()){
+					check_pay.setChecked(false);
+					checkedIndex = -1;
+				}else{
+					checkedIndex = position;
+					notifyDataSetChanged();
+				}
+			}
+		});
+		/*check_pay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -82,7 +97,7 @@ public class PayTypeAdapter extends BaseListAdapter {
 					checkedIndex = -1;
 				}
 			}
-		});
+		});*/
 		tv_username.setText(payType.getDescription());
 		if(!StringUtils.isEmpty(payType.getIconPic())){
 			ImageLoader.getInstance().displayImage(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+payType.getIconPic(), iv_image,
