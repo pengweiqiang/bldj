@@ -109,6 +109,7 @@ public class LoginFragment extends BaseFragment {
 							Intent data = new Intent();
 							data.putExtra("isLogin", true);
 					        mActivity.setResult(321, data);  
+					        ToastUtils.showToast(mActivity, "登录成功!");
 					        mActivity.finish();  
 						}else{
 							ToastUtils.showToast(mActivity, parseModel.getMsg());
