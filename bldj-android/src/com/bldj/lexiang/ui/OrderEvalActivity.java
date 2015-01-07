@@ -3,13 +3,16 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,6 +67,8 @@ public class OrderEvalActivity extends BaseActivity {
 	private ListView lv_group;
 	private List<TitleBarEnum> groups;
 	
+	InputMethodManager manager ;
+	
 	private boolean evalSuccess;//评价成功
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,7 @@ public class OrderEvalActivity extends BaseActivity {
 		initData();
 		shareUtil = new ShareUtil(this);
 		shareUtil.initWX();
+		manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE); 
 	}
 
 	// 设置activity的导航条
@@ -231,5 +237,16 @@ public class OrderEvalActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	@Override  
+	 public boolean onTouchEvent(MotionEvent event) {  
+	  // TODO Auto-generated method stub  
+	  if(event.getAction() == MotionEvent.ACTION_DOWN){  
+	     if(getCurrentFocus()!=null && getCurrentFocus().getWindowToken()!=null){  
+	       manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);  
+	     }  
+	  }  
+	  return super.onTouchEvent(event);  
+	 } 
 
 }
