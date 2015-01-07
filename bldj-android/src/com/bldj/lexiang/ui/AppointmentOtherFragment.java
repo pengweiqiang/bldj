@@ -62,7 +62,7 @@ import com.bldj.lexiang.view.SpringScrollView;
  * @author will
  * 
  */
-public class AppointmentOtherFragment extends BaseFragment implements OnGetSuggestionResultListener{
+public class AppointmentOtherFragment extends BaseFragment {
 
 	View infoView;
 	private TextView btn_contact;
@@ -84,10 +84,6 @@ public class AppointmentOtherFragment extends BaseFragment implements OnGetSugge
 	private ArrayAdapter<String> adapter;
 	
 	
-	private PoiSearch mPoiSearch = null;
-	GeoCoder mSearch = null;//搜索模块，也可去掉地图模块独立使用
-	private SuggestionSearch mSuggestionSearch = null;
-	String city ;
 	
 	LinearLayout layout;
 	InputMethodManager manager ;
@@ -97,26 +93,6 @@ public class AppointmentOtherFragment extends BaseFragment implements OnGetSugge
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-//		mSearch = GeoCoder.newInstance();
-//		mSearch.setOnGetGeoCodeResultListener(this);
-
-//		mPoiSearch = PoiSearch.newInstance();
-//		mPoiSearch.setOnGetPoiSearchResultListener(this);
-		
-		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
-			city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
-		}
-		/**
-		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-		 */
-		
-		mSuggestionSearch = SuggestionSearch.newInstance();
-		mSuggestionSearch.setOnGetSuggestionResultListener(this);
-		
-		mSuggestionSearch
-				.requestSuggestion((new SuggestionSearchOption())
-						.keyword(MyApplication.getInstance().street).city(city));
 		
 		manager = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE); 
 	}
@@ -212,16 +188,16 @@ public class AppointmentOtherFragment extends BaseFragment implements OnGetSugge
 				if (cs.length() <= 0) {
 					return;
 				}
-				if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
-					city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
-				}
-//				mPoiSearch.searchNearby(new PoiNearbySearchOption().location(new LatLng(MyApplication.lat, MyApplication.lon)).keyword("小区").radius(200));
-				/**
-				 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-				 */
-				mSuggestionSearch
-						.requestSuggestion((new SuggestionSearchOption())
-								.keyword(cs.toString()).city(city));
+//				if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", ""))) {
+//					city = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "city", "");
+//				}
+////				mPoiSearch.searchNearby(new PoiNearbySearchOption().location(new LatLng(MyApplication.lat, MyApplication.lon)).keyword("小区").radius(200));
+//				/**
+//				 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+//				 */
+//				mSuggestionSearch
+//						.requestSuggestion((new SuggestionSearchOption())
+//								.keyword(cs.toString()).city(city));
 				
 			}
 		});
@@ -385,32 +361,18 @@ public class AppointmentOtherFragment extends BaseFragment implements OnGetSugge
 		super.onActivityResult(requestCode, resultCode, data);
 
 	}
-
-	@Override
-	public void onGetSuggestionResult(SuggestionResult res) {
-		if (res == null || res.getAllSuggestions() == null) {
-//			Toast.makeText(AddressActivity.this, "没有更多了~", Toast.LENGTH_SHORT)
-//					.show();
-			locationList.clear();
-			locationList.add(btn_location.getText().toString());
-			listadapter.notifyDataSetChanged();
-			return;
+	
+	public void setSearchList(ArrayList<String> list){
+		if(locationList==null){
+			locationList = new ArrayList<String>();
 		}
 		locationList.clear();
-		for (SuggestionResult.SuggestionInfo info : res.getAllSuggestions()) {
-//			Log.e("TAG", info.key);
-			if (info != null) {
-//				mAdapter.add(info);
-				if(!locationList.contains(info.key)){
-					locationList.add(info.key);
-				}
-			}
-//			mAdapter.notifyDataSetChanged();// 默认聚焦最后一行
-//			lvAddress.setSelection(mAdapter.getCount());
-		}
+		locationList.addAll(list);
 		listadapter.notifyDataSetChanged();
+//		setListViewHeightBasedOnChildren(locatioListView);
 	}
 
+	
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -418,11 +380,6 @@ public class AppointmentOtherFragment extends BaseFragment implements OnGetSugge
 		if(!StringUtils.isEmpty(address)){
 			et_address.setText(address);
 		}
-	}
-	@Override
-	public void onDestroy() {
-		mSuggestionSearch.destroy();
-		super.onDestroy();
 	}
 
 }
