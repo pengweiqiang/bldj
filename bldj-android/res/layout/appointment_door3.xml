@@ -109,7 +109,7 @@
                 android:layout_below="@+id/step2"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dip"
-                android:text="选理疗师"
+                android:text="@string/select_seller"
                 android:textColor="@color/grey" />
         </RelativeLayout>
 
