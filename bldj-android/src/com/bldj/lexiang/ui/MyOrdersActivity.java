@@ -178,9 +178,9 @@ IXListViewListener{
 									new TypeToken<List<Order>>() {
 									});
 
-//							if (pageNumber == 0) {
+							if (pageNumber == 0) {
 								orders.clear();
-//							}
+							}
 							orders.addAll(ordersList);
 
 							listAdapter.notifyDataSetChanged();
