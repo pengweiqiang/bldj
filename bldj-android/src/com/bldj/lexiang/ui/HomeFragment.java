@@ -202,7 +202,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("便利到家");
+		actionBar.setTitle(getResources().getString(R.string.app_name));
 		infoView.findViewById(R.id.actionBarLayout).setBackgroundColor(getResources().getColor(R.color.app_bg_color));
 		actionBar.setTitleTextColor(R.color.white);
 		actionBar.setLeftHomeCityActionButton(new OnClickListener() {
@@ -307,7 +307,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						Intent intent = new Intent(mActivity,
 								BannerWebActivity.class);
 						intent.putExtra("url", MyApplication.getInstance().getConfParams().getRecruitTxt());
-						intent.putExtra("name", "理疗师招聘");
+						intent.putExtra("name", "推拿师招聘");
 						startActivity(intent);
 					}else if(position == TitleBarEnum.COMPANY.getIndex()){
 						Intent intent = new Intent(mActivity, CompanyZoneActivity.class);

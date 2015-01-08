@@ -145,7 +145,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 			public void onClick(View v) {
 				if (mSeletedSeller == null) {
 					ToastUtils.showToast(AppointmentDoor2Activity.this,
-							"请选择理疗师");
+							"请选择推拿师");
 					return;
 				}
 				Intent intent = new Intent(AppointmentDoor2Activity.this,
