@@ -2,7 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">脉度理疗</string>
+    <string name="app_name">脉度</string>
 	<string name="NETWORK_ERROR">网络不给力呀，稍后试试吧！</string>
 	<string name="APP_LOADING_TIP">正在努力加载数据&#8230;</string>
 	<string name="APP_LOADING_FAILED">数据加载失败</string>
