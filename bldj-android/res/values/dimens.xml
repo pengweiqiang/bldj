@@ -48,6 +48,8 @@
     <dimen name="company_margin_button_top">20dip</dimen>
     
     <dimen name="image_height">100dip</dimen>
+    <dimen name="home_item_image_height">160dp</dimen>
+    <dimen name="home_item_top_height">60dp</dimen>
     <dimen name="category_image_height">70dip</dimen>
     <dimen name="home_image_height">160dip</dimen>
     <dimen name="health_image_height">160dip</dimen>
