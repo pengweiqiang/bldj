@@ -92,9 +92,9 @@ public class SellerProductAdapter extends BaseListAdapter {
 
 		holder.name.setText(productItem.get(0).getName());
 //		holder.title.setText(productItem.get(0).getOneword());
-		holder.price.setText("价格：￥"
+		holder.price.setText("市场价￥"
 				+ String.valueOf(productItem.get(0).getMarketPrice()) );
-		holder.yixiujia_price.setText("￥"
+		holder.yixiujia_price.setText("脉度价￥"
 				+ String.valueOf(productItem.get(0).getCurPrice()));
 		ImageLoader.getInstance().displayImage(
 				productItem.get(0).getPicurl(),
