@@ -74,17 +74,6 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 		if (!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "city", ""))) {
 			city = (String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "city", "");
 		}
-		/**
-		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-		 */
-		locationList = new ArrayList<String>();
-		mSuggestionSearch = SuggestionSearch.newInstance();
-		mSuggestionSearch.setOnGetSuggestionResultListener(this);
-		
-		mSuggestionSearch
-				.requestSuggestion((new SuggestionSearchOption())
-						.keyword(MyApplication.getInstance().street).city(city));
-		
 		
 		// 定位初始化
 		mLocClient = new LocationClient(this);
@@ -97,6 +86,26 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 		mLocClient.setLocOption(option);
 		mLocClient.start();
 	}
+	
+	
+	
+	@Override
+	protected void onResume() {
+		/**
+		 * 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
+		 */
+		locationList = new ArrayList<String>();
+		mSuggestionSearch = SuggestionSearch.newInstance();
+		mSuggestionSearch.setOnGetSuggestionResultListener(this);
+		
+		mSuggestionSearch
+				.requestSuggestion((new SuggestionSearchOption())
+						.keyword(MyApplication.getInstance().street).city(city));
+		
+		super.onResume();
+	}
+
+
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
@@ -252,6 +261,13 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 				MyApplication.lat = location.getLatitude();
 				MyApplication.lon = location.getLongitude();
 				MyApplication.getInstance().street = location.getStreet();
+				appointMyFragment.setLocation(location.getAddrStr());
+				
+				if(mSuggestionSearch!=null){
+					mSuggestionSearch
+					.requestSuggestion((new SuggestionSearchOption())
+						.keyword(MyApplication.getInstance().street).city(city));
+				}
 			}
 			
 		}
@@ -302,7 +318,7 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 			}
 		}
 		appointMyFragment.setSearchList(locationList);
-		appointOtherFragment.setSearchList(locationList);
+//		appointOtherFragment.setSearchList(locationList);
 		
 	}
 

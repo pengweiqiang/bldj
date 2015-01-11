@@ -38,6 +38,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.BannerPagerAdapter;
 import com.bldj.lexiang.adapter.GroupAdapter;
 import com.bldj.lexiang.adapter.HomeAdapter;
+import com.bldj.lexiang.adapter.HomeNewAdapter;
 import com.bldj.lexiang.api.ApiHomeUtils;
 import com.bldj.lexiang.api.ApiProductUtils;
 import com.bldj.lexiang.api.vo.Ad;
@@ -71,7 +72,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 	private ActionBar mActionBar;
 
 	private MyListView mListView;
-	private HomeAdapter listAdapter;
+	private HomeNewAdapter listAdapter;
 	private List<Product> products;
 	RelativeLayout rl_loading;//进度条
 	ImageView loading_ImageView;//加载动画
@@ -175,7 +176,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		// mListView.addHeaderView(bannerView);
 		// mListView.bannerView = bannerView;
 		products = new ArrayList<Product>();
-		listAdapter = new HomeAdapter(mActivity, products);
+		listAdapter = new HomeNewAdapter(mActivity, products);
 		mListView.setAdapter(listAdapter);
 
 		mListView.setPullLoadEnable(true);
@@ -593,7 +594,19 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 				startActivity(intent);
 			}
 		});
+		mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				Product productItem = (Product)listAdapter.getItem(position-1);
+				Intent intent = new Intent();
+				intent.setClass(mActivity, HealthProductDetailActivity.class);
+				intent.putExtra("product", productItem);
+				startActivity(intent);
+			}
+			
+		});
 	}
 
 	@Override
