@@ -99,9 +99,9 @@ public class HomeAdapter extends BaseListAdapter {
 
 		holder.name.setText(productItem.get(0).getName());
 //		holder.title.setText(productItem.get(0).getOneword());
-		holder.price.setText("价格：￥"
+		holder.price.setText("市场价￥"
 				+ String.valueOf(productItem.get(0).getMarketPrice()) );
-		holder.yixiujia_price.setText("￥"
+		holder.yixiujia_price.setText("脉度价￥"
 				+ String.valueOf(productItem.get(0).getCurPrice()));
 		ImageLoader.getInstance().displayImage(
 				productItem.get(0).getPicurl(),
@@ -135,10 +135,10 @@ public class HomeAdapter extends BaseListAdapter {
 			holder.frameTwo.setVisibility(View.VISIBLE);
 			holder.name2.setText(productItem.get(1).getName());
 //			holder.title2.setText(productItem.get(1).getOneword());
-			holder.price2.setText("价格：￥"+String.valueOf(productItem.get(1)
+			holder.price2.setText("市场价￥"+String.valueOf(productItem.get(1)
 					.getMarketPrice()));
 			
-			holder.yixiujia_price2.setText("￥"
+			holder.yixiujia_price2.setText("脉度价￥"
 					+ String.valueOf(productItem.get(1).getCurPrice()) );
 			ImageLoader.getInstance().displayImage(
 					productItem.get(1).getPicurl(),
