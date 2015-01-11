@@ -142,13 +142,15 @@ public class RoundImageView extends ImageView {
 		if (bmpHeight > bmpWidth) {// 高大于宽
 			squareWidth = squareHeight = bmpWidth;
 			x = 0;
-			y = (bmpHeight - bmpWidth) / 2;
+			y = 0;
+//			y = (bmpHeight - bmpWidth) / 2;
 			// 截取正方形图片
 			squareBitmap = Bitmap.createBitmap(bmp, x, y, squareWidth,
 					squareHeight);
 		} else if (bmpHeight < bmpWidth) {// 宽大于高
 			squareWidth = squareHeight = bmpHeight;
-			x = (bmpWidth - bmpHeight) / 2;
+//			x = (bmpWidth - bmpHeight) / 2;
+			x = 0;
 			y = 0;
 			squareBitmap = Bitmap.createBitmap(bmp, x, y, squareWidth,
 					squareHeight);
