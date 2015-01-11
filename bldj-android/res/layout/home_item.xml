@@ -25,8 +25,9 @@
             android:layout_margin="3dip" >
 
             <ImageView
+                android:layout_centerInParent="true"
                 android:id="@+id/image"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height"
                 android:scaleType="centerCrop"
                 android:src="@drawable/default_image" />
@@ -63,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="一休价：80元/20分钟"
                 android:textColor="@color/app_bg_color"
                 android:textSize="@dimen/price_textsize" />
@@ -72,6 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="价格：100元/20分钟"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/price_textsize" />
@@ -99,7 +102,8 @@
 
             <ImageView
                 android:id="@+id/image2"
-                android:layout_width="fill_parent"
+                android:layout_centerInParent="true"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height"
                 android:scaleType="centerCrop"
                 android:src="@drawable/default_image" />
@@ -136,6 +140,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="一休价：80元/20分钟"
                 android:textColor="@color/app_bg_color"
                 android:textSize="@dimen/price_textsize" />
@@ -144,6 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:text="价格：100元/20分钟"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/price_textsize" />

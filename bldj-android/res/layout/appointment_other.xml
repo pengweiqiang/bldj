@@ -167,6 +167,7 @@
             android:enabled="false"
             android:clickable="false"
             android:padding="10dip"
+            android:visibility="gone"
             android:hint="@string/select_location"
             android:textColor="@color/grey"
             android:textSize="15sp" />
@@ -179,6 +180,7 @@
             android:layout_marginLeft="45dp"
             android:layout_marginRight="25dp"
             android:layout_marginTop="2dp"
+            android:visibility="gone"
             android:listSelector="@android:color/transparent"
             android:background="@color/home_bg" >
         </ListView>
@@ -256,7 +258,7 @@
             android:layout_width="150dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dip"
+            android:layout_marginTop="20dip"
             android:background="@drawable/btn_coners"
             android:text="@string/next"
             android:textColor="@color/white" />

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dip"
+    android:layout_marginRight="5dip"
+    android:orientation="horizontal"
+    android:paddingBottom="8dip" >
+
+    <LinearLayout
+        android:id="@+id/good_cell_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="2.5dp"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/border"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_item_image_height"
+            android:layout_margin="6dip"
+             >
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/home_item_image_height"
+                android:scaleType="centerCrop"
+                android:src="@drawable/default_image" />
+
+            <!--
+                 <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/transcat_bg" >
+            -->
+
+            <!-- </LinearLayout> -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="#50000000"
+                android:orientation="vertical"
+                android:weightSum="5"
+                android:paddingLeft="15dp" >
+                
+                <View 
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/home_item_top_height"
+                    android:layout_weight="1"
+                    />
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:minWidth="@dimen/recomment_width"
+                    android:text="头皮放松按摩"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/yixiu_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_weight="1"
+                    android:gravity="bottom"
+                    android:text="138元"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="21sp" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:layout_weight="1"
+                    android:text="强化记忆"
+                    android:gravity="bottom"
+                    android:singleLine="true"
+                    android:textColor="#e0d9d5d0"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

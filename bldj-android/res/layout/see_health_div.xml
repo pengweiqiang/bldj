@@ -14,7 +14,7 @@
             android:id="@+id/order_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="接单次数"
+            android:text="默认排序"
             android:layout_weight="1"
             android:layout_margin="5dip"
              android:gravity="center"
