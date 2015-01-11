@@ -74,9 +74,9 @@ public class AppointmentOtherFragment extends BaseFragment {
 	private TextView btn_city;
 	private EditText btn_location;
 	private EditText et_address;
-	ListView locatioListView;
-	ArrayList<String> locationList;
-	ListviewAdapter listadapter;
+//	ListView locatioListView;
+//	ArrayList<String> locationList;
+//	ListviewAdapter listadapter;
 //	String address;//预约地点
 	String time ;//预约时间
 	CustomerSpinner spinner;
@@ -124,7 +124,7 @@ public class AppointmentOtherFragment extends BaseFragment {
 		btn_city = (Button) infoView.findViewById(R.id.btn_city);
 		btn_location = (EditText) infoView.findViewById(R.id.btn_location);
 		et_address = (EditText) infoView.findViewById(R.id.et_address);
-		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
+//		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
 		layout = (LinearLayout)infoView.findViewById(R.id.layout);
 		scrollView = (ScrollView)infoView.findViewById(R.id.scrollView);
 		btn_time.setTag(false);
@@ -148,10 +148,10 @@ public class AppointmentOtherFragment extends BaseFragment {
 	    
 	    
 	  //常用地址
-	    locationList = new ArrayList<String>();
-	    listadapter = new ListviewAdapter(mActivity,locationList,1);
-	    locatioListView.setAdapter(listadapter);
-	    locatioListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);// 一定要设置这个属性，否则ListView不会刷新
+//	    locationList = new ArrayList<String>();
+//	    listadapter = new ListviewAdapter(mActivity,locationList,1);
+//	    locatioListView.setAdapter(listadapter);
+//	    locatioListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);// 一定要设置这个属性，否则ListView不会刷新
 
 	}
 
@@ -201,43 +201,43 @@ public class AppointmentOtherFragment extends BaseFragment {
 				
 			}
 		});
-		locatioListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int position,
-					long arg3) {
-//				listadapter.setCurrentItem(position);
-				
-				if (selectedView == null) {
-		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
-		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);
-		            selectedView = view; 
-		            if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
-		            	et_address.setText(btn_location.getText().toString());
-		            }else{
-		            	et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
-		            }
-		        }else if(selectedView == view){//点击第二次取消
-		        	et_address.setText("");
-					((TextView)view.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
-					view.setBackgroundColor(Color.TRANSPARENT);
-					selectedView = null;
-		        }
-				else {
-					((TextView)selectedView.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
-					selectedView.setBackgroundColor(Color.TRANSPARENT);
-		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
-		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);
-		            selectedView = view;
-		            if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
-		            	et_address.setText(btn_location.getText().toString());
-		            }else{
-		            	et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
-		            }
-		        }
-			}
+//		locatioListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> arg0, View view, int position,
+//					long arg3) {
+////				listadapter.setCurrentItem(position);
+//				
+//				if (selectedView == null) {
+//		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+//		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);
+//		            selectedView = view; 
+//		            if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
+//		            	et_address.setText(btn_location.getText().toString());
+//		            }else{
+//		            	et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
+//		            }
+//		        }else if(selectedView == view){//点击第二次取消
+//		        	et_address.setText("");
+//					((TextView)view.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
+//					view.setBackgroundColor(Color.TRANSPARENT);
+//					selectedView = null;
+//		        }
+//				else {
+//					((TextView)selectedView.findViewById(R.id.itemText)).setTextColor(getResources().getColor(R.color.grey));
+//					selectedView.setBackgroundColor(Color.TRANSPARENT);
+//		            view.setBackgroundColor(getResources().getColor(R.color.app_bg_color));
+//		            ((TextView)view.findViewById(R.id.itemText)).setTextColor(Color.WHITE);
+//		            selectedView = view;
+//		            if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
+//		            	et_address.setText(btn_location.getText().toString());
+//		            }else{
+//		            	et_address.setText(btn_location.getText().toString()+((String)listadapter.getItem(position)));
+//		            }
+//		        }
+//			}
 			
-		});
+//		});
 		btn_contact.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -362,15 +362,15 @@ public class AppointmentOtherFragment extends BaseFragment {
 
 	}
 	
-	public void setSearchList(ArrayList<String> list){
-		if(locationList==null){
-			locationList = new ArrayList<String>();
-		}
-		locationList.clear();
-		locationList.addAll(list);
-		listadapter.notifyDataSetChanged();
-//		setListViewHeightBasedOnChildren(locatioListView);
-	}
+//	public void setSearchList(ArrayList<String> list){
+//		if(locationList==null){
+//			locationList = new ArrayList<String>();
+//		}
+//		locationList.clear();
+//		locationList.addAll(list);
+//		listadapter.notifyDataSetChanged();
+////		setListViewHeightBasedOnChildren(locatioListView);
+//	}
 
 	
 	@Override
