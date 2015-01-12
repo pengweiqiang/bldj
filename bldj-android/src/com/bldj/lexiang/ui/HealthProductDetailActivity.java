@@ -1,6 +1,7 @@
 package com.bldj.lexiang.ui;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -136,6 +137,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 		
 		tv_shop_price.setText("门店价：￥"
 				+ String.valueOf(product.getMarketPrice()));
+		tv_shop_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG );
 		
 		String buyCount = product.getSellerNum()+"人已经购买";
 		SpannableStringBuilder style=new SpannableStringBuilder(buyCount);
@@ -313,7 +315,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 				Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
 				sendIntent.setData(Uri.parse("smsto:"));
-				sendIntent.putExtra("sms_body", "健康送到家，方便你我他");
+				sendIntent.putExtra("sms_body", "健康送到家，方便你我他"+MyApplication.getInstance().getConfParams().getAboutUsUrl());
 				mContext.startActivity(sendIntent);
 
 			}
