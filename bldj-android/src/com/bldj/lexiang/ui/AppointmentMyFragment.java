@@ -236,6 +236,8 @@ public class AppointmentMyFragment extends BaseFragment{
 //		            	btn_location.append(listadapter.getItem(position).toString());
 		            	btn_location.setText(MyApplication.getInstance().addressStr+((String)listadapter.getItem(position)));
 		            }
+		            locatioListView.setVisibility(View.GONE);
+		            tv_input_tip.setVisibility(View.VISIBLE);
 		        }
 				
 //				if(btn_location.getText().toString().equals((String)listadapter.getItem(position))){
