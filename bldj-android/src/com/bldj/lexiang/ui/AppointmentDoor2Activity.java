@@ -1,7 +1,9 @@
 package com.bldj.lexiang.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -103,8 +105,13 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		ll_busy.setVisibility(View.GONE);
 
 		sellers = new ArrayList<Seller>();
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("time", time);
+		params.put("timeIndex", timeIndex);
+		params.put("product", product);
+		params.put("address", address);
 		listAdapter = new JlysHealthAdapter(AppointmentDoor2Activity.this,
-				sellers);
+				sellers,params);
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
