@@ -29,12 +29,14 @@ import com.bldj.lexiang.api.ApiSellerUtils;
 import com.bldj.lexiang.api.vo.ConfParams;
 import com.bldj.lexiang.api.vo.Evals;
 import com.bldj.lexiang.api.vo.ParseModel;
+import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
+import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.ActionItem;
@@ -84,7 +86,12 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 	//定义标题栏弹窗按钮
 	private TitlePopup titlePopup;
 	SharePopupWindow pop ;
-
+	
+	
+	private String time;
+	private int timeIndex;
+	private Product product;
+	private String address;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.seller_personal);
@@ -92,7 +99,11 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 
 		sellerVo = (Seller) this.getIntent().getSerializableExtra("seller");
 		sellerId = this.getIntent().getLongExtra("sellerId", 0);
-
+		time = this.getIntent().getStringExtra("time");
+		timeIndex = this.getIntent().getIntExtra("timeIndex", -1);
+		product = (Product)this.getIntent().getSerializableExtra("product");
+		address = this.getIntent().getStringExtra("address");
+		
 		initView();
 		initData();
 		initListener();
@@ -328,12 +339,24 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 				pop.showAtLocation(view,Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 			}
 		});
+		//我要预约他
 		// 预约次美容师-->弹出下面的服务项目
 		btn_appointseller.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if(checkIsLogin()){
+					if(!StringUtils.isEmpty(time) && timeIndex != -1 && product != null && !StringUtils.isEmpty(address)){
+						Intent intent = new Intent(SellerPersonalActivity.this,
+								AppointmentDoor3Activity.class);
+						intent.putExtra("time", time);// 预约时间
+						intent.putExtra("timeIndex", timeIndex);// 预约时间位置
+						intent.putExtra("seller", sellerVo);// 预约美容师
+						intent.putExtra("product", product);//预约产品
+						intent.putExtra("address", address);//详细地址
+						startActivity(intent);
+						return;
+					}
 					Intent intent = new Intent(SellerPersonalActivity.this,
 							SellerServiceActivity.class);
 					intent.putExtra("seller", sellerVo);
