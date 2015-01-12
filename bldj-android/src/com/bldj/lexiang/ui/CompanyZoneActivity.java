@@ -58,6 +58,7 @@ public class CompanyZoneActivity extends BaseActivity {
 	private Button btn_confirm;
 	private TextView et_service_type_name;// 选择的套餐服务
 	private TextView tv_price;
+	private TextView tv_preferential;
 	private String service_type_name;
 	private int serviceTypeIndex;
 	private double price;
@@ -106,6 +107,7 @@ public class CompanyZoneActivity extends BaseActivity {
 	}
 
 	private void initData() {
+		tv_preferential.setText(MyApplication.getInstance().getConfParams().getPreferential());
 		et_service_type_name.setText(service_type_name);
 		tv_price.setText(String.valueOf(price) + "元");
 		manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -113,6 +115,7 @@ public class CompanyZoneActivity extends BaseActivity {
 
 		if(type == 0){//优惠特区。需要登录
 			// 获取支付方式
+			findViewById(R.id.ll_company_name).setVisibility(View.GONE);
 			getPayType();
 		}else if(type == 1){//企业专区,无需登录
 			findViewById(R.id.ll_company_name).setVisibility(View.GONE);
@@ -132,6 +135,7 @@ public class CompanyZoneActivity extends BaseActivity {
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		mListView = (ListView) findViewById(R.id.paytype_listView);
 		scrollView = (SpringScrollView)findViewById(R.id.scrollView);
+		tv_preferential = (TextView)findViewById(R.id.tv_preferential);
 
 	}
 
@@ -155,16 +159,16 @@ public class CompanyZoneActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				companyName = et_company_name.getText().toString().trim();
+				companyName = /*et_company_name.getText().toString().trim();*/"个人购卡";
 				concactType = et_contact_type.getText().toString().trim();
 				contactor = et_contactor.getText().toString().trim();
 				address = et_address.getText().toString().trim();
 				if(type==0){
-					if (StringUtils.isEmpty(companyName)) {
-						et_company_name.requestFocus();
-						ToastUtils.showToast(CompanyZoneActivity.this, "请输入企业名称");
-						return;
-					}
+//					if (StringUtils.isEmpty(companyName)) {
+//						et_company_name.requestFocus();
+//						ToastUtils.showToast(CompanyZoneActivity.this, "请输入企业名称");
+//						return;
+//					}
 				}else{
 					companyName = "";
 					payType = new PayType();
