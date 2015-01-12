@@ -14,19 +14,20 @@
         <RelativeLayout
             android:id="@+id/time1"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_weight="1" >
 
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                
                 android:drawableLeft="@drawable/btn_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="10:00" />
 
@@ -36,14 +37,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="可预约" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/time2"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
@@ -54,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/btn_time"
                 
                 android:text="11:00" />
@@ -64,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="可预约" />
         </RelativeLayout>
@@ -72,7 +73,7 @@
         <RelativeLayout
             android:id="@+id/time3"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
@@ -84,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="12:00" />
 
@@ -93,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="可预约" />
         </RelativeLayout>
@@ -101,7 +102,7 @@
         <RelativeLayout
             android:id="@+id/time4"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_weight="1" >
@@ -111,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="12:30" />
@@ -121,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="可预约" />
         </RelativeLayout>
@@ -137,9 +138,11 @@
             android:id="@+id/time5"
             android:gravity="center"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_weight="1" >
 
             <TextView
@@ -148,7 +151,7 @@
                 android:layout_height="wrap_content"
                 
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="13:00" />
 
@@ -157,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="可预约" />
         </RelativeLayout>
@@ -165,7 +168,7 @@
         <RelativeLayout
             android:id="@+id/time6"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
@@ -177,7 +180,7 @@
                 android:layout_height="wrap_content"
                 
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="13:30" />
 
@@ -185,7 +188,7 @@
                 android:id="@+id/tv_status6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
                 android:text="可预约" />
@@ -194,7 +197,7 @@
         <RelativeLayout
             android:id="@+id/time7"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
@@ -205,7 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="14:00" />
@@ -215,7 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="可预约" />
         </RelativeLayout>
@@ -223,7 +226,7 @@
         <RelativeLayout
             android:id="@+id/time8"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_weight="1" >
@@ -233,7 +236,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="14:30" />
@@ -244,7 +247,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="可预约" />
         </RelativeLayout>
     </LinearLayout>
@@ -258,7 +261,7 @@
         <RelativeLayout
             android:id="@+id/time9"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             
             android:layout_weight="1"
             android:gravity="center"
@@ -270,7 +273,7 @@
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 
                 android:drawableLeft="@drawable/btn_time"
                 android:textColor="@color/white"
@@ -281,7 +284,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="可预约" />
         </RelativeLayout>
@@ -289,9 +292,11 @@
         <RelativeLayout
             android:id="@+id/time10"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:gravity="center"
             android:layout_weight="1" >
 
@@ -317,7 +322,7 @@
         <RelativeLayout
             android:id="@+id/time11"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
@@ -329,7 +334,7 @@
                 android:layout_height="wrap_content"
                 
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="17:00" />
 
@@ -339,14 +344,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="可预约" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/time12"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_weight="1" >
@@ -356,7 +361,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="17:30" />
@@ -367,7 +372,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="可预约" />
         </RelativeLayout>
     </LinearLayout>
@@ -380,10 +385,12 @@
         <RelativeLayout
             android:id="@+id/time13"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_weight="1" >
 
             <TextView
@@ -393,7 +400,7 @@
                 
                 android:drawableLeft="@drawable/btn_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="18:00" />
 
             <TextView
@@ -402,14 +409,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="可预约" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/time14"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
@@ -422,7 +429,7 @@
                 
                 android:textColor="@color/white"
                 android:drawableLeft="@drawable/btn_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="19:00" />
 
             <TextView
@@ -431,14 +438,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="可预约" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/time15"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_marginRight="1dip"
@@ -450,7 +457,7 @@
                 android:layout_height="wrap_content"
                 
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="20:00" />
 
@@ -459,7 +466,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/white"
                 android:text="可预约" />
         </RelativeLayout>
@@ -467,7 +474,7 @@
         <RelativeLayout
             android:id="@+id/time16"
             android:layout_width="0dip"
-            android:layout_height="60dip"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:background="@color/scheduled_green"
             android:layout_weight="1" >
@@ -477,7 +484,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableLeft="@drawable/btn_time"
                 android:text="21:00" />
 
@@ -487,7 +494,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_time"
                 android:textColor="@color/white"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:text="可预约" />
         </RelativeLayout>
     </LinearLayout>
