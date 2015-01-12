@@ -7,7 +7,7 @@
    	<RelativeLayout
                 android:id="@+id/cheep_package"
                 android:layout_width="match_parent"
-                android:layout_height="120dip"
+                android:layout_height="wrap_content"
                 android:layout_margin="7dip"
                 android:background="@color/bg_company_package2"
                 android:orientation="vertical" >
@@ -15,7 +15,8 @@
                 <View
                     android:id="@+id/line_view"
                     android:layout_width="3dip"
-                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="120dp"
                     android:background="@color/line_company_package2" />
 
                 <LinearLayout
@@ -71,6 +72,7 @@
                     android:layout_below="@+id/package_info2"
                     android:layout_marginLeft="20dip"
                     android:paddingTop="3dip"
+                    android:paddingBottom="5dp"
                     android:text="@string/package_2_info3"
                     android:textSize="15sp" />
             </RelativeLayout>
