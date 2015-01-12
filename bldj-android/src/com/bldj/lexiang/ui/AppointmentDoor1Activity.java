@@ -26,6 +26,7 @@ import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 
 /**
  * 上门预约1
@@ -49,6 +50,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 	// GridView gridView;
 
 	Scheduled scheduled;
+	LoadingDialog loading;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -148,12 +150,15 @@ public class AppointmentDoor1Activity extends BaseActivity {
 	}
 
 	private void getData(String date) {
+		loading = new LoadingDialog(mContext);
+		loading.show();
 		long sellerId = seller==null?0:seller.getId();
 		ApiBuyUtils.getScheduled(mContext, sellerId, product.getId(), date,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.dismiss();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							ToastUtils.showToast(mContext, parseModel.getMsg());
