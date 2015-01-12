@@ -1,6 +1,7 @@
 package com.bldj.lexiang.adapter;
 
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.ConfParams;
+import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.ui.SellerPersonalActivity;
 import com.bldj.lexiang.utils.StringUtils;
@@ -27,13 +29,18 @@ public class JlysHealthAdapter extends BaseListAdapter {
 	private Context context;
 	private List<Seller> dataList;
 	private LayoutInflater mInflater;
-
+	private Map<String, Object> params;
 	public JlysHealthAdapter(Context c, List<Seller> dataList) {
 		this.context = c;
 		this.dataList = dataList;
 		this.mInflater = LayoutInflater.from(context);
 	}
-
+	public JlysHealthAdapter(Context c,List<Seller> dataList,Map<String, Object> params){
+		this.context = c;
+		this.dataList = dataList;
+		this.mInflater = LayoutInflater.from(context);
+		this.params = params;
+	}
 	@Override
 	public int getCount() {
 		int count = dataList.size();
@@ -101,6 +108,12 @@ public class JlysHealthAdapter extends BaseListAdapter {
 				// 启动美容师个人界面
 				Intent intent = new Intent(context,
 						SellerPersonalActivity.class);
+				if(params != null){
+					intent.putExtra("time", (String)params.get("time"));// 预约时间
+					intent.putExtra("timeIndex", (Integer)params.get("timeIndex"));// 预约时间位置
+					intent.putExtra("product", (Product)params.get("product"));//预约产品
+					intent.putExtra("address", (String)params.get("address"));//详细地址
+				}
 				intent.putExtra("seller", seller);
 				context.startActivity(intent);
 			}
