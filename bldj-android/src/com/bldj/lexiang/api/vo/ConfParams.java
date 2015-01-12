@@ -25,6 +25,8 @@ public class ConfParams  implements Serializable{
 	private String starRule;//星级判断   x<10 一颗星   10<=x<30 两颗星 左闭右开以此类推  eg:"10;30;50;100"
 	
 	private String mobileRule;//手机号校验正则表达式
+	
+	private String preferential;//优惠特区的支付界面的顶层文案
 
 	public String getAboutUsUrl() {
 		return aboutUsUrl;
@@ -98,6 +100,14 @@ public class ConfParams  implements Serializable{
 		this.mobileRule = mobileRule;
 	}
 
+	public String getPreferential() {
+		return preferential;
+	}
+
+	public void setPreferential(String preferential) {
+		this.preferential = preferential;
+	}
+
 	/**
 	 * 默认常量配置，防止网络连接失败
 	 * @return
@@ -112,6 +122,7 @@ public class ConfParams  implements Serializable{
 		c.setShareSellerTxt("网上搜索找百度，上门推拿找脉度。度娘度哥度姐真给力！下载地址:http://t.cn/RZcPd90");
 		c.setRecruitTxt("http://dwz.cn/zGzfl");
 		c.setMobileRule("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+		c.setPreferential("购买套卡后平台会返回给你序列号且享受优惠折扣，后续凭借序列号消费即可!");
 		return c;
 	}
 	/**
