@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -58,6 +59,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private View mSelectedView;
 	private Button btn_previous, btn_next;
 	private TextView tv_callCustom;
+	private LinearLayout ll_busy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,8 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
 		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView) findViewById(R.id.listview);
+		ll_busy = (LinearLayout) findViewById(R.id.ll_busy);
+		ll_busy.setVisibility(View.GONE);
 
 		sellers = new ArrayList<Seller>();
 		listAdapter = new JlysHealthAdapter(AppointmentDoor2Activity.this,
@@ -170,6 +174,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
                 }else if(arg1 == mSelectedView){
                 	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
                 	mSeletedSeller = null;
+                	mSelectedView = null;
                 	return;
                 }else {
                 	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
@@ -225,6 +230,9 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 									});
 							if (pageNumber == 0) {
 								sellers.clear();
+								if(sellersList == null || sellersList.isEmpty()){
+									ll_busy.setVisibility(View.VISIBLE);
+								}
 							}
 							sellers.addAll(sellersList);
 
