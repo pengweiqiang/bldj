@@ -165,14 +165,9 @@ public class AppointmentDoor1Activity extends BaseActivity {
 								.getStatus())) {
 							ToastUtils.showToast(mContext, parseModel.getMsg());
 						} else {
-							List<Scheduled> scheduledList = (List<Scheduled>) JsonUtils.fromJson(parseModel.getData().toString(), new TypeToken<List<Scheduled>>() {
-									});
-							if(scheduledList!=null && !scheduledList.isEmpty()){
-								scheduled = scheduledList.get(0);
-							}
-//							scheduled = (Scheduled) JsonUtils.fromJson(
-//									parseModel.getData().toString(),
-//									Scheduled.class);
+							scheduled = (Scheduled) JsonUtils.fromJson(
+									parseModel.getData().toString(),
+									Scheduled.class);
 							setTimeStatus();
 						}
 
@@ -397,6 +392,8 @@ public class AppointmentDoor1Activity extends BaseActivity {
 					R.color.scheduled_green));
 			// bgView.setBackground(null);
 			time.setText(canAppointment);
+			bgView.setClickable(true);
+			bgView.setEnabled(true);
 		} else if (status == 1) {// 不可预约
 			bgView.setBackgroundColor(getResources().getColor(
 					R.color.scheduled_grey));
