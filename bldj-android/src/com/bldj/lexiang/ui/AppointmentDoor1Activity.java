@@ -1,6 +1,7 @@
 package com.bldj.lexiang.ui;
 
 import java.util.Date;
+import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiBuyUtils;
@@ -163,9 +165,14 @@ public class AppointmentDoor1Activity extends BaseActivity {
 								.getStatus())) {
 							ToastUtils.showToast(mContext, parseModel.getMsg());
 						} else {
-							scheduled = (Scheduled) JsonUtils.fromJson(
-									parseModel.getData().toString(),
-									Scheduled.class);
+							List<Scheduled> scheduledList = (List<Scheduled>) JsonUtils.fromJson(parseModel.getData().toString(), new TypeToken<List<Scheduled>>() {
+									});
+							if(scheduledList!=null && !scheduledList.isEmpty()){
+								scheduled = scheduledList.get(0);
+							}
+//							scheduled = (Scheduled) JsonUtils.fromJson(
+//									parseModel.getData().toString(),
+//									Scheduled.class);
 							setTimeStatus();
 						}
 
