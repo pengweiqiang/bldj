@@ -28,30 +28,30 @@ public class ApiSellerUtils {
 	 * @param startWorkyear 起始工作年限
 	 * @param endWorkyear 终止工作年限
 	 * @param orderbyTag 排序字段 0时间 3均价 4累计成交量 5距离
+	 * @param sort 0降序 1升序
 	 * @param lat
 	 * @param lon
 	 * @param requestCallBack
 	 */
 	public static void getSellers(Context context, int start, int limit,
-			int startPrice, int endPrice, int startWorkyear, int endWorkyear,
-			int orderbyTag,double lat,double lon, RequestCallback requestCallBack) {
+			/*int startPrice, int endPrice, int startWorkyear, int endWorkyear,*/
+			int orderbyTag,double lat,double lon,int sort, RequestCallback requestCallBack) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.START, start);
 		params.put(ReqUrls.LIMIT, limit);
-		params.put("startPrice",startPrice);
+		/*params.put("startPrice",startPrice);
 		if(endPrice !=-1){
 			params.put("endPrice", endPrice);
 		}
 		params.put("startWorkyear", startWorkyear);
 		if(endWorkyear!=-1){
 			params.put("endWorkyear", endWorkyear);
-		}
+		}*/
 		params.put("orderbyTag", orderbyTag);
-		params.put("lat", lat);
-		params.put("lon", lon);
+		params.put("sort", sort);
 
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLERS, false,
-				requestCallBack, MethodType.GET_MAINPAGE_AD, context,HttpMethod.GET);
+				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 	}
 	
 	/**
