@@ -24,6 +24,7 @@ public class Product implements Serializable{
 	private String proDetailUrl;
 	private String suitsCrowd;
 	private long sellerId;
+	private String extPrice;//二人套餐@2@236||三人套餐@3#333
 	
 	
 	
@@ -92,6 +93,12 @@ public class Product implements Serializable{
 	}
 	public void setSellerId(long sellerId) {
 		this.sellerId = sellerId;
+	}
+	public String getExtPrice() {
+		return extPrice;
+	}
+	public void setExtPrice(String extPrice) {
+		this.extPrice = extPrice;
 	}
 	
 	
