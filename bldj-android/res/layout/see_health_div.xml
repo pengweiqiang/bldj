@@ -10,36 +10,39 @@
         android:layout_marginBottom="3dip"
         android:background="@color/white"
         >
-        <TextView 
-            android:id="@+id/order_count"
+        <CheckBox 
+            android:id="@+id/order_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="默认排序"
+            android:text="距离排序"
+            android:button="@null"
             android:layout_weight="1"
             android:layout_margin="5dip"
              android:gravity="center"
-             android:drawableRight="@drawable/btn_down_open"
+             android:drawableRight="@drawable/order_sort_check"
             android:layout_marginLeft="8dip"
             />
-        <TextView 
-            android:id="@+id/order_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="价格区间"
-            android:layout_weight="1"
-            android:layout_margin="5dip"
-            android:drawableRight="@drawable/btn_down_open"
-             android:gravity="center"
-            />
-        <TextView 
-            android:id="@+id/order_work"
+        <CheckBox 
+            android:id="@+id/order_worker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="工作经验"
+            android:button="@null"
+            android:layout_weight="1"
+            android:layout_margin="5dip"
+            android:drawableRight="@drawable/order_sort_check"
+             android:gravity="center"
+            />
+        <CheckBox 
+            android:id="@+id/order_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="接单次数"
+            android:button="@null"
             android:layout_weight="1"
              android:gravity="center"
              android:layout_margin="5dip"
-             android:drawableRight="@drawable/btn_down_open"
+             android:drawableRight="@drawable/order_sort_check"
             android:layout_marginRight="8dip"
             />
     </LinearLayout>
