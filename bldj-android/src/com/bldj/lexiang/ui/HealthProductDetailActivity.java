@@ -82,6 +82,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	
 	private double curPrice ;
 	private double marketPrice;
+	private String title;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.health_product_detail);
@@ -139,7 +140,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	}
 
 	private void initData() {
-		mActionBar.setTitle(product.getName());
+		title = product.getName();
 		// 获取此产品是否收藏过
 		if (isFav) {
 			tv_fav.setChecked(true);
@@ -149,18 +150,19 @@ public class HealthProductDetailActivity extends BaseActivity {
 			try{
 				packagePrice = new ArrayList<String>();
 				packagePrice.add("一人独享@1@"+product.getCurPrice());
-				String packagePriceHttp [] = product.getExtPrice().split("||");//二人套餐@2@236||三人套餐@3#333
+				String packagePriceHttp [] = product.getExtPrice().split("[|]");//二人套餐@2@236||三人套餐@3#333
 				for (int i = 0; i < packagePriceHttp.length; i++) {
 					packagePrice.add(packagePriceHttp[i]);
 				}
 				if(packagePrice.size() == 2){
 					rb_three.setVisibility(View.GONE);
 				}
-				
+				mActionBar.setTitle(title+"一人独享");
 			}catch(Exception e){
 				packagePrice = null;
 			}
 		}else{
+			mActionBar.setTitle(title);
 			rg_title.setVisibility(View.GONE);
 		}
 		
@@ -281,9 +283,16 @@ public class HealthProductDetailActivity extends BaseActivity {
 	
 	private void showPackagePrice(int count){
 		
-		curPrice = product.getCurPrice()*(count+1);
-		marketPrice = product.getMarketPrice()*(count+1);
+		String packageItem[] = packagePrice.get(count).split("@");//三人套餐@3@333
+		String name = packageItem[0];
+		int num = Integer.valueOf(packageItem[1]);
+		curPrice = Double.valueOf(packageItem[2]);
+		
+//		curPrice = product.getCurPrice()*num;
+		marketPrice = product.getMarketPrice()*num;
 		tv_price.setText("￥" + String.valueOf(curPrice));
+		title = product.getName() + name;
+		mActionBar.setTitle(title);
 		
 		tv_shop_price.setText("市场价：￥"
 				+ String.valueOf(marketPrice));
@@ -333,6 +342,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 				}
 				product.setCurPrice(curPrice);
 				product.setMarketPrice(marketPrice);
+				product.setName(title);
 				intent.putExtra("product", product);
 				startActivity(intent);
 			}
