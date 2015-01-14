@@ -1,5 +1,8 @@
 package com.bldj.lexiang.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
@@ -23,6 +26,8 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -36,6 +41,7 @@ import com.bldj.lexiang.db.DatabaseUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
+import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.SharePopupWindow;
@@ -69,6 +75,13 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 	ShareUtil shareUtil;
 	SharePopupWindow pop ;
+	
+	private RadioGroup rg_title;
+	private RadioButton rb_single,rb_two,rb_three;
+	private List<String> packagePrice;
+	
+	private double curPrice ;
+	private double marketPrice;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.health_product_detail);
@@ -118,6 +131,10 @@ public class HealthProductDetailActivity extends BaseActivity {
 		btn_appointment_product = (Button) findViewById(R.id.appointment_product);
 		tv_custom_service = (TextView) findViewById(R.id.custom_service);
 		tv_fav = (CheckBox) findViewById(R.id.collect);
+		rg_title = (RadioGroup) findViewById(R.id.rg_title);
+		rb_single = (RadioButton) findViewById(R.id.radio_single);
+		rb_two = (RadioButton)findViewById(R.id.radio_two);
+		rb_three = (RadioButton)findViewById(R.id.radio_three);
 
 	}
 
@@ -128,14 +145,34 @@ public class HealthProductDetailActivity extends BaseActivity {
 			tv_fav.setChecked(true);
 			tv_fav.setText("已收藏");
 		}
-
+		if(!StringUtils.isEmpty(product.getExtPrice())){
+			try{
+				packagePrice = new ArrayList<String>();
+				packagePrice.add("一人独享@1@"+product.getCurPrice());
+				String packagePriceHttp [] = product.getExtPrice().split("||");//二人套餐@2@236||三人套餐@3#333
+				for (int i = 0; i < packagePriceHttp.length; i++) {
+					packagePrice.add(packagePriceHttp[i]);
+				}
+				if(packagePrice.size() == 2){
+					rb_three.setVisibility(View.GONE);
+				}
+				
+			}catch(Exception e){
+				packagePrice = null;
+			}
+		}else{
+			rg_title.setVisibility(View.GONE);
+		}
+		
 		ImageLoader.getInstance().displayImage(product.getPicurl(),
 				product_img,
 				MyApplication.getInstance().getOptions(R.drawable.default_image));
 		tv_time.setText("时长：" + product.getTimeConsume() + "分钟");
+		curPrice = product.getCurPrice();
 		tv_price.setText("￥" + String.valueOf(product.getCurPrice()));
 		
-		tv_shop_price.setText("门店价：￥"
+		marketPrice = product.getMarketPrice();
+		tv_shop_price.setText("市场价：￥"
 				+ String.valueOf(product.getMarketPrice()));
 		tv_shop_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG );
 		
@@ -242,8 +279,42 @@ public class HealthProductDetailActivity extends BaseActivity {
 		});
 	}
 	
+	private void showPackagePrice(int count){
+		
+		curPrice = product.getCurPrice()*(count+1);
+		marketPrice = product.getMarketPrice()*(count+1);
+		tv_price.setText("￥" + String.valueOf(curPrice));
+		
+		tv_shop_price.setText("市场价：￥"
+				+ String.valueOf(marketPrice));
+		
+//		product.setCurPrice(curPrice);
+//		product.setMarketPrice(marketPrice);
+	}
 	@Override
 	public void initListener() {
+		rg_title.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup arg0, int id) {
+				switch (id) {
+				case R.id.radio_single://个人套餐
+					showPackagePrice(0);
+					break;
+				case R.id.radio_two://第二个套餐
+					showPackagePrice(1);
+					break;
+				case R.id.radio_three://第三个套餐
+					showPackagePrice(2);
+					break;
+
+				default:
+					break;
+				}
+			}
+			
+			
+		});
 		// 预约产品
 		btn_appointment_product.setOnClickListener(new OnClickListener() {
 
@@ -260,6 +331,8 @@ public class HealthProductDetailActivity extends BaseActivity {
 				if(seller!=null){
 					intent.putExtra("seller", seller);
 				}
+				product.setCurPrice(curPrice);
+				product.setMarketPrice(marketPrice);
 				intent.putExtra("product", product);
 				startActivity(intent);
 			}
