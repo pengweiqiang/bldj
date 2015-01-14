@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DBHelper extends SQLiteOpenHelper{
 	
 	public static final String DATA_BASE_NAME = "bldj_fav_db";
-	public static final int DATA_BASE_VERSION = 2;
+	public static final int DATA_BASE_VERSION = 3;
 	public static final String TABLE_NAME_PRODUCT = "fav_product";//经络养生
 	public static final String TABLE_NAME_SELLER = "fav_seller";//美容师
 	public static final String TABLE_NAME_BANNER = "banner";//首页广告栏
@@ -49,6 +49,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		String PRODETAILURL = "proDetailUrl";
 		String SUITSCROWD = "suitsCrowd";
 		String TYPE = "type";//0是首页缓存  1是收藏
+		String EXTPRICE = "extPrice";
 				
 	}
 	interface SellerTable{
@@ -95,7 +96,8 @@ public class DBHelper extends SQLiteOpenHelper{
 	      		.append(ProductTable.SELLERNUM).append(" Integer,")
 	      		.append(ProductTable.PRODETAILURL).append(" varchar(200),")
 	      		.append(ProductTable.SUITSCROWD).append(" varchar(100) ,")
-	      		.append(ProductTable.TYPE).append(" Integer );")
+	      		.append(ProductTable.TYPE).append(" Integer ,")
+	      		.append(ProductTable.EXTPRICE).append(" varchar(100) );")
 	      		;
 	      db.execSQL(favStr.toString());
 	}
