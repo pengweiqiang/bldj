@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dip"
                     android:text="时长：30分钟"
+                    android:paddingTop="3dp"
                     android:layout_marginBottom="10dp"
                      />
                 
@@ -61,6 +62,7 @@
                     android:layout_marginRight="5dip"
                     android:layout_toRightOf="@+id/product_buy_img"
                     android:text="50人已经购买"
+                    android:textColor="@color/grey"
                      />
                 
                 </LinearLayout>
@@ -74,26 +76,26 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
+                        android:layout_marginBottom="2dp"
                         >
                     <TextView 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="脉度价"
-                        android:paddingLeft="5dp"
                         android:paddingRight="5dp"
-                        android:paddingTop="3dp"
+                        android:paddingTop="2dp"
                         android:paddingBottom="3dp"
                         android:layout_marginRight="2dip"
-                        android:textColor="@color/white"
-                        android:background="@color/btn_bg_color"
+                        android:layout_marginBottom="5dp"
+                        android:textColor="@color/grey"
                         />
                      <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￥64.5/次"
+                    android:textSize="18sp"
                     android:textColor="@color/app_bg_color"
-                    android:layout_marginBottom="10dp"
                      />
                      </LinearLayout>
                      
@@ -101,6 +103,7 @@
                     android:id="@+id/price_shop"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/grey"
                     android:text="门店价：￥22.4/次"
                      />
                     
@@ -279,14 +282,85 @@
         <View
             android:id="@+id/line"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="2dip"
-            android:layout_marginTop="2dip"
+            android:layout_height="1px"
             android:background="@color/line" />
     </LinearLayout>
+    
+    <RadioGroup
+        android:id="@+id/rg_title"
+        android:layout_below="@+id/center_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dip"
+        android:background="@color/white"
+        android:visibility="visible"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/radio_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_weight="1"
+            android:textColor="@color/grey"
+            android:button="@android:color/transparent"
+            android:background="@drawable/bg_tab_selector"
+            android:checked="true"
+            android:gravity="center"
+            android:text="一人独享" />
+        <View 
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_weight="1"
+            android:paddingTop="10dip"
+            android:background="@drawable/bg_tab_selector"
+            android:paddingBottom="10dip"
+            android:textColor="@color/grey"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="二人套餐" /> 
+            
+        <View 
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/line"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:layout_weight="1"
+            android:paddingTop="10dip"
+            android:background="@drawable/bg_tab_selector"
+            android:paddingBottom="10dip"
+            android:textColor="@color/grey"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="三人套餐" /> 
+
+    </RadioGroup>
 
     <ProgressBar
-        	android:layout_below="@+id/center_info"
+        	android:layout_below="@+id/rg_title"
             android:id="@+id/web_progress"
             style="@style/ProgressBarHorizontal"
             android:layout_width="fill_parent"
