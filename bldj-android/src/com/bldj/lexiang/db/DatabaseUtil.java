@@ -321,6 +321,7 @@ public class DatabaseUtil {
 			product.setSellerNum(cursor.getInt(8));
 			product.setProDetailUrl(cursor.getString(9));
 			product.setSuitsCrowd(cursor.getString(10));
+			product.setExtPrice(cursor.getString(12));
 
 			products.add(product);
 		}
@@ -417,6 +418,7 @@ public class DatabaseUtil {
 					cv.put(ProductTable.PRODETAILURL, product.getProDetailUrl());
 					cv.put(ProductTable.SUITSCROWD, product.getSuitsCrowd());
 					cv.put(ProductTable.TYPE, type);
+					cv.put(ProductTable.EXTPRICE, product.getExtPrice());
 					long uri = dbHelper.insert(DBHelper.TABLE_NAME_PRODUCT,
 							null, cv);
 					System.out.println("缓存数据："+uri);
