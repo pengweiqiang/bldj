@@ -29,7 +29,7 @@ public enum TitleBarEnum {
 	TYPE_ORDER_SINGLE(13,"个人",0),
 	//0时间 3均价 4累计成交量 5距离
 	ORDER_DEFAULT(14,"默认排序",0),
-	ORDER_PRICE_SELLER(25,"价格排序",3),
+//	ORDER_PRICE_SELLER(25,"价格排序",3),
 	ORDER_DISTANCE(15,"距离排序",5),
 	ORDER_COUNT(16,"接单次数",4),
 	
