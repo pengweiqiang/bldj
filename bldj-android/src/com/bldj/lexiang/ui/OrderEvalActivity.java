@@ -189,6 +189,7 @@ public class OrderEvalActivity extends BaseActivity {
 			groups = new ArrayList<TitleBarEnum>();
 			groups.add(TitleBarEnum.SHARE_SINA);
 			groups.add(TitleBarEnum.SHARE_WEIXIN);
+			groups.add(TitleBarEnum.SHARE_WEIXIN_FRIEND);
 			groups.add(TitleBarEnum.SHARE_TENCENT);
 			GroupAdapter groupAdapter = new GroupAdapter(this, groups);
 			lv_group.setAdapter(groupAdapter);
@@ -219,10 +220,16 @@ public class OrderEvalActivity extends BaseActivity {
 					startActivity(intent);
 				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN
 						.getIndex()) {
+					MyApplication.getInstance().type = 1;
 					ToastUtils.showToast(mContext, "分享微信...");
 					shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareAppTxt(),
 							SendMessageToWX.Req.WXSceneTimeline,"");
-				} else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT
+				}else if(groups.get(position).getIndex() == TitleBarEnum.SHARE_WEIXIN_FRIEND.getIndex()){
+					MyApplication.getInstance().type = 0;
+					ToastUtils.showToast(mContext, "分享微信...");
+					shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareAppTxt(),
+							SendMessageToWX.Req.WXSceneSession,"");
+				}else if (groups.get(position).getIndex() == TitleBarEnum.SHARE_TENCENT
 						.getIndex()) {
 					String shareUrl = 
 							shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareAppTxt(), "", "");

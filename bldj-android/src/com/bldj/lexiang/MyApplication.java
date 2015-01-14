@@ -50,7 +50,8 @@ public class MyApplication extends Application {
 
 	public Map<String, String> appointMap = new HashMap<String, String>();// 我要预约的时间，姓名等等
 	public String street = "";// 当前街道地点
-
+	
+	public int type = -1;//0好友  1朋友圈
 	public static MyApplication getInstance() {
 		return myApplication;
 	}

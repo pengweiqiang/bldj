@@ -90,6 +90,7 @@
     <string name="share_tencent">分享到腾讯微博</string>
     <string name="share_sina">分享到新浪微博</string>
     <string name="share_weixin">分享到朋友圈</string>
+    <string name="share_weixin_friend">分享给好友</string>
     <string name="eval_good">好评</string>
     <string name="eval_nor">中评</string>
     <string name="eval_bad">差评</string>

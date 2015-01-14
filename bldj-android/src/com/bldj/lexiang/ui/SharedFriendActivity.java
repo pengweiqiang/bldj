@@ -25,6 +25,7 @@ public class SharedFriendActivity extends BaseActivity {
 	private Button btn_tencent;
 	private Button btn_sina;
 	private Button btn_weixin;
+	private Button btn_weixinFriend;
 
 	
 	ShareUtil shareUtil ;
@@ -58,10 +59,21 @@ public class SharedFriendActivity extends BaseActivity {
 		btn_tencent = (Button) findViewById(R.id.btn_share_tencent);
 		btn_sina = (Button) findViewById(R.id.btn_share_sina);
 		btn_weixin = (Button) findViewById(R.id.btn_share_weixin);
+		btn_weixinFriend = (Button)findViewById(R.id.btn_share_weixin_friend);
 	}
 
 	@Override
 	public void initListener() {
+		btn_weixinFriend.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				MyApplication.getInstance().type = 0;
+				ToastUtils.showToast(mContext, "分享微信...");
+				shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareAppTxt(),
+						SendMessageToWX.Req.WXSceneSession,MyApplication.getInstance().getConfParams().getAboutUsUrl());
+			}
+		});
 		btn_tencent.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -90,6 +102,7 @@ public class SharedFriendActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
+				MyApplication.getInstance().type = 1;
 				ToastUtils.showToast(mContext, "分享微信...");
 				shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareAppTxt(),
 						SendMessageToWX.Req.WXSceneTimeline,MyApplication.getInstance().getConfParams().getAboutUsUrl());
