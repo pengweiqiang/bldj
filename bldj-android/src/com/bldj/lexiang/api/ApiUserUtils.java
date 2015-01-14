@@ -72,7 +72,7 @@ public class ApiUserUtils {
 		params.put(ReqUrls.USERNAME, username);
 		params.put(ReqUrls.PASSWORD, password);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_USER_LOGIN, false,
-				requestCallBack, MethodType.LOGIN, context,HttpMethod.GET);
+				requestCallBack, MethodType.LOGIN, context);
 	}
 
 	/**

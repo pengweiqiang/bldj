@@ -30,8 +30,7 @@ public class ApiHomeUtils {
 		params.put(ReqUrls.LIMIT, limit);
 		params.put("type", type);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_GET_MAINPAGE_AD, false,
-				requestCallBack, MethodType.GET_MAINPAGE_AD, context,
-				HttpMethod.GET);
+				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 	}
 	/**
 	 * 企业专区
@@ -60,8 +59,7 @@ public class ApiHomeUtils {
 		params.put("payType", payType);
 		
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_COMPANY_ZONE, false,
-				requestCallBack, MethodType.GET_MAINPAGE_AD, context,
-				HttpMethod.GET);
+				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 	}
 	/**
 	 * 获取企业专区优惠列表
@@ -76,8 +74,7 @@ public class ApiHomeUtils {
 		params.put(ReqUrls.LIMIT, limit);
 		
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_CHEAP_CARDS, false,
-				requestCallBack, MethodType.GET_MAINPAGE_AD, context,
-				HttpMethod.GET);
+				requestCallBack, MethodType.GET_MAINPAGE_AD, context);
 	}
 
 }
