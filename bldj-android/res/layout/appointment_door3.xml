@@ -275,6 +275,32 @@
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="8dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/show_order_price"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/order_price"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="￥216.00"
+                    android:textColor="@color/grey"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -413,32 +439,6 @@
 	                    android:layout_gravity="center_vertical"
 	                    android:hint="@string/input_contactor"
 	                    android:textSize="14sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="3dip"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/show_order_price"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/order_price"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="￥216.00"
-                    android:textColor="@color/grey"
-                    android:textSize="14sp" />
             </LinearLayout>
             
             <LinearLayout
