@@ -12,13 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
@@ -30,11 +30,9 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
@@ -56,7 +54,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	private JlysHealthAdapter listAdapter;
 	private List<Seller> sellers;
 
-	private TextView tv_order_count, tv_order_price, tv_order_work;
+	private CheckBox tv_order_distance, tv_order_count, tv_order_work;
 
 	private int pageNumber = 0;
 
@@ -71,6 +69,12 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	private int endWorker;
 	private int startPrice;
 	private int endPrice;
+	
+	private int sortDistance = 0;//默认0降序
+	private int sortWorkYear = 0;//默认0降序
+	private int sortCount;//默认0降序
+	
+	int sort= 0;//默认0降序
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -113,9 +117,9 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
 
-		tv_order_count = (TextView) infoView.findViewById(R.id.order_count);
-		tv_order_price = (TextView) infoView.findViewById(R.id.order_price);
-		tv_order_work = (TextView) infoView.findViewById(R.id.order_work);
+		tv_order_distance = (CheckBox) infoView.findViewById(R.id.order_distance);
+		tv_order_count = (CheckBox) infoView.findViewById(R.id.order_count);
+		tv_order_work = (CheckBox) infoView.findViewById(R.id.order_worker);
 
 	}
 
@@ -150,23 +154,36 @@ public class SeeHealthDivFragment extends BaseFragment implements
 
 			@Override
 			public void onClick(View parent) {
-				buildTitleBar(parent, 0);
+				sortDistance = sortDistance == 0 ? 1: 0;
+//				buildTitleBar(parent, 0);
+				orderByTag = 4;
+				sort = sortDistance;
+				getSellers();
 			}
 		});
-		// 价格区间
-		tv_order_price.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View parent) {
-				buildTitleBar(parent, 1);
-			}
-		});
-		// 工作年限
+		// 工作经验
 		tv_order_work.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View parent) {
-				buildTitleBar(parent, 2);
+				sortWorkYear = sortWorkYear == 0 ? 1: 0;
+//				buildTitleBar(parent, 0);
+				orderByTag = 6;
+				sort = sortWorkYear;
+				getSellers();
+			}
+		});
+		// 距离排序
+		tv_order_distance.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View parent) {
+				sortCount = sortCount == 0 ? 1: 0;
+//				buildTitleBar(parent, 0);
+				orderByTag = 5;
+				sort = sortCount;
+				getSellers();
+//				buildTitleBar(parent, 2);
 			}
 		});
 
@@ -189,9 +206,10 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	private void getSellers() {
 		showLoading();
 		ApiSellerUtils.getSellers(mActivity, pageNumber, ApiConstants.LIMIT,
-				startPrice, endPrice, startWorker, endWorker, orderByTag,
+				/*startPrice, endPrice, startWorker, endWorker,*/ orderByTag,
 				MyApplication.getInstance().lat,
 				MyApplication.getInstance().lon,
+				sort,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -246,9 +264,9 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		groups = new ArrayList<TitleBarEnum>();
 		switch (index) {
 		case 0:
-			groups.add(TitleBarEnum.ORDER_DEFAULT);
+//			groups.add(TitleBarEnum.ORDER_DEFAULT);
 			groups.add(TitleBarEnum.ORDER_TIME);
-			groups.add(TitleBarEnum.ORDER_PRICE_SELLER);
+//			groups.add(TitleBarEnum.ORDER_PRICE_SELLER);
 			groups.add(TitleBarEnum.ORDER_DISTANCE);
 			groups.add(TitleBarEnum.ORDER_COUNT);
 			break;
