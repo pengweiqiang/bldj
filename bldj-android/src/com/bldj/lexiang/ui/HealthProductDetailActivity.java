@@ -359,18 +359,25 @@ public class HealthProductDetailActivity extends BaseActivity {
 							int position, long arg3) {
 						switch (position) {
 						case 0://微信分享
+							MyApplication.getInstance().type = 0;
+							ToastUtils.showToast(mContext, "分享微信...");
+							shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareProTxt(),
+									SendMessageToWX.Req.WXSceneSession,product.getProDetailUrl());
+							break;
+						case 1://微信分享
+							MyApplication.getInstance().type = 1;
 							ToastUtils.showToast(mContext, "分享微信...");
 							shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareProTxt(),
 									SendMessageToWX.Req.WXSceneTimeline,product.getProDetailUrl());
 							break;
-						case 1://新浪
+						case 2://新浪
 							String shareUrlSina = shareUtil.shareSina(MyApplication.getInstance().getConfParams().getShareProTxt(), product.getProDetailUrl(), product.getPicurl());
 							Intent intent = new Intent(HealthProductDetailActivity.this,BannerWebActivity.class);
 							intent.putExtra("url", shareUrlSina);
 							intent.putExtra("name", "新浪微博分享");
 							startActivity(intent);
 							break;
-						case 2://腾讯
+						case 3://腾讯
 							String shareUrlQQ = shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareProTxt(), product.getProDetailUrl(), product.getPicurl());
 							Intent intentQQ = new Intent(HealthProductDetailActivity.this,BannerWebActivity.class);
 							intentQQ.putExtra("url", shareUrlQQ);

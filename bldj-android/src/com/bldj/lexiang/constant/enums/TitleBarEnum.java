@@ -39,7 +39,8 @@ public enum TitleBarEnum {
 	WORK_10_BIG(28,"10年以上",10,-1),
 	
 	SHARE_SINA(20,"新浪微博"),
-	SHARE_WEIXIN(21,"微信"),
+	SHARE_WEIXIN(21,"朋友圈"),
+	SHARE_WEIXIN_FRIEND(31,"微信好友"),
 	SHARE_TENCENT(22,"腾讯微博"),
 	
 	CITY_BEIJING(22,"北京"),

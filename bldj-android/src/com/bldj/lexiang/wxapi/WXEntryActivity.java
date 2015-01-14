@@ -79,11 +79,12 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 		@Override
 		public void onResp(BaseResp resp) {
 			String result = "";
-			
 			switch (resp.errCode) {
 			case BaseResp.ErrCode.ERR_OK:
+				if(MyApplication.getInstance().type==1){
+					shared_addCode();
+				}
 				result = "分享成功";
-				shared_addCode();
 				break;
 			case BaseResp.ErrCode.ERR_USER_CANCEL:
 				result = "分享取消";
@@ -95,6 +96,7 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 				result = "未知";
 				break;
 			}
+			MyApplication.getInstance().type = -1;
 			if(!result.equals("分享取消")){
 				ToastUtils.showToast(mContext, result);
 			}

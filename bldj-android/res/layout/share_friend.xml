@@ -83,6 +83,23 @@
             android:text="@string/share_weixin"
              android:textColor="@color/grey"
             android:textSize="18sp" />
+        <Button
+            android:id="@+id/btn_share_weixin_friend"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:drawableLeft="@drawable/weixin_friend"
+            android:drawablePadding="15dp"
+            android:paddingLeft="15dip"
+            android:paddingRight="15dip"
+            android:drawableRight="@drawable/btn_img_open"
+            android:gravity="left|center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/share_weixin_friend"
+             android:textColor="@color/grey"
+            android:textSize="18sp" />
          <View 
             android:layout_width="match_parent"
             android:layout_height="1px"

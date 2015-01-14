@@ -309,18 +309,25 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 							int position, long arg3) {
 						switch (position) {
 						case 0://微信分享
+							MyApplication.getInstance().type = 0;
+							ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
+							shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
+									SendMessageToWX.Req.WXSceneSession,sellerVo.getDetailUrl());
+							break;
+						case 1://微信分享
+							MyApplication.getInstance().type = 1;
 							ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
 							shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
 									SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
 							break;
-						case 1://新浪
+						case 2://新浪
 							String shareUrlSina = shareUtil.shareSina(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
 							Intent intent = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
 							intent.putExtra("url", shareUrlSina);
 							intent.putExtra("name", "新浪微博分享");
 							startActivity(intent);
 							break;
-						case 2://腾讯
+						case 3://腾讯
 							String shareUrlQQ = shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
 							Intent intentQQ = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
 							intentQQ.putExtra("url", shareUrlQQ);
@@ -434,18 +441,25 @@ public class SellerPersonalActivity extends BaseFragmentActivity{
 								int position, long arg3) {
 							switch (position) {
 							case 0://微信分享
+								MyApplication.getInstance().type = 0;
+								ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
+								shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
+										SendMessageToWX.Req.WXSceneSession,sellerVo.getDetailUrl());
+								break;
+							case 1://微信分享
+								MyApplication.getInstance().type = 1;
 								ToastUtils.showToast(SellerPersonalActivity.this, "分享微信...");
 								shareUtil.sendWebPageToWX(MyApplication.getInstance().getConfParams().getShareSellerTxt(),
 										SendMessageToWX.Req.WXSceneTimeline,sellerVo.getDetailUrl());
 								break;
-							case 1://新浪
+							case 2://新浪
 								String shareUrlSina = shareUtil.shareSina(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
 								Intent intent = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
 								intent.putExtra("url", shareUrlSina);
 								intent.putExtra("name", "新浪微博分享");
 								startActivity(intent);
 								break;
-							case 2://腾讯
+							case 3://腾讯
 								String shareUrlQQ = shareUtil.shareQQ(MyApplication.getInstance().getConfParams().getShareSellerTxt(), sellerVo.getDetailUrl(), sellerVo.getHeadurl());
 								Intent intentQQ = new Intent(SellerPersonalActivity.this,BannerWebActivity.class);
 								intentQQ.putExtra("url", shareUrlQQ);

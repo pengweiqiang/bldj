@@ -25,9 +25,9 @@ public class SharePopupWindow extends PopupWindow {
 	private View view;
 	private GridView gridView;
 	private TextView cancel;
-	private int[] logo = { R.drawable.share_weixin,
+	private int[] logo = { R.drawable.weixin_friend,R.drawable.share_weixin,
 			R.drawable.share_sina, R.drawable.tencent_weibo};
-	private String[] name = { "朋友圈","新浪微博", "腾讯微博"};
+	private String[] name = {"微信好友", "朋友圈","新浪微博", "腾讯微博"};
 	private List<Map<String, Object>> contents;
 
 	public SharePopupWindow(Context context,
