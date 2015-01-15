@@ -543,6 +543,7 @@ public class DatabaseUtil {
 			product.setSellerNum(cursor.getInt(8));
 			product.setProDetailUrl(cursor.getString(9));
 			product.setSuitsCrowd(cursor.getString(10));
+			product.setExtPrice(cursor.getString(12));
 		}
 		
 		if (cursor != null) {
