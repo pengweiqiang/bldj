@@ -83,6 +83,11 @@
             android:text="@string/share_weixin"
              android:textColor="@color/grey"
             android:textSize="18sp" />
+         <View 
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line"
+            />
         <Button
             android:id="@+id/btn_share_weixin_friend"
             android:layout_width="fill_parent"
