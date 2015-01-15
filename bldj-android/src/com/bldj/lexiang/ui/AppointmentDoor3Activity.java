@@ -282,7 +282,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					return;
 				}
 				ApiBuyUtils.couponsManage(AppointmentDoor3Activity.this,
-						user.getUserId(), 0, vcode, 4, 0, 0, 0,
+						user.getUserId(), 0, vcode, 4, 0, 10, 0,
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
@@ -303,7 +303,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									} catch (Exception e) {
 										codePrice = 0;
 										ToastUtils.showToast(mContext,
-												e.toString());
+												"电子码无效！");
 									}
 									tv_electCodePrice.setText("￥" + codePrice);// 显示电子券码
 									showOrderPay(2);
