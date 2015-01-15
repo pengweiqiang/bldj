@@ -156,6 +156,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 			public void onClick(View parent) {
 				sortDistance = sortDistance == 0 ? 1: 0;
 //				buildTitleBar(parent, 0);
+				pageNumber = 0;
 				orderByTag = 4;
 				sort = sortDistance;
 				getSellers();
@@ -168,6 +169,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 			public void onClick(View parent) {
 				sortWorkYear = sortWorkYear == 0 ? 1: 0;
 //				buildTitleBar(parent, 0);
+				pageNumber = 0;
 				orderByTag = 6;
 				sort = sortWorkYear;
 				getSellers();
@@ -180,6 +182,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 			public void onClick(View parent) {
 				sortCount = sortCount == 0 ? 1: 0;
 //				buildTitleBar(parent, 0);
+				pageNumber = 0;
 				orderByTag = 5;
 				sort = sortCount;
 				getSellers();

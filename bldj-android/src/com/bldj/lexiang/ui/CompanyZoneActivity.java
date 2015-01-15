@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.PayType;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.utils.AlertDialogOperate;
 import com.bldj.lexiang.utils.DialogUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -41,6 +43,7 @@ import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.LoadingDialog;
 import com.bldj.lexiang.view.SpringScrollView;
+import com.bldj.universalimageloader.core.ImageLoader;
 
 /**
  * 企业专区
@@ -59,6 +62,7 @@ public class CompanyZoneActivity extends BaseActivity {
 	private TextView et_service_type_name;// 选择的套餐服务
 	private TextView tv_price;
 	private TextView tv_preferential;
+	private ImageView image_zone;
 	private String service_type_name;
 	private int serviceTypeIndex;
 	private double price;
@@ -115,11 +119,20 @@ public class CompanyZoneActivity extends BaseActivity {
 
 		if(type == 0){//优惠特区。需要登录
 			// 获取支付方式
+			image_zone.setVisibility(View.GONE);
+			findViewById(R.id.cheap_header).setVisibility(View.VISIBLE);
 			findViewById(R.id.ll_company_name).setVisibility(View.GONE);
 			getPayType();
 		}else if(type == 1){//企业专区,无需登录
-			findViewById(R.id.ll_company_name).setVisibility(View.GONE);
+			findViewById(R.id.cheap_header).setVisibility(View.GONE);
+			findViewById(R.id.ll_company_name).setVisibility(View.VISIBLE);
 			findViewById(R.id.ll_pay).setVisibility(View.GONE);
+			
+			ImageLoader.getInstance().displayImage(
+					MyApplication.getInstance().getConfParams().getEnterZonePic(),
+					image_zone,
+					MyApplication.getInstance().getOptions(
+							R.drawable.default_image));
 		}
 	}
 
@@ -136,6 +149,7 @@ public class CompanyZoneActivity extends BaseActivity {
 		mListView = (ListView) findViewById(R.id.paytype_listView);
 		scrollView = (SpringScrollView)findViewById(R.id.scrollView);
 		tv_preferential = (TextView)findViewById(R.id.tv_preferential);
+		image_zone = (ImageView)findViewById(R.id.image_zone);
 
 	}
 
@@ -159,18 +173,18 @@ public class CompanyZoneActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View arg0) {
-				companyName = /*et_company_name.getText().toString().trim();*/"个人购卡";
+				companyName = et_company_name.getText().toString().trim();;
 				concactType = et_contact_type.getText().toString().trim();
 				contactor = et_contactor.getText().toString().trim();
 				address = et_address.getText().toString().trim();
-				if(type==0){
-//					if (StringUtils.isEmpty(companyName)) {
-//						et_company_name.requestFocus();
-//						ToastUtils.showToast(CompanyZoneActivity.this, "请输入企业名称");
-//						return;
-//					}
-				}else{
-					companyName = "";
+				if(type==0){//优惠特区
+					companyName = "个人购卡";
+				}else{//企业专区
+					if (StringUtils.isEmpty(companyName)) {
+						et_company_name.requestFocus();
+						ToastUtils.showToast(CompanyZoneActivity.this, "请输入企业名称");
+						return;
+					}
 					payType = new PayType();
 					payType.setCode(0);
 				}
