@@ -278,7 +278,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 				if (StringUtils.isEmpty(vcode)) {
 					et_code.requestFocus();
 					ToastUtils.showToast(AppointmentDoor3Activity.this,
-							"请输入电子券码");
+							"请输入电子券");
 					return;
 				}
 				ApiBuyUtils.couponsManage(AppointmentDoor3Activity.this,
@@ -298,15 +298,26 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									// System.out.println(parseModel.getData()
 									// .toString());
 									try {
-										codePrice = Double.valueOf((parseModel
-												.getData().getAsString()));
+										
+										coupon = (Coupon)JsonUtils.fromJson(
+												parseModel.getData().toString(),
+												Coupon.class);
+										if(coupon.getStatus() != null && coupon.getStatus() == 0){
+											codePrice = coupon.getPrice();
+											
+											tv_electCodePrice.setText("￥" + codePrice);// 显示电子券码
+											showOrderPay(2);
+										}else{
+											ToastUtils.showToast(mContext,
+													"电子券已失效！");
+											codePrice = 0;
+										}
 									} catch (Exception e) {
 										codePrice = 0;
 										ToastUtils.showToast(mContext,
-												"电子码无效！");
+												"电子券无效！");
 									}
-									tv_electCodePrice.setText("￥" + codePrice);// 显示电子券码
-									showOrderPay(2);
+									
 								}
 							}
 						});
@@ -329,10 +340,15 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == 20) {// 选择优惠卷
 			coupon = (Coupon) data.getSerializableExtra("coupon");
-			tv_coupons.setText(coupon.getName() + " ￥" + coupon.getPrice());
-			couponPrice = coupon.getPrice();
-			tv_couponPrice.setText(" ￥" + couponPrice);
-			showOrderPay(1);
+			if(coupon.getStatus() != null && coupon.getStatus() == 0){
+				tv_coupons.setText(coupon.getName() + " ￥" + coupon.getPrice());
+				couponPrice = coupon.getPrice();
+				tv_couponPrice.setText(" ￥" + couponPrice);
+				showOrderPay(1);
+			}else{
+				ToastUtils.showToast(mContext,
+						"优惠券已失效！");
+			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}

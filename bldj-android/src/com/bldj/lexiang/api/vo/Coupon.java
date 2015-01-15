@@ -12,6 +12,8 @@ public class Coupon  implements Serializable{
 	private String name;
 	private String code;
 	private double price;
+	private Integer status;//0正常,1失效
+	private String statusStr;
 	private String starttime;
 	private String endtime;
 	private String description;
@@ -80,6 +82,19 @@ public class Coupon  implements Serializable{
 	public void setType(int type) {
 		this.type = type;
 	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public String getStatusStr() {
+		return statusStr;
+	}
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
+	
 	
 	
 }
