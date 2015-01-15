@@ -97,7 +97,7 @@
             android:layout_marginTop="20dip"
             android:layout_toRightOf="@+id/leaf_point"
             android:background="@drawable/myfile_bg1"
-            android:padding="10dip"
+            android:padding="15dip"
             android:text="今天身体状况很好今11212今天身体状况很好今天身体状况很好今天身体状况很好"
             android:textColor="@color/grey"
             android:textSize="12sp" />
