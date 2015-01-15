@@ -31,6 +31,7 @@
                 />
 
             <TextView
+                android:id="@+id/select_package_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dip"
