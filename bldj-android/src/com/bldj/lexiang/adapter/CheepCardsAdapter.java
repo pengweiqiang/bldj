@@ -71,6 +71,16 @@ public class CheepCardsAdapter extends BaseListAdapter {
 		
 		String []colors = cheepCard.getColorVal().split(";");
 		String []items = cheepCard.getItems().split(";");
+		if(items.length == 2){
+			holder.tv_package2.setVisibility(View.VISIBLE);
+			holder.tv_package3.setVisibility(View.GONE);
+		}else if(items.length == 1){
+			holder.tv_package2.setVisibility(View.GONE);
+			holder.tv_package3.setVisibility(View.GONE);
+		}else if(items.length == 3){
+			holder.tv_package2.setVisibility(View.VISIBLE);
+			holder.tv_package3.setVisibility(View.VISIBLE);
+		}
 		for (int i = 0; i < items.length; i++) {
 			if(i==0){
 				String item1 = "1、"+items[0];
