@@ -11,6 +11,7 @@
         android:orientation="horizontal"
         android:layout_marginBottom="3dip"
         android:background="@color/white"
+        android:visibility="gone"
         >
         <TextView 
             android:id="@+id/order_time"
