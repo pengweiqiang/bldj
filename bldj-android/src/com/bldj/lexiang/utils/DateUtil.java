@@ -21,6 +21,7 @@ public class DateUtil {
 	public static final String CHINESE_PATTERN = "MM月dd日  HH:mm";
 	public static final String CUSTOM_PATTERN_SCHEDULED = "yyyyMMdd";
 	public static final String SIMPLY_DD_PATTERN2 = "MM-dd";
+	public static final String SIMPLY_DD_PATTERN3 = "MM月dd日";
 
 	/**
 	 * 获得日期对象
@@ -100,6 +101,17 @@ public class DateUtil {
 		Date tempDate;
 		try {
 			tempDate = getDate(dateStr, FULL_PATTERN);
+			return getDateString(tempDate, pattern);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
+	}
+	public static String getDateMMDDString(String dateStr, String pattern) {
+		Date tempDate;
+		try {
+			tempDate = getDate(dateStr, SIMPLY_DD_PATTERN3);
 			return getDateString(tempDate, pattern);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
