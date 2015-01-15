@@ -46,6 +46,7 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 	ActionBar mActionBar;
 
 	Button btn_next;
+	private TextView tv_select_package_title;
 //	LinearLayout layout_package1;
 //	View layout_package2;
 //	View layout_package3;
@@ -77,8 +78,9 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
+		initData();
 		getData();
-		//		initData();
+		
 	}
 
 	// 设置activity的导航条
@@ -117,9 +119,11 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
 		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView)findViewById(R.id.listview);
+		tv_select_package_title = (TextView)findViewById(R.id.select_package_title);
 	}
 
 	private void initData() {
+		tv_select_package_title.setText(MyApplication.getInstance().getConfParams().getPreferential());
 		// 企业0元体验中的0字体变红
 //		setIndexTextColor(tv_package1_title,R.color.color_package1_title);
 //		// 企业0元体验中的0字体变红
