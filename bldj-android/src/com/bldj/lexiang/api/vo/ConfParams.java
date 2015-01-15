@@ -27,6 +27,8 @@ public class ConfParams  implements Serializable{
 	private String mobileRule;//手机号校验正则表达式
 	
 	private String preferential;//优惠特区的支付界面的顶层文案
+	
+	private String enterZonePic;//企业专区的banner
 
 	public String getAboutUsUrl() {
 		return aboutUsUrl;
@@ -106,6 +108,15 @@ public class ConfParams  implements Serializable{
 
 	public void setPreferential(String preferential) {
 		this.preferential = preferential;
+	}
+	
+
+	public String getEnterZonePic() {
+		return enterZonePic;
+	}
+
+	public void setEnterZonePic(String enterZonePic) {
+		this.enterZonePic = enterZonePic;
 	}
 
 	/**
