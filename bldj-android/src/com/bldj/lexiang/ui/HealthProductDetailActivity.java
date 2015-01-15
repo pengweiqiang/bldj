@@ -152,6 +152,11 @@ public class HealthProductDetailActivity extends BaseActivity {
 				packagePrice.add("一人独享@1@"+product.getCurPrice());
 				String packagePriceHttp [] = product.getExtPrice().split("[|]");//二人套餐@2@236||三人套餐@3#333
 				for (int i = 0; i < packagePriceHttp.length; i++) {
+					if(i==0){
+						rb_two.setText(packagePriceHttp[i].split("@")[0]);
+					}else if(i== 1){
+						rb_three.setText(packagePriceHttp[i].split("@")[0]);
+					}
 					packagePrice.add(packagePriceHttp[i]);
 				}
 				if(packagePrice.size() == 2){
