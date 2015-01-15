@@ -19,7 +19,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.MyFiles;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.ui.HealthProductDetailActivity;
-import com.bldj.universalimageloader.core.ImageLoader;
+import com.bldj.lexiang.utils.DateUtil;
 
 public class MyFileAdapter extends BaseListAdapter {
 
@@ -73,11 +73,12 @@ public class MyFileAdapter extends BaseListAdapter {
 		String year = "2014";
 		String date = "1205";
 		if(myFile.getContent().length()>4){
-			year = myFile.getDealdate().subSequence(0, 4).toString()+"年";
+			year = myFile.getDealdate().subSequence(0, 4).toString();
 			date = myFile.getDealdate().substring(4);
+			date = DateUtil.getDateString(date, "MMdd", DateUtil.SIMPLY_DD_PATTERN3);
 		}
 		holder.tv_year.setText(year);
-		holder.tv_year_small.setText(year);
+		holder.tv_year_small.setText(year+"年");
 		holder.tv_date.setText(date);
 		holder.tv_content.setText(myFile.getContent());
 		if(position == 0){
