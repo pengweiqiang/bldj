@@ -391,7 +391,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:background="@drawable/btn_coners"
-                        android:text="使用电子卷"
+                        android:text="使用电子券"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 

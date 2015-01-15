@@ -54,7 +54,7 @@ public class CouponsFragmentActivity extends BaseFragmentActivity {
 
 	// 设置activity的导航条
 	protected void onConfigureActionBar(ActionBar actionBar) {
-		actionBar.setTitle("我的优惠卷");
+		actionBar.setTitle("我的优惠券");
 		actionBar.setLeftActionButton(R.drawable.btn_back,
 				new OnClickListener() {
 					@Override
