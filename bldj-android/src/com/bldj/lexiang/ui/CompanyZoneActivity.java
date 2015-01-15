@@ -124,6 +124,7 @@ public class CompanyZoneActivity extends BaseActivity {
 			findViewById(R.id.ll_company_name).setVisibility(View.GONE);
 			getPayType();
 		}else if(type == 1){//企业专区,无需登录
+			btn_confirm.setText("0元申请");
 			findViewById(R.id.cheap_header).setVisibility(View.GONE);
 			findViewById(R.id.ll_company_name).setVisibility(View.VISIBLE);
 			findViewById(R.id.ll_pay).setVisibility(View.GONE);

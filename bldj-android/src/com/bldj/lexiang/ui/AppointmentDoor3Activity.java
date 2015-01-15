@@ -363,11 +363,13 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		if (type == 1) {// 优惠卷
 			orderPay = orderPay - couponPrice;
 			codePrice = 0;
+			tv_electCodePrice.setText(" ￥" + codePrice);
 		} else if (type == 2) {// 电子卷
 			orderPay = orderPay - codePrice;
 			if (coupon != null) {
 				tv_coupons.setText("无");
 				couponPrice = 0;
+				tv_couponPrice.setText(" ￥" + couponPrice);
 				coupon = null;
 			}
 
