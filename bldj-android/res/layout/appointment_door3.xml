@@ -466,6 +466,17 @@
                     android:text="￥0.00"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
+                <Button
+                        android:id="@+id/btn_cancel_coupons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:padding="5dp"
+                        android:background="@drawable/btn_coners"
+                        android:text="取消"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
             </LinearLayout>
             
             <LinearLayout
@@ -493,6 +504,17 @@
                     android:text="￥0.00"
                     android:textColor="@color/grey"
                     android:textSize="14sp" />
+                <Button
+                        android:id="@+id/btn_cancel_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:padding="5dp"
+                        android:background="@drawable/btn_coners"
+                        android:text="取消"
+                        android:visibility="gone"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
             </LinearLayout>
             
             <LinearLayout
