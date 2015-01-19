@@ -29,6 +29,7 @@ import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.PayTypeAdapter;
 import com.bldj.lexiang.alipay.Rsa;
 import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.vo.Account;
 import com.bldj.lexiang.api.vo.Coupon;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
@@ -82,6 +83,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private TextView tv_orderPrice;// 订单原本金额
 	private TextView tv_orderPay;
 	private EditText et_contactor;// 联系人
+	private TextView tv_account_left;//账户余额
+	
 	private ScrollView scrollView;
 	private PayType payType;
 
@@ -98,7 +101,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private Button btn_cancel_code;//取消电子券
 	private Button btn_cancel_coupon;//取消优惠卷
 	LoadingDialog loading;
-
+	
+	private Account account;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.appointment_door3);
@@ -118,6 +123,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		initData();
 		// 获取支付方式
 		getPayType();
+		//获取账户余额
+		getAccountLeft();
 	}
 
 	private void initData() {
@@ -157,6 +164,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_couponPrice = (TextView) findViewById(R.id.coupons_price);
 		tv_electCodePrice = (TextView) findViewById(R.id.elect_code_price);
 		et_contactor = (EditText) findViewById(R.id.contactor);
+		tv_account_left = (TextView) findViewById(R.id.account_left);
 		scrollView = (ScrollView) findViewById(R.id.scrollView);
 		btn_cancel_code = (Button) findViewById(R.id.btn_cancel_code);
 		btn_cancel_coupon = (Button) findViewById(R.id.btn_cancel_coupons);
@@ -221,6 +229,11 @@ public class AppointmentDoor3Activity extends BaseActivity {
 						aliPay(order);
 					} else if (payType.getCode() == 2) {// 银联支付
 
+					}else if(payType.getCode() == 0){
+						if(orderPay > account.getAccountLeft()){
+							ToastUtils.showToast(mContext, "账户余额不足");
+							return;
+						}
 					}
 
 					return;
@@ -463,6 +476,31 @@ public class AppointmentDoor3Activity extends BaseActivity {
 								payTypeList.addAll(payTypes);
 								listAdapter.notifyDataSetChanged();
 							}
+
+						}
+					}
+				});
+
+	}
+	/**
+	 * 获取账户余额
+	 */
+	private void getAccountLeft() {
+
+		loading = new LoadingDialog(mContext);
+		loading.show();
+		ApiBuyUtils.getAccountLeft(mContext,user.getUserId(),user.getMobile(),
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						loading.dismiss();
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							ToastUtils.showToast(mContext, parseModel.getMsg());
+						} else {
+							account = (Account)JsonUtils.fromJson(parseModel.getData().getAsString(), Account.class);
+							tv_account_left.setText("￥"+account.getAccountLeft());
 
 						}
 					}
