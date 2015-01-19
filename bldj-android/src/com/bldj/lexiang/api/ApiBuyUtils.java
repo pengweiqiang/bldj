@@ -184,5 +184,19 @@ public class ApiBuyUtils {
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 		
 	}
+	/**
+	 * 获取用户的余额
+	 * @param context
+	 * @param id
+	 * @param mobile
+	 * @param requestCallback
+	 */
+	public static void getAccountLeft(Context context,long id,String mobile,RequestCallback requestCallback){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.MOBILE, mobile);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ACCOUNT_LEFT, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+	}
 
 }
