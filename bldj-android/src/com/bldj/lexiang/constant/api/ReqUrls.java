@@ -187,6 +187,11 @@ public interface ReqUrls {
 	 */
 	public static final String REQUEST_PAY_TYPE = "/pay/getPays";
 	/**
+	 * 获取用户余额
+	 * /user/getAccountLeft
+	 */
+	public static final String REQUEST_ACCOUNT_LEFT = "/user/getAccountLeft";
+	/**
 	 * 通过支付id获取支付参数
 	 */
 	public static final String REQUEST_PAY_TYPE_BYID = "/pay/getPayByCode";
