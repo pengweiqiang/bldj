@@ -391,14 +391,19 @@ public class OrderDetail2Activity extends BaseActivity {
 
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.cancel();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							ToastUtils.showToast(OrderDetail2Activity.this,
 									parseModel.getMsg());
 						} else {
 							payType = (PayType)JsonUtils.fromJson(parseModel.getData().toString(), PayType.class);
-							aliPay(order);
-							loading.cancel();
+							if(payType.getCode() == 1){//支付宝
+								aliPay(order);
+							}else if(payType.getCode() == 0){//账户余额支付
+								
+							}
+							
 						}
 					}
 				});
