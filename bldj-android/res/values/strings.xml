@@ -143,6 +143,7 @@
     <string name="use_elect_code">使用电子券：</string>
     <string name="show_order_price">订单价格：</string>
     <string name="real_pay">实际支付：</string>
+    <string name="account_left">账户余额：</string>
     <string name="use_elect_code_price">使用电子券：</string>
     <string name="select_pay_type">选择支付方式：</string>
     <string name="order_item">订单项目</string>
