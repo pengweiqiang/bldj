@@ -46,6 +46,7 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.LoadingDialog;
 
 /**
  * 上门预约3
@@ -96,6 +97,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	InputMethodManager manager;
 	private Button btn_cancel_code;//取消电子券
 	private Button btn_cancel_coupon;//取消优惠卷
+	LoadingDialog loading;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -306,12 +308,15 @@ public class AppointmentDoor3Activity extends BaseActivity {
 							"请输入电子券");
 					return;
 				}
+				loading = new LoadingDialog(mContext);
+				loading.show();
 				ApiBuyUtils.couponsManage(AppointmentDoor3Activity.this,
 						user.getUserId(), 0, vcode, 4, 0, 10, 0,
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
 							public void execute(ParseModel parseModel) {
+								loading.dismiss();
 								if (!ApiConstants.RESULT_SUCCESS
 										.equals(parseModel.getStatus())) {
 									ToastUtils.showToast(
