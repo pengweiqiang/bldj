@@ -38,7 +38,9 @@ import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.utils.AlertDialogOperate;
 import com.bldj.lexiang.utils.DateUtil;
+import com.bldj.lexiang.utils.DialogUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.StringUtils;
@@ -92,6 +94,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	Order order = null;
 
 	InputMethodManager manager;
+	private Button btn_cancel_code;//取消电子券
+	private Button btn_cancel_coupon;//取消优惠卷
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +156,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_electCodePrice = (TextView) findViewById(R.id.elect_code_price);
 		et_contactor = (EditText) findViewById(R.id.contactor);
 		scrollView = (ScrollView) findViewById(R.id.scrollView);
+		btn_cancel_code = (Button) findViewById(R.id.btn_cancel_code);
+		btn_cancel_coupon = (Button) findViewById(R.id.btn_cancel_coupons);
 		/*
 		 * rb_aliay = (RadioButton) findViewById(R.id.aliay_pay); rb_weixin =
 		 * (RadioButton) findViewById(R.id.weixin_pay); rb_union = (RadioButton)
@@ -169,6 +175,25 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 	@Override
 	public void initListener() {
+		//取消电子码
+		btn_cancel_code.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				et_code.setText("");
+				showOrderPay(0);
+			}
+		});
+		//取消优惠卷
+		btn_cancel_coupon.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				tv_coupons.setText("请选择优惠卷");
+				showOrderPay(0);
+			}
+		});
+		
 		scrollView.setOnTouchListener(new OnTouchListener() {
 
 			@Override
@@ -303,10 +328,12 @@ public class AppointmentDoor3Activity extends BaseActivity {
 												parseModel.getData().toString(),
 												Coupon.class);
 										if(coupon.getStatus() != null && coupon.getStatus() == 0){
-											codePrice = coupon.getPrice();
+											
+											showCodePriceDialog(coupon.getPrice());
+											/*codePrice = coupon.getPrice();
 											
 											tv_electCodePrice.setText("￥" + codePrice);// 显示电子券码
-											showOrderPay(2);
+											showOrderPay(2);*/
 										}else{
 											ToastUtils.showToast(mContext,
 													"电子券已失效！");
@@ -362,17 +389,36 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		orderPay = product.getCurPrice();
 		if (type == 1) {// 优惠卷
 			orderPay = orderPay - couponPrice;
-			codePrice = 0;
-			tv_electCodePrice.setText(" ￥" + codePrice);
+			if(codePrice != 0 ){
+				ToastUtils.showToast(mContext, "多种优惠活动只能使用一种");
+				codePrice = 0;
+				tv_electCodePrice.setText(" ￥" + codePrice);
+			}
+			et_code.setText("");
+			btn_cancel_code.setVisibility(View.GONE);
+			btn_cancel_coupon.setVisibility(View.VISIBLE);
+			
 		} else if (type == 2) {// 电子卷
 			orderPay = orderPay - codePrice;
-			if (coupon != null) {
-				tv_coupons.setText("选择优惠券");
+			if (couponPrice != 0) {
+				ToastUtils.showToast(mContext, "多种优惠活动只能使用一种");
 				couponPrice = 0;
+				tv_coupons.setText("选择优惠券");
+				
+				btn_cancel_coupon.setVisibility(View.GONE);
 				tv_couponPrice.setText(" ￥" + couponPrice);
-				coupon = null;
+//				coupon = null;
 			}
+			btn_cancel_code.setVisibility(View.VISIBLE);
 
+		}else{
+			coupon = null;
+			couponPrice = 0;
+			codePrice = 0;
+			btn_cancel_code.setVisibility(View.GONE);
+			btn_cancel_coupon.setVisibility(View.GONE);
+			tv_couponPrice.setText(" ￥" + couponPrice);
+			tv_electCodePrice.setText(" ￥" + codePrice);
 		}
 		if (orderPay <= 0) {// 总价格小于1，最低消费0.01
 			orderPay = 0.01;
@@ -559,5 +605,34 @@ public class AppointmentDoor3Activity extends BaseActivity {
 			}
 		}
 		return super.onTouchEvent(event);
+	}
+	/**
+	 * 展示电子码最终结果
+	 * @param codePrice
+	 */
+	private void showCodePriceDialog(double price){
+		String tip = StringUtils.ToDBC("您的电子券价值："+price+"元，点击确定使用");
+		DialogUtil.createAlertDialog(mContext, -1, tip,
+				R.string.dlg_ok, R.string.dlg_cancel,
+				new AlertDialogOperate() {
+
+					@Override
+					public void physicalclose() {
+
+					}
+
+					@Override
+					public void operate() {
+						codePrice = coupon.getPrice();
+						
+						tv_electCodePrice.setText("￥" + codePrice);// 显示电子券码
+						showOrderPay(2);
+					}
+
+					@Override
+					public void cancel() {
+
+					}
+				});
 	}
 }
