@@ -192,6 +192,11 @@ public interface ReqUrls {
 	 */
 	public static final String REQUEST_ACCOUNT_LEFT = "/user/getAccountLeft";
 	/**
+	 * 使用余额支付
+	 * /user/accountLeftConsume
+	 */
+	public static final String REQUEST_ACCOUNT_LEFT_CONSUME = "/user/accountLeftConsume";
+	/**
 	 * 通过支付id获取支付参数
 	 */
 	public static final String REQUEST_PAY_TYPE_BYID = "/pay/getPayByCode";
