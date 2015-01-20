@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,25 +59,34 @@ public class PayTypeAdapter extends BaseListAdapter {
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		PayType payType = (PayType) getItem(position);
 
-		convertView = mInflater.inflate(R.layout.paytype_item, null);
-		TextView tv_username = (TextView) convertView
-				.findViewById(R.id.pay_name);
-		ImageView iv_image = (ImageView) convertView
-				.findViewById(R.id.pay_image);
-		final CheckBox check_pay = (CheckBox) convertView
-				.findViewById(R.id.pay_radio);
-		LinearLayout ll_pay = (LinearLayout)convertView.findViewById(R.id.ll_pay);
-		if(checkedIndex==position){
-			check_pay.setChecked(true);
-		}else{
-			check_pay.setChecked(false);
+		final ViewHolder holder;
+		if (null == convertView) {
+			holder = new ViewHolder();
+
+			convertView = mInflater.inflate(R.layout.paytype_item, null);
+			holder.tv_username = (TextView)convertView.findViewById(R.id.pay_name);
+			holder.iv_image = (ImageView)convertView.findViewById(R.id.pay_image);
+			holder.check_pay = (CheckBox)convertView.findViewById(R.id.pay_radio);
+			holder.ll_pay = (LinearLayout)convertView.findViewById(R.id.ll_pay);
+			
+			convertView.setTag(holder);
+
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-		ll_pay.setOnClickListener(new View.OnClickListener() {
+		
+		
+		if(checkedIndex==position){
+			holder.check_pay.setChecked(true);
+		}else{
+			holder.check_pay.setChecked(false);
+		}
+		holder.ll_pay.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				if(check_pay.isChecked()){
-					check_pay.setChecked(false);
+				if(holder.check_pay.isChecked()){
+					holder.check_pay.setChecked(false);
 					checkedIndex = -1;
 				}else{
 					checkedIndex = position;
@@ -86,7 +94,7 @@ public class PayTypeAdapter extends BaseListAdapter {
 				}
 			}
 		});
-		/*check_pay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		/*holder.check_pay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -98,13 +106,22 @@ public class PayTypeAdapter extends BaseListAdapter {
 				}
 			}
 		});*/
-		tv_username.setText(payType.getDescription());
+		holder.tv_username.setText(payType.getDescription());
 		if(!StringUtils.isEmpty(payType.getIconPic())){
-			ImageLoader.getInstance().displayImage(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+payType.getIconPic(), iv_image,
+			ImageLoader.getInstance().displayImage(ReqUrls.Connection_Type_Common+ReqUrls.DEFAULT_REQ_HOST_IP+payType.getIconPic(), holder.iv_image,
 					MyApplication.getInstance().getOptions(R.drawable.default_icon));
 		}
 
 		return convertView;
 	}
+	
+	public final class ViewHolder {
+		public TextView tv_username;
+		public ImageView iv_image;
+		public CheckBox check_pay;
+		public LinearLayout ll_pay;
+		
+	}
+
 
 }
