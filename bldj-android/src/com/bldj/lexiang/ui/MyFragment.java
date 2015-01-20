@@ -635,6 +635,7 @@ public class MyFragment extends BaseFragment {
 							if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 									.getStatus())) {
 								ToastUtils.showToast(mActivity, parseModel.getMsg());
+								tv_account_left.setText("帐户余额获取失败，稍后重试");
 							} else {
 								account = (Account)JsonUtils.fromJson(parseModel.getData().toString(), Account.class);
 								tv_account_left.setText("帐户余额："+account.getAccountLeft()+"元");
