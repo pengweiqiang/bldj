@@ -198,5 +198,24 @@ public class ApiBuyUtils {
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ACCOUNT_LEFT, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
+	/**
+	 * 
+	 * @param context
+	 * @param id
+	 * @param mobile
+	 * @param couponsId
+	 * @param payNum
+	 * @param orderNum
+	 */
+	public static void accountLeftConsume(Context context,long id,String mobile,String couponsId,Double payNum,String orderNum,RequestCallback requestCallback){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.MOBILE, mobile);
+		params.put("couponsId", couponsId);
+		params.put("payNum", payNum);
+		params.put("orderNum", orderNum);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ACCOUNT_LEFT_CONSUME, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+	}
 
 }
