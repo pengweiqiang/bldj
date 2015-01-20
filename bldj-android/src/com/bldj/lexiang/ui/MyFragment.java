@@ -35,14 +35,17 @@ import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
+import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.ApiUserUtils;
 import com.bldj.lexiang.api.ApiVersionUtils;
+import com.bldj.lexiang.api.vo.Account;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.api.ReqUrls;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.PhotoUtil;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
@@ -76,7 +79,8 @@ public class MyFragment extends BaseFragment {
 	LoadingDialog loading;
 	
 	private EditText et_nickname;
-
+	private TextView tv_account_left;//余额
+	
 	User user;
 
 	String path;
@@ -88,6 +92,7 @@ public class MyFragment extends BaseFragment {
 		infoView = inflater.inflate(R.layout.my_fragment, container, false);
 		initView();
 		initListener();
+		
 		return infoView;
 	}
 
@@ -109,6 +114,7 @@ public class MyFragment extends BaseFragment {
 
 		tv_username = (TextView) infoView.findViewById(R.id.tv_person_name);
 		image_head = (RoundImageView) infoView.findViewById(R.id.img_person);
+		tv_account_left = (TextView) infoView.findViewById(R.id.tv_account_left);
 
 	}
 
@@ -374,6 +380,7 @@ public class MyFragment extends BaseFragment {
 	public void onResume() {
 		super.onResume();
 		initData();
+		getAccountLeft();
 	}
 
 	RelativeLayout layout_choose;
@@ -612,7 +619,33 @@ public class MyFragment extends BaseFragment {
 					}
 				});
 	}
+	
+	
+	/**
+	 * 获取账户余额
+	 */
+	Account account;
+	private void getAccountLeft() {
+		if(user!=null){
+			ApiBuyUtils.getAccountLeft(mActivity,user.getUserId(),user.getMobile(),
+					new HttpConnectionUtil.RequestCallback() {
+	
+						@Override
+						public void execute(ParseModel parseModel) {
+							if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+									.getStatus())) {
+								ToastUtils.showToast(mActivity, parseModel.getMsg());
+							} else {
+								account = (Account)JsonUtils.fromJson(parseModel.getData().toString(), Account.class);
+								tv_account_left.setText("帐户余额："+account.getAccountLeft()+"元");
+	
+							}
+						}
+					});
+		}
 
+	}
+	
 	// ApiUserUtils.updateHeader(mActivity,user.getUsername(),
 	// stream,new File(path), new HttpConnectionUtil.RequestCallback() {
 	//
