@@ -499,7 +499,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 								.getStatus())) {
 							ToastUtils.showToast(mContext, parseModel.getMsg());
 						} else {
-							account = (Account)JsonUtils.fromJson(parseModel.getData().getAsString(), Account.class);
+							account = (Account)JsonUtils.fromJson(parseModel.getData().toString(), Account.class);
 							tv_account_left.setText("￥"+account.getAccountLeft());
 
 						}
