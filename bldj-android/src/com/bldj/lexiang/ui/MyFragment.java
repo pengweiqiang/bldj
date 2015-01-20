@@ -121,6 +121,7 @@ public class MyFragment extends BaseFragment {
 	private void initData() {
 		user = MyApplication.getInstance().getCurrentUser();
 		if (user != null) {
+			tv_account_left.setVisibility(View.VISIBLE);
 			btn_logout.setText(getResources().getString(R.string.logout));
 			tv_username
 					.setText(StringUtils.isEmpty(user.getNickname()) ? "未设置昵称"
@@ -132,6 +133,7 @@ public class MyFragment extends BaseFragment {
 							R.drawable.default_head_image));
 		} else {// 未登录
 			tv_username.setText("未登录");
+			tv_account_left.setVisibility(View.GONE);
 			btn_logout.setText(getResources().getString(R.string.login));
 			image_head.setImageDrawable(getResources().getDrawable(R.drawable.default_head_image));
 		}
