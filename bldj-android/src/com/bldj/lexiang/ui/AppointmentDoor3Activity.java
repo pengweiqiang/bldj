@@ -731,6 +731,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 								.getStatus())) {
 							ToastUtils.showToast(mContext, parseModel.getMsg());
 						} else {
+							ToastUtils.showToast(mContext, "支付成功");
 							paySuccessOrCancelPay();
 						}
 					}
