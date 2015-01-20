@@ -321,7 +321,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									} else if (payType.getCode() == 2) {// 银联支付
 
 									}else if(payType.getCode() == 0){//余额支付成功
-										paySuccessOrCancelPay();
+										accountLeftResume(order);
 									}
 									return;
 								}
@@ -714,4 +714,27 @@ public class AppointmentDoor3Activity extends BaseActivity {
                 + 15;  
         listView.setLayoutParams(params);  
     }  
+	
+	/**
+	 * 下单成功使用余额支付
+	 */
+	private void accountLeftResume(Order order){
+		loading = new LoadingDialog(mContext);
+		loading.show();
+		ApiBuyUtils.accountLeftConsume(mContext,user.getUserId(),user.getMobile(),order.getCouponsId(),order.getOrderPay(),order.getOrderNum(),
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						loading.dismiss();
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							ToastUtils.showToast(mContext, parseModel.getMsg());
+						} else {
+							paySuccessOrCancelPay();
+						}
+					}
+				});
+
+	}
 }
