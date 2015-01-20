@@ -46,6 +46,7 @@
             android:layout_height="wrap_content" 
             android:checked="false"
             android:padding="5dip"
+            android:clickable="false"
             android:layout_gravity="center"
             android:gravity="center_vertical"
             />
