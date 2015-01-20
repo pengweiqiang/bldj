@@ -137,6 +137,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_time.setText(DateUtil.getDateString(time, DateUtil.CUSTOM_PATTERN3,
 				DateUtil.CUSTOM_PATTERN2));
 		tv_sellerName.setText(seller.getNickname());
+		et_contactor.setText(user.getUsername());
 
 		orderPay = product.getCurPrice();
 		showOrderPay(0);
