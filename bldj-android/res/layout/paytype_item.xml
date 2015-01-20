@@ -16,7 +16,7 @@
         <ImageView
             android:id="@+id/pay_image"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_marginRight="10dip"
             android:layout_gravity="center"
