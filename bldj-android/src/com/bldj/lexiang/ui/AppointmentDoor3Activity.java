@@ -11,12 +11,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -121,6 +123,10 @@ public class AppointmentDoor3Activity extends BaseActivity {
 
 		initListener();
 		initData();
+		
+		payTypeList = new ArrayList<PayType>();
+		listAdapter = new PayTypeAdapter(mContext, payTypeList, null);
+		mListView.setAdapter(listAdapter);
 		// 获取支付方式
 		getPayType();
 		//获取账户余额
@@ -230,6 +236,10 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					} else if (payType.getCode() == 2) {// 银联支付
 
 					}else if(payType.getCode() == 0){
+						if(account == null){
+							ToastUtils.showToast(mContext, "账户余额不足");
+							return;
+						}
 						if(orderPay > account.getAccountLeft()){
 							ToastUtils.showToast(mContext, "账户余额不足");
 							return;
@@ -249,6 +259,16 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					return;
 				}
 				payType = payTypeList.get(listAdapter.getCheckPosition());
+				if(payType.getCode() == 0){
+					if(account == null){
+						ToastUtils.showToast(mContext, "账户余额不足");
+						return;
+					}
+					if(orderPay > account.getAccountLeft()){
+						ToastUtils.showToast(mContext, "账户余额不足");
+						return;
+					}
+				}
 				String serviceTime = time.substring(0, time.indexOf(" ")) + "@"
 						+ timeIndex;
 				long couponId = 0;
@@ -300,6 +320,8 @@ public class AppointmentDoor3Activity extends BaseActivity {
 										aliPay(order);
 									} else if (payType.getCode() == 2) {// 银联支付
 
+									}else if(payType.getCode() == 0){//余额支付成功
+										paySuccessOrCancelPay();
 									}
 									return;
 								}
@@ -455,9 +477,6 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	 */
 	private void getPayType() {
 
-		payTypeList = new ArrayList<PayType>();
-		listAdapter = new PayTypeAdapter(mContext, payTypeList, null);
-		mListView.setAdapter(listAdapter);
 
 		ApiBuyUtils.getPayType(mContext,
 				new HttpConnectionUtil.RequestCallback() {
@@ -474,9 +493,9 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									});
 							if (payTypes != null && !payTypes.isEmpty()) {
 								payTypeList.addAll(payTypes);
-								listAdapter.notifyDataSetChanged();
 							}
-
+							listAdapter.notifyDataSetChanged();
+							setListViewHeightBasedOnChildren(mListView);
 						}
 					}
 				});
@@ -678,4 +697,21 @@ public class AppointmentDoor3Activity extends BaseActivity {
 					}
 				});
 	}
+	public void setListViewHeightBasedOnChildren(ListView listView) {  
+        ListAdapter listAdapter = listView.getAdapter();  
+        if (listAdapter == null) {  
+            return;  
+        }  
+        int totalHeight = 0;  
+        for (int i = 0; i < listAdapter.getCount(); i++) {  
+            View listItem = listAdapter.getView(i, null, listView);  
+            listItem.measure(0, 0);  
+            totalHeight += listItem.getMeasuredHeight();  
+        }  
+        ViewGroup.LayoutParams params = listView.getLayoutParams();  
+        params.height = totalHeight  
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1))  
+                + 15;  
+        listView.setLayoutParams(params);  
+    }  
 }
