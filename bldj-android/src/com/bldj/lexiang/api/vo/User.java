@@ -16,6 +16,7 @@ public class User implements Serializable{
 	private String headurl;//头像
 	private double lon;//经度
 	private double lat;//纬度
+	private double accountLeft;//余额
 	
 	
 	public long getUserId() {
@@ -59,6 +60,12 @@ public class User implements Serializable{
 	}
 	public void setLat(double lat) {
 		this.lat = lat;
+	}
+	public double getAccountLeft() {
+		return accountLeft;
+	}
+	public void setAccountLeft(double accountLeft) {
+		this.accountLeft = accountLeft;
 	}
 	
 	
