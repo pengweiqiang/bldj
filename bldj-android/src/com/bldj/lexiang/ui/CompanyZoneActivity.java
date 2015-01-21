@@ -12,11 +12,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -226,6 +228,9 @@ public class CompanyZoneActivity extends BaseActivity {
 						.getCheckPosition());
 				if (payType.getCode() == 1) {// 支付宝支付
 					aliPay();
+				}else if(payType.getCode() == 0){//余额支付
+					ToastUtils.showToast(mContext, "亲，优惠专区不支持"+payType.getName());
+					return;
 				}
 
 			}
@@ -253,12 +258,14 @@ public class CompanyZoneActivity extends BaseActivity {
 		payTypeList = new ArrayList<PayType>();
 		listAdapter = new PayTypeAdapter(mContext, payTypeList, null);
 		mListView.setAdapter(listAdapter);
-
+		loading = new LoadingDialog(mContext);
+		loading.show();
 		ApiBuyUtils.getPayType(mContext,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
+						loading.dismiss();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							ToastUtils.showToast(mContext, parseModel.getMsg());
@@ -271,6 +278,7 @@ public class CompanyZoneActivity extends BaseActivity {
 								payTypeList.addAll(payTypes);
 								listAdapter.notifyDataSetChanged();
 							}
+							setListViewHeightBasedOnChildren(mListView);
 
 						}
 					}
@@ -433,5 +441,23 @@ public class CompanyZoneActivity extends BaseActivity {
 			}
 		};
 	};
+	
+	public void setListViewHeightBasedOnChildren(ListView listView) {  
+        ListAdapter listAdapter = listView.getAdapter();  
+        if (listAdapter == null) {  
+            return;  
+        }  
+        int totalHeight = 0;  
+        for (int i = 0; i < listAdapter.getCount(); i++) {  
+            View listItem = listAdapter.getView(i, null, listView);  
+            listItem.measure(0, 0);  
+            totalHeight += listItem.getMeasuredHeight();  
+        }  
+        ViewGroup.LayoutParams params = listView.getLayoutParams();  
+        params.height = totalHeight  
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1))  
+                ;  
+        listView.setLayoutParams(params);  
+    }  
 
 }

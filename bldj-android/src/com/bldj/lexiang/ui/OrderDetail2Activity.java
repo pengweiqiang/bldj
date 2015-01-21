@@ -183,7 +183,16 @@ public class OrderDetail2Activity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				getPayType();
+				if(order.getPayType()==0){//余额支付
+					if(order.getOrderPay() > user.getAccountLeft()){
+						ToastUtils.showToast(mContext, "亲，帐户余额不足哦");
+						return;
+					}
+					accountLeftResume(order);
+				}else if(order.getPayType() == 1){
+					getPayType();
+				}
+				
 			}
 		});
 		// 取消订单
@@ -457,7 +466,29 @@ public class OrderDetail2Activity extends BaseActivity {
 		return super.onKeyDown(keyCode, event);
 	}
 
-	
+	/**
+	 * 下单成功使用余额支付
+	 */
+	private void accountLeftResume(Order order){
+		loading = new LoadingDialog(mContext);
+		loading.show();
+		ApiBuyUtils.accountLeftConsume(mContext,user.getUserId(),user.getMobile(),order.getCouponsId(),order.getOrderPay(),order.getOrderNum(),
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						loading.dismiss();
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							ToastUtils.showToast(mContext, parseModel.getMsg());
+						} else {
+							ToastUtils.showToast(mContext, "支付成功");
+							paySuccessOrCancelPay();
+						}
+					}
+				});
+
+	}
 	
 	
 	

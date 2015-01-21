@@ -711,8 +711,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
         }  
         ViewGroup.LayoutParams params = listView.getLayoutParams();  
         params.height = totalHeight  
-                + (listView.getDividerHeight() * (listAdapter.getCount() - 1))  
-                + 15;  
+                + (listView.getDividerHeight() * (listAdapter.getCount() - 1));  
         listView.setLayoutParams(params);  
     }  
 	
