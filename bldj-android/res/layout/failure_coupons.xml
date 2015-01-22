@@ -3,7 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+	
+    <LinearLayout
+        android:id="@+id/un_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
     
       <com.bldj.lexiang.view.XListView
         android:id="@+id/jlys_listview"
@@ -23,7 +28,12 @@
         android:max="100"
         android:visibility="visible" /> -->
         <include layout="@layout/loading"/>
+    </LinearLayout>
     
+     <include
+        android:id="@+id/empty_layout"
+        layout="@layout/empty"
+        android:visibility="gone" />
     
 
 </LinearLayout>

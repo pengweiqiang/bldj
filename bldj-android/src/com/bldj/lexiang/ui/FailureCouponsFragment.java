@@ -7,6 +7,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -31,7 +32,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * @author will
  * 
  */
-public class FailureCouponsFragment extends BaseFragment implements IXListViewListener{
+public class FailureCouponsFragment extends BaseFragment implements IXListViewListener,OnClickListener{
 
 	RelativeLayout rl_loading;//进度条
 	ImageView loading_ImageView;//加载动画
@@ -42,7 +43,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	private List<Coupon> coupons;
 	
 	private int pageNumber = 0;
-	
+	View layoutEmpty;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,7 +82,7 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 		rl_loadingFail = (RelativeLayout) infoView.findViewById(R.id.loading_fail);
 		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 		mListView = (XListView)infoView.findViewById(R.id.jlys_listview);
-		
+		layoutEmpty = infoView.findViewById(R.id.empty_layout);
 		
 	}
 	/**
@@ -137,6 +138,11 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 									});
 							if(pageNumber==0){
 								coupons.clear();
+								if(couponsList==null || couponsList.isEmpty()){
+									infoView.findViewById(R.id.un_empty).setVisibility(View.GONE);
+									layoutEmpty.setVisibility(View.VISIBLE);
+									showEmpty(layoutEmpty,R.string.empty_unfail_coupons_tip,0,R.drawable.empty_unuse_coupons,FailureCouponsFragment.this);
+								}
 							}
 							coupons.addAll(couponsList);
 
@@ -160,4 +166,10 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 		getCoupons();
 	}
 
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

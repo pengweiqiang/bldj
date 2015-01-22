@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.bldj.lexiang.api.vo.MyFiles;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
+import com.bldj.lexiang.listener.EmptyClickListener;
 import com.bldj.lexiang.utils.DateUtil;
 import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
@@ -35,7 +37,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * 
  */
 public class MyFilesActivity extends BaseActivity implements
-IXListViewListener {
+IXListViewListener,OnClickListener {
 
 	ActionBar mActionBar;
 	
@@ -50,6 +52,7 @@ IXListViewListener {
 	private int pageNumber = 0;
 	String dealDate = DateUtil.getDateString(new Date(), DateUtil.CUSTOM_PATTERN_SCHEDULED);
 	
+	View layoutEmpty;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.my_files);
@@ -85,6 +88,7 @@ IXListViewListener {
 		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
 		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView) findViewById(R.id.listview);
+		layoutEmpty = findViewById(R.id.empty_layout);
 	}
 
 	@Override
@@ -140,6 +144,11 @@ IXListViewListener {
 
 							if (pageNumber == 0) {
 								myFiles.clear();
+								if(myFilesList==null || myFilesList.isEmpty()){
+									findViewById(R.id.un_empty).setVisibility(View.GONE);
+									layoutEmpty.setVisibility(View.VISIBLE);
+									showEmpty(layoutEmpty,R.string.empty_file_tip,R.string.empty_file_go,R.drawable.empty_myfile,MyFilesActivity.this);
+								}
 							}
 							myFiles.addAll(myFilesList);
 
@@ -164,6 +173,14 @@ IXListViewListener {
 		dealDate = DateUtils.getDateAfterSomeDay(dealDate, -5);//?????日期从哪里选择，还有分页数据
 		getData();
 	}
+
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+		
+	}
+
+	
 
 
 }

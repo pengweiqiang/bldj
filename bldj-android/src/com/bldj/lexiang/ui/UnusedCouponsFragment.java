@@ -8,6 +8,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -34,7 +35,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * 
  */
 public class UnusedCouponsFragment extends BaseFragment implements
-		IXListViewListener {
+		IXListViewListener,OnClickListener {
 
 	RelativeLayout rl_loading;//进度条
 	ImageView loading_ImageView;//加载动画
@@ -46,6 +47,8 @@ public class UnusedCouponsFragment extends BaseFragment implements
 
 	private int pageNumber = 0;
 	private int type;
+	
+	View layoutEmpty;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,6 +88,8 @@ public class UnusedCouponsFragment extends BaseFragment implements
 		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
 		type = ((CouponsFragmentActivity)mActivity).type;
+		
+		layoutEmpty = infoView.findViewById(R.id.empty_layout);
 
 	}
 
@@ -158,6 +163,11 @@ public class UnusedCouponsFragment extends BaseFragment implements
 									});
 							if (pageNumber == 0) {
 								coupons.clear();
+								if(productsList==null || productsList.isEmpty()){
+									infoView.findViewById(R.id.un_empty).setVisibility(View.GONE);
+									layoutEmpty.setVisibility(View.VISIBLE);
+									showEmpty(layoutEmpty,R.string.empty_unfail_coupons_tip,0,R.drawable.empty_unuse_coupons,UnusedCouponsFragment.this);
+								}
 							}
 							coupons.addAll(productsList);
 
@@ -181,4 +191,11 @@ public class UnusedCouponsFragment extends BaseFragment implements
 		pageNumber++;
 		getCoupons();
 	}
+
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

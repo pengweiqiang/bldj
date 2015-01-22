@@ -163,6 +163,16 @@
     <string name="order_seller_name">推拿师名称：</string>
     <string name="msg_load_ing">加载中...</string>
     <string name="loading_text">努力加载中~</string>
+    <string name="empty_file_tip">亲，还没有自己的相关信息哦~</string>
+    <string name="empty_file_go">赶紧去收录把</string>
+    <string name="empty_order_tip">亲，您还没有相关的订单~</string>
+    <string name="empty_order_go">立即去首页预约把</string>
+    <string name="empty_collect_tip">亲，您还没有任何收藏哦~</string>
+    <string name="empty_collect_go">快去首页逛逛把</string>
+    <string name="empty_unuse_coupons_tip">亲，你没有未使用的优惠券~</string>
+    <string name="empty_unfail_coupons_tip">亲，你没有已失效的优惠券~</string>
+    <string name="empty_address_tip">亲，你还没有任何地址~</string>
+    <string name="empty_address_go">赶紧去添加把</string>
     <string name="loading_fail_text">网络连接失败 点击重新加载</string>
     <string name="input_company_name">请输入企业名称</string>
     <string name="input_contact">请输入联系方式</string>

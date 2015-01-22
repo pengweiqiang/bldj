@@ -6,6 +6,7 @@ import java.util.List;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
@@ -24,7 +25,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * @author will
  * 
  */
-public class CollectJlysFragment extends BaseFragment implements IXListViewListener{
+public class CollectJlysFragment extends BaseFragment implements IXListViewListener,OnClickListener{
 
 	private ProgressBar progressBar;
 	private View infoView;
@@ -33,6 +34,7 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 	private List<Product> products;
 	
 	private int pageNumber = 0;
+	View layoutEmpty;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 		progressBar = (ProgressBar)infoView.findViewById(R.id.progress_listView);
 		mListView = (XListView)infoView.findViewById(R.id.jlys_listview);
 		
-		
+		layoutEmpty = infoView.findViewById(R.id.empty_layout);
 	}
 	/**
 	 * 事件初始化
@@ -90,6 +92,11 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 		mListView.setVisibility(View.VISIBLE);
 		if(pageNumber==0){
 			products.clear();
+			if(productsList==null || productsList.isEmpty()){
+				infoView.findViewById(R.id.un_empty).setVisibility(View.GONE);
+				layoutEmpty.setVisibility(View.VISIBLE);
+				showEmpty(layoutEmpty,R.string.empty_collect_tip,R.string.empty_collect_go,R.drawable.empty_collect,CollectJlysFragment.this);
+			}
 		}
 		products.addAll(productsList);
 
@@ -109,4 +116,10 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 		getCollectProduct();
 	}
 
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }

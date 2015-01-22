@@ -7,10 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bldj.lexiang.MyApplication;
+import com.bldj.lexiang.R;
 import com.bldj.lexiang.commons.AppManager;
+import com.bldj.lexiang.listener.EmptyClickListener;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 
@@ -109,5 +113,23 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 	 * 初始化控件的事件
 	 */
 	public abstract void initListener();
-
+	
+	/**
+	 * 展示空白页面
+	 * @param view
+	 * @param tipStr
+	 * @param goStr
+	 * @param imageId
+	 * @param emptyClick
+	 */
+	public void showEmpty(View view,int tipId,int goId,int imageId,OnClickListener emptyClick){
+		ImageView imageView = (ImageView)view.findViewById(R.id.empty_imageView);
+		imageView.setImageDrawable(this.getResources().getDrawable(imageId));
+		TextView textTip = (TextView)view.findViewById(R.id.empty_text_tip);
+		textTip.setText(getResources().getString(tipId));
+		TextView textGo = (TextView)view.findViewById(R.id.empty_text_go);
+		textGo.setText(getResources().getString(goId));
+		
+		textGo.setOnClickListener(emptyClick);
+	}
 }
