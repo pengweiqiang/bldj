@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
@@ -36,7 +37,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * 
  */
 public class CollectKmrsFragment extends BaseFragment implements
-		IXListViewListener {
+		IXListViewListener,OnClickListener {
 
 	private ProgressBar progressBar;
 	private View infoView;
@@ -45,7 +46,7 @@ public class CollectKmrsFragment extends BaseFragment implements
 	private List<Seller> sellers;
 
 	private int pageNumber = 0;
-
+	View layoutEmpty ;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -91,7 +92,7 @@ public class CollectKmrsFragment extends BaseFragment implements
 		progressBar = (ProgressBar) infoView
 				.findViewById(R.id.progress_listView);
 		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
-
+		layoutEmpty = infoView.findViewById(R.id.empty_layout);
 	}
 
 	/**
@@ -123,6 +124,11 @@ public class CollectKmrsFragment extends BaseFragment implements
 		mListView.setVisibility(View.VISIBLE);
 		if (pageNumber == 0) {
 			sellers.clear();
+			if(sellersList==null || sellersList.isEmpty()){
+				infoView.findViewById(R.id.un_empty).setVisibility(View.GONE);
+				layoutEmpty.setVisibility(View.VISIBLE);
+				showEmpty(layoutEmpty,R.string.empty_collect_tip,R.string.empty_collect_go,R.drawable.empty_collect,CollectKmrsFragment.this);
+			}
 		}
 		sellers.addAll(sellersList);
 
@@ -143,5 +149,9 @@ public class CollectKmrsFragment extends BaseFragment implements
 		getSellers();
 	}
 
+	@Override
+	public void onClick(View arg0) {
+		
+	}
 
 }

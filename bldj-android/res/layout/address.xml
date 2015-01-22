@@ -8,33 +8,48 @@
     <com.bldj.lexiang.view.ActionBar
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
-        android:layout_marginBottom="10dip"
-        android:layout_height="48dp" >
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
-    <View 
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#c9c9c9"
-        />
-    <ListView
-        android:id="@+id/jlys_listview"
+        android:background="#c9c9c9" />
+
+    <LinearLayout
+        android:id="@+id/un_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:divider="#00000000"
-        android:background="@color/white"
-        android:listSelector="@android:color/transparent"
-        android:visibility="gone" />
+        android:orientation="vertical" >
 
-    <!-- <ProgressBar
+        <ListView
+            android:id="@+id/jlys_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:divider="#00000000"
+            android:listSelector="@android:color/transparent"
+            android:visibility="gone" />
+
+        <!--
+         <ProgressBar
         android:id="@+id/progress_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:max="100"
-        android:visibility="visible" /> -->
-        <include layout="@layout/loading"/>
+        android:visibility="visible" />
+        -->
+
+        <include layout="@layout/loading" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/empty_layout"
+        layout="@layout/empty"
+        android:visibility="gone" />
 
 </LinearLayout>

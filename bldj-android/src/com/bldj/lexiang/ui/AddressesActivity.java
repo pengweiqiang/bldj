@@ -34,7 +34,7 @@ import com.bldj.lexiang.view.ActionBar;
  * @author will
  * 
  */
-public class AddressesActivity extends BaseActivity{
+public class AddressesActivity extends BaseActivity implements OnClickListener{
 
 	ActionBar mActionBar;
 	
@@ -48,6 +48,8 @@ public class AddressesActivity extends BaseActivity{
 	private int pageNumber = 0;
 
 	private int type;//1-从上门预约界面跳入
+	
+	View layoutEmpty;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.address);
@@ -90,6 +92,7 @@ public class AddressesActivity extends BaseActivity{
 		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
 		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (ListView)findViewById(R.id.jlys_listview);
+		layoutEmpty = findViewById(R.id.empty_layout);
 	}
 
 	@Override
@@ -160,12 +163,17 @@ public class AddressesActivity extends BaseActivity{
 
 						} else {
 							mListView.setVisibility(View.VISIBLE);
-							List<Address> sellersList = JsonUtils.fromJson(
+							List<Address> addressList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Address>>() {
 									});
+							if(addressList==null || addressList.isEmpty()){
+								findViewById(R.id.un_empty).setVisibility(View.GONE);
+								layoutEmpty.setVisibility(View.VISIBLE);
+								showEmpty(layoutEmpty,R.string.empty_address_tip,R.string.empty_address_go,R.drawable.empty_address,AddressesActivity.this);
+							}
 							addresses.clear();
-							addresses.addAll(sellersList);
+							addresses.addAll(addressList);
 
 							listAdapter.notifyDataSetChanged();
 						}
@@ -191,5 +199,11 @@ public class AddressesActivity extends BaseActivity{
 		}
 		
 	};
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+	}
+	
+	
 	
 }

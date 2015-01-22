@@ -22,6 +22,7 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
+import com.bldj.lexiang.listener.EmptyClickListener;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -35,7 +36,7 @@ import com.bldj.lexiang.view.XListView.IXListViewListener;
  * 
  */
 public class MyOrdersActivity extends BaseActivity implements
-IXListViewListener{
+IXListViewListener,OnClickListener{
 
 	ActionBar mActionBar;
 	
@@ -49,6 +50,8 @@ IXListViewListener{
 	private int pageNumber = 0;
 	
 	private int selectOrderIndex = -1;
+	
+	private View layoutEmpty;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.my_orders);
@@ -83,6 +86,7 @@ IXListViewListener{
 		rl_loadingFail = (RelativeLayout) findViewById(R.id.loading_fail);
 		loading_ImageView = (ImageView)findViewById(R.id.loading_imageView);
 		mListView = (XListView) findViewById(R.id.listview);
+		layoutEmpty = findViewById(R.id.empty_layout);
 	}
 
 	@Override
@@ -180,6 +184,11 @@ IXListViewListener{
 
 							if (pageNumber == 0) {
 								orders.clear();
+								if(ordersList==null || ordersList.isEmpty()){
+									findViewById(R.id.un_empty).setVisibility(View.GONE);
+									showEmpty(layoutEmpty,R.string.empty_order_tip,R.string.empty_order_go,R.drawable.empty_order,MyOrdersActivity.this);
+									layoutEmpty.setVisibility(View.VISIBLE);
+								}
 							}
 							orders.addAll(ordersList);
 
@@ -202,5 +211,12 @@ IXListViewListener{
 		pageNumber++;
 		getData();
 	}
+
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+	}
+
+	
 
 }

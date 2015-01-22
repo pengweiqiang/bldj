@@ -9,133 +9,139 @@
         android:id="@+id/actionBar"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
-        android:layout_marginBottom="10dip"
-         >
+        android:layout_marginBottom="10dip" >
     </com.bldj.lexiang.view.ActionBar>
-    <LinearLayout 
-        android:id="@+id/un_login"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@color/white"
-        android:weightSum="3"
-        android:visibility="gone"
-        >
-        
-        <Button 
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/click_login"
-            android:layout_weight="1"
-            android:background="@drawable/btn_coners"
-            android:textColor="@color/white"
-            />
-        
-    </LinearLayout>
 
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dip"
-        android:visibility="gone"
-        >
-        <TextView 
-            android:id="@+id/order_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="时间查询"
-            android:layout_weight="1"
-            android:layout_marginLeft="8dip"
-             android:gravity="center"
-            />
-        <TextView 
-            android:id="@+id/order_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="订单状态"
-            android:layout_weight="1"
-             android:gravity="center"
-            />
-        <TextView 
-            android:id="@+id/order_key"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="关键字查询"
-            android:layout_weight="1"
-            android:layout_marginRight="8dip"
-             android:gravity="center"
-            />
-        <Button 
-            android:id="@+id/order_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="搜索"
-            android:layout_weight="1"
-            android:layout_marginRight="8dip"
-             android:gravity="center"
-            />
-    </LinearLayout>
-    
-    <LinearLayout 
-        android:id="@+id/ll_tab_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dip"
-        >
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="下单时间"
-            android:layout_weight="1"
-            android:layout_marginLeft="8dip"
-             android:gravity="center"
-            />
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="订单号"
-            android:layout_weight="1"
-             android:gravity="center"
-            />
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="订单状态"
-            android:layout_weight="1"
-             android:gravity="center"
-            />
-        <TextView 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="订单总额"
-            android:layout_weight="1"
-             android:gravity="center"
-            />
-    </LinearLayout>
-    
-     <com.bldj.lexiang.view.XListView
-        android:id="@+id/listview"
+    <LinearLayout
+        android:id="@+id/un_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:layout_marginTop="5dip"
-        android:listSelector="@android:color/transparent"
-        android:background="@color/white"
-        android:divider="#00000000"
-        android:visibility="gone" />
-      
-      <!--  <ProgressBar
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/un_login"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:visibility="gone"
+            android:weightSum="3" >
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_coners"
+                android:text="@string/click_login"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="时间查询" />
+
+            <TextView
+                android:id="@+id/order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="订单状态" />
+
+            <TextView
+                android:id="@+id/order_key"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="关键字查询" />
+
+            <Button
+                android:id="@+id/order_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="搜索" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tab_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="下单时间" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="订单号" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="订单状态" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="订单总额" />
+        </LinearLayout>
+
+        <com.bldj.lexiang.view.XListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dip"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:divider="#00000000"
+            android:listSelector="@android:color/transparent"
+            android:visibility="gone" />
+
+        <!--
+        <ProgressBar
         android:id="@+id/progress_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:max="100"
-        android:visibility="visible" /> -->
-        <include layout="@layout/loading"/>
-    
-   
+        android:visibility="visible" />
+        -->
+
+        <include layout="@layout/loading" />
+    </LinearLayout>
+
+    <include android:id="@+id/empty_layout" layout="@layout/empty" android:visibility="gone"/>
+
 </LinearLayout>
