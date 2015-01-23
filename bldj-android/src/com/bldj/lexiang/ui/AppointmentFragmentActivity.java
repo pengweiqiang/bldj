@@ -302,6 +302,9 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 //			Toast.makeText(AddressActivity.this, "没有更多了~", Toast.LENGTH_SHORT)
 //					.show();
 			locationList.clear();
+			if(StringUtils.isEmpty(MyApplication.getInstance().street)){
+		    	locationList.add(MyApplication.getInstance().street);
+		    }
 //			locationList.add(btn_location.getText().toString());
 		}else{
 			locationList.clear();
@@ -316,9 +319,11 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 	//			mAdapter.notifyDataSetChanged();// 默认聚焦最后一行
 	//			lvAddress.setSelection(mAdapter.getCount());
 			}
+			appointMyFragment.setSearchList(locationList);
+//			appointOtherFragment.setSearchList(locationList);
 		}
-		appointMyFragment.setSearchList(locationList);
-//		appointOtherFragment.setSearchList(locationList);
+		
+
 		
 	}
 

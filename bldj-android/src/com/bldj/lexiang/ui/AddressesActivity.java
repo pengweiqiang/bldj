@@ -162,15 +162,17 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 							 return;
 
 						} else {
+							if(layoutEmpty.getVisibility() == View.VISIBLE){
+								findViewById(R.id.un_empty).setVisibility(View.VISIBLE);
+								layoutEmpty.setVisibility(View.GONE);
+							}
 							mListView.setVisibility(View.VISIBLE);
 							List<Address> addressList = JsonUtils.fromJson(
 									parseModel.getData().toString(),
 									new TypeToken<List<Address>>() {
 									});
 							if(addressList==null || addressList.isEmpty()){
-								findViewById(R.id.un_empty).setVisibility(View.GONE);
-								layoutEmpty.setVisibility(View.VISIBLE);
-								showEmpty(layoutEmpty,R.string.empty_address_tip,R.string.empty_address_go,R.drawable.empty_address,AddressesActivity.this);
+								showEmptyLayout();
 							}
 							addresses.clear();
 							addresses.addAll(addressList);
@@ -195,6 +197,9 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 			if(msg.what == 1){
 				addresses.remove(msg.arg1);
 				listAdapter.notifyDataSetChanged();
+				if(listAdapter.getCount()==0){
+					showEmptyLayout();
+				}
 			}
 		}
 		
@@ -205,6 +210,12 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 		Intent intent = new Intent(AddressesActivity.this,
 				AddressInfoActivity.class);
 		startActivity(intent);
+	}
+	
+	private void showEmptyLayout(){
+		findViewById(R.id.un_empty).setVisibility(View.GONE);
+		layoutEmpty.setVisibility(View.VISIBLE);
+		showEmpty(layoutEmpty,R.string.empty_address_tip,R.string.empty_address_go,R.drawable.empty_address,AddressesActivity.this);
 	}
 	
 	

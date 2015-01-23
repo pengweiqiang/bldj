@@ -148,7 +148,7 @@ public class AppointmentMyFragment extends BaseFragment{
 //		mPoiSearch.searchInBound(new PoiBoundSearchOption())
 		
 	    locationList = new ArrayList<String>();
-	    if(StringUtils.isEmpty(MyApplication.getInstance().street)){
+	    if(!StringUtils.isEmpty(MyApplication.getInstance().street)){
 	    	locationList.add(MyApplication.getInstance().street);
 	    }
 	    listadapter = new ListviewAdapter(mActivity,locationList,1);
