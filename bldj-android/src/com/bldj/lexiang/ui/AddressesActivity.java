@@ -202,6 +202,9 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+		Intent intent = new Intent(AddressesActivity.this,
+				AddressInfoActivity.class);
+		startActivity(intent);
 	}
 	
 	

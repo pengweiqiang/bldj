@@ -215,6 +215,8 @@ IXListViewListener,OnClickListener{
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
+		Intent intent = new Intent(this,MainActivity.class);
+		startActivity(intent);
 	}
 
 	

@@ -12,16 +12,16 @@
         android:layout_marginBottom="10dip" >
     </com.bldj.lexiang.view.ActionBar>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#c9c9c9" />
-
     <LinearLayout
         android:id="@+id/un_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c9c9c9" />
 
         <ListView
             android:id="@+id/jlys_listview"
@@ -41,7 +41,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:max="100"
-        android:visibility="visible" />
+        android:visibility="visible" />
         -->
 
         <include layout="@layout/loading" />

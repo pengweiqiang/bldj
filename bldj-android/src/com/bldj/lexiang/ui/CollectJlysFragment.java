@@ -3,6 +3,7 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
@@ -118,8 +118,8 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 
 	@Override
 	public void onClick(View arg0) {
-		// TODO Auto-generated method stub
-		
+		Intent intent = new Intent(mActivity,MainActivity.class);
+		startActivity(intent);
 	}
 	
 }
