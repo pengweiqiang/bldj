@@ -151,7 +151,8 @@ public class CollectKmrsFragment extends BaseFragment implements
 
 	@Override
 	public void onClick(View arg0) {
-		
+		Intent intent = new Intent(mActivity,MainActivity.class);
+		startActivity(intent);
 	}
 
 }
