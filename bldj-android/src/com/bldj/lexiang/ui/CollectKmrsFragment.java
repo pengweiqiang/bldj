@@ -12,21 +12,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ProgressBar;
 
-import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.R;
-import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.adapter.KmrsAdapter;
-import com.bldj.lexiang.api.ApiProductUtils;
-import com.bldj.lexiang.api.ApiSellerUtils;
-import com.bldj.lexiang.api.vo.ParseModel;
-import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
-import com.bldj.lexiang.utils.DateUtils;
-import com.bldj.lexiang.utils.HttpConnectionUtil;
-import com.bldj.lexiang.utils.JsonUtils;
-import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
 
