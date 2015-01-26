@@ -517,7 +517,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 						loading.dismiss();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
-							ToastUtils.showToast(mContext, parseModel.getMsg());
+//							ToastUtils.showToast(mContext, parseModel.getMsg());
 						} else {
 							account = (Account)JsonUtils.fromJson(parseModel.getData().toString(), Account.class);
 							tv_account_left.setText("￥"+account.getAccountLeft());
