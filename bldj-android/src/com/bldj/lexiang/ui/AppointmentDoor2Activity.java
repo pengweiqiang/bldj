@@ -176,20 +176,23 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 					int position, long arg3) {
 				
 				if (mSelectedView == null) {
-                    arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
+//                    arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
                     mSelectedView = arg1;
                 }else if(arg1 == mSelectedView){
-                	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
+//                	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
                 	mSeletedSeller = null;
                 	mSelectedView = null;
+                	listAdapter.setSelectedIndex(-1);
+                	listAdapter.notifyDataSetChanged();
                 	return;
                 }else {
-                	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
-                	arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
+//                	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
+//                	arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
                 	mSelectedView = arg1;
                 }
 				listAdapter.setSelectedIndex(position-1);
 				mSeletedSeller = sellers.get(position-1);
+				listAdapter.notifyDataSetChanged();
 				// 启动美容师个人界面
 //				Intent intent = new Intent(AppointmentDoor2Activity.this,
 //						SellerPersonalActivity.class);
