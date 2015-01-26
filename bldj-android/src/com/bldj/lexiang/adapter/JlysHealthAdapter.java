@@ -5,6 +5,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -118,6 +119,11 @@ public class JlysHealthAdapter extends BaseListAdapter {
 				context.startActivity(intent);
 			}
 		});
+		if(selectedIndex == position){
+			convertView.setBackgroundColor(context.getResources().getColor(R.color.selected_color));
+		}else{
+			convertView.setBackgroundColor(Color.TRANSPARENT);
+		}
 
 		return convertView;
 	}
@@ -128,6 +134,10 @@ public class JlysHealthAdapter extends BaseListAdapter {
 		public TextView tv_username, tv_distance, tv_address, tv_avgprice,
 				tv_order_count,tv_seller_info;
 		public RatingBar tv_level;
+	}
+	int selectedIndex = -1;
+	public void setSelectedIndex(int selectedIndex){
+		this.selectedIndex = selectedIndex;
 	}
 
 }

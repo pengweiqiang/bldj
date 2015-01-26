@@ -186,8 +186,9 @@ public class AppointmentDoor2Activity extends BaseActivity implements
                 }else {
                 	mSelectedView.setBackgroundColor(Color.TRANSPARENT);
                 	arg1.setBackgroundColor(getResources().getColor(R.color.selected_color));
-                    mSelectedView = arg1;
+                	mSelectedView = arg1;
                 }
+				listAdapter.setSelectedIndex(position-1);
 				mSeletedSeller = sellers.get(position-1);
 				// 启动美容师个人界面
 //				Intent intent = new Intent(AppointmentDoor2Activity.this,
