@@ -198,7 +198,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 //						SellerPersonalActivity.class);
 //				intent.putExtra("seller", mSeletedSeller);// 美容师
 //				startActivity(intent);
-			}
+ 			}
 
 		});
 	}
