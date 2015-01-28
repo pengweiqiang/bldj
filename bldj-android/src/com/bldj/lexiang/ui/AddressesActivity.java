@@ -147,7 +147,7 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 	private void getAddresses() {
 		showLoading();
 		long userId = MyApplication.getInstance().getCurrentUser().getUserId();
-		ApiUserUtils.addressManager(this.getApplicationContext(), 3, userId, "", "", "", 
+		ApiUserUtils.addressManager(this.getApplicationContext(), 3, userId, "", "", "","", 
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
