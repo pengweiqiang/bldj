@@ -319,7 +319,7 @@ public class ApiUserUtils {
 	 * @param requestCallback
 	 */
 	public static void addressManager(Context context, int type, long userId,
-			String curLocation, String detailAddress, String id,
+			String curLocation, String detailAddress, String id,String name,
 			RequestCallback requestCallback) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put("type", String.valueOf(type));
@@ -328,6 +328,7 @@ public class ApiUserUtils {
 			params.put(ReqUrls.USER_ID, userId);
 			params.put("curLocation", curLocation);
 			params.put("detailAddress", detailAddress);
+			params.put("contactor", name);
 			break;
 		case 1:// 删除地址
 			params.put(ReqUrls.ID, id);
@@ -336,6 +337,7 @@ public class ApiUserUtils {
 			params.put(ReqUrls.USER_ID, userId);
 			params.put("curLocation", curLocation);
 			params.put("detailAddress", detailAddress);
+			params.put("contactor", name);
 			params.put(ReqUrls.ID, id);
 			break;
 		case 3:// 查询地址
