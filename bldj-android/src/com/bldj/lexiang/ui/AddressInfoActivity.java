@@ -100,7 +100,7 @@ public class AddressInfoActivity extends BaseActivity {
 				}
 				loading = new LoadingDialog(mContext);
 				loading.show();
-				ApiUserUtils.addressManager(AddressInfoActivity.this, type, user.getUserId(),curLocation , address, addressId, new HttpConnectionUtil.RequestCallback() {
+				ApiUserUtils.addressManager(AddressInfoActivity.this, type, user.getUserId(),curLocation , address, addressId,name, new HttpConnectionUtil.RequestCallback() {
 					
 					@Override
 					public void execute(ParseModel parseModel) {
@@ -125,7 +125,7 @@ public class AddressInfoActivity extends BaseActivity {
 		et_contact_address = (EditText)findViewById(R.id.contact_address);
 		et_contact_phone = (EditText)findViewById(R.id.contact_phone);
 		
-		et_contact_name.setText(user.getNickname());
+		
 		et_contact_phone.setText(user.getMobile());
 	}
 
@@ -135,6 +135,7 @@ public class AddressInfoActivity extends BaseActivity {
 
 	}
 	public void initAddressData(){
+		et_contact_name.setText(addressVo.getContactor());
 		et_contact_address.setText(addressVo.getDetailAddress());
 		
 	}
