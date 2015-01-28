@@ -65,7 +65,7 @@ public class AppointmentMyFragment extends BaseFragment{
 //	private String time;//预约时间
 	
 	InputMethodManager manager ;
-	ScrollView scrollView;
+	LinearLayout liearLayoutView;
 	
 	private View selectedView;//选中的地址
 	@Override
@@ -118,7 +118,7 @@ public class AppointmentMyFragment extends BaseFragment{
 		btn_time = (Button) infoView.findViewById(R.id.btn_appoint_time);
 		locatioListView = (ListView)infoView.findViewById(R.id.locations_list);
 		layout = (LinearLayout)infoView.findViewById(R.id.layout);
-		scrollView = (ScrollView)infoView.findViewById(R.id.scrollView);
+		liearLayoutView = (LinearLayout)infoView.findViewById(R.id.layout);
 		btn_time.setTag(false);
 		tv_input_tip.setVisibility(View.GONE);
 		
@@ -159,7 +159,7 @@ public class AppointmentMyFragment extends BaseFragment{
 	 * 事件初始化
 	 */
 	private void initListener(){
-		scrollView.setOnTouchListener(new OnTouchListener() {
+		liearLayoutView.setOnTouchListener(new OnTouchListener() {
 			
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
