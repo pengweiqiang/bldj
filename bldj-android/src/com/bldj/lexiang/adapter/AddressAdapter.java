@@ -75,7 +75,7 @@ public class AddressAdapter extends BaseListAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		holder.tv_username.setText(user.getNickname());
+		holder.tv_username.setText(address.getContactor());
 		holder.tv_address.setText(address.getDetailAddress());
 		holder.tv_phone.setText(user.getMobile());
 
@@ -99,7 +99,7 @@ public class AddressAdapter extends BaseListAdapter {
 				final LoadingDialog loading = new LoadingDialog(context);
 				loading.show();
 				ApiUserUtils.addressManager(context, 1, user.getUserId(), "", "",
-						String.valueOf(address.getId()),
+						String.valueOf(address.getId()),"",
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
