@@ -65,6 +65,7 @@ public class OrderDetail2Activity extends BaseActivity {
 	private TextView tv_order_time;//订单时间
 	private TextView tv_order_num;//订单号
 	private TextView tv_order_pay;//订单金额
+	private TextView tv_appoint_time;//预约时间
 	private Button btn_confirm;
 	private Button btn_cancel_order;
 	private TextView tv_order_product;
@@ -127,6 +128,7 @@ public class OrderDetail2Activity extends BaseActivity {
 		tv_order_num = (TextView) findViewById(R.id.order_num);
 		tv_order_pay = (TextView) findViewById(R.id.order_pay);
 		tv_order_time = (TextView) findViewById(R.id.order_time);
+		tv_appoint_time = (TextView) findViewById(R.id.appoint_time);
 		tv_order_sellerName = (TextView) findViewById(R.id.order_seller);
 		tv_orderStatus = (TextView) findViewById(R.id.order_status);
 		ll_btn = (LinearLayout)findViewById(R.id.ll_btn);
@@ -152,6 +154,12 @@ public class OrderDetail2Activity extends BaseActivity {
 		tv_order_product.setText(order.getProName());
 		tv_order_sellerName.setText(order.getSellerName());
 		tv_orderStatus.setText(order.getStatusStr());
+		try{
+			String serviceTime = DateUtil.getDateString(order.getServicetime().substring(0,8),DateUtil.CUSTOM_PATTERN_SCHEDULED,DateUtil.CUSTOM_PATTERN4);
+			tv_appoint_time.setText(StringUtils.isEmpty(serviceTime)?order.getServicetime():serviceTime+" "+order.getServicetime().substring(8));
+		}catch(Exception e){
+			tv_appoint_time.setText(order.getServicetime());
+		}
 	}
 
 	@Override
