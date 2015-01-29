@@ -85,6 +85,30 @@
                 android:text="2014-12-02 12:45:30"
                 android:textSize="14sp" />
         </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dip"
+            android:layout_marginTop="8dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/appoint_time"
+                android:textColor="@color/grey"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/appoint_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/grey"
+                android:text="2014-12-02 12:45:30"
+                android:textSize="14sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
