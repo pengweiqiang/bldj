@@ -22,6 +22,7 @@ public class DateUtil {
 	public static final String CUSTOM_PATTERN_SCHEDULED = "yyyyMMdd";
 	public static final String SIMPLY_DD_PATTERN2 = "MM-dd";
 	public static final String SIMPLY_DD_PATTERN3 = "MM月dd日";
+	public static final String CUSTOM_PATTERN4="yyyy年MM月dd日";
 
 	/**
 	 * 获得日期对象
