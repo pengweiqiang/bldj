@@ -153,6 +153,7 @@
     <string name="union_pay_tip">信用卡支付支持储蓄卡，无需开通网银</string>
     <string name="order_num">订单号：</string>
     <string name="order_time">下单时间：</string>
+    <string name="appoint_time">预约时间：</string>
     <string name="order_info">订单信息</string>
     <string name="product_info">产品信息</string>
     <string name="order_pay">应付金额：</string>
