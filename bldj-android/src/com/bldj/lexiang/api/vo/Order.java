@@ -22,6 +22,7 @@ public class Order implements Serializable{
 	private long sellerId;//卖家id
 	private int payType;//支付方式
 	private String couponsId;//优惠卷id
+	private String servicetime;//预约时间
 	
 	
 	
@@ -90,6 +91,12 @@ public class Order implements Serializable{
 	}
 	public void setPayType(int payType) {
 		this.payType = payType;
+	}
+	public String getServicetime() {
+		return servicetime;
+	}
+	public void setServicetime(String servicetime) {
+		this.servicetime = servicetime;
 	}
 	
 }
