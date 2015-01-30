@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Order;
+import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
+import com.bldj.lexiang.ui.HealthProductDetailActivity;
 import com.bldj.lexiang.ui.MainActivity;
 import com.bldj.lexiang.ui.MyOrdersActivity;
 import com.bldj.lexiang.ui.OrderEvalActivity;
@@ -79,8 +82,21 @@ public class OrderAdapter extends BaseListAdapter {
 
 		holder.tv_order_time.setText(DateUtil.getDateString(order.getCreatetime(),DateUtil.TRIM_PATTERN,DateUtil.CRITICISM_PATTERN));
 		holder.tv_order_pay.setText("￥" + String.valueOf(order.getOrderPay()));
-		holder.tv_order_num.setText(order.getOrderNum());
+		holder.tv_order_num.setText(order.getProName());
+		holder.tv_order_num.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG );//底部加横线
 		holder.tv_order_status.setText(order.getStatusStr());
+		
+		holder.tv_order_num.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(context,HealthProductDetailActivity.class);
+				Product product = new Product();
+				product.setId(order.getProductId());
+				intent.putExtra("product", product);
+				context.startActivity(intent);
+			}
+		});
 		
 		switch (order.getStatus()) {
 		case OrderStatusEnum.NO_PAID:
