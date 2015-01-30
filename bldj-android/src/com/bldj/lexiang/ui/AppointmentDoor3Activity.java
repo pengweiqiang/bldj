@@ -500,6 +500,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 									new TypeToken<List<PayType>>() {
 									});
 							if (payTypes != null && !payTypes.isEmpty()) {
+								payTypes.remove(2);//移除支付宝网页支付
 								payTypeList.addAll(payTypes);
 							}
 							listAdapter.notifyDataSetChanged();
