@@ -34,6 +34,7 @@
     <string name="login">登录</string>
     <string name="click_login">点击登录</string>
     <string name="register">注册</string>
+    <string name="register_success">首次注册成功赠送100优惠券，请去我的优惠券查看使用</string>
     <string name="forget_pwd">忘记密码</string>
     <string name="update_pwd">修改密码</string>
     <string name="input_old_pwd">输入旧密码：</string>
@@ -91,6 +92,7 @@
     <string name="share_sina">分享到新浪微博</string>
     <string name="share_weixin">分享到朋友圈</string>
     <string name="share_weixin_friend">分享给好友</string>
+    <string name="share_weixin_success">分享成功赠送50元代金券,请去我的优惠券查看使用</string>
     <string name="eval_good">好评</string>
     <string name="eval_nor">中评</string>
     <string name="eval_bad">差评</string>
