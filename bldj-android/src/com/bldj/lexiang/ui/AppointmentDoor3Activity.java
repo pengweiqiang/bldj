@@ -40,12 +40,14 @@ import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.AppManager;
+import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.AlertDialogOperate;
 import com.bldj.lexiang.utils.DateUtil;
 import com.bldj.lexiang.utils.DialogUtil;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
@@ -137,8 +139,13 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_time.setText(DateUtil.getDateString(time, DateUtil.CUSTOM_PATTERN3,
 				DateUtil.CUSTOM_PATTERN2));
 		tv_sellerName.setText(seller.getNickname());
-		et_contactor.setText(user.getUsername());
-
+		if(MyApplication.getInstance().appointMap!=null && !StringUtils.isEmpty(MyApplication.getInstance().appointMap.get("contactor"))){//从为他人预约填写的资料
+			et_contactor.setText(MyApplication.getInstance().appointMap.get("contactor"));
+		}else if(!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "contactor", ""))){//从我要预约里面取
+			et_contactor.setText((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "contactor", ""));
+		}else{
+			et_contactor.setText(user.getNickname());
+		}
 		orderPay = product.getCurPrice();
 		showOrderPay(0);
 		tv_productName.setText(product.getName());
