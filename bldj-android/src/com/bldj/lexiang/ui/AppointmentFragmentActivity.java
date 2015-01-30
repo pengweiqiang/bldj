@@ -260,6 +260,8 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 				MyApplication.getInstance().addressStr = location.getAddrStr();
 				MyApplication.lat = location.getLatitude();
 				MyApplication.lon = location.getLongitude();
+				MyApplication.getInstance().city = location.getCity();
+				city = location.getCity();
 				MyApplication.getInstance().street = location.getStreet();
 				appointMyFragment.setLocation(location.getAddrStr());
 				
@@ -267,6 +269,7 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 					mSuggestionSearch
 					.requestSuggestion((new SuggestionSearchOption())
 						.keyword(MyApplication.getInstance().street).city(city));
+					
 				}
 			}
 			
@@ -289,8 +292,11 @@ public class AppointmentFragmentActivity extends BaseFragmentActivity implements
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 20) {
 			String address = data.getStringExtra("address");
+			String contactor = data.getStringExtra("contactor");
 			if(!StringUtils.isEmpty(address)){
 				SharePreferenceManager.saveBatchSharedPreference(AppointmentFragmentActivity.this, Constant.FILE_NAME, "address",address);
+				SharePreferenceManager.saveBatchSharedPreference(AppointmentFragmentActivity.this, Constant.FILE_NAME, "contactor",contactor);
+				appointMyFragment.setDetailEditText(address);
 			}
 		}
 	}
