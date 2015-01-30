@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -153,6 +153,8 @@ public class OrderDetail2Activity extends BaseActivity {
 		tv_order_num.setText(order.getOrderNum());
 		tv_order_product.setText(order.getProName());
 		tv_order_sellerName.setText(order.getSellerName());
+		tv_order_product.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG );//底部加横线
+		tv_order_sellerName.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG );//底部加横线
 		tv_orderStatus.setText(order.getStatusStr());
 		try{
 			String serviceTime = DateUtil.getDateString(order.getServicetime().substring(0,8),DateUtil.CUSTOM_PATTERN_SCHEDULED,DateUtil.CUSTOM_PATTERN4);
