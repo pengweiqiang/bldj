@@ -69,7 +69,7 @@ public class AddressInfoActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View arg0) {
-				String name = et_contact_name.getText().toString().trim();
+				final String name = et_contact_name.getText().toString().trim();
 				String address = et_contact_address.getText().toString().trim();
 				String phone = et_contact_phone.getText().toString().trim();
 				if(StringUtils.isEmpty(name)){
@@ -111,6 +111,7 @@ public class AddressInfoActivity extends BaseActivity {
 						}else{
 							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
 							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",curLocation);
+							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "contactor",name);
 							finish();
 						}
 					}
