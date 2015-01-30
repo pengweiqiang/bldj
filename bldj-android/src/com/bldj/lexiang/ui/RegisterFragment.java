@@ -134,7 +134,7 @@ public class RegisterFragment extends BaseFragment {
 									et_password.setText("");
 									et_code.setText("");
 									//提示注册成功送优惠卷
-									ToastUtils.showToast(mActivity,mActivity.getString(R.string.register_success));
+									ToastUtils.showToast(mActivity,MyApplication.getInstance().getConfParams().getTxtRexSucc());
 									
 									((RegisterAndLoginActivity) mActivity).mViewPager
 											.setCurrentItem(0, false);
