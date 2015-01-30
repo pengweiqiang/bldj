@@ -64,7 +64,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	private List<TitleBarEnum> groups;
 
 	// 筛选条件
-	private int orderByTag = 0;
+	private int orderByTag = 4;//默认按接单次数排序
 	private int startWorker;
 	private int endWorker;
 	private int startPrice;
@@ -175,7 +175,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 				getSellers();
 			}
 		});
-		// 距离排序
+		// 均价排序
 		tv_order_distance.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -183,7 +183,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 				sortCount = sortCount == 0 ? 1: 0;
 //				buildTitleBar(parent, 0);
 				pageNumber = 0;
-				orderByTag = 5;
+				orderByTag = 3;
 				sort = sortCount;
 				getSellers();
 //				buildTitleBar(parent, 2);
