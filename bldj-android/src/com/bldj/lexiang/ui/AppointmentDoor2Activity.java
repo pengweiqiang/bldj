@@ -220,7 +220,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	 */
 	private void getSellers() {
 		showLoading();
-		ApiSellerUtils.getSellerByProIdAndDate(AppointmentDoor2Activity.this,product.getId(),time.substring(0,time.indexOf(" ")) ,pageNumber,ApiConstants.LIMIT, new HttpConnectionUtil.RequestCallback() {
+		ApiSellerUtils.getSellerByProIdAndDate(AppointmentDoor2Activity.this,product.getId(),time.substring(0,time.indexOf(" ")) ,pageNumber,ApiConstants.LIMIT,timeIndex, new HttpConnectionUtil.RequestCallback() {
 
 					@Override
 					public void execute(ParseModel parseModel) {
