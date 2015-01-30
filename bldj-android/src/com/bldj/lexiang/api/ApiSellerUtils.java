@@ -121,10 +121,11 @@ public class ApiSellerUtils {
 	 * @param dealDate
 	 * @param requestCallback
 	 */
-	public static void getSellerByProIdAndDate(Context context,long proId,String dealDate,int start,int limit,RequestCallback requestCallback){
+	public static void getSellerByProIdAndDate(Context context,long proId,String dealDate,int start,int limit,int hour,RequestCallback requestCallback){
 		Map<String,Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put("proId", proId);
 		params.put("dealDate", dealDate);
+		params.put("hour", hour);
 		params.put(ReqUrls.START, start);
 		params.put(ReqUrls.LIMIT, limit);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_SCHEDULED, false,
