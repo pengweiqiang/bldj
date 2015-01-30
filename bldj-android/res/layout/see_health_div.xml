@@ -14,7 +14,7 @@
             android:id="@+id/order_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="距离排序"
+            android:text="均价排序"
             android:button="@null"
             android:layout_weight="1"
             android:textSize="14sp"
