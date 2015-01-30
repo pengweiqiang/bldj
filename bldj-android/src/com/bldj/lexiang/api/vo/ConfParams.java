@@ -29,7 +29,11 @@ public class ConfParams  implements Serializable{
 	private String preferential;//优惠特区的支付界面的顶层文案
 	
 	private String enterZonePic;//企业专区的banner
+	
+	private String txtRexSucc;//注册成功的提示
 
+	private String txtShareSucc;//分享朋友圈的提示
+	
 	public String getAboutUsUrl() {
 		return aboutUsUrl;
 	}
@@ -118,6 +122,22 @@ public class ConfParams  implements Serializable{
 	public void setEnterZonePic(String enterZonePic) {
 		this.enterZonePic = enterZonePic;
 	}
+	
+	public String getTxtRexSucc() {
+		return txtRexSucc;
+	}
+
+	public void setTxtRexSucc(String txtRexSucc) {
+		this.txtRexSucc = txtRexSucc;
+	}
+
+	public String getTxtShareSucc() {
+		return txtShareSucc;
+	}
+
+	public void setTxtShareSucc(String txtShareSucc) {
+		this.txtShareSucc = txtShareSucc;
+	}
 
 	/**
 	 * 默认常量配置，防止网络连接失败
@@ -134,6 +154,8 @@ public class ConfParams  implements Serializable{
 		c.setRecruitTxt("http://dwz.cn/zGzfl");
 		c.setMobileRule("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
 		c.setPreferential("购买套卡后平台会返回给你序列号且享受优惠折扣，后续凭借序列号消费即可!");
+		c.setTxtRexSucc("首次注册成功赠送100优惠券，请去我的优惠券查看使用");
+		c.setTxtShareSucc("分享成功赠送50元代金券,请去我的优惠券查看使用");
 		return c;
 	}
 	/**
