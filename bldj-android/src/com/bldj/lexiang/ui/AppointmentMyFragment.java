@@ -129,10 +129,10 @@ public class AppointmentMyFragment extends BaseFragment{
 		}
 		
 		
-		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
-		if(!StringUtils.isEmpty(address)){
-			et_address.setText(address);
-		}
+//		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
+//		if(!StringUtils.isEmpty(address)){
+//			et_address.setText(address);
+//		}
 		
 		
 		//城市
@@ -311,10 +311,13 @@ public class AppointmentMyFragment extends BaseFragment{
 	@Override
 	public void onResume() {
 		super.onResume();
-		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
-		if(!StringUtils.isEmpty(address)){
-			et_address.setText(address);
-		}
+//		String address = (String)SharePreferenceManager.getSharePreferenceValue(mActivity, Constant.FILE_NAME, "address", "");
+//		if(!StringUtils.isEmpty(address)){
+//			et_address.setText(address);
+//		}
 	}
 	
+	public void setDetailEditText(String address){
+		et_address.setText(address);
+	}
 }
