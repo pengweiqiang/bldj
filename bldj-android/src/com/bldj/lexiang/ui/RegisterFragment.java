@@ -133,6 +133,9 @@ public class RegisterFragment extends BaseFragment {
 									et_phone.setText("");
 									et_password.setText("");
 									et_code.setText("");
+									//提示注册成功送优惠卷
+									ToastUtils.showToast(mActivity,mActivity.getString(R.string.register_success));
+									
 									((RegisterAndLoginActivity) mActivity).mViewPager
 											.setCurrentItem(0, false);
 
@@ -168,7 +171,7 @@ public class RegisterFragment extends BaseFragment {
 	
 								@Override
 								public void execute(ParseModel parseModel) {
-									handler.sendEmptyMessage(0);
+//									handler.sendEmptyMessage(0);
 									if (ApiConstants.RESULT_SUCCESS
 											.equals(parseModel.getStatus())) {// 发送成功
 										String code = parseModel.getData()
