@@ -275,7 +275,7 @@ public class CompanyZoneActivity extends BaseActivity {
 									new TypeToken<List<PayType>>() {
 									});
 							if (payTypes != null && !payTypes.isEmpty()) {
-								payTypeList.addAll(payTypes);
+								payTypeList.add(payTypes.get(0));//只保留支付宝支付，优惠特区不支持余额支付
 								listAdapter.notifyDataSetChanged();
 							}
 							setListViewHeightBasedOnChildren(mListView);
