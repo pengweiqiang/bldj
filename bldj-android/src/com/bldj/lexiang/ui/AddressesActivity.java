@@ -117,6 +117,7 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 				if(type ==1 ){
 		            Intent data=new Intent();  
 		            data.putExtra("address", address.getDetailAddress());  
+		            data.putExtra("contactor", address.getContactor());
 		            //回到上门预约界面
 		            setResult(20, data);  
 		            finish();  
