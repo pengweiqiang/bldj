@@ -96,10 +96,11 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 				result = "未知";
 				break;
 			}
-			MyApplication.getInstance().type = -1;
-			if(!result.equals("分享取消")){
+			if(!result.equals("分享取消") && MyApplication.getInstance().type!=1){
 				ToastUtils.showToast(mContext, result);
 			}
+			MyApplication.getInstance().type = -1;
+			
 			finish();
 			
 		}
@@ -151,7 +152,7 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 									.getStatus())) {
 								 ToastUtils.showToast(WXEntryActivity.this,parseModel.getMsg());
 							} else {
-//								ToastUtils.showToast(WXEntryActivity.this,parseModel.getMsg());
+								ToastUtils.showToast(WXEntryActivity.this,mContext.getString(R.string.share_weixin_success));
 							}
 						}
 					});
