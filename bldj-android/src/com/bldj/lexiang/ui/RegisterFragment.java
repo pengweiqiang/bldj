@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
@@ -134,7 +135,7 @@ public class RegisterFragment extends BaseFragment {
 									et_password.setText("");
 									et_code.setText("");
 									//提示注册成功送优惠卷
-									ToastUtils.showToast(mActivity,MyApplication.getInstance().getConfParams().getTxtRexSucc());
+									ToastUtils.showToast(mActivity,MyApplication.getInstance().getConfParams().getTxtRexSucc(),Toast.LENGTH_LONG);
 									
 									((RegisterAndLoginActivity) mActivity).mViewPager
 											.setCurrentItem(0, false);

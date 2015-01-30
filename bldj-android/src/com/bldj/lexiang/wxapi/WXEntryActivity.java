@@ -2,6 +2,7 @@ package com.bldj.lexiang.wxapi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
@@ -152,7 +153,7 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 									.getStatus())) {
 								 ToastUtils.showToast(WXEntryActivity.this,parseModel.getMsg());
 							} else {
-								ToastUtils.showToast(WXEntryActivity.this,MyApplication.getInstance().getConfParams().getTxtShareSucc());
+								ToastUtils.showToast(WXEntryActivity.this,MyApplication.getInstance().getConfParams().getTxtShareSucc(),Toast.LENGTH_LONG);
 							}
 						}
 					});
