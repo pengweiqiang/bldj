@@ -152,7 +152,7 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler{
 									.getStatus())) {
 								 ToastUtils.showToast(WXEntryActivity.this,parseModel.getMsg());
 							} else {
-								ToastUtils.showToast(WXEntryActivity.this,mContext.getString(R.string.share_weixin_success));
+								ToastUtils.showToast(WXEntryActivity.this,MyApplication.getInstance().getConfParams().getTxtShareSucc());
 							}
 						}
 					});
