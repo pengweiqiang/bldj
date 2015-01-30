@@ -154,7 +154,9 @@ public class MyApplication extends Application {
 			// // 此处设置开发者获取到的方向信息，顺时针0-360
 			// .direction(100).latitude(location.getLatitude())
 			// .longitude(location.getLongitude()).build();
-
+			if(location == null){
+				return;
+			}
 			String province = location.getProvince();
 			city = location.getCity();
 			String district = location.getDistrict();
