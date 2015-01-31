@@ -14,6 +14,7 @@ import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiBuyUtils;
+import com.bldj.lexiang.api.vo.Address;
 import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Scheduled;
@@ -84,6 +85,12 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		address = (String)SharePreferenceManager.getSharePreferenceValue(mContext, Constant.FILE_NAME, "address", "");
 		if(!StringUtils.isEmpty(address)){
 			btn_address.setText(address);
+		}else{
+			String defaultAddressJson = (String)SharePreferenceManager.getSharePreferenceValue(mContext, Constant.FILE_NAME, "defaultAddress", "");
+			if(!StringUtils.isEmpty(defaultAddressJson)){
+				Address defaultAddress = (Address)JsonUtils.fromJson(defaultAddressJson, Address.class);
+				btn_address.setText(defaultAddress.getDetailAddress());
+			}
 		}
 	}
 	@Override
