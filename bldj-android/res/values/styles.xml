@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -114,6 +114,9 @@
 
     <style name="CustomRadioButtonTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/check</item>
+    </style>
+    <style name="CustomRadioButtonTheme2" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/cb_is_share_selector</item>
     </style>
 
     <style name="CustomFavCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
