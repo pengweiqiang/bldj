@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 	private JlysHealthAdapter listAdapter;
 	private List<Seller> sellers;
 
-	private CheckBox tv_order_distance, tv_order_count, tv_order_work;
+	private TextView tv_order_distance, tv_order_count, tv_order_work;
 
 	private int pageNumber = 0;
 
@@ -117,9 +118,9 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
 		mListView = (XListView) infoView.findViewById(R.id.jlys_listview);
 
-		tv_order_distance = (CheckBox) infoView.findViewById(R.id.order_distance);
-		tv_order_count = (CheckBox) infoView.findViewById(R.id.order_count);
-		tv_order_work = (CheckBox) infoView.findViewById(R.id.order_worker);
+		tv_order_distance = (TextView) infoView.findViewById(R.id.order_distance);
+		tv_order_count = (TextView) infoView.findViewById(R.id.order_count);
+		tv_order_work = (TextView) infoView.findViewById(R.id.order_worker);
 
 	}
 
@@ -159,6 +160,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 				pageNumber = 0;
 				orderByTag = 4;
 				sort = sortDistance;
+				setTextViewSortImage(tv_order_count, sort);
 				getSellers();
 			}
 		});
@@ -172,6 +174,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 				pageNumber = 0;
 				orderByTag = 6;
 				sort = sortWorkYear;
+				setTextViewSortImage(tv_order_work, sort);
 				getSellers();
 			}
 		});
@@ -185,6 +188,7 @@ public class SeeHealthDivFragment extends BaseFragment implements
 				pageNumber = 0;
 				orderByTag = 3;
 				sort = sortCount;
+				setTextViewSortImage(tv_order_distance, sort);
 				getSellers();
 //				buildTitleBar(parent, 2);
 			}
@@ -342,6 +346,15 @@ public class SeeHealthDivFragment extends BaseFragment implements
 				getSellers();
 			}
 		});
+	}
+	/**
+	 * 设置
+	 * @param view
+	 */
+	public void setTextViewSortImage(TextView view,int sort){
+		Drawable nav_up=getResources().getDrawable(sort==0?R.drawable.btn_down_open:R.drawable.btn_up_open);  
+		nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());  
+		view.setCompoundDrawables(null, null, nav_up, null);  
 	}
 
 }
