@@ -181,6 +181,10 @@ public interface ReqUrls {
 	 * 获取用户订单
 	 */
 	public static final String REQUEST_ORDERS = "/user/getOrders";
+	/**
+	 * 获取推拿师订单
+	 */
+	public static final String REQUEST_SELLER_ORDERS = "/seller/getOrdersBySellerId";
 	///user/getOrders?id=123&start=0&limit=10
 	/**
 	 * 获取支付方式
