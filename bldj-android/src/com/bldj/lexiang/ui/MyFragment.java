@@ -1,6 +1,7 @@
 package com.bldj.lexiang.ui;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -171,40 +172,51 @@ public class MyFragment extends BaseFragment {
 										int which) {
 									final String nickname = et_nickname
 											.getText().toString();
+									boolean isDismiss = false;
 									if (StringUtils.isEmpty(nickname)) {
 										ToastUtils.showToast(mActivity,
 												"用户昵称不能为空");
-										return;
-									}
-									loading = new LoadingDialog(mActivity);
-									loading.show();
-									ApiUserUtils.updateNickName(
-											mActivity,
-											user.getUsername(),
-											nickname,
-											new HttpConnectionUtil.RequestCallback() {
-
-												@Override
-												public void execute(
-														ParseModel parseModel) {
-													loading.cancel();
-													if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
-															.getStatus())) {
-														ToastUtils
-																.showToast(
-																		mActivity,
-																		parseModel
-																				.getMsg());
-													} else {
-														user.setNickname(nickname);
-														MyApplication
-																.getInstance()
-																.setUser(user);
-														tv_username
-																.setText(nickname);
+										isDismiss = false;
+									}else{
+										isDismiss = true;
+										loading = new LoadingDialog(mActivity);
+										loading.show();
+										ApiUserUtils.updateNickName(
+												mActivity,
+												user.getUsername(),
+												nickname,
+												new HttpConnectionUtil.RequestCallback() {
+	
+													@Override
+													public void execute(
+															ParseModel parseModel) {
+														loading.cancel();
+														if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+																.getStatus())) {
+															ToastUtils
+																	.showToast(
+																			mActivity,
+																			parseModel
+																					.getMsg());
+														} else {
+															user.setNickname(nickname);
+															MyApplication
+																	.getInstance()
+																	.setUser(user);
+															tv_username
+																	.setText(nickname);
+														}
 													}
-												}
-											});
+												});
+									}
+									try { 
+			                            Field field = dialog.getClass().getSuperclass() 
+			                                    .getDeclaredField("mShowing"); 
+			                            field.setAccessible(true); 
+			                            field.set(dialog, isDismiss); 
+			                        } catch (Exception e) { 
+			                            e.printStackTrace(); 
+			                        } 
 								}
 							});
 
@@ -212,7 +224,14 @@ public class MyFragment extends BaseFragment {
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,
 										int which) {
-
+									try { 
+			                            Field field = dialog.getClass().getSuperclass() 
+			                                    .getDeclaredField("mShowing"); 
+			                            field.setAccessible(true); 
+			                            field.set(dialog, true); 
+			                        } catch (Exception e) { 
+			                            e.printStackTrace(); 
+			                        } 
 								}
 
 							});
