@@ -77,6 +77,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 			holder.tv_distance = (TextView) convertView.findViewById(R.id.distance);
 			holder.tv_level = (RatingBar)convertView.findViewById(R.id.level);
 			holder.tv_seller_info = (TextView)convertView.findViewById(R.id.seller_info);
+			holder.tv_price = (TextView)convertView.findViewById(R.id.price);
 			convertView.setTag(holder);
 
 		} else {
@@ -94,6 +95,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 						.getOptions(R.drawable.default_head_image));
 
 		holder.tv_distance.setText(String.valueOf("距您"+seller.getDistance()+"公里"));
+		holder.tv_price.setText(String.valueOf("均价："+seller.getAvgPrice()+"元"));
 		String orderCount ="共接单"+seller.getDealnumSum()+"次";
 		SpannableStringBuilder style=new SpannableStringBuilder(orderCount);
 		style.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.app_title_color)),3,orderCount.indexOf("次"),Spannable.SPAN_EXCLUSIVE_INCLUSIVE); 
@@ -132,7 +134,7 @@ public class JlysHealthAdapter extends BaseListAdapter {
 	public final class ViewHolder {
 		public ImageView headImg;
 		public TextView tv_username, tv_distance, tv_address, tv_avgprice,
-				tv_order_count,tv_seller_info;
+				tv_order_count,tv_seller_info,tv_price;
 		public RatingBar tv_level;
 	}
 	int selectedIndex = -1;
