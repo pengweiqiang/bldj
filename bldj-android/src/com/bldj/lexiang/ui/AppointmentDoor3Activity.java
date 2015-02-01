@@ -32,6 +32,7 @@ import com.bldj.lexiang.adapter.PayTypeAdapter;
 import com.bldj.lexiang.alipay.Rsa;
 import com.bldj.lexiang.api.ApiBuyUtils;
 import com.bldj.lexiang.api.vo.Account;
+import com.bldj.lexiang.api.vo.Address;
 import com.bldj.lexiang.api.vo.Coupon;
 import com.bldj.lexiang.api.vo.Order;
 import com.bldj.lexiang.api.vo.ParseModel;
@@ -65,6 +66,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 	private String time;// 预约时间
 	private int timeIndex;
 	private String detailAddress;
+	private String contactor;
 	private Seller seller;
 	private Product product;
 	private Button btn_use_code;
@@ -118,6 +120,7 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		seller = (Seller) this.getIntent().getSerializableExtra("seller");
 		product = (Product) this.getIntent().getSerializableExtra("product");
 		detailAddress = this.getIntent().getStringExtra("address");
+		contactor = this.getIntent().getStringExtra("contactor");
 		user = MyApplication.getInstance().getCurrentUser();
 		manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -141,8 +144,11 @@ public class AppointmentDoor3Activity extends BaseActivity {
 		tv_sellerName.setText(seller.getNickname());
 		if(MyApplication.getInstance().appointMap!=null && !StringUtils.isEmpty(MyApplication.getInstance().appointMap.get("contactor"))){//从为他人预约填写的资料
 			et_contactor.setText(MyApplication.getInstance().appointMap.get("contactor"));
-		}else if(!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "contactor", ""))){//从我要预约里面取
-			et_contactor.setText((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "contactor", ""));
+		}else if(!StringUtils.isEmpty(contactor)){
+			et_contactor.setText(contactor);
+		}else if(!StringUtils.isEmpty((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "defaultAddress", ""))){//从我要预约里面取
+			Address defaultAddress = (Address)JsonUtils.fromJson((String)SharePreferenceManager.getSharePreferenceValue(this, Constant.FILE_NAME, "defaultAddress", ""),Address.class);
+			et_contactor.setText(defaultAddress.getContactor());
 		}else{
 			et_contactor.setText(user.getNickname());
 		}

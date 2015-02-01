@@ -56,6 +56,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 	private String time;// 预约时间
 	private int timeIndex;
 	private String address;
+	private String contactor;
 	private Product product;
 	private Seller mSeletedSeller;// 预约美容师
 	private View mSelectedView;
@@ -71,6 +72,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		timeIndex = this.getIntent().getIntExtra("timeIndex", 0);
 		product = (Product)this.getIntent().getSerializableExtra("product");
 		address = this.getIntent().getStringExtra("address");
+		contactor = this.getIntent().getStringExtra("contactor");
 		mActionBar = (ActionBar) findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		initView();
@@ -166,6 +168,7 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 				intent.putExtra("seller", mSeletedSeller);// 预约美容师
 				intent.putExtra("product", product);//预约产品
 				intent.putExtra("address", address);//详细地址
+				intent.putExtra("contactor", contactor);
 				startActivity(intent);
 			}
 		});
