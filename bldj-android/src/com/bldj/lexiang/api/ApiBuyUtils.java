@@ -153,11 +153,13 @@ public class ApiBuyUtils {
 	 * @param status 状态  3-取消
 	 * @param requestCallback
 	 */
-	public static void orderManager(Context context,long id,String orderNum,int status,RequestCallback requestCallback) {
+	public static void orderManager(Context context,long id,String orderNum,int status,String serviceTime,long sellerId,RequestCallback requestCallback) {
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, id);
 		params.put("orderNum", orderNum);
 		params.put("status", status);
+		params.put("serviceTime", serviceTime);
+		params.put("sellerId", sellerId);
 		ApiUtils.getParseModel(params, ReqUrls.ORDER_MANAGER, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
