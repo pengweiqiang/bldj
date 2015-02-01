@@ -25,9 +25,9 @@ public class OrderAdapter extends BaseListAdapter {
 	private Context context;
 	private List<Order> dataList;
 	private LayoutInflater mInflater;
-	private int type = 0;
+	private int type = 0;  //2代表首页的订单  0 是用户订单   1 美容师订单
 
-	public OrderAdapter(Context c, List<Order> dataList) {
+	public OrderAdapter(Context c, List<Order> dataList,String mobile) {
 		this.context = c;
 		this.dataList = dataList;
 		this.mInflater = LayoutInflater.from(context);
@@ -124,7 +124,7 @@ public class OrderAdapter extends BaseListAdapter {
 		default:
 			break;
 		}
-		if (/*order.getStatus() == OrderStatusEnum.COMPLETE || */order.getStatus() == OrderStatusEnum.PAID_OFFLINE || order.getStatus() == OrderStatusEnum.PAID_ONLINE) {//已完成才有评价
+		if (type != 1 && (order.getStatus() == OrderStatusEnum.PAID_OFFLINE || order.getStatus() == OrderStatusEnum.PAID_ONLINE)) {//已完成才有评价
 			holder.tv_eval.setVisibility(View.VISIBLE);
 			holder.tv_eval.setOnClickListener(new View.OnClickListener() {
 
