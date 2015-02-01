@@ -87,7 +87,8 @@ public class AppointmentDoor1Activity extends BaseActivity {
 			String defaultAddressJson = (String)SharePreferenceManager.getSharePreferenceValue(mContext, Constant.FILE_NAME, "defaultAddress", "");
 			if(!StringUtils.isEmpty(defaultAddressJson)){
 				Address defaultAddress = (Address)JsonUtils.fromJson(defaultAddressJson, Address.class);
-				btn_address.setText(defaultAddress.getDetailAddress());
+				address = defaultAddress.getDetailAddress();
+				btn_address.setText(address);
 			}
 		}
 	}
