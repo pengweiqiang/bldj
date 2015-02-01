@@ -213,7 +213,7 @@ public class OrderDetail2Activity extends BaseActivity {
 				loading = new LoadingDialog(OrderDetail2Activity.this);
 				loading.show();
 				ApiBuyUtils.orderManager(mContext, user.getUserId(),
-						order.getOrderNum(), 3,
+						order.getOrderNum(), 3,order.getServicetime(),order.getSellerId(),
 						new HttpConnectionUtil.RequestCallback() {
 
 							@Override
