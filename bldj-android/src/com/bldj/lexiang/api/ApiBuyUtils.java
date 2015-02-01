@@ -201,7 +201,7 @@ public class ApiBuyUtils {
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
 	/**
-	 * 
+	 * 余额支付
 	 * @param context
 	 * @param id
 	 * @param mobile
@@ -217,6 +217,26 @@ public class ApiBuyUtils {
 		params.put("payNum", payNum);
 		params.put("orderNum", orderNum);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_ACCOUNT_LEFT_CONSUME, false,
+				requestCallback, MethodType.GET_MAINPAGE_AD, context);
+	}
+	/**
+	 * 推拿师查看订单
+	 * @param context
+	 * @param id 1校验+查询代表手机号 2、分页代表sellerId
+	 * @param start 
+	 * @param limit
+	 * @param status 订单状态，通用户订单
+	 * @param method 4 校验+查询 3 查询
+	 * @param requestCallback
+	 */
+	public static void getOrdersBySellerId(Context context,String id,int start,int limit,int status,String method,RequestCallback requestCallback){
+		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
+		params.put(ReqUrls.ID, id);
+		params.put(ReqUrls.START, start);
+		params.put(ReqUrls.LIMIT, limit);
+		params.put("status", status);
+		params.put("method", method);
+		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_ORDERS, false,
 				requestCallback, MethodType.GET_MAINPAGE_AD, context);
 	}
 
