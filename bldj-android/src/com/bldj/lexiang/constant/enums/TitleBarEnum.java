@@ -11,6 +11,7 @@ public enum TitleBarEnum {
 	SHARE(2,"分享好友"),	
 	ZHAOPIN(3,"推拿师招聘"), 
 	COMPANY(4,"企业专区"), 
+	SELLER(5,"推拿师入口"),
 	
 	ORDER_SALE(4,"销量排序",2),
 	ORDER_TIME(5,"时间排序",0),
