@@ -122,8 +122,6 @@ public class AddressInfoActivity extends BaseActivity {
 								}
 							}
 							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
-//							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",curLocation);
-							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "contactor",name);
 							finish();
 						}
 					}
