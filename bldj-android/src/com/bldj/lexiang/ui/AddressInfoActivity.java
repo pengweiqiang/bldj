@@ -9,6 +9,7 @@ import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
+import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
@@ -70,7 +71,7 @@ public class AddressInfoActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				final String name = et_contact_name.getText().toString().trim();
-				String address = et_contact_address.getText().toString().trim();
+				final String address = et_contact_address.getText().toString().trim();
 				String phone = et_contact_phone.getText().toString().trim();
 				if(StringUtils.isEmpty(name)){
 					et_contact_name.requestFocus();
@@ -109,8 +110,19 @@ public class AddressInfoActivity extends BaseActivity {
 								.getStatus())) {
 							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
 						}else{
+							if(type == 2){//内存中默认修改	
+								addressVo.setContactor(name);
+								addressVo.setDetailAddress(address);
+								String addressJson = (String)SharePreferenceManager.getSharePreferenceValue(mContext, Constant.FILE_NAME, "defaultAddress","");
+								if(!StringUtils.isEmpty(addressJson)){
+									Address defaultAddress = (Address)JsonUtils.fromJson(addressJson, Address.class);
+									if(defaultAddress.getId() == addressVo.getId()){
+										SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "defaultAddress",JsonUtils.toJson(addressVo));
+									}
+								}
+							}
 							ToastUtils.showToast(AddressInfoActivity.this, parseModel.getMsg());
-							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",curLocation);
+//							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",curLocation);
 							SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "contactor",name);
 							finish();
 						}
