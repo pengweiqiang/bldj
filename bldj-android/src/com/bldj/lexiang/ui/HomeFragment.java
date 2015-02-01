@@ -1,11 +1,15 @@
 package com.bldj.lexiang.ui;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Rect;
@@ -14,6 +18,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.InputType;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -23,21 +28,19 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.adapter.BannerPagerAdapter;
 import com.bldj.lexiang.adapter.GroupAdapter;
-import com.bldj.lexiang.adapter.HomeAdapter;
 import com.bldj.lexiang.adapter.HomeNewAdapter;
 import com.bldj.lexiang.api.ApiHomeUtils;
 import com.bldj.lexiang.api.ApiProductUtils;
@@ -48,11 +51,12 @@ import com.bldj.lexiang.commons.Constant;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.TitleBarEnum;
 import com.bldj.lexiang.db.DatabaseUtil;
-import com.bldj.lexiang.utils.DateUtils;
 import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.PatternUtils;
 import com.bldj.lexiang.utils.SharePreferenceManager;
+import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.MyListView;
@@ -256,6 +260,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			groups.add(TitleBarEnum.SHARE);
 			groups.add(TitleBarEnum.ZHAOPIN);
 			groups.add(TitleBarEnum.COMPANY);
+			groups.add(TitleBarEnum.SELLER);
 		}
 		final PopupWindow popupWindow;
 //		if (popupWindow == null) {
@@ -316,6 +321,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 						intent.putExtra("price", 0);
 						intent.putExtra("type", 1);
 						startActivity(intent);
+					}else if(position == TitleBarEnum.SELLER.getIndex()){//推拿师入口
+						showSellerOrder();
 					}
 				
 				}
@@ -648,5 +655,91 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		mActivity.unregisterReceiver(locationBroadReceiver);
 	}
 	
+	private void showSellerOrder(){
+		
+		Builder dialog = new AlertDialog.Builder(mActivity);
+		LayoutInflater inflater = (LayoutInflater) mActivity
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		LinearLayout layout = (LinearLayout) inflater.inflate(
+				R.layout.dialogview, null);
+		dialog.setView(layout);
+		
+		try 
+		{
+		    Field field = dialog.getClass()
+		            .getSuperclass().getDeclaredField(
+		                     "mShowing" );
+		    field.setAccessible(true);
+		     //   将mShowing变量设为false，表示对话框已关闭 
+		    field.set(dialog, false );
+		    dialog.create().dismiss();
+
+		}
+		catch (Exception e)
+		{
+
+		}
+		
+		final EditText et_mobile = (EditText) layout.findViewById(R.id.searchC);
+		et_mobile.setHint(R.string.input_phone2);
+		et_mobile.setInputType(InputType.TYPE_CLASS_PHONE);
+		et_mobile.requestFocus();
+		dialog.setPositiveButton("确定",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						final String mobile = et_mobile
+								.getText().toString();
+						boolean isDismiss = false;
+						if (StringUtils.isEmpty(mobile)) {
+							ToastUtils.showToast(mActivity,
+									"手机号不能为空");
+						}
+						if(!PatternUtils.checkPhoneNum(mobile)){
+							ToastUtils.showToast(mActivity, "请输入正确的手机号");
+							try { 
+	                            Field field = dialog.getClass().getSuperclass() 
+	                                    .getDeclaredField("mShowing"); 
+	                            field.setAccessible(true); 
+	                            field.set(dialog, false); 
+	                        } catch (Exception e) { 
+	                            e.printStackTrace(); 
+	                        } 
+							return;
+						}else{
+							isDismiss = true;
+							Intent intent = new Intent(mActivity,MyOrdersActivity.class);
+							intent.putExtra("mobile", mobile);
+							startActivity(intent);
+						}
+						try { 
+                            Field field = dialog.getClass().getSuperclass() 
+                                    .getDeclaredField("mShowing"); 
+                            field.setAccessible(true); 
+                            field.set(dialog, isDismiss); 
+                        } catch (Exception e) { 
+                            e.printStackTrace(); 
+                        } 
+					}
+				});
+
+		dialog.setNegativeButton("取消",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int which) {
+						try { 
+	                        Field field = dialog.getClass().getSuperclass() 
+	                                .getDeclaredField("mShowing"); 
+	                        field.setAccessible(true); 
+	                        field.set(dialog, true); 
+	                    } catch (Exception e) { 
+	                        e.printStackTrace(); 
+	                    } 
+					}
+
+				});
+		dialog.show();
+		
+	}
 
 }
