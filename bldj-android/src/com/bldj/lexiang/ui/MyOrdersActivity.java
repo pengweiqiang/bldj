@@ -107,7 +107,7 @@ IXListViewListener,OnClickListener{
 			@Override
 			public void onClick(View arg0) {
 				pageNumber = 0;
-				getData();
+				
 			}
 		});
 
@@ -214,7 +214,8 @@ IXListViewListener,OnClickListener{
 	 */
 	public void getSellerOrderData(){
 		showLoading();
-		ApiBuyUtils.getOrdersBySellerId(MyOrdersActivity.this, mobile,pageNumber,ApiConstants.LIMIT,ApiConstants.MAX_STATUS,"4",
+		//查询支付的订单
+		ApiBuyUtils.getOrdersBySellerId(MyOrdersActivity.this, mobile,pageNumber,ApiConstants.LIMIT,1,"4",
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -254,13 +255,13 @@ IXListViewListener,OnClickListener{
 	@Override
 	public void onRefresh() {
 		pageNumber = 0;
-		getData();
+		getOrders();
 	}
 
 	@Override
 	public void onLoadMore() {
 		pageNumber++;
-		getData();
+		getOrders();
 	}
 
 	@Override
@@ -269,7 +270,14 @@ IXListViewListener,OnClickListener{
 		Intent intent = new Intent(this,MainActivity.class);
 		startActivity(intent);
 	}
-
+	
+	private void getOrders(){
+		if(StringUtils.isEmpty(mobile)){
+			getData();
+		}else{
+			getSellerOrderData();
+		}
+	}
 	
 
 }
