@@ -1,15 +1,11 @@
 package com.bldj.lexiang.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,9 +14,6 @@ import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
-import com.bldj.lexiang.commons.AppManager;
-import com.bldj.lexiang.ui.AppointmentDoor1Activity;
-import com.bldj.lexiang.ui.HealthProductDetailActivity;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class HomeNewAdapter extends BaseListAdapter {
