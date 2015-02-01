@@ -48,6 +48,10 @@ public class AddressAdapter extends BaseListAdapter {
 	@Override
 	public int getCount() {
 		int count = dataList.size();
+		if(defaultAddress == null && count == 1){//如果只有一个地址的时候，默认第一个为默认
+			SharePreferenceManager.saveBatchSharedPreference(context, Constant.FILE_NAME, "defaultAddress",JsonUtils.toJson(dataList.get(0)));
+			defaultAddress = dataList.get(0);
+		}
 		return count;
 	}
 
@@ -156,6 +160,10 @@ public class AddressAdapter extends BaseListAdapter {
 										.getStatus())) {
 									ToastUtils.showToast(context, parseModel.getMsg());
 								}else{
+									if(defaultAddress!=null && defaultAddress.getId() == address.getId()){//默认地址被删除
+										defaultAddress = null;
+										SharePreferenceManager.saveBatchSharedPreference(context, Constant.FILE_NAME, "defaultAddress","");
+									}
 									ToastUtils.showToast(context, "删除成功");
 									Message msg = new Message();
 									msg.what = 1;
