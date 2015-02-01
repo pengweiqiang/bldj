@@ -1,8 +1,6 @@
 package com.bldj.lexiang.adapter;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.bldj.lexiang.MyApplication;
@@ -39,7 +36,6 @@ public class AddressAdapter extends BaseListAdapter {
 	private Handler handler;
 	User user = MyApplication.getInstance().getCurrentUser();
 	private Address defaultAddress;//默认地址
-	Map<Integer, Boolean> isCheckMap =  new HashMap<Integer, Boolean>();
 	
 	public AddressAdapter(Context c, List<Address> dataList,Handler handler) {
 		this.context = c;
@@ -47,14 +43,6 @@ public class AddressAdapter extends BaseListAdapter {
 		this.mInflater = LayoutInflater.from(context);
 		this.handler = handler;
 		getDefaultAddress();
-//		for (int i = 0; i < dataList.size(); i++) {
-//			Address address = dataList.get(i);
-//			if(defaultAddress!=null && address.getId() == defaultAddress.getId()){
-//				isCheckMap.put(address.getId(), true);
-//			}else{
-//				isCheckMap.put(address.getId(), false);
-//			}
-//		}
 	}
 
 	@Override
@@ -98,7 +86,7 @@ public class AddressAdapter extends BaseListAdapter {
 		holder.tv_username.setText(address.getContactor());
 		holder.tv_address.setText(address.getDetailAddress());
 		holder.tv_phone.setText(user.getMobile());
-//		if(isCheckMap!=null && isCheckMap.containsKey(address.getId())){
+//		if(isCheckMap!=null && isCheckMap.containsKey(address.getId()) && isCheckMap.get(address.getId())){
 //			holder.cb_default.setChecked(true);
 //		}else{
 //			holder.cb_default.setChecked(false);
@@ -108,16 +96,34 @@ public class AddressAdapter extends BaseListAdapter {
 		}else{
 			holder.cb_default.setChecked(false);
 		}
-		holder.cb_default.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//		holder.cb_default.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//			
+//			@Override
+//			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//				if(isChecked && (isCheckMap.containsKey(address.getId()) && !isCheckMap.get(address.getId()))){
+//					isCheckMap.put(defaultAddress.getId(), false);
+//					isCheckMap.put(address.getId(),true);
+//					SharePreferenceManager.saveBatchSharedPreference(context, Constant.FILE_NAME, "defaultAddress",JsonUtils.toJson(address));
+//				}/*else{
+//					SharePreferenceManager.saveBatchSharedPreference(context, Constant.FILE_NAME, "defaultAddress","");
+//				}*/
+//				notifyDefaultChanged();
+//			}
+//		});
+		holder.cb_default.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if(isChecked){
+			public void onClick(View arg0) {
+				if(defaultAddress!=null && defaultAddress.getId() != address.getId()){//有选中，但是这次选得是另外的
 					SharePreferenceManager.saveBatchSharedPreference(context, Constant.FILE_NAME, "defaultAddress",JsonUtils.toJson(address));
-				}/*else{
+					notifyDefaultChanged();
+				}else if(defaultAddress!=null && defaultAddress.getId() == address.getId()){//取消选中
 					SharePreferenceManager.saveBatchSharedPreference(context, Constant.FILE_NAME, "defaultAddress","");
-				}*/
-				notifyDefaultChanged();
+					notifyDefaultChanged();
+				}else if(defaultAddress==null){//没有选中
+					SharePreferenceManager.saveBatchSharedPreference(context, Constant.FILE_NAME, "defaultAddress",JsonUtils.toJson(address));
+					notifyDefaultChanged();
+				}
 			}
 		});
 		// 修改
@@ -182,6 +188,8 @@ public class AddressAdapter extends BaseListAdapter {
 		String addressJson = (String)SharePreferenceManager.getSharePreferenceValue(context, Constant.FILE_NAME, "defaultAddress","");
 		if(!StringUtils.isEmpty(addressJson)){
 			defaultAddress = (Address)JsonUtils.fromJson(addressJson, Address.class);
+		}else{
+			defaultAddress = null;
 		}
 	}
 
