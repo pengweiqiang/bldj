@@ -1,7 +1,6 @@
 package com.bldj.lexiang.ui;
 
 import java.util.Date;
-import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.bldj.gson.reflect.TypeToken;
 import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.ApiBuyUtils;
@@ -153,7 +151,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 			address = data.getStringExtra("address");
 			if(!StringUtils.isEmpty(address)){
 				btn_address.setText(address);
-				SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",address);
+				//SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",address);
 			}
 		}
 	}
