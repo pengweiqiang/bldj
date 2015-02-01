@@ -44,6 +44,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 	int index = 0;// 时间 4*4 具体的位置
 	TextView btn_address;
 	String address;
+	String contactor;
 	Product product;//选择的产品
 	Seller seller;//选择理疗师
 	User user;
@@ -139,6 +140,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 				intent.putExtra("timeIndex", index);
 				intent.putExtra("product", product);
 				intent.putExtra("address", address);
+				intent.putExtra("contactor", contactor);
 				startActivity(intent);
 				
 			}
@@ -150,6 +152,7 @@ public class AppointmentDoor1Activity extends BaseActivity {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 20) {
 			address = data.getStringExtra("address");
+			contactor = data.getStringExtra("contactor");
 			if(!StringUtils.isEmpty(address)){
 				btn_address.setText(address);
 				//SharePreferenceManager.saveBatchSharedPreference(mContext, Constant.FILE_NAME, "address",address);
