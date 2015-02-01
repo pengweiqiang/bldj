@@ -22,9 +22,9 @@ import com.bldj.lexiang.api.vo.ParseModel;
 import com.bldj.lexiang.api.vo.User;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.constant.enums.OrderStatusEnum;
-import com.bldj.lexiang.listener.EmptyClickListener;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
+import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
@@ -52,19 +52,29 @@ IXListViewListener,OnClickListener{
 	private int selectOrderIndex = -1;
 	
 	private View layoutEmpty;
+	
+	private String mobile;//推拿师的手机号，用来查看订单
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.my_orders);
 		super.onCreate(savedInstanceState);
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
+		mobile = this.getIntent().getStringExtra("mobile");
 		
 		orders = new ArrayList<Order>();
-		listAdapter = new OrderAdapter(this, orders);
+		if(StringUtils.isEmpty(mobile)){//查看用户订单
+			listAdapter = new OrderAdapter(this, orders,0);
+			getData();
+		}else{//查看推拿师订单
+			listAdapter = new OrderAdapter(this, orders,1);
+			getSellerOrderData();
+		}
+		
 		mListView.setAdapter(listAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
-		getData();
+		
 	}
 
 	// 设置activity的导航条
@@ -174,6 +184,47 @@ IXListViewListener,OnClickListener{
 //							 ToastUtils.showToast(MyOrdersActivity.this,
 //							 parseModel.getMsg());
 //							 mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"点击重试");
+							
+						} else {
+							mListView.setVisibility(View.VISIBLE);
+							List<Order> ordersList = JsonUtils.fromJson(
+									parseModel.getData().toString(),
+									new TypeToken<List<Order>>() {
+									});
+
+							if (pageNumber == 0) {
+								orders.clear();
+								if(ordersList==null || ordersList.isEmpty()){
+									findViewById(R.id.un_empty).setVisibility(View.GONE);
+									showEmpty(layoutEmpty,R.string.empty_order_tip,R.string.empty_order_go,R.drawable.empty_order,MyOrdersActivity.this);
+									layoutEmpty.setVisibility(View.VISIBLE);
+								}
+							}
+							orders.addAll(ordersList);
+
+							listAdapter.notifyDataSetChanged();
+							mListView.onLoadFinish(pageNumber,listAdapter.getCount(),"加载完毕");
+						}
+
+					}
+				});
+	}
+	/**
+	 * 获取理疗师的订单
+	 */
+	public void getSellerOrderData(){
+		showLoading();
+		ApiBuyUtils.getOrdersBySellerId(MyOrdersActivity.this, mobile,pageNumber,ApiConstants.LIMIT,ApiConstants.MAX_STATUS,"4",
+				new HttpConnectionUtil.RequestCallback() {
+
+					@Override
+					public void execute(ParseModel parseModel) {
+						rl_loading.setVisibility(View.GONE);
+						
+						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
+								.getStatus())) {
+							mListView.setVisibility(View.GONE);
+							rl_loadingFail.setVisibility(View.VISIBLE);
 							
 						} else {
 							mListView.setVisibility(View.VISIBLE);
