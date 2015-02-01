@@ -86,9 +86,19 @@
                     android:drawablePadding="3dip"
                      android:textColor="@color/grey"
                      android:textSize="13sp"
+                     android:visibility="gone"
                      android:layout_marginBottom="4dip"
                      android:drawableLeft="@drawable/btn_distance"
                     android:text="距您3公里" />
+                 <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="3dip"
+                     android:textColor="@color/grey"
+                     android:textSize="13sp"
+                     android:layout_marginBottom="4dip"
+                    android:text="￥138元" />
 
                 <RatingBar  android:id="@+id/level"
                 android:layout_width="wrap_content"
