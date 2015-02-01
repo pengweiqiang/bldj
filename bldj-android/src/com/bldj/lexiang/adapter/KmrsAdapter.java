@@ -84,7 +84,7 @@ public class KmrsAdapter extends BaseListAdapter {
 
 		holder.tv_distance.setText(String.valueOf("距您" + seller.getDistance()
 				+ "公里"));
-		holder.tv_age.setText(String.valueOf(seller.getUserGrade()));
+		holder.tv_age.setText(String.valueOf(seller.getUserGrade()+"岁"));
 
 		int level = ConfParams.getStarRuleCount(seller.getDealnumSum(), MyApplication.getInstance().getConfParams().getStarRule());
 		holder.feedBack.setNumStars(level);
