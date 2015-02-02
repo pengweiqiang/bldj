@@ -25,6 +25,7 @@ import com.bldj.lexiang.constant.enums.OrderStatusEnum;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.StringUtils;
+import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
@@ -224,6 +225,13 @@ IXListViewListener,OnClickListener{
 						
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
+							if(ApiConstants.RESULT_USER_NOT_EXIST.equals(parseModel.getStatus())){
+								ToastUtils.showToast(mContext, parseModel.getMsg());
+								findViewById(R.id.un_empty).setVisibility(View.GONE);
+								showEmpty(layoutEmpty,parseModel.getMsg(),R.string.empty_order_go,R.drawable.empty_order,MyOrdersActivity.this);
+								layoutEmpty.setVisibility(View.VISIBLE);
+								return;
+							}
 							mListView.setVisibility(View.GONE);
 							rl_loadingFail.setVisibility(View.VISIBLE);
 							
