@@ -132,4 +132,15 @@ public abstract class BaseActivity extends Activity implements OnClickListener {
 		
 		textGo.setOnClickListener(emptyClick);
 	}
+	
+	public void showEmpty(View view,String tip,int goId,int imageId,OnClickListener emptyClick){
+		ImageView imageView = (ImageView)view.findViewById(R.id.empty_imageView);
+		imageView.setImageDrawable(this.getResources().getDrawable(imageId));
+		TextView textTip = (TextView)view.findViewById(R.id.empty_text_tip);
+		textTip.setText(tip);
+		TextView textGo = (TextView)view.findViewById(R.id.empty_text_go);
+		textGo.setText(getResources().getString(goId));
+		
+		textGo.setOnClickListener(emptyClick);
+	}
 }
