@@ -59,9 +59,10 @@ import com.bldj.lexiang.utils.SharePreferenceManager;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
-import com.bldj.lexiang.view.MyListView;
 import com.bldj.lexiang.view.PageIndicator;
-import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.bldj.lexiang.view.PullToRefreshView;
+import com.bldj.lexiang.view.PullToRefreshView.OnFooterRefreshListener;
+import com.bldj.lexiang.view.PullToRefreshView.OnHeaderRefreshListener;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 /**
@@ -71,11 +72,12 @@ import com.bldj.universalimageloader.core.ImageLoader;
  * 
  */
 @SuppressLint("NewApi")
-public class HomeFragment extends BaseFragment implements IXListViewListener {
+public class HomeFragment extends BaseFragment implements /*IXListViewListener,*/OnHeaderRefreshListener, OnFooterRefreshListener {
+	private PullToRefreshView mPullToRefreshView;
 	private View infoView;
 	private ActionBar mActionBar;
 
-	private MyListView mListView;
+	private ListView mListView;
 	private HomeNewAdapter listAdapter;
 	private List<Product> products;
 	RelativeLayout rl_loading;//进度条
@@ -120,8 +122,10 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		rl_loading = (RelativeLayout) infoView.findViewById(R.id.progress_listView);
 		rl_loadingFail = (RelativeLayout) infoView.findViewById(R.id.loading_fail);
 		loading_ImageView = (ImageView)infoView.findViewById(R.id.loading_imageView);
-
-		mListView = (MyListView) infoView.findViewById(R.id.home_listview);
+		mPullToRefreshView = (PullToRefreshView) infoView.findViewById(R.id.main_pull_refresh_view);
+		mPullToRefreshView.setOnHeaderRefreshListener(this);
+		mPullToRefreshView.setOnFooterRefreshListener(this);
+		mListView = (ListView) infoView.findViewById(R.id.home_listview);
 		// bannerView =
 		// (FrameLayout)LayoutInflater.from(mActivity).inflate(R.layout.home_banner,
 		// null);
@@ -183,9 +187,9 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		listAdapter = new HomeNewAdapter(mActivity, products);
 		mListView.setAdapter(listAdapter);
 
-		mListView.setPullLoadEnable(true);
-		mListView.setPullRefreshEnable(true);
-		mListView.setXListViewListener(this);
+//		mListView.setPullLoadEnable(false);
+//		mListView.setPullRefreshEnable(false);
+//		mListView.setXListViewListener(this);
 		return infoView;
 	}
 	
@@ -449,7 +453,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 				mListView.setVisibility(View.VISIBLE);
 				products.addAll(productsCache);
 				listAdapter.notifyDataSetChanged();
-				mListView.onLoadFinish();
+//				mListView.onLoadFinish();
+				mPullToRefreshView.onHeaderRefreshComplete();
 				return;
 			}
 		}
@@ -462,7 +467,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 					public void execute(ParseModel parseModel) {
 //						progressbar.setVisibility(View.GONE);
 						rl_loading.setVisibility(View.GONE);
-						
+						mPullToRefreshView.onHeaderRefreshComplete();
+						mPullToRefreshView.onFooterRefreshComplete();
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
 								.getStatus())) {
 							rl_loadingFail.setVisibility(View.VISIBLE);
@@ -495,8 +501,8 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 							
 							products.addAll(productsList);
 							listAdapter.notifyDataSetChanged();
-							mListView.onLoadFinish(pageNumber,products.size(),"加载完毕");
-							
+//							mPullToRefreshView.onHeaderRefreshComplete();
+//							mListView.onLoadFinish(pageNumber,products.size(),"加载完毕");
 						}
 
 					}
@@ -606,7 +612,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				Product productItem = (Product)listAdapter.getItem(position-1);
+				Product productItem = (Product)listAdapter.getItem(position);
 				Intent intent = new Intent();
 				intent.setClass(mActivity, HealthProductDetailActivity.class);
 				intent.putExtra("product", productItem);
@@ -616,7 +622,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		});
 	}
 
-	@Override
+	/*@Override
 	public void onRefresh() {
 		pageNumber = 0;
 		getHotProduct();
@@ -630,7 +636,7 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 			pageNumber++;
 		}
 		getHotProduct();
-	}
+	}*/
 
 	/**
 	 * 定位通知改变城市广播
@@ -741,5 +747,24 @@ public class HomeFragment extends BaseFragment implements IXListViewListener {
 		dialog.show();
 		
 	}
+
+	@Override
+	public void onFooterRefresh(PullToRefreshView view) {
+		if (products == null || products.isEmpty()) {
+			pageNumber = 0;
+		} else {
+			pageNumber++;
+		}
+		getHotProduct();
+	}
+
+	@Override
+	public void onHeaderRefresh(PullToRefreshView view) {
+		// TODO Auto-generated method stub
+		pageNumber = 0;
+		getHotProduct();
+		
+	}
+
 
 }
