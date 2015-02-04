@@ -10,7 +10,25 @@
         android:layout_width="fill_parent"
         android:layout_height="48dp" >
     </com.bldj.lexiang.view.ActionBar>
-
+    <com.bldj.lexiang.view.PullToRefreshView 
+        android:id="@+id/main_pull_refresh_view"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+        >
+	<ScrollView 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:focusable="false"
+	    android:focusableInTouchMode="false"
+	    android:fillViewport="true"
+	    >
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        
+        >
     <include
         android:id="@+id/banner"
         layout="@layout/home_banner" />
@@ -113,7 +131,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.bldj.lexiang.view.MyListView
+    <com.bldj.lexiang.view.ListViewForScrollView
         android:id="@+id/home_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -145,6 +163,9 @@
         android:layout_weight="1"
         android:max="100"
         android:visibility="visible" /> -->
-        <include layout="@layout/loading"/>
-
+        <include layout="@layout/loading" />
+        
+	</LinearLayout>
+	</ScrollView>
+	</com.bldj.lexiang.view.PullToRefreshView>
 </LinearLayout>
