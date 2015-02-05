@@ -52,6 +52,10 @@ public class MyApplication extends Application {
 	public String street = "";// 当前街道地点
 	
 	public int type = -1;//0好友  1朋友圈
+	
+	
+	public static String mobile = "";//推拿师手机号
+	public static String password = "";//密码
 	public static MyApplication getInstance() {
 		return myApplication;
 	}
