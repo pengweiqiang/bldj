@@ -229,11 +229,12 @@ public class ApiBuyUtils {
 	 * @param method 4 校验+查询 3 查询
 	 * @param requestCallback
 	 */
-	public static void getOrdersBySellerId(Context context,String id,int start,int limit,int status,String method,RequestCallback requestCallback){
+	public static void getOrdersBySellerId(Context context,String id,int start,int limit,int status,String method,String password,RequestCallback requestCallback){
 		Map<String, Object> params = HttpClientAddHeaders.getHeaders(context);
 		params.put(ReqUrls.ID, id);
 		params.put(ReqUrls.START, start);
 		params.put(ReqUrls.LIMIT, limit);
+		params.put("password", password);
 		params.put("status", status);
 		params.put("method", method);
 		ApiUtils.getParseModel(params, ReqUrls.REQUEST_SELLER_ORDERS, false,
