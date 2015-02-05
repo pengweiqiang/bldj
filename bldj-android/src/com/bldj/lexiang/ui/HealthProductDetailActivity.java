@@ -13,8 +13,10 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -25,6 +27,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -44,6 +47,8 @@ import com.bldj.lexiang.utils.ShareUtil;
 import com.bldj.lexiang.utils.StringUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.bldj.lexiang.view.ElasticScrollView;
+import com.bldj.lexiang.view.ElasticScrollView.OnRefreshListener;
 import com.bldj.lexiang.view.SharePopupWindow;
 import com.bldj.universalimageloader.core.ImageLoader;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
@@ -54,7 +59,7 @@ import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
  * @author will
  * 
  */
-public class HealthProductDetailActivity extends BaseActivity {
+public class HealthProductDetailActivity extends BaseActivity implements OnRefreshListener{
 
 	ActionBar mActionBar;
 	private Product product;
@@ -83,6 +88,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 	private double curPrice ;
 	private double marketPrice;
 	private String title;
+	private ElasticScrollView elasticScrollView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.health_product_detail);
@@ -118,25 +124,47 @@ public class HealthProductDetailActivity extends BaseActivity {
 		actionBar.hideRightActionButton();
 	}
 
+	LinearLayout mBuyLayout,mTopBuyLayout;
 	@Override
 	public void initView() {
-		product_img = (ImageView) findViewById(R.id.product_img);
-		tv_time = (TextView) findViewById(R.id.time);
-		tv_price = (TextView) findViewById(R.id.price);
-		btn_shared = (TextView) findViewById(R.id.share);
-		tv_buy_count = (TextView) findViewById(R.id.buy_count);
-		tv_shop_price = (TextView) findViewById(R.id.price_shop);
-		btn_invite = (TextView) findViewById(R.id.invite);
-		webView = (WebView) findViewById(R.id.webView_product_info);
-		progressBar = (ProgressBar)findViewById(R.id.web_progress);
+		elasticScrollView = (ElasticScrollView) findViewById(R.id.scrollView);
+       View view=LayoutInflater.from(this).inflate(R.layout.health_product_detail_main, null);
+       mBuyLayout = (LinearLayout) view.findViewById(R.id.buy);
+		mTopBuyLayout = (LinearLayout)view.findViewById(R.id.top_buy_layout);
+       
+       elasticScrollView.addChild(view);
+       
+     //当布局的状态或者控件的可见性发生改变回调的接口
+       findViewById(R.id.parent_layout).getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+ 			
+ 			@Override
+ 			public void onGlobalLayout() {
+ 				//这一步很重要，使得上面的购买布局和下面的购买布局重合
+ 				onScroll(elasticScrollView.getScrollY());
+ 				
+ 				System.out.println(elasticScrollView.getScrollY());
+ 			}
+ 		});	
+       product_img = (ImageView) view.findViewById(R.id.product_img);
+		tv_time = (TextView) view.findViewById(R.id.time);
+		tv_price = (TextView) view.findViewById(R.id.price);
+		btn_shared = (TextView) view.findViewById(R.id.share);
+		tv_buy_count = (TextView) view.findViewById(R.id.buy_count);
+		tv_shop_price = (TextView)view.findViewById(R.id.price_shop);
+		btn_invite = (TextView) view.findViewById(R.id.invite);
+		
+		webView = (WebView) view.findViewById(R.id.webView_product_info);
+		progressBar = (ProgressBar)view.findViewById(R.id.web_progress);
 		btn_appointment_product = (Button) findViewById(R.id.appointment_product);
 		tv_custom_service = (TextView) findViewById(R.id.custom_service);
 		tv_fav = (CheckBox) findViewById(R.id.collect);
-		rg_title = (RadioGroup) findViewById(R.id.rg_title);
-		rb_single = (RadioButton) findViewById(R.id.radio_single);
-		rb_two = (RadioButton)findViewById(R.id.radio_two);
+		rg_title = (RadioGroup) view.findViewById(R.id.rg_title);
+		rb_single = (RadioButton) view.findViewById(R.id.radio_single);
+		rb_two = (RadioButton)view.findViewById(R.id.radio_two);
 		rb_three = (RadioButton)findViewById(R.id.radio_three);
-
+		
+		
+		elasticScrollView.setonRefreshListener(this);
 	}
 
 	private void initData() {
@@ -187,7 +215,8 @@ public class HealthProductDetailActivity extends BaseActivity {
 		SpannableStringBuilder style=new SpannableStringBuilder(buyCount);
 		style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.app_title_color)),0,buyCount.indexOf("人")+1,Spannable.SPAN_EXCLUSIVE_INCLUSIVE); 
 		tv_buy_count.setText(style);
-
+		
+		
 		webView.setWebViewClient(new WebViewClient() { // 通过webView打开链接，不调用系统浏览器
 
 			@Override
@@ -198,6 +227,7 @@ public class HealthProductDetailActivity extends BaseActivity {
 
 		});
 
+		
 		webView.setInitialScale(25);
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
@@ -208,7 +238,6 @@ public class HealthProductDetailActivity extends BaseActivity {
 		webView.getSettings().setLoadWithOverviewMode(true);
 
 		webView.loadUrl(product.getProDetailUrl());
-
 		WebChromeClient webChromeClient = new WebChromeClient() {
 
 			@Override
@@ -490,5 +519,16 @@ public class HealthProductDetailActivity extends BaseActivity {
 		}
 		
 	};
+	@Override
+	public void onRefresh() {
+		
+	}
+
+
+	@Override
+	public void onScroll(int scrollY) {
+		int mBuyLayout2ParentTop = Math.max(scrollY, mBuyLayout.getTop());
+		mTopBuyLayout.layout(0, mBuyLayout2ParentTop, mTopBuyLayout.getWidth(), mBuyLayout2ParentTop + mTopBuyLayout.getHeight());
+	}
 
 }
