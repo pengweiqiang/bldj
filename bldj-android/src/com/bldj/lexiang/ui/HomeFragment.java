@@ -181,8 +181,8 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 		mIndicator = (PageIndicator) bannerView.findViewById(R.id.indicator);
 		mIndicator.setViewPager(bannerViewPager);
 
-		// mListView.addHeaderView(bannerView);
-		// mListView.bannerView = bannerView;
+//		 mListView.addHeaderView(bannerView);
+//		 mListView.bannerView = bannerView;
 		products = new ArrayList<Product>();
 		listAdapter = new HomeNewAdapter(mActivity, products);
 		mListView.setAdapter(listAdapter);
@@ -534,7 +534,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 						intent.putExtra("name", ad.getName());
 						startActivity(intent);
 					}else if("1".equals(ad.getActionType())){//1 则表示跳转的界面 例如注册界面
-						if (MyApplication.getInstance().getCurrentUser() == null) {
+						if (MyApplication.getInstance().getCurrentUser() == null) {//未登录
 							try{
 								Intent intent = new Intent(mActivity,
 										Class.forName(ad.getActionUrl()));
@@ -542,8 +542,18 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 							}catch(Exception e){
 								ToastUtils.showToast(mActivity, "访问路径出错，"+ad.getActionUrl());
 							}
-						}else{
-							ToastUtils.showToast(mActivity, "您已经获取到优惠券了");
+						}else{//已登录
+							if("com.bldj.lexiang.ui.RegisterAndLoginActivity".equals(ad.getActionUrl())){
+								ToastUtils.showToast(mActivity, "您已经获取到优惠券了");
+							}else{
+								try{
+									Intent intent = new Intent(mActivity,
+											Class.forName(ad.getActionUrl()));
+									startActivity(intent);
+								}catch(Exception e){
+									ToastUtils.showToast(mActivity, "访问路径出错，"+ad.getActionUrl());
+								}
+							}
 						}
 					}
 
