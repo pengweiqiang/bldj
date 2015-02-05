@@ -12,6 +12,7 @@ public class Ad  implements Serializable{
 	private String picurl;//广告图地址
 	private String leavetime;//停留时间
 	private String actionUrl;//点击跳转地址
+	private String actionType;//0网页  1跳转activity
 	public String getName() {
 		return name;
 	}
@@ -35,6 +36,12 @@ public class Ad  implements Serializable{
 	}
 	public void setActionUrl(String actionUrl) {
 		this.actionUrl = actionUrl;
+	}
+	public String getActionType() {
+		return actionType;
+	}
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
 	}
 	
 	
