@@ -55,6 +55,7 @@ IXListViewListener,OnClickListener{
 	private View layoutEmpty;
 	
 	private String mobile;//推拿师的手机号，用来查看订单
+	private String password;//推拿师登录密码
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.my_orders);
@@ -62,6 +63,7 @@ IXListViewListener,OnClickListener{
 		mActionBar = (ActionBar)findViewById(R.id.actionBar);
 		onConfigureActionBar(mActionBar);
 		mobile = this.getIntent().getStringExtra("mobile");
+		password = this.getIntent().getStringExtra("password");
 		
 		orders = new ArrayList<Order>();
 		if(StringUtils.isEmpty(mobile)){//查看用户订单
@@ -216,7 +218,7 @@ IXListViewListener,OnClickListener{
 	public void getSellerOrderData(){
 		showLoading();
 		//查询支付的订单
-		ApiBuyUtils.getOrdersBySellerId(MyOrdersActivity.this, mobile,pageNumber,ApiConstants.LIMIT,1,"4",
+		ApiBuyUtils.getOrdersBySellerId(MyOrdersActivity.this, mobile,pageNumber,ApiConstants.LIMIT,1,"4",password,
 				new HttpConnectionUtil.RequestCallback() {
 
 					@Override
@@ -241,7 +243,8 @@ IXListViewListener,OnClickListener{
 									parseModel.getData().toString(),
 									new TypeToken<List<Order>>() {
 									});
-
+							MyApplication.mobile = mobile;
+							MyApplication.password = password;
 							if (pageNumber == 0) {
 								orders.clear();
 								if(ordersList==null || ordersList.isEmpty()){
