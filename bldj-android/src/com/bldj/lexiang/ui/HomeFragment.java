@@ -527,11 +527,25 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(mActivity,
+					if("0".equals(ad.getActionType())){// 0则表示跳转的URL是个网页
+						Intent intent = new Intent(mActivity,
 							BannerWebActivity.class);
-					intent.putExtra("url", ad.getActionUrl());
-					intent.putExtra("name", ad.getName());
-					startActivity(intent);
+						intent.putExtra("url", ad.getActionUrl());
+						intent.putExtra("name", ad.getName());
+						startActivity(intent);
+					}else if("1".equals(ad.getActionType())){//1 则表示跳转的界面 例如注册界面
+						if (MyApplication.getInstance().getCurrentUser() == null) {
+							try{
+								Intent intent = new Intent(mActivity,
+										Class.forName(ad.getActionUrl()));
+								startActivity(intent);
+							}catch(Exception e){
+								ToastUtils.showToast(mActivity, "访问路径出错，"+ad.getActionUrl());
+							}
+						}else{
+							ToastUtils.showToast(mActivity, "您已经获取到优惠券了");
+						}
+					}
 
 				}
 			});
@@ -663,6 +677,13 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	
 	private void showSellerOrder(){
 		
+		if(!StringUtils.isEmpty(MyApplication.mobile) && !StringUtils.isEmpty(MyApplication.password)){
+			Intent intent = new Intent(mActivity,MyOrdersActivity.class);
+			intent.putExtra("mobile", MyApplication.mobile);
+			intent.putExtra("password", MyApplication.password);
+			startActivity(intent);
+			return;
+		}
 		Builder dialog = new AlertDialog.Builder(mActivity);
 		LayoutInflater inflater = (LayoutInflater) mActivity
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -687,6 +708,8 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 		}
 		
 		final EditText et_mobile = (EditText) layout.findViewById(R.id.searchC);
+		final EditText et_password = (EditText) layout.findViewById(R.id.et_password);
+		et_password.setVisibility(View.VISIBLE);
 		et_mobile.setHint(R.string.input_phone2);
 		et_mobile.setInputType(InputType.TYPE_CLASS_PHONE);
 		et_mobile.requestFocus();
@@ -698,8 +721,14 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 								.getText().toString();
 						boolean isDismiss = false;
 						if (StringUtils.isEmpty(mobile)) {
+							et_mobile.requestFocus();
 							ToastUtils.showToast(mActivity,
 									"手机号不能为空");
+						}
+						final String password = et_password.getText().toString();
+						if(StringUtils.isEmpty(password)){
+							et_password.requestFocus();
+							ToastUtils.showToast(mActivity, "请输入密码");
 						}
 						if(!PatternUtils.checkPhoneNum(mobile)){
 							ToastUtils.showToast(mActivity, "请输入正确的手机号");
@@ -716,6 +745,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 							isDismiss = true;
 							Intent intent = new Intent(mActivity,MyOrdersActivity.class);
 							intent.putExtra("mobile", mobile);
+							intent.putExtra("password", password);
 							startActivity(intent);
 						}
 						try { 
