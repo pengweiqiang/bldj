@@ -3,6 +3,8 @@ package com.bldj.lexiang.ui;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -97,6 +99,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	
 	ArrayList<View> bannerListView;
 	private BannerPagerAdapter bannerPageAdapter;
+	private FrameLayout progressBbanner;
 
 	// 广告条 end
 	private int pageNumber = 0;
@@ -133,12 +136,13 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 
 		bannerViewPager = (ViewPager) bannerView
 				.findViewById(R.id.banner_viewpager);
+		progressBbanner = (FrameLayout)infoView.findViewById(R.id.progress_banner);
 
 		LayoutParams params1 = bannerViewPager.getLayoutParams();
 		params1.width = DeviceInfo.getDisplayMetricsWidth(mActivity);
 		params1.height = (int) (params1.width * 1.0 / 484 * 200);
-
 		bannerViewPager.setLayoutParams(params1);
+		progressBbanner.setLayoutParams(params1);
 		bannerListView = new ArrayList<View>();
 
 		bannerPageAdapter = new BannerPagerAdapter(bannerListView);
@@ -192,7 +196,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 //		mListView.setXListViewListener(this);
 		return infoView;
 	}
-	
+	   
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -337,14 +341,16 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 		});
 	}
 
-	/*
-	 * @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
-	 * 
-	 * mGestureDetector = new GestureDetector(new YScrollDetector());
-	 * 
-	 * return super.onInterceptTouchEvent(ev) &&
-	 * mGestureDetector.onTouchEvent(ev); }
-	 */
+	
+	/* @Override 
+	 public boolean onInterceptTouchEvent(MotionEvent ev) {
+	 mGestureDetector = new GestureDetector(new YScrollDetector());
+	 
+	 return super.onInterceptTouchEvent(ev) &&
+	mGestureDetector.onTouchEvent(ev); 
+	
+	 }*/
+	 
 
 	class YScrollDetector extends GestureDetector.SimpleOnGestureListener {
 		@Override
@@ -406,8 +412,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 
 					@Override
 					public void execute(ParseModel parseModel) {
-						infoView.findViewById(R.id.progress_banner)
-								.setVisibility(View.GONE);
+						progressBbanner.setVisibility(View.GONE);
 						infoView.findViewById(R.id.fl_banner).setVisibility(
 								View.VISIBLE);
 						if (!ApiConstants.RESULT_SUCCESS.equals(parseModel
@@ -559,16 +564,17 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 
 				}
 			});
-
 		}
-
-		bannerPageAdapter = new BannerPagerAdapter(bannerListView);
-
-		bannerViewPager.setAdapter(bannerPageAdapter);
-		bannerViewPager.setCurrentItem(0);
-		bannerPageAdapter.notifyDataSetChanged();
-
-		mIndicator.setViewPager(bannerViewPager);
+		if(ads!=null && !ads.isEmpty()){
+			startTimer();
+			bannerPageAdapter = new BannerPagerAdapter(bannerListView);
+	
+			bannerViewPager.setAdapter(bannerPageAdapter);
+			bannerViewPager.setCurrentItem(0);
+			bannerPageAdapter.notifyDataSetChanged();
+	
+			mIndicator.setViewPager(bannerViewPager);
+		}
 		// bannerPageAdapter = new BannerPagerAdapter(bannerListView);
 		// bannerViewPager.setAdapter(bannerPageAdapter);
 		// bannerViewPager.setCurrentItem(0);
@@ -683,8 +689,15 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	public void onDestroy() {
 		super.onDestroy();
 		mActivity.unregisterReceiver(locationBroadReceiver);
+		if(timer!=null){
+			timer.cancel();
+			timer = null;
+		}
 	}
 	
+	/**
+	 * 查询推拿师的订单
+	 */
 	private void showSellerOrder(){
 		
 		if(!StringUtils.isEmpty(MyApplication.mobile) && !StringUtils.isEmpty(MyApplication.password)){
@@ -804,6 +817,28 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 		pageNumber = 0;
 		getHotProduct();
 		
+	}
+	Timer timer;
+	public void startTimer() {
+		timer = new Timer();
+		timer.schedule(new TimerTask() {
+			public void run() {
+				mActivity.runOnUiThread(new Runnable() {
+					public void run() {
+						if(!ads.isEmpty()){
+							int currentIndex = bannerViewPager.getCurrentItem();
+							if(currentIndex<ads.size()-1){
+								currentIndex++;
+							}else{
+								currentIndex = 0;
+							}
+							
+							bannerViewPager.setCurrentItem(currentIndex,true);
+						}
+					}
+				});
+			}
+		}, 5000, 5000);
 	}
 
 
