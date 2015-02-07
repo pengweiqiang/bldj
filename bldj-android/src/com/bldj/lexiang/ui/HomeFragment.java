@@ -838,7 +838,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 					}
 				});
 			}
-		}, 5000, 5000);
+		}, 5000, 6000);
 	}
 
 
