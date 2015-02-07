@@ -23,7 +23,6 @@ import android.widget.TextView;
 
 /**
  * @description自定义容器，盛放listview,gridview,scrollview
- * @author 袁东华
  * @date 2014-7-21 下午5:56:00
  */
 public class PullToRefreshView extends LinearLayout {
