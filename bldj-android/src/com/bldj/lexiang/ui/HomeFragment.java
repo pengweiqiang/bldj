@@ -87,7 +87,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	RelativeLayout rl_loadingFail;//加载失败
 
 	// 广告条 start
-	private GestureDetector mGestureDetector;
+//	private GestureDetector mGestureDetector;
 	View.OnTouchListener mGestureListener;
 	private List<Ad> ads;
 
@@ -182,6 +182,16 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 						mPreviousState = state;
 					}
 				});
+		bannerViewPager.setOnTouchListener(new View.OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					startTimer();
+				} else {
+					stopTimer();
+				}
+				return false;
+			}
+		});
 		mIndicator = (PageIndicator) bannerView.findViewById(R.id.indicator);
 		mIndicator.setViewPager(bannerViewPager);
 
@@ -689,10 +699,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	public void onDestroy() {
 		super.onDestroy();
 		mActivity.unregisterReceiver(locationBroadReceiver);
-		if(timer!=null){
-			timer.cancel();
-			timer = null;
-		}
+		stopTimer();
 	}
 	
 	/**
@@ -840,6 +847,12 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 			}
 		}, 5000, 6000);
 	}
-
+	
+	public void stopTimer(){
+		if (timer != null) {
+			timer.cancel();
+			timer = null;
+		}
+	}
 
 }
