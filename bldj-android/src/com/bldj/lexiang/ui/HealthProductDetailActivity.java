@@ -73,6 +73,7 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 	private TextView btn_invite;// 邀请
 	private CheckBox tv_fav;// 收藏
 	private TextView tv_custom_service;// 联系客服
+	private View lineView,lineView2;
 	private WebView webView;
 	private ProgressBar progressBar;
 	private Button btn_appointment_product;
@@ -81,7 +82,7 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 	ShareUtil shareUtil;
 	SharePopupWindow pop ;
 	
-	private RadioGroup rg_title;
+	private RadioGroup rg_title,rg_title2;
 	private RadioButton rb_single,rb_two,rb_three;
 	private List<String> packagePrice;
 	
@@ -127,10 +128,10 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 	LinearLayout mBuyLayout,mTopBuyLayout;
 	@Override
 	public void initView() {
-		elasticScrollView = (ElasticScrollView) findViewById(R.id.scrollView);
+	   elasticScrollView = (ElasticScrollView) findViewById(R.id.scrollView);
        View view=LayoutInflater.from(this).inflate(R.layout.health_product_detail_main, null);
        mBuyLayout = (LinearLayout) view.findViewById(R.id.buy);
-		mTopBuyLayout = (LinearLayout)view.findViewById(R.id.top_buy_layout);
+	   mTopBuyLayout = (LinearLayout)view.findViewById(R.id.top_buy_layout);
        
        elasticScrollView.addChild(view);
        
@@ -145,7 +146,9 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
  				System.out.println(elasticScrollView.getScrollY());
  			}
  		});	
-       product_img = (ImageView) view.findViewById(R.id.product_img);
+       	product_img = (ImageView) view.findViewById(R.id.product_img);
+       	lineView = (View)findViewById(R.id.line2);
+       	lineView2 = (View)view.findViewById(R.id.line);
 		tv_time = (TextView) view.findViewById(R.id.time);
 		tv_price = (TextView) view.findViewById(R.id.price);
 		btn_shared = (TextView) view.findViewById(R.id.share);
@@ -159,6 +162,7 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 		tv_custom_service = (TextView) findViewById(R.id.custom_service);
 		tv_fav = (CheckBox) findViewById(R.id.collect);
 		rg_title = (RadioGroup) view.findViewById(R.id.rg_title);
+		rg_title2 = (RadioGroup)view.findViewById(R.id.rg_title2);
 		rb_single = (RadioButton) view.findViewById(R.id.radio_single);
 		rb_two = (RadioButton)view.findViewById(R.id.radio_two);
 		rb_three = (RadioButton)findViewById(R.id.radio_three);
@@ -196,6 +200,9 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 			}
 		}else{
 			mActionBar.setTitle(title);
+			lineView.setVisibility(View.GONE);
+			lineView2.setVisibility(View.GONE);
+			rg_title2.setVisibility(View.GONE);
 			rg_title.setVisibility(View.GONE);
 		}
 		
@@ -232,11 +239,17 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 //		webSettings.setBuiltInZoomControls(true);
-		webSettings.setSupportZoom(true);
-
-		webView.getSettings().setUseWideViewPort(true);
-		webView.getSettings().setLoadWithOverviewMode(true);
-
+		//webSettings.setSupportZoom(true);
+		//解决ScrollView嵌套webView下面很多空白问题
+		webSettings.setUseWideViewPort(true);
+		webSettings.setLoadWithOverviewMode(true);
+		//将webView的横向竖向的scrollBar都禁用掉，将不再与ScrollView冲突
+		webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+		webView.setVerticalScrollBarEnabled(false);
+		webView.setVerticalScrollbarOverlay(false);
+		webView.setHorizontalScrollBarEnabled(false);
+		webView.setHorizontalScrollbarOverlay(false);
+		//解决ScrollView嵌套webView下面很多空白问题
 		webView.loadUrl(product.getProDetailUrl());
 		WebChromeClient webChromeClient = new WebChromeClient() {
 
