@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 实体类的shard策略 -->
+<entityShards>
+    <!--
+    class: 实体的类名
+    groups: shard的组名
+    -->
+    <entityShard className="test.db.model.User" groups="yypt_cms">
+        <dbShardStrategies>
+            <shardStrategy type="hash">
+                <properties>
+                    <property name="shardCount">2</property>
+                    <property name="shardNamePrefix">yypt</property>
+                </properties>
+            </shardStrategy>
+        </dbShardStrategies>
+        <tableShardStrategies>
+            <shardStrategy type="named">
+                <properties>
+                    <property name="shardName">user</property>
+                </properties>
+            </shardStrategy>
+        </tableShardStrategies>
+    </entityShard>
+    <!--<entityShard className="com.renren.gsns.dal.db.model.ShardFriend" groups="gsns_test">
+        &lt;!&ndash; shard 策略 &ndash;&gt;
+        &lt;!&ndash; 数据库的shard策略 &ndash;&gt;
+        <dbShardStrategies>
+            &lt;!&ndash;
+            class: IShardStrategy的子类名
+            &ndash;&gt;
+            <shardStrategy type="hash">
+                <properties>
+                    <property name="shardCount">3</property>
+                    <property name="shardNamePrefix">gsns</property>
+                </properties>
+            </shardStrategy>
+        </dbShardStrategies>
+        &lt;!&ndash; 表的shard策略 &ndash;&gt;
+        <tableShardStrategies>
+            <shardStrategy type="named">
+                <properties>
+                    <property name="shardName">friend_shard</property>
+                </properties>
+            </shardStrategy>
+        </tableShardStrategies>
+    </entityShard>-->
+</entityShards>

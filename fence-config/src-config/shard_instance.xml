@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Shard的配置信息 -->
+<shardGroups>
+    <!-- 默认的shard -->
+    <defaultShard groupId="default" shardId="default_0"/>
+    <groups>
+       <!--  <shardGroup id="default">
+            <shardInstance id="default_0" dbInstanceId="db_0" schema="bldj"/>
+        </shardGroup>
+        <shardGroup id="yypt_cms">
+            <shardInstance id="yypt_0" dbInstanceId="db_0" schema="bldj"/>
+            <shardInstance id="yypt_1" dbInstanceId="db_1" schema="bldj"/>
+        </shardGroup> -->
+        <!-- <shardGroup id="default">
+            <shardInstance id="default_0" dbInstanceId="db_0" schema="lzd"/>
+        </shardGroup>
+        <shardGroup id="yypt_cms">
+            <shardInstance id="yypt_0" dbInstanceId="db_0" schema="lzd"/>
+            <shardInstance id="yypt_1" dbInstanceId="db_1" schema="lzd"/>
+        </shardGroup> -->
+        <shardGroup id="default">
+            <shardInstance id="default_0" dbInstanceId="db_0" schema="seadata"/>
+        </shardGroup>
+        <shardGroup id="yypt_cms">
+            <shardInstance id="yypt_0" dbInstanceId="db_0" schema="seadata"/>
+            <shardInstance id="yypt_1" dbInstanceId="db_1" schema="seadata"/>
+        </shardGroup>
+    </groups>
+</shardGroups>
+

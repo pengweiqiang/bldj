@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <groups>
+
+        <!-- Entity类型的缓存统一使用一个redis服务 , 以后视数据状况可以进一步划分 -->
+
+        <!-- 广告列表 -->
+        <group name="ad.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 广告组列表 -->
+        <group name="adGroup.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 应用列表 -->
+        <group name="app.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 用户列表 -->
+        <group name="user.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 平台级终端列表 -->
+        <group name="ter.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- CP列表 -->
+        <group name="cp.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 角色列表 -->
+        <group name="role.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 聚合app -->
+        <group name="polyApp.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 聚合sdk -->
+        <group name="polySdk.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 每日终端 -->
+        <group name="ter.count.entity">
+            <servers>
+                <server name="redis_1"/>
+            </servers>
+        </group>
+
+        <!-- 业务数据相关的缓存统一使用一个redis服务 , 以后视数据状况可以进一步划分 -->
+
+        <!-- 广告业务 -->
+        <group name="ad.service">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 请求广告频率控制 -->
+        <group name="ad.req.freq">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 请求配置频率控制 -->
+        <group name="cfg.req.freq">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+        <!-- 防作弊控制 -->
+        <group name="ad.anticheat">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 国家地区树 -->
+        <group name="dis.tree">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- CP分类树 -->
+        <group name="cp.type.tree">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 广告应用分类树 -->
+        <group name="app.type.tree">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 终端类型 -->
+        <group name="ter.type.tree">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 菜单树 -->
+        <group name="menu.tree">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 角色权限关联 -->
+        <group name="role.permission">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 用户角色关联 -->
+        <group name="user.role">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 验证码 -->
+        <group name="reg.captcha">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- 平台配置组 -->
+        <group name="config.plat">
+            <servers>
+                <server name="redis_2"/>
+            </servers>
+        </group>
+
+        <!-- app收入状态配置组 ：持久化 -->
+        <group name="app.income.state">
+            <servers>
+                <server name="redis_3"/>
+            </servers>
+        </group>
+
+    </groups>
+</root>
