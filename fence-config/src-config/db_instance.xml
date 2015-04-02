@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dbInstances>
+   <!--  <server id="db_0" ip="bldj5168.mysql.rds.aliyuncs.com" port="3306" user="bldj" password="bldj123"/>
+    <server id="db_1" ip="bldj5168.mysql.rds.aliyuncs.com" port="3306" user="bldj" password="bldj123"/> -->
+    <!-- <server id="db_0" ip="127.0.0.1" port="3306" user="root" password=""/>
+    <server id="db_1" ip="127.0.0.1" port="3306" user="root" password=""/> -->
+    <server id="db_0" ip="220.113.10.11" port="3306" user="root" password="seadata"/>
+    <server id="db_1" ip="220.113.10.11" port="3306" user="root" password="seadata"/>
+</dbInstances>
+

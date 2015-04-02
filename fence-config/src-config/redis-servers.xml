@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <servers>
+        <!-- 非持久化 -->
+        <server name="redis_1" port="6379" host="10.22.225.66"/>
+        <server name="redis_2" port="6379" host="10.22.225.66"/>
+        <!-- 持久化 -->
+        <server name="redis_3" port="6379" host="10.22.225.66"/>
+    </servers>
+</root>
