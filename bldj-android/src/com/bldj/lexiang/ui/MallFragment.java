@@ -34,6 +34,8 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 /**
  * 商城
  * @author will
@@ -86,7 +88,8 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		mActivity.registerReceiver(mCountMsgReceiver, countFilter);
 		orders = new ArrayList<Order>();
 		listAdapter = new OrderAdapter(mActivity, orders,2);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 //		getData();
@@ -336,5 +339,9 @@ public class MallFragment extends BaseFragment implements IXListViewListener{
 		mActivity.unregisterReceiver(mCountMsgReceiver);
 		super.onDestroy();
 	}
-	
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
+	}
 }

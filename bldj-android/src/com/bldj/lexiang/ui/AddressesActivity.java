@@ -27,6 +27,9 @@ import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 /**
  * 常用地址
@@ -61,7 +64,13 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 		
 		addresses = new ArrayList<Address>();
 		listAdapter = new AddressAdapter(AddressesActivity.this, addresses,handler);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+//		setAlphaAdapter();
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(listAdapter);
+		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
+		swingBottomInAnimationAdapter.setAbsListView(mListView);
+
+		mListView.setAdapter(swingBottomInAnimationAdapter);
 		
 	}
 
@@ -219,6 +228,10 @@ public class AddressesActivity extends BaseActivity implements OnClickListener{
 		showEmpty(layoutEmpty,R.string.empty_address_tip,R.string.empty_address_go,R.drawable.empty_address,AddressesActivity.this);
 	}
 	
-	
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
+	}
 	
 }

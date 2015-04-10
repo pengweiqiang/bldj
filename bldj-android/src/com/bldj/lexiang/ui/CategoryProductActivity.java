@@ -22,6 +22,9 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 /**
  * 分类后的产品列表
@@ -58,7 +61,15 @@ IXListViewListener {
 		
 		products = new ArrayList<Product>();
 		listAdapter = new HomeAdapter(this, products);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+//		setAlphaAdapter();
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(listAdapter);
+		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
+		swingBottomInAnimationAdapter.setAbsListView(mListView);
+
+		mListView.setAdapter(swingBottomInAnimationAdapter);
+		
+
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 		getData();
@@ -160,6 +171,11 @@ IXListViewListener {
 	public void onLoadMore() {
 		pageNumber++;
 		getData();
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 
 

@@ -107,7 +107,7 @@ public class MainActivity extends BaseFragmentActivity implements
 		};
 		mViewPager.setAdapter(mAdapter);
 		mViewPager.setOnPageChangeListener(this);
-
+		
 		mViewPager.setOffscreenPageLimit(4);
 		// 实现模块切换
 		mTabIndicators

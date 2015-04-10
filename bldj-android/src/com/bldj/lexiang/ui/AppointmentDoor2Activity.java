@@ -34,6 +34,7 @@ import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 /**
  * 上门预约2
@@ -114,7 +115,12 @@ public class AppointmentDoor2Activity extends BaseActivity implements
 		params.put("address", address);
 		listAdapter = new JlysHealthAdapter(AppointmentDoor2Activity.this,
 				sellers,params);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(listAdapter);
+		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
+		swingBottomInAnimationAdapter.setAbsListView(mListView);
+
+		mListView.setAdapter(swingBottomInAnimationAdapter);
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 

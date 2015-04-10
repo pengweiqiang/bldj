@@ -18,6 +18,8 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 
 /**
  * 经络养生
@@ -58,7 +60,8 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 		super.onActivityCreated(savedInstanceState);
 		products = new ArrayList<Product>();
 		listAdapter = new HomeAdapter(mActivity, products);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 		
@@ -120,6 +123,11 @@ public class CollectJlysFragment extends BaseFragment implements IXListViewListe
 	public void onClick(View arg0) {
 		Intent intent = new Intent(mActivity,MainActivity.class);
 		startActivity(intent);
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 	
 }

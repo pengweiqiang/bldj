@@ -235,20 +235,21 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 		});
 
 		
-		webView.setInitialScale(25);
+		webView.setInitialScale(70);
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
-//		webSettings.setBuiltInZoomControls(true);
-		//webSettings.setSupportZoom(true);
+		webSettings.setBuiltInZoomControls(false);
+		webSettings.setDisplayZoomControls(false); //隐藏webview缩放按钮
+		webSettings.setSupportZoom(false);
 		//解决ScrollView嵌套webView下面很多空白问题
 		webSettings.setUseWideViewPort(true);
 		webSettings.setLoadWithOverviewMode(true);
 		//将webView的横向竖向的scrollBar都禁用掉，将不再与ScrollView冲突
-		webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+		/*webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 		webView.setVerticalScrollBarEnabled(false);
 		webView.setVerticalScrollbarOverlay(false);
 		webView.setHorizontalScrollBarEnabled(false);
-		webView.setHorizontalScrollbarOverlay(false);
+		webView.setHorizontalScrollbarOverlay(false);*/
 		//解决ScrollView嵌套webView下面很多空白问题
 		webView.loadUrl(product.getProDetailUrl());
 		WebChromeClient webChromeClient = new WebChromeClient() {

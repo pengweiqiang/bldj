@@ -19,6 +19,8 @@ import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 
 /**
  * 收藏--》看美容师
@@ -67,7 +69,8 @@ public class CollectKmrsFragment extends BaseFragment implements
 		super.onActivityCreated(savedInstanceState);
 		sellers = new ArrayList<Seller>();
 		listAdapter = new KmrsAdapter(mActivity, sellers);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 
@@ -144,5 +147,9 @@ public class CollectKmrsFragment extends BaseFragment implements
 		Intent intent = new Intent(mActivity,MainActivity.class);
 		startActivity(intent);
 	}
-
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
+	}
 }
