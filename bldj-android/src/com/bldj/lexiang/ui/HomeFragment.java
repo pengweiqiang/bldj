@@ -66,6 +66,9 @@ import com.bldj.lexiang.view.PullToRefreshView;
 import com.bldj.lexiang.view.PullToRefreshView.OnFooterRefreshListener;
 import com.bldj.lexiang.view.PullToRefreshView.OnHeaderRefreshListener;
 import com.bldj.universalimageloader.core.ImageLoader;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.SwingBottomInAnimationAdapter;
 
 /**
  * 首页
@@ -197,9 +200,15 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 
 //		 mListView.addHeaderView(bannerView);
 //		 mListView.bannerView = bannerView;
-		products = new ArrayList<Product>();
+		/*products = new ArrayList<Product>();
 		listAdapter = new HomeNewAdapter(mActivity, products);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+//		setAlphaAdapter();
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(listAdapter);
+		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
+		swingBottomInAnimationAdapter.setAbsListView(mListView);
+
+		mListView.setAdapter(swingBottomInAnimationAdapter);*/
 
 //		mListView.setPullLoadEnable(false);
 //		mListView.setPullRefreshEnable(false);
@@ -210,9 +219,18 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
 		initListener();
+		
+		products = new ArrayList<Product>();
+		listAdapter = new HomeNewAdapter(mActivity, products);
+//		mListView.setAdapter(listAdapter);
+//		setAlphaAdapter();
+		SwingBottomInAnimationAdapter swingBottomInAnimationAdapter = new SwingBottomInAnimationAdapter(listAdapter);
+		swingBottomInAnimationAdapter.setInitialDelayMillis(300);
+		swingBottomInAnimationAdapter.setAbsListView(mListView);
 
+		mListView.setAdapter(swingBottomInAnimationAdapter);
+		
 		getAdLists();
 
 		getHotProduct();
@@ -457,7 +475,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	 */
 	private void getHotProduct() {
 		showLoading();
-		if(isFirst){
+		if(false){
 			isFirst = false;
 			//获取缓存数据
 			List<Product> productsCache = DatabaseUtil.getInstance(mActivity).queryFavProduct(0, 0, 1);
@@ -853,6 +871,11 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 			timer.cancel();
 			timer = null;
 		}
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 
 }

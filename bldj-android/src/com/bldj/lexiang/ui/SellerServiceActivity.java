@@ -23,6 +23,8 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 
 /**
  * 美容师个人的服务项目
@@ -53,7 +55,8 @@ IXListViewListener{
 		
 		products = new ArrayList<Product>();
 		listAdapter = new HomeAdapter(this, products,2,sellerVo);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 
@@ -138,6 +141,11 @@ IXListViewListener{
 	public void onLoadMore() {
 		pageNumber++;
 		getData();
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 
 }

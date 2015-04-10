@@ -158,5 +158,6 @@
     <color name="list_btn_pressed_bg">#ffcce8a9</color>
     <color name="red">#FF4500</color>
     <color name="color_company_text_color">#787878</color>
+    <color name="super_light_grey">#f6f6f6</color>
     
 </resources>

@@ -25,6 +25,8 @@ import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 /**
  * 热门推荐（分类）
  * @author will
@@ -71,11 +73,17 @@ public class HotProductFragment extends BaseFragment implements IXListViewListen
 		super.onActivityCreated(savedInstanceState);
 		categorys = new ArrayList<Category>();
 		listAdapter = new CategoryAdapter(mActivity, categorys);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 		
 		getCategory();
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 	/**
 	 * 初始化控件

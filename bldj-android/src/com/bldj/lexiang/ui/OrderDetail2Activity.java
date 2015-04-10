@@ -199,7 +199,7 @@ public class OrderDetail2Activity extends BaseActivity {
 						return;
 					}
 					accountLeftResume(order);
-				}else if(order.getPayType() == 1){
+				}else if(order.getPayType() == 1){//支付宝支付
 					getPayType();
 				}
 				

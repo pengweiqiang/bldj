@@ -33,6 +33,8 @@ import com.bldj.lexiang.utils.ToastUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 
 /**
  * 企业专区-->选择套餐
@@ -75,7 +77,8 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 
 		cheepCardList = new ArrayList<CheepCards>();
 		listAdapter = new CheepCardsAdapter(this, cheepCardList);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 		initData();
@@ -298,6 +301,11 @@ public class CompanyZoneSelectPackageActivity extends BaseActivity implements
 	public void onLoadMore() {
 		pageNumber++;
 		getData();
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 
 }

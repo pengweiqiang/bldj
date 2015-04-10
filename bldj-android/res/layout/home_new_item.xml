@@ -5,6 +5,7 @@
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
     android:orientation="horizontal"
+    android:background="@drawable/selectable_background"
     android:paddingBottom="8dip" >
 
     <LinearLayout

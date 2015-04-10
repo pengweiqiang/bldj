@@ -25,6 +25,8 @@ import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 
 /**
  * 已失效优惠卷
@@ -66,7 +68,8 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 		super.onActivityCreated(savedInstanceState);
 		coupons = new ArrayList<Coupon>();
 		listAdapter = new CouponsAdapter(mActivity, coupons);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 		
@@ -170,6 +173,11 @@ public class FailureCouponsFragment extends BaseFragment implements IXListViewLi
 	public void onClick(View arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 	
 }

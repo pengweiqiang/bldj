@@ -37,6 +37,8 @@ import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.view.ActionBar;
 import com.bldj.lexiang.view.XListView;
 import com.bldj.lexiang.view.XListView.IXListViewListener;
+import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
+import com.nhaarman.listviewanimations.swinginadapters.prepared.AlphaInAnimationAdapter;
 
 /**
  * 经络养生-->看养生师
@@ -101,7 +103,8 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		super.onActivityCreated(savedInstanceState);
 		sellers = new ArrayList<Seller>();
 		listAdapter = new JlysHealthAdapter(mActivity, sellers);
-		mListView.setAdapter(listAdapter);
+//		mListView.setAdapter(listAdapter);
+		setAlphaAdapter();
 		mListView.setPullLoadEnable(true);
 		mListView.setXListViewListener(this);
 
@@ -355,6 +358,11 @@ public class SeeHealthDivFragment extends BaseFragment implements
 		Drawable nav_up=getResources().getDrawable(sort==0?R.drawable.btn_down_open:R.drawable.btn_up_open);  
 		nav_up.setBounds(0, 0, nav_up.getMinimumWidth(), nav_up.getMinimumHeight());  
 		view.setCompoundDrawables(null, null, nav_up, null);  
+	}
+	private void setAlphaAdapter() {
+		AnimationAdapter animAdapter = new AlphaInAnimationAdapter(listAdapter);
+		animAdapter.setAbsListView(mListView);
+		mListView.setAdapter(animAdapter);
 	}
 
 }
