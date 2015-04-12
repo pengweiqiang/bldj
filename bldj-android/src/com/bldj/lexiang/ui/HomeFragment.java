@@ -475,7 +475,7 @@ public class HomeFragment extends BaseFragment implements /*IXListViewListener,*
 	 */
 	private void getHotProduct() {
 		showLoading();
-		if(false){
+		if(isFirst){
 			isFirst = false;
 			//获取缓存数据
 			List<Product> productsCache = DatabaseUtil.getInstance(mActivity).queryFavProduct(0, 0, 1);
