@@ -2,10 +2,12 @@ package com.bldj.lexiang.adapter;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.bldj.lexiang.MyApplication;
 import com.bldj.lexiang.R;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
+import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class HomeNewAdapter extends BaseListAdapter {
@@ -61,6 +64,7 @@ public class HomeNewAdapter extends BaseListAdapter {
 			holder = new ViewHolder();
 
 			convertView = mInflater.inflate(R.layout.home_new_item, null);
+			holder.bg_trans = (LinearLayout)convertView.findViewById(R.id.bg_trans);
 			holder.name = (TextView) convertView.findViewById(R.id.name);
 			holder.img = (ImageView) convertView.findViewById(R.id.image);
 //			holder.price = (TextView) convertView
@@ -69,7 +73,11 @@ public class HomeNewAdapter extends BaseListAdapter {
 			holder.yixiujia_price = (TextView) convertView.findViewById(R.id.yixiu_price);
 			holder.title = (TextView) convertView.findViewById(R.id.title);
 //			holder.frameOne = (LinearLayout) convertView.findViewById(R.id.good_cell_one);
-			
+			LayoutParams params1 = holder.img.getLayoutParams();
+			params1.width = DeviceInfo.getDisplayMetricsWidth((Activity)mContext);
+			params1.height = (int) (params1.width * 1.0 / 4 * 2.5);
+			holder.img.setLayoutParams(params1);
+			holder.bg_trans.setLayoutParams(params1);
 			convertView.setTag(holder);
 
 		} else {
@@ -106,6 +114,7 @@ public class HomeNewAdapter extends BaseListAdapter {
 		public TextView yixiujia_price;
 		public TextView name;
 		public LinearLayout frameOne;
+		public LinearLayout bg_trans;
 	}
 
 }
