@@ -80,6 +80,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dip"
             android:layout_weight="1"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:background="@drawable/border"
             android:focusable="false" >
 
@@ -106,6 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dip"
             android:layout_weight="1"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:background="@drawable/border"
             android:focusable="false" >
 
@@ -132,13 +136,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dip"
             android:layout_weight="1"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:background="@drawable/border"
             android:focusable="false" >
 
             <ImageView
                 android:id="@+id/imageview3"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/category_image_height"
+                android:layout_height="wrap_content"
                 android:padding="2dip"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher" />
@@ -158,13 +164,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="1dip"
             android:layout_weight="1"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:background="@drawable/border"
             android:focusable="false" >
 
             <ImageView
                 android:id="@+id/imageview4"
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/category_image_height"
+                android:layout_height="wrap_content"
                 android:padding="2dip"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher" />
