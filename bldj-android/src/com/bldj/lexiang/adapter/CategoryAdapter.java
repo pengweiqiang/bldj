@@ -1,13 +1,14 @@
 package com.bldj.lexiang.adapter;
 
 import java.util.List;
-import java.util.Random;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ import com.bldj.lexiang.api.vo.Category;
 import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.ui.CategoryProductActivity;
 import com.bldj.lexiang.ui.HealthProductDetailActivity;
-import com.bldj.lexiang.view.CircleView;
+import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class CategoryAdapter extends BaseListAdapter {
@@ -70,6 +71,13 @@ public class CategoryAdapter extends BaseListAdapter {
 					.findViewById(R.id.imageview3);
 			holder.imageView4 = (ImageView) convertView
 					.findViewById(R.id.imageview4);
+			LayoutParams layoutParams = holder.imageView1.getLayoutParams();
+			layoutParams.width = (DeviceInfo.getDisplayMetricsWidth((Activity)context)-10)/4;
+			layoutParams.height = (int) (layoutParams.width * 1.0 / 4 * 2.5);
+			holder.imageView1.setLayoutParams(layoutParams);
+			holder.imageView2.setLayoutParams(layoutParams);
+			holder.imageView3.setLayoutParams(layoutParams);
+			holder.imageView4.setLayoutParams(layoutParams);
 
 			holder.tv_product_name1 = (TextView) convertView
 					.findViewById(R.id.product_name1);
