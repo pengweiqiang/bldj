@@ -3,12 +3,14 @@ package com.bldj.lexiang.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.commons.AppManager;
 import com.bldj.lexiang.ui.AppointmentDoor1Activity;
 import com.bldj.lexiang.ui.HealthProductDetailActivity;
+import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.universalimageloader.core.ImageLoader;
 
 public class HomeAdapter extends BaseListAdapter {
@@ -90,6 +93,13 @@ public class HomeAdapter extends BaseListAdapter {
 					.findViewById(R.id.product_price2);
 			holder.price2.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG );
 			holder.yixiujia_price2 = (TextView) convertView.findViewById(R.id.yixiu_price2);
+			
+			LayoutParams params1 = holder.img.getLayoutParams();
+			params1.width = ((DeviceInfo.getDisplayMetricsWidth((Activity)mContext)-10)/2);
+			params1.height = (int) (params1.width * 1.0 / 4 * 2.5);
+			holder.img.setLayoutParams(params1);
+			holder.img2.setLayoutParams(params1);
+			
 //			holder.title2 = (TextView) convertView.findViewById(R.id.title2);
 			convertView.setTag(holder);
 
