@@ -3,6 +3,7 @@ package com.bldj.lexiang.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -41,6 +43,7 @@ import com.bldj.lexiang.api.vo.Product;
 import com.bldj.lexiang.api.vo.Seller;
 import com.bldj.lexiang.constant.api.ApiConstants;
 import com.bldj.lexiang.db.DatabaseUtil;
+import com.bldj.lexiang.utils.DeviceInfo;
 import com.bldj.lexiang.utils.HttpConnectionUtil;
 import com.bldj.lexiang.utils.JsonUtils;
 import com.bldj.lexiang.utils.ShareUtil;
@@ -205,7 +208,10 @@ public class HealthProductDetailActivity extends BaseActivity implements OnRefre
 			rg_title2.setVisibility(View.GONE);
 			rg_title.setVisibility(View.GONE);
 		}
-		
+		LayoutParams params1 = product_img.getLayoutParams();
+		params1.width = DeviceInfo.getDisplayMetricsWidth((Activity)mContext);
+		params1.height = (int) (params1.width * 1.0 / 4 * 2.5);
+		product_img.setLayoutParams(params1);
 		ImageLoader.getInstance().displayImage(product.getPicurl(),
 				product_img,
 				MyApplication.getInstance().getOptions(R.drawable.default_image));
