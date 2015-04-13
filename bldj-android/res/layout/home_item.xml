@@ -21,7 +21,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/image_height"
+            android:layout_height="wrap_content"
             android:layout_margin="3dip" >
 
             <ImageView
@@ -97,7 +97,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/image_height"
+            android:layout_height="wrap_content"
             android:layout_margin="3dip" >
 
             <ImageView
