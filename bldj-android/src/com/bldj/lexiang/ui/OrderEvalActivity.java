@@ -142,7 +142,7 @@ public class OrderEvalActivity extends BaseActivity {
 				String nickname = "",username = "";
 				if(user != null){
 					userId = Long.parseLong(user.getUserId()+"");
-					nickname= user.getNickname();
+					nickname= user.getNickname()==null?"":nickname;
 					username= user.getUsername();
 				}
 				int checkId = rg.getCheckedRadioButtonId();
